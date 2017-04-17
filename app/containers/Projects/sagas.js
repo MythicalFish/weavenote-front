@@ -1,6 +1,7 @@
 import request from 'utils/request';
-import { call, put } from 'redux-saga/effects';
-import { projectsLoaded, projectLoadingError } from './actions';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { LOAD_PROJECTS } from './constants';
+import { projectsLoaded } from './actions';
 
 export function* loadProjects() {
   const requestURL = 'http://localhost:4000/projects';
@@ -9,12 +10,15 @@ export function* loadProjects() {
     const projects = yield call(request, requestURL);
     yield put(projectsLoaded(projects));
   } catch (err) {
-    yield put(projectLoadingError(err));
+    console.log(err);
   }
 }
 
+export function* projectData() {
+  yield takeLatest(LOAD_PROJECTS, loadProjects);
+}
 
-// All sagas to be loaded
+// Bootstrap sagas
 export default [
-  loadProjects,
+  projectData,
 ];

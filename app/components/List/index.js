@@ -1,33 +1,24 @@
 import React from 'react';
 
-import Ul from './Ul';
-import Wrapper from './Wrapper';
-
 function List(props) {
-  const ComponentToRender = props.component;
-  let content = (<div></div>);
+  let content = (<li></li>);
 
-  // If we have items, render them
   if (props.items) {
     content = props.items.map((item, index) => (
-      <ComponentToRender key={`item-${index}`} item={item} />
+      <li key={`item-${index}`}>{item.title}</li>
     ));
-  } else {
-    // Otherwise render a single component
-    content = (<ComponentToRender />);
   }
 
   return (
-    <Wrapper>
-      <Ul>
+    <div>
+      <ul>
         {content}
-      </Ul>
-    </Wrapper>
+      </ul>
+    </div>
   );
 }
 
 List.propTypes = {
-  component: React.PropTypes.func.isRequired,
   items: React.PropTypes.array,
 };
 

@@ -4,26 +4,32 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import ProjectsList from 'components/ProjectsList';
 import makeSelectProjects from './selectors';
 
 export class Projects extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const { projects } = this.props;
+    const projectsListProps = {
+      projects,
+    };
     return (
       <div>
+        <ProjectsList {...projectsListProps} />
       </div>
     );
   }
 }
 
 Projects.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  projects: React.PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  Projects: makeSelectProjects(),
+  projects: makeSelectProjects(),
 });
 
 function mapDispatchToProps(dispatch) {
