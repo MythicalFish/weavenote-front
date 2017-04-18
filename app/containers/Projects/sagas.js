@@ -4,24 +4,22 @@
 
 import request from 'utils/request';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { LOAD_PROJECTS } from './constants';
+import * as types from './constants';
 import { projectsLoaded } from './actions';
 
 export function* loadProjects() {
   const requestURL = 'http://localhost:4000/projects';
-
   try {
     const projects = yield call(request, requestURL);
-    yield put(projectsLoaded(projects)); // executes when 'projects' is ready
-    // end result is a "put" "effect (saga) description" with:
-    // { type: LOAD_PROJECTS_SUCCESS, projects: [the projects] }
+    yield put(projectsLoaded(projects)); 
   } catch (err) {
     console.log(err);
   }
 }
 
 export function* projectData() {
-  yield takeLatest(LOAD_PROJECTS, loadProjects); // Spawns the saga
+  // Watcher saga
+  yield takeLatest(types.LOAD_PROJECTS, loadProjects); 
 }
 
 // Bootstrap sagas

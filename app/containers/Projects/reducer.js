@@ -7,7 +7,9 @@
 import { fromJS } from 'immutable';
 import * as types from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  projects: [],
+});
 
 function projectsReducer(state = initialState, action) {
   switch (action.type) {
