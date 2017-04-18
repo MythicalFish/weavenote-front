@@ -27,17 +27,7 @@ const selectGlobal = () => {
 // above is same as:
 // const selectGlobal = () => (state) => state.get('global');
 
-const selectProjects = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.get('projects')
-);
-
-
 export {
   makeSelectLocationState,
   selectGlobal,
-  selectProjects,
 };
-
-
-export default selectGlobal;

@@ -18,11 +18,9 @@ export function projectsLoaded(projects) {
   };
 }
 
-/*
 export function projectLoadingError(error) {
   return {
-    type: LOAD_PROJECTS_ERROR,
+    type: types.LOAD_PROJECTS_ERROR,
     error,
   };
 }
-*/
