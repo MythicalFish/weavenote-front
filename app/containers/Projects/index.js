@@ -9,8 +9,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ProjectsList from 'components/ProjectsList';
 import makeSelectProjects from './selectors';
+import { loadProjects } from './actions';
 
 export class Projects extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentWillMount() {
+    console.log('componentWillMount');
+  }
   render() {
     const { projects } = this.props;
     const projectsListProps = {
@@ -25,7 +29,10 @@ export class Projects extends React.Component { // eslint-disable-line react/pre
 }
 
 Projects.propTypes = {
-  projects: React.PropTypes.array,
+  projects: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.bool,
+  ]),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -34,7 +41,10 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onSubmitForm: (evt) => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(loadProjects());
+    },
   };
 }
 

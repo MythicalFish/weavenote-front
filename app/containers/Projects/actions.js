@@ -4,20 +4,16 @@
  *
  */
 
-import {
-  LOAD_PROJECTS,
-  LOAD_PROJECTS_SUCCESS,
-//  LOAD_PROJECTS_ERROR,
-} from './constants';
+import * as types from './constants';
 
 export function loadProjects() {
   return {
-    type: LOAD_PROJECTS,
+    type: types.LOAD_PROJECTS,
   };
 }
 export function projectsLoaded(projects) {
   return {
-    type: LOAD_PROJECTS_SUCCESS,
+    type: types.LOAD_PROJECTS_SUCCESS,
     projects,
   };
 }

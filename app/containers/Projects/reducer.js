@@ -5,18 +5,15 @@
  */
 
 import { fromJS } from 'immutable';
-import {
-  LOAD_PROJECTS,
-  LOAD_PROJECTS_SUCCESS,
-} from './constants';
+import * as types from './constants';
 
 const initialState = fromJS({});
 
 function projectsReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_PROJECTS:
+    case types.LOAD_PROJECTS:
       return state;
-    case LOAD_PROJECTS_SUCCESS:
+    case types.LOAD_PROJECTS_SUCCESS:
       return state
         .set('projects', state.projects);
     default:
