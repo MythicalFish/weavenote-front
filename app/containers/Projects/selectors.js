@@ -5,7 +5,6 @@ import { selectGlobal } from '../App/selectors';
  * Direct selector to the projects state domain
  */
 const selectProjectsDomain = () => (state) => state.get('projects');
-//const selectGlobal = (state) => state.get('global');
 
 /**
  * Other specific selectors
