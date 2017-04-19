@@ -4,31 +4,44 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import makeSelectAuth from './selectors';
+import AuthService from 'utils/AuthService';
+import { startAuth } from './actions';
+//import makeSelectAuth from './selectors';
+
 
 export class Auth extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    this.props.startAuth();
+  }
   render() {
+    const { auth } = this.props;
     return (
       <div>
+        {this.props.children}
       </div>
     );
   }
 }
 
 Auth.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  children: React.PropTypes.element.isRequired,
+  startAuth: React.PropTypes.func,
+  auth: React.PropTypes.instanceOf(AuthService),
 };
 
 const mapStateToProps = createStructuredSelector({
-  Auth: makeSelectAuth(),
+  //Auth: makeSelectAuth(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    startAuth: (evt) => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(startAuth());
+    },
   };
 }
 

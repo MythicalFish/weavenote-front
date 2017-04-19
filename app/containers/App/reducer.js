@@ -12,7 +12,7 @@ const initialState = fromJS({
   error: false,
   projects: false,
   logged_in: false,
-  user_data: false,
+  auth: false,
 });
 
 function appReducer(state = initialState, action) {
