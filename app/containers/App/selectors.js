@@ -1,29 +1,31 @@
 import { createSelector } from 'reselect';
 
-//const selectGlobal = () => (state) => state.get('global'); /* same as (i think):
+const selectGlobal = (state) => state.get('global'); /*
 
-const selectGlobal = () => {
-  return (state) => {
-    return state.get('global');
-  };
+// same as:
+
+const selectGlobal = (state) => {
+  return state.get('global');
 };
 
+*/
+
 const makeSelectLoading = () => createSelector(
-  selectGlobal(),
+  selectGlobal,
   (globalState) => {
     return globalState.get('loading');
   }
 );
 
 const makeSelectError = () => createSelector(
-  selectGlobal(),
+  selectGlobal,
   (globalState) => {
     return globalState.get('error');
   }
 );
 
 const makeSelectProjects = () => createSelector(
-  selectGlobal(),
+  selectGlobal,
   (globalState) => {
     return globalState.get('projects');
   }
