@@ -19,15 +19,19 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
-      name: 'home',
+      name: 'dashboard',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/HomePage'),
+          import('containers/Dashboard/reducer'),
+          import('containers/Dashboard/sagas'),
+          import('containers/Dashboard'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('dashboard', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 
