@@ -1,9 +1,11 @@
 import { createSelector } from 'reselect';
+import { selectGlobal } from '../App/selectors';
 
 /**
  * Direct selector to the projects state domain
  */
 const selectProjectsDomain = () => (state) => state.get('projects');
+//const selectGlobal = (state) => state.get('global');
 
 /**
  * Other specific selectors
@@ -15,8 +17,10 @@ const selectProjectsDomain = () => (state) => state.get('projects');
  */
 
 const makeSelectProjects = () => createSelector(
-  selectProjectsDomain(),
-  (substate) => substate.toJS()
+  selectGlobal,
+  (substate) => {
+    return substate.get('projects');
+  }
 );
 
 export default makeSelectProjects;

@@ -7,8 +7,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectLoading, makeSelectError, makeSelectProjects } from 'containers/App/selectors';
+import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import ProjectsList from 'components/ProjectsList';
+import makeSelectProjects from './selectors';
 import { loadProjects } from '../App/actions';
 
 
@@ -55,11 +56,5 @@ const mapStateToProps = createStructuredSelector({
   error: makeSelectError(),
   projects: makeSelectProjects(),
 });
-
-// function mapStateToProps(state) { // this works though
-//   return {
-//     projects: state.get('projects'),
-//   };
-// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);
