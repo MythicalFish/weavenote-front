@@ -7,18 +7,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectProjects } from 'containers/App/selectors';
+import { makeSelectLoading, makeSelectError, makeSelectProjects } from 'containers/App/selectors';
 import ProjectsList from 'components/ProjectsList';
 import { loadProjects } from '../App/actions';
 
 
-export class Projects extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.loadProjects();
   }
   render() {
-    const { projects } = this.props;
+    const { loading, error, projects } = this.props;
     const projectsListProps = {
+      loading,
+      error,
       projects,
     };
     return (
@@ -30,8 +32,8 @@ export class Projects extends React.Component { // eslint-disable-line react/pre
 }
 
 Projects.propTypes = {
-  // missing loading
-  // missing error
+  loading: React.PropTypes.bool,
+  error: React.PropTypes.bool,
   projects: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.bool,
@@ -49,11 +51,12 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
   projects: makeSelectProjects(),
 });
 
 // function mapStateToProps(state) { // this works though
-//   console.log(state.get('projects'));
 //   return {
 //     projects: state.get('projects'),
 //   };
