@@ -19,7 +19,7 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false);
-    case types.LOAD_PROJECTS_SUCCESS:  
+    case types.LOAD_PROJECTS_SUCCESS:
       return state
         .set('projects', action.projects)
         .set('loading', false);

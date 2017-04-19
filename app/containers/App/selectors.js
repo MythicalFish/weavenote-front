@@ -1,6 +1,21 @@
 import { createSelector } from 'reselect';
 
-// makeSelectLocationState expects a plain JS object for the routing state
+const selectGlobal = () => (state) => state.get('global'); /* same as (i think):
+
+const selectGlobal = () => {
+  return (state) => {
+    state.get('global');
+  };
+};
+
+*/
+
+const makeSelectProjects = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('projects')
+);
+
+
 const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -17,17 +32,8 @@ const makeSelectLocationState = () => {
   };
 };
 
-
-const selectGlobal = () => {
-  return (state) => {
-    state.get('global');
-  };
-};
-
-// above is same as:
-// const selectGlobal = () => (state) => state.get('global');
-
 export {
-  makeSelectLocationState,
   selectGlobal,
+  makeSelectProjects,
+  makeSelectLocationState,
 };
