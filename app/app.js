@@ -15,7 +15,6 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
-import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
@@ -26,6 +25,7 @@ import { makeSelectLocationState } from 'containers/App/selectors';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
+// Import Auth0 container
 import Auth from 'containers/Auth';
 
 // Load the favicon, the manifest.json file and the .htaccess file

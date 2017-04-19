@@ -1,48 +1,35 @@
-/*
- *
- * Auth
- *
- */
-
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import AuthService from 'utils/AuthService';
-import { startAuth } from './actions';
-//import makeSelectAuth from './selectors';
 
+// TODO: use dotenv for these vars
+const AUTH0_CLIENT_ID = '2j5Y7oyQLUAQtcCAeqxbrdrFrWT3gO19';
+const AUTH0_DOMAIN = 'mythic.eu.auth0.com';
+export const authService = new AuthService(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
 
-export class Auth extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    this.props.startAuth();
-  }
+export default class Auth extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { auth } = this.props;
+    let ui = this.props.children;
+    if (!authService.loggedIn()) {
+      ui = LoginUI();
+    }
     return (
       <div>
-        {this.props.children}
+        {ui}
       </div>
     );
   }
 }
 
-Auth.propTypes = {
-  children: React.PropTypes.element.isRequired,
-  startAuth: React.PropTypes.func,
-  auth: React.PropTypes.instanceOf(AuthService),
-};
-
-const mapStateToProps = createStructuredSelector({
-  //Auth: makeSelectAuth(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    startAuth: (evt) => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(startAuth());
-    },
-  };
+function LoginUI() {
+  return (
+    <div>
+      Please login
+      <br />
+      <button className="" onClick={authService.login.bind(this)}>Login</button>
+    </div>
+  );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+Auth.propTypes = {
+  children: React.PropTypes.element.isRequired,
+};

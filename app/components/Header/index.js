@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { authService } from 'containers/Auth';
 
 function Header() {
   return (
@@ -8,6 +9,7 @@ function Header() {
       <nav>
         <Link className="inline-block p2 aqua smaller1" to="/">Home</Link>
         <Link className="inline-block p2 aqua smaller1" to="/projects">Projects</Link>
+        <button className="" onClick={authService.logout.bind(this)}>Logout</button>
       </nav>
     </div>
   );
