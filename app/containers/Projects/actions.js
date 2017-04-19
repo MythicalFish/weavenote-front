@@ -4,23 +4,14 @@
  *
  */
 
-import * as types from './constants';
 
-export function loadProjects() {
+import {
+  DEFAULT_ACTION,
+} from './constants';
+
+export function defaultAction() {
   return {
-    type: types.LOAD_PROJECTS,
-  };
-}
-export function projectsLoaded(projects) {
-  return {
-    type: types.LOAD_PROJECTS_SUCCESS,
-    projects,
+    type: DEFAULT_ACTION,
   };
 }
 
-export function projectLoadingError(error) {
-  return {
-    type: types.LOAD_PROJECTS_ERROR,
-    error,
-  };
-}

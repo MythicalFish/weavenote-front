@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ProjectsList from 'components/ProjectsList';
 import { selectProjects } from './selectors';
-import { loadProjects } from './actions';
+import { loadProjects } from '../App/actions';
 
 
 export class Projects extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -21,7 +21,6 @@ export class Projects extends React.Component { // eslint-disable-line react/pre
     const projectsListProps = {
       projects,
     };
-    console.log(projectsListProps);
     return (
       <div>
         <ProjectsList {...projectsListProps} />
@@ -38,17 +37,18 @@ Projects.propTypes = {
   loadProjects: React.PropTypes.func,
 };
 
-// selectors.js breaks the app (globalState.get is not a function)
-//  const mapStateToProps = createStructuredSelector({
-//    projects: selectProjects, // careful of parens() here
-//  });
+const mapStateToProps = createStructuredSelector({
+  projects: (state) => {
+    return state.projects;
+  },
+});
 
-function mapStateToProps(state) { // this works though
-  console.log(state);
-  return {
-    projects: state.get('projects'),
-  };
-}
+// function mapStateToProps(state) { // this works though
+//   console.log(state.get('projects'));
+//   return {
+//     projects: state.get('projects'),
+//   };
+// }
 
 export function mapDispatchToProps(dispatch) {
   return {

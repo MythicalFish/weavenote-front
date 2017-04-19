@@ -5,8 +5,8 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
-import * as types from './constants';
-import { projectsLoaded } from './actions';
+import * as types from 'containers/App/constants';
+import { projectsLoaded } from 'containers/App/actions';
 
 export function* loadProjects() {
   const requestURL = 'http://localhost:4000/projects';
