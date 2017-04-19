@@ -11,6 +11,8 @@ const initialState = fromJS({
   loading: false,
   error: false,
   projects: false,
+  logged_in: false,
+  user_data: false,
 });
 
 function appReducer(state = initialState, action) {
