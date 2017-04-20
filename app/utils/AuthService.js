@@ -9,7 +9,7 @@ export default class AuthService extends EventEmitter {
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: `${window.location.origin}/login`,
+        redirectUrl: window.location.origin,
         responseType: 'token',
       },
     });
@@ -25,7 +25,8 @@ export default class AuthService extends EventEmitter {
     // Saves the user token
     this.setToken(authResult.idToken);
     // navigate to the home route
-    browserHistory.replace('/');
+    // browserHistory.replace('/');
+    window.location.replace('/');
     // Async loads the user profile data
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {

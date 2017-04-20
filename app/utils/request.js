@@ -36,8 +36,19 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url, options) {
-  return fetch(url, options)
+export default function request(url) {
+  console.log(requestOptions())
+  return fetch(url, requestOptions())
     .then(checkStatus)
     .then(parseJSON);
 }
+
+const requestOptions = () => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': idToken(),
+  };
+  return { headers: headers };
+};
+
+const idToken = () => localStorage.id_token;
