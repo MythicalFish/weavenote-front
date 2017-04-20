@@ -37,7 +37,6 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url) {
-  console.log(requestOptions())
   return fetch(url, requestOptions())
     .then(checkStatus)
     .then(parseJSON);
@@ -45,10 +44,9 @@ export default function request(url) {
 
 const requestOptions = () => {
   const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': idToken(),
+    Authorization: idToken(),
   };
-  return { headers: headers };
+  return { headers };
 };
 
-const idToken = () => localStorage.id_token;
+const idToken = () => `Bearer: ${localStorage.access_token}`;

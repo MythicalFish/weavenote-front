@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthService from 'utils/AuthService';
+import AuthService from './AuthService';
 
 // TODO: use dotenv for these vars
 const AUTH0_CLIENT_ID = '2j5Y7oyQLUAQtcCAeqxbrdrFrWT3gO19';
@@ -31,5 +31,5 @@ function LoginUI() {
 }
 
 Auth.propTypes = {
-  children: React.PropTypes.element.isRequired,
+  children: React.PropTypes.node,
 };
