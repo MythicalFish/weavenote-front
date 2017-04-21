@@ -2,22 +2,28 @@ import { EventEmitter } from 'events';
 import Auth0Lock from 'auth0-lock';
 import { isTokenExpired } from './jwtHelper';
 
+const LOCK_OPTIONS = {
+  container: 'login-form',
+  theme: {
+    logo: 'https://mythical.fish/images/logo.svg',
+  },
+  auth: {
+    redirectUrl: window.location.origin,
+    responseType: 'token',
+  },
+};
+
+// TODO: use dotenv for these vars
+const CLIENT_ID = '2j5Y7oyQLUAQtcCAeqxbrdrFrWT3gO19';
+const DOMAIN = 'mythic.eu.auth0.com';
+
 export default class AuthService extends EventEmitter {
-  constructor(clientId, domain) {
+
+  constructor() {
     super();
-
-    // Config
-    this.lock = new Auth0Lock(clientId, domain, {
-      auth: {
-        redirectUrl: window.location.origin,
-        responseType: 'token',
-      },
-    });
-
+    this.lock = new Auth0Lock(CLIENT_ID, DOMAIN, LOCK_OPTIONS);
     this.lock.on('authenticated', this.doAuthentication.bind(this));
-    this.lock.on('authorization_error', this.authorizationError.bind(this));
-    this.login = this.login.bind(this);
-
+    this.lock.on('authorization_error', this.err.bind(this));
   }
 
   doAuthentication(authResult) {
@@ -25,19 +31,14 @@ export default class AuthService extends EventEmitter {
     this.set('access_token', authResult.accessToken);
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
-        console.log('Error loading the Profile', error);
+        console.error('Error loading the Profile', error); // eslint-disable-line no-console
       } else {
         this.setProfile(profile);
       }
     });
   }
 
-  authorizationError(error) {
-    console.log('Authentication Error', error);
-  }
-
-  login = () => this.lock.show();
-
+  err = (error) => console.error('Authentication Error', error); // eslint-disable-line no-console
   get = (item) => localStorage.getItem(item);
   set = (item, value) => localStorage.setItem(item, value);
 
