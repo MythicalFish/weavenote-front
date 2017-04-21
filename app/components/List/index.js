@@ -5,7 +5,9 @@ function List(props) {
 
   if (props.items) {
     content = props.items.map((item, index) => (
-      <li key={`item-${index}`}>{item.title}</li>
+      <li key={`item-${index}`}>
+        {item.name}
+      </li>
     ));
   }
 

@@ -10,6 +10,9 @@ const LOCK_OPTIONS = {
   auth: {
     redirectUrl: window.location.origin,
     responseType: 'token',
+    params: {
+      scope: 'openid email',
+    },
   },
 };
 

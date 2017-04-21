@@ -1,18 +1,28 @@
 import React, { PropTypes } from 'react';
+import ListItem from './ListItem';
 
-import List from 'components/List';
 
 function ProjectsList({ error, projects }) {
   if (error !== false) {
-    const items = [{ title: 'Something went wrong' }];
-    return <List items={items} />;
+    return (
+      <div>
+        Something went wrong
+      </div>
+    );
   }
-
+  let content = (<div></div>);
   if (projects !== false) {
-    return <List items={projects} />;
+    content = projects.map((project, index) => (
+      //<li key={`project-${index}`}>
+      <ListItem project={project} listIndex={index} />
+    ));
   }
-
-  return null;
+  console.log(content);
+  return (
+    <div>
+      {content}
+    </div>
+  );
 }
 
 ProjectsList.propTypes = {

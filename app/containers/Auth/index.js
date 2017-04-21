@@ -15,7 +15,8 @@ export default class Auth extends React.PureComponent { // eslint-disable-line r
        * This is a horrible hacky fix to hide the form after login,
        * it wouldn't occur if handled authentication with redux-saga, etc.
        */
-      document.getElementsByClassName('auth0-lock')[0].remove();
+      const lock = document.getElementsByClassName('auth0-lock');
+      if (lock.length > 0) { lock[0].remove(); }
     }
   }
   render() {
