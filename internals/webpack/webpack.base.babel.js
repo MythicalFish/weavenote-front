@@ -30,6 +30,10 @@ module.exports = (options) => ({
       test: /\.(eot|svg|ttf|woff|woff2)$/,
       loader: 'file-loader',
     }, {
+      test: /\.scss$/,
+      exclude: /node_modules/,
+      loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    }, {
       test: /\.(jpg|png|gif)$/,
       loaders: [
         'file-loader',
