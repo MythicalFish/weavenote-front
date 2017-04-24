@@ -1,0 +1,24 @@
+::-webkit-input-placeholder { color: $gray-lightest; }
+::-moz-placeholder { color: $gray-lightest; }
+:-ms-input-placeholder { color: $gray-lightest; }
+input:-moz-placeholder { color: $gray-lightest; }
+
+input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],select,textarea {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1;
+  display: block;
+  padding: $space-2;
+  box-shadow: none!important;
+  -webkit-box-shadow: none!important;
+  height: auto;
+  width: 100%;
+  border: 1px solid $gray-lighterer;
+  background: $gray-lightest;
+}
+textarea {
+  min-height: 200px;
+  resize: vertical;
+  width: 100%;
+  line-height: 1.4;
+}

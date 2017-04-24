@@ -1,0 +1,39 @@
+.bg-gray-darkest { background-color: $gray-darkest!important; }
+.bg-gray-darkerer { background-color: $gray-darkerer!important; }
+.bg-gray-darker { background-color: $gray-darker!important; }
+.bg-gray-dark { background-color: $gray-dark!important; }
+.bg-gray { background-color: $gray!important; }
+.bg-gray-light { background-color: $gray-light!important; }
+.bg-gray-lighter { background-color: $gray-lighter!important; }
+.bg-gray-lightest { background-color: $gray-lightest!important; }
+
+.gray-darkest { color: $gray-darkest!important; }
+.gray-darkerer { color: $gray-darkerer!important; }
+.gray-darker { color: $gray-darker!important; }
+.gray-dark { color: $gray-dark!important; }
+.gray { color: $gray!important; }
+.gray-light { color: $gray-light!important; }
+.gray-lighter { color: $gray-lighter!important; }
+.gray-lightest { color: $gray-lightest!important; }
+
+.white { fill: #FFF; }
+
+.light1 { color: $light1; }
+.light2 { color: $light2; }
+.light3 { color: $light3; }
+.light4 { color: $light4; }
+.light5 { color: $light5; }
+.light6 { color: $light6; }
+.light7 { color: $light7; }
+.light8 { color: $light8; }
+.light9 { color: $light9; }
+
+.dark1 { color: $dark1; }
+.dark2 { color: $dark2; }
+.dark3 { color: $dark3; }
+.dark4 { color: $dark4; }
+.dark5 { color: $dark5; }
+.dark6 { color: $dark6; }
+.dark7 { color: $dark7; }
+.dark8 { color: $dark8; }
+.dark9 { color: $dark9; }
