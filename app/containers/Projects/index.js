@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import ProjectsList from 'components/ProjectsList';
 import makeSelectProjects from './selectors';
-import { loadProjects } from '../App/actions';
+import { loadProjects } from './actions';
 
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

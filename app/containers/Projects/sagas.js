@@ -5,8 +5,8 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
-import * as types from 'containers/App/constants';
-import { projectsLoaded } from 'containers/App/actions';
+import * as types from './constants';
+import { projectsLoaded } from './actions';
 
 export function* loadProjects() {
   const requestURL = 'http://localhost:4000/projects';
@@ -14,7 +14,7 @@ export function* loadProjects() {
     const projects = yield call(request, requestURL);
     yield put(projectsLoaded(projects));
   } catch (err) {
-    console.error(err);
+    console.error(err); // eslint-disable-line no-console
   }
 }
 
@@ -38,7 +38,7 @@ export function* projectData() {
    *
    * Yay I understand this!
   */
-  const watcher = yield takeLatest(types.LOAD_PROJECTS, loadProjects); 
+  const watcher = yield takeLatest(types.LOAD_PROJECTS, loadProjects);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
@@ -47,5 +47,3 @@ export function* projectData() {
 export default [
   projectData,
 ];
-
-

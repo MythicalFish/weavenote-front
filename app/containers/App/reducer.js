@@ -5,7 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
-import * as types from './constants';
+import * as types from 'containers/Projects/constants';
 
 const initialState = fromJS({
   loading: false,
