@@ -1,0 +1,171 @@
+$font-family: 'Source Sans Pro', sans-serif;
+$heading-font-family: 'Klavika',sans-serif;
+$monospace-font-family: 'Source Code Pro', Consolas, monospace;
+$letter-spacing: 1;
+
+$heading-line-height: 1.25;
+$caps-letter-spacing: .2em;
+
+body {
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 22px;
+  font-weight: 300;
+  color: $gray-darkerer;
+}
+
+h1, h2, h3, h4 {
+  font-family: $heading-font-family;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: $gray-dark;
+}
+
+// Sizing
+
+$h00000: 4em;
+$h0000: 3.5em;
+$h000: 3em;
+$h00: 2.6em;
+$h0: 2.2em;
+$h1: 2em;
+$h2: 1.8em;
+$h3: 1.25em;
+$h4: 1em;
+$h5: .875em;
+$h6: .75em;
+
+.h00 { font-size: $h00; }
+.h0 {  font-size: $h0; }
+h1, .h1 {  font-size: $h1; }
+h2, .h2 {  font-size: $h2; }
+h3, .h3 {  font-size: $h3; }
+
+@media #{$breakpoint-sm} {
+  .h00    { font-size: $h000; }
+  .h0     { font-size: $h00; }
+  h1 { font-size: $h0; }
+  .h1 { font-size: $h0!important; }
+  h2 { font-size: $h1; }
+  .h2 { font-size: $h1!important; }
+}
+@media #{$breakpoint-md} {
+  .h00    { font-size: $h0000; }
+  .h0     { font-size: $h000; }
+  h1 { font-size: $h00; }
+  .h1 { font-size: $h00!important; }
+  h2 { font-size: $h0; }
+  .h2 { font-size: $h0!important; }
+}
+@media #{$breakpoint-lg} {
+  .h00    { font-size: $h00000; }
+  .h0     { font-size: $h0000; }
+  h1 { font-size: $h000; }
+  .h1 { font-size: $h000!important; }
+  h2 { font-size: $h00; }
+  .h2 { font-size: $h00!important; }
+}
+
+.upcase { text-transform: uppercase; }
+.nocase { text-transform: none; }
+.thin { font-weight: 300; }
+.thick, b { font-weight: bold; }
+.thicker { font-weight: bolder; }
+.body-font { font-family: 'Source Sans Pro', sans-serif; }
+.heading-font { font-family: 'Klavika', sans-serif; }
+
+.bigger1 { font-size: 1.1em; }
+.bigger2 { font-size: 1.2em; }
+.bigger3 { font-size: 1.3em; }
+.bigger4 { font-size: 1.4em; }
+.bigger5 { font-size: 1.5em; }
+
+.smaller1 { font-size: 0.9em; }
+.smaller2 { font-size: 0.8em; }
+.smaller3 { font-size: 0.7em; }
+.smaller4 { font-size: 0.6em; }
+.smaller5 { font-size: 0.5em; }
+
+.lh0 { line-height: 0; }
+.lh1 { line-height: 1; }
+
+@media #{$breakpoint-sm} {
+  .sm-center {
+    text-align: center!important;
+  }
+  .sm-left-align {
+    text-align: left!important;
+  }
+  .sm-right-align {
+    text-align: right!important;
+  }
+}
+@media #{$breakpoint-md} {
+  .md-center {
+    text-align: center!important;
+  }
+  .md-left-align {
+    text-align: left!important;
+  }
+  .md-right-align {
+    text-align: right!important;
+  }
+}
+@media #{$breakpoint-lg} {
+  .lg-center {
+    text-align: center!important;
+  }
+  .lg-left-align {
+    text-align: left!important;
+  }
+  .lg-right-align {
+    text-align: right!important;
+  }
+}
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,300');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+@font-face {
+  font-family: 'Klavika';
+  font-weight: normal;
+  src: url('/fonts/klavika/regular.eot');
+  src: url('/fonts/klavika/regular.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/klavika/regular.woff') format('woff'),
+       url('/fonts/klavika/regular.ttf') format('truetype'),
+       url('/fonts/klavika/regular.svg#Klavika') format('svg');
+}
+
+@font-face {
+  font-family: 'Klavika';
+  font-weight: 300;
+  src: url('/fonts/klavika/light.eot');
+  src: url('/fonts/klavika/light.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/klavika/light.woff') format('woff'),
+       url('/fonts/klavika/light.ttf') format('truetype'),
+       url('/fonts/klavika/light.svg#Klavika') format('svg');
+}
+
+@font-face {
+  font-family: 'Klavika';
+  font-weight: bold;
+  src: url('/fonts/klavika/bold.eot');
+  src: url('/fonts/klavika/bold.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/klavika/bold.woff') format('woff'),
+       url('/fonts/klavika/bold.ttf') format('truetype'),
+       url('/fonts/klavika/bold.svg#Klavika') format('svg');
+}
+
+@font-face {
+  font-family: 'Klavika';
+  font-weight: bolder;
+  src: url('/fonts/klavika/black.eot');
+  src: url('/fonts/klavika/black.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/klavika/black.woff') format('woff'),
+       url('/fonts/klavika/black.ttf') format('truetype'),
+       url('/fonts/klavika/black.svg#Klavika') format('svg');
+}
+

@@ -1,0 +1,74 @@
+
+.mouse {
+  position: absolute;
+  width: 34px;
+  height: 56px;
+  bottom: 40px;
+  left: 50%;
+  margin-left: -17px;
+  border-radius: 9999px;
+  border: 3px solid rgba(0,0,0,0.7);
+  -webkit-animation: intro 1s;
+  animation: intro 1s;
+  .scroll {
+    display: block;
+    width: 5px;
+    height: 8px;
+    margin: 6px auto;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.7);
+    -webkit-animation: finger 2s infinite;
+    animation: finger 2s infinite;
+  }
+}
+.mouse-light {
+  @extend .mouse;
+  border-color: rgba(255,255,255,0.7);
+  .scroll {
+    background: rgba(255,255,255,0.7);
+  }
+}
+@-webkit-keyframes intro {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(40px);
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes intro {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(40px);
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes finger {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}
+@keyframes finger {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}

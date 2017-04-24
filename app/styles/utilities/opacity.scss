@@ -1,0 +1,8 @@
+$opacities: 1,2,3,4,5,6,7,8,9;
+
+@each $o in $opacities {
+  $d: .1 * $o;
+  .opa#{$o} { opacity: $d; }
+  .dark#{$o} { color: rgba(0,0,0,$d); fill: rgba(0,0,0,$d)!important; }
+  .light#{$o} { color: rgba(255,255,255,$d); fill: rgba(255,255,255,$d)!important; }
+}

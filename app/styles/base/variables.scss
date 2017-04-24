@@ -1,0 +1,102 @@
+/*--------------------------------------*\
+      Colors
+\*--------------------------------------*/
+
+$gray-base:              #000;
+$gray-darkest:           lighten($gray-base, 5%);
+$gray-darkerer:          lighten($gray-base, 10%);
+$gray-darker:            lighten($gray-base, 15%);
+$gray-dark:              lighten($gray-base, 30%);
+$gray:                   lighten($gray-base, 50%);
+$gray-light:             lighten($gray-base, 70%);
+$gray-lighter:           lighten($gray-base, 90%);
+$gray-lighterer:         lighten($gray-base, 94%);
+$gray-lightest:          lighten($gray-base, 97%);
+
+$light1: rgba(255,255,255,.1);
+$light2: rgba(255,255,255,.2);
+$light3: rgba(255,255,255,.3);
+$light4: rgba(255,255,255,.4);
+$light5: rgba(255,255,255,.5);
+$light6: rgba(255,255,255,.6);
+$light7: rgba(255,255,255,.7);
+$light8: rgba(255,255,255,.8);
+$light9: rgba(255,255,255,.9);
+
+$dark1: rgba(0,0,0,.1);
+$dark2: rgba(0,0,0,.2);
+$dark3: rgba(0,0,0,.3);
+$dark4: rgba(0,0,0,.4);
+$dark5: rgba(0,0,0,.5);
+$dark6: rgba(0,0,0,.6);
+$dark7: rgba(0,0,0,.7);
+$dark8: rgba(0,0,0,.8);
+$dark9: rgba(0,0,0,.9);
+
+/*--------------------------------------*\
+      Overrides
+\*--------------------------------------*/
+
+$aqua: #4cbae2;
+$blue: #0074d9;
+$navy: #0B4F6C;
+$teal: #39cccc;
+$green: #20BF55;
+$olive: #3d9970;
+$lime: #01ff70;
+$yellow: #ffdc00;
+$orange: #ff851b;
+$red: #ff4136;
+$fuchsia: #f012be;
+$purple: #b10dc9;
+$maroon: #85144b;
+$white: #fff;
+$silver: #ddd;
+$gray: #aaa;
+$black: #000;
+
+
+
+$space-1: .5rem;
+$space-2: 1rem;
+$space-3: 2rem;
+$space-4: 4rem;
+$space-5: 6rem;
+$form-field-font-size: 1rem;
+$form-field-height: 2.25rem;
+$form-field-padding-y: 2rem;
+$form-field-padding-x: 1.5rem;
+$button-font-size: inherit;
+$button-font-weight: bold;
+$button-line-height: 1.125rem;
+$button-padding-y: 1.5rem;
+$button-padding-x: 2rem;
+$container-width: 90em;
+$darken-1: rgba(0,0,0,.0625);
+$darken-2: rgba(0,0,0,.125);
+$darken-3: rgba(0,0,0,.25);
+$darken-4: rgba(0,0,0,.5);
+$darken-5: rgba(0,0,0,.7);
+$darken-6: rgba(0,0,0,.8);
+$darken-7: rgba(0,0,0,.9);
+$lighten-1: rgba(255,255,255,.0625);
+$lighten-2: rgba(255,255,255,.125);
+$lighten-3: rgba(255,255,255,.25);
+$lighten-4: rgba(255,255,255,.5);
+$border-width: 1px;
+$border-radius: 0;
+$border-color: rgba(0,0,0,0.4);
+$field-focus-color: $gray;
+$field-success-color: $gray-light;
+$field-warning-color: $gray-light;
+$field-error-color: $gray-light;
+
+// Custom Media Query Variables
+
+$sm: '40em';
+$md: '60em';
+$lg: '80em';
+
+$breakpoint-sm: "(min-width: #{$sm})";
+$breakpoint-md: "(min-width: #{$md})";
+$breakpoint-lg: "(min-width: #{$lg})";

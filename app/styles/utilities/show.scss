@@ -1,0 +1,26 @@
+
+@mixin hide(){
+  position: absolute!important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+@media (max-width: $sm) {
+  .sm-show {
+    @include hide();
+  }
+}
+
+@media (max-width: $md) {
+  .md-show {
+    @include hide();
+  }
+}
+
+@media (max-width: $lg) {
+  .lg-show {
+    @include hide();
+  }
+}

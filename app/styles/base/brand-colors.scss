@@ -1,0 +1,55 @@
+// This is the shit: 
+// https://brightside.me/article/the-ultimate-color-combinations-cheat-sheet-92405/
+
+// Color names should be generic, so HEX codes can be changed here without renaming all the classes
+
+// Format: 
+// $color1xxxx = color 1 with brightness of 4  
+// $color2x    = color 2 with brightness of 1 (dark)
+
+$color1x: #a39501;
+$color1xx: #cbbe00;
+$color1xxx: #fdf50c;
+$color1xxxx: #fbf681;
+
+$color2x: #69015a;
+$color2xx: #810d70;
+$color2xxx: #a51f90;
+$color2xxxx: #bd7cb4;
+
+$color3x: #081c63;
+$color3xx: #172e7c;
+$color3xxx: #21409a;
+$color3xxxx: #5664af;
+
+
+.bg-color1x { background-color: $color1x; }
+.bg-color1xx { background-color: $color1xx; }
+.bg-color1xxx { background-color: $color1xxx; }
+.bg-color1xxxx { background-color: $color1xxxx; }
+
+.bg-color2x { background-color: $color2x; }
+.bg-color2xx { background-color: $color2xx; }
+.bg-color2xxx { background-color: $color2xxx; }
+.bg-color2xxxx { background-color: $color2xxxx; }
+
+.bg-color3x { background-color: $color3x; }
+.bg-color3xx { background-color: $color3xx; }
+.bg-color3xxx { background-color: $color3xxx; }
+.bg-color3xxxx { background-color: $color3xxxx; }
+
+
+.color1x { color: $color1x; path { fill: $color1x; }}
+.color1xx { color: $color1xx; path { fill: $color1xx; }}
+.color1xxx { color: $color1xxx; path { fill: $color1xxx; }}
+.color1xxxx { color: $color1xxxx; path { fill: $color1xxxx; }}
+
+.color2x { color: $color2x; path { fill: $color2x; }}
+.color2xx { color: $color2xx; path { fill: $color2xx; }}
+.color2xxx { color: $color2xxx; path { fill: $color2xxx; }}
+.color2xxxx { color: $color2xxxx; path { fill: $color2xxxx; }}
+
+.color3x { color: $color3x; path { fill: $color3x; }}
+.color3xx { color: $color3xx; path { fill: $color3xx; }}
+.color3xxx { color: $color3xxx; path { fill: $color3xxx; }}
+.color3xxxx { color: $color3xxxx; path { fill: $color3xxxx; }}
