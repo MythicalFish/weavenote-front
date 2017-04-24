@@ -6,7 +6,7 @@ function ProjectsList({ list, onClick }) {
   let content = (<div></div>);
   if (list !== false && list !== undefined) {
     content = list.map((project, index) => (
-      <ListItem key={`project-${index}`} project={project} onClick={onClick} />
+      <ListItem key={`project-${index}`} project={project} onClick={() => { onClick(project.id); }} />
     ));
   }
   return (

@@ -21,13 +21,10 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
       this.props.listProjects();
     }
   }
-  componentDidUpdate() {
-    //console.log('asdasdasd')
-  }
   render() {
     const projectsListProps = {
       list: this.props.list,
-      onClick: () => { },
+      onClick: (id) => { this.props.showBasics(id); },
     };
     return (
       <ProjectsList {...projectsListProps} />
@@ -47,7 +44,7 @@ Projects.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
     listProjects: () => dispatch(listProjects()),
-    showBasics: () => dispatch(showBasics()),
+    showBasics: (id) => dispatch(showBasics(id)),
   };
 }
 
