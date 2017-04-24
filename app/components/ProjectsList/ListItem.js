@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
 
 class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  handleOnClick = (id) => {
+    this.props.onClick(id);
+  }
   render() {
     const p = this.props.project;
     return (
-      <Link className="block b1 mb2 bg-white dark7 smaller2 flex justify-between" to={`/projects/${p.id}`}>
+      <button onClick={this.handleOnClick(p.id)} className="b1 mb2 bg-white dark7 smaller2 flex justify-between x-fill">
         <div className="flex">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
@@ -32,7 +34,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
             <Dropdown label="..." links={links} />
           </div>
         </div>
-      </Link>
+      </button>
     );
   }
 }
@@ -40,6 +42,7 @@ const links = [1,2,3];
 
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,
+  onClick: React.PropTypes.func.isRequired,
 };
 
 export default ListItem;

@@ -9,30 +9,31 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ProjectsList from 'components/ProjectsList';
 import makeSelectProjects from './selectors';
-import { listProjects } from './actions';
-import List from './views/List';
-
+import { listProjects, showBasics } from './actions';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.listProjects();
+    const currentPath = this.props.location.pathname;
+    const projectID = currentPath.split('/')[2];
+    if (projectID) {
+      this.props.showBasics(projectID);
+    } else {
+      this.props.listProjects();
+    }
+  }
+  componentDidUpdate() {
+    //console.log('asdasdasd')
   }
   render() {
-    const { list } = this.props;
     const projectsListProps = {
-      list,
+      list: this.props.list,
+      onClick: () => { },
     };
     return (
-      <div>
-        <ProjectsList {...projectsListProps} />
-      </div>
+      <ProjectsList {...projectsListProps} />
     );
   }
 }
-
-const currentView = () => {
-  console.log('asd');
-};
 
 Projects.propTypes = {
   list: React.PropTypes.oneOfType([
@@ -40,14 +41,13 @@ Projects.propTypes = {
     React.PropTypes.bool,
   ]),
   listProjects: React.PropTypes.func,
+  showBasics: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    listProjects: (evt) => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(listProjects());
-    },
+    listProjects: () => dispatch(listProjects()),
+    showBasics: () => dispatch(showBasics()),
   };
 }
 
