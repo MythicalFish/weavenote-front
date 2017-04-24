@@ -5,6 +5,7 @@ import * as types from './constants';
 const initialState = fromJS({
   list: false,
   current: {
+    id: false,
     basics: false,
   },
 });

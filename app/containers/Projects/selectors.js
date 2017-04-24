@@ -14,14 +14,19 @@ const selectProjectsDomain = () => (state) => state.get('projects');
  * Default selector used by Projects
  */
 
-const makeSelectProjects = () => createSelector(
+export const makeSelectList = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
     return substate.get('list');
   }
 );
 
-export default makeSelectProjects;
-export {
-  selectProjectsDomain,
-};
+
+export const makeSelectCurrent = () => createSelector(
+  selectProjectsDomain(),
+  (substate) => {
+//    console.log(substate.get('current'));
+    return substate.get('current');
+  }
+);
+
