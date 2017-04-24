@@ -15,6 +15,7 @@ import React from 'react';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Auth from 'containers/Auth';
+require('styles/app.css');
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

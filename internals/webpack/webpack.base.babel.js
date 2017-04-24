@@ -29,7 +29,7 @@ module.exports = (options) => ({
     }, {
       test: /\.css$/,
       exclude: /node_modules/,
-      loaders: ['postcss-loader'],
+      loaders: ['style-loader', 'css-loader', 'postcss-loader'],
     }, {
       test: /\.(eot|svg|ttf|woff|woff2)$/,
       loader: 'file-loader',
