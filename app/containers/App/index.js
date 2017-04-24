@@ -32,9 +32,7 @@ export default class App extends React.PureComponent { // eslint-disable-line re
           <div className="flex-auto">
             <Header />
             <div className="p4">
-              <div className="bg-white p4">
-                {React.Children.toArray(this.props.children)}
-              </div>
+              {React.Children.toArray(this.props.children)}
             </div>
           </div>
         </div>

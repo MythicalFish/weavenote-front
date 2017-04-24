@@ -5,7 +5,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
     const p = this.props.project;
     return (
-      <Link className="block py2 px4 aqua smaller1 flex justify-between items-center" to="">
+      <Link className="block p3 mb2 bg-white dark7 smaller1 flex justify-between items-center" to="">
         <div className="flex items-center">
           <div>
             <img src="" role="presentation" />
