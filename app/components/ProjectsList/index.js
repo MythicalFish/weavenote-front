@@ -13,11 +13,9 @@ function ProjectsList({ error, projects }) {
   let content = (<div></div>);
   if (projects !== false) {
     content = projects.map((project, index) => (
-      //<li key={`project-${index}`}>
-      <ListItem project={project} listIndex={index} />
+      <ListItem key={`project-${index}`} project={project} listIndex={index} />
     ));
   }
-  console.log(content);
   return (
     <div>
       {content}
