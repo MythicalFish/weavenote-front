@@ -6,7 +6,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
     const p = this.props.project;
     return (
-      <Link className="block b1 mb2 bg-white dark7 smaller2 flex justify-between" to="">
+      <Link className="block b1 mb2 bg-white dark7 smaller2 flex justify-between" to={'/projects/' + p.id}>
         <div className="flex">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
