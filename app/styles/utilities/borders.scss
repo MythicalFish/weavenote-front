@@ -1,0 +1,43 @@
+@mixin borders($namespace) {
+
+  $b1: 1px solid rgba(0,0,0,0.2);
+  $b2: 2px solid rgba(0,0,0,0.2);
+
+  .#{$namespace}b0 { border: 0}
+  .#{$namespace}b1 { border: $b1; }
+  .#{$namespace}b2 { border: $b2; }
+
+  .#{$namespace}bt0 { border-top: 0}
+  .#{$namespace}bt1 { border-top: $b1; }
+  .#{$namespace}bt2 { border-top: $b2; }
+
+  .#{$namespace}br0 { border-right: 0}
+  .#{$namespace}br1 { border-right: $b1; }
+  .#{$namespace}br2 { border-right: $b2; }
+
+  .#{$namespace}bb0 { border-bottom: 0}
+  .#{$namespace}bb1 { border-bottom: $b1; }
+  .#{$namespace}bb2 { border-bottom: $b2; }
+
+  .#{$namespace}bl0 { border-left: 0}
+  .#{$namespace}bl1 { border-left: $b1; }
+  .#{$namespace}bl2 { border-left: $b2; }
+
+  .#{$namespace}bx0 { border-left: 0;   border-right: 0}
+  .#{$namespace}bx1 { border-left: $b1; border-right: $b1; }
+  .#{$namespace}bx2 { border-left: $b2; border-right: $b2; }
+}
+
+@include borders('');
+
+@media #{$breakpoint-sm} {
+  @include borders('sm-');
+}
+
+@media #{$breakpoint-md} {
+  @include borders('md-');
+}
+
+@media #{$breakpoint-lg} {
+  @include borders('lg-');
+}

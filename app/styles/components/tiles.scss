@@ -1,0 +1,58 @@
+.tile {
+  @extend .flex;
+  @extend .flex-auto;
+  @extend .items-middle;
+  position: relative;
+  min-height: 300px;
+}
+.tile-background {
+  width: 100%;
+  @include transition(all .3s);
+  img {
+    width: 100%;
+    min-height: 281px;
+    display: block;
+    @include transition(all .5s);
+  }
+}
+.tile-content {
+  text-align: center;
+  @extend .flex-auto;
+  @extend .p3;
+  @extend .thin;
+  h3 {
+    @extend .thin;
+  }
+  .tile-header {
+    @extend .h2;
+    @extend .mt2;
+    @extend .mb1;
+  }
+  .tile-caption {
+    $font-size: $h3;
+  }
+}
+.tileh:hover {
+  .tile-background {
+    z-index: 10;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform-origin: center;
+    -webkit-transform-origin: center;
+    img {
+      opacity: 0.6;
+    }
+  }
+}
+.tile-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+@media #{$breakpoint-lg} {
+  .tile-content {
+    padding: $space-4;
+  }
+}

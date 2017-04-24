@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  outline: none!important;
+}
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+}
+svg {
+  fill: inherit;
+}
+img {
+  max-width: 100%;
+}

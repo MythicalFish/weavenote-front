@@ -1,0 +1,27 @@
+@media #{$breakpoint-md} {
+  #header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+}
+
+#menu {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-right: -$space-2;
+    li {
+      display: inline-block;
+      a {
+        padding: $space-2;
+        &.link-active {
+          border-bottom: 4px solid $color1xxx;
+        }
+      }
+    }
+  }
+}
