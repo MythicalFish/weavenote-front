@@ -24,14 +24,6 @@ const makeSelectError = () => createSelector(
   }
 );
 
-const makeSelectProjects = () => createSelector(
-  selectGlobal,
-  (globalState) => {
-    return globalState.get('projects');
-  }
-);
-
-
 const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -52,6 +44,5 @@ export {
   selectGlobal,
   makeSelectLoading,
   makeSelectError,
-  makeSelectProjects,
   makeSelectLocationState,
 };
