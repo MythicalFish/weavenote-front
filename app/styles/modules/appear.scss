@@ -1,4 +1,4 @@
-.appear, .appear2 {
+.appear {
   transition: opacity .5s, transform .8s;
   -webkit-transition: opacity .5s, transform .8s;
   opacity: 0;
@@ -7,18 +7,6 @@
   &.appeared {
     transform: translateY(0px);
     -webkit-transform: translateY(0px);
-    opacity: 1;
-  }
-}
-.appear3 {
-  transition: opacity .5s, transform .8s;
-  -webkit-transition: opacity .5s, transform .8s;
-  opacity: 0;
-  transform: scale(1.2);
-  -webkit-transform: translateY(1.2);
-  &.in {
-    transform: scale(1);
-    -webkit-transform: scale(1);
     opacity: 1;
   }
 }

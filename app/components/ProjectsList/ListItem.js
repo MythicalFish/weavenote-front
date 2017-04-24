@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
 
 class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -28,15 +29,14 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
             collaborators
           </div>
           <div className="p2">
-            <button className="b0 bg-white dark4 bigger5 lh0">
-              ...
-            </button>
+            <Dropdown label="..." id={'project' + p.id + '-dropdown'} links={links} />
           </div>
         </div>
       </Link>
     );
   }
 }
+const links = [1,2,3];
 
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,

@@ -1,6 +1,6 @@
 @mixin borders($namespace) {
 
-  $b1: 1px solid rgba(0,0,0,0.2);
+  $b1: 1px solid $gray-lighter;
   $b2: 2px solid rgba(0,0,0,0.2);
 
   .#{$namespace}b0 { border: 0}

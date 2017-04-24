@@ -7,15 +7,13 @@
 @import "base/basscss";
 @import "base/general";
 
-@import "components/backgrounds";
 @import "components/buttons";
 @import "components/layout";
 @import "components/flexboxgrid";
 @import "components/forms";
 @import "components/modal";
-@import "components/mouse";
 @import "components/sections";
-@import "components/tiles";
+@import "components/dropdown";
 
 @import "utilities/borders";
 @import "utilities/colors";
@@ -24,7 +22,4 @@
 @import "utilities/widths";
 @import "utilities/misc";
 
-@import "modules/header";
 @import "modules/appear";
-@import "modules/avatar";
-@import "modules/tech";
