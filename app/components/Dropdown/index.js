@@ -23,7 +23,7 @@ class Dropdown extends React.PureComponent { // eslint-disable-line react/prefer
 }
 
 Dropdown.propTypes = {
-  id: React.PropTypes.string.isRequired,
+  id: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
   links: React.PropTypes.array.isRequired,
 };

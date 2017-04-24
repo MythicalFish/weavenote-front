@@ -17,7 +17,7 @@ const selectProjectsDomain = () => (state) => state.get('projects');
 const makeSelectProjects = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
-    return substate.get('items');
+    return substate.get('list');
   }
 );
 

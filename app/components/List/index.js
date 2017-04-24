@@ -3,8 +3,8 @@ import React from 'react';
 function List(props) {
   let content = (<li></li>);
 
-  if (props.items) {
-    content = props.items.map((item, index) => (
+  if (props.list) {
+    content = props.list.map((item, index) => (
       <li key={`item-${index}`}>
         {item.name}
       </li>
@@ -21,7 +21,7 @@ function List(props) {
 }
 
 List.propTypes = {
-  items: React.PropTypes.array,
+  list: React.PropTypes.array,
 };
 
 export default List;

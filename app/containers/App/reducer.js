@@ -17,11 +17,11 @@ const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case types.LOAD_PROJECTS:
+    case types.LIST_PROJECTS:
       return state
         .set('loading', true)
         .set('error', false);
-    case types.LOAD_PROJECTS_SUCCESS:
+    case types.LIST_PROJECTS_SUCCESS:
       return state
         .set('loading', false);
     default:

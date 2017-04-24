@@ -9,17 +9,18 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ProjectsList from 'components/ProjectsList';
 import makeSelectProjects from './selectors';
-import { loadProjects } from './actions';
+import { listProjects } from './actions';
+import List from './views/List';
 
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.loadProjects();
+    this.props.listProjects();
   }
   render() {
-    const { items } = this.props;
+    const { list } = this.props;
     const projectsListProps = {
-      items,
+      list,
     };
     return (
       <div>
@@ -29,25 +30,29 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
   }
 }
 
+const currentView = () => {
+  console.log('asd');
+};
+
 Projects.propTypes = {
-  items: React.PropTypes.oneOfType([
+  list: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
-  loadProjects: React.PropTypes.func,
+  listProjects: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    loadProjects: (evt) => {
+    listProjects: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadProjects());
+      dispatch(listProjects());
     },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  items: makeSelectProjects(),
+  list: makeSelectProjects(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

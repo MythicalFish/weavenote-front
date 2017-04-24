@@ -6,13 +6,13 @@ import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
 import * as types from './constants';
-import { projectsLoaded } from './actions';
+import { listProjectsSuccess } from './actions';
 
-export function* loadProjects() {
+export function* listProjects() {
   const requestURL = 'http://localhost:4000/projects';
   try {
     const projects = yield call(request, requestURL);
-    yield put(projectsLoaded(projects));
+    yield put(listProjectsSuccess(projects));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -22,15 +22,15 @@ export function* projectData() {
   /*
    * WATCHER SAGA
    *
-   * When the index.js does dispatch(loadProjects()),
-   * all it does is emit an action called LOAD_PROJECTS,
+   * When the index.js does dispatch(listProjects()),
+   * all it does is emit an action called LIST_PROJECTS,
    * it DOES NOT call the above function directly.
    *
    * The reducer.js sees the action and updates the state (loading: true, etc.)
    * This watcher also sees the action, and then actually does the above function
    *
-   * On success, it dispatches a new action with put(projectsLoaded(projects))
-   * Which is the same as put({type:LOAD_PROJECTS_SUCCESS, projects:projects})
+   * On success, it dispatches a new action with put(listProjectsSuccess(projects))
+   * Which is the same as put({type:LIST_PROJECTS_SUCCESS, projects:projects})
    * This is seen by the reducer.js, and the state is updated again
    *
    * When the state has been given the projects, the selector sees it,
@@ -38,7 +38,7 @@ export function* projectData() {
    *
    * Yay I understand this!
   */
-  const watcher = yield takeLatest(types.LOAD_PROJECTS, loadProjects);
+  const watcher = yield takeLatest(types.LIST_PROJECTS, listProjects);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
