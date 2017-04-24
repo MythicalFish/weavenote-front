@@ -1068,6 +1068,12 @@ babel-register@^6.18.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
+babel-runtime@^5.5.6:
+  version "5.8.38"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-5.8.38.tgz#1c0b02eb63312f5f087ff20450827b425c9d4c19"
+  dependencies:
+    core-js "^1.0.0"
+
 babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.20.0.tgz#87300bdcf4cd770f09bf0048c64204e17806d16f"
@@ -6930,6 +6936,12 @@ seek-bzip@^1.0.3:
   resolved "https://registry.yarnpkg.com/seek-bzip/-/seek-bzip-1.0.5.tgz#cfe917cb3d274bcffac792758af53173eb1fabdc"
   dependencies:
     commander "~2.8.1"
+
+selector@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/selector/-/selector-0.0.4.tgz#d1f0a641dad61465bcd88cf86d455032b6141e73"
+  dependencies:
+    babel-runtime "^5.5.6"
 
 semver-regex@^1.0.0:
   version "1.0.0"
