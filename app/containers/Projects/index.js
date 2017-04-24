@@ -7,7 +7,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import ProjectsList from 'components/ProjectsList';
 import makeSelectProjects from './selectors';
 import { loadProjects } from './actions';
@@ -18,11 +17,9 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
     this.props.loadProjects();
   }
   render() {
-    const { loading, error, projects } = this.props;
+    const { items } = this.props;
     const projectsListProps = {
-      loading,
-      error,
-      projects,
+      items,
     };
     return (
       <div>
@@ -33,9 +30,7 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
 }
 
 Projects.propTypes = {
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.bool,
-  projects: React.PropTypes.oneOfType([
+  items: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
@@ -52,9 +47,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
-  projects: makeSelectProjects(),
+  items: makeSelectProjects(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);
