@@ -27,6 +27,8 @@ export function showBasics(id) {
 }
 
 export function showBasicsSuccess(data) {
+  console.log('showBasicsSuccess!');
+  console.log(data);
   return {
     type: types.SHOW_BASICS_SUCCESS,
     data,

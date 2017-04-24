@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
-import ListItem from './ListItem';
+import ProjectListItem from 'containers/ProjectListItem';
 
 
-function ProjectsList({ list, onClick }) {
+function ProjectsList({ list }) {
   let content = (<div></div>);
   if (list !== false && list !== undefined) {
     content = list.map((project, index) => (
-      <ListItem key={`project-${index}`} project={project} onClick={onClick} />
+      <ProjectListItem key={`project-${index}`} project={project}  />
     ));
   }
   return (
@@ -18,7 +18,6 @@ function ProjectsList({ list, onClick }) {
 
 ProjectsList.propTypes = {
   list: PropTypes.any,
-  onClick: PropTypes.func,
 };
 
 export default ProjectsList;

@@ -9,7 +9,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
     const p = this.props.project;
     return (
-      <button onClick={this.handleOnClick(p.id)} className="b1 mb2 bg-white dark7 smaller2 flex justify-between x-fill">
+      <button onClick={this.props.onSelectProject(p.id)} className="b1 mb2 bg-white dark7 smaller2 flex justify-between x-fill">
         <div className="flex">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
@@ -42,7 +42,7 @@ const links = [1,2,3];
 
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,
-  onClick: React.PropTypes.func.isRequired,
+  onSelectProject: React.PropTypes.func.isRequired,
 };
 
 export default ListItem;

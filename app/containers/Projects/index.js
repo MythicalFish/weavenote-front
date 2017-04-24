@@ -24,10 +24,14 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
   componentDidUpdate() {
     //console.log('asdasdasd')
   }
+  // onSelectProject(id) {
+  //   // this.props === undefined
+  //   this.props.showBasics(id);
+  // }
   render() {
     const projectsListProps = {
       list: this.props.list,
-      onClick: () => { },
+      // onSelectProject: this.props.showBasics, // cannot
     };
     return (
       <ProjectsList {...projectsListProps} />

@@ -18,8 +18,8 @@ export function* listProjects() {
   }
 }
 
-export function* showBasics(id) {
-  const requestURL = `http://localhost:4000/projects/${id}`;
+export function* showBasics(action) {
+  const requestURL = `http://localhost:4000/projects/${action.id}`;
   try {
     const data = yield call(request, requestURL);
     yield put(showBasicsSuccess(data));
@@ -61,5 +61,6 @@ export function* listProjectsWatcher() {
 
 // Bootstrap sagas
 export default [
-  listProjectsWatcher,
+  listProjectsWatcher, // <--- DONT FORGET TO ADD WATCHERS FFS
+  showBasicsWatcher, // <--- DONT FORGET TO ADD WATCHERS FFS
 ];
