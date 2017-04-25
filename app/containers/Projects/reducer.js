@@ -10,6 +10,7 @@ const initialState = fromJS({
     basics: false,
   },
   currentView: 'list',
+  currentSection: null,
 });
 
 function projectsReducer(state = initialState, action) {
@@ -24,7 +25,8 @@ function projectsReducer(state = initialState, action) {
     case types.SHOW_PROJECT_SUCCESS:
       return state
         .setIn(['active', 'basics'], action.data)
-        .set('currentView', 'show');
+        .set('currentView', 'show')
+        .set('currentSection', 'basics');
     case LOCATION_CHANGE:
       return state
         .set('currentView', 'list');

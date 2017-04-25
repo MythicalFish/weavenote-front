@@ -1,24 +1,7 @@
-import React, { PropTypes } from 'react';
-import ListItem from './ListItem';
+import ListProjects from './List/index';
+import ShowProject from './Show/index';
 
-
-function ListProjects({ list, onClick }) {
-  let content = (<div></div>);
-  if (list !== false && list !== undefined) {
-    content = list.map((project, index) => (
-      <ListItem key={`project-${index}`} project={project} onClick={() => { onClick(project.id); }} />
-    ));
-  }
-  return (
-    <div>
-      {content}
-    </div>
-  );
-}
-
-ListProjects.propTypes = {
-  list: PropTypes.any,
-  onClick: PropTypes.func,
+export {
+  ListProjects,
+  ShowProject,
 };
-
-export default ListProjects;
