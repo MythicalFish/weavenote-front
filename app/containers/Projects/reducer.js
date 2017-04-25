@@ -27,6 +27,9 @@ function projectsReducer(state = initialState, action) {
         .setIn(['active', 'basics'], action.data)
         .set('currentView', 'show')
         .set('currentSection', 'basics');
+    case types.CHANGE_SECTION:
+      return state
+        .set('currentSection', action.name);
     case LOCATION_CHANGE:
       return state
         .set('currentView', 'list');

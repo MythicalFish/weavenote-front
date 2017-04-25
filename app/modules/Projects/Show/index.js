@@ -15,7 +15,7 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
     }
     return (
       <div>
-        <Navigation />
+        <Navigation onChange={this.props.onClickNav(name)} />
         {section}
       </div>
     );
@@ -26,6 +26,7 @@ ShowProject.propTypes = {
   id: React.PropTypes.number,
   basics: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
+  onClickNav: React.PropTypes.func,
   currentSection: React.PropTypes.string,
 };
 

@@ -46,3 +46,10 @@ export function updateProjectSuccess(id) {
     id,
   };
 }
+
+export function changeSection(name) {
+  return {
+    type: types.CHANGE_SECTION,
+    name,
+  };
+}

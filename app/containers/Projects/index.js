@@ -12,7 +12,7 @@ import {
   makeSelectList, makeSelectActive, makeSelectCurrentView,
   makeSelectCurrentSection,
 } from './selectors';
-import { listProjects, showProject, updateProject } from './actions';
+import { listProjects, showProject, updateProject, changeSection } from './actions';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -28,6 +28,7 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
             basics={p.active.get('basics')}
             onSubmit={(data) => { p.updateProject(data); }}
             currentSection={p.currentSection}
+            onClickNav={(name) => { p.changeSection(name); }} 
           />
         );
       default:
@@ -52,6 +53,7 @@ Projects.propTypes = {
   updateProject: React.PropTypes.func,
   currentView: React.PropTypes.string,
   currentSection: React.PropTypes.string,
+  changeSection: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -59,6 +61,7 @@ export function mapDispatchToProps(dispatch) {
     listProjects: () => dispatch(listProjects()),
     showProject: (id) => dispatch(showProject(id)),
     updateProject: (data) => dispatch(updateProject(data)),
+    changeSection: (name) => dispatch(changeSection(name)),
   };
 }
 
