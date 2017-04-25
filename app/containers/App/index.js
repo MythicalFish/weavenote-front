@@ -14,8 +14,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Header from 'components/Header';
-import Sidebar from 'components/Sidebar';
+import Header from 'modules/Header';
+import Sidebar from 'modules/Sidebar';
 import Auth from 'containers/Auth';
 import { getCurrentPageName } from './actions';
 

@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { ListProjects, ShowProject } from 'components/Projects';
+import { ListProjects, ShowProject } from 'modules/Projects';
 import {
   makeSelectList, makeSelectActive, makeSelectCurrentView,
   makeSelectCurrentSection,

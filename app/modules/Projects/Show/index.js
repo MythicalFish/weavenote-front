@@ -11,7 +11,7 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
     let section;
     switch (p.currentSection) {
       default:
-        section = <Basics />;
+        section = <Basics {...p.basics} />;
     }
     return (
       <div>
