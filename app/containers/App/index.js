@@ -12,11 +12,13 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Auth from 'containers/Auth';
 
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -40,3 +42,8 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     );
   }
 }
+
+const mapStateToProps = createStructuredSelector({
+});
+
+export default connect(mapStateToProps)(App);
