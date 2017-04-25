@@ -22,11 +22,10 @@ export const makeSelectList = () => createSelector(
 );
 
 
-export const makeSelectCurrent = () => createSelector(
+export const makeSelectActive = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
-//    console.log(substate.get('current'));
-    return substate.get('current');
+    return substate.get('active');
   }
 );
 

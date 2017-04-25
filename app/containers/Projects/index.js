@@ -5,36 +5,38 @@
  */
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import ProjectsList from 'components/ProjectsList';
-import { makeSelectList, makeSelectCurrent } from './selectors';
+import ListProjects from 'components/Projects';
+import EditProject from 'components/Projects/Edit';
+import { makeSelectList, makeSelectActive } from './selectors';
 import { listProjects, showBasics } from './actions';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    const currentPath = this.props.location.pathname;
-    const projectID = currentPath.split('/')[2];
-    if (projectID) {
-      this.props.showBasics(projectID);
-    } else {
-      this.props.listProjects();
-    }
+    this.props.listProjects();
+  }
+  componentDidUpdate() {
+    // const currentPath = this.props.location.pathname;
+    // const urlID = currentPath.split('/')[2];
+    // const activeID = this.props.active.get('id');
+    // if (!urlID && activeID) {
+    //   browserHistory.push(`/projects/${activeID}`);
+    // }
   }
   render() {
-    if (this.props.current.get('id')) {
+    const { active } = this.props;
+    if (active.get('id')) {
       return (
-        <div>
-          form goes here
-        </div>
+        <EditProject />
       );
     } else {
-      const projectsListProps = {
-        list: this.props.list,
-        onClick: (id) => { this.props.showBasics(id); },
-      };
       return (
-        <ProjectsList {...projectsListProps} />
+        <ListProjects
+          list={this.props.list}
+          onClick={(id) => { this.props.showBasics(id); }}
+        />
       );
     }
   }
@@ -45,10 +47,7 @@ Projects.propTypes = {
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
-  current: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.bool,
-  ]),
+  active: React.PropTypes.object,
   listProjects: React.PropTypes.func,
   showBasics: React.PropTypes.func,
 };
@@ -62,7 +61,7 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   list: makeSelectList(),
-  current: makeSelectCurrent(),
+  active: makeSelectActive(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

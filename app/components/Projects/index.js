@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import ListItem from './ListItem';
 
 
-function ProjectsList({ list, onClick }) {
+function ListProjects({ list, onClick }) {
   let content = (<div></div>);
   if (list !== false && list !== undefined) {
     content = list.map((project, index) => (
@@ -16,9 +16,9 @@ function ProjectsList({ list, onClick }) {
   );
 }
 
-ProjectsList.propTypes = {
+ListProjects.propTypes = {
   list: PropTypes.any,
   onClick: PropTypes.func,
 };
 
-export default ProjectsList;
+export default ListProjects;
