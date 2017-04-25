@@ -6,7 +6,7 @@ import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
 import * as types from './constants';
-import { listProjectsSuccess, showBasicsSuccess } from './actions';
+import { listProjectsSuccess, showProjectSuccess } from './actions';
 
 export function* listProjects() {
   const requestURL = 'http://localhost:4000/projects';
@@ -18,18 +18,18 @@ export function* listProjects() {
   }
 }
 
-export function* showBasics(action) {
+export function* showProject(action) {
   const requestURL = `http://localhost:4000/projects/${action.id}`;
   try {
     const data = yield call(request, requestURL);
-    yield put(showBasicsSuccess(data));
+    yield put(showProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
 }
 
-export function* showBasicsWatcher() {
-  const watcher = yield takeLatest(types.SHOW_BASICS, showBasics);
+export function* showProjectWatcher() {
+  const watcher = yield takeLatest(types.SHOW_PROJECT, showProject);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
@@ -62,5 +62,5 @@ export function* listProjectsWatcher() {
 // Bootstrap sagas
 export default [
   listProjectsWatcher,
-  showBasicsWatcher,
+  showProjectWatcher,
 ];

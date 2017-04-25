@@ -19,16 +19,30 @@ export function listProjectsError(error) {
   };
 }
 
-export function showBasics(id) {
+export function showProject(id) {
   return {
-    type: types.SHOW_BASICS,
+    type: types.SHOW_PROJECT,
     id,
   };
 }
 
-export function showBasicsSuccess(data) {
+export function showProjectSuccess(data) {
   return {
-    type: types.SHOW_BASICS_SUCCESS,
+    type: types.SHOW_PROJECT_SUCCESS,
     data,
+  };
+}
+
+export function updateProject(data) {
+  return {
+    type: types.UPDATE_PROJECT,
+    data,
+  };
+}
+
+export function updateProjectSuccess(id) {
+  return {
+    type: types.UPDATE_PROJECT_SUCCESS,
+    id,
   };
 }

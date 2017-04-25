@@ -1,6 +1,7 @@
 
 import { fromJS } from 'immutable';
 import * as types from './constants';
+import { LOCATION_CHANGE } from 'react-router-redux';
 
 const initialState = fromJS({
   list: false,
@@ -8,6 +9,7 @@ const initialState = fromJS({
     id: false,
     basics: false,
   },
+  currentView: 'list',
 });
 
 function projectsReducer(state = initialState, action) {
@@ -15,16 +17,17 @@ function projectsReducer(state = initialState, action) {
     case types.LIST_PROJECTS_SUCCESS:
       return state
         .set('list', action.list)
-        .setIn(['active', 'id'], false);
-    case types.SHOW_BASICS:
+        .set('currentView', 'list');
+    case types.SHOW_PROJECT:
       return state
         .setIn(['active', 'id'], action.id);
-    case types.SHOW_BASICS_SUCCESS:
+    case types.SHOW_PROJECT_SUCCESS:
       return state
-        .setIn(['active', 'basics'], action.data);
-    case '@@router/LOCATION_CHANGE':
+        .setIn(['active', 'basics'], action.data)
+        .set('currentView', 'show');
+    case LOCATION_CHANGE:
       return state
-        .setIn(['active', 'id'], false);  
+        .set('currentView', 'list');
     default:
       return state;
   }

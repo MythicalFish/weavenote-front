@@ -1,18 +1,6 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the projects state domain
- */
 const selectProjectsDomain = () => (state) => state.get('projects');
-
-/**
- * Other specific selectors
- */
-
-
-/**
- * Default selector used by Projects
- */
 
 export const makeSelectList = () => createSelector(
   selectProjectsDomain(),
@@ -21,11 +9,17 @@ export const makeSelectList = () => createSelector(
   }
 );
 
-
 export const makeSelectActive = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
     return substate.get('active');
+  }
+);
+
+export const makeSelectCurrentView = () => createSelector(
+  selectProjectsDomain(),
+  (substate) => {
+    return substate.get('currentView');
   }
 );
 
