@@ -6,26 +6,41 @@
 
 import React from 'react';
 
-class Dropdown extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class Dropdown extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentWillMount() {
+    this.setState({ active: false });
+  }
+  toggleMenu() {
+    {
+      this.state.active
+        ? this.setState({ active: false })
+        : this.setState({ active: true })
+    }
+  }
   render() {
-    const { id, label, links } = this.props;
+    const { label, menuItems } = this.props;
+    let menu;
+    if (this.state.active) {
+      menu = (
+        <div className="dropdown-content x10 center">
+          {menuItems()}
+        </div>
+      );
+    }
     return (
       <div className="dropdown">
-        <label>
+        <button onClick={() => { this.toggleMenu() }}>
           {label}
-        </label>
-        <div className="dropdown-content x20 sm-x30 center">
-
-        </div>
+        </button>
+        {menu}
       </div>
     );
   }
 }
 
 Dropdown.propTypes = {
-  id: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
-  links: React.PropTypes.array.isRequired,
+  menuItems: React.PropTypes.func.isRequired,
 };
 
 export default Dropdown;

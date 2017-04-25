@@ -4,7 +4,7 @@
   display: block;
   position: relative;
   * { cursor: pointer!important; }
-  > label {
+  > button {
     background: $white;
     color: $gray-dark;
     border-radius: 2px;
@@ -26,14 +26,12 @@
     -webkit-box-shadow: 0 0 14px rgba(255,255,255,0.5);
     transition: transform .2s;
     -webkit-transition: transform .2s;
-    transform: scaleY(0);
-    -webkit-transform: scaleY(0);
     transform-origin: top;
     -webkit-transform-origin: top;
     margin-top: -1px;
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;
     z-index: 2;
     background: $white;
     min-width: 120px;
@@ -42,5 +40,12 @@
     overflow-x: hidden;
     @extend .px1;
     @extend .b1;
+    button {
+      display: block;
+      border: 0;
+      background: none;
+      width: 100%;
+      padding: $space-2;
+    }
   }
 }
