@@ -10,3 +10,4 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const GET_CURRENT_PAGE_NAME = 'GET_CURRENT_PAGE_NAME';

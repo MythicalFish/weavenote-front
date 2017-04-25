@@ -17,19 +17,30 @@ import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Auth from 'containers/Auth';
+import { getCurrentPageName } from './actions';
 
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
-  };
+    getCurrentPageName: React.PropTypes.func,
+    location: React.PropTypes.object,
+  }
+
+  componentWillMount() {
+    //this.props.getCurrentPageName(this.props.location.pathname);
+  }
+
+  componentDidUpdate() {
+    //this.props.getCurrentPageName(this.props.location.pathname);
+  }
 
   render() {
     return (
       <Auth>
         <div className="flex bg-gray-lightest">
           <div className="flex-none">
-            <Sidebar />
+            <Sidebar currentPath={this.props.location.pathname} />
           </div>
           <div className="flex-auto">
             <Header />
@@ -43,7 +54,13 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   }
 }
 
+export function mapDispatchToProps(dispatch) {
+  return {
+    getCurrentPageName: (path) => dispatch(getCurrentPageName(path)),
+  };
+}
+
 const mapStateToProps = createStructuredSelector({
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
