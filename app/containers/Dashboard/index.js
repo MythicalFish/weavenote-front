@@ -14,8 +14,33 @@ import React from 'react';
 export default class Dashboard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
-        Dashboard
+      <div className="p4">
+        <div className="row flex">
+          <div className="col-xs-12 col-md-7">
+            <div className="row">
+              <div className="col-xs-12 col-sm-6">
+                <div className="p3 bg-white">
+                  
+                </div>
+              </div>
+              <div className="col-xs-12 col-sm-6">
+                <div className="p3 bg-white">
+                  
+                </div>
+              </div>
+              <div className="col-xs-12 mt2">
+                <div className="p3 bg-white">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-12 col-md-5 flex">
+            <div className="p3 bg-white flex-auto">
+              
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
