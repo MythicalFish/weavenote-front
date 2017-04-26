@@ -7,33 +7,31 @@ import * as sections from './constants/sections';
 
 const initialState = fromJS({
   list: false,
-  active: {
-    id: false,
-    basics: false,
-  },
+  currentProject: null,
   currentView: views.Default,
   currentSection: sections.Default,
 });
 
 function projectsReducer(state = initialState, action) {
   switch (action.type) {
+
     case types.LIST_PROJECTS_SUCCESS:
       return state
         .set('list', action.list)
         .set('currentView', views.List);
-    case types.SHOW_PROJECT:
-      return state
-        .setIn(['active', 'id'], action.id);
+
     case types.SHOW_PROJECT_SUCCESS:
       return state
-        .setIn(['active', 'basics'], action.data)
         .set('currentView', views.Show)
+        .set('currentProject', action.data)
         .setIn(['currentSection', 'id'], sections.Basics.id)
         .setIn(['currentSection', 'label'], sections.Basics.label);
+
     case types.CHANGE_SECTION:
       return state
         .setIn(['currentSection', 'id'], action.section.id)
         .setIn(['currentSection', 'label'], action.section.label);
+
     case LOCATION_CHANGE:
       return state
         .set('currentView', views.Default)

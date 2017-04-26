@@ -9,10 +9,10 @@ export const makeSelectList = () => createSelector(
   }
 );
 
-export const makeSelectActive = () => createSelector(
+export const selectCurrentProject = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
-    return substate.get('active');
+    return substate.get('currentProject');
   }
 );
 

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { ListProjects, ShowProject } from 'modules/Projects';
 import {
-  makeSelectList, makeSelectActive, makeSelectCurrentView,
+  makeSelectList, selectCurrentProject, makeSelectCurrentView,
   selectCurrentSection,
 } from './selectors';
 import { listProjects, showProject, updateProject } from './actions';
@@ -25,8 +25,7 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
       case views.Show.key:
         return (
           <ShowProject
-            id={p.active.get('id')}
-            basics={p.active.get('basics')}
+            currentProject={p.currentProject}
             onSubmit={(data) => { p.updateProject(data); }}
             currentSection={p.currentSection}
           />
@@ -47,7 +46,7 @@ Projects.propTypes = {
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
-  active: React.PropTypes.object,
+  currentProject: React.PropTypes.object,
   listProjects: React.PropTypes.func,
   showProject: React.PropTypes.func,
   updateProject: React.PropTypes.func,
@@ -66,7 +65,7 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   list: makeSelectList(),
-  active: makeSelectActive(),
+  currentProject: selectCurrentProject(),
   currentView: makeSelectCurrentView(),
   currentSection: selectCurrentSection(),
 });
