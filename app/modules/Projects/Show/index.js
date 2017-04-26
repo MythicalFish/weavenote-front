@@ -1,4 +1,5 @@
 import React from 'react';
+import SubHeader from 'components/SubHeader';
 import Navigation from './Navigation';
 import Basics from './Basics';
 
@@ -15,8 +16,12 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
     }
     return (
       <div>
-        <Navigation onChange={this.props.onClickNav(name)} />
-        {section}
+        <SubHeader>
+          <Navigation onChange={(name) => { this.props.onClickNav(name); }} />
+        </SubHeader>
+        <div className="p2">
+          {section}
+        </div>
       </div>
     );
   }

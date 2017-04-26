@@ -18,12 +18,12 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
     }
   }
   render() {
-    const { label, menuItems } = this.props;
+    const { label, children } = this.props;
     let menu;
     if (this.state.active) {
       menu = (
         <div className="dropdown-content x10 center">
-          {menuItems()}
+          {children}
         </div>
       );
     }
@@ -40,7 +40,7 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
 
 Dropdown.propTypes = {
   label: React.PropTypes.string.isRequired,
-  menuItems: React.PropTypes.func.isRequired,
+  children: React.PropTypes.node,
 };
 
 export default Dropdown;

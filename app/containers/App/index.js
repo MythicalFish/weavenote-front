@@ -44,9 +44,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
           </div>
           <div className="flex-auto">
             <Header />
-            <div className="p4">
-              {React.Children.toArray(this.props.children)}
-            </div>
+            {React.Children.toArray(this.props.children)}
           </div>
         </div>
       </Auth>

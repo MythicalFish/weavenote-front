@@ -1,7 +1,6 @@
 import React from 'react';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
-import ListItemMenu from './ListItemMenu';
 
 class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   handleOnClick = (id) => {
@@ -32,14 +31,16 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
             collaborators
           </div>
           <div className="p2">
-            <Dropdown label="..." menuItems={ListItemMenu} />
+            <Dropdown label="...">
+              <button>Menu item 1</button>
+              <button>Menu item 2</button>
+            </Dropdown>
           </div>
         </div>
       </div>
     );
   }
 }
-const links = [1,2,3];
 
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,

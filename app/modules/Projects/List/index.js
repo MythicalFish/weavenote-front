@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import SubHeader from 'components/SubHeader';
 import ListItem from './ListItem';
-
+import Navigation from './Navigation';
 
 function ListProjects({ list, onClick }) {
   let content = (<div></div>);
@@ -11,7 +12,12 @@ function ListProjects({ list, onClick }) {
   }
   return (
     <div>
-      {content}
+      <SubHeader>
+        <Navigation onChange={() => { }} />
+      </SubHeader>
+      <div className="p2">
+        {content}
+      </div>
     </div>
   );
 }
