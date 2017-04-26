@@ -4,9 +4,7 @@ import { isTokenExpired } from './jwtHelper';
 
 const LOCK_OPTIONS = {
   container: 'login-form',
-  theme: {
-    logo: 'https://mythical.fish/images/logo.svg',
-  },
+  theme: {},
   auth: {
     redirectUrl: window.location.origin,
     responseType: 'token',
@@ -16,15 +14,11 @@ const LOCK_OPTIONS = {
   },
 };
 
-// TODO: use dotenv for these vars
-const CLIENT_ID = '2j5Y7oyQLUAQtcCAeqxbrdrFrWT3gO19';
-const DOMAIN = 'mythic.eu.auth0.com';
-
 export default class AuthService extends EventEmitter {
 
   constructor() {
     super();
-    this.lock = new Auth0Lock(CLIENT_ID, DOMAIN, LOCK_OPTIONS);
+    this.lock = new Auth0Lock(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN, LOCK_OPTIONS);
     this.lock.on('authenticated', this.doAuthentication.bind(this));
     this.lock.on('authorization_error', this.err.bind(this));
   }

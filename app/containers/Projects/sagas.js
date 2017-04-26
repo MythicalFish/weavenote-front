@@ -9,9 +9,8 @@ import * as types from './constants/actions';
 import { listProjectsSuccess, showProjectSuccess } from './actions';
 
 export function* listProjects() {
-  const requestURL = 'http://localhost:4000/projects';
   try {
-    const projects = yield call(request, requestURL);
+    const projects = yield call(request, 'projects');
     yield put(listProjectsSuccess(projects));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -19,9 +18,8 @@ export function* listProjects() {
 }
 
 export function* showProject(action) {
-  const requestURL = `http://localhost:4000/projects/${action.id}`;
   try {
-    const data = yield call(request, requestURL);
+    const data = yield call(request, `projects/${action.id}`);
     yield put(showProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

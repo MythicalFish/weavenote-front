@@ -4,6 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = (options) => ({
   entry: options.entry,
@@ -69,6 +70,8 @@ module.exports = (options) => ({
       // make fetch available
       fetch: 'exports-loader?self.fetch!whatwg-fetch',
     }),
+
+    new Dotenv(),
 
     // new webpack.ProvidePlugin({
     //   $: 'selector',

@@ -36,8 +36,8 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url) {
-  return fetch(url, requestOptions())
+export default function request(path) {
+  return fetch(`${process.env.API_URL}/${path}`, requestOptions())
     .then(checkStatus)
     .then(parseJSON);
 }
