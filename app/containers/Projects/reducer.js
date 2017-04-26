@@ -1,7 +1,9 @@
 
 import { fromJS } from 'immutable';
-import * as types from './constants';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import * as types from './constants/actions';
+import * as views from './constants/views';
+import * as sections from './constants/sections';
 
 const initialState = fromJS({
   list: false,
@@ -9,8 +11,8 @@ const initialState = fromJS({
     id: false,
     basics: false,
   },
-  currentView: 'list',
-  currentSection: null,
+  currentView: views.Default,
+  currentSection: sections.Default,
 });
 
 function projectsReducer(state = initialState, action) {
@@ -18,21 +20,25 @@ function projectsReducer(state = initialState, action) {
     case types.LIST_PROJECTS_SUCCESS:
       return state
         .set('list', action.list)
-        .set('currentView', 'list');
+        .set('currentView', views.List);
     case types.SHOW_PROJECT:
       return state
         .setIn(['active', 'id'], action.id);
     case types.SHOW_PROJECT_SUCCESS:
       return state
         .setIn(['active', 'basics'], action.data)
-        .set('currentView', 'show')
-        .set('currentSection', 'basics');
+        .set('currentView', views.Show)
+        .setIn(['currentSection', 'id'], sections.Basics.id)
+        .setIn(['currentSection', 'label'], sections.Basics.label);
     case types.CHANGE_SECTION:
       return state
-        .set('currentSection', action.name);
+        .setIn(['currentSection', 'id'], action.section.id)
+        .setIn(['currentSection', 'label'], action.section.label);
     case LOCATION_CHANGE:
       return state
-        .set('currentView', 'list');
+        .set('currentView', views.Default)
+        .setIn(['currentSection', 'id'], sections.Default.id)
+        .setIn(['currentSection', 'label'], sections.Default.label);
     default:
       return state;
   }

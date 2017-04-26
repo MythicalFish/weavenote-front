@@ -5,7 +5,7 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
-import * as types from './constants';
+import * as types from './constants/actions';
 import { listProjectsSuccess, showProjectSuccess } from './actions';
 
 export function* listProjects() {

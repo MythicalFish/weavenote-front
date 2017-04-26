@@ -1,4 +1,4 @@
-import * as types from './constants';
+import * as types from './constants/actions';
 
 export function listProjects() {
   return {
@@ -47,9 +47,9 @@ export function updateProjectSuccess(id) {
   };
 }
 
-export function changeSection(name) {
+export function changeSection(section) {
   return {
     type: types.CHANGE_SECTION,
-    name,
+    section,
   };
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import NavigationItem from 'components/NavigationItem';
+import * as sections from 'containers/Projects/constants/sections';
+import ProjectNavItem from '../Shared/ProjectNavItem';
 
 export default class Navigation extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   handleChange() {
@@ -10,13 +11,10 @@ export default class Navigation extends React.PureComponent { // eslint-disable-
       <nav className="tabs">
         <ul>
           <li>
-            <NavigationItem label="Basics" onClick={() => { this.props.onChange('basics'); }} />
+            <ProjectNavItem target={sections.Active} />
           </li>
           <li>
-            <NavigationItem label="Materials" onClick={() => { this.props.onChange('materials'); }} />
-          </li>
-          <li>
-            <NavigationItem label="Measurements" onClick={() => { this.props.onChange('measurements'); }} />
+            <ProjectNavItem target={sections.Archived} />
           </li>
         </ul>
       </nav>

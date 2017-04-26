@@ -14,9 +14,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Header from 'modules/Header';
+import Auth, { Auth0 } from 'containers/Auth';
+import Header from 'components/Header';
 import Sidebar from 'modules/Sidebar';
-import Auth from 'containers/Auth';
 import { getCurrentPageName } from './actions';
 
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -43,7 +43,12 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
             <Sidebar currentPath={this.props.location.pathname} />
           </div>
           <div className="flex-auto">
-            <Header />
+            <Header>
+              <div></div>
+              <nav>
+                <button className="" onClick={() => { Auth0.logout(); }}>Logout</button>
+              </nav>
+            </Header>
             {React.Children.toArray(this.props.children)}
           </div>
         </div>

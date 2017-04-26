@@ -10,7 +10,7 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
   render() {
     const p = this.props;
     let section;
-    switch (p.currentSection) {
+    switch (p.currentSection.id) {
       default:
         section = <Basics {...p.basics} />;
     }
@@ -32,7 +32,7 @@ ShowProject.propTypes = {
   basics: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   onClickNav: React.PropTypes.func,
-  currentSection: React.PropTypes.string,
+  currentSection: React.PropTypes.object,
 };
 
 export default ShowProject;

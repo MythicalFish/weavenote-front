@@ -13,8 +13,11 @@ nav.tabs {
         display: block;
         width: 100%;
         text-align: center;
-        padding: $space-2;
+        padding: $space-3;
         color: $dark7;
+        &.active {
+          border-bottom: 3px solid $aqua;
+        }
       }
     }
   }

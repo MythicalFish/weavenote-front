@@ -23,10 +23,17 @@ export const makeSelectCurrentView = () => createSelector(
   }
 );
 
-export const makeSelectCurrentSection = () => createSelector(
+export const selectCurrentSection = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
     return substate.get('currentSection');
+  }
+);
+
+export const selectCurrentSectionID = () => createSelector(
+  selectCurrentSection(),
+  (substate) => {
+    return substate.id;
   }
 );
 
