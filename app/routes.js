@@ -81,6 +81,66 @@ export default function createRoutes(store) {
         },
       ],
     }, {
+      path: '/conversations',
+      name: 'conversations',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Conversations/reducer'),
+          import('containers/Conversations/sagas'),
+          import('containers/Conversations'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('conversations', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/materials',
+      name: 'materials',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Materials/reducer'),
+          import('containers/Materials/sagas'),
+          import('containers/Materials'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('materials', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/contacts',
+      name: 'contacts',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Contacts/reducer'),
+          import('containers/Contacts/sagas'),
+          import('containers/Contacts'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('contacts', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
