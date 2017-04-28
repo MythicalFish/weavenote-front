@@ -13,7 +13,7 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
   render() {
     const p = this.props;
     let currentSection = <Basics {...p.currentProject} />;
-    switch (p.currentSection.get('id')) {
+    switch (p.currentSection.id) {
       case sections.Basics.id:
         break; // already set
       case sections.Materials.id:

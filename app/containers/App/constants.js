@@ -10,4 +10,5 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
-export const GET_CURRENT_PAGE_NAME = 'GET_CURRENT_PAGE_NAME';
+export const GET_STATS = 'GET_STATS';
+export const GET_STATS_SUCCESS = 'GET_STATS_SUCCESS';

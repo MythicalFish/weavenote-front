@@ -1,20 +1,10 @@
 import { createSelector } from 'reselect';
 
-const selectGlobal = (state) => state.get('global'); 
+const makeSelectGlobal = () => (state) => state.get('global');
 
-const selectLoading = () => createSelector(
-  selectGlobal,
-  (globalState) => { globalState.get('loading'); }
-);
-
-const selectError = () => createSelector(
-  selectGlobal,
-  (globalState) => { globalState.get('error'); }
-);
-
-const selectCurrentPage = () => createSelector(
-  selectGlobal,
-  (globalState) => { globalState.get('currentPage'); }
+const selectGlobal = () => createSelector(
+  makeSelectGlobal(),
+  (globalState) => globalState.toJS()
 );
 
 const makeSelectLocationState = () => {
@@ -35,8 +25,5 @@ const makeSelectLocationState = () => {
 
 export {
   selectGlobal,
-  selectLoading,
-  selectError,
-  selectCurrentPage,
   makeSelectLocationState,
 };

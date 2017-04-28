@@ -6,7 +6,7 @@ import { selectCurrentSection } from 'containers/Projects/selectors';
 class NavItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   buttonClass() {
     let c = '';
-    if (this.props.currentSection.get('id') === this.props.target.id) {
+    if (this.props.currentSection.id === this.props.target.id) {
       c = `${c} active`;
     }
     return c;

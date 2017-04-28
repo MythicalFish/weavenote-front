@@ -2,6 +2,11 @@ import { createSelector } from 'reselect';
 
 const selectProjectsDomain = () => (state) => state.get('projects');
 
+export const selectProjects = () => createSelector(
+  selectProjectsDomain(),
+  (substate) => substate.toJS()
+);
+
 export const selectProjectsList = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
@@ -10,9 +15,9 @@ export const selectProjectsList = () => createSelector(
 );
 
 export const selectCurrentProject = () => createSelector(
-  selectProjectsDomain(),
+  selectProjects(),
   (substate) => {
-    return substate.get('currentProject');
+    return substate.currentProject;
   }
 );
 
@@ -24,16 +29,8 @@ export const makeSelectCurrentView = () => createSelector(
 );
 
 export const selectCurrentSection = () => createSelector(
-  selectProjectsDomain(),
+  selectProjects(),
   (substate) => {
-    return substate.get('currentSection');
+    return substate.currentSection;
   }
 );
-
-export const selectCurrentSectionID = () => createSelector(
-  selectCurrentSection(),
-  (substate) => {
-    return substate.id;
-  }
-);
-

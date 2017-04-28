@@ -14,12 +14,12 @@ const selectDashboardDomain = () => (state) => state.get('dashboard');
  * Default selector used by Test
  */
 
-const makeSelectTest = () => createSelector(
+const selectDashboard = () => createSelector(
   selectDashboardDomain(),
   (substate) => substate.toJS()
 );
 
-export default makeSelectTest;
+export default selectDashboard;
 export {
   selectDashboardDomain,
 };

@@ -5,22 +5,21 @@
  */
 
 import { fromJS } from 'immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
 import * as types from './constants';
 
 const initialState = fromJS({
-  loading: false,
-  error: false,
-  currentPage: null,
+  stats: {
+    projects: {
+      counts: [],
+    },
+  },
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case LOCATION_CHANGE:
-      return state;
-    case types.GET_CURRENT_PAGE_NAME:
+    case types.GET_STATS_SUCCESS:
       return state
-        .set('currentPage', action.path);
+        .set('stats', action.stats);
     default:
       return state;
   }

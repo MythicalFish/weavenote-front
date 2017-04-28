@@ -17,22 +17,14 @@ import { createStructuredSelector } from 'reselect';
 import Auth, { Auth0 } from 'containers/Auth';
 import Header from 'components/Header';
 import Sidebar from 'modules/Sidebar';
-import { getCurrentPageName } from './actions';
+import { selectGlobal } from './selectors';
+import { getStats } from './actions';
 
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
-    getCurrentPageName: React.PropTypes.func,
     location: React.PropTypes.object,
-  }
-
-  componentWillMount() {
-    //this.props.getCurrentPageName(this.props.location.pathname);
-  }
-
-  componentDidUpdate() {
-    //this.props.getCurrentPageName(this.props.location.pathname);
   }
 
   render() {
@@ -59,11 +51,12 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getCurrentPageName: (path) => dispatch(getCurrentPageName(path)),
+    getStats: () => { dispatch(getStats()); },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
+  globalState: selectGlobal(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
