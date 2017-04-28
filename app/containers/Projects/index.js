@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { ListProjects, ShowProject } from 'modules/Projects';
@@ -43,16 +43,16 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
 }
 
 Projects.propTypes = {
-  projectsList: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.bool,
+  projectsList: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.bool,
   ]),
-  currentProject: React.PropTypes.object,
-  listProjects: React.PropTypes.func,
-  createProject: React.PropTypes.func,
-  updateProject: React.PropTypes.func,
-  currentView: React.PropTypes.object,
-  currentSection: React.PropTypes.object,
+  currentProject: PropTypes.object,
+  listProjects: PropTypes.func,
+  createProject: PropTypes.func,
+  updateProject: PropTypes.func,
+  currentView: PropTypes.object,
+  currentSection: PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {

@@ -19,8 +19,13 @@ function projectsReducer(state = initialState, action) {
       return state
         .set('list', action.list)
         .set('currentView', views.List);
-      
+
     case types.CREATE_PROJECT_SUCCESS:
+      return state
+        .set('list', action.list)
+        .set('currentView', views.List);
+      
+    case types.ARCHIVE_PROJECT_SUCCESS:
       return state
         .set('list', action.list)
         .set('currentView', views.List);

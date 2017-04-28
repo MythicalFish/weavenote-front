@@ -41,9 +41,13 @@ export function request(opts) {
     .then(parseJSON);
 }
 
+export function patch(opts = { path: '/', body: {} }) {
+  return fetch(requestURL(opts), requestOptions({ method: 'PATCH', body: JSON.stringify(opts.body) }))
+    .then(checkStatus)
+    .then(parseJSON);
+}
+
 export function send(opts = { path: '/', body: {} }) {
-  // const data = new FormData();
-  // data.append('json', JSON.stringify(opts.body));
   return fetch(requestURL(opts), requestOptions({ method: 'POST', body: JSON.stringify(opts.body) }))
     .then(checkStatus)
     .then(parseJSON);

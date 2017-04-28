@@ -1,14 +1,18 @@
 
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { request, send } from 'utils/request';
+import { request, send, patch } from 'utils/request';
 import * as types from './constants/actions';
-import { listProjectsSuccess, showProjectSuccess, createProjectSuccess } from './actions';
+import {
+  listProjectsSuccess, showProjectSuccess, createProjectSuccess,
+  archiveProjectSuccess,
+} from './actions';
 
 export default [
   listProjectsWatcher,
   showProjectWatcher,
   createProjectWatcher,
+  archiveProjectWatcher,
 ];
 
 export function* createProject() {
@@ -22,6 +26,22 @@ export function* createProject() {
 
 export function* createProjectWatcher() {
   const watcher = yield takeLatest(types.CREATE_PROJECT, createProject);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* archiveProject(action) {
+  try {
+    const data = yield call(patch, { path: `projects/${action.id}`, body: { archived: true, index_after_update: true } });
+    console.log(data)
+    yield put(archiveProjectSuccess(data));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* archiveProjectWatcher() {
+  const watcher = yield takeLatest(types.ARCHIVE_PROJECT, archiveProject);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { showProject } from 'containers/Projects/actions';
+import { showProject, archiveProject } from 'containers/Projects/actions';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
 
@@ -32,7 +32,8 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
           </div>
           <div className="p2">
             <Dropdown label="...">
-              <button>Archive</button>
+              <button onClick={() => { this.props.showProject(p.id); }}>Manage</button>
+              <button onClick={() => { this.props.archiveProject(p.id); }}>Archive</button>
             </Dropdown>
           </div>
         </div>
@@ -44,12 +45,14 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,
   showProject: React.PropTypes.func,
+  archiveProject: React.PropTypes.func,
 };
 
 
 export function mapDispatchToProps(dispatch) {
   return {
     showProject: (projectID) => dispatch(showProject(projectID)),
+    archiveProject: (projectID) => dispatch(archiveProject(projectID)),
   };
 }
 
