@@ -11,13 +11,13 @@ export default class Navigation extends React.PureComponent { // eslint-disable-
       <nav className="tabs">
         <ul>
           <li>
-            <ProjectNavItem target={sections.Basics} />
+            <ProjectNavItem target={sections.Basics} handleDispatch={() => {}} />
           </li>
           <li>
-            <ProjectNavItem target={sections.Materials} />
+            <ProjectNavItem target={sections.Materials} handleDispatch={() => {}} />
           </li>
           <li>
-            <ProjectNavItem target={sections.Measurements} />
+            <ProjectNavItem target={sections.Measurements} handleDispatch={() => {}} />
           </li>
         </ul>
       </nav>
