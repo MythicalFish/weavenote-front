@@ -1,16 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { showProject } from 'containers/Projects/actions';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
 
 class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  handleOnClick = (id) => {
-    this.props.onClick(id);
-  }
   render() {
     const p = this.props.project;
     return (
       <div className="b1 mb2 bg-white dark7 smaller2 flex justify-between x-fill">
-        <button onClick={this.props.onClick} className="flex items-center b0 bg-white">
+        <button onClick={() => { this.props.showProject(p.id); }} className="flex items-center b0 bg-white">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
               <Thumbnail project={p} />
@@ -32,8 +32,8 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
           </div>
           <div className="p2">
             <Dropdown label="...">
-              <button>Menu item 1</button>
-              <button>Menu item 2</button>
+              <button>Archive</button>
+              <button>Duplicate</button>
             </Dropdown>
           </div>
         </div>
@@ -44,7 +44,18 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
 
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,
-  onClick: React.PropTypes.func.isRequired,
+  showProject: React.PropTypes.func,
 };
 
-export default ListItem;
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    showProject: (projectID) => dispatch(showProject(projectID)),
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);

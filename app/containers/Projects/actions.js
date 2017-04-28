@@ -1,8 +1,9 @@
 import * as types from './constants/actions';
 
-export function listProjects() {
+export function listProjects(params) {
   return {
     type: types.LIST_PROJECTS,
+    params,
   };
 }
 export function listProjectsSuccess(list) {

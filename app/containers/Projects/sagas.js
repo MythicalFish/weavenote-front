@@ -8,9 +8,9 @@ import request from 'utils/request';
 import * as types from './constants/actions';
 import { listProjectsSuccess, showProjectSuccess } from './actions';
 
-export function* listProjects() {
+export function* listProjects(opts) {
   try {
-    const projects = yield call(request, 'projects');
+    const projects = yield call(request, { path: 'projects', params: opts.params });
     yield put(listProjectsSuccess(projects));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

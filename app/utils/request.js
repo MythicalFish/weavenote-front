@@ -36,17 +36,33 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(path) {
-  return fetch(`${process.env.API_URL}/${path}`, requestOptions())
+export default function request(opts) {
+  return fetch(requestURL(opts), requestOptions())
     .then(checkStatus)
     .then(parseJSON);
 }
 
+const requestURL = (opts) => {
+  let url = `${process.env.API_URL}/${opts.path}`;
+  if (opts.params) {
+    url = `${url}?${encodedRequestParams(opts.params)}`;
+  }
+  return url;
+};
+
 const requestOptions = () => {
-  const headers = {
-    Authorization: idToken(),
+  return {
+    headers: {
+      Authorization: idToken(),
+    },
   };
-  return { headers };
+};
+
+const encodedRequestParams = (params) => {
+  const esc = encodeURIComponent;
+  return Object.keys(params)
+    .map(k => esc(k) + '=' + esc(params[k]))
+    .join('&');
 };
 
 const idToken = () => `Bearer: ${localStorage.access_token}`;

@@ -5,22 +5,29 @@ import { changeSection } from 'containers/Projects/actions';
 import NavItem from 'components/NavItem';
 
 class ProjectNavItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  handleClick(section) {
+    this.props.changeSection(section);
+    this.props.handleDispatch();
+  }
   render() {
-    const { target, onClick } = this.props;
+    const { target } = this.props;
     return (
-      <NavItem target={target} onClick={(section) => { onClick(section); }} />
+      <NavItem target={target} onClick={(section) => { this.handleClick(section); }} />
     );
   }
 }
 
 ProjectNavItem.propTypes = {
   target: React.PropTypes.object,
-  onClick: React.PropTypes.func,
+  changeSection: React.PropTypes.func,
+  handleDispatch: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onClick: (section) => dispatch(changeSection(section)),
+    changeSection: (section) => {
+      dispatch(changeSection(section));
+    },
   };
 }
 

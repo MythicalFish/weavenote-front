@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const selectProjectsDomain = () => (state) => state.get('projects');
 
-export const makeSelectList = () => createSelector(
+export const selectProjectsList = () => createSelector(
   selectProjectsDomain(),
   (substate) => {
     return substate.get('list');

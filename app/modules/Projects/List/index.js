@@ -3,17 +3,17 @@ import SubHeader from 'components/SubHeader';
 import ListItem from './ListItem';
 import Navigation from './Navigation';
 
-function ListProjects({ list, onClick }) {
+function ListProjects({ projectsList, listProjects }) {
   let content = (<div></div>);
-  if (list !== false && list !== undefined) {
-    content = list.map((project, index) => (
-      <ListItem key={`project-${index}`} project={project} onClick={() => { onClick(project.id); }} />
+  if (projectsList !== false && projectsList !== undefined) {
+    content = projectsList.map((project, index) => (
+      <ListItem key={`project-${index}`} project={project} />
     ));
   }
   return (
     <div>
       <SubHeader>
-        <Navigation onChange={() => { }} />
+        <Navigation listProjects={listProjects} />
       </SubHeader>
       <div className="p2">
         {content}
@@ -23,8 +23,8 @@ function ListProjects({ list, onClick }) {
 }
 
 ListProjects.propTypes = {
-  list: PropTypes.any,
-  onClick: PropTypes.func,
+  projectsList: PropTypes.any,
+  listProjects: PropTypes.func,
 };
 
 export default ListProjects;
