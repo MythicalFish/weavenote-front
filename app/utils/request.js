@@ -22,7 +22,6 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-
   const error = new Error(response.statusText);
   error.response = response;
   throw error;
@@ -36,8 +35,16 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(opts) {
+export function request(opts) {
   return fetch(requestURL(opts), requestOptions())
+    .then(checkStatus)
+    .then(parseJSON);
+}
+
+export function send(opts = { path: '/', body: {} }) {
+  // const data = new FormData();
+  // data.append('json', JSON.stringify(opts.body));
+  return fetch(requestURL(opts), requestOptions({ method: 'POST', body: JSON.stringify(opts.body) }))
     .then(checkStatus)
     .then(parseJSON);
 }
@@ -50,12 +57,14 @@ const requestURL = (opts) => {
   return url;
 };
 
-const requestOptions = () => {
-  return {
-    headers: {
-      Authorization: idToken(),
-    },
+const requestOptions = (options = {}) => {
+  const o = options;
+  o.headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: idToken(),
   };
+  return o;
 };
 
 const encodedRequestParams = (params) => {

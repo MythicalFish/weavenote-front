@@ -6,6 +6,7 @@ export function listProjects(params) {
     params,
   };
 }
+
 export function listProjectsSuccess(list) {
   return {
     type: types.LIST_PROJECTS_SUCCESS,
@@ -31,6 +32,19 @@ export function showProjectSuccess(data) {
   return {
     type: types.SHOW_PROJECT_SUCCESS,
     data,
+  };
+}
+
+export function createProject() {
+  return {
+    type: types.CREATE_PROJECT,
+  };
+}
+
+export function createProjectSuccess(list) {
+  return {
+    type: types.LIST_PROJECTS_SUCCESS,
+    list,
   };
 }
 

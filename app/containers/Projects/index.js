@@ -12,7 +12,7 @@ import {
   selectProjectsList, selectCurrentProject, makeSelectCurrentView,
   selectCurrentSection,
 } from './selectors';
-import { listProjects, updateProject } from './actions';
+import { listProjects, updateProject, createProject } from './actions';
 import * as views from './constants/views';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -35,6 +35,7 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
           <ListProjects
             projectsList={p.projectsList}
             listProjects={p.listProjects}
+            createProject={p.createProject}
           />
         );
     }
@@ -48,6 +49,7 @@ Projects.propTypes = {
   ]),
   currentProject: React.PropTypes.object,
   listProjects: React.PropTypes.func,
+  createProject: React.PropTypes.func,
   updateProject: React.PropTypes.func,
   currentView: React.PropTypes.object,
   currentSection: React.PropTypes.object,
@@ -56,6 +58,7 @@ Projects.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
     listProjects: (params) => dispatch(listProjects(params)),
+    createProject: (data) => dispatch(createProject(data)),
     updateProject: (data) => dispatch(updateProject(data)),
   };
 }

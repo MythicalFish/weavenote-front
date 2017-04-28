@@ -33,7 +33,6 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
           <div className="p2">
             <Dropdown label="...">
               <button>Archive</button>
-              <button>Duplicate</button>
             </Dropdown>
           </div>
         </div>

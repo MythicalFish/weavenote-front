@@ -39,7 +39,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     return (
       <Auth>
         <div className="flex bg-gray-lightest">
-          <div className="flex-none">
+          <div className="flex-none bg-color1x">
             <Sidebar currentPath={this.props.location.pathname} />
           </div>
           <div className="flex-auto">

@@ -4,11 +4,11 @@ import ProjectNavItem from '../Shared/ProjectNavItem';
 
 export default class Navigation extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { listProjects } = this.props;
+    const { createProject, listProjects } = this.props;
     return (
       <div className="flex justify-between">
         <div className="flex items-center px3">
-          <button className="glyph">
+          <button className="glyph" onClick={() => { createProject(); }}>
             <i className="fa fa-plus-circle"></i>
           </button>
         </div>
@@ -31,4 +31,5 @@ export default class Navigation extends React.PureComponent { // eslint-disable-
 
 Navigation.propTypes = {
   listProjects: React.PropTypes.func,
+  createProject: React.PropTypes.func,
 };

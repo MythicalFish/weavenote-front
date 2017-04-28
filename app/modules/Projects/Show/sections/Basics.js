@@ -1,4 +1,5 @@
 import React from 'react';
+import { mainImage } from 'modules/Projects/Shared/Images';
 
 export default class Basics extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -6,7 +7,7 @@ export default class Basics extends React.PureComponent { // eslint-disable-line
     return (
       <div className="row">
         <div className="col-xs-12 col-md-7">
-          <img src={p.images[0].url} role="presentation" />
+          <img src={mainImage(p).url} role="presentation" />
         </div>
         <div className="col-xs-12 col-md-5">
           <form>

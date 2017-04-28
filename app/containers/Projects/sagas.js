@@ -1,25 +1,34 @@
-// this file is injected via routes.js
-// it's basically just asynchronous stuff, but writen in a way which looks synchronous,
-// and yet doesn't prevent the rest of the app from running until it's finished
 
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import request from 'utils/request';
+import { request, send } from 'utils/request';
 import * as types from './constants/actions';
-import { listProjectsSuccess, showProjectSuccess } from './actions';
+import { listProjectsSuccess, showProjectSuccess, createProjectSuccess } from './actions';
 
-export function* listProjects(opts) {
+export default [
+  listProjectsWatcher,
+  showProjectWatcher,
+  createProjectWatcher,
+];
+
+export function* createProject() {
   try {
-    const projects = yield call(request, { path: 'projects', params: opts.params });
-    yield put(listProjectsSuccess(projects));
+    const data = yield call(send, { path: 'projects', body: { name: 'Untitled project' } });
+    yield put(createProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
 }
 
+export function* createProjectWatcher() {
+  const watcher = yield takeLatest(types.CREATE_PROJECT, createProject);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
 export function* showProject(action) {
   try {
-    const data = yield call(request, `projects/${action.id}`);
+    const data = yield call(request, { path: `projects/${action.id}` });
     yield put(showProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -32,6 +41,14 @@ export function* showProjectWatcher() {
   yield cancel(watcher);
 }
 
+export function* listProjects(opts) {
+  try {
+    const projects = yield call(request, { path: 'projects', params: opts.params });
+    yield put(listProjectsSuccess(projects));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
 export function* listProjectsWatcher() {
   /*
    * WATCHER SAGA
@@ -56,9 +73,3 @@ export function* listProjectsWatcher() {
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
-
-// Bootstrap sagas
-export default [
-  listProjectsWatcher,
-  showProjectWatcher,
-];
