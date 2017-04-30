@@ -1,0 +1,26 @@
+.itemization {
+  @extend .b1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  line-height: 1;
+  header {
+    @extend .bb1;
+    @extend .p2;
+  }
+  > div {
+    @extend .bb1;
+    @extend .flex;
+    label, input {
+      @extend .p2;
+    }
+    label {
+      @extend .flex-none;
+      opacity: 0.8;
+    }
+    input {
+      min-width: 300px;
+      @extend .flex-auto;
+      text-align: right;
+    }
+  }
+}

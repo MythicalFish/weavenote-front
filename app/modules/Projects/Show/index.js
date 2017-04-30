@@ -31,8 +31,10 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
         <SubHeader>
           <Navigation onChange={(name) => { this.props.onClickNav(name); }} />
         </SubHeader>
-        <div className="p2">
-          {currentSection}
+        <div className="p2 bg-white">
+          <div className="container">
+            {currentSection}
+          </div>
         </div>
       </div>
     );
