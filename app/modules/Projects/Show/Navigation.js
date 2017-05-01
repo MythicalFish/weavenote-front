@@ -1,6 +1,6 @@
 import React from 'react';
 import * as sections from 'containers/Projects/constants/sections';
-import ProjectNavItem from '../shared/ProjectNavItem';
+import ProjectNavItem from '../Shared/ProjectNavItem';
 
 export default class Navigation extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   handleChange() {
