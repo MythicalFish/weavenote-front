@@ -61,6 +61,7 @@ $sizes_em: 1,2,3,4,5,6,7,8,9,10,12,20;
   @each $size in $sizes_em {
 
     .#{$namespace}x#{$size} { width: #{$size}em; }
+    .#{$namespace}y#{$size} { height: #{$size}em; }
     .#{$namespace}x-max#{$size} { max-width: #{$size}em; }
     .#{$namespace}y-max#{$size} { max-height: #{$size}em; }
 

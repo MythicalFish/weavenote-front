@@ -1,0 +1,26 @@
+.thumbnail {
+  @extend .x-max5;
+  line-height: 0;
+  @extend .flex-none;
+  border: none;
+  background: transparent;
+  img {
+    width: 100%;
+  }
+}
+ul.thumbnails {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  @extend .flex;
+  @extend .justify-center;
+  li {
+    @extend .flex-none;
+    @extend .x5;
+    @extend .y5;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+}
