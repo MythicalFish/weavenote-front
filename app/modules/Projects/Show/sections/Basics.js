@@ -5,7 +5,7 @@ import { changeImage, updateBasics } from 'containers/Projects/actions';
 import { selectCurrentImage } from 'containers/Projects/selectors';
 import ImageUploader from 'components/ImageUploader';
 import DataRow from 'components/DataRow';
-import Thumbnails from 'modules/Projects/Shared/Thumbnails';
+import Thumbnails from 'modules/Projects/common/Thumbnails';
 
 class Basics extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
