@@ -66,7 +66,7 @@ const requestOptions = (options = {}) => {
   o.headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: idToken(),
+    Authorization: accessToken(),
   };
   return o;
 };
@@ -78,4 +78,4 @@ const encodedRequestParams = (params) => {
     .join('&');
 };
 
-const idToken = () => `Bearer: ${localStorage.access_token}`;
+export const accessToken = () => `Bearer: ${localStorage.access_token}`;
