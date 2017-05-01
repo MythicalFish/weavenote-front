@@ -1,11 +1,15 @@
-
+/*
+ *
+ * Project reducer
+ *
+ */
 
 import { fromJS } from 'immutable';
 import * as types from './constants';
 
 const initialState = fromJS({});
 
-function imagesReducer(state = initialState, action) {
+function projectReducer(state = initialState, action) {
   switch (action.type) {
     case types.SELECT_IMAGE:
       return state
@@ -15,4 +19,4 @@ function imagesReducer(state = initialState, action) {
   }
 }
 
-export default imagesReducer;
+export default projectReducer;

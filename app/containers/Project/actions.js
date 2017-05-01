@@ -1,9 +1,3 @@
-/*
- *
- * Images actions
- *
- */
-
 import * as types from './constants';
 
 export function selectImage(payload) {

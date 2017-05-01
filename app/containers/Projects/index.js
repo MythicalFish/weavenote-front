@@ -13,7 +13,6 @@ import {
   selectCurrentSection,
 } from './selectors';
 import { listProjects, updateProject, createProject } from './actions';
-import * as views from './constants/views';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -21,24 +20,16 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
   }
   render() {
     const p = this.props;
-    switch (p.currentView.key) {
-      case views.Show.key:
-        return (
-          <ShowProject
-            currentProject={p.currentProject}
-            onSubmit={(data) => { p.updateProject(data); }}
-            currentSection={p.currentSection}
-          />
-        );
-      default:
-        return (
-          <ListProjects
-            projectsList={p.projectsList}
-            listProjects={p.listProjects}
-            createProject={p.createProject}
-          />
-        );
+    if (this.props.params.id) {
+      return this.props.children;
     }
+    return (
+      <ListProjects
+        projectsList={p.projectsList}
+        listProjects={p.listProjects}
+        createProject={p.createProject}
+      />
+    );
   }
 }
 
@@ -53,6 +44,8 @@ Projects.propTypes = {
   updateProject: PropTypes.func,
   currentView: PropTypes.object,
   currentSection: PropTypes.object,
+  params: PropTypes.object,
+  children: React.PropTypes.node,
 };
 
 export function mapDispatchToProps(dispatch) {

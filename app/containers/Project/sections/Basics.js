@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { mainImage } from 'modules/Projects/Shared/Images';
+import { mainImage } from 'modules/Projects/Images';
 import { changeImage } from 'containers/Images/actions';
-import Thumbnails from 'modules/Projects/Shared/Thumbnails';
+import Thumbnails from 'modules/Projects/Thumbnails';
 import ImageUploader from 'components/ImageUploader';
 import DataRow from 'components/DataRow';
 import Images from 'containers/Images';
@@ -45,7 +45,6 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-
 });
 
 export default connect(mapState, mapDispatch)(Basics);

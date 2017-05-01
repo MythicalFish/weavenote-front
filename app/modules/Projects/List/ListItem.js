@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router';
 import { showProject, archiveProject } from 'containers/Projects/actions';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
@@ -10,19 +11,21 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
     const p = this.props.project;
     return (
       <div className="b1 mb2 bg-white dark7 smaller2 flex justify-between x-fill">
-        <button onClick={() => { this.props.showProject(p.id); }} className="flex items-center b0 bg-white">
+        <div className="flex items-center b0 bg-white">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
               <Thumbnail project={p} />
             </div>
           </div>
           <div className="p2">
-            <div>{p.name}</div>
+            <Link to={`/projects/${p.id}`} key={p.id}>
+              {p.name}
+            </Link>
           </div>
           <div className="p2">
             <div>#{p.identifier}</div>
           </div>
-        </button>
+        </div>
         <div className="flex items-center">
           <div className="p2 smaller4 upcase">
             {p.stage.label}
