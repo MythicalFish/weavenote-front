@@ -27,7 +27,7 @@ class Basics extends React.PureComponent { // eslint-disable-line react/prefer-s
         url: 'https://i.imgur.com/19jCEX4.jpg',
       };
     }
-    return currentImage;
+    return currentImage.toJS();
   }
   render() {
     const { dispatch, currentProject } = this.props;

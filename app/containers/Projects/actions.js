@@ -98,7 +98,7 @@ export function createImageSuccess(payload) {
 
 export function changeImage(payload) {
   return {
-    type: types.CHANGE_IMAGE,
+    type: types.SELECT_IMAGE,
     payload,
   };
 }

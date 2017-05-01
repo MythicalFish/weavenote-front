@@ -19,8 +19,12 @@ ul.thumbnails {
     @extend .x5;
     @extend .y5;
     overflow: hidden;
-    img {
-      width: 100%;
+    button {
+      background: transparent;
+      border: none;
+      img {
+        width: 100%;
+      }
     }
   }
 }

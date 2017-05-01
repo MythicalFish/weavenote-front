@@ -36,18 +36,21 @@ function projectsReducer(state = initialState, action) {
 
     case types.SHOW_PROJECT_SUCCESS:
       return state
-        .set('currentView', views.Show)
+        .set('currentImage', null)
         .set('currentProject', fromJS(action.data))
+        .set('currentView', views.Show)
         .setIn(['currentSection', 'id'], sections.Basics.id)
         .setIn(['currentSection', 'label'], sections.Basics.label);
 
     case types.CREATE_IMAGE_SUCCESS:
+      const image = fromJS(payload.image);
       return state
-        .setIn(['currentProject', 'images', -1], fromJS(payload.image));
+        .setIn(['currentProject', 'images', -1], image)
+        .set('currentImage', image);
     
-    case types.CHANGE_IMAGE:
+    case types.SELECT_IMAGE:
       return state
-        .set('currentImage', payload);
+        .set('currentImage', fromJS(payload));
       
     case types.CHANGE_SECTION:
       return state
