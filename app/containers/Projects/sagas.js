@@ -5,7 +5,7 @@ import { request, send, patch } from 'utils/request';
 import * as types from './constants/actions';
 import {
   listProjectsSuccess, showProjectSuccess, createProjectSuccess,
-  archiveProjectSuccess,
+  archiveProjectSuccess, createImageSuccess,
 } from './actions';
 
 export default [
@@ -13,6 +13,7 @@ export default [
   showProjectWatcher,
   createProjectWatcher,
   archiveProjectWatcher,
+  createImageWatcher,
 ];
 
 export function* createProject() {
@@ -26,6 +27,22 @@ export function* createProject() {
 
 export function* createProjectWatcher() {
   const watcher = yield takeLatest(types.CREATE_PROJECT, createProject);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* createImage(action) {
+  const { payload } = action;
+  try {
+    const images = yield call(send, { path: `projects/${payload.projectID}/add_image`, body: { url: payload.imageURL } });
+    yield put(createImageSuccess(images));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* createImageWatcher() {
+  const watcher = yield takeLatest(types.CREATE_IMAGE, createImage);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }

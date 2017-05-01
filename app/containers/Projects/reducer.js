@@ -37,6 +37,10 @@ function projectsReducer(state = initialState, action) {
         .setIn(['currentSection', 'id'], sections.Basics.id)
         .setIn(['currentSection', 'label'], sections.Basics.label);
 
+    case types.CREATE_IMAGE_SUCCESS:
+      return state
+        .set('currentProject.images', action.payload.images);
+      
     case types.CHANGE_SECTION:
       return state
         .setIn(['currentSection', 'id'], action.section.id)
