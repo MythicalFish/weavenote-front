@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { changeImage } from 'containers/Projects/actions';
+import { changeImage, updateBasics } from 'containers/Projects/actions';
 import { selectCurrentImage } from 'containers/Projects/selectors';
 import ImageUploader from 'components/ImageUploader';
 import DataRow from 'components/DataRow';
@@ -31,20 +31,27 @@ class Basics extends React.PureComponent { // eslint-disable-line react/prefer-s
   }
   render() {
     const { dispatch, currentProject } = this.props;
+    const project = currentProject.toJS();
     return (
       <div className="row">
-        <div className="col-xs-12 col-md-7">
-          <ImageUploader project={currentProject} />
-          <img src={this.currentImage().url} role="presentation" className="x-max20" />
-          <Thumbnails images={currentProject.get('images').toArray()} handleClick={(data) => { dispatch(changeImage(data)); }} />
+        <div className="col-xs-12 col-md-7 flex justify-center">
+          <div>
+            <div>
+              <img src={this.currentImage().url} role="presentation" className="x-max20" />
+            </div>
+            <div>
+              <Thumbnails images={currentProject.get('images').toArray()} handleClick={(data) => { dispatch(changeImage(data)); }} />
+            </div>
+            <ImageUploader project={currentProject} />
+          </div>
         </div>
         <div className="col-xs-12 col-md-5 flex justify-center">
           <form className="itemization" onSubmit={() => {  }}>
             <header>
-              {currentProject.name}
+              {project.name}
             </header>
-            <DataRow name="category" val={currentProject.category} />
-            <DataRow name="identifier" val={currentProject.identifier} />
+            <DataRow name="category" val={project.category} />
+            <DataRow name="identifier" val={project.identifier} />
             <button type="submit">Save</button>
           </form>
         </div>

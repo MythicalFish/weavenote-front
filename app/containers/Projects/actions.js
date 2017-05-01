@@ -62,16 +62,22 @@ export function archiveProjectSuccess(list) {
   };
 }
 
-export function updateProject(data) {
+/*
+ *
+ *  Basics
+ *
+ */
+
+export function updateBasics(data) {
   return {
-    type: types.UPDATE_PROJECT,
+    type: types.UPDATE_BASICS,
     data,
   };
 }
 
-export function updateProjectSuccess(id) {
+export function updateBasicsSuccess(id) {
   return {
-    type: types.UPDATE_PROJECT_SUCCESS,
+    type: types.UPDATE_BASICS_SUCCESS,
     id,
   };
 }
