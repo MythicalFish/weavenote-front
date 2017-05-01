@@ -76,6 +76,12 @@ export function updateProjectSuccess(id) {
   };
 }
 
+/*
+ *
+ *  Images
+ *
+ */
+
 export function createImage(payload) {
   return {
     type: types.CREATE_IMAGE,
@@ -89,6 +95,20 @@ export function createImageSuccess(payload) {
     payload,
   };
 }
+
+export function changeImage(payload) {
+  return {
+    type: types.CHANGE_IMAGE,
+    payload,
+  };
+}
+
+/*
+ *
+ *  Sections
+ *
+ */
+
 
 export function changeSection(section) {
   return {

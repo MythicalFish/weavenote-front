@@ -22,14 +22,14 @@ Contacts.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   Contacts: makeSelectContacts(),
 });
 
-function mapDispatchToProps(dispatch) {
+function mapDispatch(dispatch) {
   return {
     dispatch,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
+export default connect(mapState, mapDispatch)(Contacts);

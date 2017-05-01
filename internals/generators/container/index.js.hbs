@@ -45,19 +45,19 @@ export class {{ properCase name }} extends React.{{{ component }}} { // eslint-d
 };
 
 {{#if wantActionsAndReducer}}
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   {{name}}: makeSelect{{properCase name}}(),
 });
 {{/if}}
 
-function mapDispatchToProps(dispatch) {
+function mapDispatch(dispatch) {
   return {
     dispatch,
   };
 }
 
 {{#if wantActionsAndReducer}}
-export default connect(mapStateToProps, mapDispatchToProps)({{ properCase name }});
+export default connect(mapState, mapDispatch)({{ properCase name }});
 {{else}}
-export default connect(null, mapDispatchToProps)({{ properCase name }});
+export default connect(null, mapDispatch)({{ properCase name }});
 {{/if}}

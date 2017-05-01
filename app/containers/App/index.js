@@ -49,14 +49,14 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   }
 }
 
-export function mapDispatchToProps(dispatch) {
+export function mapDispatch(dispatch) {
   return {
     getStats: () => { dispatch(getStats()); },
   };
 }
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   globalState: selectGlobal(),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapState, mapDispatch)(App);

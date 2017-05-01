@@ -25,7 +25,7 @@ class ImageUploader extends React.PureComponent { // eslint-disable-line react/p
     return (
       <ReactS3Uploader
         server={process.env.API_URL}
-        signingUrl={`/projects/${project.id}/get_upload_url`}
+        signingUrl={`/projects/${project.get('id')}/get_upload_url`}
         signingUrlMethod="GET"
         signingUrlHeaders={{ Authorization: accessToken() }}
         accept="image/*"

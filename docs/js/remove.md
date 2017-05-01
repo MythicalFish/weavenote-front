@@ -30,7 +30,7 @@ side-effect management library you want to use!**
 ## Removing `reselect`
 
 To remove `reselect`, remove it from your dependencies in `package.json` and then write
-your `mapStateToProps` functions like you normally would!
+your `mapState` functions like you normally would!
 
 You'll also need to hook up the history directly to the store. Make changes to `app/app.js`.
 

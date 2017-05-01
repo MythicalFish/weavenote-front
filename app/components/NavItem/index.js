@@ -27,8 +27,8 @@ NavItem.propTypes = {
   onClick: React.PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   currentSection: selectCurrentSection(),
 });
 
-export default connect(mapStateToProps)(NavItem);
+export default connect(mapState)(NavItem);

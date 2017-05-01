@@ -55,7 +55,7 @@ Projects.propTypes = {
   currentSection: PropTypes.object,
 };
 
-export function mapDispatchToProps(dispatch) {
+export function mapDispatch(dispatch) {
   return {
     listProjects: (params) => dispatch(listProjects(params)),
     createProject: (data) => dispatch(createProject(data)),
@@ -63,11 +63,11 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   projectsList: selectProjectsList(),
   currentProject: selectCurrentProject(),
   currentView: makeSelectCurrentView(),
   currentSection: selectCurrentSection(),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Projects);
+export default connect(mapState, mapDispatch)(Projects);

@@ -49,15 +49,15 @@ ListItem.propTypes = {
 };
 
 
-export function mapDispatchToProps(dispatch) {
+export function mapDispatch(dispatch) {
   return {
     showProject: (projectID) => dispatch(showProject(projectID)),
     archiveProject: (projectID) => dispatch(archiveProject(projectID)),
   };
 }
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
+export default connect(mapState, mapDispatch)(ListItem);

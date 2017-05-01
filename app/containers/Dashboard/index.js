@@ -75,14 +75,14 @@ Dashboard.propTypes = {
   getStats: PropTypes.func,
 };
 
-export function mapDispatchToProps(dispatch) {
+export function mapDispatch(dispatch) {
   return {
     getStats: () => dispatch(getStats()),
   };
 }
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   globalState: selectGlobal(),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapState, mapDispatch)(Dashboard);

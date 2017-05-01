@@ -15,9 +15,9 @@ export const selectProjectsList = () => createSelector(
 );
 
 export const selectCurrentProject = () => createSelector(
-  selectProjects(),
+  selectProjectsDomain(),
   (substate) => {
-    return substate.currentProject;
+    return substate.get('currentProject');
   }
 );
 
@@ -32,5 +32,12 @@ export const selectCurrentSection = () => createSelector(
   selectProjects(),
   (substate) => {
     return substate.currentSection;
+  }
+);
+
+export const selectCurrentImage = () => createSelector(
+  selectProjectsDomain(),
+  (substate) => {
+    return substate.get('currentImage');
   }
 );

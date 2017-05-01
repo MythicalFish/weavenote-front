@@ -22,14 +22,14 @@ Conversations.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   Conversations: makeSelectConversations(),
 });
 
-function mapDispatchToProps(dispatch) {
+function mapDispatch(dispatch) {
   return {
     dispatch,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Conversations);
+export default connect(mapState, mapDispatch)(Conversations);

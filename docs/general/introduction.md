@@ -190,16 +190,16 @@ The example application is a simple service which shows a list of repositories f
 
 Run `npm start` to launch the application. If you start browsing at [https://localhost:3000](https://localhost:3000), by default you will be navigated to the home page. Here, notice that route is `"/"`, so the [`<HomePage />`](https://github.com/react-boilerplate/react-boilerplate/blob/master/app/containers/HomePage/index.js) container will be mounted. It is responsible for rendering a form with a textbox and a list of repositories.
 
-- `mapDispatchToProps()`: Generally, we provide outgoing action creators (functions that create [action](http://redux.js.org/docs/basics/Actions.html) objects) to the react component through this method. Notice that for every keypress in textbox, your state will be updated by dispatching a `changeUsername` action to the store. So at any point in time, your Redux state will hold the currently typed username. When you submit the form, another action, `loadRepos` will be dispatched.
+- `mapDispatch()`: Generally, we provide outgoing action creators (functions that create [action](http://redux.js.org/docs/basics/Actions.html) objects) to the react component through this method. Notice that for every keypress in textbox, your state will be updated by dispatching a `changeUsername` action to the store. So at any point in time, your Redux state will hold the currently typed username. When you submit the form, another action, `loadRepos` will be dispatched.
 
-- `mapStateToProps()`: Generally, we provide incoming state from Redux store to the react component through this method. Notice that the we do not provide the entire state to the component, simply because we don't want the react component to have access to irrelevant data. The state will be filtered by selectors such as `selectRepos`, `selectUsername` etc.
+- `mapState()`: Generally, we provide incoming state from Redux store to the react component through this method. Notice that the we do not provide the entire state to the component, simply because we don't want the react component to have access to irrelevant data. The state will be filtered by selectors such as `selectRepos`, `selectUsername` etc.
 
 Together these two methods work like magic. When you type something in the textbox the following things will happen in a sequential manner:
 
 1. `changeUsername()` will send text to the Redux store. The text can be accessed using `evt.target.value`. Here, `evt` is the `onChange` event emmited by pressing a key.
 2. The Redux store will consult with its corresponding reducer, since a reducer knows what to do with the data.
 3. When a reducer computes a new state tree, the store will update its state with the newly typed data.
-4. An update has occured in the state, therefore `mapStateToProps()` will be triggered and your react component will get the new data.
+4. An update has occured in the state, therefore `mapState()` will be triggered and your react component will get the new data.
 5. The updated data will be set as the `value` to your `<Input />`.
 
 _So you see, if you type something in the textbox, it will not be directly reflected in the DOM. It must pass through redux. Redux will update the state and return it to the component. It's the component's responsibility to show the updated data._
@@ -216,7 +216,7 @@ Check out [`HomePage/sagas.js`](https://github.com/react-boilerplate/react-boile
 - `takeLatest` is used for listening for a particular action. In this case, it will wait for a `LOAD_REPOS` action. Whenever you disptach this action, the saga will understand that you want to fetch repos from github's public API by calling `getRepos()`.
 - If the API successfully returns some data, a `reposLoaded()` action will be dispatched which carries the data. When redux store receives this action, [a reducer](https://github.com/react-boilerplate/react-boilerplate/blob/master/app/containers/App/reducer.js) will set incoming data in the new state tree.
 
-_An update has occurred!_ `mapStateToProps()` will be triggered. `<HomePage />` will receive the new data and rerender.
+_An update has occurred!_ `mapState()` will be triggered. `<HomePage />` will receive the new data and rerender.
 
 ## Why all this fuss just to load a list of repos?
 

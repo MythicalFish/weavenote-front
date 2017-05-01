@@ -11,17 +11,19 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
     this.props.onSubmit(data);
   }
   render() {
-    const p = this.props;
-    let currentSection = <Basics {...p.currentProject} />;
-    switch (p.currentSection.id) {
-      case sections.Basics.id:
-        break; // already set
+    const { currentSection } = this.props;
+    let renderedSection = <Basics {...this.props} />;
+
+    switch (currentSection.id) {
+
       case sections.Materials.id:
-        currentSection = <Materials />;
+        renderedSection = <Materials {...this.props} />;
         break;
+
       case sections.Measurements.id:
-        currentSection = <Measurements />;
+        renderedSection = <Measurements {...this.props} />;
         break;
+
       default:
         break; // already set
     }
@@ -33,7 +35,7 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
         </SubHeader>
         <div className="p2 bg-white">
           <div className="container">
-            {currentSection}
+            {renderedSection}
           </div>
         </div>
       </div>

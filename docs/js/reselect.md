@@ -2,7 +2,7 @@
 
 reselect memoizes ("caches") previous state trees and calculations based on said
 tree. This means repeated changes and calculations are fast and efficient,
-providing us with a performance boost over standard `mapStateToProps`
+providing us with a performance boost over standard `mapState`
 implementations.
 
 The [official documentation](https://github.com/reactjs/reselect)
@@ -46,7 +46,7 @@ export {
 ```
 
 These selectors can then either be used directly in our containers as
-`mapStateToProps` functions or be nested with `createSelector` once again:
+`mapState` functions or be nested with `createSelector` once again:
 
 ```javascript
 export default connect(createSelector(

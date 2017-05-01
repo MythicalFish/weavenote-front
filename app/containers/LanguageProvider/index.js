@@ -30,15 +30,15 @@ LanguageProvider.propTypes = {
 };
 
 
-const mapStateToProps = createSelector(
+const mapState = createSelector(
   makeSelectLocale(),
   (locale) => ({ locale })
 );
 
-function mapDispatchToProps(dispatch) {
+function mapDispatch(dispatch) {
   return {
     dispatch,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LanguageProvider);
+export default connect(mapState, mapDispatch)(LanguageProvider);

@@ -34,8 +34,8 @@ export function* createProjectWatcher() {
 export function* createImage(action) {
   const { payload } = action;
   try {
-    const images = yield call(send, { path: `projects/${payload.projectID}/add_image`, body: { url: payload.imageURL } });
-    yield put(createImageSuccess(images));
+    const image = yield call(send, { path: `projects/${payload.projectID}/create_image`, body: { url: payload.imageURL } });
+    yield put(createImageSuccess(image));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }

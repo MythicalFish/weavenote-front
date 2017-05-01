@@ -23,7 +23,7 @@ ProjectNavItem.propTypes = {
   handleDispatch: React.PropTypes.func,
 };
 
-export function mapDispatchToProps(dispatch) {
+export function mapDispatch(dispatch) {
   return {
     changeSection: (section) => {
       dispatch(changeSection(section));
@@ -31,8 +31,8 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectNavItem);
+export default connect(mapState, mapDispatch)(ProjectNavItem);

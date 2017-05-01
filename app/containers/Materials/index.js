@@ -22,14 +22,14 @@ Materials.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
+const mapState = createStructuredSelector({
   Materials: makeSelectMaterials(),
 });
 
-function mapDispatchToProps(dispatch) {
+function mapDispatch(dispatch) {
   return {
     dispatch,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Materials);
+export default connect(mapState, mapDispatch)(Materials);
