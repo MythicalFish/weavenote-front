@@ -10,6 +10,7 @@
   > div {
     @extend .bb1;
     @extend .flex;
+    @extend .smaller2;
     label, input {
       @extend .p2;
     }
@@ -18,7 +19,7 @@
       opacity: 0.8;
     }
     input {
-      min-width: 300px;
+      min-width: 100px;
       @extend .flex-auto;
       text-align: right;
     }

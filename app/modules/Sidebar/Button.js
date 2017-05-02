@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 class Button extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   buttonClass() {
-    let c = 'block py2 px4 aqua smaller1';
+    let c;
     if (location.pathname === this.props.path) {
       // c = `${c} bg-gray-darkerer`;
     }

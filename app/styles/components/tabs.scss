@@ -15,6 +15,7 @@ nav.tabs {
         text-align: center;
         padding: $space-3;
         color: $dark7;
+        @extend .smaller1;
         &.active {
           border-bottom: 3px solid $aqua;
         }

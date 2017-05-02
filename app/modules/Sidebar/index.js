@@ -5,9 +5,11 @@ class Sidebar extends React.PureComponent { // eslint-disable-line react/prefer-
   render() {
     return (
       <aside id="sidebar" className="vh-ymin100 bg-color1x light9">
-        <header className="larger1 py3 px4 bold">
-          Seamless
-        </header>
+        <div className="pr4">
+          <header className="bigger3 px4 pt3 pb2 bold">
+            Seamless
+          </header>
+        </div>
         <ul className="m0 p0">
           <Button path="/" label="Dashboard" />
           <Button path="/projects" label="Projects" />

@@ -9,7 +9,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
     const p = this.props.project;
     return (
-      <div className="b1 mb2 bg-white dark7 smaller2 flex justify-between x-fill">
+      <div className="b1 mb2 bg-white dark7 flex justify-between x-fill">
         <button onClick={() => { this.props.showProject(p.id); }} className="flex items-center b0 bg-white">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
@@ -24,10 +24,10 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
           </div>
         </button>
         <div className="flex items-center">
-          <div className="p2 smaller4 upcase">
+          <div className="p2 smaller1 upcase">
             {p.stage.label}
           </div>
-          <div className="p2 dark3 smaller4">
+          <div className="p2 dark3 smaller1">
             collaborators
           </div>
           <div className="p2">

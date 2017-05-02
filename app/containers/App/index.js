@@ -38,7 +38,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
             <Header>
               <div></div>
               <nav>
-                <button className="" onClick={() => { Auth0.logout(); }}>Logout</button>
+                <button className="btn" onClick={() => { Auth0.logout(); }}>Logout</button>
               </nav>
             </Header>
             {React.Children.toArray(this.props.children)}

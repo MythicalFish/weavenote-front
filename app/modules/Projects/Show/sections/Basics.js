@@ -46,13 +46,13 @@ class Basics extends React.PureComponent { // eslint-disable-line react/prefer-s
           </div>
         </div>
         <div className="col-xs-12 col-md-5 flex justify-center">
-          <form className="itemization" onSubmit={() => {  }}>
+          <form className="itemization" onSubmit={(e) => { e.preventDefault(); console.log(e); console.log(this); }}>
             <header>
               {project.name}
             </header>
             <DataRow name="category" val={project.category} />
             <DataRow name="identifier" val={project.identifier} />
-            <button type="submit">Save</button>
+            <button className="btn" type="submit">Save</button>
           </form>
         </div>
       </div>

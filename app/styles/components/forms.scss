@@ -13,8 +13,12 @@ input[type="text"],input[type="password"],input[type="email"],input[type="email"
   -webkit-box-shadow: none!important;
   height: auto;
   width: 100%;
-  border: 1px solid $gray-lighterer;
-  background: $gray-lightest;
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
 }
 textarea {
   min-height: 200px;

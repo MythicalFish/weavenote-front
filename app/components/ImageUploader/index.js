@@ -17,7 +17,6 @@ class ImageUploader extends React.Component { // eslint-disable-line react/prefe
     console.log('Upload progress: ' + percent + '% ' + message);
     if (percent === 0) { percent = 1; }
     if (percent === 100) { percent = 0; }
-    console.log(percent)
     this.setState({ progress: percent });
   }
   onFinish(data) {
