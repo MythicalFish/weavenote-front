@@ -2,9 +2,9 @@ import React from 'react';
 import * as sections from 'containers/Projects/constants/sections';
 import SubHeader from 'components/SubHeader';
 import Navigation from './Navigation';
-import Basics from './sections/Basics';
-import Materials from './sections/Materials';
-import Measurements from './sections/Measurements';
+import Basics from './Basics';
+import Materials from './Materials';
+import Measurements from './Measurements';
 
 class ShowProject extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   handleOnSubmit = (data) => {
