@@ -13,6 +13,7 @@ import { selectCurrentSection } from '../App/selectors';
 import { changeSection } from '../App/actions';
 import * as sections from '../App/constants/sections';
 import { fetchProject } from './actions';
+import ImageInterface from './sections/ImageInterface';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -51,7 +52,18 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
         </SubHeader>
         <div className="p2 bg-white">
           <div className="container">
-            {renderedSection}
+            <div className="row">
+              <div className="col-xs-12 col-md-7 flex justify-center">
+                <div>
+                  {currentProject &&
+                    <ImageInterface project={currentProject} />
+                  }
+                </div>
+              </div>
+              <div className="col-xs-12 col-md-5 flex justify-center">  
+                {renderedSection}
+              </div>
+            </div>
           </div>
         </div>
       </div>
