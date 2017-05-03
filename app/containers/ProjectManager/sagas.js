@@ -1,15 +1,22 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { send, request } from 'utils/request';
-import * as types from './constants/actions';
+import { send, request, patch } from 'utils/request';
+import * as types from './constants';
 import {
-  createImageSuccess, fetchProjectSuccess,
+  createImageSuccess, fetchProjectSuccess, updateProjectSuccess,
 } from './actions';
 
 export default [
-  createImageWatcher,
   fetchProjectWatcher,
+  updateProjectWatcher,
+  createImageWatcher,
 ];
+
+/*
+ *
+ *  Image
+ *
+ */
 
 export function* createImage(action) {
   const { payload } = action;
@@ -27,6 +34,12 @@ export function* createImageWatcher() {
   yield cancel(watcher);
 }
 
+/*
+ *
+ *  Fetch
+ *
+ */
+
 export function* fetchProject(action) {
   try {
     const data = yield call(request, { path: `projects/${action.id}` });
@@ -38,6 +51,31 @@ export function* fetchProject(action) {
 
 export function* fetchProjectWatcher() {
   const watcher = yield takeLatest(types.SHOW_PROJECT, fetchProject);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+
+/*
+ *
+ *  Update
+ *
+ */
+
+export function* updateProject(action) {
+  const { payload } = action;
+  const id = payload.get('id');
+  const data = payload.delete('id');
+  try {
+    yield call(patch, { path: `projects/${id}`, body: data });
+    yield put(updateProjectSuccess());
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* updateProjectWatcher() {
+  const watcher = yield takeLatest(types.UPDATE_PROJECT, updateProject);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }

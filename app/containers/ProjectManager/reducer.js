@@ -1,7 +1,7 @@
 
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import * as types from './constants/actions';
+import * as types from './constants';
 
 const initialState = fromJS({
   currentProject: null,
@@ -18,8 +18,7 @@ function projectReducer(state = initialState, action) {
       return state
         .set('currentProject', fromJS(action.data));
       
-    case types.UPDATE_BASICS_SUCCESS:
-      console.log('UPDATE_BASICS_SUCCESS');
+    case types.UPDATE_PROJECT_SUCCESS:
       return state;
 
     case types.CREATE_IMAGE_SUCCESS:

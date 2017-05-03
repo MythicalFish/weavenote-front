@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { updateBasics } from 'containers/ProjectManager/actions';
+import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
+import { updateProject } from '../../actions';
+import { selectProjectBasics } from '../../selectors';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
@@ -42,11 +44,15 @@ export function mapDispatch(dispatch) {
   return {
     onSubmit: (data) => {
       // this is automatically called on submit (after redux-form has done its magic)
-      dispatch(updateBasics(data));
+      dispatch(updateProject(data));
     },
   };
 }
 
-BasicsForm = connect(null, mapDispatch)(BasicsForm);
+const mapState = createStructuredSelector({
+  initialValues: selectProjectBasics(),
+});
+
+BasicsForm = connect(mapState, mapDispatch)(BasicsForm);
 
 export default BasicsForm;

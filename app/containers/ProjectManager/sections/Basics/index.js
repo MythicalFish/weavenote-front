@@ -16,7 +16,7 @@ export default class Basics extends React.PureComponent { // eslint-disable-line
           </div>
         </div>
         <div className="col-xs-12 col-md-5 flex justify-center">
-          <Form initialValues={currentProject} />
+          {currentProject && <Form />}
         </div>
       </div>
     );

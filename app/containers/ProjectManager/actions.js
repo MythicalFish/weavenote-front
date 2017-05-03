@@ -1,4 +1,4 @@
-import * as types from './constants/actions';
+import * as types from './constants';
 
 export function fetchProject(id) {
   return {
@@ -20,17 +20,16 @@ export function fetchProjectSuccess(data) {
  *
  */
 
-export function updateBasics(data) {
+export function updateProject(payload) {
   return {
-    type: types.UPDATE_BASICS,
-    data,
+    type: types.UPDATE_PROJECT,
+    payload,
   };
 }
 
-export function updateBasicsSuccess(id) {
+export function updateProjectSuccess() {
   return {
-    type: types.UPDATE_BASICS_SUCCESS,
-    id,
+    type: types.UPDATE_PROJECT_SUCCESS,
   };
 }
 
