@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { showProject, archiveProject } from 'containers/ProjectsPage/actions';
+import { archiveProject } from 'containers/ProjectList/actions';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
 
@@ -10,7 +11,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
     const p = this.props.project;
     return (
       <div className="b1 mb2 bg-white dark7 flex justify-between x-fill">
-        <button onClick={() => { this.props.showProject(p.id); }} className="flex items-center b0 bg-white">
+        <Link to={`/projects/${p.id}`} className="flex items-center b0 bg-white">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
               <Thumbnail project={p} />
@@ -22,7 +23,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
           <div className="p2">
             <div>#{p.identifier}</div>
           </div>
-        </button>
+        </Link>
         <div className="flex items-center">
           <div className="p2 smaller1 upcase">
             {p.stage.label}
@@ -32,7 +33,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
           </div>
           <div className="p2">
             <Dropdown label="...">
-              <button onClick={() => { this.props.showProject(p.id); }}>Manage</button>
+              <button onClick={() => { this.props.fetchProject(p.id); }}>Manage</button>
               <button onClick={() => { this.props.archiveProject(p.id); }}>Archive</button>
             </Dropdown>
           </div>
@@ -44,14 +45,14 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
 
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,
-  showProject: React.PropTypes.func,
+  fetchProject: React.PropTypes.func,
   archiveProject: React.PropTypes.func,
 };
 
 
 export function mapDispatch(dispatch) {
   return {
-    showProject: (projectID) => dispatch(showProject(projectID)),
+    fetchProject: (projectID) => dispatch(fetchProject(projectID)),
     archiveProject: (projectID) => dispatch(archiveProject(projectID)),
   };
 }

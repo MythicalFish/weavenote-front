@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentSection } from 'containers/ProjectsPage/selectors';
+import { selectCurrentSection } from 'containers/ProjectList/selectors';
 
 class NavItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   buttonClass() {

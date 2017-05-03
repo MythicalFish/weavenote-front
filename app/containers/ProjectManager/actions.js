@@ -1,5 +1,39 @@
 import * as types from './constants/actions';
 
+export function fetchProject(id) {
+  return {
+    type: types.SHOW_PROJECT,
+    id,
+  };
+}
+
+export function fetchProjectSuccess(data) {
+  return {
+    type: types.SHOW_PROJECT_SUCCESS,
+    data,
+  };
+}
+
+/*
+ *
+ *  Basics
+ *
+ */
+
+export function updateBasics(data) {
+  return {
+    type: types.UPDATE_BASICS,
+    data,
+  };
+}
+
+export function updateBasicsSuccess(id) {
+  return {
+    type: types.UPDATE_BASICS_SUCCESS,
+    id,
+  };
+}
+
 /*
  *
  *  Images

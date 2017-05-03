@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { updateBasics } from 'containers/ProjectsPage/actions';
+import { updateBasics } from 'containers/ProjectManager/actions';
 import { Field, reduxForm } from 'redux-form/immutable';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (

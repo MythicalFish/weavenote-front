@@ -39,21 +39,39 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/projects',
-      name: 'projects',
+      name: 'ProjectList',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/ProjectsPage/reducer'),
-          import('containers/ProjectsPage/sagas'),
-          import('containers/ProjectManager/sagas'),
-          import('containers/ProjectsPage'),
+          import('containers/ProjectList/reducer'),
+          import('containers/ProjectList/sagas'),
+          import('containers/ProjectList'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, sagas2, component]) => {
-          injectReducer('projects', reducer.default);
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('ProjectList', reducer.default);
           injectSagas(sagas.default);
-          injectSagas(sagas2.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/projects/:id',
+      name: 'ProjectManager',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/ProjectManager/reducer'),
+          import('containers/ProjectManager/sagas'),
+          import('containers/ProjectManager'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('ProjectManager', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 

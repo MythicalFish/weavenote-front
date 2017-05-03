@@ -21,20 +21,6 @@ export function listProjectsError(error) {
   };
 }
 
-export function showProject(id) {
-  return {
-    type: types.SHOW_PROJECT,
-    id,
-  };
-}
-
-export function showProjectSuccess(data) {
-  return {
-    type: types.SHOW_PROJECT_SUCCESS,
-    data,
-  };
-}
-
 export function createProject() {
   return {
     type: types.CREATE_PROJECT,
@@ -59,26 +45,6 @@ export function archiveProjectSuccess(list) {
   return {
     type: types.ARCHIVE_PROJECT_SUCCESS,
     list,
-  };
-}
-
-/*
- *
- *  Basics
- *
- */
-
-export function updateBasics(data) {
-  return {
-    type: types.UPDATE_BASICS,
-    data,
-  };
-}
-
-export function updateBasicsSuccess(id) {
-  return {
-    type: types.UPDATE_BASICS_SUCCESS,
-    id,
   };
 }
 

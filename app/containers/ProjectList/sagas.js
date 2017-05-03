@@ -4,13 +4,12 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { request, send, patch } from 'utils/request';
 import * as types from './constants/actions';
 import {
-  listProjectsSuccess, showProjectSuccess, createProjectSuccess,
+  listProjectsSuccess, createProjectSuccess,
   archiveProjectSuccess,
 } from './actions';
 
 export default [
   listProjectsWatcher,
-  showProjectWatcher,
   createProjectWatcher,
   archiveProjectWatcher,
 ];
@@ -33,7 +32,6 @@ export function* createProjectWatcher() {
 export function* archiveProject(action) {
   try {
     const data = yield call(patch, { path: `projects/${action.id}`, body: { archived: true, index_after_update: true } });
-    console.log(data)
     yield put(archiveProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -42,21 +40,6 @@ export function* archiveProject(action) {
 
 export function* archiveProjectWatcher() {
   const watcher = yield takeLatest(types.ARCHIVE_PROJECT, archiveProject);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-export function* showProject(action) {
-  try {
-    const data = yield call(request, { path: `projects/${action.id}` });
-    yield put(showProjectSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
-}
-
-export function* showProjectWatcher() {
-  const watcher = yield takeLatest(types.SHOW_PROJECT, showProject);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
