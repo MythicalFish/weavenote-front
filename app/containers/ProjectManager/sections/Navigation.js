@@ -1,30 +1,30 @@
 import React from 'react';
 import * as sections from 'containers/App/constants/sections';
-import ProjectNavItem from 'components/ProjectNavItem';
+import NavItem from 'components/NavItem';
 
 export default class Navigation extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  handleChange() {
-
+  Nav(props) {
+    return (
+      <NavItem target={props.target} onClick={props.handleClick} />
+    );
   }
   render() {
+    const Nav = this.Nav;
+    const { props } = this;
     return (
       <nav className="tabs">
         <ul>
           <li>
-            <ProjectNavItem target={sections.Basics} handleDispatch={() => {}} />
+            <Nav {...props} target={sections.Basics} />
           </li>
           <li>
-            <ProjectNavItem target={sections.Materials} handleDispatch={() => {}} />
+            <Nav {...props} target={sections.Materials} />
           </li>
           <li>
-            <ProjectNavItem target={sections.Measurements} handleDispatch={() => {}} />
+            <Nav {...props} target={sections.Measurements} />
           </li>
         </ul>
       </nav>
     );
   }
 }
-
-Navigation.propTypes = {
-  onChange: React.PropTypes.func,
-};

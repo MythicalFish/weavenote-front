@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
-import SubHeader from 'components/SubHeader';
 import ListItem from '../ListItem';
-import Navigation from '../Navigation';
 
 function ProjectList({ projectsList, listProjects, createProject }) {
   let content = (<div></div>);
@@ -11,13 +9,8 @@ function ProjectList({ projectsList, listProjects, createProject }) {
     ));
   }
   return (
-    <div>
-      <SubHeader>
-        <Navigation createProject={createProject} listProjects={listProjects} />
-      </SubHeader>
-      <div className="p2">
-        {content}
-      </div>
+    <div className="p2">
+      {content}
     </div>
   );
 }

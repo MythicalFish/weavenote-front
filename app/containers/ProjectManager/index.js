@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as sections from 'containers/App/constants/sections';
 import SubHeader from 'components/SubHeader';
 import Navigation from './sections/Navigation';
 import Basics from './sections/Basics';
@@ -11,6 +10,8 @@ import {
   selectCurrentProject,
 } from './selectors';
 import { selectCurrentSection } from '../App/selectors';
+import { changeSection } from '../App/actions';
+import * as sections from '../App/constants/sections';
 import { fetchProject } from './actions';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -18,10 +19,11 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
   componentDidMount() {
     const { dispatch, params } = this.props;
     dispatch(fetchProject(params.id));
+    dispatch(changeSection(sections.Basics));
   }
 
   render() {
-    const { currentProject, currentSection } = this.props;
+    const { currentProject, currentSection, dispatch } = this.props;
     const sectionProps = {
       currentProject,
     };
@@ -45,7 +47,7 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
     return (
       <div>
         <SubHeader>
-          <Navigation onChange={(name) => { this.props.onClickNav(name); }} />
+          <Navigation handleClick={(section) => { dispatch(changeSection(section)); }} />
         </SubHeader>
         <div className="p2 bg-white">
           <div className="container">
@@ -59,8 +61,9 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
 
 ProjectManager.propTypes = {
   currentProject: React.PropTypes.object,
-  onClickNav: React.PropTypes.func,
   currentSection: React.PropTypes.object,
+  dispatch: React.PropTypes.func,
+  params: React.PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
