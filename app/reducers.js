@@ -9,7 +9,12 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+
+/*
+ * Reducers added by me
+ */
 import authReducer from 'containers/Auth/reducer';
+import { reducer as reduxFormReducer } from 'redux-form/immutable';
 
 /*
  * routeReducer
@@ -48,6 +53,7 @@ export default function createReducer(asyncReducers) {
     global: globalReducer,
     language: languageProviderReducer,
     auth: authReducer,
+    form: reduxFormReducer,
     ...asyncReducers,
   });
 }
