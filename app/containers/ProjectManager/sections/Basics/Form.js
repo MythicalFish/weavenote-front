@@ -21,7 +21,7 @@ let BasicsForm = (props) => {
       <Field name="category" type="text" component={renderField} label="Category" />
       <Field name="identifier" type="text" component={renderField} label="Identifier" />
       <footer className="p2 center">
-        <button className="btn" type="submit" disabled={submitting}>Submit</button>
+        <button className="btn-color2x" type="submit" disabled={submitting}>Submit</button>
       </footer>
     </form>
   );

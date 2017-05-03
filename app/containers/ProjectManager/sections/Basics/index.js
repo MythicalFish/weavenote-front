@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import BasicsForm from './BasicsForm';
+import Form from './Form';
 import ImageInterface from '../ImageInterface';
 
 export default class Basics extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -14,7 +14,7 @@ export default class Basics extends React.PureComponent { // eslint-disable-line
           </div>
         </div>
         <div className="col-xs-12 col-md-5 flex justify-center">
-          <BasicsForm initialValues={currentProject} />
+          <Form initialValues={currentProject} />
         </div>
       </div>
     );

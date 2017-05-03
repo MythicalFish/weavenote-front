@@ -1,10 +1,10 @@
 import React from 'react';
 import * as sections from 'containers/ProjectsPage/constants/sections';
 import SubHeader from 'components/SubHeader';
-import Navigation from './Navigation';
-import Basics from './Basics';
-import Materials from './Materials';
-import Measurements from './Measurements';
+import Navigation from './sections/Navigation';
+import Basics from './sections/Basics';
+import Materials from './sections/Materials';
+import Measurements from './sections/Measurements';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

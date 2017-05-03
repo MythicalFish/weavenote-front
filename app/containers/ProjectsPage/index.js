@@ -18,6 +18,7 @@ import * as views from './constants/views';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
+    console.log('adasd')
     this.props.listProjects();
   }
   render() {

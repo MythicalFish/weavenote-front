@@ -22,10 +22,14 @@ button {
   @include transition('transform .3s, border-color .5s');
   border-radius: 999px;
   -webkit-border-radius: 999px;
-  border: 2px solid $color2x;
-  color: $color2x;
+  border: 2px solid $gray-dark;
+  color: $gray-dark;
   text-transform: uppercase;
-
+  &-color2x {
+    @extend .btn;
+    border-color: $color2x;
+    color: $color2x;
+  }
 }
 .btn:hover {
   @include transform(translate(-2%,-2%));

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Thumbnails from 'components/Thumbnails';
 import ImageUploader from 'components/ImageUploader';
-import { changeImage } from 'containers/ProjectsPage/actions';
-import { selectCurrentImage } from 'containers/ProjectsPage/selectors';
+import { selectCurrentImage } from 'containers/ProjectManager/selectors';
+import { changeImage } from '../actions';
 
 class ImageInterface extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {

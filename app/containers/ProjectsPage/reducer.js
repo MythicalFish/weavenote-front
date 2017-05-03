@@ -2,6 +2,7 @@
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as types from './constants/actions';
+import * as managerTypes from '../ProjectManager/constants/actions';
 import * as views from './constants/views';
 import * as sections from './constants/sections';
 
@@ -46,13 +47,13 @@ function projectsReducer(state = initialState, action) {
       console.log('UPDATE_BASICS_SUCCESS');
       return state;
 
-    case types.CREATE_IMAGE_SUCCESS:
+    case managerTypes.CREATE_IMAGE_SUCCESS:
       const image = fromJS(payload.image);
       return state
         .setIn(['currentProject', 'images', -1], image)
         .set('currentImage', image);
     
-    case types.SELECT_IMAGE:
+    case managerTypes.SELECT_IMAGE:
       return state
         .set('currentImage', fromJS(payload));
       
