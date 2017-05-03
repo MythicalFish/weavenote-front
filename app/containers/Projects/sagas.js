@@ -87,25 +87,6 @@ export function* listProjects(opts) {
   }
 }
 export function* listProjectsWatcher() {
-  /*
-   * WATCHER SAGA
-   *
-   * When the index.js does dispatch(listProjects()),
-   * all it does is emit an action called LIST_PROJECTS,
-   * it DOES NOT call the above function directly.
-   *
-   * The reducer.js sees the action and updates the state (loading: true, etc.)
-   * This watcher also sees the action, and then actually does the above function
-   *
-   * On success, it dispatches a new action with put(listProjectsSuccess(projects))
-   * Which is the same as put({type:LIST_PROJECTS_SUCCESS, projects:projects})
-   * This is seen by the reducer.js, and the state is updated again
-   *
-   * When the state has been given the projects, the selector sees it,
-   * and the projects are finally rendered on the page.
-   *
-   * Yay I understand this!
-  */
   const watcher = yield takeLatest(types.LIST_PROJECTS, listProjects);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
