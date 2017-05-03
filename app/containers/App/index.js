@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Auth, { Auth0 } from 'containers/Auth';
 import Header from 'components/Header';
-import Sidebar from 'modules/Sidebar';
+import Sidebar from 'components/Sidebar';
 import { selectGlobal } from './selectors';
 import { getStats } from './actions';
 

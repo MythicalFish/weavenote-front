@@ -7,7 +7,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { ListProjects, ShowProject } from 'modules/Projects';
+import ProjectManager from 'containers/ProjectManager';
+import ProjectList from 'containers/ProjectList';
 import {
   selectProjectsList, selectCurrentProject, makeSelectCurrentView,
   selectCurrentSection,
@@ -24,14 +25,14 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
     switch (p.currentView.key) {
       case views.Show.key:
         return (
-          <ShowProject
+          <ProjectManager
             currentProject={p.currentProject}
             currentSection={p.currentSection}
           />
         );
       default:
         return (
-          <ListProjects
+          <ProjectList
             projectsList={p.projectsList}
             listProjects={p.listProjects}
             createProject={p.createProject}

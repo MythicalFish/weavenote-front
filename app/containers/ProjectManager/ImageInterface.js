@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Thumbnails from 'modules/Projects/common/Thumbnails';
+import Thumbnails from 'components/Thumbnails';
 import ImageUploader from 'components/ImageUploader';
 import { changeImage } from 'containers/Projects/actions';
 import { selectCurrentImage } from 'containers/Projects/selectors';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mainImage } from '../common/Images';
+import { mainImage } from 'utils/images';
 
 class Thumbnail extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {

@@ -6,10 +6,8 @@ import Basics from './Basics';
 import Materials from './Materials';
 import Measurements from './Measurements';
 
-class ShowProject extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  handleOnSubmit = (data) => {
-    this.props.onSubmit(data);
-  }
+class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   render() {
     const { currentSection } = this.props;
     let renderedSection = <Basics {...this.props} />;
@@ -43,11 +41,10 @@ class ShowProject extends React.PureComponent { // eslint-disable-line react/pre
   }
 }
 
-ShowProject.propTypes = {
+ProjectManager.propTypes = {
   currentProject: React.PropTypes.object,
-  onSubmit: React.PropTypes.func,
   onClickNav: React.PropTypes.func,
   currentSection: React.PropTypes.object,
 };
 
-export default ShowProject;
+export default ProjectManager;

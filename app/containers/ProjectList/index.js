@@ -3,7 +3,7 @@ import SubHeader from 'components/SubHeader';
 import ListItem from './ListItem';
 import Navigation from './Navigation';
 
-function ListProjects({ projectsList, listProjects, createProject }) {
+function ProjectList({ projectsList, listProjects, createProject }) {
   let content = (<div></div>);
   if (projectsList !== false && projectsList !== undefined) {
     content = projectsList.map((project, index) => (
@@ -22,10 +22,10 @@ function ListProjects({ projectsList, listProjects, createProject }) {
   );
 }
 
-ListProjects.propTypes = {
+ProjectList.propTypes = {
   projectsList: PropTypes.any,
   createProject: PropTypes.func,
   listProjects: PropTypes.func,
 };
 
-export default ListProjects;
+export default ProjectList;
