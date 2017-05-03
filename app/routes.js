@@ -42,9 +42,9 @@ export default function createRoutes(store) {
       name: 'projects',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/Projects/reducer'),
-          import('containers/Projects/sagas'),
-          import('containers/Projects'),
+          import('containers/ProjectsPage/reducer'),
+          import('containers/ProjectsPage/sagas'),
+          import('containers/ProjectsPage'),
         ]);
 
         const renderRoute = loadModule(cb);
@@ -63,9 +63,9 @@ export default function createRoutes(store) {
           name: 'projects',
           getComponent(nextState, cb) {
             const importModules = Promise.all([
-              import('containers/Projects/reducer'),
-              import('containers/Projects/sagas'),
-              import('containers/Projects'),
+              import('containers/ProjectsPage/reducer'),
+              import('containers/ProjectsPage/sagas'),
+              import('containers/ProjectsPage'),
             ]);
 
             const renderRoute = loadModule(cb);

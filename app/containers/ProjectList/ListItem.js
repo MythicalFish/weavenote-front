@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { showProject, archiveProject } from 'containers/Projects/actions';
+import { showProject, archiveProject } from 'containers/ProjectsPage/actions';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
 

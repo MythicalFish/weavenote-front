@@ -1,5 +1,5 @@
 import React from 'react';
-import * as sections from 'containers/Projects/constants/sections';
+import * as sections from 'containers/ProjectsPage/constants/sections';
 import SubHeader from 'components/SubHeader';
 import Navigation from './Navigation';
 import Basics from './Basics';

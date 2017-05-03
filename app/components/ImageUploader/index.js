@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ReactS3Uploader from 'react-s3-uploader';
 import { accessToken } from 'utils/request';
-import { createImage } from 'containers/Projects/actions';
+import { createImage } from 'containers/ProjectsPage/actions';
 
 class ImageUploader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
