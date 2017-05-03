@@ -16,7 +16,6 @@ function projectReducer(state = initialState, action) {
 
     case types.SHOW_PROJECT_SUCCESS:
       return state
-        .set('currentImage', null)
         .set('currentProject', fromJS(action.data));
       
     case types.UPDATE_BASICS_SUCCESS:

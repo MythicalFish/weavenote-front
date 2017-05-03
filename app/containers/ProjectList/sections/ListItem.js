@@ -2,39 +2,42 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { archiveProject } from 'containers/ProjectList/actions';
+import { fileProject } from 'containers/ProjectList/actions';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from './Thumbnail';
 
 class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   render() {
-    const p = this.props.project;
+    const { project, dispatch } = this.props;
+    const url = `/projects/${project.id}`;
     return (
       <div className="b1 mb2 bg-white dark7 flex justify-between x-fill">
-        <Link to={`/projects/${p.id}`} className="flex items-center b0 bg-white">
+        <Link to={url} className="flex items-center b0 bg-white">
           <div className="p1 pr2">
             <div className="vh-sq7 overflow-hidden b1">
-              <Thumbnail project={p} />
+              <Thumbnail project={project} />
             </div>
           </div>
           <div className="p2">
-            <div>{p.name}</div>
+            <div>{project.name}</div>
           </div>
           <div className="p2">
-            <div>#{p.identifier}</div>
+            <div>#{project.identifier}</div>
           </div>
         </Link>
         <div className="flex items-center">
           <div className="p2 smaller1 upcase">
-            {p.stage.label}
+            {project.stage.label}
           </div>
           <div className="p2 dark3 smaller1">
             collaborators
           </div>
           <div className="p2">
             <Dropdown label="...">
-              <button onClick={() => { this.props.fetchProject(p.id); }}>Manage</button>
-              <button onClick={() => { this.props.archiveProject(p.id); }}>Archive</button>
+              <Link to={url}>Manage</Link>
+              {!project.archived && <button onClick={() => { dispatch(fileProject({ id: project.id, archived: true })); }}>Archive</button>}
+              {project.archived && <button onClick={() => { dispatch(fileProject({ id: project.id, archived: false })); }}>Restore</button>}
             </Dropdown>
           </div>
         </div>
@@ -45,15 +48,13 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
 
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,
-  fetchProject: React.PropTypes.func,
-  archiveProject: React.PropTypes.func,
+  dispatch: React.PropTypes.func,
 };
 
 
 export function mapDispatch(dispatch) {
   return {
-    fetchProject: (projectID) => dispatch(fetchProject(projectID)),
-    archiveProject: (projectID) => dispatch(archiveProject(projectID)),
+    dispatch,
   };
 }
 

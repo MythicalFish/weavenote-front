@@ -5,13 +5,13 @@ import { request, send, patch } from 'utils/request';
 import * as types from './constants/actions';
 import {
   listProjectsSuccess, createProjectSuccess,
-  archiveProjectSuccess,
+  fileProjectSuccess,
 } from './actions';
 
 export default [
   listProjectsWatcher,
   createProjectWatcher,
-  archiveProjectWatcher,
+  fileProjectWatcher,
 ];
 
 export function* createProject() {
@@ -29,17 +29,18 @@ export function* createProjectWatcher() {
   yield cancel(watcher);
 }
 
-export function* archiveProject(action) {
+export function* fileProject(action) {
+  const { id, archived } = action.payload;
   try {
-    const data = yield call(patch, { path: `projects/${action.id}`, body: { archived: true, index_after_update: true } });
-    yield put(archiveProjectSuccess(data));
+    const data = yield call(patch, { path: `projects/${id}`, body: { archived, index_after_update: true } });
+    yield put(fileProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
 }
 
-export function* archiveProjectWatcher() {
-  const watcher = yield takeLatest(types.ARCHIVE_PROJECT, archiveProject);
+export function* fileProjectWatcher() {
+  const watcher = yield takeLatest(types.FILE_PROJECT, fileProject);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }

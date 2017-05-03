@@ -34,16 +34,16 @@ export function createProjectSuccess(list) {
   };
 }
 
-export function archiveProject(id) {
+export function fileProject(payload) {
   return {
-    type: types.ARCHIVE_PROJECT,
-    id,
+    type: types.FILE_PROJECT,
+    payload,
   };
 }
 
-export function archiveProjectSuccess(list) {
+export function fileProjectSuccess(list) {
   return {
-    type: types.ARCHIVE_PROJECT_SUCCESS,
+    type: types.FILE_PROJECT_SUCCESS,
     list,
   };
 }

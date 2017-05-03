@@ -21,7 +21,7 @@ function projectsReducer(state = initialState, action) {
       return state
         .set('list', action.list);
 
-    case types.ARCHIVE_PROJECT_SUCCESS:
+    case types.FILE_PROJECT_SUCCESS:
       return state
         .set('list', action.list);
 

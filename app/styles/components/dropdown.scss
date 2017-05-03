@@ -40,12 +40,16 @@
     overflow-x: hidden;
     @extend .px1;
     @extend .b1;
-    button {
+    button, a {
       display: block;
       border: 0;
       background: none;
       width: 100%;
       padding: $space-2;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
     }
   }
 }
