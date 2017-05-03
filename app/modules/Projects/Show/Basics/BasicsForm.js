@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { updateBasics } from 'containers/Projects/actions';
 import { Field, reduxForm } from 'redux-form/immutable';
-import validate from './validate';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
@@ -12,7 +13,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 );
 
-const BasicsForm = (props) => {
+let BasicsForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
     <form className="itemization" onSubmit={handleSubmit}>
@@ -33,6 +34,19 @@ BasicsForm.propTypes = {
   reset: PropTypes.func,
 };
 
-export default reduxForm({
-  form: 'basicsForm',  // a unique identifier for this form
+BasicsForm = reduxForm({
+  form: 'basicsForm',
 })(BasicsForm);
+
+export function mapDispatch(dispatch) {
+  return {
+    onSubmit: (data) => {
+      // this is automatically called on submit (after redux-form has done its magic)
+      dispatch(updateBasics(data));
+    },
+  };
+}
+
+BasicsForm = connect(null, mapDispatch)(BasicsForm);
+
+export default BasicsForm;

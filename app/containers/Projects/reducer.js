@@ -41,6 +41,10 @@ function projectsReducer(state = initialState, action) {
         .set('currentView', views.Show)
         .setIn(['currentSection', 'id'], sections.Basics.id)
         .setIn(['currentSection', 'label'], sections.Basics.label);
+      
+    case types.UPDATE_BASICS_SUCCESS:
+      console.log('UPDATE_BASICS_SUCCESS');
+      return state;
 
     case types.CREATE_IMAGE_SUCCESS:
       const image = fromJS(payload.image);
