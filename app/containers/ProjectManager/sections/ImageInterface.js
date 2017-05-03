@@ -8,32 +8,32 @@ import { changeImage } from '../actions';
 
 class ImageInterface extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.selectImage();
+    this.setImage();
   }
-  selectImage() {
-    const { dispatch, project, currentImage } = this.props;
-    const firstImage = project.getIn(['images', 0]);
-    if (!currentImage && firstImage) {
-      dispatch(changeImage(firstImage.toJS()));
+  setImage() {
+    const { dispatch } = this.props;
+    const image = this.firstImage();
+    if (image) {
+      dispatch(changeImage(image.toJS()));
     }
   }
-  currentImage() {
+  getImageURL() {
     const { currentImage } = this.props;
-    if (!currentImage) {
-      return {
-        id: 0,
-        name: null,
-        url: 'https://i.imgur.com/19jCEX4.jpg',
-      };
+    if (currentImage) {
+      return currentImage.get('url');
     }
-    return currentImage.toJS();
+    return 'https://i.imgur.com/19jCEX4.jpg';
+  }
+  firstImage() {
+    const { project } = this.props;
+    return project.getIn(['images', 0]);
   }
   render() {
     const { dispatch, project } = this.props;
     return (
       <div>
         <div>
-          <img src={this.currentImage().url} role="presentation" className="x-max20" />
+          <img src={this.getImageURL()} role="presentation" className="x-max20" />
         </div>
         <div>
           <Thumbnails images={project.get('images').toArray()} handleClick={(data) => { dispatch(changeImage(data)); }} />
