@@ -8,9 +8,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ProjectList from './sections/List';
-import {
-  selectProjectsList, selectCurrentSection,
-} from './selectors';
+import { selectProjectsList } from './selectors';
+import { selectCurrentSection } from '../App/selectors';
 import { listProjects, createProject } from './actions';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -37,7 +36,6 @@ Projects.propTypes = {
   currentProject: PropTypes.object,
   listProjects: PropTypes.func,
   createProject: PropTypes.func,
-  currentView: PropTypes.object,
   currentSection: PropTypes.object,
 };
 

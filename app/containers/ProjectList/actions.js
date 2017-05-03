@@ -47,17 +47,3 @@ export function archiveProjectSuccess(list) {
     list,
   };
 }
-
-/*
- *
- *  Sections
- *
- */
-
-
-export function changeSection(section) {
-  return {
-    type: types.CHANGE_SECTION,
-    section,
-  };
-}

@@ -12,3 +12,4 @@
 export const DEFAULT_LOCALE = 'en';
 export const GET_STATS = 'GET_STATS';
 export const GET_STATS_SUCCESS = 'GET_STATS_SUCCESS';
+export const CHANGE_SECTION = 'CHANGE_SECTION';

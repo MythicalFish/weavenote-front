@@ -12,3 +12,17 @@ export function getStatsSuccess(stats) {
     stats,
   };
 }
+
+/*
+ *
+ *  Sections
+ *
+ */
+
+
+export function changeSection(section) {
+  return {
+    type: types.CHANGE_SECTION,
+    section,
+  };
+}

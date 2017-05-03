@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as sections from 'containers/ProjectList/constants/sections';
+import * as sections from 'containers/App/constants/sections';
 import SubHeader from 'components/SubHeader';
 import Navigation from './sections/Navigation';
 import Basics from './sections/Basics';
 import Materials from './sections/Materials';
 import Measurements from './sections/Measurements';
 import {
-  selectCurrentProject, makeSelectCurrentView,
-  selectCurrentSection,
+  selectCurrentProject,
 } from './selectors';
+import { selectCurrentSection } from '../App/selectors';
 import { fetchProject } from './actions';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -61,7 +61,6 @@ ProjectManager.propTypes = {
   currentProject: React.PropTypes.object,
   onClickNav: React.PropTypes.func,
   currentSection: React.PropTypes.object,
-  currentView: React.PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
@@ -72,7 +71,6 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   currentProject: selectCurrentProject(),
-  currentView: makeSelectCurrentView(),
   currentSection: selectCurrentSection(),
 });
 

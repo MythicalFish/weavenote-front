@@ -7,6 +7,13 @@ const selectGlobal = () => createSelector(
   (globalState) => globalState.toJS()
 );
 
+export const selectCurrentSection = () => createSelector(
+  selectGlobal(),
+  (substate) => {
+    return substate.currentSection;
+  }
+);
+
 const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
