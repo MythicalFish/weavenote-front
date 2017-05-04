@@ -13,7 +13,11 @@ function projectReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-
+    
+    case types.SHOW_PROJECT:
+      return state
+        .set('currentProject', null);
+      
     case types.SHOW_PROJECT_SUCCESS:
       return state
         .set('currentProject', fromJS(action.data));

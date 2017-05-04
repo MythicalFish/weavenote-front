@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import SubHeader from 'components/SubHeader';
 import Navigation from './sections/Navigation';
-import Basics from './sections/Basics';
+import BasicsForm from './sections/BasicsForm';
 import Materials from './sections/Materials';
 import Measurements from './sections/Measurements';
 import {
@@ -29,7 +29,7 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
       currentProject,
     };
 
-    let renderedSection = <Basics {...sectionProps} />;
+    let renderedSection = <BasicsForm {...sectionProps} />;
 
     switch (currentSection.id) {
 
@@ -44,7 +44,6 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
       default:
         break; // already set
     }
-
     return (
       <div>
         <SubHeader>

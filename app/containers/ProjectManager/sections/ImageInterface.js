@@ -11,11 +11,13 @@ class ImageInterface extends React.PureComponent { // eslint-disable-line react/
     this.setImage();
   }
   setImage() {
-    const { dispatch } = this.props;
-    const image = this.firstImage();
+    const { dispatch, project } = this.props;
+    const image = project.getIn(['images', 0]);
+    let imageData = null;
     if (image) {
-      dispatch(changeImage(image.toJS()));
+      imageData = image.toJS();
     }
+    dispatch(changeImage(imageData));
   }
   getImageURL() {
     const { currentImage } = this.props;
@@ -23,10 +25,6 @@ class ImageInterface extends React.PureComponent { // eslint-disable-line react/
       return currentImage.get('url');
     }
     return 'https://i.imgur.com/19jCEX4.jpg';
-  }
-  firstImage() {
-    const { project } = this.props;
-    return project.getIn(['images', 0]);
   }
   render() {
     const { dispatch, project } = this.props;
