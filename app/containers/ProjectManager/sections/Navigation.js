@@ -18,7 +18,7 @@ export default class Navigation extends React.PureComponent { // eslint-disable-
             <Nav {...props} target={sections.Basics} />
           </li>
           <li>
-            <Nav {...props} target={sections.Materials} />
+            <Nav {...props} target={sections.Components} />
           </li>
           <li>
             <Nav {...props} target={sections.Measurements} />

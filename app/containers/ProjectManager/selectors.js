@@ -15,11 +15,16 @@ export const selectCurrentImage = () => createSelector(
   }
 );
 
-export const selectCurrentProject = () => createSelector(
+export const selectProject = () => createSelector(
   selectDomain(),
   (substate) => {
-    return substate.get('currentProject');
+    return substate.get('project');
   }
+);
+
+export const selectComponents = () => createSelector(
+  selectDomain(),
+  (substate) => substate.get('components')
 );
 
 /*
@@ -29,7 +34,7 @@ export const selectCurrentProject = () => createSelector(
  */
 
 export const selectProjectBasics = () => createSelector(
-  selectCurrentProject(),
+  selectProject(),
   (substate) => {
     if (substate) {
       const project = substate.toJS();

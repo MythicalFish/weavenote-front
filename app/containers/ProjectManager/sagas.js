@@ -4,12 +4,14 @@ import { send, request, patch } from 'utils/request';
 import * as types from './constants';
 import {
   createImageSuccess, fetchProjectSuccess, updateProjectSuccess,
+  fetchComponentsSuccess,
 } from './actions';
 
 export default [
   fetchProjectWatcher,
   updateProjectWatcher,
   createImageWatcher,
+  fetchComponentsWatcher,
 ];
 
 /*
@@ -50,7 +52,22 @@ export function* fetchProject(action) {
 }
 
 export function* fetchProjectWatcher() {
-  const watcher = yield takeLatest(types.SHOW_PROJECT, fetchProject);
+  const watcher = yield takeLatest(types.FETCH_PROJECT, fetchProject);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* fetchComponents(action) {
+  try {
+    const data = yield call(request, { path: `projects/${action.id}/components` });
+    yield put(fetchComponentsSuccess(data));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* fetchComponentsWatcher() {
+  const watcher = yield takeLatest(types.FETCH_COMPONENTS, fetchComponents);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }

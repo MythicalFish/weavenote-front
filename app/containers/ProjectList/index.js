@@ -39,7 +39,6 @@ Projects.propTypes = {
     PropTypes.array,
     PropTypes.bool,
   ]),
-  currentProject: PropTypes.object,
   listProjects: PropTypes.func,
   createProject: PropTypes.func,
   currentSection: PropTypes.object,

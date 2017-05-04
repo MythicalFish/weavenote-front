@@ -4,11 +4,9 @@ import { createStructuredSelector } from 'reselect';
 import SubHeader from 'components/SubHeader';
 import Navigation from './sections/Navigation';
 import BasicsForm from './sections/BasicsForm';
-import Materials from './sections/Materials';
+import Components from './sections/Components';
 import Measurements from './sections/Measurements';
-import {
-  selectCurrentProject,
-} from './selectors';
+import { selectProject } from './selectors';
 import { selectCurrentSection } from '../App/selectors';
 import { changeSection } from '../App/actions';
 import * as sections from '../App/constants/sections';
@@ -24,17 +22,17 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
   }
 
   render() {
-    const { currentProject, currentSection, dispatch } = this.props;
+    const { project, currentSection, dispatch } = this.props;
     const sectionProps = {
-      currentProject,
+      project,
     };
 
     let renderedSection = <BasicsForm {...sectionProps} />;
 
     switch (currentSection.id) {
 
-      case sections.Materials.id:
-        renderedSection = <Materials {...sectionProps} />;
+      case sections.Components.id:
+        renderedSection = <Components {...sectionProps} />;
         break;
 
       case sections.Measurements.id:
@@ -54,8 +52,8 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
             <div className="row">
               <div className="col-xs-12 col-md-7 flex justify-center">
                 <div>
-                  {currentProject &&
-                    <ImageInterface project={currentProject} />
+                  {project &&
+                    <ImageInterface project={project} />
                   }
                 </div>
               </div>
@@ -71,7 +69,7 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
 }
 
 ProjectManager.propTypes = {
-  currentProject: React.PropTypes.object,
+  project: React.PropTypes.object,
   currentSection: React.PropTypes.object,
   dispatch: React.PropTypes.func,
   params: React.PropTypes.object,
@@ -84,7 +82,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  currentProject: selectCurrentProject(),
+  project: selectProject(),
   currentSection: selectCurrentSection(),
 });
 

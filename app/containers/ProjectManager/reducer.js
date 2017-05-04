@@ -1,11 +1,11 @@
 
 import { fromJS } from 'immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
 import * as types from './constants';
 
 const initialState = fromJS({
-  currentProject: null,
+  project: null,
   currentImage: null,
+  components: null,
 });
 
 function projectReducer(state = initialState, action) {
@@ -14,21 +14,25 @@ function projectReducer(state = initialState, action) {
 
   switch (type) {
     
-    case types.SHOW_PROJECT:
+    case types.FETCH_PROJECT:
       return state
-        .set('currentProject', null);
+        .set('project', null);
       
-    case types.SHOW_PROJECT_SUCCESS:
+    case types.FETCH_PROJECT_SUCCESS:
       return state
-        .set('currentProject', fromJS(action.data));
+        .set('project', fromJS(action.data));
       
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
-
+    
+    case types.FETCH_COMPONENTS_SUCCESS:
+      return state
+        .set('components', fromJS(action.components));
+      
     case types.CREATE_IMAGE_SUCCESS:
       const image = fromJS(payload.image);
       return state
-        .setIn(['currentProject', 'images', -1], image)
+        .setIn(['project', 'images', -1], image)
         .set('currentImage', image);
     
     case types.SELECT_IMAGE:
