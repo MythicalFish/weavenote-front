@@ -9,6 +9,10 @@
       @extend .py2;
       @extend .px4;
       @extend .bigger1;
+      &.active {
+        background: $white;
+        color: $color1x;
+      }
     }
   }
 }
