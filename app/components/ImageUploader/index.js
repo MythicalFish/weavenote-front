@@ -31,18 +31,21 @@ class ImageUploader extends React.Component { // eslint-disable-line react/prefe
     return (
       <div>
         {this.state.progress === 0 &&
-          <ReactS3Uploader
-            server={process.env.API_URL}
-            signingUrl={`/projects/${project.get('id')}/get_upload_url`}
-            signingUrlMethod="GET"
-            signingUrlHeaders={{ Authorization: accessToken() }}
-            accept="image/*"
-            preprocess={this.onUploadPreprocess}
-            onProgress={this.onUploadProgress.bind(this)}
-            onError={this.onUploadError}
-            onFinish={(data) => { this.props.createImage(data); }}
-            scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/ig, '')}
-          />
+          <div className="glyph">
+            <i className="fa fa-plus-circle"></i>
+            <ReactS3Uploader
+              server={process.env.API_URL}
+              signingUrl={`/projects/${project.get('id')}/get_upload_url`}
+              signingUrlMethod="GET"
+              signingUrlHeaders={{ Authorization: accessToken() }}
+              accept="image/*"
+              preprocess={this.onUploadPreprocess}
+              onProgress={this.onUploadProgress.bind(this)}
+              onError={this.onUploadError}
+              onFinish={(data) => { this.props.createImage(data); }}
+              scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/ig, '')}
+            />
+          </div>
         }
         {this.state.progress > 0 &&
           <div>
