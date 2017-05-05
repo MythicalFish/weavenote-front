@@ -42,11 +42,11 @@ const ComponentRow = (props) => {
   return (
     <div>
       <button className="item" onClick={handleClick}>
-        <div>
+        <div className="left-align">
           {component.material.name}
         </div>
-        <div>
-          <i className={chevronClass}></i>
+        <div className="right-align">
+          <i className={`${chevronClass} gray`}></i>
         </div>
       </button>
       {isCurrent && <Form initialValues={current} material={current.material} /> }

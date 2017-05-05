@@ -12,6 +12,7 @@
     @extend .flex;
     @extend .smaller2;
     min-width: 300px;
+    padding: 0;
     > label, > input, > div, > button {
       @extend .p2;
     }
@@ -34,9 +35,6 @@
       font-weight: inherit;
       font-family: inherit;
       font-size: inherit;
-      .fa {
-        color: $gray;
-      }
     }
   }
 }

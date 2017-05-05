@@ -1,18 +1,16 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { updateComponent } from '../../actions';
-import { selectComponent } from '../../selectors';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div className="item">
-    <label>{label}</label>
-    <input {...input} type={type} />
-    <div>
-      {touched && error && <span>{error}</span>}
+  <div>
+    <div className="item">  
+      <label>{label}</label>
+      <input {...input} type={type} />
     </div>
+    {touched && error && <span>{error}</span>}
   </div>
 );
 
@@ -20,7 +18,7 @@ const Item = (props) => {
   return (
     <div className="item">
       <div>{props.label}</div>
-      <div>{props.value}</div>
+      <div className="right-align">{props.value}</div>
     </div>
   );
 };
