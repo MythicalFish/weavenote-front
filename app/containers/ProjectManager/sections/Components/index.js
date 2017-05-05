@@ -8,20 +8,20 @@ import { selectComponents, selectCurrentComponent } from '../../selectors';
 class Components extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const { fetchComponentsFor, project } = this.props;
-    fetchComponentsFor(project.id);
+    const { fetch, project } = this.props;
+    fetch(project.id);
   }
 
   render() {
-    const { components, currentComponent, switchComponentTo } = this.props;
+    const { components, current, switchTo } = this.props;
     return (
       <div className="itemization">
         {components && components.toJS().map((component) => (
           <ComponentRow
             key={`component-${component.id}`}
             component={component}
-            currentComponent={currentComponent}
-            handleClick={() => { switchComponentTo(component); }}
+            current={current}
+            switchTo={switchTo}
           />
         ))}
       </div>
@@ -30,48 +30,54 @@ class Components extends React.PureComponent { // eslint-disable-line react/pref
 }
 
 const ComponentRow = (props) => {
-  const { component, currentComponent, handleClick } = props;
+  const { component, current, switchTo } = props;
+  const isCurrent = current && current.id === component.id;
+  let chevronClass = 'fa fa-chevron-down';
+  let switchTarget = component;
+  if (isCurrent) {
+    chevronClass = 'fa fa-chevron-up';
+    switchTarget = null;
+  }
+  const handleClick = () => { switchTo(switchTarget); };
   return (
     <div>
-      <div className="item">
+      <button className="item" onClick={handleClick}>
         <div>
           {component.material.name}
         </div>
-        <button onClick={handleClick}>
-          <i className="fa fa-chevron-down"></i>
-        </button>
-      </div>
-      {currentComponent && currentComponent.id === component.id &&
-        <Form />
-      }
+        <div>
+          <i className={chevronClass}></i>
+        </div>
+      </button>
+      {isCurrent && <Form initialValues={current} material={current.material} /> }
     </div>
   );
 };
 
 ComponentRow.propTypes = {
   component: PropTypes.object,
-  currentComponent: PropTypes.object,
-  handleClick: PropTypes.func,
+  current: PropTypes.object,
+  switchTo: PropTypes.func,
 };
 
 Components.propTypes = {
   project: PropTypes.object,
   components: PropTypes.object,
-  currentComponent: PropTypes.object,
-  fetchComponentsFor: PropTypes.func,
-  switchComponentTo: PropTypes.func,
+  current: PropTypes.object,
+  fetch: PropTypes.func,
+  switchTo: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return {
-    fetchComponentsFor: (id) => { dispatch(fetchComponents(id)); },
-    switchComponentTo: (component) => { dispatch(switchComponent(component)); },
+    fetch: (id) => { dispatch(fetchComponents(id)); },
+    switchTo: (component) => { dispatch(switchComponent(component)); },
   };
 }
 
 const mapState = createStructuredSelector({
   components: selectComponents(),
-  currentComponent: selectCurrentComponent(),
+  current: selectCurrentComponent(),
 });
 
 export default connect(mapState, mapDispatch)(Components);

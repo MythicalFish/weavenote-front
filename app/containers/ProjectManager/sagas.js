@@ -47,9 +47,9 @@ export function* fetchProjectWatcher() {
 }
 
 export function* updateProject(action) {
-  const { payload } = action;
+  const project = action.project.toJS();
   try {
-    yield call(patch, { path: `projects/${id}`, body: payload });
+    yield call(patch, { path: `projects/${project.id}`, body: project });
     yield put(updateProjectSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

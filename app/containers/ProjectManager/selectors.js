@@ -22,7 +22,8 @@ export const selectComponents = () => createSelector(
 export const selectCurrentComponent = () => createSelector(
   selectDomain(),
   (substate) => {
-    return substate.get('currentComponent');
+    const component = substate.get('currentComponent');
+    return component;
   }
 );
 
@@ -43,7 +44,7 @@ export const selectCurrentImage = () => createSelector(
  *
  */
 
-export const selectProjectBasics = () => createSelector(
+export const selectBasicsForm = () => createSelector(
   selectProject(),
   (project) => {
     if (project) {
@@ -53,6 +54,19 @@ export const selectProjectBasics = () => createSelector(
         category: project.category,
         identifier: project.identifier,
         development_stage_id: project.stage.id,
+      });
+    }
+  }
+);
+
+
+export const selectComponentForm = () => createSelector(
+  selectCurrentComponent(),
+  (component) => {
+    if (component) {
+      return fromJS({
+        id: component.id,
+        name: component.quantity,
       });
     }
   }

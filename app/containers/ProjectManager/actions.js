@@ -13,8 +13,8 @@ export function fetchProjectSuccess(data) {
   return { type: types.FETCH_PROJECT_SUCCESS, data };
 }
 
-export function updateProject(payload) {
-  return { type: types.UPDATE_PROJECT, payload };
+export function updateProject(project) {
+  return { type: types.UPDATE_PROJECT, project };
 }
 export function updateProjectSuccess() {
   return { type: types.UPDATE_PROJECT_SUCCESS };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { updateProject } from '../../actions';
-import { selectProjectBasics } from '../../selectors';
+import { selectBasicsForm } from '../../selectors';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div className="item">
@@ -23,7 +23,7 @@ let Basics = (props) => {
       <Field name="category" type="text" component={renderField} label="Category" />
       <Field name="identifier" type="text" component={renderField} label="Identifier" />
       <footer className="p2 center">
-        <button className="btn-color2x" type="submit" disabled={submitting}>Submit</button>
+        <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
       </footer>
     </form>
   );
@@ -50,7 +50,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  initialValues: selectProjectBasics(),
+  initialValues: selectBasicsForm(),
 });
 
 Basics = connect(mapState, mapDispatch)(Basics);
