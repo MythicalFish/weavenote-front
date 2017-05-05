@@ -50,8 +50,8 @@ export function createComponentSuccess(component) {
   return { type: types.CREATE_COMPONENT_SUCCESS, component };
 }
 
-export function deleteComponent({ projectID, componentID }) {
-  return { type: types.DELETE_COMPONENT, projectID, componentID };
+export function deleteComponent({ projectID, id }) {
+  return { type: types.DELETE_COMPONENT, projectID, id };
 }
 
 export function deleteComponentSuccess(components) {
@@ -88,8 +88,8 @@ export function createImageSuccess(image) {
   return { type: types.CREATE_IMAGE_SUCCESS, image };
 }
 
-export function deleteImage({ projectID, imageID }) {
-  return { type: types.DELETE_IMAGE, projectID, imageID };
+export function deleteImage({ projectID, id }) {
+  return { type: types.DELETE_IMAGE, projectID, id };
 }
 
 export function deleteImageSuccess(images) {

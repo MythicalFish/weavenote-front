@@ -51,13 +51,9 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-7 flex justify-center">
-                <div>
-                  {project &&
-                    <ImageInterface project={project} />
-                  }
-                </div>
+                {project && <ImageInterface project={project} /> }
               </div>
-              <div className="col-xs-12 col-md-5 flex justify-center">  
+              <div className="col-xs-12 col-md-5 flex justify-center">
                 {project && renderedSection}
               </div>
             </div>

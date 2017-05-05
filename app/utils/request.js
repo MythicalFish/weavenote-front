@@ -53,6 +53,12 @@ export function send(opts = { path: '/', body: {} }) {
     .then(parseJSON);
 }
 
+export function del(opts = { path: '/', body: {} }) {
+  return fetch(requestURL(opts), requestOptions({ method: 'DELETE', body: JSON.stringify(opts.body) }))
+    .then(checkStatus)
+    .then(parseJSON);
+}
+
 const requestURL = (opts) => {
   let url = `${process.env.API_URL}/${opts.path}`;
   if (opts.params) {

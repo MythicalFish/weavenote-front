@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 
 function Thumbnails(props) {
-  const { handleClick } = props;
+  const { handleClick, images } = props;
   return (
     <ul className="thumbnails">
-      {props.images.map((image, index) => (
+      {images && images.toJS().map((image, index) => (
         <li key={`thumbnail-${index}`}>
           <button onClick={() => { handleClick(image); }}>
             <img src={image.url} role="presentation" />
@@ -16,8 +16,8 @@ function Thumbnails(props) {
 }
 
 Thumbnails.propTypes = {
-  images: PropTypes.array.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  images: PropTypes.object,
+  handleClick: PropTypes.func,
 };
 
 export default Thumbnails;

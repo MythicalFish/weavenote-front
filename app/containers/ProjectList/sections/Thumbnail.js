@@ -1,11 +1,15 @@
 import React from 'react';
-import { mainImage } from 'utils/images';
 
 class Thumbnail extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  thumbnailURL(props) {
+    const url = props.project.thumbnail_url;
+    if (url) { return url; }
+    return 'https://i.imgur.com/19jCEX4.jpg';
+  }
+
   render() {
-    const image = mainImage(this.props.project);
     return (
-      <img src={image.url} role="presentation" />
+      <img src={this.thumbnailURL(this.props)} role="presentation" />
     );
   }
 }

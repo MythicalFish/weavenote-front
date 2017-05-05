@@ -42,7 +42,7 @@ function projectReducer(state = initialState, action) {
     case types.DELETE_COMPONENT_SUCCESS:
       return state
         .set('components', fromJS(action.components))
-        .set('currentComponent', null);
+        .set('currentComponent', action.components[0]);
 
     // Images
 
@@ -62,7 +62,7 @@ function projectReducer(state = initialState, action) {
     case types.DELETE_IMAGE_SUCCESS:
       return state
         .set('images', fromJS(action.images))
-        .set('currentImage', null);
+        .set('currentImage', action.images[0]);
       
     case types.SWITCH_IMAGE:
       return state

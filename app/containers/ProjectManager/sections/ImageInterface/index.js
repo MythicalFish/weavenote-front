@@ -11,23 +11,29 @@ class ImageInterface extends React.PureComponent { // eslint-disable-line react/
     const { dispatch, project } = this.props;
     dispatch(fetchImages(project.id));
   }
-  currentImageURL() {
+  currentImage() {
     const { currentImage } = this.props;
     if (currentImage) {
-      return currentImage.url;
+      return currentImage;
     }
-    return 'https://i.imgur.com/19jCEX4.jpg';
+    return { url: 'https://i.imgur.com/19jCEX4.jpg' };
   }
   render() {
-    const { dispatch, project } = this.props;
+    const { dispatch, project, images } = this.props;
+    const image = this.currentImage();
     return (
       <div>
-        <div>
-          <img src={this.currentImageURL()} role="presentation" className="x-max20" />
+        <div className="flex flex-column items-center">
+          {image.id &&
+            <div>
+              <button onClick={() => { dispatch(deleteImage({ projectID: project.id, id: image.id })); }}>Delete</button>
+            </div>
+          }
+          <img src={image.url} role="presentation" className="x-max20" />
         </div>
         <div>
           <Thumbnails
-            images={project.images}
+            images={images}
             handleClick={(data) => { dispatch(switchImage(data)); }}
           />
         </div>

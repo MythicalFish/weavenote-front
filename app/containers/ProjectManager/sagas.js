@@ -1,6 +1,6 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { send, request, patch } from 'utils/request';
+import { send, request, patch, del } from 'utils/request';
 import * as types from './constants';
 import {
   fetchProjectSuccess, updateProjectSuccess,
@@ -116,10 +116,9 @@ export function* createImageWatcher() {
 }
 
 export function* deleteImage(action) {
-  const { payload } = action;
   try {
-    yield call(patch, { path: `projects/${payload.projectID}/images/${payload.id}` });
-    yield put(deleteImageSuccess());
+    const images = yield call(del, { path: `projects/${action.projectID}/images/${action.id}` });
+    yield put(deleteImageSuccess(images));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -169,9 +168,8 @@ export function* updateComponentWatcher() {
 }
 
 export function* createComponent(action) {
-  const { payload } = action;
   try {
-    const component = yield call(send, { path: `projects/${payload.projectID}/component`, body: { url: payload.componentURL } });
+    const component = yield call(send, { path: `projects/${action.projectID}/component`, body: { url: action.componentURL } });
     yield put(createComponentSuccess(component));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -185,10 +183,9 @@ export function* createComponentWatcher() {
 }
 
 export function* deleteComponent(action) {
-  const { payload } = action;
   try {
-    yield call(patch, { path: `projects/${payload.projectID}/components/${payload.id}` });
-    yield put(deleteComponentSuccess());
+    const components = yield call(del, { path: `projects/${action.projectID}/components/${action.id}` });
+    yield put(deleteComponentSuccess(components));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
