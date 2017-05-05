@@ -1,12 +1,13 @@
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
-import { updateProject } from '../../actions';
-import { selectProjectBasics } from '../../selectors';
+import { updateComponent } from '../../actions';
+import { selectComponent } from '../../selectors';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
+  <div className="item">
     <label>{label}</label>
     <input {...input} type={type} />
     <div>
@@ -15,13 +16,11 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 );
 
-let BasicsForm = (props) => {
+let Form = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
     <form className="itemization" onSubmit={handleSubmit}>
-      <Field name="name" type="text" component={renderField} label="Name" />
-      <Field name="category" type="text" component={renderField} label="Category" />
-      <Field name="identifier" type="text" component={renderField} label="Identifier" />
+      <Field name="quantity" type="text" component={renderField} label="Quantity" />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Submit</button>
       </footer>
@@ -29,30 +28,25 @@ let BasicsForm = (props) => {
   );
 };
 
-BasicsForm.propTypes = {
+Form.propTypes = {
   handleSubmit: PropTypes.func,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   reset: PropTypes.func,
 };
 
-BasicsForm = reduxForm({
-  form: 'basicsForm',
-})(BasicsForm);
+Form = reduxForm({
+  form: 'Component',
+})(Form);
 
 export function mapDispatch(dispatch) {
   return {
     onSubmit: (data) => {
-      // this is automatically called on submit (after redux-form has done its magic)
-      dispatch(updateProject(data));
+      dispatch(updateComponent(data));
     },
   };
 }
 
-const mapState = createStructuredSelector({
-  initialValues: selectProjectBasics(),
-});
+Form = connect(null, mapDispatch)(Form);
 
-BasicsForm = connect(mapState, mapDispatch)(BasicsForm);
-
-export default BasicsForm;
+export default Form;

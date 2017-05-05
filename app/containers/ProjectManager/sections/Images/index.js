@@ -6,7 +6,7 @@ import { selectImages, selectCurrentImage } from '../../selectors';
 import { fetchImages, switchImage, deleteImage } from '../../actions';
 import Uploader from './Uploader';
 
-class ImageInterface extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class Images extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     const { dispatch, project } = this.props;
     dispatch(fetchImages(project.id));
@@ -43,7 +43,7 @@ class ImageInterface extends React.PureComponent { // eslint-disable-line react/
   }
 }
 
-ImageInterface.propTypes = {
+Images.propTypes = {
   images: PropTypes.object,
   project: PropTypes.object,
   currentImage: PropTypes.object,
@@ -59,4 +59,4 @@ const mapState = createStructuredSelector({
   currentImage: selectCurrentImage(),
 });
 
-export default connect(mapState, mapDispatch)(ImageInterface);
+export default connect(mapState, mapDispatch)(Images);

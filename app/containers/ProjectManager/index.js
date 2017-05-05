@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import SubHeader from 'components/SubHeader';
 import Navigation from './sections/Navigation';
-import BasicsForm from './sections/BasicsForm';
+import Basics from './sections/Basics';
 import Components from './sections/Components';
 import Measurements from './sections/Measurements';
 import { selectProject } from './selectors';
@@ -11,7 +11,7 @@ import { selectCurrentSection } from '../App/selectors';
 import { changeSection } from '../App/actions';
 import * as sections from '../App/constants/sections';
 import { fetchProject } from './actions';
-import ImageInterface from './sections/ImageInterface';
+import Images from './sections/Images';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -27,7 +27,7 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
       project,
     };
 
-    let renderedSection = <BasicsForm {...sectionProps} />;
+    let renderedSection = <Basics {...sectionProps} />;
 
     switch (currentSection.id) {
 
@@ -51,7 +51,7 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-7 flex justify-center">
-                {project && <ImageInterface project={project} /> }
+                {project && <Images project={project} /> }
               </div>
               <div className="col-xs-12 col-md-5 flex justify-center">
                 {project && renderedSection}

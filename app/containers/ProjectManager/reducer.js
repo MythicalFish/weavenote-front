@@ -4,8 +4,10 @@ import * as types from './constants';
 
 const initialState = fromJS({
   project: null,
+  images: [],
   currentImage: null,
-  components: null,
+  components: [],
+  currentComponent: null,
 });
 
 function projectReducer(state = initialState, action) {
@@ -43,7 +45,11 @@ function projectReducer(state = initialState, action) {
       return state
         .set('components', fromJS(action.components))
         .set('currentComponent', action.components[0]);
-
+      
+    case types.SWITCH_COMPONENT:
+      return state
+        .set('currentComponent', action.component);
+      
     // Images
 
     case types.FETCH_IMAGES_SUCCESS:

@@ -58,6 +58,10 @@ export function deleteComponentSuccess(components) {
   return { type: types.DELETE_COMPONENT_SUCCESS, components };
 }
 
+export function switchComponent(component) {
+  return { type: types.SWITCH_COMPONENT, component };
+}
+
 /*
  *
  *  Project images
