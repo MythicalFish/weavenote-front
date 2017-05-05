@@ -8,7 +8,7 @@ class Components extends React.PureComponent { // eslint-disable-line react/pref
 
   componentDidMount() {
     const { doFetchComponents, project } = this.props;
-    doFetchComponents(project.get('id'));
+    doFetchComponents(project.id);
   }
 
   render() {

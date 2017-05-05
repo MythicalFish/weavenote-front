@@ -3,42 +3,31 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { send, request, patch } from 'utils/request';
 import * as types from './constants';
 import {
-  createImageSuccess, fetchProjectSuccess, updateProjectSuccess,
-  fetchComponentsSuccess,
+  fetchProjectSuccess, updateProjectSuccess,
+  fetchImagesSuccess, updateImageSuccess, createImageSuccess, deleteImageSuccess,
+  fetchComponentsSuccess, updateComponentSuccess, createComponentSuccess, deleteComponentSuccess,
 } from './actions';
 
 export default [
+
   fetchProjectWatcher,
   updateProjectWatcher,
+
+  fetchImagesWatcher,
+  updateImageWatcher,
   createImageWatcher,
+  deleteImageWatcher,
+
   fetchComponentsWatcher,
+  updateComponentWatcher,
+  createComponentWatcher,
+  deleteComponentWatcher,
+
 ];
 
 /*
  *
- *  Image
- *
- */
-
-export function* createImage(action) {
-  const { payload } = action;
-  try {
-    const image = yield call(send, { path: `projects/${payload.projectID}/create_image`, body: { url: payload.imageURL } });
-    yield put(createImageSuccess(image));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
-}
-
-export function* createImageWatcher() {
-  const watcher = yield takeLatest(types.CREATE_IMAGE, createImage);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-/*
- *
- *  Fetch
+ *  Project
  *
  */
 
@@ -57,10 +46,101 @@ export function* fetchProjectWatcher() {
   yield cancel(watcher);
 }
 
+export function* updateProject(action) {
+  const { payload } = action;
+  try {
+    yield call(patch, { path: `projects/${id}`, body: payload });
+    yield put(updateProjectSuccess());
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* updateProjectWatcher() {
+  const watcher = yield takeLatest(types.UPDATE_PROJECT, updateProject);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+
+/*
+ *
+ *  Image
+ *
+ */
+
+export function* fetchImages(action) {
+  try {
+    const images = yield call(request, { path: `projects/${action.projectID}/images` });
+    yield put(fetchImagesSuccess(images));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* fetchImagesWatcher() {
+  const watcher = yield takeLatest(types.FETCH_IMAGES, fetchImages);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* updateImage(action) {
+  const { payload } = action;
+  try {
+    yield call(patch, { path: `projects/${payload.projectID}/images/${payload.id}`, body: payload });
+    yield put(updateImageSuccess());
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* updateImageWatcher() {
+  const watcher = yield takeLatest(types.UPDATE_IMAGE, updateImage);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* createImage(action) {
+  try {
+    const image = yield call(send, { path: `projects/${action.projectID}/images`, body: { url: action.imageURL } });
+    yield put(createImageSuccess(image));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* createImageWatcher() {
+  const watcher = yield takeLatest(types.CREATE_IMAGE, createImage);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* deleteImage(action) {
+  const { payload } = action;
+  try {
+    yield call(patch, { path: `projects/${payload.projectID}/images/${payload.id}` });
+    yield put(deleteImageSuccess());
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* deleteImageWatcher() {
+  const watcher = yield takeLatest(types.DELETE_IMAGE, deleteImage);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+/*
+ *
+ *  Components
+ *
+ */
+
 export function* fetchComponents(action) {
   try {
-    const data = yield call(request, { path: `projects/${action.id}/components` });
-    yield put(fetchComponentsSuccess(data));
+    const components = yield call(request, { path: `projects/${action.projectID}/components` });
+    yield put(fetchComponentsSuccess(components));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -72,27 +152,50 @@ export function* fetchComponentsWatcher() {
   yield cancel(watcher);
 }
 
-
-/*
- *
- *  Update
- *
- */
-
-export function* updateProject(action) {
+export function* updateComponent(action) {
   const { payload } = action;
-  const id = payload.get('id');
-  const data = payload.delete('id');
   try {
-    yield call(patch, { path: `projects/${id}`, body: data });
-    yield put(updateProjectSuccess());
+    yield call(patch, { path: `projects/${payload.projectID}/components/${payload.id}`, body: payload });
+    yield put(updateComponentSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
 }
 
-export function* updateProjectWatcher() {
-  const watcher = yield takeLatest(types.UPDATE_PROJECT, updateProject);
+export function* updateComponentWatcher() {
+  const watcher = yield takeLatest(types.UPDATE_COMPONENT, updateComponent);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* createComponent(action) {
+  const { payload } = action;
+  try {
+    const component = yield call(send, { path: `projects/${payload.projectID}/component`, body: { url: payload.componentURL } });
+    yield put(createComponentSuccess(component));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* createComponentWatcher() {
+  const watcher = yield takeLatest(types.CREATE_COMPONENT, createComponent);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* deleteComponent(action) {
+  const { payload } = action;
+  try {
+    yield call(patch, { path: `projects/${payload.projectID}/components/${payload.id}` });
+    yield put(deleteComponentSuccess());
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+export function* deleteComponentWatcher() {
+  const watcher = yield takeLatest(types.DELETE_COMPONENT, deleteComponent);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }

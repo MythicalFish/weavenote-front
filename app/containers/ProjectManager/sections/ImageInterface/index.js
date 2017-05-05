@@ -2,27 +2,19 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Thumbnails from 'components/Thumbnails';
-import ImageUploader from 'components/ImageUploader';
-import { selectCurrentImage } from 'containers/ProjectManager/selectors';
-import { changeImage } from '../actions';
+import { selectImages, selectCurrentImage } from '../../selectors';
+import { fetchImages, switchImage, deleteImage } from '../../actions';
+import Uploader from './Uploader';
 
 class ImageInterface extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.setImage();
-  }
-  setImage() {
     const { dispatch, project } = this.props;
-    const image = project.getIn(['images', 0]);
-    let imageData = null;
-    if (image) {
-      imageData = image.toJS();
-    }
-    dispatch(changeImage(imageData));
+    dispatch(fetchImages(project.id));
   }
-  getImageURL() {
+  currentImageURL() {
     const { currentImage } = this.props;
     if (currentImage) {
-      return currentImage.get('url');
+      return currentImage.url;
     }
     return 'https://i.imgur.com/19jCEX4.jpg';
   }
@@ -31,18 +23,22 @@ class ImageInterface extends React.PureComponent { // eslint-disable-line react/
     return (
       <div>
         <div>
-          <img src={this.getImageURL()} role="presentation" className="x-max20" />
+          <img src={this.currentImageURL()} role="presentation" className="x-max20" />
         </div>
         <div>
-          <Thumbnails images={project.get('images').toArray()} handleClick={(data) => { dispatch(changeImage(data)); }} />
+          <Thumbnails
+            images={project.images}
+            handleClick={(data) => { dispatch(switchImage(data)); }}
+          />
         </div>
-        <ImageUploader project={project} />
+        <Uploader project={project} />
       </div>
     );
   }
 }
 
 ImageInterface.propTypes = {
+  images: PropTypes.object,
   project: PropTypes.object,
   currentImage: PropTypes.object,
   dispatch: PropTypes.func,
@@ -53,6 +49,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
+  images: selectImages(),
   currentImage: selectCurrentImage(),
 });
 

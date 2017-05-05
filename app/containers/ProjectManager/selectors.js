@@ -3,22 +3,14 @@ import { fromJS } from 'immutable';
 
 export const selectDomain = () => (state) => state.get('ProjectManager');
 
-export const selectProjectManager = () => createSelector(
-  selectDomain(),
-  (substate) => substate.toJS()
-);
-
-export const selectCurrentImage = () => createSelector(
-  selectDomain(),
-  (substate) => {
-    return substate.get('currentImage');
-  }
-);
-
 export const selectProject = () => createSelector(
   selectDomain(),
   (substate) => {
-    return substate.get('project');
+    const project = substate.get('project');
+    if (project) {
+      return project.toJS();
+    }
+    return project;
   }
 );
 
@@ -27,6 +19,24 @@ export const selectComponents = () => createSelector(
   (substate) => substate.get('components')
 );
 
+export const selectCurrentComponent = () => createSelector(
+  selectDomain(),
+  (substate) => {
+    return substate.get('currentComponent');
+  }
+);
+
+export const selectImages = () => createSelector(
+  selectDomain(),
+  (substate) => substate.get('images')
+);
+
+export const selectCurrentImage = () => createSelector(
+  selectDomain(),
+  (substate) => {
+    return substate.get('currentImage');
+  }
+);
 /*
  *
  *  Selectors for use with redux-form
@@ -35,9 +45,8 @@ export const selectComponents = () => createSelector(
 
 export const selectProjectBasics = () => createSelector(
   selectProject(),
-  (substate) => {
-    if (substate) {
-      const project = substate.toJS();
+  (project) => {
+    if (project) {
       return fromJS({
         id: project.id,
         name: project.name,
@@ -46,6 +55,5 @@ export const selectProjectBasics = () => createSelector(
         development_stage_id: project.stage.id,
       });
     }
-    return substate;
   }
 );

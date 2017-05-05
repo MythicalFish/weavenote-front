@@ -3,28 +3,30 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ReactS3Uploader from 'react-s3-uploader';
 import { accessToken } from 'utils/request';
-import { createImage } from 'containers/ProjectManager/actions';
+import { createImage } from '../../actions';
 
-class ImageUploader extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class Uploader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     this.setState({ progress: 0 });
   }
   onUploadPreprocess(file, next) {
-    console.log('Pre-process: ' + file.name);
+    console.log(`Pre-process: ${file.name}`); // eslint-disable-line no-console
     next(file);
   }
   onUploadProgress(percent, message) {
-    console.log('Upload progress: ' + percent + '% ' + message);
-    if (percent === 0) { percent = 1; }
-    if (percent === 100) { percent = 0; }
-    this.setState({ progress: percent });
+    let p = percent;
+    if (percent === 0) { p = 1; }
+    if (percent === 100) { p = 0; }
+    console.log(`Upload progress: ${p}% ${message}`); // eslint-disable-line no-console
+    this.setState({ progress: p });
   }
   onFinish(data) {
-    console.log("Upload finished: ");
-    this.props.createImage(data);
+    console.log('Upload finished:'); // eslint-disable-line no-console
+    const { dispatch } = this.props;
+    dispatch(createImage(data));
   }
   onUploadError(message) {
-    console.log("Upload error: " + message);
+    console.log(`Upload error: ${message}`); // eslint-disable-line no-console
   }
   render() {
     const { project } = this.props;
@@ -35,14 +37,14 @@ class ImageUploader extends React.Component { // eslint-disable-line react/prefe
             <i className="fa fa-plus-circle"></i>
             <ReactS3Uploader
               server={process.env.API_URL}
-              signingUrl={`/projects/${project.get('id')}/get_upload_url`}
+              signingUrl={`/projects/${project.id}/images/get_upload_url`}
               signingUrlMethod="GET"
               signingUrlHeaders={{ Authorization: accessToken() }}
               accept="image/*"
               preprocess={this.onUploadPreprocess}
               onProgress={this.onUploadProgress.bind(this)}
               onError={this.onUploadError}
-              onFinish={(data) => { this.props.createImage(data); }}
+              onFinish={this.onFinish.bind(this)}
               scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/ig, '')}
             />
           </div>
@@ -57,21 +59,17 @@ class ImageUploader extends React.Component { // eslint-disable-line react/prefe
   }
 }
 
-ImageUploader.propTypes = {
+Uploader.propTypes = {
   project: PropTypes.object,
-  createImage: PropTypes.func,
+  dispatch: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
-  return {
-    createImage: (data) => {
-      dispatch(createImage(data));
-    },
-  };
+  return { dispatch };
 }
 
 const mapState = createStructuredSelector({
 
 });
 
-export default connect(mapState, mapDispatch)(ImageUploader);
+export default connect(mapState, mapDispatch)(Uploader);
