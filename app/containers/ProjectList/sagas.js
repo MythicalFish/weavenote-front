@@ -9,10 +9,18 @@ import {
 } from './actions';
 
 export default [
-  fetchProjectsWatcher,
-  createProjectWatcher,
-  fileProjectWatcher,
+  projectListWatcher,
 ];
+
+export function* projectListWatcher() {
+  const watcher = [
+    yield takeLatest(types.CREATE_PROJECT, createProject),
+    yield takeLatest(types.FILE_PROJECT, fileProject),
+    yield takeLatest(types.FETCH_PROJECTS, fetchProjects),
+  ];
+  yield take(LOCATION_CHANGE);
+  yield cancel(...watcher);
+}
 
 export function* createProject() {
   try {
@@ -21,12 +29,6 @@ export function* createProject() {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-
-export function* createProjectWatcher() {
-  const watcher = yield takeLatest(types.CREATE_PROJECT, createProject);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
 }
 
 export function* fileProject(action) {
@@ -39,12 +41,6 @@ export function* fileProject(action) {
   }
 }
 
-export function* fileProjectWatcher() {
-  const watcher = yield takeLatest(types.FILE_PROJECT, fileProject);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
 export function* fetchProjects(action) {
   const { params } = action;
   try {
@@ -53,9 +49,4 @@ export function* fetchProjects(action) {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-export function* fetchProjectsWatcher() {
-  const watcher = yield takeLatest(types.FETCH_PROJECTS, fetchProjects);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
 }

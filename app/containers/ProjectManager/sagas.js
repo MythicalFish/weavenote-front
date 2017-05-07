@@ -9,21 +9,28 @@ import {
 } from './actions';
 
 export default [
-
-  fetchProjectWatcher,
-  updateProjectWatcher,
-
-  fetchImagesWatcher,
-  updateImageWatcher,
-  createImageWatcher,
-  deleteImageWatcher,
-
-  fetchComponentsWatcher,
-  updateComponentWatcher,
-  createComponentWatcher,
-  deleteComponentWatcher,
-
+  projectManagerWatcher,
 ];
+
+export function* projectManagerWatcher() {
+  const watcher = [
+    yield takeLatest(types.FETCH_PROJECT, fetchProject),
+    yield takeLatest(types.UPDATE_PROJECT, updateProject),
+
+    yield takeLatest(types.FETCH_IMAGES, fetchImages),
+    yield takeLatest(types.UPDATE_IMAGE, updateImage),
+    yield takeLatest(types.CREATE_IMAGE, createImage),
+    yield takeLatest(types.DELETE_IMAGE, deleteImage),
+
+    yield takeLatest(types.FETCH_COMPONENTS, fetchComponents),
+    yield takeLatest(types.UPDATE_COMPONENT, updateComponent),
+    yield takeLatest(types.CREATE_COMPONENT, createComponent),
+    yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
+
+  ];
+  yield take(LOCATION_CHANGE);
+  yield cancel(...watcher);
+}
 
 /*
  *
@@ -40,12 +47,6 @@ export function* fetchProject(action) {
   }
 }
 
-export function* fetchProjectWatcher() {
-  const watcher = yield takeLatest(types.FETCH_PROJECT, fetchProject);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
 export function* updateProject(action) {
   const project = action.project.toJS();
   try {
@@ -54,12 +55,6 @@ export function* updateProject(action) {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-
-export function* updateProjectWatcher() {
-  const watcher = yield takeLatest(types.UPDATE_PROJECT, updateProject);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
 }
 
 
@@ -78,12 +73,6 @@ export function* fetchImages(action) {
   }
 }
 
-export function* fetchImagesWatcher() {
-  const watcher = yield takeLatest(types.FETCH_IMAGES, fetchImages);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
 export function* updateImage(action) {
   const { image } = action;
   try {
@@ -92,12 +81,6 @@ export function* updateImage(action) {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-
-export function* updateImageWatcher() {
-  const watcher = yield takeLatest(types.UPDATE_IMAGE, updateImage);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
 }
 
 export function* createImage(action) {
@@ -110,12 +93,6 @@ export function* createImage(action) {
   }
 }
 
-export function* createImageWatcher() {
-  const watcher = yield takeLatest(types.CREATE_IMAGE, createImage);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
 export function* deleteImage(action) {
   try {
     const images = yield call(API.destroy, `projects/${action.projectID}/images/${action.id}`);
@@ -123,12 +100,6 @@ export function* deleteImage(action) {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-
-export function* deleteImageWatcher() {
-  const watcher = yield takeLatest(types.DELETE_IMAGE, deleteImage);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
 }
 
 /*
@@ -146,12 +117,6 @@ export function* fetchComponents(action) {
   }
 }
 
-export function* fetchComponentsWatcher() {
-  const watcher = yield takeLatest(types.FETCH_COMPONENTS, fetchComponents);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
 export function* updateComponent(action) {
   const component = action.component.toJS();
   try {
@@ -160,12 +125,6 @@ export function* updateComponent(action) {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-
-export function* updateComponentWatcher() {
-  const watcher = yield takeLatest(types.UPDATE_COMPONENT, updateComponent);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
 }
 
 export function* createComponent(action) {
@@ -177,12 +136,6 @@ export function* createComponent(action) {
   }
 }
 
-export function* createComponentWatcher() {
-  const watcher = yield takeLatest(types.CREATE_COMPONENT, createComponent);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
 export function* deleteComponent(action) {
   try {
     const components = yield call(API.destroy, `projects/${action.projectID}/components/${action.id}`);
@@ -190,10 +143,4 @@ export function* deleteComponent(action) {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-
-export function* deleteComponentWatcher() {
-  const watcher = yield takeLatest(types.DELETE_COMPONENT, deleteComponent);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
 }
