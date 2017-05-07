@@ -28,9 +28,15 @@ class Components extends React.PureComponent { // eslint-disable-line react/pref
         const handleClick = () => { switchTo(switchTarget); };
         const item = [];
         item.push((
-          <button className="item" onClick={handleClick} key={`component-item-${component.id}`}>
-            <div className="left-align">
+          <button className="item left-align" onClick={handleClick} key={`component-item-${component.id}`}>
+            <div>
               {component.material.name}
+            </div>
+            <div>
+              {component.material.type.name}
+            </div>
+            <div>
+              {component.material.color.name}
             </div>
             <div className="right-align">
               <i className={`fa ${chevronClass} gray`}></i>

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Thumbnails from 'components/Thumbnails';
+import ThumbnailList from 'components/ThumbnailList';
 import { selectImages, selectCurrentImage } from '../../selectors';
 import { fetchImages, switchImage, deleteImage } from '../../actions';
 import Uploader from './Uploader';
@@ -33,7 +33,7 @@ class Images extends React.PureComponent { // eslint-disable-line react/prefer-s
           <img src={image.url} role="presentation" className="x-max20" />
         </div>
         <div>
-          <Thumbnails
+          <ThumbnailList
             images={images}
             handleClick={(data) => { dispatch(switchImage(data)); }}
           />

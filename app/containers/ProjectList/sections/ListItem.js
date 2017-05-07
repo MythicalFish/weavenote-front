@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { fileProject } from 'containers/ProjectList/actions';
 import Dropdown from 'components/Dropdown';
-import Thumbnail from './Thumbnail';
+import Thumbnail from 'components/Thumbnail';
 
 class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -15,9 +15,7 @@ class ListItem extends React.PureComponent { // eslint-disable-line react/prefer
       <div className="b1 mb2 bg-white dark7 flex justify-between x-fill">
         <Link to={url} className="flex items-center b0 bg-white">
           <div className="p1 pr2">
-            <div className="vh-sq7 overflow-hidden b1">
-              <Thumbnail project={project} />
-            </div>
+            <Thumbnail url={project.thumbnail_url} />
           </div>
           <div className="p2">
             <div>{project.name}</div>
