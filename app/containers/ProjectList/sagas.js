@@ -16,7 +16,7 @@ export default [
 
 export function* createProject() {
   try {
-    const data = yield call(send, { path: 'projects', body: { name: 'Untitled project' } });
+    const data = yield call(send, { path: 'projects', body: { project: { name: 'Untitled project' } } });
     yield put(createProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -32,7 +32,7 @@ export function* createProjectWatcher() {
 export function* fileProject(action) {
   const { id, archived } = action.payload;
   try {
-    const data = yield call(patch, { path: `projects/${id}`, body: { archived, index_after_update: true } });
+    const data = yield call(patch, { path: `projects/${id}`, body: { project: { archived }, index_after_update: true } });
     yield put(fileProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

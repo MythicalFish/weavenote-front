@@ -1,8 +1,5 @@
-
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form/immutable';
-import { updateComponent } from '../../actions';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
@@ -48,23 +45,13 @@ let Form = (props) => {
 };
 
 Form.propTypes = {
-  handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   material: PropTypes.object,
+  handleSubmit: PropTypes.func,
 };
 
 Form = reduxForm({
   form: 'Component',
 })(Form);
-
-export function mapDispatch(dispatch) {
-  return {
-    onSubmit: (data) => {
-      dispatch(updateComponent(data));
-    },
-  };
-}
-
-Form = connect(null, mapDispatch)(Form);
 
 export default Form;

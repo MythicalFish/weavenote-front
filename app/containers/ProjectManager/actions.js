@@ -34,8 +34,8 @@ export function fetchComponentsSuccess(components) {
   return { type: types.FETCH_COMPONENTS_SUCCESS, components };
 }
 
-export function updateComponent({ projectID, componentID }) {
-  return { type: types.UPDATE_COMPONENT, projectID, componentID };
+export function updateComponent(component) {
+  return { type: types.UPDATE_COMPONENT, component };
 }
 
 export function updateComponentSuccess() {
@@ -84,8 +84,8 @@ export function updateImageSuccess() {
   return { type: types.UPDATE_IMAGE_SUCCESS };
 }
 
-export function createImage({ projectID, imageURL }) {
-  return { type: types.CREATE_IMAGE, projectID, imageURL };
+export function createImage(data) {
+  return { type: types.CREATE_IMAGE, data };
 }
 
 export function createImageSuccess(image) {

@@ -22,8 +22,7 @@ export const selectComponents = () => createSelector(
 export const selectCurrentComponent = () => createSelector(
   selectDomain(),
   (substate) => {
-    const component = substate.get('currentComponent');
-    return component;
+    return substate.get('currentComponent');
   }
 );
 
@@ -59,14 +58,14 @@ export const selectBasicsForm = () => createSelector(
   }
 );
 
-
 export const selectComponentForm = () => createSelector(
   selectCurrentComponent(),
   (component) => {
     if (component) {
       return fromJS({
         id: component.id,
-        name: component.quantity,
+        quantity: component.quantity,
+        project_id: component.project_id,
       });
     }
   }

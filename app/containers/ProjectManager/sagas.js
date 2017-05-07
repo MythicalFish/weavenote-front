@@ -49,7 +49,7 @@ export function* fetchProjectWatcher() {
 export function* updateProject(action) {
   const project = action.project.toJS();
   try {
-    yield call(patch, { path: `projects/${project.id}`, body: project });
+    yield call(patch, { path: `projects/${project.id}`, body: { project } });
     yield put(updateProjectSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -101,9 +101,10 @@ export function* updateImageWatcher() {
 }
 
 export function* createImage(action) {
+  const { image } = action.data;
   try {
-    const image = yield call(send, { path: `projects/${action.projectID}/images`, body: { url: action.imageURL } });
-    yield put(createImageSuccess(image));
+    const response = yield call(send, { path: `projects/${image.project_id}/images`, body: { image } });
+    yield put(createImageSuccess(response));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -152,9 +153,9 @@ export function* fetchComponentsWatcher() {
 }
 
 export function* updateComponent(action) {
-  const { payload } = action;
+  const component = action.component.toJS();
   try {
-    yield call(patch, { path: `projects/${payload.projectID}/components/${payload.id}`, body: payload });
+    yield call(patch, { path: `projects/${component.project_id}/components/${component.id}`, body: component });
     yield put(updateComponentSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

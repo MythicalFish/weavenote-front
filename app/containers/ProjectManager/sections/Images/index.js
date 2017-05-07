@@ -5,6 +5,7 @@ import Thumbnails from 'components/Thumbnails';
 import { selectImages, selectCurrentImage } from '../../selectors';
 import { fetchImages, switchImage, deleteImage } from '../../actions';
 import Uploader from './Uploader';
+import { IMAGE_PLACEHOLDER } from 'containers/App/constants/misc';
 
 class Images extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -16,7 +17,7 @@ class Images extends React.PureComponent { // eslint-disable-line react/prefer-s
     if (currentImage) {
       return currentImage;
     }
-    return { url: 'https://i.imgur.com/19jCEX4.jpg' };
+    return { url: IMAGE_PLACEHOLDER };
   }
   render() {
     const { dispatch, project, images } = this.props;
