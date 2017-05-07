@@ -1,6 +1,6 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { send, request, patch, del } from 'utils/request';
+import * as API from 'utils/API';
 import * as types from './constants';
 import {
   fetchProjectSuccess, updateProjectSuccess,
@@ -33,7 +33,7 @@ export default [
 
 export function* fetchProject(action) {
   try {
-    const data = yield call(request, { path: `projects/${action.id}` });
+    const data = yield call(API.get, `projects/${action.id}`);
     yield put(fetchProjectSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -49,7 +49,7 @@ export function* fetchProjectWatcher() {
 export function* updateProject(action) {
   const project = action.project.toJS();
   try {
-    yield call(patch, { path: `projects/${project.id}`, body: { project } });
+    yield call(API.patch, `projects/${project.id}`, { project });
     yield put(updateProjectSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -71,7 +71,7 @@ export function* updateProjectWatcher() {
 
 export function* fetchImages(action) {
   try {
-    const images = yield call(request, { path: `projects/${action.projectID}/images` });
+    const images = yield call(API.get, `projects/${action.projectID}/images`);
     yield put(fetchImagesSuccess(images));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -85,9 +85,9 @@ export function* fetchImagesWatcher() {
 }
 
 export function* updateImage(action) {
-  const { payload } = action;
+  const { image } = action;
   try {
-    yield call(patch, { path: `projects/${payload.projectID}/images/${payload.id}`, body: payload });
+    yield call(API.patch, `projects/${image.project_id}/images/${image.id}`, { image });
     yield put(updateImageSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -103,7 +103,7 @@ export function* updateImageWatcher() {
 export function* createImage(action) {
   const { image } = action.data;
   try {
-    const response = yield call(send, { path: `projects/${image.project_id}/images`, body: { image } });
+    const response = yield call(API.post, `projects/${image.project_id}/images`, { image });
     yield put(createImageSuccess(response));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -118,7 +118,7 @@ export function* createImageWatcher() {
 
 export function* deleteImage(action) {
   try {
-    const images = yield call(del, { path: `projects/${action.projectID}/images/${action.id}` });
+    const images = yield call(API.destroy, `projects/${action.projectID}/images/${action.id}`);
     yield put(deleteImageSuccess(images));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -139,7 +139,7 @@ export function* deleteImageWatcher() {
 
 export function* fetchComponents(action) {
   try {
-    const components = yield call(request, { path: `projects/${action.projectID}/components` });
+    const components = yield call(API.get, `projects/${action.projectID}/components`);
     yield put(fetchComponentsSuccess(components));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -155,7 +155,7 @@ export function* fetchComponentsWatcher() {
 export function* updateComponent(action) {
   const component = action.component.toJS();
   try {
-    yield call(patch, { path: `projects/${component.project_id}/components/${component.id}`, body: component });
+    yield call(API.patch, `projects/${component.project_id}/components/${component.id}`, { component });
     yield put(updateComponentSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -170,7 +170,7 @@ export function* updateComponentWatcher() {
 
 export function* createComponent(action) {
   try {
-    const component = yield call(send, { path: `projects/${action.projectID}/component`, body: { url: action.componentURL } });
+    const component = yield call(API.post, `projects/${action.projectID}/component`, { component });
     yield put(createComponentSuccess(component));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
@@ -185,7 +185,7 @@ export function* createComponentWatcher() {
 
 export function* deleteComponent(action) {
   try {
-    const components = yield call(del, { path: `projects/${action.projectID}/components/${action.id}` });
+    const components = yield call(API.destroy, `projects/${action.projectID}/components/${action.id}`);
     yield put(deleteComponentSuccess(components));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

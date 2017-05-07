@@ -2,11 +2,11 @@ import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { getStatsSuccess } from 'containers/App/actions';
 import * as types from 'containers/App/constants';
-import { request } from 'utils/request';
+import * as API from 'utils/API';
 
 export function* getStats() {
   try {
-    const data = yield call(request, { path: 'stats' });
+    const data = yield call(API.get, 'stats');
     yield put(getStatsSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

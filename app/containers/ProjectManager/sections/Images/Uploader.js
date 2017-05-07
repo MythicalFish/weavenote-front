@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ReactS3Uploader from 'react-s3-uploader';
-import { accessToken } from 'utils/request';
+import * as API from 'utils/API';
 import { createImage } from '../../actions';
 
 class Uploader extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -39,7 +39,7 @@ class Uploader extends React.Component { // eslint-disable-line react/prefer-sta
               server={process.env.API_URL}
               signingUrl={`/projects/${project.id}/images/get_upload_url`}
               signingUrlMethod="GET"
-              signingUrlHeaders={{ Authorization: accessToken() }}
+              signingUrlHeaders={{ Authorization: API.accessToken() }}
               accept="image/*"
               preprocess={this.onUploadPreprocess}
               onProgress={this.onUploadProgress.bind(this)}
