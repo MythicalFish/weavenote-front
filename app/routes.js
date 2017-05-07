@@ -99,18 +99,38 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/materials',
-      name: 'materials',
+      name: 'MaterialList',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/Materials/reducer'),
-          import('containers/Materials/sagas'),
-          import('containers/Materials'),
+          import('containers/MaterialList/reducer'),
+          import('containers/MaterialList/sagas'),
+          import('containers/MaterialList'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('materials', reducer.default);
+          injectReducer('MaterialList', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/materials/:id',
+      name: 'MaterialManager',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/MaterialManager/reducer'),
+          import('containers/MaterialManager/sagas'),
+          import('containers/MaterialManager'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('MaterialManager', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });
