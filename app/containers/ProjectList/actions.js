@@ -1,22 +1,22 @@
 import * as types from './constants/actions';
 
-export function listProjects(params) {
+export function fetchProjects(params) {
   return {
-    type: types.LIST_PROJECTS,
+    type: types.FETCH_PROJECTS,
     params,
   };
 }
 
-export function listProjectsSuccess(list) {
+export function fetchProjectsSuccess(list) {
   return {
-    type: types.LIST_PROJECTS_SUCCESS,
+    type: types.FETCH_PROJECTS_SUCCESS,
     list,
   };
 }
 
-export function listProjectsError(error) {
+export function fetchProjectsError(error) {
   return {
-    type: types.LIST_PROJECTS_ERROR,
+    type: types.FETCH_PROJECTS_ERROR,
     error,
   };
 }

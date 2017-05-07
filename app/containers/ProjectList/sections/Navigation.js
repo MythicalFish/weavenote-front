@@ -4,7 +4,7 @@ import ProjectNavItem from 'components/ProjectNavItem';
 
 export default class Navigation extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { createProject, listProjects } = this.props;
+    const { createProject, fetchProjects } = this.props;
     return (
       <div className="flex justify-between">
         <div className="flex items-center px3">
@@ -15,10 +15,10 @@ export default class Navigation extends React.PureComponent { // eslint-disable-
         <nav className="tabs">
           <ul>
             <li>
-              <ProjectNavItem target={sections.Active} handleDispatch={() => { listProjects(); }} />
+              <ProjectNavItem target={sections.Active} handleDispatch={() => { fetchProjects(); }} />
             </li>
             <li>
-              <ProjectNavItem target={sections.Archived} handleDispatch={() => { listProjects({ archived: true }); }} />
+              <ProjectNavItem target={sections.Archived} handleDispatch={() => { fetchProjects({ archived: true }); }} />
             </li>
           </ul>
         </nav>
@@ -30,6 +30,6 @@ export default class Navigation extends React.PureComponent { // eslint-disable-
 }
 
 Navigation.propTypes = {
-  listProjects: React.PropTypes.func,
+  fetchProjects: React.PropTypes.func,
   createProject: React.PropTypes.func,
 };

@@ -12,13 +12,13 @@ import Navigation from './sections/Navigation';
 import ProjectList from './sections/List';
 import { selectProjectsList } from './selectors';
 import { selectCurrentSection } from '../App/selectors';
-import { listProjects, createProject } from './actions';
+import { fetchProjects, createProject } from './actions';
 import * as sections from '../App/constants/sections';
 import { changeSection } from '../App/actions';
 
 export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.listProjects();
+    this.props.fetchProjects();
     this.props.changeSection(sections.Active);
   }
   render() {
@@ -26,7 +26,7 @@ export class Projects extends React.PureComponent { // eslint-disable-line react
     return (
       <div>
         <SubHeader>
-          <Navigation createProject={p.createProject} listProjects={p.listProjects} />
+          <Navigation createProject={p.createProject} fetchProjects={p.fetchProjects} />
         </SubHeader>
         <ProjectList projectsList={p.projectsList} />
       </div>
@@ -39,7 +39,7 @@ Projects.propTypes = {
     PropTypes.array,
     PropTypes.bool,
   ]),
-  listProjects: PropTypes.func,
+  fetchProjects: PropTypes.func,
   createProject: PropTypes.func,
   currentSection: PropTypes.object,
   changeSection: PropTypes.func,
@@ -47,7 +47,7 @@ Projects.propTypes = {
 
 export function mapDispatch(dispatch) {
   return {
-    listProjects: (params) => dispatch(listProjects(params)),
+    fetchProjects: (params) => dispatch(fetchProjects(params)),
     createProject: (data) => dispatch(createProject(data)),
     changeSection: (section) => dispatch(changeSection(section)),
   };

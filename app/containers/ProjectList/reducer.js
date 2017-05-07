@@ -13,7 +13,7 @@ function projectsReducer(state = initialState, action) {
 
   switch (type) {
 
-    case types.LIST_PROJECTS_SUCCESS:
+    case types.FETCH_PROJECTS_SUCCESS:
       return state
         .set('list', action.list);
 

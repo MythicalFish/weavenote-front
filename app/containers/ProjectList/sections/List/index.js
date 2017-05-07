@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ListItem from '../ListItem';
 
-function ProjectList({ projectsList, listProjects, createProject }) {
+function ProjectList({ projectsList, fetchProjects, createProject }) {
   let content = (<div></div>);
   if (projectsList !== false && projectsList !== undefined) {
     content = projectsList.map((project, index) => (
@@ -18,7 +18,7 @@ function ProjectList({ projectsList, listProjects, createProject }) {
 ProjectList.propTypes = {
   projectsList: PropTypes.any,
   createProject: PropTypes.func,
-  listProjects: PropTypes.func,
+  fetchProjects: PropTypes.func,
 };
 
 export default ProjectList;

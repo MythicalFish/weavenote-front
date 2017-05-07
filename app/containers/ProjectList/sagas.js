@@ -4,12 +4,12 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { request, send, patch } from 'utils/request';
 import * as types from './constants/actions';
 import {
-  listProjectsSuccess, createProjectSuccess,
+  fetchProjectsSuccess, createProjectSuccess,
   fileProjectSuccess,
 } from './actions';
 
 export default [
-  listProjectsWatcher,
+  fetchProjectsWatcher,
   createProjectWatcher,
   fileProjectWatcher,
 ];
@@ -45,16 +45,16 @@ export function* fileProjectWatcher() {
   yield cancel(watcher);
 }
 
-export function* listProjects(opts) {
+export function* fetchProjects(opts) {
   try {
     const projects = yield call(request, { path: 'projects', params: opts.params });
-    yield put(listProjectsSuccess(projects));
+    yield put(fetchProjectsSuccess(projects));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
 }
-export function* listProjectsWatcher() {
-  const watcher = yield takeLatest(types.LIST_PROJECTS, listProjects);
+export function* fetchProjectsWatcher() {
+  const watcher = yield takeLatest(types.FETCH_PROJECTS, fetchProjects);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
