@@ -10,13 +10,13 @@ const ListItem = (props) => {
   }
   return (
     <button className="item left-align" onClick={() => { switchTo(switchTarget); }}>
-      <div>
+      <div className="x10">
         {component.material.name}
       </div>
-      <div>
+      <div className="x8">
         {component.material.type.name}
       </div>
-      <div>
+      <div className="x8">
         {component.material.color.name}
       </div>
       <div className="right-align">
