@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 export function request(method = 'GET', path, params) {
 
   let url;
-  const body = requestBody;
+  const body = requestBody();
 
   if (method === 'GET') {
     url = requestURL({ path, params });
@@ -46,13 +46,15 @@ const requestURL = (opts) => {
   return url;
 };
 
-const requestBody = {
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization: accessToken(),
-  },
-};
+function requestBody() {
+  return {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: accessToken(),
+    },
+  };
+}
 
 const encodedRequestParams = (params) => {
   const esc = encodeURIComponent;
