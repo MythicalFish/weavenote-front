@@ -6,8 +6,9 @@ export function fetchMaterials() {
   };
 }
 
-export function fetchMaterialsSuccess() {
+export function fetchMaterialsSuccess(list) {
   return {
     type: types.FETCH_MATERIALS_SUCCESS,
+    list,
   };
 }

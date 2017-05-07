@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import SubHeader from 'components/SubHeader';
-import selectMaterials from './selectors';
+import selectMaterialsList from './selectors';
 import { fetchMaterials } from './actions';
 
 export class MaterialList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -13,11 +13,18 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
   }
 
   render() {
+    const { materials } = this.props;
+    console.log(materials);
+    if (!materials) { return null; }
     return (
       <div>
         <SubHeader>
         </SubHeader>
-        {}
+        {materials && materials.map((material) => (
+          <div>
+            {material.name}
+          </div>
+        ))}
       </div>
     );
   }
@@ -29,7 +36,7 @@ MaterialList.propTypes = {
 };
 
 const mapState = createStructuredSelector({
-  materials: selectMaterials(),
+  materials: selectMaterialsList(),
 });
 
 function mapDispatch(dispatch) {

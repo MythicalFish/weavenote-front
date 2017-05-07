@@ -1,6 +1,5 @@
 
 import { fromJS } from 'immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
 import * as types from './constants/actions';
 
 const initialState = fromJS({
@@ -9,7 +8,7 @@ const initialState = fromJS({
 
 function projectsReducer(state = initialState, action) {
 
-  const { type, payload } = action;
+  const { type } = action;
 
   switch (type) {
 
