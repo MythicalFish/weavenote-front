@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Form from './Form';
+import ListItem from './ListItem';
 import { fetchComponents, switchComponent, updateComponent } from '../../actions';
 import { selectComponents, selectCurrentComponent, selectComponentForm } from '../../selectors';
 
@@ -17,45 +18,21 @@ class Components extends React.PureComponent { // eslint-disable-line react/pref
     let items = [];
     if (components) {
       items = components.toJS().map((component) => {
-        const key = `component-${component.id}`;
-        let chevronClass = 'fa-chevron-down';
-        let switchTarget = component;
         const isCurrent = current && current.id === component.id;
-        if (isCurrent) {
-          chevronClass = 'fa-chevron-up';
-          switchTarget = null;
-        }
-        const handleClick = () => { switchTo(switchTarget); };
-        const item = [];
-        item.push((
-          <button className="item left-align" onClick={handleClick} key={`component-item-${component.id}`}>
-            <div>
-              {component.material.name}
-            </div>
-            <div>
-              {component.material.type.name}
-            </div>
-            <div>
-              {component.material.color.name}
-            </div>
-            <div className="right-align">
-              <i className={`fa ${chevronClass} gray`}></i>
-            </div>
-          </button>
-        ));
-        if (isCurrent) {
-          item.push((
-            <Form
-              onSubmit={handleSubmit}
-              initialValues={initialValues}
-              material={current.material}
-              key={`component-form-${component.id}`}
-            />
-          ));
-        }
         return (
-          <div key={key}>
-            {item}
+          <div key={`component-${component.id}`}>
+            <ListItem
+              component={component}  
+              isCurrent={isCurrent}
+              switchTo={switchTo}
+            />
+            {isCurrent &&
+              <Form
+                onSubmit={handleSubmit}
+                initialValues={initialValues}
+                material={current.material}
+              />
+            }
           </div>
         );
       });
