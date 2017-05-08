@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
+import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import SubHeader from 'components/SubHeader';
 import Navigation from './partials/Navigation';
@@ -21,6 +22,8 @@ export class ProjectList extends React.PureComponent { // eslint-disable-line re
       <div>
         <SubHeader>
           <Navigation
+            currentSection={props.currentSection}
+            changeSection={props.changeSection}
             create={props.createProject}
             fetch={props.fetchProjects}
           />
@@ -48,6 +51,7 @@ ProjectList.propTypes = {
   createProject: PropTypes.func,
   fileProject: PropTypes.func,
   changeSection: PropTypes.func,
+  currentSection: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
@@ -59,6 +63,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   projects: selectProjectsList(),
+  currentSection: selectCurrentSection(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectList);

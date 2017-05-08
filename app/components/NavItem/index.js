@@ -1,34 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { selectCurrentSection } from 'containers/App/selectors';
 
-class NavItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  buttonClass() {
-    let c = '';
-    if (this.props.currentSection.id === this.props.target.id) {
-      c = `${c} active`;
-    }
-    return c;
-  }
-  handleClick() {
-    this.props.onClick(this.props.target);
-  }
-  render() {
-    return (
-      <button className={this.buttonClass()} onClick={() => { this.handleClick(); }}>{this.props.target.label}</button>
-    );
-  }
+export default function NavItem(props) {
+  const { label, handleClick, isActive } = props;
+  let buttonClass;
+  if (isActive) { buttonClass = 'active'; }
+  return (
+    <button className={buttonClass} onClick={handleClick}>{label}</button>
+  );
 }
 
 NavItem.propTypes = {
-  target: React.PropTypes.object.isRequired,
-  currentSection: React.PropTypes.object,
-  onClick: React.PropTypes.func,
+  label: React.PropTypes.string.isRequired,
+  handleClick: React.PropTypes.func,
+  isActive: React.PropTypes.bool,
 };
 
-const mapState = createStructuredSelector({
-  currentSection: selectCurrentSection(),
-});
-
-export default connect(mapState)(NavItem);

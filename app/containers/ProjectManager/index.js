@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
@@ -16,13 +17,13 @@ import { fetchProject } from './actions';
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const { dispatch, params } = this.props;
-    dispatch(fetchProject(params.id));
-    dispatch(changeSection(sections.Basics));
+    const { params } = this.props;
+    this.props.fetchProject(params.id);
+    this.props.changeSection(sections.Basics);
   }
 
   render() {
-    const { project, currentSection, dispatch } = this.props;
+    const { project, currentSection } = this.props;
     const sectionProps = {
       project,
     };
@@ -45,7 +46,10 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
     return (
       <div>
         <SubHeader>
-          <Navigation handleClick={(section) => { dispatch(changeSection(section)); }} />
+          <Navigation
+            changeSection={this.props.changeSection}
+            currentSection={currentSection}
+          />
         </SubHeader>
         <div className="p2 bg-white">
           <div className="container">
@@ -67,14 +71,16 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
   currentSection: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
+  changeSection: React.PropTypes.func,
+  fetchProject: React.PropTypes.func,
   params: React.PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
-  return {
-    dispatch,
-  };
+  return bindActionCreators(
+    { changeSection, fetchProject },
+    dispatch
+  );
 }
 
 const mapState = createStructuredSelector({
