@@ -20,7 +20,7 @@
       @extend .flex-none;
       opacity: 0.8;
     }
-    > input {
+    > input, > .rw-dropdownlist {
       @extend .flex-auto;
       text-align: right;
     }

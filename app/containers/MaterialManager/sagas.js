@@ -41,6 +41,14 @@ export function* fetchMaterial(action) {
 
 export function* updateMaterial(action) {
   const material = action.material.toJS();
+  if (material.type) {
+    material.material_type_id = material.type.id;
+    delete (material.type);
+  }
+  if (material.color) {
+    material.color_id = material.color.id;
+    delete (material.color);
+  }
   try {
     yield call(API.patch, `materials/${material.id}`, { material });
     yield put(updateMaterialSuccess());
