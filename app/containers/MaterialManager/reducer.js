@@ -5,6 +5,7 @@ import * as types from './constants';
 const initialState = fromJS({
   material: null,
   materialTypes: null,
+  colors: null,
 });
 
 function materialReducer(state = initialState, action) {
@@ -29,6 +30,12 @@ function materialReducer(state = initialState, action) {
     case types.FETCH_MATERIAL_TYPES_SUCCESS:
       return state
         .set('materialTypes', fromJS(action.materialTypes));
+
+    // Colors
+
+    case types.FETCH_COLORS_SUCCESS:
+      return state
+        .set('colors', fromJS(action.colors));
 
     default:
       return state;  

@@ -22,3 +22,11 @@ export const selectMaterialTypes = () => createSelector(
   }
 );
 
+export const selectColors = () => createSelector(
+  selectDomain(), (substate) => {
+    const colors = substate.get('colors');
+    if (colors) { return colors.toJS(); }
+    return colors;
+  }
+);
+

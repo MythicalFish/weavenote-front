@@ -3,11 +3,12 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import FormField from 'components/FormField';
 
 let Form = (props) => {
-  const { handleSubmit, submitting, materialTypes } = props;
+  const { handleSubmit, submitting, materialTypes, colors } = props;
   return (
     <form className="bg-white itemization" onSubmit={handleSubmit}>
       <Field name="name" type="text" component={FormField} label="Name" />
       <Field name="type" type="select" component={FormField} label="Type" data={materialTypes} />
+      <Field name="color" type="select" component={FormField} label="Color" data={colors} />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
       </footer>

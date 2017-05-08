@@ -23,3 +23,12 @@ export function fetchMaterialTypes() {
 export function fetchMaterialTypesSuccess(materialTypes) {
   return { type: types.FETCH_MATERIAL_TYPES_SUCCESS, materialTypes };
 }
+
+// Colors
+
+export function fetchColors() {
+  return { type: types.FETCH_COLORS };
+}
+export function fetchColorsSuccess(colors) {
+  return { type: types.FETCH_COLORS_SUCCESS, colors };
+}
