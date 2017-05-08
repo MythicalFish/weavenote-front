@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import * as sections from 'containers/App/constants/sections';
+import { selectCurrentSection } from 'containers/App/selectors';
+import { changeSection } from 'containers/App/actions';
 import SubHeader from 'components/SubHeader';
-import Navigation from './sections/Navigation';
-import Basics from './sections/Basics';
-import Components from './sections/Components';
-import Measurements from './sections/Measurements';
+import Navigation from './partials/Navigation';
+import Basics from './partials/Basics';
+import Components from './partials/Components';
+import Measurements from './partials/Measurements';
+import Images from './partials/Images';
 import { selectProject } from './selectors';
-import { selectCurrentSection } from '../App/selectors';
-import { changeSection } from '../App/actions';
-import * as sections from '../App/constants/sections';
 import { fetchProject } from './actions';
-import Images from './sections/Images';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

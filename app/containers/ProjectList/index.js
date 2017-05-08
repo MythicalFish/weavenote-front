@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import * as sections from 'containers/App/constants/sections';
+import { changeSection } from 'containers/App/actions';
 import SubHeader from 'components/SubHeader';
-import Navigation from './sections/Navigation';
-import { selectProjectsList } from './selectors';
+import Navigation from './partials/Navigation';
+import ListItem from './partials/ListItem';
 import { fetchProjects, createProject } from './actions';
-import * as sections from '../App/constants/sections';
-import { changeSection } from '../App/actions';
-import ListItem from './sections/ListItem';
+import { selectProjectsList } from './selectors';
 
 export class ProjectList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
