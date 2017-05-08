@@ -14,3 +14,11 @@ export const selectMaterial = () => createSelector(
   }
 );
 
+export const selectMaterialTypes = () => createSelector(
+  selectDomain(), (substate) => {
+    const types = substate.get('materialTypes');
+    if (types) { return types.toJS(); }
+    return types;
+  }
+);
+

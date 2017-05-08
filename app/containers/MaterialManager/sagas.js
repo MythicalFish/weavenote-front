@@ -4,6 +4,7 @@ import * as API from 'utils/API';
 import * as types from './constants';
 import {
   fetchMaterialSuccess, updateMaterialSuccess,
+  fetchMaterialTypesSuccess,
 } from './actions';
 
 export default [
@@ -14,9 +15,19 @@ export function* materialManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
+    yield takeLatest(types.FETCH_MATERIAL_TYPES, fetchMaterialTypes),
   ];
   yield take(LOCATION_CHANGE);
   yield cancel(...watcher);
+}
+
+export function* fetchMaterialTypes() {
+  try {
+    const data = yield call(API.get, 'material_types');
+    yield put(fetchMaterialTypesSuccess(data));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
 }
 
 export function* fetchMaterial(action) {

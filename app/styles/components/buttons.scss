@@ -55,3 +55,7 @@ button {
     height: 100%;
   }
 }
+.glyph-sm {
+  @extend .glyph;
+  font-size: $h3;
+}
