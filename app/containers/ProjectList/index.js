@@ -1,61 +1,56 @@
-/*
- *
- * Projects
- *
- */
-
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import SubHeader from 'components/SubHeader';
 import Navigation from './sections/Navigation';
-import ProjectList from './sections/List';
 import { selectProjectsList } from './selectors';
-import { selectCurrentSection } from '../App/selectors';
 import { fetchProjects, createProject } from './actions';
 import * as sections from '../App/constants/sections';
 import { changeSection } from '../App/actions';
+import ListItem from './sections/ListItem';
 
-export class Projects extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class ProjectList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.fetchProjects();
+    this.props.fetch();
     this.props.changeSection(sections.Active);
   }
   render() {
-    const p = this.props;
+    const { projects, create, fetch } = this.props;
     return (
       <div>
         <SubHeader>
-          <Navigation createProject={p.createProject} fetchProjects={p.fetchProjects} />
+          <Navigation create={create} fetch={fetch} />
         </SubHeader>
-        <ProjectList projectsList={p.projectsList} />
+        <div className="p2">
+          {projects && projects.map((project, index) => (
+            <ListItem key={`project-${index}`} project={project} />
+          ))}
+        </div>
       </div>
     );
   }
 }
 
-Projects.propTypes = {
-  projectsList: PropTypes.oneOfType([
+ProjectList.propTypes = {
+  projects: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.bool,
   ]),
-  fetchProjects: PropTypes.func,
-  createProject: PropTypes.func,
-  currentSection: PropTypes.object,
+  fetch: PropTypes.func,
+  create: PropTypes.func,
   changeSection: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return {
-    fetchProjects: (params) => dispatch(fetchProjects(params)),
-    createProject: (data) => dispatch(createProject(data)),
+    fetch: (params) => dispatch(fetchProjects(params)),
+    create: (data) => dispatch(createProject(data)),
     changeSection: (section) => dispatch(changeSection(section)),
   };
 }
 
 const mapState = createStructuredSelector({
-  projectsList: selectProjectsList(),
-  currentSection: selectCurrentSection(),
+  projects: selectProjectsList(),
 });
 
-export default connect(mapState, mapDispatch)(Projects);
+export default connect(mapState, mapDispatch)(ProjectList);
