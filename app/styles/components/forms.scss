@@ -3,7 +3,7 @@
 :-ms-input-placeholder { color: $gray-lightest; }
 input:-moz-placeholder { color: $gray-lightest; }
 
-input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],select,textarea {
+input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],select,textarea,.select-input > button {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   line-height: 1;
@@ -26,10 +26,34 @@ textarea {
   width: 100%;
   line-height: 1.4;
 }
-.rw-dropdownlist {
+.select-input {
   position: relative;
-  .rw-popup {
+  display: inline-block;
+  button {
+    &:after {
+      content: "\f078";
+      font-family: FontAwesome;
+      margin-left: $space-1;
+      font-size: .8em;
+      color: $dark5;
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     position: absolute;
     top: 100%;
+    right: 0;
+    background: $white;
+    @extend .b1;
+    li {
+      display: block;
+      padding: $space-1 $space-2;
+      cursor: pointer;
+      &:not(:last-child) {
+        @extend .bb1;
+      }
+    }
   }
 }

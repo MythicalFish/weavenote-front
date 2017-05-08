@@ -10,17 +10,16 @@
   .item {
     @extend .bb1;
     @extend .flex;
-    @extend .smaller2;
     min-width: 300px;
     padding: 0;
-    > label, > input, > div, > button {
+    > label, > input, > div:not(.select-input), > button, .select-input > button {
       @extend .p2;
     }
     > label {
       @extend .flex-none;
       opacity: 0.8;
     }
-    > input, > .rw-dropdownlist {
+    > input, > .select-input, > .select-input button {
       @extend .flex-auto;
       text-align: right;
     }
