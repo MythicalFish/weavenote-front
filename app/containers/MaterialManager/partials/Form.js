@@ -24,7 +24,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 let Form = (props) => {
   const { handleSubmit, submitting, materialTypes } = props;
   return (
-    <form className="itemization" onSubmit={handleSubmit}>
+    <form className="bg-white itemization" onSubmit={handleSubmit}>
       <Field name="name" type="text" component={renderField} label="Name" />
       <Field
         name="type"

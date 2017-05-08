@@ -5,8 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
-import SubHeader from 'components/SubHeader';
-import Navigation from './partials/Navigation';
+import Toolbar from './partials/Toolbar';
 import Basics from './partials/Basics';
 import Components from './partials/Components';
 import Measurements from './partials/Measurements';
@@ -45,12 +44,10 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
     }
     return (
       <div>
-        <SubHeader>
-          <Navigation
-            changeSection={this.props.changeSection}
-            currentSection={currentSection}
-          />
-        </SubHeader>
+        <Toolbar
+          changeSection={this.props.changeSection}
+          currentSection={currentSection}
+        />
         <div className="p2 bg-white">
           <div className="container">
             <div className="row">

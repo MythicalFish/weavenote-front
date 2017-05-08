@@ -3,10 +3,10 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import SubHeader from 'components/SubHeader';
 import { selectMaterial, selectMaterialTypes } from './selectors';
 import { fetchMaterial, updateMaterial, fetchMaterialTypes } from './actions';
 import Form from './partials/Form';
+import Toolbar from './partials/Toolbar';
 
 export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -22,11 +22,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
     const { material, materialTypes, updateMaterial: update } = this.props;
     return (
       <div>
-        <SubHeader>
-          <Link to="/materials" className="glyph-sm gray">
-            <i className="fa fa-arrow-left"></i>
-          </Link>
-        </SubHeader>
+        <Toolbar />
         <div className="p2">
           <div className="container-narrow">
             {material && materialTypes &&

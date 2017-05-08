@@ -39,10 +39,18 @@ button {
   background: none;
   border: none;
   font-size: $h2;
+  padding: $space-2;
   color: $aqua;
   position: relative;
   display: inline-block;
   overflow: hidden;
+  i.fa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+  }
   input {
     opacity: 0;
     position: absolute;
@@ -56,6 +64,5 @@ button {
   }
 }
 .glyph-sm {
-  @extend .glyph;
   font-size: $h3;
 }

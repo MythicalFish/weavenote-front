@@ -5,10 +5,9 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
-import SubHeader from 'components/SubHeader';
 import { selectMaterialsList } from './selectors';
 import { fetchMaterials, createMaterial } from './actions';
-import Navigation from './partials/Navigation';
+import Toolbar from './partials/Toolbar';
 import ListItem from './partials/ListItem';
 
 export class MaterialList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -22,17 +21,17 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
     const { materials } = this.props;
     return (
       <div>
-        <SubHeader>
-          <Navigation
-            changeSection={this.props.changeSection}
-            currentSection={this.props.currentSection}
-            create={this.props.createMaterial}
-            fetch={this.props.fetchMaterials}
-          />
-        </SubHeader>
-        {materials && materials.map((material) => (
-          <ListItem material={material} key={`material-${material.id}`} />
-        ))}
+        <Toolbar
+          changeSection={this.props.changeSection}
+          currentSection={this.props.currentSection}
+          create={this.props.createMaterial}
+          fetch={this.props.fetchMaterials}
+        />
+        <div className="m2 b1">
+          {materials && materials.map((material) => (
+            <ListItem material={material} key={`material-${material.id}`} />
+          ))}
+        </div>
       </div>
     );
   }

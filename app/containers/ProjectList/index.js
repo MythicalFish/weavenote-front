@@ -5,8 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
-import SubHeader from 'components/SubHeader';
-import Navigation from './partials/Navigation';
+import Toolbar from './partials/Toolbar';
 import ListItem from './partials/ListItem';
 import { fetchProjects, createProject, fileProject } from './actions';
 import { selectProjectsList } from './selectors';
@@ -20,14 +19,12 @@ export class ProjectList extends React.PureComponent { // eslint-disable-line re
     const { props } = this;
     return (
       <div>
-        <SubHeader>
-          <Navigation
-            currentSection={props.currentSection}
-            changeSection={props.changeSection}
-            create={props.createProject}
-            fetch={props.fetchProjects}
-          />
-        </SubHeader>
+        <Toolbar
+          currentSection={props.currentSection}
+          changeSection={props.changeSection}
+          create={props.createProject}
+          fetch={props.fetchProjects}
+        />
         <div className="p2">
           {props.projects && props.projects.map((project, index) => (
             <ListItem

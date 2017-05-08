@@ -5,7 +5,7 @@ class Sidebar extends React.PureComponent { // eslint-disable-line react/prefer-
   render() {
     const { props } = this;
     return (
-      <aside id="sidebar" className="vh-ymin100 bg-color1x light9">
+      <aside id="sidebar" className="vh-ymin100 bg-color1x light9 br1">
         <div className="pr4">
           <header className="bigger3 px4 pt3 pb2 bold">
             Seamless

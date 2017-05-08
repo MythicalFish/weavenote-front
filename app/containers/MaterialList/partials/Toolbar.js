@@ -2,16 +2,14 @@ import React from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
 
-export default function Navigation(props) {
+export default function Toolbar(props) {
   const { create, fetch, changeSection, currentSection } = props;
   return (
-    <div className="flex justify-between">
-      <div className="flex items-center px3">
-        <button className="glyph" onClick={() => { create(); }}>
-          <i className="fa fa-plus-circle"></i>
-        </button>
-      </div>
-      <nav className="tabs">
+    <header className="toolbar">
+      <button className="glyph" onClick={() => { create(); }}>
+        <i className="fa fa-plus-circle"></i>
+      </button>
+      <nav>
         <ul>
           <li>
             <NavItem
@@ -37,11 +35,11 @@ export default function Navigation(props) {
       </nav>
       <div>
       </div>
-    </div>
+    </header>
   );
 }
 
-Navigation.propTypes = {
+Toolbar.propTypes = {
   fetch: React.PropTypes.func,
   create: React.PropTypes.func,
   changeSection: React.PropTypes.func,
