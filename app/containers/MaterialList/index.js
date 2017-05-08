@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
+import * as sections from 'containers/App/constants/sections';
 import SubHeader from 'components/SubHeader';
 import { selectMaterialsList } from './selectors';
 import { fetchMaterials, createMaterial } from './actions';
@@ -14,6 +15,7 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
 
   componentDidMount() {
     this.props.fetchMaterials();
+    this.props.changeSection(sections.ActiveMaterials);
   }
 
   render() {

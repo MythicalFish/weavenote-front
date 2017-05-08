@@ -1,13 +1,30 @@
+
 import { fromJS } from 'immutable';
 import * as types from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  currentMaterial: null,
+});
 
-function materialManagerReducer(state = initialState, action) {
+function materialReducer(state = initialState, action) {
+
   switch (action.type) {
-    default:
+
+    case types.FETCH_MATERIAL:
+      return state
+        .set('material', null);
+
+    case types.FETCH_MATERIAL_SUCCESS:
+      return state
+        .set('material', fromJS(action.material));
+
+    case types.UPDATE_MATERIAL_SUCCESS:
       return state;
+
+    default:
+      return state;  
+
   }
 }
 
-export default materialManagerReducer;
+export default materialReducer;

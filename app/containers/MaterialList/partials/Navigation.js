@@ -15,21 +15,21 @@ export default function Navigation(props) {
         <ul>
           <li>
             <NavItem
-              label={sections.Active.label}
-              isActive={currentSection.id === sections.Active.id}
+              label={sections.ActiveMaterials.label}
+              isActive={currentSection.id === sections.ActiveMaterials.id}
               handleClick={() => {
                 fetch();
-                changeSection(sections.Active);
+                changeSection(sections.ActiveMaterials);
               }}
             />
           </li>
           <li>
             <NavItem
-              label={sections.Archived.label}
-              isActive={currentSection.id === sections.Archived.id}
+              label={sections.ArchivedMaterials.label}
+              isActive={currentSection.id === sections.ArchivedMaterials.id}
               handleClick={() => {
                 fetch({ archived: true });
-                changeSection(sections.Archived);
+                changeSection(sections.ArchivedMaterials);
               }}
             />
           </li>

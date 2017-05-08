@@ -1,38 +1,46 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import makeSelectMaterials from './selectors';
+import { selectMaterial } from './selectors';
 import { fetchMaterial } from './actions';
+import Form from './partials/Form';
 
 export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const { params, fetch } = this.props;
+    const { params, fetchMaterial: fetch } = this.props;
     fetch(params.id);
   }
 
   render() {
+    const { material } = this.props;
     return (
       <div>
-        {}
+        <Form
+          onSubmit={(data) => { console.log(data); }}
+          initialValues={material}
+        />
       </div>
     );
   }
 }
 
 MaterialManager.propTypes = {
-  fetch: PropTypes.func.isRequired,
-  params: PropTypes.object,
+  fetchMaterial: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired,
+  material: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
-  Materials: makeSelectMaterials(),
+  material: selectMaterial(),
 });
 
 function mapDispatch(dispatch) {
-  return {
-    fetch: (id) => { dispatch(fetchMaterial(id)); },
-  };
+  return bindActionCreators(
+    { fetchMaterial },
+    dispatch
+  );
 }
 
 export default connect(mapState, mapDispatch)(MaterialManager);

@@ -14,7 +14,7 @@ import { selectProjectsList } from './selectors';
 export class ProjectList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchProjects();
-    this.props.changeSection(sections.Active);
+    this.props.changeSection(sections.ActiveProjects);
   }
   render() {
     const { props } = this;

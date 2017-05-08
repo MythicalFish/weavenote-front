@@ -1,17 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router';
+import ListItemWrapper from 'components/ListItemWrapper';
 
 export default function ListItem(props) {
   const { material } = props;
   const url = `/materials/${material.id}`;
   return (
-    <div className="b1 mb2 bg-white dark7 flex justify-between x-fill">
-      <Link to={url} className="flex items-center b0 bg-white">
-        <div className="p1 pr2">
-          {material.name}
-        </div>
-      </Link>
-    </div>
+    <ListItemWrapper url={url}>
+      <div className="p1 pr2">
+        {material.type.name}
+      </div>
+      <div className="p1 pr2">
+        {material.identifier}
+      </div>
+      <div className="p1 pr2">
+        {material.name}
+      </div>
+      <div className="p1 pr2">
+        <div className="dot mr1" style={{ backgroundColor: material.color.hex_code }}></div>
+        {material.color.name}
+      </div>
+      <div className="p1 pr2">
+        {material.price}
+      </div>
+    </ListItemWrapper>
   );
 }
 
