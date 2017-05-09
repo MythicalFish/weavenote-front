@@ -2,26 +2,19 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
+import DataRow from 'components/DataRow';
 import { updateProject } from '../../actions';
 import { selectBasicsForm } from '../../selectors';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div className="item">
-    <label>{label}</label>
-    <input {...input} type={type} />
-    <div>
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-);
-
 let Basics = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, pristine, reset, submitting, project } = props;
   return (
-    <form className="itemization" onSubmit={handleSubmit}>
-      <Field name="name" type="text" component={renderField} label="Name" />
-      <Field name="category" type="text" component={renderField} label="Category" />
-      <Field name="identifier" type="text" component={renderField} label="Identifier" />
+    <form className="data-rows" onSubmit={handleSubmit}>
+      <Field name="name" type="text" component={DataRow} label="Name" />
+      <Field name="category" type="text" component={DataRow} label="Category" />
+      <Field name="identifier" type="text" component={DataRow} label="Identifier" />
+      <DataRow type="display" label="Created on" value={project.created_at} />
+      <Field name="description" type="textarea" component={DataRow} label="Description" />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
       </footer>

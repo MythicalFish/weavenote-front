@@ -5,19 +5,18 @@
 @import "base/typography";
 @import "base/brand-colors";
 @import "base/basscss";
+@import "base/flexboxgrid";
 @import "base/general";
 
+@import "components/animations";
 @import "components/buttons";
-@import "components/layout";
-@import "components/flexboxgrid";
-@import "components/forms";
+@import "components/container";
+@import "components/data-rows";
+@import "components/input";
 @import "components/modal";
-@import "components/sections";
 @import "components/dropdown";
-@import "components/itemization";
 @import "components/thumbnails";
 @import "components/dot";
-@import "components/toolbar";
 
 @import "utilities/borders";
 @import "utilities/colors";
@@ -26,5 +25,6 @@
 @import "utilities/widths";
 @import "utilities/misc";
 
-@import "modules/appear";
+@import "modules/toolbar";
 @import "modules/sidebar";
+@import "modules/appear";

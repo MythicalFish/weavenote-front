@@ -1,0 +1,38 @@
+.data-rows {
+  @extend .b1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  line-height: 1;
+  header {
+    @extend .bb1;
+    @extend .p2;
+  }
+  .data-row {
+    @extend .bb1;
+    @extend .flex;
+    min-width: 300px;
+    padding: 0;
+    > *:not(.select-input) {
+      @extend .p2;
+    }
+    > label {
+      @extend .flex-none;
+      text-align: left;
+      color: $dark6;
+    }
+    > *:not(label) {
+      @extend .flex-auto;
+      text-align: right;
+    }
+    .select-input {
+      button {
+        text-align: right;
+      }
+    }
+    textarea {
+      width: 100%;
+      text-align: left;
+      padding-top: 0!important;
+    }
+  }
+}

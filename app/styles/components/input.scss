@@ -34,8 +34,8 @@ textarea {
       content: "\f078";
       font-family: FontAwesome;
       margin-left: $space-1;
-      font-size: .8em;
-      color: $dark5;
+      font-size: .7em;
+      color: $dark3;
     }
   }
   ul {
@@ -47,6 +47,8 @@ textarea {
     right: 0;
     background: $white;
     @extend .b1;
+    z-index: 2;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     li {
       display: block;
       padding: $space-1 $space-2;

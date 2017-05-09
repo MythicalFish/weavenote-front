@@ -53,6 +53,7 @@ export const selectBasicsForm = () => createSelector(
         category: project.category,
         identifier: project.identifier,
         development_stage_id: project.stage.id,
+        description: project.description,
       });
     }
   }

@@ -38,7 +38,7 @@ class Components extends React.PureComponent { // eslint-disable-line react/pref
       });
     }
     return (
-      <div className="itemization">
+      <div className="data-rows">
         {items}
       </div>
     );

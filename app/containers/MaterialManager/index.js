@@ -27,7 +27,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
       <div>
         <Toolbar />
         <div className="p2">
-          <div className="container-narrow">
+          <div className="container-narrower">
             {material && materialTypes &&
               <Form
                 initialValues={material}

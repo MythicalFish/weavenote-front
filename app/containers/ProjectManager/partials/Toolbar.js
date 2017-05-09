@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
+import { Link } from 'react-router';
 
 export default function Toolbar(props) {
   const { changeSection, currentSection } = props;
   return (
     <header className="toolbar">
-      <div></div>
+      <Link to="/projects" className="glyph glyph-sm gray">
+        <i className="fa fa-arrow-left"></i>
+      </Link>
       <nav>
         <ul>
           <li>

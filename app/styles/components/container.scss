@@ -8,6 +8,10 @@
   @extend .container;
   max-width: 600px;
 }
+.container-narrower {
+  @extend .container;
+  max-width: 400px;
+}
 .items-middle {
   @extend .items-center;
   @extend .justify-center;

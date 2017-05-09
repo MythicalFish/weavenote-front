@@ -1,24 +1,45 @@
-import React from 'react';
-import { TextInput } from '../Input';
+import React, { PropTypes } from 'react';
+import SelectInput from 'components/SelectInput';
 
-function DataRow(p) {
-  let { label, type } = p;
-  if (!label) { label = p.name; }
-  if (!type) { type = 'text'; }
+export default function DataRow(props) {
+
+  const { label, type } = props;
+  let field;
+  let touched;
+  let rowClass = 'data-row';
+
+  if (type === 'display') {
+    const { value } = props;
+    field = <div>{value}</div>;
+  } else {
+    const { input, meta: { touched, error } } = props;
+    switch (type) {
+      case 'select':
+        field = <SelectInput {...props} />;
+        break;
+      case 'textarea':
+        field = <textarea {...input} />;
+        rowClass += ' flex-wrap';
+        break;
+      default:
+        field = <input {...input} type={type} />;
+        break;
+    }
+  }
+
   return (
-    <div>
-      <label htmlFor={p.name}>{label}</label>
-      {type === 'text' &&
-        <TextInput name={p.name} val={p.val} />
-      }
+    <div className={rowClass}>
+      <label>{label}</label>
+      {field}
+      {touched && error && <span className="error">{error}</span>}
     </div>
   );
 }
 
 DataRow.propTypes = {
-  name: React.PropTypes.string,
-  val: React.PropTypes.string,
-  type: React.PropTypes.string,
+  value: PropTypes.string,
+  label: PropTypes.string,
+  type: PropTypes.string,
+  input: PropTypes.object,
+  meta: PropTypes.object,
 };
-
-export default DataRow;
