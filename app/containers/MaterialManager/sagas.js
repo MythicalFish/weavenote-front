@@ -3,7 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
 import * as types from './constants';
 import {
-  fetchMaterialSuccess, updateMaterialSuccess,
+  fetchMaterialSuccess, updateMaterialSuccess, createMaterialSuccess,
   fetchMaterialTypesSuccess, fetchColorsSuccess,
 } from './actions';
 
@@ -15,6 +15,7 @@ export function* materialManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
+    yield takeLatest(types.CREATE_MATERIAL, createMaterial),
     yield takeLatest(types.FETCH_MATERIAL_TYPES, fetchMaterialTypes),
     yield takeLatest(types.FETCH_COLORS, fetchColors),
   ];
@@ -50,19 +51,34 @@ export function* fetchMaterial(action) {
 }
 
 export function* updateMaterial(action) {
-  const material = action.material.toJS();
-  if (material.type) {
-    material.material_type_id = material.type.id;
-    delete (material.type);
-  }
-  if (material.color) {
-    material.color_id = material.color.id;
-    delete (material.color);
-  }
+  const material = sanitize(action.material.toJS());  
   try {
     yield call(API.patch, `materials/${material.id}`, { material });
     yield put(updateMaterialSuccess());
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
+}
+
+export function* createMaterial(action) {
+  const material = sanitize(action.material.toJS());  
+  try {
+    const response = yield call(API.post, 'materials', { material });
+    yield put(createMaterialSuccess(response));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+}
+
+function sanitize(material) {
+  const attributes = material;
+  if (attributes.type) {
+    attributes.material_type_id = attributes.type.id;
+    delete (attributes.type);
+  }
+  if (attributes.color) {
+    attributes.color_id = attributes.color.id;
+    delete (attributes.color);
+  }
+  return attributes;
 }

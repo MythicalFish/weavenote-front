@@ -7,6 +7,7 @@ let Form = (props) => {
   return (
     <form className="bg-white data-rows" onSubmit={handleSubmit}>
       <Field name="name" type="text" component={DataRow} label="Name" />
+      <Field name="identifier" type="text" component={DataRow} label="Identifier" />
       <Field name="type" type="select" component={DataRow} label="Type" data={materialTypes} />
       <Field name="color" type="select" component={DataRow} label="Color" data={colors} />
       <footer className="p2 center">

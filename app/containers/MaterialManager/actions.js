@@ -14,6 +14,12 @@ export function updateMaterial(material) {
 export function updateMaterialSuccess() {
   return { type: types.UPDATE_MATERIAL_SUCCESS };
 }
+export function createMaterial(material) {
+  return { type: types.CREATE_MATERIAL, material };
+}
+export function createMaterialSuccess(material) {
+  return { type: types.CREATE_MATERIAL_SUCCESS, material };
+}
 
 // Material types
 

@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
 
 export default function Toolbar(props) {
-  const { create, fetch, changeSection, currentSection } = props;
+  const { fetch, changeSection, currentSection } = props;
   return (
     <header className="toolbar">
-      <button className="glyph" onClick={() => { create(); }}>
+      <Link to="/materials/new" className="glyph">
         <i className="fa fa-plus-circle"></i>
-      </button>
+      </Link>
       <nav>
         <ul>
           <li>
@@ -41,7 +42,6 @@ export default function Toolbar(props) {
 
 Toolbar.propTypes = {
   fetch: React.PropTypes.func,
-  create: React.PropTypes.func,
   changeSection: React.PropTypes.func,
   currentSection: React.PropTypes.object,
 };

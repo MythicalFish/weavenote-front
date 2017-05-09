@@ -25,6 +25,10 @@ function materialReducer(state = initialState, action) {
     case types.UPDATE_MATERIAL_SUCCESS:
       return state;
 
+    case types.CREATE_MATERIAL_SUCCESS:
+      return state
+        .set('material', fromJS(action.material));
+
     // Material types
 
     case types.FETCH_MATERIAL_TYPES_SUCCESS:

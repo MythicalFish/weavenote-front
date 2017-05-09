@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectMaterial, selectMaterialTypes, selectColors } from './selectors';
-import { fetchMaterial, updateMaterial, fetchMaterialTypes, fetchColors } from './actions';
+import { fetchMaterial, updateMaterial, createMaterial, fetchMaterialTypes, fetchColors } from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
 
@@ -12,28 +11,33 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
 
   componentDidMount() {
     const { params, materialTypes, colors } = this.props;
+    if (!materialTypes) { this.props.fetchMaterialTypes(); }
+    if (!colors) { this.props.fetchColors(); }
     this.props.fetchMaterial(params.id);
-    if (!materialTypes) {
-      this.props.fetchMaterialTypes();
-    }
-    if (!colors) {
-      this.props.fetchColors();
+  }
+
+  onSubmit = (values) => {
+    const { params, updateMaterial: update, createMaterial: create } = this.props;
+    if (params.id === 'new') {
+      create(values);
+    } else {
+      update(values);
     }
   }
 
   render() {
-    const { material, materialTypes, colors, updateMaterial: update } = this.props;
+    const { material, materialTypes, colors } = this.props;
     return (
       <div>
         <Toolbar />
         <div className="p2">
           <div className="container-narrower">
-            {material && materialTypes &&
+            {material && materialTypes && colors &&
               <Form
                 initialValues={material}
                 materialTypes={materialTypes}
                 colors={colors}
-                onSubmit={(values) => { update(values); }}
+                onSubmit={(values) => { this.onSubmit(values); }}
               />
             }
           </div>
@@ -46,6 +50,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
 MaterialManager.propTypes = {
   fetchMaterial: PropTypes.func.isRequired,
   updateMaterial: PropTypes.func.isRequired,
+  createMaterial: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   material: PropTypes.object,
   fetchMaterialTypes: PropTypes.func.isRequired,
@@ -62,7 +67,7 @@ const mapState = createStructuredSelector({
 
 function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchMaterial, fetchMaterialTypes, updateMaterial, fetchColors },
+    { fetchMaterial, fetchMaterialTypes, updateMaterial, createMaterial, fetchColors },
     dispatch
   );
 }
