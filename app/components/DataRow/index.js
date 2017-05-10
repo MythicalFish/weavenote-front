@@ -6,6 +6,7 @@ export default function DataRow(props) {
   const { label, type } = props;
   let field;
   let touched;
+  let error;
   let rowClass = 'data-row';
 
   if (type === 'display') {

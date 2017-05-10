@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form/immutable';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
-    <div className="item">  
+    <div className="data-row">  
       <label>{label}</label>
       <input {...input} type={type} />
     </div>
@@ -13,8 +13,8 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 const Item = (props) => {
   return (
-    <div className="item">
-      <div>{props.label}</div>
+    <div className="data-row">
+      <label>{props.label}</label>
       <div className="right-align">{props.value}</div>
     </div>
   );
