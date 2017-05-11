@@ -9,7 +9,10 @@ export default function SelectMaterial(props) {
         {materials && materials.toArray().map((material) => (
           <button
             type="button"
-            onClick={() => { create(material.get('id')); }}
+            onClick={() => {
+              create(material.get('id'));
+              toggleCreate();
+            }}
             key={material}
           >
             {material.get('name')}

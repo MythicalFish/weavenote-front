@@ -13,6 +13,7 @@ const initialState = fromJS({
 function projectReducer(state = initialState, action) {
 
   const imageCount = state.get('images').size;
+  const componentCount = state.get('components').size;
 
   switch (action.type) {
 
@@ -44,7 +45,7 @@ function projectReducer(state = initialState, action) {
 
     case types.CREATE_COMPONENT_SUCCESS:
       return state
-        .setIn(['components', -1], fromJS(action.component))
+        .setIn(['components', componentCount], fromJS(action.component))
         .set('currentComponent', action.component);
 
     case types.DELETE_COMPONENT_SUCCESS:
