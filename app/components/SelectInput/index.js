@@ -1,8 +1,11 @@
 import React from 'react';
 
 export default class SelectInput extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentWillMount() {
-    this.setState({ active: false });
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: false,
+    };
   }
   toggleMenu = () => {
     this.state.active

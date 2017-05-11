@@ -35,6 +35,11 @@ button {
   @include transform(translate(-2%,-2%));
   @include transform(scale(1.04));
 }
+.btn-shy {
+  @extend button;
+  opacity: .7;
+  font-size: .9em;
+}
 .glyph {
   background: none;
   border: none;

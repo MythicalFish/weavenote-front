@@ -1,45 +1,38 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Form from './Form';
-import ListItem from './ListItem';
+
+import CreateComponent from './CreateComponent';
+import ListComponents from './ListComponents';
 import { fetchComponents, switchComponent, updateComponent } from '../../actions';
 import { selectComponents, selectCurrentComponent, selectComponentForm } from '../../selectors';
 
-class Components extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class Components extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      creating: false,
+    };
+  }
 
   componentDidMount() {
     const { fetch, project } = this.props;
     fetch(project.id);
   }
 
+  toggleCreate = () => {
+    this.setState({ creating: !this.state.creating });
+  }
+
   render() {
-    const { components, current, switchTo, handleSubmit, initialValues } = this.props;
-    let items = [];
-    if (components) {
-      items = components.toJS().map((component) => {
-        const isCurrent = current && current.id === component.id;
-        return (
-          <div key={`component-${component.id}`}>
-            <ListItem
-              component={component}  
-              isCurrent={isCurrent}
-              switchTo={switchTo}
-            />
-            {isCurrent &&
-              <Form
-                onSubmit={handleSubmit}
-                initialValues={initialValues}
-                material={current.material}
-              />
-            }
-          </div>
-        );
-      });
-    }
     return (
-      <div className="data-rows">
-        {items}
+      <div>
+        {
+          this.state.creating
+            ? <CreateComponent {...this.props} toggleCreate={this.toggleCreate} />
+            : <ListComponents {...this.props} toggleCreate={this.toggleCreate} />
+        }
       </div>
     );
   }
@@ -47,12 +40,7 @@ class Components extends React.PureComponent { // eslint-disable-line react/pref
 
 Components.propTypes = {
   project: PropTypes.object,
-  components: PropTypes.object,
-  current: PropTypes.object,
   fetch: PropTypes.func,
-  switchTo: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  initialValues: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
