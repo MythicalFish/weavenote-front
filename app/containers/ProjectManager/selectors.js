@@ -22,7 +22,10 @@ export const selectComponents = () => createSelector(
 export const selectCurrentComponent = () => createSelector(
   selectDomain(),
   (substate) => {
-    return substate.get('currentComponent');
+    const index = substate.get('currentComponent');
+    const component = substate.getIn(['components', index]);
+    if (component) { return component; }
+    return null;
   }
 );
 

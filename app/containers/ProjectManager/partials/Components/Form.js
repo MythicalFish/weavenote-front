@@ -21,7 +21,8 @@ const Item = (props) => {
 };
 
 let Form = (props) => {
-  const { handleSubmit, submitting, material } = props;
+  const { handleSubmit, submitting } = props;
+  const material = props.material.toJS();
   return (
     <form onSubmit={handleSubmit}>
       <Item label="Type" value={material.type.name} />

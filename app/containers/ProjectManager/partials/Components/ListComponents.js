@@ -6,12 +6,13 @@ export default function ListComponents(props) {
   const { components, current, switchComponent, handleSubmit, initialValues, toggleCreate } = props;
   let items = [];
   if (components) {
-    items = components.toJS().map((component) => {
-      const isCurrent = current && current.id === component.id;
+    items = components.toArray().map((component, index) => {
+      const isCurrent = current && current.get('id') === component.get('id');
       return (
-        <div key={`component-${component.id}`}>
+        <div key={component}>
           <ListItem
-            component={component}  
+            component={component}
+            index={index}
             isCurrent={isCurrent}
             switchComponent={switchComponent}
           />
@@ -19,7 +20,7 @@ export default function ListComponents(props) {
             <Form
               onSubmit={handleSubmit}
               initialValues={initialValues}
-              material={current.material}
+              material={current.get('material')}
             />
           }
         </div>

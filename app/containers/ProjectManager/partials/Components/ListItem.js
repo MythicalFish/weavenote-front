@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 
 const ListItem = (props) => {
-  const { component, switchComponent, isCurrent } = props;
+  const { component, switchComponent, isCurrent, index } = props;
+  const material = component.get('material').toJS();
   let chevronClass = 'fa-chevron-down';
-  let switchTarget = component;
+  let switchTarget = index;
   if (isCurrent) {
     chevronClass = 'fa-chevron-up';
     switchTarget = null;
@@ -11,13 +12,13 @@ const ListItem = (props) => {
   return (
     <button className="data-row left-align" onClick={() => { switchComponent(switchTarget); }}>
       <div className="x8">
-        {component.material.name}
+        {material.name}
       </div>
       <div className="x7">
-        {component.material.type.name}
+        {material.type.name}
       </div>
       <div className="x7">
-        {component.material.color.name}
+        {material.color.name}
       </div>
       <div className="right-align">
         <i className={`fa ${chevronClass} gray`}></i>
@@ -27,6 +28,7 @@ const ListItem = (props) => {
 };
 
 ListItem.propTypes = {
+  index: PropTypes.number,
   component: PropTypes.object,
   switchComponent: PropTypes.func,
   isCurrent: PropTypes.bool,

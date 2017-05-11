@@ -38,6 +38,10 @@ function projectReducer(state = initialState, action) {
     case types.UPDATE_COMPONENT_SUCCESS:
       return state;
 
+    case types.CREATE_COMPONENT:
+      return state
+        .set('currentComponent', null);
+
     case types.CREATE_COMPONENT_SUCCESS:
       return state
         .setIn(['components', -1], fromJS(action.component))
@@ -50,7 +54,7 @@ function projectReducer(state = initialState, action) {
 
     case types.SWITCH_COMPONENT:
       return state
-        .set('currentComponent', action.component);
+        .set('currentComponent', action.index);
 
     // Images
 

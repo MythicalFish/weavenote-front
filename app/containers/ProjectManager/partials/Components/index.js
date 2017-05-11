@@ -30,7 +30,6 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
   }
 
   create = (materialID) => {
-    console.log('createComponent');
     this.props.createComponent({
       materialID,
       projectID: this.props.project.id,
@@ -38,7 +37,7 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
   }
 
   render() {
-    const { toggleCreate, create } = this;
+    const { toggleCreate, create, state } = this;
     const props = {
       ...this.props,
       toggleCreate,
@@ -47,7 +46,7 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
     return (
       <div>
         {
-          this.state.creating
+          state.creating
             ? <SelectMaterial {...props} />
             : <ListComponents {...props} />
         }

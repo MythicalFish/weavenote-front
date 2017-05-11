@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 
 export default function SelectMaterial(props) {
   const { toggleCreate, materials, create } = props;
-  console.log(props);
   return (
     <div>
       Select a material
