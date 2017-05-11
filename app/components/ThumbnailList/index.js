@@ -7,7 +7,7 @@ function ThumbnailList(props) {
     <ul className="thumbnails">
       {images && images.toJS().map((image, index) => (
         <li key={`thumbnail-${index}`}>
-          <button onClick={() => { handleClick(image); }}>
+          <button onClick={() => { handleClick(index); }}>
             <Thumbnail url={image.url} />
           </button>
         </li>

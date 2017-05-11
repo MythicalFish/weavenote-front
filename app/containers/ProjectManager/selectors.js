@@ -34,7 +34,10 @@ export const selectImages = () => createSelector(
 export const selectCurrentImage = () => createSelector(
   selectDomain(),
   (substate) => {
-    return substate.get('currentImage');
+    const index = substate.get('currentImage');
+    const image = substate.getIn(['images', index]);
+    if (image) { return image.toJS(); }
+    return null;
   }
 );
 /*

@@ -5,12 +5,14 @@ import * as types from './constants';
 const initialState = fromJS({
   project: null,
   images: [],
-  currentImage: null,
+  currentImage: 0,
   components: [],
   currentComponent: null,
 });
 
 function projectReducer(state = initialState, action) {
+
+  const imageCount = state.get('images').size;
 
   switch (action.type) {
 
@@ -54,25 +56,24 @@ function projectReducer(state = initialState, action) {
 
     case types.FETCH_IMAGES_SUCCESS:
       return state
-        .set('images', fromJS(action.images))
-        .set('currentImage', action.images[0]);
+        .set('images', fromJS(action.images));
     
     case types.UPDATE_IMAGE_SUCCESS:
       return state;
 
     case types.CREATE_IMAGE_SUCCESS:
       return state
-        .setIn(['images', -1], fromJS(action.image))
-        .set('currentImage', action.image);
+        .setIn(['images', imageCount], fromJS(action.image))
+        .set('currentImage', imageCount);
 
     case types.DELETE_IMAGE_SUCCESS:
       return state
         .set('images', fromJS(action.images))
-        .set('currentImage', action.images[0]);
+        .set('currentImage', 0);
       
     case types.SWITCH_IMAGE:
       return state
-        .set('currentImage', action.image);
+        .set('currentImage', action.index);
       
     default:
       return state;

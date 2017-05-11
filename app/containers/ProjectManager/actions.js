@@ -100,6 +100,6 @@ export function deleteImageSuccess(images) {
   return { type: types.DELETE_IMAGE_SUCCESS, images };
 }
 
-export function switchImage(image) {
-  return { type: types.SWITCH_IMAGE, image };
+export function switchImage(index) {
+  return { type: types.SWITCH_IMAGE, index };
 }

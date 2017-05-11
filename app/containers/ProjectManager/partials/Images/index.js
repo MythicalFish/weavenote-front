@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { IMAGE_PLACEHOLDER } from 'containers/App/constants/misc';
 import ThumbnailList from 'components/ThumbnailList';
 import { selectImages, selectCurrentImage } from '../../selectors';
 import { fetchImages, switchImage, deleteImage } from '../../actions';
 import Uploader from './Uploader';
-import { IMAGE_PLACEHOLDER } from 'containers/App/constants/misc';
 
 class Images extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -35,7 +35,7 @@ class Images extends React.PureComponent { // eslint-disable-line react/prefer-s
         <div>
           <ThumbnailList
             images={images}
-            handleClick={(data) => { dispatch(switchImage(data)); }}
+            handleClick={(index) => { dispatch(switchImage(index)); }}
           />
         </div>
         <Uploader project={project} />
