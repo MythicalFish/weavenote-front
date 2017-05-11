@@ -12,7 +12,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectGlobal } from 'containers/App/selectors';
+import { selectStats } from 'containers/App/selectors';
 import { getStats } from 'containers/App/actions';
 
 class Dashboard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -20,18 +20,21 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
     this.props.getStats();
   }
   render() {
-    const stats = this.props.globalState.stats;
-    const counts = stats.projects.counts;
+
+    const { stats } = this.props;
+    if (!stats) { return null; }
+
+    const { projects: { counts } } = stats;
 
     let countsByStage = (<li></li>);
 
-    if (counts.by_stage) {
+    if (counts && counts.by_stage) {
       countsByStage = counts.by_stage.map((item, index) => (
         <li key={`item-${index}`}>
           {`${item.label}: ${item.count}`}
         </li>
       ));
-    }    
+    }
 
     return (
       <div className="p4">
@@ -71,7 +74,7 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
 }
 
 Dashboard.propTypes = {
-  globalState: PropTypes.object,
+  stats: PropTypes.object,
   getStats: PropTypes.func,
 };
 
@@ -82,7 +85,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  globalState: selectGlobal(),
+  stats: selectStats(),
 });
 
 export default connect(mapState, mapDispatch)(Dashboard);

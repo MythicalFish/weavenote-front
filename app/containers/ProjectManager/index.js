@@ -12,6 +12,7 @@ import Measurements from './partials/Measurements';
 import Images from './partials/Images';
 import { selectProject } from './selectors';
 import { fetchProject } from './actions';
+import { fetchMaterials } from '../MaterialList/actions';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -19,6 +20,7 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
     const { params } = this.props;
     this.props.fetchProject(params.id);
     this.props.changeSection(sections.Basics);
+    this.props.fetchMaterials();
   }
 
   render() {
@@ -75,7 +77,7 @@ ProjectManager.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { changeSection, fetchProject },
+    { changeSection, fetchProject, fetchMaterials },
     dispatch
   );
 }

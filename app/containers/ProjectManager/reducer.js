@@ -34,7 +34,7 @@ function projectReducer(state = initialState, action) {
     case types.FETCH_COMPONENTS_SUCCESS:
       return state
         .set('components', fromJS(action.components));
-    
+
     case types.UPDATE_COMPONENT_SUCCESS:
       return state;
 
@@ -47,17 +47,17 @@ function projectReducer(state = initialState, action) {
       return state
         .set('components', fromJS(action.components))
         .set('currentComponent', action.components[0]);
-      
+
     case types.SWITCH_COMPONENT:
       return state
         .set('currentComponent', action.component);
-      
+
     // Images
 
     case types.FETCH_IMAGES_SUCCESS:
       return state
         .set('images', fromJS(action.images));
-    
+
     case types.UPDATE_IMAGE_SUCCESS:
       return state;
 
@@ -70,11 +70,11 @@ function projectReducer(state = initialState, action) {
       return state
         .set('images', fromJS(action.images))
         .set('currentImage', 0);
-      
+
     case types.SWITCH_IMAGE:
       return state
         .set('currentImage', action.index);
-      
+
     default:
       return state;
   }

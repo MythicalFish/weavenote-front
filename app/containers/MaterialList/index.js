@@ -2,10 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentSection } from 'containers/App/selectors';
+import { selectCurrentSection, selectMaterials } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
-import { selectMaterialsList } from './selectors';
 import { fetchMaterials, createMaterial } from './actions';
 import Toolbar from './partials/Toolbar';
 import ListItem from './partials/ListItem';
@@ -28,8 +27,8 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
           fetch={this.props.fetchMaterials}
         />
         <div className="m2 b1">
-          {materials && materials.map((material) => (
-            <ListItem material={material} key={`material-${material.id}`} />
+          {materials && materials.toArray().map((material) => (
+            <ListItem material={material} key={`material-${material.get('id')}`} />
           ))}
         </div>
       </div>
@@ -42,14 +41,11 @@ MaterialList.propTypes = {
   currentSection: PropTypes.object,
   changeSection: PropTypes.func,
   createMaterial: PropTypes.func,
-  materials: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.bool,
-  ]),
+  materials: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
-  materials: selectMaterialsList(),
+  materials: selectMaterials(),
   currentSection: selectCurrentSection(),
 });
 

@@ -1,6 +1,7 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
+import { materialListWatcher } from 'containers/MaterialList/sagas';
 import * as types from './constants';
 import {
   fetchProjectSuccess, updateProjectSuccess,
@@ -8,8 +9,10 @@ import {
   fetchComponentsSuccess, updateComponentSuccess, createComponentSuccess, deleteComponentSuccess,
 } from './actions';
 
+
 export default [
   projectManagerWatcher,
+  materialListWatcher,
 ];
 
 export function* projectManagerWatcher() {

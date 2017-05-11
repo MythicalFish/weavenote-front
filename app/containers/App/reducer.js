@@ -11,10 +11,14 @@ import * as sections from './constants/sections';
 const initialState = fromJS({
   stats: {
     projects: {
-      counts: [],
+      counts: {
+        by_stage: [],
+        active: [],
+      },
     },
   },
   currentSection: sections.Default,
+  materials: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -27,7 +31,14 @@ function appReducer(state = initialState, action) {
 
     case types.GET_STATS_SUCCESS:
       return state
-        .set('stats', action.stats);
+        .set('stats', fromJS(action.stats));
+
+    // Materials
+
+    case 'FETCH_MATERIALS_SUCCESS':
+      return state
+        .set('materials', fromJS(action.list));
+
     default:
       return state;
   }

@@ -12,15 +12,12 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import Auth, { Auth0 } from 'containers/Auth';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
-import { selectGlobal } from './selectors';
-import { getStats } from './actions';
 
-class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -48,15 +45,3 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     );
   }
 }
-
-export function mapDispatch(dispatch) {
-  return {
-    getStats: () => { dispatch(getStats()); },
-  };
-}
-
-const mapState = createStructuredSelector({
-  globalState: selectGlobal(),
-});
-
-export default connect(mapState, mapDispatch)(App);

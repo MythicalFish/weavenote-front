@@ -14,7 +14,6 @@ class Sidebar extends React.PureComponent { // eslint-disable-line react/prefer-
         <ul className="m0 p0">
           <Button {...props} path="/" label="Dashboard" />
           <Button {...props} path="/projects" label="Projects" />
-          <Button {...props} path="/conversations" label="Conversations" />
           <Button {...props} path="/materials" label="Materials" />
           <Button {...props} path="/contacts" label="Contacts" />
         </ul>

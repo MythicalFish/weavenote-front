@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import * as types from './constants';
 
 const initialState = fromJS({
-  list: false,
+
 });
 
 function materialsReducer(state = initialState, action) {
@@ -13,8 +13,7 @@ function materialsReducer(state = initialState, action) {
   switch (type) {
 
     case types.FETCH_MATERIALS_SUCCESS:
-      return state
-        .set('list', action.list);
+      return state; // Set in the App reducer (need to access materials from another container)
 
     default:
       return state;

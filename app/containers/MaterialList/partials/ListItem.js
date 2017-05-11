@@ -2,7 +2,7 @@ import React from 'react';
 import ListItemWrapper from 'components/ListItemWrapper';
 
 export default function ListItem(props) {
-  const { material } = props;
+  const material = props.material.toJS();
   const url = `/materials/${material.id}`;
   return (
     <ListItemWrapper url={url}>
