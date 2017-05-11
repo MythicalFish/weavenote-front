@@ -130,9 +130,10 @@ export function* updateComponent(action) {
   }
 }
 
-export function* createComponent(action) {
+export function* createComponent({ payload }) {
+  let component = { material_id: payload.materialID };
   try {
-    const component = yield call(API.post, `projects/${action.projectID}/component`, { component });
+    component = yield call(API.post, `projects/${payload.projectID}/components`, { component });
     yield put(createComponentSuccess(component));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

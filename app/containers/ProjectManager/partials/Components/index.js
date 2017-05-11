@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import CreateComponent from './CreateComponent';
+import { selectMaterials } from 'containers/App/selectors';
+import { fetchMaterials } from 'containers/MaterialList/actions';
+import SelectMaterial from './SelectMaterial';
 import ListComponents from './ListComponents';
-import { fetchComponents, switchComponent, updateComponent } from '../../actions';
+import { fetchComponents, switchComponent, createComponent } from '../../actions';
 import { selectComponents, selectCurrentComponent, selectComponentForm } from '../../selectors';
 
 class Components extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -17,21 +20,36 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
   }
 
   componentDidMount() {
-    const { fetch, project } = this.props;
-    fetch(project.id);
+    const { project } = this.props;
+    this.props.fetchComponents(project.id);
+    this.props.fetchMaterials();
   }
 
   toggleCreate = () => {
     this.setState({ creating: !this.state.creating });
   }
 
+  create = (materialID) => {
+    console.log('createComponent');
+    this.props.createComponent({
+      materialID,
+      projectID: this.props.project.id,
+    });
+  }
+
   render() {
+    const { toggleCreate, create } = this;
+    const props = {
+      ...this.props,
+      toggleCreate,
+      create,
+    };
     return (
       <div>
         {
           this.state.creating
-            ? <CreateComponent {...this.props} toggleCreate={this.toggleCreate} />
-            : <ListComponents {...this.props} toggleCreate={this.toggleCreate} />
+            ? <SelectMaterial {...props} />
+            : <ListComponents {...props} />
         }
       </div>
     );
@@ -40,21 +58,23 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
 
 Components.propTypes = {
   project: PropTypes.object,
-  fetch: PropTypes.func,
+  fetchComponents: PropTypes.func,
+  createComponent: PropTypes.func,
+  fetchMaterials: PropTypes.func,
+  switchComponent: PropTypes.func,
 };
 
+
 export function mapDispatch(dispatch) {
-  return {
-    fetch: (id) => { dispatch(fetchComponents(id)); },
-    switchTo: (component) => { dispatch(switchComponent(component)); },
-    handleSubmit: (data) => {
-      dispatch(updateComponent(data));
-    },
-  };
+  return bindActionCreators(
+    { fetchComponents, createComponent, switchComponent, fetchMaterials },
+    dispatch
+  );
 }
 
 const mapState = createStructuredSelector({
   components: selectComponents(),
+  materials: selectMaterials(),
   current: selectCurrentComponent(),
   initialValues: selectComponentForm(),
 });

@@ -42,8 +42,8 @@ export function updateComponentSuccess() {
   return { type: types.UPDATE_COMPONENT_SUCCESS };
 }
 
-export function createComponent(projectID) {
-  return { type: types.CREATE_COMPONENT, projectID };
+export function createComponent(payload) {
+  return { type: types.CREATE_COMPONENT, payload };
 }
 
 export function createComponentSuccess(component) {

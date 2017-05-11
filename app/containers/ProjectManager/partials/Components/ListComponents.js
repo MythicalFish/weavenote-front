@@ -3,7 +3,7 @@ import Form from './Form';
 import ListItem from './ListItem';
 
 export default function ListComponents(props) {
-  const { components, current, switchTo, handleSubmit, initialValues, toggleCreate } = props;
+  const { components, current, switchComponent, handleSubmit, initialValues, toggleCreate } = props;
   let items = [];
   if (components) {
     items = components.toJS().map((component) => {
@@ -13,7 +13,7 @@ export default function ListComponents(props) {
           <ListItem
             component={component}  
             isCurrent={isCurrent}
-            switchTo={switchTo}
+            switchComponent={switchComponent}
           />
           {isCurrent &&
             <Form
@@ -44,7 +44,7 @@ export default function ListComponents(props) {
 ListComponents.propTypes = {
   components: PropTypes.object,
   current: PropTypes.object,
-  switchTo: PropTypes.func,
+  switchComponent: PropTypes.func,
   handleSubmit: PropTypes.func,
   initialValues: PropTypes.object,
   toggleCreate: PropTypes.func,

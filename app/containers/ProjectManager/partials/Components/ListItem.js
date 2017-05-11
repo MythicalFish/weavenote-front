@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const ListItem = (props) => {
-  const { component, switchTo, isCurrent } = props;
+  const { component, switchComponent, isCurrent } = props;
   let chevronClass = 'fa-chevron-down';
   let switchTarget = component;
   if (isCurrent) {
@@ -9,7 +9,7 @@ const ListItem = (props) => {
     switchTarget = null;
   }
   return (
-    <button className="data-row left-align" onClick={() => { switchTo(switchTarget); }}>
+    <button className="data-row left-align" onClick={() => { switchComponent(switchTarget); }}>
       <div className="x8">
         {component.material.name}
       </div>
@@ -28,7 +28,7 @@ const ListItem = (props) => {
 
 ListItem.propTypes = {
   component: PropTypes.object,
-  switchTo: PropTypes.func,
+  switchComponent: PropTypes.func,
   isCurrent: PropTypes.bool,
 };
 
