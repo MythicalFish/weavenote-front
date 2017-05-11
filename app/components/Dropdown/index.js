@@ -10,12 +10,10 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
   componentWillMount() {
     this.setState({ active: false });
   }
-  toggleMenu() {
-    {
-      this.state.active
-        ? this.setState({ active: false })
-        : this.setState({ active: true })
-    }
+  toggleMenu = () => {
+    this.state.active
+      ? this.setState({ active: false })
+      : this.setState({ active: true });
   }
   render() {
     const { label, children } = this.props;
@@ -29,7 +27,7 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
     }
     return (
       <div className="dropdown">
-        <button onClick={() => { this.toggleMenu(); }}>
+        <button onClick={this.toggleMenu}>
           {label}
         </button>
         {menu}
