@@ -1,6 +1,7 @@
 
-import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
+import { call, put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { selectMaterials } from 'containers/App/selectors';
 import * as API from 'utils/API';
 import * as types from './constants';
 import { fetchMaterialsSuccess } from './actions';
@@ -17,10 +18,12 @@ export function* materialListWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-export function* fetchMaterials(action) {
-  const { params } = action;
+export function* fetchMaterials({ params }) {
   try {
-    const materials = yield call(API.get, 'materials', params);
+    let materials = yield select(selectMaterials());
+    if (!materials) {
+      materials = yield call(API.get, 'materials', params);
+    }
     yield put(fetchMaterialsSuccess(materials));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
