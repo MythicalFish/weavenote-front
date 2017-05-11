@@ -19,7 +19,7 @@ export function* projectListWatcher() {
     yield takeLatest(types.FETCH_PROJECTS, fetchProjects),
   ];
   yield take(LOCATION_CHANGE);
-  yield cancel(...watcher);
+  yield watcher.map((task) => cancel(task));
 }
 
 export function* createProject() {

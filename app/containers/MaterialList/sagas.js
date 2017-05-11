@@ -14,7 +14,7 @@ export function* materialListWatcher() {
     yield takeLatest(types.FETCH_MATERIALS, fetchMaterials),
   ];
   yield take(LOCATION_CHANGE);
-  yield cancel(...watcher);
+  yield watcher.map((task) => cancel(task));
 }
 
 export function* fetchMaterials(action) {

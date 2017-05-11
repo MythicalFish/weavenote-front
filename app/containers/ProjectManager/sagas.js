@@ -29,7 +29,7 @@ export function* projectManagerWatcher() {
 
   ];
   yield take(LOCATION_CHANGE);
-  yield cancel(...watcher);
+  yield watcher.map((task) => cancel(task));
 }
 
 /*

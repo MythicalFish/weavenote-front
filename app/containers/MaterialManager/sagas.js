@@ -20,7 +20,7 @@ export function* materialManagerWatcher() {
     yield takeLatest(types.FETCH_COLORS, fetchColors),
   ];
   yield take(LOCATION_CHANGE);
-  yield cancel(...watcher);
+  yield watcher.map((task) => cancel(task));
 }
 
 export function* fetchMaterialTypes() {

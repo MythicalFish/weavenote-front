@@ -27,7 +27,7 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
     }
     return (
       <div className="dropdown">
-        <button onClick={this.toggleMenu}>
+        <button type="button" onClick={this.toggleMenu}>
           {label}
         </button>
         {menu}
