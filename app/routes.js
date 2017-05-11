@@ -78,26 +78,6 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/conversations',
-      name: 'conversations',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/Conversations/reducer'),
-          import('containers/Conversations/sagas'),
-          import('containers/Conversations'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('conversations', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
       path: '/materials',
       name: 'MaterialList',
       getComponent(nextState, cb) {
