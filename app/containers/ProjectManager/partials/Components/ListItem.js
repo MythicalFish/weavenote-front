@@ -12,13 +12,13 @@ const ListItem = (props) => {
   }
   return (
     <button className="data-row left-align" onClick={() => { switchComponent(switchTarget); }}>
-      <div className="x8">
+      <div className="x8 pr0">
         {material.name}
       </div>
-      <div className="x7">
+      <div className="x7 pr0">
         {material.type.name}
       </div>
-      <div className="x7">
+      <div className="x7 right-align pr0">
         {material.color.name}
         <Dot className="ml1" color={material.color.hex_code} />
       </div>

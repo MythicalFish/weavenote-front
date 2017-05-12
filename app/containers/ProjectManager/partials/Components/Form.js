@@ -20,7 +20,7 @@ let Form = (props) => {
       <DataRow type="display" label="Identifier" value={material.identifier} />
       <DataRow type="display" label="Price" value={price} />
       <DataRow type="display" label="Color" value={color} />
-      <Field type="text" name="quantity" label="Quantity" component={DataRow} />
+      <Field type="text" name="quantity" label="Quantity" component={DataRow} focus />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
       </footer>

@@ -33,7 +33,7 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
     ));
 
     return (
-      <div className={`select-input ${className}`}>
+      <div className={`select-input p0 ${className}`}>
         <button onClick={this.toggleMenu} type="button">
           {val.name}
           {val.hex_code && <Dot className="ml1" color={val.hex_code} /> }

@@ -44,9 +44,10 @@ function projectReducer(state = initialState, action) {
         .set('currentComponent', null);
 
     case types.CREATE_COMPONENT_SUCCESS:
-      return state
-        .setIn(['components', componentCount], fromJS(action.component))
-        .set('currentComponent', componentCount);
+      return state.set(
+        'components',
+        state.get('components').insert(0, fromJS(action.component))
+      ).set('currentComponent', 0); // TL;DR: insert at beginning of list
 
     case types.DELETE_COMPONENT_SUCCESS:
       return state
