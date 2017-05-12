@@ -11,7 +11,7 @@ const ListItem = (props) => {
     switchTarget = null;
   }
   return (
-    <button className="data-row left-align" onClick={() => { switchComponent(switchTarget); }}>
+    <button type="button" className="data-row left-align" onClick={() => { switchComponent(switchTarget); }}>
       <div className="x8 pr0">
         {material.name}
       </div>

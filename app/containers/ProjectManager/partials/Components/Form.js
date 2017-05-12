@@ -6,8 +6,9 @@ import DataRow from 'components/DataRow';
 
 let Form = (props) => {
   const { handleSubmit, submitting } = props;
-  const material = props.material.toJS();
-  const price = <Price value={material.price} />;
+  const component = props.component.toJS();
+  const material = component.material;
+  const materialCost = <Price value={component.material_cost} />;
   const color =
     (<div>
       {material.color.name}
@@ -18,9 +19,9 @@ let Form = (props) => {
       <DataRow type="display" label="Type" value={material.type.name} />
       <DataRow type="display" label="Name" value={material.name} />
       <DataRow type="display" label="Identifier" value={material.identifier} />
-      <DataRow type="display" label="Price" value={price} />
       <DataRow type="display" label="Color" value={color} />
       <Field type="text" name="quantity" label="Quantity" component={DataRow} focus />
+      <DataRow type="display" label="Cost" value={materialCost} />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
       </footer>
@@ -29,9 +30,9 @@ let Form = (props) => {
 };
 
 Form.propTypes = {
-  submitting: PropTypes.bool,
-  material: PropTypes.object,
+  component: PropTypes.object,
   handleSubmit: PropTypes.func,
+  submitting: PropTypes.bool,
 };
 
 Form = reduxForm({

@@ -23,9 +23,9 @@ export default class ListComponents extends React.PureComponent {
             />
             {isCurrent &&
               <Form
+                component={component}
                 onSubmit={this.handleSubmit}
                 initialValues={props.formValues}
-                material={props.current.get('material')}
               />
             }
           </div>
