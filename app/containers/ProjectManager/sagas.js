@@ -1,4 +1,4 @@
-import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
+import { call, put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
@@ -8,6 +8,8 @@ import {
   fetchImagesSuccess, updateImageSuccess, createImageSuccess, deleteImageSuccess,
   fetchComponentsSuccess, updateComponentSuccess, createComponentSuccess, deleteComponentSuccess,
 } from './actions';
+
+import { selectComponents } from './selectors';
 
 
 export default [

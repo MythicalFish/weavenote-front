@@ -46,12 +46,12 @@ function projectReducer(state = initialState, action) {
     case types.CREATE_COMPONENT_SUCCESS:
       return state
         .setIn(['components', componentCount], fromJS(action.component))
-        .set('currentComponent', action.component);
+        .set('currentComponent', componentCount);
 
     case types.DELETE_COMPONENT_SUCCESS:
       return state
         .set('components', fromJS(action.components))
-        .set('currentComponent', action.components[0]);
+        .set('currentComponent', null);
 
     case types.SWITCH_COMPONENT:
       return state

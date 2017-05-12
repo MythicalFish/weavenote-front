@@ -70,9 +70,9 @@ export const selectComponentForm = () => createSelector(
   (component) => {
     if (component) {
       return fromJS({
-        id: component.id,
-        quantity: component.quantity,
-        project_id: component.project_id,
+        id: component.get('id'),
+        quantity: component.get('quantity'),
+        project_id: component.get('project_id'),
       });
     }
   }

@@ -1,40 +1,49 @@
 import React, { PropTypes } from 'react';
 
-export default function SelectMaterial(props) {
-  const { toggleCreate, materials, create } = props;
-  return (
-    <div>
-      Select a material
+export default class SelectMaterial extends React.PureComponent {
+
+  handleClick = (material) => {
+    this.props.createComponent({
+      materialID: material.get('id'),
+      projectID: this.props.project.id,
+    });
+    this.props.toggleCreate();
+  }
+
+  render() {
+    const { materials } = this.props;
+    return (
       <div>
-        {materials && materials.toArray().map((material) => (
-          <button
-            type="button"
-            onClick={() => {
-              create(material.get('id'));
-              toggleCreate();
-            }}
-            key={material}
-          >
-            {material.get('name')}
+        Select a material
+        <div>
+          {materials && materials.toArray().map((material) => (
+            <button
+              type="button"
+              onClick={() => { this.handleClick(material); }}
+              key={material}
+            >
+              {material.get('name')}
+            </button>
+          ))}
+          <button type="button" className="btn-shy">
+            <i className="fa fa-plus mr1"></i>
+            Create a material
           </button>
-        ))}
-        <button type="button" className="btn-shy">
-          <i className="fa fa-plus mr1"></i>
-          Create a material
-        </button>
+        </div>
+        <div className="bt1 mt2 pt1">
+          <button className="btn-shy" onClick={this.props.toggleCreate}>
+            Cancel
+          </button>
+        </div>
       </div>
-      <div className="bt1 mt2 pt1">
-        <button className="btn-shy" onClick={toggleCreate}>
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 SelectMaterial.propTypes = {
+  project: PropTypes.object,
   toggleCreate: PropTypes.func,
-  create: PropTypes.func,
+  createComponent: PropTypes.func,
   materials: PropTypes.object,
 };
 

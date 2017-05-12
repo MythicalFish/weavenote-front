@@ -7,7 +7,7 @@ import { selectMaterials } from 'containers/App/selectors';
 import { fetchMaterials } from 'containers/MaterialList/actions';
 import SelectMaterial from './SelectMaterial';
 import ListComponents from './ListComponents';
-import { fetchComponents, switchComponent, createComponent } from '../../actions';
+import { fetchComponents, switchComponent, updateComponent, createComponent } from '../../actions';
 import { selectComponents, selectCurrentComponent, selectComponentForm } from '../../selectors';
 
 class Components extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -29,26 +29,25 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
     this.setState({ creating: !this.state.creating });
   }
 
-  create = (materialID) => {
-    this.props.createComponent({
-      materialID,
-      projectID: this.props.project.id,
-    });
-  }
-
   render() {
-    const { toggleCreate, create, state } = this;
-    const props = {
-      ...this.props,
-      toggleCreate,
-      create,
-    };
     return (
       <div>
         {
-          state.creating
-            ? <SelectMaterial {...props} />
-            : <ListComponents {...props} />
+          this.state.creating
+            ? <SelectMaterial
+              project={this.props.project}
+              materials={this.props.materials}
+              toggleCreate={this.toggleCreate}
+              createComponent={this.props.createComponent}
+            />
+            : <ListComponents
+              components={this.props.components}
+              current={this.props.current}
+              toggleCreate={this.toggleCreate}
+              updateComponent={this.props.updateComponent}
+              switchComponent={this.props.switchComponent}
+              formValues={this.props.formValues}
+            />
         }
       </div>
     );
@@ -57,16 +56,21 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
 
 Components.propTypes = {
   project: PropTypes.object,
+  materials: PropTypes.object,
+  components: PropTypes.object,
+  current: PropTypes.object,
   fetchComponents: PropTypes.func,
   createComponent: PropTypes.func,
+  updateComponent: PropTypes.func,
   fetchMaterials: PropTypes.func,
   switchComponent: PropTypes.func,
+  formValues: PropTypes.object,
 };
 
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchComponents, createComponent, switchComponent, fetchMaterials },
+    { fetchComponents, updateComponent, createComponent, switchComponent, fetchMaterials },
     dispatch
   );
 }
@@ -75,7 +79,7 @@ const mapState = createStructuredSelector({
   components: selectComponents(),
   materials: selectMaterials(),
   current: selectCurrentComponent(),
-  initialValues: selectComponentForm(),
+  formValues: selectComponentForm(),
 });
 
 export default connect(mapState, mapDispatch)(Components);
