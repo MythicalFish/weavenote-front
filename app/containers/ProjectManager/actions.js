@@ -62,6 +62,14 @@ export function switchComponent(index) {
   return { type: types.SWITCH_COMPONENT, index };
 }
 
+export function fetchMaterialCost(component) {
+  return { type: types.FETCH_MATERIAL_COST, component };
+}
+
+export function fetchMaterialCostSuccess(cost) {
+  return { type: types.FETCH_MATERIAL_COST_SUCCESS, cost };
+}
+
 /*
  *
  *  Project images

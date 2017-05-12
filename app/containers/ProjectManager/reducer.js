@@ -36,6 +36,10 @@ function projectReducer(state = initialState, action) {
       return state
         .set('components', fromJS(action.components));
 
+    case types.UPDATE_COMPONENT:
+      console.log(state)  
+      return state;
+
     case types.UPDATE_COMPONENT_SUCCESS:
       return state;
 
@@ -57,6 +61,10 @@ function projectReducer(state = initialState, action) {
     case types.SWITCH_COMPONENT:
       return state
         .set('currentComponent', action.index);
+
+    case types.FETCH_MATERIAL_COST_SUCCESS:
+      return state
+        .setIn(['project', 'material_cost'], action.cost);
 
     // Images
 

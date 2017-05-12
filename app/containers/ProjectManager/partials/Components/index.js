@@ -7,7 +7,10 @@ import { selectMaterials } from 'containers/App/selectors';
 import { fetchMaterials } from 'containers/MaterialList/actions';
 import SelectMaterial from './SelectMaterial';
 import ListComponents from './ListComponents';
-import { fetchComponents, switchComponent, updateComponent, createComponent } from '../../actions';
+import {
+  fetchComponents, switchComponent, updateComponent, createComponent,
+  fetchMaterialCost,
+} from '../../actions';
 import { selectComponents, selectCurrentComponent, selectComponentForm } from '../../selectors';
 
 class Components extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -41,10 +44,12 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
               createComponent={this.props.createComponent}
             />
             : <ListComponents
+              project={this.props.project}
               components={this.props.components}
               current={this.props.current}
               toggleCreate={this.toggleCreate}
               updateComponent={this.props.updateComponent}
+              fetchMaterialCost={this.props.fetchMaterialCost}
               switchComponent={this.props.switchComponent}
               formValues={this.props.formValues}
             />
@@ -63,6 +68,7 @@ Components.propTypes = {
   createComponent: PropTypes.func,
   updateComponent: PropTypes.func,
   fetchMaterials: PropTypes.func,
+  fetchMaterialCost: PropTypes.func,
   switchComponent: PropTypes.func,
   formValues: PropTypes.object,
 };
@@ -70,7 +76,7 @@ Components.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchComponents, updateComponent, createComponent, switchComponent, fetchMaterials },
+    { fetchComponents, updateComponent, createComponent, switchComponent, fetchMaterials, fetchMaterialCost },
     dispatch
   );
 }

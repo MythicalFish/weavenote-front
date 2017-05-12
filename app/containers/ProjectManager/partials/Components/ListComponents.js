@@ -1,4 +1,6 @@
 import React from 'react';
+import DataRow from 'components/DataRow';
+import Price from 'components/Price';
 import Form from './Form';
 import ListItem from './ListItem';
 
@@ -6,6 +8,8 @@ export default class ListComponents extends React.PureComponent {
   handleSubmit = (data) => {
     const { props } = this;
     props.updateComponent(data);
+    props.fetchMaterialCost(data);
+    props.switchComponent(null);
   }
   render() {
     let items = [];
@@ -42,6 +46,11 @@ export default class ListComponents extends React.PureComponent {
             ? items
             : 'No materials yet'
           }
+          <DataRow
+            type="display"
+            label="Material cost"
+            value={(<Price value={props.project.material_cost} />)}
+          />
         </div>
       </div>
     );
