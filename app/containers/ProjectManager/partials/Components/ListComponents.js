@@ -8,7 +8,6 @@ export default class ListComponents extends React.PureComponent {
   handleSubmit = (data) => {
     const { props } = this;
     props.updateComponent(data);
-    props.fetchMaterialCost(data);
   }
   render() {
     let items = [];

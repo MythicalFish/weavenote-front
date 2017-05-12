@@ -7,7 +7,7 @@ import {
   fetchProjectSuccess, updateProjectSuccess,
   fetchImagesSuccess, updateImageSuccess, createImageSuccess, deleteImageSuccess,
   fetchComponentsSuccess, updateComponentSuccess, createComponentSuccess, deleteComponentSuccess,
-  fetchMaterialCostSuccess,
+  fetchMaterialCost, fetchMaterialCostSuccess,
 } from './actions';
 
 
@@ -30,7 +30,7 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.UPDATE_COMPONENT, updateComponent),
     yield takeLatest(types.CREATE_COMPONENT, createComponent),
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
-    yield takeLatest(types.FETCH_MATERIAL_COST, fetchMaterialCost),
+    yield takeLatest(types.FETCH_MATERIAL_COST, doFetchMaterialCost),
 
   ];
   yield take(LOCATION_CHANGE);
@@ -127,6 +127,7 @@ export function* updateComponent(action) {
   try {
     component = yield call(API.patch, `projects/${component.project_id}/components/${component.id}`, { component });
     yield put(updateComponentSuccess(component));
+    yield put(fetchMaterialCost(component));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -151,8 +152,8 @@ export function* deleteComponent(action) {
   }
 }
 
-export function* fetchMaterialCost(action) {
-  const component = action.component.toJS();
+export function* doFetchMaterialCost(action) {
+  const component = action.component;
   try {
     const data = yield call(API.get, `projects/${component.project_id}/material_cost`);
     yield put(fetchMaterialCostSuccess(data));
