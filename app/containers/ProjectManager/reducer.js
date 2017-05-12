@@ -14,7 +14,8 @@ function projectReducer(state = initialState, action) {
 
   const imageCount = state.get('images').size;
   const componentCount = state.get('components').size;
-
+  const currentComponent = state.get('currentComponent');
+  
   switch (action.type) {
 
     // Project
@@ -36,12 +37,10 @@ function projectReducer(state = initialState, action) {
       return state
         .set('components', fromJS(action.components));
 
-    case types.UPDATE_COMPONENT:
-      console.log(state)  
-      return state;
-
     case types.UPDATE_COMPONENT_SUCCESS:
-      return state;
+      return state
+        .setIn(['components', currentComponent], fromJS(action.component))
+        .set('currentComponent', null);
 
     case types.CREATE_COMPONENT:
       return state

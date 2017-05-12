@@ -123,10 +123,10 @@ export function* fetchComponents(action) {
 }
 
 export function* updateComponent(action) {
-  const component = action.component.toJS();
+  let component = action.component.toJS();
   try {
-    yield call(API.patch, `projects/${component.project_id}/components/${component.id}`, { component });
-    yield put(updateComponentSuccess());
+    component = yield call(API.patch, `projects/${component.project_id}/components/${component.id}`, { component });
+    yield put(updateComponentSuccess(component));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }

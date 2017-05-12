@@ -9,7 +9,6 @@ export default class ListComponents extends React.PureComponent {
     const { props } = this;
     props.updateComponent(data);
     props.fetchMaterialCost(data);
-    props.switchComponent(null);
   }
   render() {
     let items = [];

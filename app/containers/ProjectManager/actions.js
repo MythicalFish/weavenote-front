@@ -38,8 +38,8 @@ export function updateComponent(component) {
   return { type: types.UPDATE_COMPONENT, component };
 }
 
-export function updateComponentSuccess() {
-  return { type: types.UPDATE_COMPONENT_SUCCESS };
+export function updateComponentSuccess(component) {
+  return { type: types.UPDATE_COMPONENT_SUCCESS, component };
 }
 
 export function createComponent(payload) {
