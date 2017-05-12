@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { FormattedDate } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
@@ -13,7 +14,12 @@ let Basics = (props) => {
       <Field name="name" type="text" component={DataRow} label="Name" />
       <Field name="category" type="text" component={DataRow} label="Category" />
       <Field name="identifier" type="text" component={DataRow} label="Identifier" />
-      <DataRow type="display" label="Created on" value={project.created_at} />
+      <div className="data-row">
+        <label>Created on</label>
+        <div>
+          <FormattedDate value={project.created_at} day="numeric" month="short" />
+        </div>
+      </div>
       <Field name="description" type="textarea" component={DataRow} label="Description" />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
