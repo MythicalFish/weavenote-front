@@ -9,17 +9,13 @@ import { selectBasicsForm } from '../../selectors';
 
 let Basics = (props) => {
   const { handleSubmit, pristine, reset, submitting, project } = props;
+  const createdOn = <FormattedDate value={project.created_at} day="numeric" month="short" />;
   return (
     <form className="data-rows" onSubmit={handleSubmit}>
       <Field name="name" type="text" component={DataRow} label="Name" />
       <Field name="category" type="text" component={DataRow} label="Category" />
       <Field name="identifier" type="text" component={DataRow} label="Identifier" />
-      <div className="data-row">
-        <label>Created on</label>
-        <div>
-          <FormattedDate value={project.created_at} day="numeric" month="short" />
-        </div>
-      </div>
+      <DataRow type="display" label="Created on" value={createdOn} />
       <Field name="description" type="textarea" component={DataRow} label="Description" />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>

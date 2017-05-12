@@ -17,21 +17,13 @@
     }
     > label {
       @extend .flex-none;
-      text-align: left;
       color: $dark6;
     }
     > *:not(label) {
       @extend .flex-auto;
-      text-align: right;
-    }
-    .select-input {
-      button {
-        text-align: right;
-      }
     }
     textarea {
       width: 100%;
-      text-align: left;
       padding-top: 0!important;
     }
   }

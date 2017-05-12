@@ -21,6 +21,7 @@ Form.propTypes = {
   submitting: PropTypes.bool,
   handleSubmit: PropTypes.func,
   materialTypes: PropTypes.array,
+  colors: PropTypes.array,
 };
 
 Form = reduxForm({

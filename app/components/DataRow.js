@@ -4,26 +4,27 @@ import SelectInput from 'components/SelectInput';
 export default function DataRow(props) {
 
   const { label, type } = props;
-  let field;
-  let touched;
-  let error;
+  let field = null;
+  let input = null;
+  let touched = false;
+  let error = false;
   let rowClass = 'data-row';
 
   if (type === 'display') {
     const { value } = props;
-    field = <div>{value}</div>;
+    field = <div className="right-align">{value}</div>;
   } else {
     const { input, meta: { touched, error } } = props;
     switch (type) {
       case 'select':
-        field = <SelectInput {...props} />;
+        field = <SelectInput {...props} className="right-align" />;
         break;
       case 'textarea':
         field = <textarea {...input} />;
         rowClass += ' flex-wrap';
         break;
       default:
-        field = <input {...input} type={type} />;
+        field = <input {...input} type={type} className="right-align" />;
         break;
     }
   }
@@ -38,7 +39,7 @@ export default function DataRow(props) {
 }
 
 DataRow.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.any,
   label: PropTypes.string,
   type: PropTypes.string,
   input: PropTypes.object,

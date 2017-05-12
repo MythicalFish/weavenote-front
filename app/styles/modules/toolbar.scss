@@ -29,8 +29,6 @@
           display: block;
           width: 100%;
           text-align: center;
-          color: $dark7;
-          @extend .smaller1;
           &.active {
             border-bottom: 3px solid $aqua;
           }

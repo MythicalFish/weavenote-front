@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Dot from 'components/Dot';
 
 const ListItem = (props) => {
   const { component, switchComponent, isCurrent, index } = props;
@@ -19,9 +20,10 @@ const ListItem = (props) => {
       </div>
       <div className="x7">
         {material.color.name}
+        <Dot className="ml1" color={material.color.hex_code} />
       </div>
-      <div className="right-align">
-        <i className={`fa ${chevronClass} gray`}></i>
+      <div className="right-align smaller2 dark2">
+        <i className={`fa ${chevronClass}`}></i>
       </div>
     </button>
   );
