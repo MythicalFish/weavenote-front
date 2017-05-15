@@ -30,6 +30,7 @@ textarea {
   position: relative;
   display: inline-block;
   button {
+    text-align: inherit;
     &:after {
       content: "\f078";
       font-family: FontAwesome;

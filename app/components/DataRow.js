@@ -39,7 +39,7 @@ export default class DataRow extends React.PureComponent {
         field = <div className="right-align">{props.value}</div>;
         break;
       case 'select':
-        field = <SelectInput {...fieldProps} className="right-align" />;
+        field = <SelectInput {...fieldProps} data={props.data} className="right-align" />;
         break;
       case 'textarea':
         field = <textarea {...fieldProps} />;

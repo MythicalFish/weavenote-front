@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 export default class SelectMaterial extends React.PureComponent {
 
@@ -25,10 +26,10 @@ export default class SelectMaterial extends React.PureComponent {
               {material.get('name')}
             </button>
           ))}
-          <button type="button" className="btn-shy">
+          <Link to="/materials/new" className="btn-shy">
             <i className="fa fa-plus mr1"></i>
             Create a material
-          </button>
+          </Link>
         </div>
         <div className="bt1 mt2 pt1">
           <button className="btn-shy" onClick={this.props.toggleCreate}>

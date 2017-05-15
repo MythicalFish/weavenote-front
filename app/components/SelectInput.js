@@ -15,18 +15,17 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
   }
 
   handleClick(item) {
-    const { input } = this.props;
-    input.onChange(item);
+    this.props.onChange(item);
     this.setState({ active: false });
   }
 
   render() {
-    const { input, data, className } = this.props;
-    let val = input.value;
+    const { value, data, className } = this.props;
+    let val = value;
     if (val.toJS) { val = val.toJS(); }
 
     const options = data.map((item, index) => (
-      <li key={`select-${input.name}-${index}`} onClick={() => { this.handleClick(item); }}>
+      <li key={`select-${name}-${index}`} onClick={() => { this.handleClick(item); }}>
         {item.name}
         {item.hex_code && <Dot className="ml1" color={item.hex_code} /> }
       </li>
@@ -49,7 +48,8 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
 }
 
 SelectInput.propTypes = {
-  input: PropTypes.object,
+  value: PropTypes.object,
   data: PropTypes.array,
   className: PropTypes.string,
+  onChange: PropTypes.func,
 };
