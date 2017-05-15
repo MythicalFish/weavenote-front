@@ -73,12 +73,14 @@ export function* fetchComponents(action) {
 }
 
 export function* updateComponent(action) {
-  const component = action.component.toJS();
-  yield sagas.updateEntity(
-    `projects/${component.project_id}/components/${component.id}`,
-    { component },
-    [actions.updateProjectSuccess, actions.fetchMaterialCost],
-  );
+  let component = action.component.toJS();
+  try {
+    component = yield call(API.patch, `projects/${component.project_id}/components/${component.id}`, { component });
+    yield put(actions.updateComponentSuccess(component));
+    yield put(actions.fetchMaterialCost(component));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
 }
 
 export function* createComponent({ payload }) {

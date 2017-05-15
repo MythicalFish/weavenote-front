@@ -30,12 +30,7 @@ export function* fetchEntity(url, callback) {
 export function* updateEntity(url, params, callback) {
   try {
     const response = yield call(API.patch, url, params);
-    if (Array.isArray(callback)) {
-      yield put(callback[0](response));
-      yield put(callback[1](response));
-    } else {
-      yield put(callback(response));
-    }
+    yield put(callback(response));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -50,7 +45,7 @@ export function* createEntity(url, params, callback) {
   }
 }
 
-export function* deleteEntity(url, callback) {
+export function* destroyEntity(url, callback) {
   try {
     const response = yield call(API.destroy, url);
     yield put(callback(response));
