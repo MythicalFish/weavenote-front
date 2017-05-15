@@ -18,24 +18,24 @@ export function* materialManagerWatcher() {
 }
 
 export function* fetchMaterialTypes() {
-  yield sagas.fetchEntities('material_types', actions.fetchMaterialTypesSuccess);
+  yield sagas.get('material_types', actions.fetchMaterialTypesSuccess);
 }
 
 export function* fetchColors() {
-  yield sagas.fetchEntities('colors', actions.fetchColorsSuccess);
+  yield sagas.get('colors', actions.fetchColorsSuccess);
 }
 
 export function* fetchMaterial(action) {
-  yield sagas.fetchEntity(`materials/${action.id}`, actions.fetchMaterialSuccess);
+  yield sagas.get(`materials/${action.id}`, actions.fetchMaterialSuccess);
 }
 
 export function* updateMaterial(action) {
   const material = sanitize(action.material.toJS());
-  yield sagas.updateEntity(`materials/${material.id}`, { material }, actions.updateMaterialSuccess);
+  yield sagas.patch(`materials/${material.id}`, { material }, actions.updateMaterialSuccess);
 }
 
 export function* createMaterial(action) {
-  yield sagas.createEntity('materials', { material: sanitize(action.material.toJS()) }, actions.createMaterialSuccess);
+  yield sagas.post('materials', { material: sanitize(action.material.toJS()) }, actions.createMaterialSuccess);
 }
 
 function sanitize(material) {

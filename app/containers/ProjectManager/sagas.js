@@ -34,12 +34,12 @@ export function* projectManagerWatcher() {
  */
 
 export function* fetchProject(action) {
-  yield sagas.fetchEntity(`projects/${action.id}`, actions.fetchProjectSuccess);
+  yield sagas.get(`projects/${action.id}`, actions.fetchProjectSuccess);
 }
 
 export function* updateProject(action) {
   const project = action.project.toJS();
-  yield sagas.updateEntity(`projects/${project.id}`, { project }, actions.updateProjectSuccess);
+  yield sagas.patch(`projects/${project.id}`, { project }, actions.updateProjectSuccess);
 }
 
 
@@ -50,16 +50,16 @@ export function* updateProject(action) {
  */
 
 export function* fetchImages(action) {
-  yield sagas.fetchEntities(`projects/${action.projectID}/images`, actions.fetchImagesSuccess);
+  yield sagas.get(`projects/${action.projectID}/images`, actions.fetchImagesSuccess);
 }
 
 export function* createImage(action) {
   const { image } = action.data;
-  yield sagas.createEntity(`projects/${image.project_id}/images`, { image }, actions.createImageSuccess);
+  yield sagas.post(`projects/${image.project_id}/images`, { image }, actions.createImageSuccess);
 }
 
 export function* deleteImage(action) {
-  yield sagas.destroyEntity(`projects/${action.projectID}/images/${action.id}`, actions.deleteImageSuccess);
+  yield sagas.destroy(`projects/${action.projectID}/images/${action.id}`, actions.deleteImageSuccess);
 }
 
 /*
@@ -69,7 +69,7 @@ export function* deleteImage(action) {
  */
 
 export function* fetchComponents(action) {
-  yield sagas.fetchEntities(`projects/${action.projectID}/components`, actions.fetchComponentsSuccess);
+  yield sagas.get(`projects/${action.projectID}/components`, actions.fetchComponentsSuccess);
 }
 
 export function* updateComponent(action) {
@@ -85,16 +85,16 @@ export function* updateComponent(action) {
 
 export function* createComponent({ payload }) {
   const component = { material_id: payload.materialID };
-  yield sagas.createEntity(`projects/${payload.projectID}/components`, { component }, actions.createComponentSuccess);
+  yield sagas.post(`projects/${payload.projectID}/components`, { component }, actions.createComponentSuccess);
 }
 
 export function* deleteComponent(action) {
-  yield sagas.destroyEntity(`projects/${action.projectID}/components/${action.id}`, actions.deleteComponentSuccess);
+  yield sagas.destroy(`projects/${action.projectID}/components/${action.id}`, actions.deleteComponentSuccess);
 }
 
 export function* doFetchMaterialCost(action) {
   const component = action.component;
-  yield sagas.fetchEntities(`projects/${component.project_id}/material_cost`, actions.fetchMaterialCostSuccess);
+  yield sagas.get(`projects/${component.project_id}/material_cost`, actions.fetchMaterialCostSuccess);
 }
 
 

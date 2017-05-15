@@ -16,5 +16,5 @@ export function* materialListWatcher() {
 }
 
 export function* fetchMaterials() {
-  yield sagas.fetchEntities('materials', actions.fetchMaterialsSuccess, null, selectMaterials);
+  yield sagas.get('materials', actions.fetchMaterialsSuccess, null, selectMaterials);
 }

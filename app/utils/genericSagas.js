@@ -3,7 +3,7 @@
 import { call, put, select, cancel } from 'redux-saga/effects';
 import * as API from 'utils/API';
 
-export function* fetchEntities(url, callback, params = null, selector = false) {
+export function* get(url, callback, params = null, selector = false) {
   try {
     let entities = null;
     if (selector) {
@@ -18,16 +18,7 @@ export function* fetchEntities(url, callback, params = null, selector = false) {
   }
 }
 
-export function* fetchEntity(url, callback) {
-  try {
-    const response = yield call(API.get, url);
-    yield put(callback(response));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
-}
-
-export function* updateEntity(url, params, callback) {
+export function* patch(url, params, callback) {
   try {
     const response = yield call(API.patch, url, params);
     yield put(callback(response));
@@ -36,7 +27,7 @@ export function* updateEntity(url, params, callback) {
   }
 }
 
-export function* createEntity(url, params, callback) {
+export function* post(url, params, callback) {
   try {
     const response = yield call(API.post, url, params);
     yield put(callback(response));
@@ -45,7 +36,7 @@ export function* createEntity(url, params, callback) {
   }
 }
 
-export function* destroyEntity(url, callback) {
+export function* destroy(url, callback) {
   try {
     const response = yield call(API.destroy, url);
     yield put(callback(response));
