@@ -48,7 +48,10 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
 }
 
 SelectInput.propTypes = {
-  value: PropTypes.object,
+  value: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]),
   data: PropTypes.array,
   className: PropTypes.string,
   onChange: PropTypes.func,

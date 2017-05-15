@@ -1,15 +1,9 @@
-import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
+import { take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import * as API from 'utils/API';
+import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
-import {
-  fetchMaterialSuccess, updateMaterialSuccess, createMaterialSuccess,
-  fetchMaterialTypesSuccess, fetchColorsSuccess,
-} from './actions';
-
-export default [
-  materialManagerWatcher,
-];
+import * as actions from './actions';
+export default [materialManagerWatcher];
 
 export function* materialManagerWatcher() {
   const watcher = [
@@ -24,50 +18,23 @@ export function* materialManagerWatcher() {
 }
 
 export function* fetchMaterialTypes() {
-  try {
-    const data = yield call(API.get, 'material_types');
-    yield put(fetchMaterialTypesSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.fetchEntities('material_types', actions.fetchMaterialTypesSuccess);
 }
 
 export function* fetchColors() {
-  try {
-    const data = yield call(API.get, 'colors');
-    yield put(fetchColorsSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.fetchEntities('colors', actions.fetchColorsSuccess);
 }
 
 export function* fetchMaterial(action) {
-  try {
-    const data = yield call(API.get, `materials/${action.id}`);
-    yield put(fetchMaterialSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.fetchEntity('material', action.id, actions.fetchMaterialSuccess);
 }
 
 export function* updateMaterial(action) {
-  const material = sanitize(action.material.toJS());  
-  try {
-    yield call(API.patch, `materials/${material.id}`, { material });
-    yield put(updateMaterialSuccess());
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.updateEntity('material', sanitize(action.material.toJS()), actions.updateMaterialSuccess);
 }
 
 export function* createMaterial(action) {
-  const material = sanitize(action.material.toJS());  
-  try {
-    const response = yield call(API.post, 'materials', { material });
-    yield put(createMaterialSuccess(response));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.createEntity('material', sanitize(action.material.toJS()), actions.createMaterialSuccess);
 }
 
 function sanitize(material) {
