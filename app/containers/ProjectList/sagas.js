@@ -2,15 +2,11 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
+import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
-import {
-  fetchProjectsSuccess, createProjectSuccess,
-  fileProjectSuccess,
-} from './actions';
+import * as actions from './actions';
 
-export default [
-  projectListWatcher,
-];
+export default [projectListWatcher];
 
 export function* projectListWatcher() {
   const watcher = [
@@ -23,30 +19,15 @@ export function* projectListWatcher() {
 }
 
 export function* createProject() {
-  try {
-    const data = yield call(API.post, 'projects', { project: { name: 'Untitled project' } });
-    yield put(createProjectSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.createEntity('project', { name: 'Untitled project' }, actions.createProjectSuccess);
 }
 
 export function* fileProject(action) {
   const { id, archived } = action.payload;
-  try {
-    const data = yield call(API.patch, `projects/${id}`, { project: { archived }, index_after_update: true });
-    yield put(fileProjectSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  const params = { project: { id, archived }, index_after_update: true };
+  yield sagas.updateEntity('project', params, actions.fileProjectSuccess);
 }
 
 export function* fetchProjects(action) {
-  const { params } = action;
-  try {
-    const projects = yield call(API.get, 'projects', params);
-    yield put(fetchProjectsSuccess(projects));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.fetchEntities('projects', actions.fetchProjectsSuccess, action.params);
 }

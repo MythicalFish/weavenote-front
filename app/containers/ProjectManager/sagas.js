@@ -1,20 +1,11 @@
 import { call, put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
+import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
 import * as types from './constants';
-import {
-  fetchProjectSuccess, updateProjectSuccess,
-  fetchImagesSuccess, updateImageSuccess, createImageSuccess, deleteImageSuccess,
-  fetchComponentsSuccess, updateComponentSuccess, createComponentSuccess, deleteComponentSuccess,
-  fetchMaterialCost, fetchMaterialCostSuccess,
-} from './actions';
-
-
-export default [
-  projectManagerWatcher,
-  materialListWatcher,
-];
+import * as actions from './actions';
+export default [projectManagerWatcher, materialListWatcher];
 
 export function* projectManagerWatcher() {
   const watcher = [
@@ -22,7 +13,6 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.UPDATE_PROJECT, updateProject),
 
     yield takeLatest(types.FETCH_IMAGES, fetchImages),
-    yield takeLatest(types.UPDATE_IMAGE, updateImage),
     yield takeLatest(types.CREATE_IMAGE, createImage),
     yield takeLatest(types.DELETE_IMAGE, deleteImage),
 
@@ -44,22 +34,11 @@ export function* projectManagerWatcher() {
  */
 
 export function* fetchProject(action) {
-  try {
-    const data = yield call(API.get, `projects/${action.id}`);
-    yield put(fetchProjectSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.fetchEntity('project', action.id, actions.fetchProjectSuccess);
 }
 
 export function* updateProject(action) {
-  const project = action.project.toJS();
-  try {
-    yield call(API.patch, `projects/${project.id}`, { project });
-    yield put(updateProjectSuccess());
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.updateEntity('project', action.project.toJS(), actions.updateProjectSuccess);
 }
 
 
@@ -70,41 +49,22 @@ export function* updateProject(action) {
  */
 
 export function* fetchImages(action) {
-  try {
-    const images = yield call(API.get, `projects/${action.projectID}/images`);
-    yield put(fetchImagesSuccess(images));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
-}
-
-export function* updateImage(action) {
-  const { image } = action;
-  try {
-    yield call(API.patch, `projects/${image.project_id}/images/${image.id}`, { image });
-    yield put(updateImageSuccess());
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.fetchEntities({ url: `projects/${action.projectID}/images` }, actions.fetchImagesSuccess);
 }
 
 export function* createImage(action) {
-  const { image } = action.data;
-  try {
-    const response = yield call(API.post, `projects/${image.project_id}/images`, { image });
-    yield put(createImageSuccess(response));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.createEntity(
+    {
+      url: `projects/${action.data.project_id}/images`,
+      name: 'image',
+    },
+    action.data.image,
+    actions.createImageSuccess
+  );
 }
 
 export function* deleteImage(action) {
-  try {
-    const images = yield call(API.destroy, `projects/${action.projectID}/images/${action.id}`);
-    yield put(deleteImageSuccess(images));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.destroyEntity(`projects/${action.projectID}/images/${action.id}`, actions.deleteImageSuccess);
 }
 
 /*
@@ -114,20 +74,15 @@ export function* deleteImage(action) {
  */
 
 export function* fetchComponents(action) {
-  try {
-    const components = yield call(API.get, `projects/${action.projectID}/components`);
-    yield put(fetchComponentsSuccess(components));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.fetchEntities(`projects/${action.projectID}/components`, actions.fetchComponentsSuccess);
 }
 
 export function* updateComponent(action) {
   let component = action.component.toJS();
   try {
     component = yield call(API.patch, `projects/${component.project_id}/components/${component.id}`, { component });
-    yield put(updateComponentSuccess(component));
-    yield put(fetchMaterialCost(component));
+    yield put(actions.updateComponentSuccess(component));
+    yield put(actions.fetchMaterialCost(component));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -137,7 +92,7 @@ export function* createComponent({ payload }) {
   let component = { material_id: payload.materialID };
   try {
     component = yield call(API.post, `projects/${payload.projectID}/components`, { component });
-    yield put(createComponentSuccess(component));
+    yield put(actions.createComponentSuccess(component));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -146,7 +101,7 @@ export function* createComponent({ payload }) {
 export function* deleteComponent(action) {
   try {
     const components = yield call(API.destroy, `projects/${action.projectID}/components/${action.id}`);
-    yield put(deleteComponentSuccess(components));
+    yield put(actions.deleteComponentSuccess(components));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
@@ -156,7 +111,7 @@ export function* doFetchMaterialCost(action) {
   const component = action.component;
   try {
     const data = yield call(API.get, `projects/${component.project_id}/material_cost`);
-    yield put(fetchMaterialCostSuccess(data));
+    yield put(actions.fetchMaterialCostSuccess(data));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
