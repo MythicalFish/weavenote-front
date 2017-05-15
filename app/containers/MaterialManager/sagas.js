@@ -26,15 +26,16 @@ export function* fetchColors() {
 }
 
 export function* fetchMaterial(action) {
-  yield sagas.fetchEntity('material', action.id, actions.fetchMaterialSuccess);
+  yield sagas.fetchEntity(`materials/${action.id}`, actions.fetchMaterialSuccess);
 }
 
 export function* updateMaterial(action) {
-  yield sagas.updateEntity('material', sanitize(action.material.toJS()), actions.updateMaterialSuccess);
+  const material = sanitize(action.material.toJS());
+  yield sagas.updateEntity(`materials/${material.id}`, { material }, actions.updateMaterialSuccess);
 }
 
 export function* createMaterial(action) {
-  yield sagas.createEntity('material', sanitize(action.material.toJS()), actions.createMaterialSuccess);
+  yield sagas.createEntity('materials', { material: sanitize(action.material.toJS()) }, actions.createMaterialSuccess);
 }
 
 function sanitize(material) {

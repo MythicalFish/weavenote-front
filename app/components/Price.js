@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedNumber } from 'react-intl';
 
 export default function Price(props) {
@@ -8,6 +8,9 @@ export default function Price(props) {
 }
 
 Price.propTypes = {
-  value: React.PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 

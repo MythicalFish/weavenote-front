@@ -19,13 +19,13 @@ export function* projectListWatcher() {
 }
 
 export function* createProject() {
-  yield sagas.createEntity('project', { name: 'Untitled project' }, actions.createProjectSuccess);
+  yield sagas.createEntity('projects', { project: { name: 'Untitled project' } }, actions.createProjectSuccess);
 }
 
 export function* fileProject(action) {
   const { id, archived } = action.payload;
   const params = { project: { id, archived }, index_after_update: true };
-  yield sagas.updateEntity('project', params, actions.fileProjectSuccess);
+  yield sagas.updateEntity(`projects/${id}`, params, actions.fileProjectSuccess);
 }
 
 export function* fetchProjects(action) {

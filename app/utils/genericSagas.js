@@ -3,18 +3,14 @@
 import { call, put, select, cancel } from 'redux-saga/effects';
 import * as API from 'utils/API';
 
-export function* fetchEntities(name, callback, params = null, selector = false) {
-  let url;
-  if (typeof name === 'object') {
-    url = name.url;
-  }
+export function* fetchEntities(url, callback, params = null, selector = false) {
   try {
     let entities = null;
     if (selector) {
       entities = yield select(selector());
     }
     if (!entities) {
-      entities = yield call(API.get, url || name, params);
+      entities = yield call(API.get, url, params);
     }
     yield put(callback(entities));
   } catch (err) {
@@ -22,41 +18,30 @@ export function* fetchEntities(name, callback, params = null, selector = false) 
   }
 }
 
-export function* fetchEntity(name, id, callback) {
+export function* fetchEntity(url, callback) {
   try {
-    const data = yield call(API.get, `${name}s/${id}`);
-    yield put(callback(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
-}
-
-export function* updateEntity(name, body, callback) {
-  let params;
-  let id;
-  if (body[name]) {
-    params = body;
-    id = body[name].id;
-  } else {
-    params = { [name]: body };
-    id = body.id;
-  }
-  try {
-    const response = yield call(API.patch, `${name}s/${id}`, params);
+    const response = yield call(API.get, url);
     yield put(callback(response));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
 }
 
-export function* createEntity(name, data, callback) {
-  let url = `${name}s`;
-  let rname = name;
-  if (typeof name === 'object') {
-    url = name.url;
-    rname = name.name;
+export function* updateEntity(url, params, callback) {
+  try {
+    const response = yield call(API.patch, url, params);
+    if (Array.isArray(callback)) {
+      yield put(callback[0](response));
+      yield put(callback[1](response));
+    } else {
+      yield put(callback(response));
+    }
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
   }
-  const params = { [rname]: data };
+}
+
+export function* createEntity(url, params, callback) {
   try {
     const response = yield call(API.post, url, params);
     yield put(callback(response));
