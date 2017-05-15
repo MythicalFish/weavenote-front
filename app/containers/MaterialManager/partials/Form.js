@@ -10,6 +10,7 @@ let Form = (props) => {
       <Field name="identifier" type="text" component={DataRow} label="Identifier" />
       <Field name="type" type="select" component={DataRow} label="Type" data={materialTypes} />
       <Field name="color" type="select" component={DataRow} label="Color" data={colors} />
+      <Field name="price" type="text" component={DataRow} label="Price" />
       <footer className="p2 center">
         <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
       </footer>
