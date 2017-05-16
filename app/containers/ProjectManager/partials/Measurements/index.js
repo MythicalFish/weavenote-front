@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { selectMeasurements } from '../../selectors';
 import { fetchMeasurements } from '../../actions';
+import Form from './Form';
 
 class Measurements extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -12,10 +14,11 @@ class Measurements extends React.PureComponent { // eslint-disable-line react/pr
   }
 
   render() {
-    const { project } = this.props;
+    const { project, measurements } = this.props;
+    if (measurements.size < 1) return null;
     return (
-      <div className="row">
-        mats
+      <div>
+        <Form initialValues={measurements} onSubmit={(data) => { console.log(data); }} />
       </div>
     );
   }
@@ -23,6 +26,7 @@ class Measurements extends React.PureComponent { // eslint-disable-line react/pr
 
 Measurements.propTypes = {
   project: PropTypes.object,
+  measurements: PropTypes.object,
   fetchMeasurements: PropTypes.func,
 };
 
@@ -34,7 +38,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-
+  measurements: selectMeasurements(),
 });
 
 export default connect(mapState, mapDispatch)(Measurements);

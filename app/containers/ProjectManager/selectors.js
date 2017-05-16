@@ -43,6 +43,12 @@ export const selectCurrentImage = () => createSelector(
     return null;
   }
 );
+
+export const selectMeasurements = () => createSelector(
+  selectDomain(),
+  (substate) => substate.get('measurements')
+);
+
 /*
  *
  *  Selectors for use with redux-form
