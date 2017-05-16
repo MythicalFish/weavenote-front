@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectMeasurements } from '../../selectors';
-import { fetchMeasurements } from '../../actions';
+import { fetchMeasurements, updateMeasurements } from '../../actions';
 import Form from './Form';
 
 class Measurements extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -13,12 +13,16 @@ class Measurements extends React.PureComponent { // eslint-disable-line react/pr
     this.props.fetchMeasurements(project.id);
   }
 
+  update = (data) => {
+    this.props.updateMeasurements(data);
+  }
+
   render() {
     const { project, measurements } = this.props;
     if (measurements.size < 1) return null;
     return (
       <div>
-        <Form initialValues={measurements} onSubmit={(data) => { console.log(data); }} />
+        <Form initialValues={measurements} onSubmit={this.update} />
       </div>
     );
   }
@@ -28,11 +32,12 @@ Measurements.propTypes = {
   project: PropTypes.object,
   measurements: PropTypes.object,
   fetchMeasurements: PropTypes.func,
+  updateMeasurements: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchMeasurements },
+    { fetchMeasurements, updateMeasurements },
     dispatch
   );
 }

@@ -94,6 +94,10 @@ function projectReducer(state = initialState, action) {
     case types.FETCH_MEASUREMENTS_SUCCESS:
       return state
         .set('measurements', fromJS(action.measurements));
+    
+    case types.UPDATE_MEASUREMENTS_SUCCESS:
+      return state
+        .set('measurements', fromJS(action.measurements));
 
     default:
       return state;

@@ -126,3 +126,11 @@ export function fetchMeasurements(projectID) {
 export function fetchMeasurementsSuccess(measurements) {
   return { type: types.FETCH_MEASUREMENTS_SUCCESS, measurements };
 }
+
+export function updateMeasurements(measurements) {
+  return { type: types.UPDATE_MEASUREMENTS, measurements };
+}
+
+export function updateMeasurementsSuccess(measurements) {
+  return { type: types.UPDATE_MEASUREMENTS_SUCCESS, measurements };
+}

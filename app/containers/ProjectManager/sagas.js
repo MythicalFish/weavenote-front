@@ -23,6 +23,7 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.FETCH_MATERIAL_COST, doFetchMaterialCost),
 
     yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
+    yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
 
   ];
   yield take(LOCATION_CHANGE);
@@ -109,3 +110,8 @@ export function* fetchMeasurements(action) {
   yield sagas.get(`projects/${action.projectID}/measurements`, actions.fetchMeasurementsSuccess);
 }
 
+export function* updateMeasurements(action) {
+  const measurements = action.measurements.toJS();
+  const projectID = measurements.groups[0].project_id;
+  yield sagas.patch(`projects/${projectID}/measurements`, { measurements }, actions.updateMeasurementsSuccess);
+}
