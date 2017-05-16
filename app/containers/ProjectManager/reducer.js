@@ -8,6 +8,7 @@ const initialState = fromJS({
   currentImage: 0,
   components: [],
   currentComponent: null,
+  measurements: [],
 });
 
 function projectReducer(state = initialState, action) {
@@ -15,7 +16,7 @@ function projectReducer(state = initialState, action) {
   const imageCount = state.get('images').size;
   const componentCount = state.get('components').size;
   const currentComponent = state.get('currentComponent');
-  
+
   switch (action.type) {
 
     // Project
@@ -87,6 +88,12 @@ function projectReducer(state = initialState, action) {
     case types.SWITCH_IMAGE:
       return state
         .set('currentImage', action.index);
+
+    // Measurements
+
+    case types.FETCH_MEASUREMENTS_SUCCESS:
+      return state
+        .set('measurements', fromJS(action.measurements));
 
     default:
       return state;

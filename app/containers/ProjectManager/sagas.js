@@ -22,6 +22,8 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
     yield takeLatest(types.FETCH_MATERIAL_COST, doFetchMaterialCost),
 
+    yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
+
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -97,4 +99,13 @@ export function* doFetchMaterialCost(action) {
   yield sagas.get(`projects/${component.project_id}/material_cost`, actions.fetchMaterialCostSuccess);
 }
 
+/*
+ *
+ *  Measurements
+ *
+ */
+
+export function* fetchMeasurements(action) {
+  yield sagas.get(`projects/${action.projectID}/measurements`, actions.fetchMeasurementsSuccess);
+}
 

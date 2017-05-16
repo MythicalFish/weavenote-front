@@ -111,3 +111,18 @@ export function deleteImageSuccess(images) {
 export function switchImage(index) {
   return { type: types.SWITCH_IMAGE, index };
 }
+
+/*
+ *
+ *  Measurements
+ *
+ */
+
+
+export function fetchMeasurements(projectID) {
+  return { type: types.FETCH_MEASUREMENTS, projectID };
+}
+
+export function fetchMeasurementsSuccess(measurements) {
+  return { type: types.FETCH_MEASUREMENTS_SUCCESS, measurements };
+}
