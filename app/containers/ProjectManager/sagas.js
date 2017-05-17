@@ -113,5 +113,10 @@ export function* fetchMeasurements(action) {
 export function* updateMeasurements(action) {
   const measurements = action.measurements.toJS();
   const projectID = measurements.groups[0].project_id;
-  yield sagas.patch(`projects/${projectID}/measurements`, { measurements }, actions.updateMeasurementsSuccess);
+  try {
+    const response = yield call(API.patch, `projects/${projectID}/measurements`, { measurements });
+    yield put(actions.updateMeasurementsSuccess(response));
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
 }

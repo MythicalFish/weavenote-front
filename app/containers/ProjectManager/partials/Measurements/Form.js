@@ -9,7 +9,7 @@ const Form = (props) => {
     {
       constraint: null,
       items: initialValues.get('names').toJS().map((name, index) => {
-        return { type: 'names', index };
+        return { type: 'names', index, fieldType: 'text', fieldLength: '16' };
       }),
       colWidth: 4,
     },
@@ -30,7 +30,7 @@ const Form = (props) => {
   });
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id="measurements">
       <div className="row">
         {groupings.map((grouping, index) => (
           <div className={`col-xs-${grouping.colWidth}`} key={`group${index}`}>

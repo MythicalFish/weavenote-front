@@ -3,7 +3,7 @@
 :-ms-input-placeholder { color: $gray-lightest; }
 input:-moz-placeholder { color: $gray-lightest; }
 
-input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],select,textarea,.select-input > button {
+input[type="text"],input[type="number"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],select,textarea,.select-input > button {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   line-height: 1;
