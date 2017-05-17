@@ -42,7 +42,7 @@ export default class ListComponents extends React.PureComponent {
         <div className="data-rows mt2">
           {items.length > 1
             ? items
-            : 'No materials yet'
+            : <div className="p2">No materials yet</div>
           }
           <DataRow
             type="display"

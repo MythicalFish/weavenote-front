@@ -24,6 +24,8 @@ export function* projectManagerWatcher() {
 
     yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
     yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
+    yield takeLatest(types.CREATE_MEASUREMENT_GROUP, createMeasurementGroup),
+    yield takeLatest(types.CREATE_MEASUREMENT_NAME, createMeasurementName),
 
   ];
   yield take(LOCATION_CHANGE);
@@ -108,6 +110,15 @@ export function* doFetchMaterialCost(action) {
 
 export function* fetchMeasurements(action) {
   yield sagas.get(`projects/${action.projectID}/measurements`, actions.fetchMeasurementsSuccess);
+}
+
+export function* createMeasurementGroup(action) {
+  const group = { name: 'X' };
+  yield sagas.post(`projects/${action.projectID}/measurement_groups`, { group }, actions.createMeasurementGroupSuccess);
+}
+
+export function* createMeasurementName(action) {
+  yield sagas.post(`projects/${action.projectID}/measurement_names`, actions.createMeasurementNameSuccess);
 }
 
 export function* updateMeasurements(action) {
