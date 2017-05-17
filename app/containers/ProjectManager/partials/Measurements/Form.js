@@ -11,7 +11,7 @@ const Form = (props) => {
       items: initialValues.get('names').toJS().map((name, index) => {
         return { type: 'names', index, fieldType: 'text', fieldLength: '16' };
       }),
-      colWidth: 4,
+      colClass: 'column',
     },
   ];
 
@@ -19,7 +19,7 @@ const Form = (props) => {
     const grouping = {
       constraint: { type: 'groups', index: groupIndex },
       items: [],
-      colWidth: 2,
+      colClass: 'column',
     };
     initialValues.get('values').toJS().forEach((measurement, index) => {
       if (measurement.measurement_group_id === group.id) {
@@ -31,9 +31,9 @@ const Form = (props) => {
 
   return (
     <form onSubmit={handleSubmit} id="measurements">
-      <div className="row">
+      <div className="flex">
         {groupings.map((grouping, index) => (
-          <div className={`col-xs-${grouping.colWidth}`} key={`group${index}`}>
+          <div className={`${grouping.colClass}`} key={`group${index}`}>
             <Column grouping={grouping} />
           </div>
         ))}

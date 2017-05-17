@@ -1,5 +1,31 @@
 #measurements {
   input[type="text"], input[type="number"] {
-    padding: 10px;
+    padding: $space-1;
+  }
+  .column {
+    max-width: 70px;
+    @extend .b1;
+    border-radius: 4px;
+    overflow: hidden;
+    > div > div {
+      &:not(:last-child) {
+        @extend .bb1;
+      }
+    }
+    input {
+      text-align: center;
+      &[type="number"] {
+        padding-right: 0;
+      }
+    }
+    &:first-child {
+      max-width: 200px;
+      input {
+        text-align: left;
+      }
+    }
+    &:not(:last-child) {
+      margin-right: $space-1;
+    }
   }
 }
