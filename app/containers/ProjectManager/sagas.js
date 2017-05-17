@@ -118,7 +118,8 @@ export function* createMeasurementGroup(action) {
 }
 
 export function* createMeasurementName(action) {
-  yield sagas.post(`projects/${action.projectID}/measurement_names`, actions.createMeasurementNameSuccess);
+  const name = { value: 'Untitled' };
+  yield sagas.post(`projects/${action.projectID}/measurement_names`, { name }, actions.createMeasurementNameSuccess);
 }
 
 export function* updateMeasurements(action) {

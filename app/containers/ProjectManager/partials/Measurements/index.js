@@ -35,6 +35,9 @@ class Measurements extends React.PureComponent { // eslint-disable-line react/pr
           <PlusButton onClick={() => { this.createGroup(project.id); }} />
         </div>
         <Form initialValues={measurements} onSubmit={this.update} />
+        <div>
+          <PlusButton onClick={() => { this.createName(project.id); }} />
+        </div>
       </div>
     );
   }
