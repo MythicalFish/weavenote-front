@@ -99,7 +99,11 @@ function projectReducer(state = initialState, action) {
       const { measurements } = action.response;
       return state
         .set('measurements', fromJS(measurements));
-      
+
+    case types.CREATE_MEASUREMENT_GROUP:
+      return state
+        .set('measurements', fromJS([]));
+
     case types.CREATE_MEASUREMENT_GROUP_SUCCESS:
       return state
         .set('measurements', fromJS(action.measurements));
