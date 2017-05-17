@@ -15,13 +15,13 @@ const Form = (props) => {
     },
   ];
 
-  initialValues.get('groups').toJS().map((group, groupIndex) => {
+  initialValues.get('groups').toJS().forEach((group, groupIndex) => {
     const grouping = {
       constraint: { type: 'groups', index: groupIndex },
       items: [],
       colWidth: 2,
     };
-    initialValues.get('values').toJS().map((measurement, index) => {
+    initialValues.get('values').toJS().forEach((measurement, index) => {
       if (measurement.measurement_group_id === group.id) {
         grouping.items.push({ type: 'values', index });
       }
