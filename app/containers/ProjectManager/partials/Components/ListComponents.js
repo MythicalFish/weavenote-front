@@ -1,6 +1,7 @@
 import React from 'react';
 import DataRow from 'components/DataRow';
 import Price from 'components/Price';
+import PlusButton from 'components/PlusButton';
 import Form from './Form';
 import ListItem from './ListItem';
 
@@ -36,9 +37,7 @@ export default class ListComponents extends React.PureComponent {
     }
     return (
       <div>
-        <button className="glyph" onClick={props.toggleCreate}>
-          <i className="fa fa-plus-circle"></i>
-        </button>
+        <PlusButton onClick={props.toggleCreate} />
         <div className="data-rows mt2">
           {items.length > 1
             ? items

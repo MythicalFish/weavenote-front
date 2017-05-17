@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import PlusButton from 'components/PlusButton';
 import { selectMeasurements } from '../../selectors';
 import { fetchMeasurements, updateMeasurements, createMeasurementGroup, createMeasurementName } from '../../actions';
 import Form from './Form';
@@ -31,9 +32,7 @@ class Measurements extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <div>
         <div className="right-align">
-          <button className="glyph" onClick={() => { this.createGroup(project.id); }}>
-            <i className="fa fa-plus-circle"></i>
-          </button>
+          <PlusButton onClick={() => { this.createGroup(project.id); }} />
         </div>
         <Form initialValues={measurements} onSubmit={this.update} />
       </div>

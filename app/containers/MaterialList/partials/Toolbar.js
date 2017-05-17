@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
+import PlusButton from 'components/PlusButton';
 
 export default function Toolbar(props) {
   const { fetch, changeSection, currentSection } = props;
   return (
     <header className="toolbar">
-      <Link to="/materials/new" className="glyph">
-        <i className="fa fa-plus-circle"></i>
-      </Link>
+      <PlusButton to="/materials/new" />
       <nav>
         <ul>
           <li>

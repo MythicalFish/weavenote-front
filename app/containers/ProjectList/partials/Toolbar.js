@@ -1,14 +1,13 @@
 import React from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
+import PlusButton from 'components/PlusButton';
 
 export default function Toolbar(props) {
   const { create, fetch, changeSection, currentSection } = props;
   return (
     <header className="toolbar">
-      <button className="glyph" onClick={() => { create(); }}>
-        <i className="fa fa-plus-circle"></i>
-      </button>
+      <PlusButton onClick={() => { create(); }} />
       <nav>
         <ul>
           <li>
