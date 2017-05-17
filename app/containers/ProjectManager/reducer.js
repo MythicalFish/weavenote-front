@@ -95,6 +95,10 @@ function projectReducer(state = initialState, action) {
       return state
         .set('measurements', fromJS(action.measurements));
 
+    case types.UPDATE_MEASUREMENTS:
+      return state
+        .set('measurements', fromJS([]));
+      
     case types.UPDATE_MEASUREMENTS_SUCCESS:
       const { measurements } = action.response;
       return state
