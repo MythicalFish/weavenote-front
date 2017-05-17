@@ -1,6 +1,7 @@
 export const Basics = { label: 'Basics', id: 'Basics' };
 export const Components = { label: 'Materials', id: 'Components' };
 export const Measurements = { label: 'Measurements', id: 'Measurements' };
+export const Instructions = { label: 'Instructions', id: 'Instructions' };
 
 export const ActiveProjects = { label: 'Active Projects', id: 'ActiveProjects' };
 export const ArchivedProjects = { label: 'Archived Projects', id: 'ArchivedProjects' };

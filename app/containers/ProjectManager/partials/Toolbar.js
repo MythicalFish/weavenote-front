@@ -40,10 +40,22 @@ export default function Toolbar(props) {
               }}
             />
           </li>
+          <li>
+            <NavItem
+              label={sections.Instructions.label}
+              isActive={sections.Instructions.id === currentSection.id}
+              handleClick={() => {
+                changeSection(sections.Instructions);
+              }}
+            />
+          </li>
         </ul>
       </nav>
       <div>
-        
+        Collaborators
+      </div>
+      <div>
+        -
       </div>
     </header>
   );

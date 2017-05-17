@@ -9,6 +9,7 @@ import Toolbar from './partials/Toolbar';
 import Basics from './partials/Basics';
 import Components from './partials/Components';
 import Measurements from './partials/Measurements';
+import Instructions from './partials/Instructions';
 import Images from './partials/Images';
 import { selectProject } from './selectors';
 import { fetchProject } from './actions';
@@ -37,6 +38,10 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
 
       case sections.Measurements.id:
         renderedSection = <Measurements {...sectionProps} />;
+        break;
+
+      case sections.Instructions.id:
+        renderedSection = <Instructions {...sectionProps} />;
         break;
 
       default:
