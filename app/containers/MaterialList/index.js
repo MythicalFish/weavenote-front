@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentSection, selectMaterials } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
+import Header from 'components/Header';
 import { fetchMaterials, createMaterial } from './actions';
 import Toolbar from './partials/Toolbar';
 import ListItem from './partials/ListItem';
@@ -20,6 +21,7 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
     const { materials } = this.props;
     return (
       <div>
+        <Header />
         <Toolbar
           changeSection={this.props.changeSection}
           currentSection={this.props.currentSection}

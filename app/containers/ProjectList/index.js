@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
+import Header from 'components/Header';
 import Toolbar from './partials/Toolbar';
 import ListItem from './partials/ListItem';
 import { fetchProjects, createProject, fileProject } from './actions';
@@ -19,6 +20,7 @@ export class ProjectList extends React.PureComponent { // eslint-disable-line re
     const { props } = this;
     return (
       <div>
+        <Header />
         <Toolbar
           currentSection={props.currentSection}
           changeSection={props.changeSection}

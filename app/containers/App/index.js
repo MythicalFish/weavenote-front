@@ -12,8 +12,7 @@
  */
 
 import React from 'react';
-import Auth, { Auth0 } from 'containers/Auth';
-import Header from 'components/Header';
+import Auth from 'containers/Auth';
 import Sidebar from 'components/Sidebar';
 
 
@@ -32,12 +31,6 @@ export default class App extends React.PureComponent { // eslint-disable-line re
             <Sidebar currentPath={this.props.location.pathname} />
           </div>
           <div className="flex-auto">
-            <Header>
-              <div></div>
-              <nav>
-                <button className="btn" onClick={() => { Auth0.logout(); }}>Logout</button>
-              </nav>
-            </Header>
             {React.Children.toArray(this.props.children)}
           </div>
         </div>

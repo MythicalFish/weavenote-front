@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import Header from 'components/Header';
 import { selectMaterial, selectMaterialTypes, selectColors } from './selectors';
 import { fetchMaterial, updateMaterial, createMaterial, fetchMaterialTypes, fetchColors } from './actions';
 import Form from './partials/Form';
@@ -29,6 +30,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
     const { material, materialTypes, colors } = this.props;
     return (
       <div>
+        <Header />
         <Toolbar />
         <div className="p2">
           <div className="container-narrower">

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
 import { Link } from 'react-router';
+import UserMenu from 'components/UserMenu';
 
 export default function Toolbar(props) {
   const { changeSection, currentSection } = props;
@@ -41,7 +42,9 @@ export default function Toolbar(props) {
           </li>
         </ul>
       </nav>
-      <div></div>
+      <div>
+        
+      </div>
     </header>
   );
 }
