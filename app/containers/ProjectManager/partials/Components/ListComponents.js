@@ -39,7 +39,7 @@ export default class ListComponents extends React.PureComponent {
       <div>
         <PlusButton onClick={props.toggleCreate} />
         <div className="data-rows mt2">
-          {items.length > 1
+          {items.length > 0
             ? items
             : <div className="p2">No materials yet</div>
           }
