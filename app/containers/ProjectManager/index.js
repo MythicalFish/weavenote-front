@@ -10,6 +10,7 @@ import Basics from './partials/Basics';
 import Components from './partials/Components';
 import Measurements from './partials/Measurements';
 import Instructions from './partials/Instructions';
+import Collaborators from './partials/Collaborators';
 import Images from './partials/Images';
 import { selectProject } from './selectors';
 import { fetchProject } from './actions';
@@ -42,6 +43,10 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
 
       case sections.Instructions.id:
         renderedSection = <Instructions {...sectionProps} />;
+        break;
+
+      case sections.Collaborators.id:
+        renderedSection = <Collaborators {...sectionProps} />;
         break;
 
       default:

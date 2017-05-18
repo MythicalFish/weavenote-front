@@ -8,11 +8,13 @@ export default function Toolbar(props) {
   const { changeSection, currentSection } = props;
   return (
     <header className="toolbar">
-      <Link to="/projects" className="glyph glyph-sm gray">
-        <i className="fa fa-arrow-left"></i>
-      </Link>
       <nav>
         <ul>
+          <li>
+            <Link to="/projects" className="glyph glyph-sm gray">
+              <i className="fa fa-arrow-left"></i>
+            </Link>
+          </li>
           <li>
             <NavItem
               label={sections.Basics.label}
@@ -49,14 +51,22 @@ export default function Toolbar(props) {
               }}
             />
           </li>
+          <li>
+            <NavItem
+              label={sections.Collaborators.label}
+              isActive={sections.Collaborators.id === currentSection.id}
+              handleClick={() => {
+                changeSection(sections.Collaborators);
+              }}
+            />
+          </li>
         </ul>
       </nav>
-      <div>
-        Collaborators
-      </div>
-      <div>
-        -
-      </div>
+      <nav>
+        <ul>
+          <li><UserMenu /></li>
+        </ul>
+      </nav>
     </header>
   );
 }
