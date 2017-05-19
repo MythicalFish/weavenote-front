@@ -6,10 +6,10 @@ export function fetchMaterials() {
   };
 }
 
-export function fetchMaterialsSuccess(list) {
+export function fetchMaterialsSuccess(materials) {
   return {
     type: types.FETCH_MATERIALS_SUCCESS,
-    list,
+    materials,
   };
 }
 
@@ -19,10 +19,10 @@ export function createMaterial() {
   };
 }
 
-export function createMaterialSuccess(list) {
+export function createMaterialSuccess(materials) {
   return {
     type: types.CREATE_MATERIAL_SUCCESS,
-    list,
+    materials,
   };
 }
 

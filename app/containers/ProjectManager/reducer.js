@@ -16,7 +16,6 @@ const initialState = fromJS({
 function projectReducer(state = initialState, action) {
 
   const imageCount = state.get('images').size;
-  const componentCount = state.get('components').size;
   const currentComponent = state.get('currentComponent');
   const currentInstruction = state.get('currentInstruction');
 

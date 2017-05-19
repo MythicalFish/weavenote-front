@@ -5,8 +5,15 @@
  */
 
 import { fromJS } from 'immutable';
-import * as types from './constants';
+import * as MaterialListActionTypes from 'containers/MaterialList/constants';
+import * as AppActionTypes from './constants';
 import * as sections from './constants/sections';
+
+const types = {
+  App: AppActionTypes,
+  MaterialList: MaterialListActionTypes,
+};
+
 
 const initialState = fromJS({
   stats: {
@@ -18,26 +25,27 @@ const initialState = fromJS({
     },
   },
   currentSection: sections.Default,
-  materials: null,
+  materials: [],
 });
 
 function appReducer(state = initialState, action) {
+
   switch (action.type) {
 
-    case types.CHANGE_SECTION:
+    case types.App.CHANGE_SECTION:
       return state
         .setIn(['currentSection', 'id'], action.section.id)
         .setIn(['currentSection', 'label'], action.section.label);
 
-    case types.GET_STATS_SUCCESS:
+    case types.App.GET_STATS_SUCCESS:
       return state
         .set('stats', fromJS(action.stats));
 
     // Materials
 
-    case 'FETCH_MATERIALS_SUCCESS':
+    case types.MaterialList.FETCH_MATERIALS_SUCCESS:
       return state
-        .set('materials', fromJS(action.list));
+        .set('materials', fromJS(action.materials));
 
     default:
       return state;
