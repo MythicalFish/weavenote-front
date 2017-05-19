@@ -1,18 +1,11 @@
 import React, { PropTypes } from 'react';
+import AccordionItem from 'components/AccordionItem';
 import Dot from 'components/Dot';
 
 const ListItem = (props) => {
-  const { item, switchItem, isCurrent, index } = props;
-  console.log(props.item.toJS())
-  const material = item.get('material').toJS();
-  let chevronClass = 'fa-chevron-down';
-  let switchTarget = index;
-  if (isCurrent) {
-    chevronClass = 'fa-chevron-up';
-    switchTarget = null;
-  }
+  const material = props.item.get('material').toJS();
   return (
-    <button type="button" className="data-row left-align" onClick={() => { switchItem(switchTarget); }}>
+    <AccordionItem {...props}>
       <div className="x8 pr0">
         {material.name}
       </div>
@@ -23,18 +16,12 @@ const ListItem = (props) => {
         {material.color.name}
         <Dot className="ml1" color={material.color.hex_code} />
       </div>
-      <div className="right-align smaller2 dark2">
-        <i className={`fa ${chevronClass}`}></i>
-      </div>
-    </button>
+    </AccordionItem>
   );
 };
 
 ListItem.propTypes = {
-  index: PropTypes.number,
   item: PropTypes.object,
-  switchItem: PropTypes.func,
-  isCurrent: PropTypes.bool,
 };
 
 export default ListItem;
