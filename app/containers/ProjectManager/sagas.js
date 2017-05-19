@@ -104,6 +104,30 @@ export function* doFetchMaterialCost(action) {
 
 /*
  *
+ *  Instructions
+ *
+ */
+
+export function* fetchInstructions(action) {
+  yield sagas.get(`projects/${action.projectID}/instructions`, actions.fetchInstructionsSuccess);
+}
+
+export function* updateInstruction(action) {
+  const instruction = action.instruction.toJS();
+  yield sagas.patch(`instructions/${instruction.id}`, { instruction }, actions.updateInstructionSuccess);
+}
+
+export function* createInstruction({ payload }) {
+  const instruction = { material_id: payload.materialID };
+  yield sagas.post(`projects/${payload.projectID}/instructions`, { instruction }, actions.createInstructionSuccess);
+}
+
+export function* deleteInstruction(action) {
+  yield sagas.destroy(`projects/${action.projectID}/instructions/${action.id}`, actions.deleteInstructionSuccess);
+}
+
+/*
+ *
  *  Measurements
  *
  */

@@ -2,7 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
+import Accordion from 'components/Accordion';
+import ListItem from './ListItem';
+import Form from './Form';
+import {
+  fetchInstructions, switchInstruction, updateInstruction, createInstruction,
+} from '../../actions';
+import { selectInstructions, selectCurrentInstruction } from '../../selectors';
+import CreateInstruction from './CreateInstruction';
 class Instructions extends React.Component {
 
   constructor(props) {
@@ -14,6 +21,7 @@ class Instructions extends React.Component {
 
   componentDidMount() {
     const { project } = this.props;
+    this.props.fetchInstructions(project.id);
   }
 
   toggleCreate = () => {
@@ -23,25 +31,50 @@ class Instructions extends React.Component {
   render() {
     return (
       <div>
-        Instructions
+        {
+          this.state.creating
+            ? <CreateInstruction
+              project={this.props.project}
+              toggleCreate={this.toggleCreate}
+              createInstruction={this.props.createInstruction}
+            />
+            : <Accordion
+              items={this.props.instructions}
+              current={this.props.current}
+              toggleCreate={this.toggleCreate}
+              updateItem={this.props.updateInstruction}
+              switchItem={this.props.switchInstruction}
+              formValues={this.props.current}
+              ListItem={ListItem}
+              Form={Form}
+            />
+        }
       </div>
     );
   }
 }
 
 Instructions.propTypes = {
+  project: PropTypes.object,
+  instructions: PropTypes.array,
+  current: PropTypes.object,
+  fetchInstructions: PropTypes.func,
+  switchInstruction: PropTypes.func,
+  updateInstruction: PropTypes.func,
+  createInstruction: PropTypes.func,
 };
 
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { },
+    { fetchInstructions, switchInstruction, updateInstruction, createInstruction },
     dispatch
   );
 }
 
 const mapState = createStructuredSelector({
-  
+  instructions: selectInstructions(),
+  current: selectCurrentInstruction(),
 });
 
 export default connect(mapState, mapDispatch)(Instructions);

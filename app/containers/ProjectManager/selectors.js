@@ -29,6 +29,22 @@ export const selectCurrentComponent = () => createSelector(
   }
 );
 
+export const selectInstructions = () => createSelector(
+  selectDomain(),
+  (substate) => substate.get('instructions')
+);
+
+export const selectCurrentInstruction = () => createSelector(
+  selectDomain(),
+  (substate) => {
+    const index = substate.get('currentInstruction');
+    const instruction = substate.getIn(['instructions', index]);
+    if (instruction) { return instruction; }
+    return null;
+  }
+);
+
+
 export const selectImages = () => createSelector(
   selectDomain(),
   (substate) => substate.get('images')
