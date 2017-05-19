@@ -84,8 +84,8 @@ export function fetchInstructionsSuccess(instructions) {
   return { type: types.FETCH_INSTRUCTIONS_SUCCESS, instructions };
 }
 
-export function updateInstruction(instruction) {
-  return { type: types.UPDATE_INSTRUCTION, instruction };
+export function updateInstruction(payload) {
+  return { type: types.UPDATE_INSTRUCTION, payload };
 }
 
 export function updateInstructionSuccess(instruction) {

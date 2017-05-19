@@ -24,6 +24,7 @@ export function* projectManagerWatcher() {
 
     yield takeLatest(types.FETCH_INSTRUCTIONS, fetchInstructions),
     yield takeLatest(types.CREATE_INSTRUCTION, createInstruction),
+    yield takeLatest(types.UPDATE_INSTRUCTION, updateInstruction),
     yield takeLatest(types.DELETE_INSTRUCTION, deleteInstruction),
 
     yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
@@ -116,9 +117,9 @@ export function* fetchInstructions(action) {
   yield sagas.get(`projects/${action.projectID}/instructions`, actions.fetchInstructionsSuccess);
 }
 
-export function* updateInstruction(action) {
-  const instruction = action.instruction.toJS();
-  yield sagas.patch(`instructions/${instruction.id}`, { instruction }, actions.updateInstructionSuccess);
+export function* updateInstruction({ payload }) {
+  const instruction = payload.toJS();
+  yield sagas.patch(`projects/${instruction.project_id}/instructions/${instruction.id}`, { instruction }, actions.updateInstructionSuccess);
 }
 
 export function* createInstruction({ payload }) {
