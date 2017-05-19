@@ -35,10 +35,10 @@ export default class Accordion extends React.PureComponent {
     return (
       <div>
         <PlusButton onClick={props.toggleCreate} />
-        <div className="data-row mt2">
+        <div className="data-rows mt2">
           {items.length > 0
             ? items
-            : <div className="p2">No items yet</div>
+            : <div className="data-row"><div className="p2">No items yet</div></div>
           }
           {props.footer &&
             <DataRow

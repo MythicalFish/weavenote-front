@@ -6,9 +6,9 @@ import DataRow from 'components/DataRow';
 
 let Form = (props) => {
   const { handleSubmit, submitting } = props;
-  const component = props.component.toJS();
-  const material = component.material;
-  const materialCost = <Price value={component.material_cost} />;
+  const item = props.item.toJS();
+  const material = item.material;
+  const materialCost = <Price value={item.material_cost} />;
   const color =
     (<div>
       {material.color.name}
@@ -30,7 +30,7 @@ let Form = (props) => {
 };
 
 Form.propTypes = {
-  component: PropTypes.object,
+  item: PropTypes.object,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
 };

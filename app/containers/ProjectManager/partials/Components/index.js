@@ -5,8 +5,11 @@ import { createStructuredSelector } from 'reselect';
 
 import { selectMaterials } from 'containers/App/selectors';
 import { fetchMaterials } from 'containers/MaterialList/actions';
+import Accordion from 'components/Accordion';
+import Price from 'components/Price';
 import SelectMaterial from './SelectMaterial';
-import ListComponents from './ListComponents';
+import ListItem from './ListItem';
+import Form from './Form';
 import {
   fetchComponents, switchComponent, updateComponent, createComponent,
   fetchMaterialCost,
@@ -43,15 +46,19 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
               toggleCreate={this.toggleCreate}
               createComponent={this.props.createComponent}
             />
-            : <ListComponents
-              project={this.props.project}
-              components={this.props.components}
+            : <Accordion
+              items={this.props.components}
               current={this.props.current}
               toggleCreate={this.toggleCreate}
-              updateComponent={this.props.updateComponent}
-              fetchMaterialCost={this.props.fetchMaterialCost}
-              switchComponent={this.props.switchComponent}
+              updateItem={this.props.updateComponent}
+              switchItem={this.props.switchComponent}
               formValues={this.props.formValues}
+              ListItem={ListItem}
+              Form={Form}
+              footer={{
+                label: 'Material cost',
+                value: <Price value={this.props.project.material_cost} />,
+              }}
             />
         }
       </div>
