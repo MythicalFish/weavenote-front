@@ -22,6 +22,10 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
     yield takeLatest(types.FETCH_MATERIAL_COST, doFetchMaterialCost),
 
+    yield takeLatest(types.FETCH_INSTRUCTIONS, fetchInstructions),
+    yield takeLatest(types.CREATE_INSTRUCTION, createInstruction),
+    yield takeLatest(types.DELETE_INSTRUCTION, deleteInstruction),
+
     yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
     yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
     yield takeLatest(types.CREATE_MEASUREMENT_GROUP, createMeasurementGroup),
@@ -118,8 +122,9 @@ export function* updateInstruction(action) {
 }
 
 export function* createInstruction({ payload }) {
-  const instruction = { material_id: payload.materialID };
-  yield sagas.post(`projects/${payload.projectID}/instructions`, { instruction }, actions.createInstructionSuccess);
+  const { title, description, projectID } = payload.toJS();
+  const instruction = { project_id: projectID, title, description };
+  yield sagas.post(`projects/${projectID}/instructions`, { instruction }, actions.createInstructionSuccess);
 }
 
 export function* deleteInstruction(action) {

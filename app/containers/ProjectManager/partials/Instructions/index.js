@@ -9,7 +9,6 @@ import {
   fetchInstructions, switchInstruction, updateInstruction, createInstruction,
 } from '../../actions';
 import { selectInstructions, selectCurrentInstruction } from '../../selectors';
-import CreateInstruction from './CreateInstruction';
 class Instructions extends React.Component {
 
   constructor(props) {
@@ -28,15 +27,24 @@ class Instructions extends React.Component {
     this.setState({ creating: !this.state.creating });
   }
 
+  createInstruction = (data) => {
+    console.log(data);
+    this.props.createInstruction(data);
+    this.toggleCreate();
+  }
+
   render() {
     return (
       <div>
         {
           this.state.creating
-            ? <CreateInstruction
-              project={this.props.project}
-              toggleCreate={this.toggleCreate}
-              createInstruction={this.props.createInstruction}
+            ? <Form
+              onSubmit={this.createInstruction}
+              initialValues={{
+                title: '',
+                description: '',
+                projectID: this.props.project.id,
+              }}
             />
             : <Accordion
               items={this.props.instructions}
@@ -56,7 +64,7 @@ class Instructions extends React.Component {
 
 Instructions.propTypes = {
   project: PropTypes.object,
-  instructions: PropTypes.array,
+  instructions: PropTypes.object,
   current: PropTypes.object,
   fetchInstructions: PropTypes.func,
   switchInstruction: PropTypes.func,
