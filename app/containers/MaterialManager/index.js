@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
-import { selectMaterial, selectMaterialTypes, selectColors, selectCurrencies } from './selectors';
+import {
+  selectMaterial, selectMaterialTypes, selectColors, selectCurrencies,
+  selectMaterialForm,
+} from './selectors';
 import {
   fetchMaterial, updateMaterial, createMaterial,
   fetchMaterialTypes, fetchColors, fetchCurrencies,
@@ -40,7 +43,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
           <div className="container">
             {material && materialTypes && colors && currencies &&
               <Form
-                initialValues={material}
+                initialValues={this.props.materialForm}
                 materialTypes={materialTypes}
                 colors={colors}
                 currencies={currencies}
@@ -70,6 +73,7 @@ MaterialManager.propTypes = {
 
 const mapState = createStructuredSelector({
   material: selectMaterial(),
+  materialForm: selectMaterialForm(),
   materialTypes: selectMaterialTypes(),
   colors: selectColors(),
   currencies: selectCurrencies(),
