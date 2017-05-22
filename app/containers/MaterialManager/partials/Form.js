@@ -7,7 +7,6 @@ class Form extends React.Component {
   state = {
     // Defaults
     selectedType: 'Fabric',
-    selectedCurrency: 'GBP',
   }
 
   componentWillMount = () => {
@@ -16,17 +15,10 @@ class Form extends React.Component {
     if (v.type) {
       this.setState({ selectedType: v.type.name });
     }
-    if (v.currency) {
-      this.setState({ selectedCurrency: v.currency.iso_code });
-    }
   }
 
   switchType = (type) => {
     this.setState({ selectedType: type.name });
-  }
-  
-  switchCurrency = (currency) => {
-    this.setState({ selectedCurrency: currency });
   }
 
   render() {

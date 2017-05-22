@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Dot from 'components/Dot';
+import PriceSymbol from 'components/PriceSymbol';
 
 export default class SelectInput extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -26,7 +27,8 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
     const options = data.map((item, index) => (
       <li key={`select-${name}-${index}`} onClick={() => { this.handleClick(item); }}>
         {item.name}
-        {item.hex_code && <Dot className="ml1" color={item.hex_code} /> }
+        {val.iso_code && <PriceSymbol code={item.iso_code} className="bold ml1" />}
+        {item.hex_code && <Dot className="ml1" color={item.hex_code} />}
       </li>
     ));
 
@@ -34,6 +36,7 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
       <div className={`select-input p0 ${className}`}>
         <button onClick={this.toggleState} type="button">
           {val.name}
+          {val.iso_code && <PriceSymbol code={val.iso_code} className="bold ml1" />}
           {val.hex_code && <Dot className="ml1" color={val.hex_code} /> }
         </button>
         {this.state.active &&
