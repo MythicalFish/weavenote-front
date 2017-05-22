@@ -1,14 +1,14 @@
 import * as types from './constants';
 
-export function getStats() {
+export function fetchStats() {
   return {
-    type: types.GET_STATS,
+    type: types.FETCH_STATS,
   };
 }
 
-export function getStatsSuccess(stats) {
+export function fetchStatsSuccess(stats) {
   return {
-    type: types.GET_STATS_SUCCESS,
+    type: types.FETCH_STATS_SUCCESS,
     stats,
   };
 }

@@ -37,7 +37,7 @@ function appReducer(state = initialState, action) {
         .setIn(['currentSection', 'id'], action.section.id)
         .setIn(['currentSection', 'label'], action.section.label);
 
-    case types.App.GET_STATS_SUCCESS:
+    case types.App.FETCH_STATS_SUCCESS:
       return state
         .set('stats', fromJS(action.stats));
 

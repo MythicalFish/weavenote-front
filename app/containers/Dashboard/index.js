@@ -13,12 +13,12 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectStats } from 'containers/App/selectors';
-import { getStats } from 'containers/App/actions';
+import { fetchStats } from 'containers/App/actions';
 import Header from 'components/Header';
 
 class Dashboard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.getStats();
+    this.props.fetchStats();
   }
   render() {
 
@@ -79,12 +79,12 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
 
 Dashboard.propTypes = {
   stats: PropTypes.object,
-  getStats: PropTypes.func,
+  fetchStats: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return {
-    getStats: () => dispatch(getStats()),
+    fetchStats: () => dispatch(fetchStats()),
   };
 }
 
