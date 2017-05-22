@@ -20,7 +20,7 @@ export default function ListItem(props) {
         {material.color.name}
       </div>
       <div className="p1 pr2">
-        {material.price}
+        {material.cost_total}
       </div>
     </ListItemWrapper>
   );
