@@ -21,6 +21,9 @@ export default class DataRow extends React.PureComponent {
 
     if (props.input) {
       fieldProps = props.input;
+      if (props.onChanged) {
+        fieldProps.onChanged = props.onChanged; // onChange in use by redux-form
+      }
     } else {
       fieldProps = props;
     }
