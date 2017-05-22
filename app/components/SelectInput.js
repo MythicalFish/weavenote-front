@@ -3,14 +3,9 @@ import Dot from 'components/Dot';
 
 export default class SelectInput extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-    };
-  }
+  state = { active: false }
 
-  toggleMenu = () => {
+  toggleState = () => {
     this.setState({ active: !this.state.active });
   }
 
@@ -33,7 +28,7 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
 
     return (
       <div className={`select-input p0 ${className}`}>
-        <button onClick={this.toggleMenu} type="button">
+        <button onClick={this.toggleState} type="button">
           {val.name}
           {val.hex_code && <Dot className="ml1" color={val.hex_code} /> }
         </button>

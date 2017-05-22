@@ -11,12 +11,7 @@ import {
 import { selectInstructions, selectCurrentInstruction } from '../../selectors';
 class Instructions extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      creating: false,
-    };
-  }
+  state = { creating: false }
 
   componentDidMount() {
     const { project } = this.props;
@@ -28,7 +23,6 @@ class Instructions extends React.Component {
   }
 
   createInstruction = (data) => {
-    console.log(data);
     this.props.createInstruction(data);
     this.toggleCreate();
   }

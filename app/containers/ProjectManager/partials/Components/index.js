@@ -18,12 +18,7 @@ import { selectComponents, selectCurrentComponent, selectComponentForm } from '.
 
 class Components extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      creating: false,
-    };
-  }
+  state = { creating: false }
 
   componentDidMount() {
     const { project } = this.props;

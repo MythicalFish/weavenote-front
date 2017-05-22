@@ -7,13 +7,11 @@
 import React from 'react';
 
 class Dropdown extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentWillMount() {
-    this.setState({ active: false });
-  }
-  toggleMenu = () => {
-    this.state.active
-      ? this.setState({ active: false })
-      : this.setState({ active: true });
+
+  state = { active: false }
+
+  toggleState = () => {
+    this.setState({ active: !this.state.active });
   }
   render() {
     const { label, children } = this.props;
@@ -27,7 +25,7 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
     }
     return (
       <div className="dropdown">
-        <button type="button" onClick={this.toggleMenu}>
+        <button type="button" onClick={this.toggleState}>
           {label}
         </button>
         {menu}
