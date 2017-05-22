@@ -30,3 +30,10 @@ export const selectColors = () => createSelector(
   }
 );
 
+export const selectCurrencies = () => createSelector(
+  selectDomain(), (substate) => {
+    const currencies = substate.get('currencies');
+    if (currencies) { return currencies.toJS(); }
+    return currencies;
+  }
+);

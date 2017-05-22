@@ -3,17 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
-import { selectMaterial, selectMaterialTypes, selectColors } from './selectors';
-import { fetchMaterial, updateMaterial, createMaterial, fetchMaterialTypes, fetchColors } from './actions';
+import { selectMaterial, selectMaterialTypes, selectColors, selectCurrencies } from './selectors';
+import {
+  fetchMaterial, updateMaterial, createMaterial,
+  fetchMaterialTypes, fetchColors, fetchCurrencies,
+} from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
 
 export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const { params, materialTypes, colors } = this.props;
+    const { params, materialTypes, colors, currencies } = this.props;
     if (!materialTypes) { this.props.fetchMaterialTypes(); }
     if (!colors) { this.props.fetchColors(); }
+    if (!currencies) { this.props.fetchCurrencies(); }
     this.props.fetchMaterial(params.id);
   }
 
@@ -27,18 +31,19 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
   }
 
   render() {
-    const { material, materialTypes, colors } = this.props;
+    const { material, materialTypes, colors, currencies } = this.props;
     return (
       <div>
         <Header />
         <Toolbar />
         <div className="p2">
-          <div className="container-narrower">
-            {material && materialTypes && colors &&
+          <div className="container">
+            {material && materialTypes && colors && currencies &&
               <Form
                 initialValues={material}
                 materialTypes={materialTypes}
                 colors={colors}
+                currencies={currencies}
                 onSubmit={(values) => { this.onSubmit(values); }}
               />
             }
@@ -58,18 +63,23 @@ MaterialManager.propTypes = {
   fetchMaterialTypes: PropTypes.func.isRequired,
   materialTypes: PropTypes.array,
   fetchColors: PropTypes.func.isRequired,
+  fetchCurrencies: PropTypes.func.isRequired,
   colors: PropTypes.array,
+  currencies: PropTypes.array,
 };
 
 const mapState = createStructuredSelector({
   material: selectMaterial(),
   materialTypes: selectMaterialTypes(),
   colors: selectColors(),
+  currencies: selectCurrencies(),
 });
 
 function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchMaterial, fetchMaterialTypes, updateMaterial, createMaterial, fetchColors },
+    {
+      fetchMaterial, fetchMaterialTypes, updateMaterial, createMaterial, fetchColors, fetchCurrencies,
+    },
     dispatch
   );
 }

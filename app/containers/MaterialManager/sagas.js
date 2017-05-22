@@ -3,6 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
+import * as selectors from './selectors';
 export default [materialManagerWatcher];
 
 export function* materialManagerWatcher() {
@@ -12,6 +13,7 @@ export function* materialManagerWatcher() {
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
     yield takeLatest(types.FETCH_MATERIAL_TYPES, fetchMaterialTypes),
     yield takeLatest(types.FETCH_COLORS, fetchColors),
+    yield takeLatest(types.FETCH_CURRENCIES, fetchCurrencies),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -23,6 +25,10 @@ export function* fetchMaterialTypes() {
 
 export function* fetchColors() {
   yield sagas.get('colors', actions.fetchColorsSuccess);
+}
+
+export function* fetchCurrencies() {
+  yield sagas.get('currencies', actions.fetchCurrenciesSuccess, null, selectors.selectCurrencies);
 }
 
 export function* fetchMaterial(action) {
@@ -39,14 +45,18 @@ export function* createMaterial(action) {
 }
 
 function sanitize(material) {
-  const attributes = material;
-  if (attributes.type) {
-    attributes.material_type_id = attributes.type.id;
-    delete (attributes.type);
+  const m = material;
+  if (m.type) {
+    m.material_type_id = m.type.id;
+    delete (m.type);
   }
-  if (attributes.color) {
-    attributes.color_id = attributes.color.id;
-    delete (attributes.color);
+  if (m.color) {
+    m.color_id = m.color.id;
+    delete (m.color);
   }
-  return attributes;
+  if (m.currency) {
+    m.currency_id = m.currency.id;
+    delete (m.currency);
+  }
+  return m;
 }

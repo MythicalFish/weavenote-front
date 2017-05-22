@@ -38,3 +38,13 @@ export function fetchColors() {
 export function fetchColorsSuccess(colors) {
   return { type: types.FETCH_COLORS_SUCCESS, colors };
 }
+
+// Currencies
+
+export function fetchCurrencies() {
+  return { type: types.FETCH_CURRENCIES };
+}
+
+export function fetchCurrenciesSuccess(currencies) {
+  return { type: types.FETCH_CURRENCIES_SUCCESS, currencies };
+}
