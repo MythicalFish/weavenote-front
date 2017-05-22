@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
+import SupplierForm from './SupplierForm';
 
 class Form extends React.Component {
 
@@ -46,7 +47,7 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            x
+            <SupplierForm />
           </div>
         </div>
         <footer className="p2 center">
