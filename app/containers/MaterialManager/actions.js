@@ -48,3 +48,13 @@ export function fetchCurrencies() {
 export function fetchCurrenciesSuccess(currencies) {
   return { type: types.FETCH_CURRENCIES_SUCCESS, currencies };
 }
+
+// Suppliers
+
+export function fetchSuppliers() {
+  return { type: types.FETCH_SUPPLIERS };
+}
+
+export function fetchSuppliersSuccess(suppliers) {
+  return { type: types.FETCH_SUPPLIERS_SUCCESS, suppliers };
+}

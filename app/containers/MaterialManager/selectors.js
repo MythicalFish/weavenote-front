@@ -38,15 +38,10 @@ export const selectCurrencies = () => createSelector(
   }
 );
 
-export const selectMaterialForm = () => createSelector(
-  selectMaterial(), (s) => {
-    if (!s) return null;
-    const m = s;
-    if (!m.supplier) {
-      m.supplier = {
-        name: null,
-      };
-    }
-    return m;
+export const selectSuppliers = () => createSelector(
+  selectDomain(), (substate) => {
+    const suppliers = substate.get('suppliers');
+    if (suppliers) { return suppliers.toJS(); }
+    return suppliers;
   }
 );

@@ -3,10 +3,13 @@ import { fromJS } from 'immutable';
 import * as types from './constants';
 
 const initialState = fromJS({
-  material: null,
+  material: {
+    supplier: {},
+  },
   materialTypes: null,
   colors: null,
   currencies: null,
+  suppliers: [],
 });
 
 function materialReducer(state = initialState, action) {
@@ -20,8 +23,10 @@ function materialReducer(state = initialState, action) {
         .set('material', null);
 
     case types.FETCH_MATERIAL_SUCCESS:
+      const m = action.material;
+      if (!m.supplier) m.supplier = {};
       return state
-        .set('material', fromJS(action.material));
+        .set('material', fromJS(m));
 
     case types.UPDATE_MATERIAL_SUCCESS:
       return state;
@@ -41,6 +46,12 @@ function materialReducer(state = initialState, action) {
     case types.FETCH_COLORS_SUCCESS:
       return state
         .set('colors', fromJS(action.colors));
+
+    // Colors
+
+    case types.FETCH_SUPPLIERS_SUCCESS:
+      return state
+        .set('colors', fromJS(action.suppliers));
 
     // Currencies
 

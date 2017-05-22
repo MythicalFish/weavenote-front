@@ -23,7 +23,7 @@ class Form extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting, materialTypes, colors, currencies } = this.props;
+    const { handleSubmit, submitting, materialTypes, colors, currencies, suppliers } = this.props;
     const { selectedType } = this.state;
     return (
       <form onSubmit={handleSubmit}>
@@ -47,7 +47,7 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <SupplierForm />
+            <SupplierForm suppliers={suppliers} />
           </div>
         </div>
         <footer className="p2 center">
@@ -64,6 +64,7 @@ Form.propTypes = {
   materialTypes: PropTypes.array,
   colors: PropTypes.array,
   currencies: PropTypes.array,
+  suppliers: PropTypes.array,
   initialValues: PropTypes.object,
 };
 

@@ -31,6 +31,10 @@ export function* fetchCurrencies() {
   yield sagas.get('currencies', actions.fetchCurrenciesSuccess, null, selectors.selectCurrencies);
 }
 
+export function* fetchSuppliers() {
+  yield sagas.get('suppliers', actions.fetchSuppliersSuccess);
+}
+
 export function* fetchMaterial(action) {
   yield sagas.get(`materials/${action.id}`, actions.fetchMaterialSuccess);
 }
