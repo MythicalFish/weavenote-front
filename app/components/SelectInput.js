@@ -35,7 +35,6 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
       ));
     }
 
-
     return (
       <div className={`select-input p0 ${className}`}>
         <button onClick={this.toggleState} type="button">
@@ -46,7 +45,9 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
         {this.state.active &&
           <ul>
             {options}
-            {tail && tail}
+            {tail &&
+              tail({ onClick: () => { this.setState({ active: false }); } })
+            }
           </ul>
         }
       </div>
@@ -63,5 +64,5 @@ SelectInput.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func,
   onChanged: PropTypes.func,
-  tail: PropTypes.node,
+  Tail: PropTypes.func,
 };

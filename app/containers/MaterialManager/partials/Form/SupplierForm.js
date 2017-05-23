@@ -4,6 +4,13 @@ import DataRow from 'components/DataRow';
 
 export default class SupplierForm extends React.PureComponent {
 
+  Tail = (props) => (
+    <li onClick={() => { this.props.newSupplier(); props.onClick(); }}>
+      <i className="fa fa-plus mr1"></i>
+      Create a supplier
+    </li>
+  )
+
   render() {
 
     const selectorProps = {
@@ -12,12 +19,7 @@ export default class SupplierForm extends React.PureComponent {
       type: 'select',
       component: DataRow,
       data: this.props.suppliers.toJS(),
-      tail: (
-        <li onClick={() => { this.props.newSupplier(); }}>
-          <i className="fa fa-plus mr1"></i>
-          Create a supplier
-        </li>
-      ),
+      tail: this.Tail,
     };
 
     return (
