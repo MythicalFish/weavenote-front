@@ -47,7 +47,7 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <SupplierForm suppliers={suppliers} />
+            <SupplierForm suppliers={suppliers} material={this.props.initialValues} />
           </div>
         </div>
         <footer className="p2 center">

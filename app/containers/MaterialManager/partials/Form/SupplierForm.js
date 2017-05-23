@@ -11,6 +11,23 @@ export default class SupplierForm extends React.PureComponent {
   }
 
   render() {
+
+    const { material } = this.props;
+
+    const selectorProps = {
+      name: 'supplier.id',
+      label: 'Supplier',
+      type: 'select',
+      component: DataRow,
+      data: this.props.suppliers,
+      tail: (
+        <li onClick={this.toggleState}>
+          <i className="fa fa-plus mr1"></i>
+          Create a supplier
+        </li>
+      ),
+    };
+
     return (
       <div className="data-rows">
         <header>
@@ -18,19 +35,7 @@ export default class SupplierForm extends React.PureComponent {
         </header>
         {!this.state.creating &&
           <div>
-            <Field
-              name="supplier.id"
-              label="Supplier"
-              type="select"
-              component={DataRow}
-              data={this.props.suppliers}
-              tail={
-                <li onClick={this.toggleState}>
-                  <i className="fa fa-plus mr1"></i>
-                  Create a supplier
-                </li>
-              }
-            />
+            <Field {...selectorProps} />
           </div>
         }
         {this.state.creating &&

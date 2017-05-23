@@ -41,27 +41,11 @@ export function* fetchMaterial(action) {
 }
 
 export function* updateMaterial(action) {
-  const material = sanitize(action.material.toJS());
+  const material = action.material.toJS();
   yield sagas.patch(`materials/${material.id}`, { material }, actions.updateMaterialSuccess);
 }
 
 export function* createMaterial(action) {
-  yield sagas.post('materials', { material: sanitize(action.material.toJS()) }, actions.createMaterialSuccess);
-}
-
-function sanitize(material) {
-  const m = material;
-  if (m.type) {
-    m.material_type_id = m.type.id;
-    delete (m.type);
-  }
-  if (m.color) {
-    m.color_id = m.color.id;
-    delete (m.color);
-  }
-  if (m.currency) {
-    m.currency_id = m.currency.id;
-    delete (m.currency);
-  }
-  return m;
+  const material = action.material.toJS();
+  yield sagas.post('materials', { material }, actions.createMaterialSuccess);
 }

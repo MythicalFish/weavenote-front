@@ -9,7 +9,7 @@ const initialState = fromJS({
   materialTypes: null,
   colors: null,
   currencies: null,
-  suppliers: [],
+  suppliers: null,
 });
 
 function materialReducer(state = initialState, action) {
@@ -51,7 +51,7 @@ function materialReducer(state = initialState, action) {
 
     case types.FETCH_SUPPLIERS_SUCCESS:
       return state
-        .set('colors', fromJS(action.suppliers));
+        .set('suppliers', fromJS(action.suppliers));
 
     // Currencies
 

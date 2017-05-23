@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
 import {
-  selectMaterial, selectMaterialTypes, selectColors, selectCurrencies,
+  selectMaterial, selectMaterialTypes, selectColors, selectCurrencies, selectSuppliers,
 } from './selectors';
 import {
   fetchMaterial, updateMaterial, createMaterial,
-  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers
+  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers,
 } from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
@@ -79,6 +79,7 @@ const mapState = createStructuredSelector({
   materialTypes: selectMaterialTypes(),
   colors: selectColors(),
   currencies: selectCurrencies(),
+  suppliers: selectSuppliers(),
 });
 
 function mapDispatch(dispatch) {
