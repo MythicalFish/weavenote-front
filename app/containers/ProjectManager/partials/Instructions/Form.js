@@ -8,11 +8,13 @@ const Form = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="title" type="text" component={DataRow} label="Title" focus />
-      <Field name="description" type="textarea" component={DataRow} label="Description" />
-      <footer className="p2 center">
-        <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
-      </footer>
+      <div className="data-rows">
+        <Field name="title" type="text" component={DataRow} label="Title" focus />
+        <Field name="description" type="textarea" component={DataRow} label="Description" />
+        <footer className="p2 center">
+          <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
+        </footer>
+      </div>
     </form>
   );
 };

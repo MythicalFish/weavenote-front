@@ -20,17 +20,21 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
   }
 
   render() {
-    const { value, data, className } = this.props;
+    const { value, data, className, tail } = this.props;
     let val = value;
     if (val.toJS) { val = val.toJS(); }
+    let options;
 
-    const options = data.map((item, index) => (
-      <li key={`select-${name}-${index}`} onClick={() => { this.handleClick(item); }}>
-        {item.name}
-        {val.iso_code && <PriceSymbol code={item.iso_code} className="bold ml1" />}
-        {item.hex_code && <Dot className="ml1" color={item.hex_code} />}
-      </li>
-    ));
+    if (data) {
+      options = data.map((item, index) => (
+        <li key={`select-${name}-${index}`} onClick={() => { this.handleClick(item); }}>
+          {item.name}
+          {val.iso_code && <PriceSymbol code={item.iso_code} className="bold ml1" />}
+          {item.hex_code && <Dot className="ml1" color={item.hex_code} />}
+        </li>
+      ));
+    }
+
 
     return (
       <div className={`select-input p0 ${className}`}>
@@ -42,6 +46,7 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
         {this.state.active &&
           <ul>
             {options}
+            {tail && tail}
           </ul>
         }
       </div>
@@ -54,7 +59,9 @@ SelectInput.propTypes = {
     PropTypes.object,
     PropTypes.string,
   ]),
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
   className: PropTypes.string,
   onChange: PropTypes.func,
+  onChanged: PropTypes.func,
+  tail: PropTypes.node,
 };

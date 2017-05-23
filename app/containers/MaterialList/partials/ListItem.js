@@ -1,5 +1,6 @@
 import React from 'react';
 import ListItemWrapper from 'components/ListItemWrapper';
+import Price from 'components/Price';
 
 export default function ListItem(props) {
   const material = props.material.toJS();
@@ -20,7 +21,7 @@ export default function ListItem(props) {
         {material.color.name}
       </div>
       <div className="p1 pr2">
-        {material.cost_total}
+        <Price value={material.cost_total} currency={material.currency.iso_code} />
       </div>
     </ListItemWrapper>
   );

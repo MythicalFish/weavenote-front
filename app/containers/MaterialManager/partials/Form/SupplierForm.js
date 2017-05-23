@@ -16,15 +16,26 @@ export default class SupplierForm extends React.PureComponent {
         <header>
           Supplier
         </header>
-        {!this.state.creating
+        {!this.state.creating &&
           <div>
-            <Field name="supplier.id" label="Supplier" type="select" component={DataRow} data={this.props.suppliers} />
-            <button className="btn" onClick={this.toggleState}>Create a supplier</button>
+            <Field
+              name="supplier.id"
+              label="Supplier"
+              type="select"
+              component={DataRow}
+              data={this.props.suppliers}
+              tail={
+                <li onClick={this.toggleState}>
+                  <i className="fa fa-plus mr1"></i>
+                  Create a supplier
+                </li>
+              }
+            />
           </div>
         }
         {this.state.creating &&
           <div>
-            <Field name="supplier.name" label="Name" type="text" component={DataRow} />
+            <Field name="supplier.name" label="Name" type="text" component={DataRow} focus />
             <Field name="supplier.agent" label="Agent" type="text" component={DataRow} />
             <Field name="supplier.name_ref" label="Name ref." type="text" component={DataRow} />
             <Field name="supplier.color_ref" label="Color ref." type="text" component={DataRow} />
