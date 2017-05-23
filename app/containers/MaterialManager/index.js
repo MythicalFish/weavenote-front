@@ -8,7 +8,7 @@ import {
 } from './selectors';
 import {
   fetchMaterial, updateMaterial, createMaterial,
-  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers,
+  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier, switchSupplier,
 } from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
@@ -34,21 +34,28 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
   }
 
   render() {
-    const { material, materialTypes, colors, currencies, suppliers } = this.props;
+    const {
+      material: initialValues, materialTypes: types, colors, currencies, suppliers, newSupplier: n,
+      switchSupplier: s,
+    } = this.props;
     return (
       <div>
         <Header />
         <Toolbar />
         <div className="p2">
           <div className="container">
-            {material && materialTypes && colors && currencies &&
+            {initialValues && types && colors && currencies &&
               <Form
-                initialValues={this.props.material}
-                materialTypes={materialTypes}
-                colors={colors}
-                currencies={currencies}
-                suppliers={suppliers}
-                onSubmit={(values) => { this.onSubmit(values); }}
+                {...{
+                  initialValues,
+                  types,
+                  colors,
+                  currencies,
+                  suppliers,
+                  switchSupplier: s,
+                  newSupplier: n,
+                  onSubmit: (values) => { this.onSubmit(values); },
+                }}
               />
             }
           </div>
@@ -68,6 +75,8 @@ MaterialManager.propTypes = {
   materialTypes: PropTypes.array,
   fetchColors: PropTypes.func.isRequired,
   fetchSuppliers: PropTypes.func.isRequired,
+  newSupplier: PropTypes.func.isRequired,
+  switchSupplier: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
   colors: PropTypes.array,
   suppliers: PropTypes.array,
@@ -86,7 +95,7 @@ function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       fetchMaterial, fetchMaterialTypes, updateMaterial, createMaterial,
-      fetchColors, fetchCurrencies, fetchSuppliers,
+      fetchColors, fetchCurrencies, fetchSuppliers, newSupplier, switchSupplier
     },
     dispatch
   );

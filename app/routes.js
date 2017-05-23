@@ -103,14 +103,16 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/MaterialManager/reducer'),
+          import('containers/MaterialManager/partials/Form/reducer'),
           import('containers/MaterialManager/sagas'),
           import('containers/MaterialManager'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, formReducer, sagas, component]) => {
           injectReducer('MaterialManager', reducer.default);
+          injectReducer('form', formReducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

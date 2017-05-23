@@ -58,3 +58,11 @@ export function fetchSuppliers() {
 export function fetchSuppliersSuccess(suppliers) {
   return { type: types.FETCH_SUPPLIERS_SUCCESS, suppliers };
 }
+
+export function newSupplier() {
+  return { type: types.NEW_SUPPLIER };
+}
+
+export function switchSupplier(supplier) {
+  return { type: types.SWITCH_SUPPLIER, supplier };
+}

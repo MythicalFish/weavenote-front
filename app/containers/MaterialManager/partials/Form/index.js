@@ -23,14 +23,14 @@ class Form extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting, materialTypes, colors, currencies, suppliers } = this.props;
+    const { handleSubmit, submitting, types, colors, currencies, suppliers, newSupplier, switchSupplier } = this.props;
     const { selectedType } = this.state;
     return (
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <div className="data-rows mb2">
-              <Field name="type" type="select" component={DataRow} label="Type" data={materialTypes} onChanged={this.switchType} />
+              <Field name="type" type="select" component={DataRow} label="Type" data={types} onChanged={this.switchType} />
               <Field name="name" type="text" component={DataRow} label="Name" />
               <Field name="identifier" type="text" component={DataRow} label="Identifier" />
               <Field name="color" type="select" component={DataRow} label="Color" data={colors} />
@@ -47,7 +47,7 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <SupplierForm suppliers={suppliers} material={this.props.initialValues} />
+            <SupplierForm {...{ suppliers, newSupplier, switchSupplier }} />
           </div>
         </div>
         <footer className="p2 center">
@@ -61,7 +61,9 @@ class Form extends React.Component {
 Form.propTypes = {
   submitting: PropTypes.bool,
   handleSubmit: PropTypes.func,
-  materialTypes: PropTypes.array,
+  newSupplier: PropTypes.func,
+  switchSupplier: PropTypes.func,
+  types: PropTypes.array,
   colors: PropTypes.array,
   currencies: PropTypes.array,
   suppliers: PropTypes.array,

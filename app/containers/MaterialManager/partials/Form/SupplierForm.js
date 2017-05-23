@@ -4,24 +4,16 @@ import DataRow from 'components/DataRow';
 
 export default class SupplierForm extends React.PureComponent {
 
-  state = { creating: false }
-
-  toggleState = () => {
-    this.setState({ creating: !this.state.creating });
-  }
-
   render() {
 
-    const { material } = this.props;
-
     const selectorProps = {
-      name: 'supplier.id',
+      name: 'supplier',
       label: 'Supplier',
       type: 'select',
       component: DataRow,
       data: this.props.suppliers,
       tail: (
-        <li onClick={this.toggleState}>
+        <li onClick={() => { this.props.newSupplier(); }}>
           <i className="fa fa-plus mr1"></i>
           Create a supplier
         </li>
@@ -33,21 +25,15 @@ export default class SupplierForm extends React.PureComponent {
         <header>
           Supplier
         </header>
-        {!this.state.creating &&
-          <div>
-            <Field {...selectorProps} />
-          </div>
-        }
-        {this.state.creating &&
-          <div>
-            <Field name="supplier.name" label="Name" type="text" component={DataRow} focus />
-            <Field name="supplier.agent" label="Agent" type="text" component={DataRow} />
-            <Field name="supplier.name_ref" label="Name ref." type="text" component={DataRow} />
-            <Field name="supplier.color_ref" label="Color ref." type="text" component={DataRow} />
-            <Field name="supplier.minimum_order" label="Minimum order" type="text" component={DataRow} />
-            <Field name="supplier.comments" label="Comments" type="textarea" component={DataRow} />
-          </div>
-        }
+        <Field {...selectorProps} />
+        <div>
+          <Field name="supplier.name" label="Name" type="text" component={DataRow} focus />
+          <Field name="supplier.agent" label="Agent" type="text" component={DataRow} />
+          <Field name="supplier.name_ref" label="Name ref." type="text" component={DataRow} />
+          <Field name="supplier.color_ref" label="Color ref." type="text" component={DataRow} />
+          <Field name="supplier.minimum_order" label="Minimum order" type="text" component={DataRow} />
+          <Field name="supplier.comments" label="Comments" type="textarea" component={DataRow} />
+        </div>
       </div>
     );
   }
@@ -55,6 +41,7 @@ export default class SupplierForm extends React.PureComponent {
 
 SupplierForm.propTypes = {
   handleSubmit: PropTypes.func,
+  newSupplier: PropTypes.func,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   reset: PropTypes.func,

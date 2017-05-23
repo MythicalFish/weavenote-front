@@ -47,7 +47,7 @@ function materialReducer(state = initialState, action) {
       return state
         .set('colors', fromJS(action.colors));
 
-    // Colors
+    // Suppliers
 
     case types.FETCH_SUPPLIERS_SUCCESS:
       return state
@@ -60,7 +60,7 @@ function materialReducer(state = initialState, action) {
         .set('currencies', fromJS(action.currencies));
 
     default:
-      return state;  
+      return state;
 
   }
 }
