@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
 import PlusButton from 'components/PlusButton';

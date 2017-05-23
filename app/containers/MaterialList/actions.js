@@ -13,19 +13,6 @@ export function fetchMaterialsSuccess(materials) {
   };
 }
 
-export function createMaterial() {
-  return {
-    type: types.CREATE_MATERIAL,
-  };
-}
-
-export function createMaterialSuccess(materials) {
-  return {
-    type: types.CREATE_MATERIAL_SUCCESS,
-    materials,
-  };
-}
-
 export function fileMaterial(payload) {
   return {
     type: types.FILE_MATERIAL,

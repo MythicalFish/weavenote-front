@@ -6,7 +6,7 @@ import { selectCurrentSection, selectMaterials } from 'containers/App/selectors'
 import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
 import Header from 'components/Header';
-import { fetchMaterials, createMaterial } from './actions';
+import { fetchMaterials } from './actions';
 import Toolbar from './partials/Toolbar';
 import ListItem from './partials/ListItem';
 
@@ -25,7 +25,6 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
         <Toolbar
           changeSection={this.props.changeSection}
           currentSection={this.props.currentSection}
-          create={this.props.createMaterial}
           fetch={this.props.fetchMaterials}
         />
         <div className="m2 b1">
@@ -42,7 +41,6 @@ MaterialList.propTypes = {
   fetchMaterials: PropTypes.func.isRequired,
   currentSection: PropTypes.object,
   changeSection: PropTypes.func,
-  createMaterial: PropTypes.func,
   materials: PropTypes.object,
 };
 
@@ -53,7 +51,7 @@ const mapState = createStructuredSelector({
 
 function mapDispatch(dispatch) {
   return bindActionCreators(
-    { changeSection, fetchMaterials, createMaterial },
+    { changeSection, fetchMaterials },
     dispatch
   );
 }

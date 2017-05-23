@@ -10,6 +10,6 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
-export const CHANGE_SECTION = 'CHANGE_SECTION';
-export const FETCH_STATS = 'FETCH_STATS';
-export const FETCH_STATS_SUCCESS = 'FETCH_STATS_SUCCESS';
+export const CHANGE_SECTION = '@@app/CHANGE_SECTION';
+export const FETCH_STATS = '@@app/FETCH_STATS';
+export const FETCH_STATS_SUCCESS = '@@app/FETCH_STATS_SUCCESS';
