@@ -14,8 +14,6 @@ export default formReducer.plugin({
         });
         return state
           .setIn(['values', 'supplier'], fromJS(empty));
-        // return state
-        //   .setIn(['values', 'supplier', 'name'], null);
 
       default:
         return state;

@@ -11,7 +11,7 @@ export default class SupplierForm extends React.PureComponent {
       label: 'Supplier',
       type: 'select',
       component: DataRow,
-      data: this.props.suppliers,
+      data: this.props.suppliers.toJS(),
       tail: (
         <li onClick={() => { this.props.newSupplier(); }}>
           <i className="fa fa-plus mr1"></i>
@@ -45,6 +45,6 @@ SupplierForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   reset: PropTypes.func,
-  suppliers: PropTypes.array,
+  suppliers: PropTypes.object,
 };
 

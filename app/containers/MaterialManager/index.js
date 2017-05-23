@@ -8,7 +8,7 @@ import {
 } from './selectors';
 import {
   fetchMaterial, updateMaterial, createMaterial,
-  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier, switchSupplier,
+  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier,
 } from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
@@ -36,7 +36,6 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
   render() {
     const {
       material: initialValues, materialTypes: types, colors, currencies, suppliers, newSupplier: n,
-      switchSupplier: s,
     } = this.props;
     return (
       <div>
@@ -52,7 +51,6 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
                   colors,
                   currencies,
                   suppliers,
-                  switchSupplier: s,
                   newSupplier: n,
                   onSubmit: (values) => { this.onSubmit(values); },
                 }}
@@ -76,10 +74,9 @@ MaterialManager.propTypes = {
   fetchColors: PropTypes.func.isRequired,
   fetchSuppliers: PropTypes.func.isRequired,
   newSupplier: PropTypes.func.isRequired,
-  switchSupplier: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
   colors: PropTypes.array,
-  suppliers: PropTypes.array,
+  suppliers: PropTypes.object,
   currencies: PropTypes.array,
 };
 
@@ -95,7 +92,7 @@ function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       fetchMaterial, fetchMaterialTypes, updateMaterial, createMaterial,
-      fetchColors, fetchCurrencies, fetchSuppliers, newSupplier, switchSupplier
+      fetchColors, fetchCurrencies, fetchSuppliers, newSupplier
     },
     dispatch
   );

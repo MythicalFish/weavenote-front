@@ -39,9 +39,5 @@ export const selectCurrencies = () => createSelector(
 );
 
 export const selectSuppliers = () => createSelector(
-  selectDomain(), (substate) => {
-    const suppliers = substate.get('suppliers');
-    if (suppliers) { return suppliers.toJS(); }
-    return suppliers;
-  }
+  selectDomain(), (substate) => substate.get('suppliers')
 );
