@@ -11,8 +11,8 @@ export function fetchMaterialSuccess(material) {
 export function updateMaterial(material) {
   return { type: types.UPDATE_MATERIAL, material };
 }
-export function updateMaterialSuccess() {
-  return { type: types.UPDATE_MATERIAL_SUCCESS };
+export function updateMaterialSuccess(material) {
+  return { type: types.UPDATE_MATERIAL_SUCCESS, material };
 }
 export function createMaterial(material) {
   return { type: types.CREATE_MATERIAL, material };

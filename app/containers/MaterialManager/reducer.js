@@ -24,12 +24,23 @@ function materialReducer(state = initialState, action) {
 
     case types.FETCH_MATERIAL_SUCCESS:
       const m = action.material;
-      if (!m.supplier) m.supplier = {};
+      if (!m.supplier) m.supplier = { name: null };
       return state
         .set('material', fromJS(m));
 
     case types.UPDATE_MATERIAL_SUCCESS:
-      return state;
+
+      const suppliers = state.get('suppliers');
+
+      let key = suppliers.findKey((obj) => (
+        obj.get('id') === action.material.supplier.id
+      ));
+
+      if (!key) key = suppliers.size;
+
+      return state
+        .set('material', fromJS(action.material))
+        .setIn(['suppliers', key], fromJS(action.material.supplier));
 
     case types.CREATE_MATERIAL_SUCCESS:
       return state

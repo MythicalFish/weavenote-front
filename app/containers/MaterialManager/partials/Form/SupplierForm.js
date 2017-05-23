@@ -18,15 +18,12 @@ export default class SupplierForm extends React.PureComponent {
       label: 'Supplier',
       type: 'select',
       component: DataRow,
-      data: this.props.suppliers.toJS(),
+      data: this.props.suppliers,
       tail: this.Tail,
     };
 
     return (
       <div className="data-rows">
-        <header>
-          Supplier
-        </header>
         <Field {...selectorProps} />
         <div>
           <Field name="supplier.name" label="Name" type="text" component={DataRow} focus />

@@ -23,16 +23,20 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
     const { value, data, className, tail } = this.props;
     let val = value;
     if (val.toJS) { val = val.toJS(); }
-    let options;
+    const options = [];
 
     if (data) {
-      options = data.map((item, index) => (
-        <li key={`select-${name}-${index}`} onClick={() => { this.handleClick(item); }}>
-          {item.name}
-          {val.iso_code && <PriceSymbol code={item.iso_code} className="bold ml1" />}
-          {item.hex_code && <Dot className="ml1" color={item.hex_code} />}
-        </li>
-      ));
+      data.forEach((item, index) => {
+        let i = item;
+        if (i.toJS) i = i.toJS();
+        options.push((
+          <li key={`select-${name}-${index}`} onClick={() => { this.handleClick(item); }}>
+            {i.name}
+            {val.iso_code && <PriceSymbol code={i.iso_code} className="bold ml1" />}
+            {i.hex_code && <Dot className="ml1" color={i.hex_code} />}
+          </li>
+        ));
+      });
     }
 
     return (
@@ -60,9 +64,12 @@ SelectInput.propTypes = {
     PropTypes.object,
     PropTypes.string,
   ]),
-  data: PropTypes.array,
+  data: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object,
+  ]),
   className: PropTypes.string,
   onChange: PropTypes.func,
   onChanged: PropTypes.func,
-  Tail: PropTypes.func,
+  tail: PropTypes.func,
 };

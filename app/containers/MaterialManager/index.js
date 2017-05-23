@@ -43,7 +43,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
         <Toolbar />
         <div className="p2">
           <div className="container">
-            {initialValues && types && colors && currencies &&
+            {initialValues && types && colors && currencies && suppliers &&
               <Form
                 {...{
                   initialValues,

@@ -6,6 +6,10 @@ export default formReducer.plugin({
   Material: (state, action) => {
     switch (action.type) {
 
+      case types.UPDATE_MATERIAL_SUCCESS:
+        return state
+          .set('values', fromJS(action.material));
+
       case types.NEW_SUPPLIER:
         const s = state.getIn(['values', 'supplier']);
         const empty = {};
