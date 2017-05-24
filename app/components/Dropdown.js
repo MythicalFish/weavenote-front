@@ -1,9 +1,3 @@
-/**
-*
-* Dropdown
-*
-*/
-
 import React from 'react';
 
 class Dropdown extends React.Component { // eslint-disable-line react/prefer-stateless-function

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Field } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
 
-export default class SupplierForm extends React.PureComponent {
+export default class Supplier extends React.PureComponent {
 
   Tail = (props) => (
     <li onClick={() => { this.props.newSupplier(); props.onClick(); }}>
@@ -12,7 +12,7 @@ export default class SupplierForm extends React.PureComponent {
   )
 
   render() {
-    const { selectedType } = this.props;
+    const { selectedType, className } = this.props;
 
     const selectorProps = {
       name: 'supplier',
@@ -24,7 +24,7 @@ export default class SupplierForm extends React.PureComponent {
     };
 
     return (
-      <div className="data-rows">
+      <div className={`data-rows ${className}`}>
         <Field {...selectorProps} />
         <div>
           <Field name="supplier.name" label="Name" type="text" component={DataRow} focus />
@@ -41,7 +41,7 @@ export default class SupplierForm extends React.PureComponent {
   }
 }
 
-SupplierForm.propTypes = {
+Supplier.propTypes = {
   handleSubmit: PropTypes.func,
   newSupplier: PropTypes.func,
   pristine: PropTypes.bool,
@@ -49,5 +49,6 @@ SupplierForm.propTypes = {
   reset: PropTypes.func,
   suppliers: PropTypes.object,
   selectedType: PropTypes.string,
+  className: PropTypes.string,
 };
 

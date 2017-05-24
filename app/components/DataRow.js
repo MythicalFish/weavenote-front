@@ -40,12 +40,18 @@ export default class DataRow extends React.PureComponent {
       error = props.meta.error;
     }
 
+    if (type === 'select') {
+      if (!fieldProps.data && props.data) {
+        fieldProps.data = props.data;
+      }
+    }
+
     switch (type) {
       case 'display':
         field = <div className="right-align">{props.value}</div>;
         break;
       case 'select':
-        field = <SelectInput {...fieldProps} data={props.data} className="right-align" />;
+        field = <SelectInput {...fieldProps} className="right-align" />;
         break;
       case 'textarea':
         field = <textarea {...fieldProps} />;

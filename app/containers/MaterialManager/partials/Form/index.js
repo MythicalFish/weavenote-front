@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
-import SupplierForm from './SupplierForm';
+import Supplier from './Supplier';
+import CareLabels from './CareLabels';
 
 class Form extends React.Component {
 
@@ -23,7 +24,7 @@ class Form extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting, types, colors, currencies, suppliers, newSupplier } = this.props;
+    const { handleSubmit, submitting, types, colors, currencies, labels, suppliers, newSupplier } = this.props;
     const { selectedType } = this.state;
     return (
       <form onSubmit={handleSubmit}>
@@ -57,7 +58,10 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <SupplierForm {...{ suppliers, newSupplier, selectedType }} />
+            <Supplier {...{ suppliers, newSupplier, selectedType }} className="mb2" />
+            {['Fabric'].includes(selectedType) &&
+              <CareLabels {...{ labels }} />
+            }
           </div>
         </div>
         <footer className="p2 center">
@@ -76,7 +80,7 @@ Form.propTypes = {
   colors: PropTypes.object,
   currencies: PropTypes.object,
   suppliers: PropTypes.object,
-  careLabels: PropTypes.object,
+  labels: PropTypes.object,
   initialValues: PropTypes.object,
 };
 

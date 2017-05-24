@@ -37,7 +37,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
   render() {
     const {
       initialValues, types, colors, currencies, suppliers,
-      newSupplier: n, careLabels,
+      newSupplier: n, labels,
     } = this.props;
     return (
       <div>
@@ -45,7 +45,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
         <Toolbar />
         <div className="p2">
           <div className="container">
-            {initialValues && types && colors && currencies && suppliers &&
+            {initialValues && types && colors && currencies && suppliers && labels &&
               <Form
                 {...{
                   initialValues,
@@ -53,7 +53,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
                   colors,
                   currencies,
                   suppliers,
-                  careLabels,
+                  labels,
                   newSupplier: n,
                   onSubmit: (values) => { this.onSubmit(values); },
                 }}
@@ -82,7 +82,7 @@ MaterialManager.propTypes = {
   colors: PropTypes.object,
   suppliers: PropTypes.object,
   currencies: PropTypes.object,
-  careLabels: PropTypes.object,
+  labels: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
@@ -91,7 +91,7 @@ const mapState = createStructuredSelector({
   colors: selectColors(),
   currencies: selectCurrencies(),
   suppliers: selectSuppliers(),
-  careLabels: selectCareLabels(),
+  labels: selectCareLabels(),
 });
 
 const mapDispatch = (dispatch) => (bindActionCreators({
