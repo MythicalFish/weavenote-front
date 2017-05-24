@@ -37,6 +37,15 @@ class Form extends React.Component {
               {selectedType === 'Fabric' &&
                 <Field name="composition" type="text" component={DataRow} label="Composition" />
               }
+              {['Button', 'Zip'].includes(selectedType) &&
+                <Field name="size" type="text" component={DataRow} label="Size" />
+              }
+              {selectedType === 'Zip' &&
+                <div>
+                  <Field name="length" type="text" component={DataRow} label="Length" />
+                  <Field name="opening_type" type="text" component={DataRow} label="Opening Type" />
+                </div>
+              }
             </div>
             <div className="data-rows">
               <Field name="currency" type="select" component={DataRow} label="Currency" data={currencies} />
@@ -47,7 +56,7 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <SupplierForm {...{ suppliers, newSupplier }} />
+            <SupplierForm {...{ suppliers, newSupplier, selectedType }} />
           </div>
         </div>
         <footer className="p2 center">

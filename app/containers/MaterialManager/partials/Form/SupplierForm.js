@@ -12,7 +12,8 @@ export default class SupplierForm extends React.PureComponent {
   )
 
   render() {
-
+    const { selectedType } = this.props;
+console.log(selectedType)
     const selectorProps = {
       name: 'supplier',
       label: 'Supplier',
@@ -27,10 +28,12 @@ export default class SupplierForm extends React.PureComponent {
         <Field {...selectorProps} />
         <div>
           <Field name="supplier.name" label="Name" type="text" component={DataRow} focus />
-          <Field name="supplier.agent" label="Agent" type="text" component={DataRow} />
-          <Field name="supplier.name_ref" label="Name ref." type="text" component={DataRow} />
-          <Field name="supplier.color_ref" label="Color ref." type="text" component={DataRow} />
-          <Field name="supplier.minimum_order" label="Minimum order" type="text" component={DataRow} />
+          {['Fabric'].includes(selectedType) &&
+            <Field name="supplier.agent" label="Agent" type="text" component={DataRow} /> }
+          <Field name="supplier.ref" label="Reference" type="text" component={DataRow} />
+          <Field name="supplier.color_ref" label="Color reference" type="text" component={DataRow} />
+          {['Fabric'].includes(selectedType) &&
+            <Field name="supplier.minimum_order" label="Minimum order" type="text" component={DataRow} /> }
           <Field name="supplier.comments" label="Comments" type="textarea" component={DataRow} />
         </div>
       </div>
