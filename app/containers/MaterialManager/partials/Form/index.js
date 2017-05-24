@@ -43,6 +43,7 @@ class Form extends React.Component {
               {selectedType === 'Zip' &&
                 <div>
                   <Field name="length" type="text" component={DataRow} label="Length" />
+                  <Field name="subtype" type="text" component={DataRow} label="Zip Type" />
                   <Field name="opening_type" type="text" component={DataRow} label="Opening Type" />
                 </div>
               }

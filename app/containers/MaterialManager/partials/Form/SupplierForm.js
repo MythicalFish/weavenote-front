@@ -13,7 +13,7 @@ export default class SupplierForm extends React.PureComponent {
 
   render() {
     const { selectedType } = this.props;
-console.log(selectedType)
+
     const selectorProps = {
       name: 'supplier',
       label: 'Supplier',
@@ -48,5 +48,6 @@ SupplierForm.propTypes = {
   submitting: PropTypes.bool,
   reset: PropTypes.func,
   suppliers: PropTypes.object,
+  selectedType: PropTypes.string,
 };
 
