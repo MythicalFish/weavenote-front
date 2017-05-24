@@ -74,14 +74,14 @@ MaterialManager.propTypes = {
   initialValues: PropTypes.object,
   fetchMaterialTypes: PropTypes.func.isRequired,
   fetchCareLabels: PropTypes.func.isRequired,
-  types: PropTypes.array,
+  types: PropTypes.object,
   fetchColors: PropTypes.func.isRequired,
   fetchSuppliers: PropTypes.func.isRequired,
   newSupplier: PropTypes.func.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
-  colors: PropTypes.array,
+  colors: PropTypes.object,
   suppliers: PropTypes.object,
-  currencies: PropTypes.array,
+  currencies: PropTypes.object,
   careLabels: PropTypes.object,
 };
 
