@@ -1,5 +1,6 @@
 import { take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
@@ -11,6 +12,7 @@ export function* materialManagerWatcher() {
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
+    yield takeLatest(types.CREATE_MATERIAL_SUCCESS, showMaterial),
     yield takeLatest(types.FETCH_MATERIAL_TYPES, fetchMaterialTypes),
     yield takeLatest(types.FETCH_COLORS, fetchColors),
     yield takeLatest(types.FETCH_CURRENCIES, fetchCurrencies),
@@ -53,4 +55,9 @@ export function* updateMaterial(action) {
 export function* createMaterial(action) {
   const material = action.material.toJS();
   yield sagas.post('materials', { material }, actions.createMaterialSuccess);
+}
+
+export function* showMaterial(action) {
+  const material = action.material;
+  browserHistory.push(`/materials/${material.id}`);
 }

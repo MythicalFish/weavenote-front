@@ -27,6 +27,10 @@ export default formReducer.plugin({
         return state
           .set('values', fromJS(action.material));
 
+      case types.CREATE_MATERIAL_SUCCESS:
+        return state
+          .set('values', fromJS(action.material));
+
       case types.NEW_SUPPLIER:
         return state
           .setIn(['values', 'supplier'], supplierAttributes(state));

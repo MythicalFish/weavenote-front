@@ -27,6 +27,21 @@ const labelCount = (state) => {
   return labels(state).size;
 };
 
+const suppliers = (state) => {
+  return state.get('suppliers');
+};
+
+const supplierIndex = (state, supplier) => {
+  return suppliers(state).findKey((obj) => (
+    obj.get('id') === supplier.id
+  ));
+}
+
+const supplierCount = (state) => {
+  return suppliers(state).size;
+};
+
+
 function materialReducer(state = initialState, action) {
 
   switch (action.type) {
@@ -44,22 +59,14 @@ function materialReducer(state = initialState, action) {
         .set('material', fromJS(m));
 
     case types.UPDATE_MATERIAL_SUCCESS:
-
-      const suppliers = state.get('suppliers');
-
-      let key = suppliers.findKey((obj) => (
-        obj.get('id') === action.material.supplier.id
-      ));
-
-      if (!key) key = suppliers.size;
-
       return state
         .set('material', fromJS(action.material))
-        .setIn(['suppliers', key], fromJS(action.material.supplier));
+        .setIn(['suppliers', supplierIndex(state, action.material.supplier)], fromJS(action.material.supplier));
 
     case types.CREATE_MATERIAL_SUCCESS:
       return state
-        .set('material', fromJS(action.material));
+        .set('material', fromJS(action.material))
+        .setIn(['suppliers', supplierIndex(state, action.material.supplier)], fromJS(action.material.supplier));
 
     // Material types
 
