@@ -6,7 +6,7 @@ import DataRow from 'components/DataRow';
 const renderCareLabels = ({ fields, removeLabel }) => (
   <div>
     {fields.getAll().map((label, index) => (
-      <div key={label} className="bg-color1x p1 white mt1 flex justify-between">
+      <div key={label} className="tag">
         <span>
           {label.get('name')}
         </span>
