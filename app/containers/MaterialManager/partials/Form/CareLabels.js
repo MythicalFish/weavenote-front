@@ -3,10 +3,16 @@ import { FieldArray } from 'redux-form/immutable';
 import SelectInput from 'components/SelectInput';
 import DataRow from 'components/DataRow';
 
-const renderCareLabels = ({ fields }) => {
-  // console.log(fields.getAll().toJS());
-  return null;
-};
+const renderCareLabels = ({ fields }) => (
+  <div>
+    {fields.getAll().map((label, index) => (
+      <div key={label} className="bg-color1x p1 white mt1">
+        {label.get('name')}
+      </div>
+    ))}
+  </div>
+);
+
 
 export default class CareLabels extends React.PureComponent {
 

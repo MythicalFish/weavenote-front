@@ -8,7 +8,7 @@ const Form = (props) => {
   const groupings = [
     {
       constraint: null,
-      items: initialValues.get('names').toJS().map((name, index) => {
+      items: initialValues.get('names').map((name, index) => {
         return { type: 'names', index, fieldType: 'text', fieldLength: '16' };
       }),
       colClass: 'column',
