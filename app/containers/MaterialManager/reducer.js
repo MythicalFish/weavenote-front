@@ -13,11 +13,19 @@ const initialState = fromJS({
   care_labels: null,
 });
 
+const labels = (state) => {
+  return state.get('care_labels');
+};
+
 const labelIndex = (state, label) => {
-  return state.get('care_labels').findKey((obj) => (
+  return labels(state).findKey((obj) => (
     obj.get('id') === label.get('id')
   ));
 }
+
+const labelCount = (state) => {
+  return labels(state).size;
+};
 
 function materialReducer(state = initialState, action) {
 
@@ -77,9 +85,13 @@ function materialReducer(state = initialState, action) {
       return state
         .set('care_labels', fromJS(action.care_labels));
 
-    case types.ADD_CARE_LABEL:
+    case types.ADD_CARE_LABEL: // deletes here, adds in form state
       return state
         .deleteIn(['care_labels', labelIndex(state, action.label)]);
+
+    case types.REMOVE_CARE_LABEL: // adds here, deletes in form state
+      return state
+        .setIn(['care_labels', labelCount(state)], action.payload.label);
       
     // Currencies
 

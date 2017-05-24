@@ -3,11 +3,16 @@ import { FieldArray } from 'redux-form/immutable';
 import SelectInput from 'components/SelectInput';
 import DataRow from 'components/DataRow';
 
-const renderCareLabels = ({ fields }) => (
+const renderCareLabels = ({ fields, removeLabel }) => (
   <div>
     {fields.getAll().map((label, index) => (
-      <div key={label} className="bg-color1x p1 white mt1">
-        {label.get('name')}
+      <div key={label} className="bg-color1x p1 white mt1 flex justify-between">
+        <span>
+          {label.get('name')}
+        </span>
+        <button className="btn-shy" onClick={() => { removeLabel({ label, index }) }}>
+          <i className="fa fa-close"></i>
+        </button>
       </div>
     ))}
   </div>
@@ -33,7 +38,7 @@ export default class CareLabels extends React.PureComponent {
         <div className="data-rows">
           <DataRow label="Care labels" type="select" data={labels} onChange={this.addLabel} />
         </div>
-        <FieldArray name="care_labels" component={renderCareLabels} />
+        <FieldArray name="care_labels" component={renderCareLabels} removeLabel={this.removeLabel} />
       </div>
     );
   }

@@ -10,11 +10,8 @@ const supplierAttributes = (state) => {
   return fromJS(attributes);
 };
 
-const labels = (state, newLabel) => {
-  let l = state.getIn(['values', 'care_labels']);
-  if (newLabel) 
-    l = l.insert(labelCount(state), newLabel);
-  return l;
+const labels = (state) => {
+  return state.getIn(['values', 'care_labels']);
 };
 
 const labelCount = (state) => {
@@ -36,11 +33,11 @@ export default formReducer.plugin({
 
       case types.ADD_CARE_LABEL:
         return state
-          .setIn(['values', 'care_labels'], labels(state, action.label));
+          .setIn(['values', 'care_labels', labelCount(state)], action.label);
       
       case types.REMOVE_CARE_LABEL:
         return state
-          .deleteIn(['values', 'care_labels', action.index]);
+          .deleteIn(['values', 'care_labels', action.payload.index]);
 
       default:
         return state;
