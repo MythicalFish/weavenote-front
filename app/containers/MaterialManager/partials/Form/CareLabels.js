@@ -2,18 +2,20 @@ import React, { PropTypes } from 'react';
 import { FieldArray } from 'redux-form/immutable';
 import SelectInput from 'components/SelectInput';
 import DataRow from 'components/DataRow';
-const renderCareLabels = ({ care_labels }) => {
+
+const renderCareLabels = ({ fields }) => {
+  // console.log(fields.getAll().toJS());
   return null;
 };
 
 export default class CareLabels extends React.PureComponent {
 
   addLabel = (label) => {
-    console.log(label);
+    this.props.addCareLabel(label);
   }
 
   removeLabel = (label) => {
-    console.log(label);
+    this.props.removeCareLabel(label);
   }
 
   render() {
@@ -32,5 +34,7 @@ export default class CareLabels extends React.PureComponent {
 }
 
 CareLabels.propTypes = {
+  addCareLabel: PropTypes.func,
+  removeCareLabel: PropTypes.func,
 };
 

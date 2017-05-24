@@ -24,7 +24,10 @@ class Form extends React.Component {
   }
 
   render() {
-    const { handleSubmit, submitting, types, colors, currencies, labels, suppliers, newSupplier } = this.props;
+    const {
+      handleSubmit, submitting, types, colors, currencies, labels, suppliers, newSupplier,
+      addCareLabel, removeCareLabel,
+    } = this.props;
     const { selectedType } = this.state;
     return (
       <form onSubmit={handleSubmit}>
@@ -60,7 +63,7 @@ class Form extends React.Component {
           <div className="col-xs-12 col-md-6">
             <Supplier {...{ suppliers, newSupplier, selectedType }} className="mb2" />
             {['Fabric'].includes(selectedType) &&
-              <CareLabels {...{ labels }} />
+              <CareLabels {...{ labels, addCareLabel, removeCareLabel }} />
             }
           </div>
         </div>
@@ -76,6 +79,8 @@ Form.propTypes = {
   submitting: PropTypes.bool,
   handleSubmit: PropTypes.func,
   newSupplier: PropTypes.func,
+  addCareLabel: PropTypes.func,
+  removeCareLabel: PropTypes.func,
   types: PropTypes.object,
   colors: PropTypes.object,
   currencies: PropTypes.object,

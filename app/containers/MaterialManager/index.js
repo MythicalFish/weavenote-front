@@ -8,7 +8,8 @@ import {
 } from './selectors';
 import {
   fetchMaterial, updateMaterial, createMaterial,
-  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier, fetchCareLabels,
+  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier,
+  fetchCareLabels, addCareLabel, removeCareLabel,
 } from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
@@ -16,12 +17,12 @@ import Toolbar from './partials/Toolbar';
 export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const { params, materialTypes, colors, currencies, suppliers, careLabels } = this.props;
-    if (!materialTypes) { this.props.fetchMaterialTypes(); }
+    const { params, types, colors, currencies, suppliers, labels } = this.props;
+    if (!types) { this.props.fetchMaterialTypes(); }
     if (!colors) { this.props.fetchColors(); }
     if (!currencies) { this.props.fetchCurrencies(); }
     if (!suppliers) { this.props.fetchSuppliers(); }
-    if (!careLabels) { this.props.fetchCareLabels(); }
+    if (!labels) { this.props.fetchCareLabels(); }
     this.props.fetchMaterial(params.id);
   }
 
@@ -37,8 +38,10 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
   render() {
     const {
       initialValues, types, colors, currencies, suppliers,
-      newSupplier: n, labels,
+      newSupplier: n, labels, addCareLabel: a, removeCareLabel: r,
     } = this.props;
+
+    const { onSubmit } = this;
     return (
       <div>
         <Header />
@@ -46,18 +49,9 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
         <div className="p2">
           <div className="container">
             {initialValues && types && colors && currencies && suppliers && labels &&
-              <Form
-                {...{
-                  initialValues,
-                  types,
-                  colors,
-                  currencies,
-                  suppliers,
-                  labels,
-                  newSupplier: n,
-                  onSubmit: (values) => { this.onSubmit(values); },
-                }}
-              />
+              <Form {...{
+                initialValues, types, colors, currencies, suppliers, labels,
+                newSupplier: n, onSubmit, addCareLabel: a, removeCareLabel: r }} />
             }
           </div>
         </div>
@@ -104,6 +98,8 @@ const mapDispatch = (dispatch) => (bindActionCreators({
   fetchSuppliers,
   newSupplier,
   fetchCareLabels,
+  addCareLabel,
+  removeCareLabel,
 }, dispatch));
 
 export default connect(mapState, mapDispatch)(MaterialManager);

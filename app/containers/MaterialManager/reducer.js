@@ -13,6 +13,12 @@ const initialState = fromJS({
   care_labels: null,
 });
 
+const labelIndex = (state, label) => {
+  return state.get('care_labels').findKey((obj) => (
+    obj.get('id') === label.get('id')
+  ));
+}
+
 function materialReducer(state = initialState, action) {
 
   switch (action.type) {
@@ -71,6 +77,10 @@ function materialReducer(state = initialState, action) {
       return state
         .set('care_labels', fromJS(action.care_labels));
 
+    case types.ADD_CARE_LABEL:
+      return state
+        .deleteIn(['care_labels', labelIndex(state, action.label)]);
+      
     // Currencies
 
     case types.FETCH_CURRENCIES_SUCCESS:

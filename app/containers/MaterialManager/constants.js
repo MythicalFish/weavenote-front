@@ -27,6 +27,8 @@ export const FETCH_CURRENCIES_SUCCESS = '@@app/FETCH_CURRENCIES_SUCCESS';
 
 export const FETCH_CARE_LABELS = '@@app/FETCH_CARE_LABELS';
 export const FETCH_CARE_LABELS_SUCCESS = '@@app/FETCH_CARE_LABELS_SUCCESS';
+export const ADD_CARE_LABEL = '@@app/ADD_CARE_LABEL';
+export const REMOVE_CARE_LABEL = '@@app/REMOVE_CARE_LABEL';
 
 // Suppliers
 

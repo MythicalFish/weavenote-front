@@ -59,6 +59,14 @@ export function fetchCareLabelsSuccess(care_labels) {
   return { type: types.FETCH_CARE_LABELS_SUCCESS, care_labels };
 }
 
+export function addCareLabel(label) {
+  return { type: types.ADD_CARE_LABEL, label };
+}
+
+export function removeCareLabel(label) {
+  return { type: types.REMOVE_CARE_LABEL, label };
+}
+
 // Suppliers
 
 export function fetchSuppliers() {
