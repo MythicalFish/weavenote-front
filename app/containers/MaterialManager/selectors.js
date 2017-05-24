@@ -41,3 +41,7 @@ export const selectCurrencies = () => createSelector(
 export const selectSuppliers = () => createSelector(
   selectDomain(), (substate) => substate.get('suppliers')
 );
+
+export const selectCareLabels = () => createSelector(
+  selectDomain(), (substate) => substate.get('care_labels')
+);

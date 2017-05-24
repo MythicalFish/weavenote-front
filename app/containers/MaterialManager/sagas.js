@@ -15,6 +15,7 @@ export function* materialManagerWatcher() {
     yield takeLatest(types.FETCH_COLORS, fetchColors),
     yield takeLatest(types.FETCH_CURRENCIES, fetchCurrencies),
     yield takeLatest(types.FETCH_SUPPLIERS, fetchSuppliers),
+    yield takeLatest(types.FETCH_CARE_LABELS, fetchCareLabels),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -34,6 +35,10 @@ export function* fetchCurrencies() {
 
 export function* fetchSuppliers() {
   yield sagas.get('suppliers', actions.fetchSuppliersSuccess);
+}
+
+export function* fetchCareLabels() {
+  yield sagas.get('care_labels', actions.fetchCareLabelsSuccess);
 }
 
 export function* fetchMaterial(action) {

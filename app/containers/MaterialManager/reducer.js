@@ -10,6 +10,7 @@ const initialState = fromJS({
   colors: null,
   currencies: null,
   suppliers: null,
+  care_labels: null,
 });
 
 function materialReducer(state = initialState, action) {
@@ -63,6 +64,12 @@ function materialReducer(state = initialState, action) {
     case types.FETCH_SUPPLIERS_SUCCESS:
       return state
         .set('suppliers', fromJS(action.suppliers));
+    
+    // Care Labels
+
+    case types.FETCH_CARE_LABELS_SUCCESS:
+      return state
+        .set('care_labels', fromJS(action.care_labels));
 
     // Currencies
 

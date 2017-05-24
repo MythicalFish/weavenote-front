@@ -76,6 +76,7 @@ Form.propTypes = {
   colors: PropTypes.array,
   currencies: PropTypes.array,
   suppliers: PropTypes.object,
+  careLabels: PropTypes.object,
   initialValues: PropTypes.object,
 };
 

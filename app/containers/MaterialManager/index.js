@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
 import {
-  selectMaterial, selectMaterialTypes, selectColors, selectCurrencies, selectSuppliers,
+  selectMaterial, selectMaterialTypes, selectColors, selectCurrencies, selectSuppliers, selectCareLabels,
 } from './selectors';
 import {
   fetchMaterial, updateMaterial, createMaterial,
-  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier,
+  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier, fetchCareLabels,
 } from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
@@ -16,11 +16,12 @@ import Toolbar from './partials/Toolbar';
 export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const { params, materialTypes, colors, currencies, suppliers } = this.props;
+    const { params, materialTypes, colors, currencies, suppliers, careLabels } = this.props;
     if (!materialTypes) { this.props.fetchMaterialTypes(); }
     if (!colors) { this.props.fetchColors(); }
     if (!currencies) { this.props.fetchCurrencies(); }
     if (!suppliers) { this.props.fetchSuppliers(); }
+    if (!careLabels) { this.props.fetchCareLabels(); }
     this.props.fetchMaterial(params.id);
   }
 
@@ -35,7 +36,8 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
 
   render() {
     const {
-      material: initialValues, materialTypes: types, colors, currencies, suppliers, newSupplier: n,
+      initialValues, types, colors, currencies, suppliers,
+      newSupplier: n, careLabels,
     } = this.props;
     return (
       <div>
@@ -51,6 +53,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
                   colors,
                   currencies,
                   suppliers,
+                  careLabels,
                   newSupplier: n,
                   onSubmit: (values) => { this.onSubmit(values); },
                 }}
@@ -68,9 +71,10 @@ MaterialManager.propTypes = {
   updateMaterial: PropTypes.func.isRequired,
   createMaterial: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
-  material: PropTypes.object,
+  initialValues: PropTypes.object,
   fetchMaterialTypes: PropTypes.func.isRequired,
-  materialTypes: PropTypes.array,
+  fetchCareLabels: PropTypes.func.isRequired,
+  types: PropTypes.array,
   fetchColors: PropTypes.func.isRequired,
   fetchSuppliers: PropTypes.func.isRequired,
   newSupplier: PropTypes.func.isRequired,
@@ -78,24 +82,28 @@ MaterialManager.propTypes = {
   colors: PropTypes.array,
   suppliers: PropTypes.object,
   currencies: PropTypes.array,
+  careLabels: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
-  material: selectMaterial(),
-  materialTypes: selectMaterialTypes(),
+  initialValues: selectMaterial(),
+  types: selectMaterialTypes(),
   colors: selectColors(),
   currencies: selectCurrencies(),
   suppliers: selectSuppliers(),
+  careLabels: selectCareLabels(),
 });
 
-function mapDispatch(dispatch) {
-  return bindActionCreators(
-    {
-      fetchMaterial, fetchMaterialTypes, updateMaterial, createMaterial,
-      fetchColors, fetchCurrencies, fetchSuppliers, newSupplier
-    },
-    dispatch
-  );
-}
+const mapDispatch = (dispatch) => (bindActionCreators({
+  fetchMaterial,
+  fetchMaterialTypes,
+  updateMaterial,
+  createMaterial,
+  fetchColors,
+  fetchCurrencies,
+  fetchSuppliers,
+  newSupplier,
+  fetchCareLabels,
+}, dispatch));
 
 export default connect(mapState, mapDispatch)(MaterialManager);

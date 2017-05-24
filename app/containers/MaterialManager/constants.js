@@ -23,6 +23,11 @@ export const FETCH_COLORS_SUCCESS = '@@app/FETCH_COLORS_SUCCESS';
 export const FETCH_CURRENCIES = '@@app/FETCH_CURRENCIES';
 export const FETCH_CURRENCIES_SUCCESS = '@@app/FETCH_CURRENCIES_SUCCESS';
 
+// Care Labels
+
+export const FETCH_CARE_LABELS = '@@app/FETCH_CARE_LABELS';
+export const FETCH_CARE_LABELS_SUCCESS = '@@app/FETCH_CARE_LABELS_SUCCESS';
+
 // Suppliers
 
 export const FETCH_SUPPLIERS = '@@app/FETCH_SUPPLIERS';

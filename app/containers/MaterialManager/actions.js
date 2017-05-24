@@ -49,6 +49,16 @@ export function fetchCurrenciesSuccess(currencies) {
   return { type: types.FETCH_CURRENCIES_SUCCESS, currencies };
 }
 
+// Care Labels
+
+export function fetchCareLabels() {
+  return { type: types.FETCH_CARE_LABELS };
+}
+
+export function fetchCareLabelsSuccess(care_labels) {
+  return { type: types.FETCH_CARE_LABELS_SUCCESS, care_labels };
+}
+
 // Suppliers
 
 export function fetchSuppliers() {
