@@ -12,7 +12,7 @@ export default class DataRow extends React.PureComponent {
   render() {
 
     const { props } = this;
-    const { label, type } = props;
+    const { label, type, className } = props;
     let field = null;
     let touched = false;
     let error = false;
@@ -63,7 +63,7 @@ export default class DataRow extends React.PureComponent {
     }
 
     return (
-      <div className={`data-row ${rowClass}`}>
+      <div className={`data-row ${rowClass}${className || ''}`}>
         <label>{label}</label>
         {field}
         <div className="focused p0"></div>

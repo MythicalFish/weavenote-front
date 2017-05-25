@@ -31,10 +31,10 @@ export default class CareLabels extends React.PureComponent {
 
   render() {
 
-    const { labels } = this.props;    
+    const { labels, className } = this.props;    
 
     return (
-      <div>
+      <div className={className}>
         <div className="data-rows">
           <DataRow label="Care labels" type="select" data={labels} onChange={this.addLabel} />
         </div>

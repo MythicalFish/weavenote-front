@@ -1,0 +1,43 @@
+@mixin conceal(){
+  position: absolute!important;
+  height: 1px!important;
+  width: 1px!important;
+  overflow: hidden!important;
+  clip: rect(1px, 1px, 1px, 1px)!important;
+  opacity: 0!important;
+  padding: 0!important;
+  margin: 0!important;
+}
+
+.hide, .sm-show, .md-show, .lg-show { display: none; }
+.conceal { @include conceal(); }
+
+@media (max-width: $sm) {
+  .sm-reveal { @include conceal(); }
+}
+
+@media (min-width: $sm) {
+  .sm-conceal { @include conceal(); }
+  .sm-show { display: block; }
+  .sm-hide { display: none; }
+}
+
+@media (max-width: $md) {
+  .md-reveal { @include conceal(); }
+}
+
+@media (min-width: $md) {
+  .md-conceal { @include conceal(); }
+  .md-show { display: block; }
+  .md-hide { display: none; }
+}
+
+@media (max-width: $lg) {
+  .lg-reveal { @include conceal(); }
+}
+
+@media (min-width: $lg) {
+  .lg-conceal { @include conceal(); }
+  .lg-show { display: block; }
+  .lg-hide { display: none; }
+}

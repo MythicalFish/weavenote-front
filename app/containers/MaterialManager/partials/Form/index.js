@@ -6,21 +6,27 @@ import CareLabels from './CareLabels';
 
 class Form extends React.Component {
 
-  state = {
-    // Defaults
-    selectedType: 'Fabric',
-  }
+  state = { type: null }
 
   componentWillMount = () => {
-    const { initialValues } = this.props;
-    const v = initialValues.toJS();
-    if (v.type) {
-      this.setState({ selectedType: v.type.name });
-    }
+    const { initialValues: v } = this.props;
+    const type = v.get('type');
+    if (type) this.switchType(type);
   }
 
   switchType = (type) => {
-    this.setState({ selectedType: type.name });
+    this.setState({ type: type.get('name') });
+  }
+
+  is = (type) => {
+    let t = type;
+    if (!Array.isArray(t)) t = [t];
+    return t.includes(this.state.type);
+  }
+
+  showFor = (type) => {
+    if (!this.is(type)) return 'conceal';
+    return '';
   }
 
   render() {
@@ -28,7 +34,8 @@ class Form extends React.Component {
       handleSubmit, submitting, types, colors, currencies, labels, suppliers, newSupplier,
       addCareLabel, removeCareLabel,
     } = this.props;
-    const { selectedType } = this.state;
+    const { type } = this.state;
+    const { showFor } = this;
     return (
       <form onSubmit={handleSubmit}>
         <div className="row">
@@ -38,19 +45,11 @@ class Form extends React.Component {
               <Field name="name" type="text" component={DataRow} label="Name" />
               <Field name="identifier" type="text" component={DataRow} label="Identifier" />
               <Field name="color" type="select" component={DataRow} label="Color" data={colors} />
-              {selectedType === 'Fabric' &&
-                <Field name="composition" type="text" component={DataRow} label="Composition" />
-              }
-              {['Button', 'Zip'].includes(selectedType) &&
-                <Field name="size" type="text" component={DataRow} label="Size" />
-              }
-              {selectedType === 'Zip' &&
-                <div>
-                  <Field name="length" type="text" component={DataRow} label="Length" />
-                  <Field name="subtype" type="text" component={DataRow} label="Zip Type" />
-                  <Field name="opening_type" type="text" component={DataRow} label="Opening Type" />
-                </div>
-              }
+              <Field name="composition" type="text" component={DataRow} label="Composition" className={showFor('Fabric')} />
+              <Field name="size" type="text" component={DataRow} label="Size" className={showFor(['Button', 'Zip'])} />
+              <Field name="length" type="text" component={DataRow} label="Length" className={showFor('Zip')} />
+              <Field name="subtype" type="text" component={DataRow} label="Zip Type" className={showFor('Zip')} />
+              <Field name="opening_type" type="text" component={DataRow} label="Opening Type" className={showFor('Zip')} />
             </div>
             <div className="data-rows">
               <Field name="currency" type="select" component={DataRow} label="Currency" data={currencies} />
@@ -61,10 +60,8 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <Supplier {...{ suppliers, newSupplier, selectedType }} className="mb2" />
-            {['Fabric'].includes(selectedType) &&
-              <CareLabels {...{ labels, addCareLabel, removeCareLabel }} />
-            }
+            <Supplier {...{ suppliers, newSupplier, type }} className="mb2" />
+            <CareLabels {...{ labels, addCareLabel, removeCareLabel }} className={showFor('Fabric')} />
           </div>
         </div>
         <footer className="p2 center">
