@@ -55,7 +55,7 @@ export function* updateProject(action) {
 
 /*
  *
- *  Image
+ *  Project images
  *
  */
 
@@ -64,13 +64,15 @@ export function* fetchImages(action) {
 }
 
 export function* createImage(action) {
-  const { image } = action.data;
-  yield sagas.post(`projects/${image.project_id}/images`, { image }, actions.createImageSuccess);
+  const { projectID, data: { image } } = action.payload;
+  yield sagas.post(`projects/${projectID}/images`, { image }, actions.createImageSuccess);
 }
 
 export function* deleteImage(action) {
-  yield sagas.destroy(`projects/${action.projectID}/images/${action.id}`, actions.deleteImageSuccess);
+  const { projectID, imageID } = action.payload;
+  yield sagas.destroy(`projects/${projectID}/images/${imageID}`, actions.deleteImageSuccess);
 }
+
 
 /*
  *

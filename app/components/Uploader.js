@@ -25,7 +25,6 @@ export default class Uploader extends React.Component { // eslint-disable-line r
     console.log(`Upload error: ${message}`); // eslint-disable-line no-console
   }
   render() {
-    const { project } = this.props;
     return (
       <div>
         {this.state.progress === 0 &&
@@ -33,7 +32,7 @@ export default class Uploader extends React.Component { // eslint-disable-line r
             <i className="fa fa-plus-circle"></i>
             <ReactS3Uploader
               server={process.env.API_URL}
-              signingUrl={`/projects/${project.id}/images/get_upload_url`}
+              signingUrl={'/s3_url'}
               signingUrlMethod="GET"
               signingUrlHeaders={{ Authorization: API.accessToken() }}
               accept="image/*"
@@ -56,7 +55,7 @@ export default class Uploader extends React.Component { // eslint-disable-line r
 }
 
 Uploader.propTypes = {
-  project: PropTypes.object,
+  projectID: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]),
   onFinish: PropTypes.func,
 };
 

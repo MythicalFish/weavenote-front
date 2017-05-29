@@ -34,10 +34,10 @@ class Instructions extends React.Component {
           this.state.creating
             ? <Form
               onSubmit={this.createInstruction}
+              projectID={this.props.project.id}
               initialValues={{
                 title: '',
                 description: '',
-                projectID: this.props.project.id,
               }}
             />
             : <Accordion

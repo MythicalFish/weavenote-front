@@ -134,16 +134,16 @@ export function updateImageSuccess() {
   return { type: types.UPDATE_IMAGE_SUCCESS };
 }
 
-export function createImage(data) {
-  return { type: types.CREATE_IMAGE, data };
+export function createImage(payload) {
+  return { type: types.CREATE_IMAGE, payload };
 }
 
 export function createImageSuccess(image) {
   return { type: types.CREATE_IMAGE_SUCCESS, image };
 }
 
-export function deleteImage({ projectID, id }) {
-  return { type: types.DELETE_IMAGE, projectID, id };
+export function deleteImage(payload) {
+  return { type: types.DELETE_IMAGE, payload };
 }
 
 export function deleteImageSuccess(images) {

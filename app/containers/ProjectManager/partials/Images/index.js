@@ -18,10 +18,13 @@ class Images extends React.PureComponent { // eslint-disable-line react/prefer-s
     if (c) return c;
     return { url: IMAGE_PLACEHOLDER };
   }
-  deleteImage = (project, image) => {
-    this.props.deleteImage(
-      { projectID: project.id, id: image.id }
-    );
+  createImage = (data) => {
+    const { project } = this.props;
+    this.props.createImage({ projectID: project.id, data });
+  }
+  deleteImage = (imageID) => {
+    const { project } = this.props;
+    this.props.deleteImage({ projectID: project.id, imageID });
   }
   render() {
     const { project, images } = this.props;
@@ -30,7 +33,7 @@ class Images extends React.PureComponent { // eslint-disable-line react/prefer-s
       <div>
         <div className="flex flex-column items-center">
           {image.id &&
-            <button onClick={() => { this.deleteImage(project, image); }}>Delete</button>
+            <button onClick={() => { this.deleteImage(image.id); }}>Delete</button>
           }
           <img src={image.url} role="presentation" className="x-max20" />
         </div>
@@ -40,7 +43,7 @@ class Images extends React.PureComponent { // eslint-disable-line react/prefer-s
             handleClick={(index) => { this.props.switchImage(index); }}
           />
         </div>
-        <Uploader project={project} onFinish={(img) => { this.props.createImage(img); }} />
+        <Uploader projectID={project.id} onFinish={(data) => { this.createImage(data); }} />
       </div>
     );
   }

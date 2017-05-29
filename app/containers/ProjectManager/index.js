@@ -25,28 +25,25 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
 
   render() {
     const { project, currentSection } = this.props;
-    const sectionProps = {
-      project,
-    };
 
-    let renderedSection = <Basics {...sectionProps} />;
+    let renderedSection = <Basics {...{ project }} />;
 
     switch (currentSection.id) {
 
       case sections.Components.id:
-        renderedSection = <Components {...sectionProps} />;
+        renderedSection = <Components {...{ project }} />;
         break;
 
       case sections.Measurements.id:
-        renderedSection = <Measurements {...sectionProps} />;
+        renderedSection = <Measurements {...{ project }} />;
         break;
 
       case sections.Instructions.id:
-        renderedSection = <Instructions {...sectionProps} />;
+        renderedSection = <Instructions {...{ project }} />;
         break;
 
       case sections.Collaborators.id:
-        renderedSection = <Collaborators {...sectionProps} />;
+        renderedSection = <Collaborators {...{ project }} />;
         break;
 
       default:
