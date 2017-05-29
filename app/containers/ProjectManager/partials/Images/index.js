@@ -1,44 +1,46 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { IMAGE_PLACEHOLDER } from 'containers/App/constants/misc';
 import ThumbnailList from 'components/ThumbnailList';
+import Uploader from 'components/Uploader';
 import { selectImages, selectCurrentImage } from '../../selectors';
-import { fetchImages, switchImage, deleteImage } from '../../actions';
-import Uploader from './Uploader';
+import { fetchImages, switchImage, deleteImage, createImage } from '../../actions';
 
 class Images extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    const { dispatch, project } = this.props;
-    dispatch(fetchImages(project.id));
+    const { fetchImages: f, project: p } = this.props;
+    f(p.id);
   }
   currentImage() {
-    const { currentImage } = this.props;
-    if (currentImage) {
-      return currentImage;
-    }
+    const { currentImage: c } = this.props;
+    if (c) return c;
     return { url: IMAGE_PLACEHOLDER };
   }
+  deleteImage = (project, image) => {
+    this.props.deleteImage(
+      { projectID: project.id, id: image.id }
+    );
+  }
   render() {
-    const { dispatch, project, images } = this.props;
+    const { project, images } = this.props;
     const image = this.currentImage();
     return (
       <div>
         <div className="flex flex-column items-center">
           {image.id &&
-            <div>
-              <button onClick={() => { dispatch(deleteImage({ projectID: project.id, id: image.id })); }}>Delete</button>
-            </div>
+            <button onClick={() => { this.deleteImage(project, image); }}>Delete</button>
           }
           <img src={image.url} role="presentation" className="x-max20" />
         </div>
         <div>
           <ThumbnailList
             images={images}
-            handleClick={(index) => { dispatch(switchImage(index)); }}
+            handleClick={(index) => { this.props.switchImage(index); }}
           />
         </div>
-        <Uploader project={project} />
+        <Uploader project={project} onFinish={(img) => { this.props.createImage(img); }} />
       </div>
     );
   }
@@ -48,11 +50,17 @@ Images.propTypes = {
   images: PropTypes.object,
   project: PropTypes.object,
   currentImage: PropTypes.object,
-  dispatch: PropTypes.func,
+  deleteImage: PropTypes.func,
+  switchImage: PropTypes.func,
+  createImage: PropTypes.func,
+  fetchImages: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
-  return { dispatch };
+  return bindActionCreators(
+    { fetchImages, switchImage, deleteImage, createImage },
+    dispatch,
+  );
 }
 
 const mapState = createStructuredSelector({
