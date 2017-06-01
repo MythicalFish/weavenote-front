@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 import Auth0Lock from 'auth0-lock';
-import { isTokenExpired } from './jwtHelper';
 
 const LOCK_OPTIONS = {
   container: 'login-form',
@@ -39,11 +38,6 @@ export default class AuthService extends EventEmitter {
   get = (item) => localStorage.getItem(item);
   set = (item, value) => localStorage.setItem(item, value);
 
-  loggedIn() {
-    const token = this.get('id_token');
-    return !!token && !isTokenExpired(token);
-  }
-
   setProfile(profile) {
     localStorage.setItem('profile', JSON.stringify(profile));
     this.emit('profile_updated', profile);
@@ -52,13 +46,6 @@ export default class AuthService extends EventEmitter {
   getProfile() {
     const profile = localStorage.getItem('profile');
     return profile ? JSON.parse(localStorage.profile) : {};
-  }
-
-  logout() {
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('profile');
-    window.location.replace('/');
   }
 
 }

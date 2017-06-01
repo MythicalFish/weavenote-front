@@ -1,11 +1,11 @@
 import React from 'react';
 import Dropdown from 'components/Dropdown';
-import { Auth0 } from 'containers/Auth';
+import * as authUtils from 'utils/authUtils';
 
 export default function UserMenu() {
   return (
     <Dropdown label="...">
-      <button className="btn" onClick={() => { Auth0.logout(); }}>Logout</button>
+      <button className="btn" onClick={() => { authUtils.logout(); }}>Logout</button>
     </Dropdown>
   );
 }
