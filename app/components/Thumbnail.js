@@ -1,5 +1,5 @@
 import React from 'react';
-import { IMAGE_PLACEHOLDER } from 'containers/App/constants/misc';
+import { IMAGE_PLACEHOLDER } from 'containers/App/constants';
 
 const Thumbnail = (props) => {
   let url = props.url;

@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 import * as MaterialListActionTypes from 'containers/MaterialList/constants';
-import * as AppActionTypes from './constants';
+import * as AppActionTypes from './constants/actions';
 import * as sections from './constants/sections';
 
 const types = {

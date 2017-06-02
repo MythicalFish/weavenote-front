@@ -1,7 +1,7 @@
 import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { fetchStatsSuccess } from 'containers/App/actions';
-import * as types from 'containers/App/constants';
+import * as types from 'containers/App/constants/actions';
 import * as API from 'utils/API';
 
 export function* fetchStats() {

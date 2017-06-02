@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { IMAGE_PLACEHOLDER } from 'containers/App/constants/misc';
+import { IMAGE_PLACEHOLDER } from 'containers/App/constants';
 import ThumbnailList from 'components/ThumbnailList';
 import Uploader from 'components/Uploader';
 import { selectImages, selectCurrentImage } from '../../selectors';
