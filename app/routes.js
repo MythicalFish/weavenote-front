@@ -16,7 +16,7 @@ export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
-  return [
+  const childRoutes = [
     {
       path: '/',
       name: 'dashboard',
@@ -149,4 +149,27 @@ export default function createRoutes(store) {
       },
     },
   ];
+
+  return {
+    getComponent(nextState, cb) {
+      const importModules = Promise.all([
+        // Global sagas
+        import('containers/App/sagas'),
+        import('containers/Auth/sagas'),
+        import('containers/App'),
+      ]);
+
+      const renderRoute = loadModule(cb);
+
+      importModules.then(([appSagas, authSagas, component]) => {
+        injectSagas(appSagas.default);
+        injectSagas(authSagas.default);
+        renderRoute(component);
+      });
+
+      importModules.catch(errorLoading);
+    },
+    childRoutes,
+  };
+
 }

@@ -6,16 +6,21 @@
 
 import { fromJS } from 'immutable';
 import * as MaterialListActionTypes from 'containers/MaterialList/constants';
+import * as AuthActionTypes from 'containers/Auth/constants';
 import * as AppActionTypes from './constants';
 import * as sections from './constants/sections';
 
 const types = {
   App: AppActionTypes,
   MaterialList: MaterialListActionTypes,
+  Auth: AuthActionTypes,
 };
 
 
 const initialState = fromJS({
+  user: null,
+  organizations: null,
+  currentOrganization: null,
   stats: {
     projects: {
       counts: {
@@ -36,6 +41,15 @@ function appReducer(state = initialState, action) {
       return state
         .setIn(['currentSection', 'id'], action.section.id)
         .setIn(['currentSection', 'label'], action.section.label);
+
+    // User
+
+    case types.Auth.FETCH_USER_SUCCESS:
+      return state
+        .set('user', action.data.user)
+        .set('organizations', fromJS(action.data.organizations));
+
+    // Stats
 
     case types.App.FETCH_STATS_SUCCESS:
       return state

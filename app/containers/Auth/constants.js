@@ -4,7 +4,6 @@
  *
  */
 
-export const SHOW_LOCK = 'SHOW_LOCK';
-export const LOCK_SUCCESS = 'LOCK_SUCCESS';
-export const LOCK_ERROR = 'LOCK_ERROR';
+export const FETCH_USER = '@@app/FETCH_USER';
+export const FETCH_USER_SUCCESS = '@@app/FETCH_USER_SUCCESS';
 

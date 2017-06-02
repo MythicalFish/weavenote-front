@@ -6,23 +6,15 @@
 
 import * as types from './constants';
 
-export function showLock() {
+export function fetchUser() {
   return {
-    type: types.SHOW_LOCK,
+    type: types.FETCH_USER,
   };
 }
 
-export function lockSuccess(profile, token) {
+export function fetchUserSuccess(data) {
   return {
-    type: types.LOCK_SUCCESS,
-    profile,
-    token,
-  };
-}
-
-export function lockError(err) {
-  return {
-    type: types.LOCK_ERROR,
-    err,
+    type: types.FETCH_USER_SUCCESS,
+    data,
   };
 }
