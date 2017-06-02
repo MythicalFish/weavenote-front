@@ -1,7 +1,6 @@
 
-import { call, put, take, cancel, takeLatest } from 'redux-saga/effects';
+import { take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import * as API from 'utils/API';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
