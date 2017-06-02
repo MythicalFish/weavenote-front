@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 import Auth from 'containers/Auth';
-import Sidebar from 'components/Sidebar';
+import { loggedIn } from 'utils/authUtils';
+import AppLayout from 'components/AppLayout';
 import { fetchUser } from './actions';
 import * as selectors from './selectors';
 
@@ -11,34 +13,21 @@ import * as selectors from './selectors';
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    this.props.fetchUser();
+    if (loggedIn()) this.props.fetchUser();
   }
 
   render() {
-    const { user, currentOrganization, organizations } = this.props;
-    return (
-      <Auth>
-        {user &&
-          <div className="flex bg-gray-lightest">
-            <div className="flex-none bg-color1x">
-              <Sidebar currentPath={this.props.location.pathname} />
-            </div>
-            <div className="flex-auto">
-              {React.Children.toArray(this.props.children)}
-            </div>
-          </div>
-        }
-      </Auth>
-    );
+    const { user, currentOrganization } = this.props;
+    if (!loggedIn()) return <Auth />;
+    if (!user) return null;
+    if (!currentOrganization) browserHistory.push('/organizations/new');
+    return <AppLayout {...this.props} />;
   }
 }
 
 App.propTypes = {
-  children: React.PropTypes.node,
-  location: React.PropTypes.object,
   fetchUser: React.PropTypes.func,
   user: React.PropTypes.object,
-  organizations: React.PropTypes.object,
   currentOrganization: React.PropTypes.object,
 };
 
