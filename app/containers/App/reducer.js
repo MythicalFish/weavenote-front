@@ -6,14 +6,12 @@
 
 import { fromJS } from 'immutable';
 import * as MaterialListActionTypes from 'containers/MaterialList/constants';
-import * as AuthActionTypes from 'containers/Auth/constants';
 import * as AppActionTypes from './constants';
 import * as sections from './constants/sections';
 
 const types = {
   App: AppActionTypes,
   MaterialList: MaterialListActionTypes,
-  Auth: AuthActionTypes,
 };
 
 
@@ -44,10 +42,11 @@ function appReducer(state = initialState, action) {
 
     // User
 
-    case types.Auth.FETCH_USER_SUCCESS:
+    case types.App.FETCH_USER_SUCCESS:
       return state
         .set('user', action.data.user)
-        .set('organizations', fromJS(action.data.organizations));
+        .set('organizations', fromJS(action.data.organizations))
+        .set('currentOrganization', fromJS(action.data.current_organization));
 
     // Stats
 

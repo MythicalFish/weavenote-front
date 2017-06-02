@@ -1,21 +1,33 @@
 import { createSelector } from 'reselect';
 
-const selectGlobal = () => (state) => state.get('global');
+const selectDomain = () => (state) => state.get('global');
+
+// Stats
 
 const selectStats = () => createSelector(
-  selectGlobal(), (s) => {
+  selectDomain(), (s) => {
     const stats = s.get('stats');
     if (stats) { return stats.toJS(); }
     return null;
   }
 );
 
-const selectMaterials = () => createSelector(
-  selectGlobal(), (s) => s.get('materials')
+// User
+
+export const selectUser = () => createSelector(
+  selectDomain(), (substate) => substate.get('user')
 );
 
+// Materials
+
+const selectMaterials = () => createSelector(
+  selectDomain(), (s) => s.get('materials')
+);
+
+// Misc
+
 export const selectCurrentSection = () => createSelector(
-  selectGlobal(), (s) => s.get('currentSection').toJS()
+  selectDomain(), (s) => s.get('currentSection').toJS()
 );
 
 const makeSelectLocationState = () => {
@@ -35,7 +47,7 @@ const makeSelectLocationState = () => {
 };
 
 export {
-  selectGlobal,
+  selectDomain,
   selectStats,
   selectMaterials,
   makeSelectLocationState,

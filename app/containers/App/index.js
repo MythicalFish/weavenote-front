@@ -1,29 +1,22 @@
-/**
- *
- * App.react.js
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
-
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import Auth from 'containers/Auth';
 import Sidebar from 'components/Sidebar';
+import { fetchUser } from './actions';
+import * as selectors from './selectors';
 
 
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    children: React.PropTypes.node,
-    location: React.PropTypes.object,
+  componentDidMount() {
+    this.props.fetchUser();
   }
 
   render() {
+    const { user } = this.props;
+    if (!user) return null;
     return (
       <Auth>
         <div className="flex bg-gray-lightest">
@@ -38,3 +31,23 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     );
   }
 }
+
+App.propTypes = {
+  children: React.PropTypes.node,
+  location: React.PropTypes.object,
+  fetchUser: React.PropTypes.func,
+  user: React.PropTypes.object,
+};
+
+export function mapDispatch(dispatch) {
+  return bindActionCreators(
+    { fetchUser },
+    dispatch
+  );
+}
+
+const mapState = createStructuredSelector({
+  user: selectors.selectUser(),
+});
+
+export default connect(mapState, mapDispatch)(App);

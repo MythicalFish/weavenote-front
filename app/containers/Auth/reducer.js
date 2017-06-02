@@ -5,11 +5,8 @@
  */
 
 import { fromJS } from 'immutable';
-import * as types from './constants';
 
-const initialState = fromJS({
-  user: null,
-});
+const initialState = fromJS({});
 
 function authReducer(state = initialState, action) {
   switch (action.type) {
