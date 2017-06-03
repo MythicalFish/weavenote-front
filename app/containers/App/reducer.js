@@ -17,8 +17,8 @@ const types = {
 
 const initialState = fromJS({
   user: null,
-  organizations: null,
   currentOrganization: null,
+  organizations: [],
   stats: {
     projects: {
       counts: {

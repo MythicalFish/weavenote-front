@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 import Auth from 'containers/Auth';
+import Organization from 'containers/Organization';
 import { loggedIn } from 'utils/authUtils';
 import AppLayout from 'components/AppLayout';
 import { fetchUser } from './actions';
@@ -17,10 +18,13 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   }
 
   render() {
-    const { user, currentOrganization } = this.props;
+    const { user, currentOrganization, location } = this.props;
     if (!loggedIn()) return <Auth />;
     if (!user) return null;
-    if (!currentOrganization) browserHistory.push('/organizations/new');
+    if (!currentOrganization && location.pathname !== '/organization') {
+      browserHistory.push('/organization');
+      return <Organization />;
+    }
     return <AppLayout {...this.props} />;
   }
 }
@@ -28,6 +32,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 App.propTypes = {
   fetchUser: React.PropTypes.func,
   user: React.PropTypes.object,
+  location: React.PropTypes.object,
   currentOrganization: React.PropTypes.object,
 };
 
@@ -40,8 +45,8 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   user: selectors.selectUser(),
-  organizations: selectors.selectOrganizations(),
-  currentOrganization: selectors.selectCurrentOrganization(),
+  organizations: selectors.selectOrgs(),
+  currentOrganization: selectors.selectCurrentOrg(),
 });
 
 export default connect(mapState, mapDispatch)(App);

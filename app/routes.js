@@ -38,6 +38,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/organization',
+      name: 'Organization',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Organization/reducer'),
+          import('containers/Organization/sagas'),
+          import('containers/Organization'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('Organization', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '/projects',
       name: 'ProjectList',
       getComponent(nextState, cb) {
