@@ -6,12 +6,14 @@
 
 import { fromJS } from 'immutable';
 import * as MaterialListActionTypes from 'containers/MaterialList/constants';
+import * as OrgActionTypes from 'containers/Organization/constants';
 import * as AppActionTypes from './constants/actions';
 import * as sections from './constants/sections';
 
 const types = {
   App: AppActionTypes,
   MaterialList: MaterialListActionTypes,
+  Org: OrgActionTypes,
 };
 
 
@@ -47,6 +49,13 @@ function appReducer(state = initialState, action) {
         .set('user', action.data.user)
         .set('organizations', fromJS(action.data.organizations))
         .set('currentOrganization', fromJS(action.data.current_organization));
+
+    // Org
+
+    case types.Org.CREATE_ORG_SUCCESS:
+      return state
+        .set('organizations', fromJS(action.data.organizations))
+        .set('currentOrganization', fromJS(action.data.currentOrganization));
 
     // Stats
 

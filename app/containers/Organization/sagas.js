@@ -15,6 +15,6 @@ export function* orgWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-export function* createOrg() {
-  yield sagas.post('organizations', actions.createOrgSuccess);
+export function* createOrg({ organization }) {
+  yield sagas.post('organizations', { organization }, actions.createOrgSuccess);
 }

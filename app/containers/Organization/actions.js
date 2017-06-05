@@ -9,6 +9,6 @@ export function updateOrgSuccess(org) {
 export function createOrg(organization) {
   return { type: types.CREATE_ORG, organization };
 }
-export function createOrgSuccess(org) {
-  return { type: types.CREATE_ORG_SUCCESS, org };
+export function createOrgSuccess(data) {
+  return { type: types.CREATE_ORG_SUCCESS, data };
 }

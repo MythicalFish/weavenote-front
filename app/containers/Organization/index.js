@@ -4,6 +4,9 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentOrg, selectOrgs } from 'containers/App/selectors';
 import { updateOrg, createOrg } from './actions';
+import Create from './views/Create';
+import NoneYet from './views/NoneYet';
+import Manage from './views/Manage';
 
 export class Organization extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -16,50 +19,28 @@ export class Organization extends React.PureComponent { // eslint-disable-line r
     }
   }
 
-  noneYet = () => (
-    <div>
-      Looks like you do not belong to a Seamless organization yet.
-      <div className="mt2">
-        <button type="button" className="btn-color2x" onClick={() => { this.setState({ view: 'create' }); }}>
-          <i className="fa fa-plus mr1"></i>
-          Create an organization
-        </button>
-      </div>
-    </div>
-  )
-
-  create = () => (
-    <div>
-      <form onSubmit={this.doCreate}>
-        <input type="text" name="name" placeholder="Name your organization" />
-        <button type="submit" className="btn-color2x">
-          Submit
-        </button>
-      </form>
-    </div>
-  )
-
-  doCreate = (e, data) => {
-    e.preventDefault();
-    console.log(data);
-    this.props.createOrg();
+  createOrg = (data) => {
+    this.props.createOrg(data);
+    this.setState({ view: null });
   }
 
   currentView = () => {
     switch (this.state.view) {
       case 'noneYet':
-        return this.noneYet();
+        return <NoneYet onClick={() => { this.setState({ view: 'create' }); }} />
       case 'create':
-        return this.create();
+        return <Create onSubmit={this.createOrg} />;
       default:
-        return null;
+        return <Manage />;
     }
   }
 
   render() {
     return (
       <div className="p3 md-p4">
-        {this.currentView()}
+        <div className="container-narrow">
+          {this.currentView()}
+        </div>
       </div>
     );
   }
