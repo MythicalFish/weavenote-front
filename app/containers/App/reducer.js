@@ -55,7 +55,7 @@ function appReducer(state = initialState, action) {
     case types.Org.CREATE_ORG_SUCCESS:
       return state
         .set('organizations', fromJS(action.data.organizations))
-        .set('currentOrganization', fromJS(action.data.currentOrganization));
+        .set('currentOrganization', fromJS(action.data.current_organization));
 
     // Stats
 
