@@ -14,8 +14,13 @@ export function request(method = 'GET', path, params) {
   }
 
   return fetch(url, body)
-    .then(checkStatus)
-    .then(parseJSON);
+    .then((r) => r.json())
+    .then((r) => {
+      if (r.server_error) {
+        return console.log(`%c ${r.server_error}`, ConsoleErrorStyle);
+      }
+      return r;
+    });
 }
 
 export function get(path, params) {
@@ -63,8 +68,10 @@ const encodedRequestParams = (params) => {
     .join('&');
 };
 
-function parseJSON(response) {
-  return response.json();
+function asdasd(response) {
+  console.log('asdasd');
+  console.log(response);
+  return response;
 }
 
 function checkStatus(response) {
@@ -75,3 +82,16 @@ function checkStatus(response) {
   error.response = response;
   throw error;
 }
+
+const ConsoleErrorStyle = [
+  'background: linear-gradient(#D33106, #571402)',
+  'border: 1px solid #3E0E02',
+  'color: white',
+  'display: block',
+  'padding: 20px',
+  'text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)',
+  'box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 5px 3px -5px rgba(0, 0, 0, 0.5), 0 -13px 5px -10px rgba(255, 255, 255, 0.4) inset',
+  'line-height: 44px',
+  'text-align: center',
+  'font-weight: bold',
+].join(';');
