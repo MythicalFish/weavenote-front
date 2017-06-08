@@ -18,6 +18,10 @@ export const selectUser = () => createSelector(
   selectDomain(), (substate) => substate.get('user')
 );
 
+export const selectUserRole = () => createSelector(
+  selectDomain(), (substate) => substate.get('user_role')
+);
+
 export const selectOrgs = () => createSelector(
   selectDomain(), (substate) => substate.get('organizations')
 );

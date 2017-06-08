@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
+import { selectUserRole } from 'containers/App/selectors';
 import {
   selectMaterial, selectMaterialTypes, selectColors, selectCurrencies, selectSuppliers, selectCareLabels,
 } from './selectors';
@@ -34,6 +35,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
     const {
       initialValues, types, colors, currencies, suppliers,
       newSupplier: n, labels, addCareLabel: a, removeCareLabel: r,
+      userRole,
     } = this.props;
 
     const { onSubmit } = this;
@@ -46,7 +48,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
             {initialValues && types && colors && currencies && suppliers && labels &&
               <Form {...{
                 initialValues, types, colors, currencies, suppliers, labels,
-                newSupplier: n, onSubmit, addCareLabel: a, removeCareLabel: r }} />
+                newSupplier: n, onSubmit, addCareLabel: a, removeCareLabel: r, userRole }} />
             }
           </div>
         </div>
@@ -68,6 +70,7 @@ MaterialManager.propTypes = {
   suppliers: PropTypes.object,
   currencies: PropTypes.object,
   labels: PropTypes.object,
+  userRole: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
@@ -77,6 +80,7 @@ const mapState = createStructuredSelector({
   currencies: selectCurrencies(),
   suppliers: selectSuppliers(),
   labels: selectCareLabels(),
+  userRole: selectUserRole(),
 });
 
 const mapDispatch = (dispatch) => (bindActionCreators({

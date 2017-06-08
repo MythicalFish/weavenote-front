@@ -19,6 +19,7 @@ const types = {
 
 const initialState = fromJS({
   user: null,
+  user_role: null,
   currentOrganization: null,
   organizations: [],
   stats: {
@@ -47,8 +48,9 @@ function appReducer(state = initialState, action) {
     case types.App.FETCH_USER_SUCCESS:
       return state
         .set('user', action.data.user)
+        .set('user_role', action.data.role)
         .set('organizations', fromJS(action.data.organizations))
-        .set('currentOrganization', fromJS(action.data.current_organization));
+        .set('currentOrganization', action.data.current_organization);
 
     // Org
 

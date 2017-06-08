@@ -7,7 +7,9 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
   state = { active: false }
 
   toggleState = () => {
-    this.setState({ active: !this.state.active });
+    if (!this.props.readOnly) {
+      this.setState({ active: !this.state.active });
+    }
   }
 
   handleClick = (item) => {
@@ -72,4 +74,5 @@ SelectInput.propTypes = {
   onChange: PropTypes.func,
   onChanged: PropTypes.func,
   tail: PropTypes.func,
+  readOnly: PropTypes.bool,
 };

@@ -35,6 +35,10 @@ export default class DataRow extends React.PureComponent {
       fieldProps.ref = (input) => { this.nameInput = input; };
     }
 
+    if (props.noEdit) {
+      fieldProps.readOnly = true;
+    }
+
     if (props.meta) {
       touched = props.meta.touched;
       error = props.meta.error;
