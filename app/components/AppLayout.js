@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Sidebar from 'components/Sidebar';
+import Notification from 'containers/App/Notification';
 
 export default function AppLayout(props) {
   return (
@@ -10,6 +11,7 @@ export default function AppLayout(props) {
       <div className="flex-auto">
         {React.Children.toArray(props.children)}
       </div>
+      <Notification />
     </div>
   );
 }

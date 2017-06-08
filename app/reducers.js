@@ -15,6 +15,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
  */
 import authReducer from 'containers/Auth/reducer';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
+import { reducer as notificationReducer } from 'react-notification-system-redux';
 
 /*
  * routeReducer
@@ -54,6 +55,7 @@ export default function createReducer(asyncReducers) {
     language: languageProviderReducer,
     auth: authReducer,
     form: reduxFormReducer,
+    notifications: notificationReducer,
     ...asyncReducers,
   });
 }

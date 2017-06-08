@@ -1,10 +1,15 @@
 import { createSelector } from 'reselect';
 
-const selectDomain = () => (state) => state.get('global');
+export const selectDomain = () => (state) => state.get('global');
+
+// Notifications
+
+export const selectNotifications = () => (state) => state.get('notifications');
+
 
 // Stats
 
-const selectStats = () => createSelector(
+export const selectStats = () => createSelector(
   selectDomain(), (s) => {
     const stats = s.get('stats');
     if (stats) { return stats.toJS(); }
@@ -28,7 +33,7 @@ export const selectCurrentOrg = () => createSelector(
 
 // Materials
 
-const selectMaterials = () => createSelector(
+export const selectMaterials = () => createSelector(
   selectDomain(), (s) => s.get('materials')
 );
 
@@ -38,7 +43,7 @@ export const selectCurrentSection = () => createSelector(
   selectDomain(), (s) => s.get('currentSection').toJS()
 );
 
-const makeSelectLocationState = () => {
+export const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
 
@@ -52,11 +57,4 @@ const makeSelectLocationState = () => {
 
     return prevRoutingStateJS;
   };
-};
-
-export {
-  selectDomain,
-  selectStats,
-  selectMaterials,
-  makeSelectLocationState,
 };

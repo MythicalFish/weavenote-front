@@ -8,7 +8,6 @@ import AppLayout from 'components/AppLayout';
 import { fetchUser } from './actions';
 import * as selectors from './selectors';
 
-
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentWillMount() {
