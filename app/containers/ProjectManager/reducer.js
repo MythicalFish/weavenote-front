@@ -31,7 +31,8 @@ function projectReducer(state = initialState, action) {
     case types.FETCH_PROJECT_SUCCESS:
       return state
         .set('role', fromJS(action.data.role))
-        .set('project', fromJS(action.data.project));
+        .set('project', fromJS(action.data.project))
+        .set('material_cost', action.data.material_cost);
 
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
@@ -68,7 +69,7 @@ function projectReducer(state = initialState, action) {
 
     case types.FETCH_MATERIAL_COST_SUCCESS:
       return state
-        .setIn(['project', 'material_cost'], action.cost);
+        .set('material_cost', action.cost);
 
     // Instructions
 

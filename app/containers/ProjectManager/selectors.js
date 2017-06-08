@@ -14,6 +14,11 @@ export const selectProject = () => createSelector(
   }
 );
 
+export const selectMaterialCost = () => createSelector(
+  selectDomain(),
+  (substate) => substate.get('material_cost')
+);
+
 export const selectComponents = () => createSelector(
   selectDomain(),
   (substate) => substate.get('components')

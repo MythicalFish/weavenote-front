@@ -14,7 +14,7 @@ import {
   fetchComponents, switchComponent, updateComponent, createComponent,
   fetchMaterialCost,
 } from '../../actions';
-import { selectComponents, selectCurrentComponent, selectComponentForm } from '../../selectors';
+import { selectComponents, selectCurrentComponent, selectComponentForm, selectMaterialCost } from '../../selectors';
 
 class Components extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -52,7 +52,7 @@ class Components extends React.Component { // eslint-disable-line react/prefer-s
               Form={Form}
               footer={{
                 label: 'Material cost',
-                value: <Price value={this.props.project.material_cost} />,
+                value: <Price value={this.props.materialCost} />,
               }}
             />
         }
@@ -73,6 +73,7 @@ Components.propTypes = {
   fetchMaterialCost: PropTypes.func,
   switchComponent: PropTypes.func,
   formValues: PropTypes.object,
+  materialCost: PropTypes.number,
 };
 
 
@@ -88,6 +89,7 @@ const mapState = createStructuredSelector({
   materials: selectMaterials(),
   current: selectCurrentComponent(),
   formValues: selectComponentForm(),
+  materialCost: selectMaterialCost(),
 });
 
 export default connect(mapState, mapDispatch)(Components);

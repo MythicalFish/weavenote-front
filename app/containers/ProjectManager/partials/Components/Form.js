@@ -4,7 +4,7 @@ import Price from 'components/Price';
 import Dot from 'components/Dot';
 import DataRow from 'components/DataRow';
 
-let Form = (props) => {
+const Form = (props) => {
   const { handleSubmit, submitting } = props;
   const item = props.item.toJS();
   const material = item.material;
@@ -35,8 +35,6 @@ Form.propTypes = {
   submitting: PropTypes.bool,
 };
 
-Form = reduxForm({
+export default reduxForm({
   form: 'Component',
 })(Form);
-
-export default Form;
