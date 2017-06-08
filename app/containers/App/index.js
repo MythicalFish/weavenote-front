@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Auth from 'containers/Auth';
 import { loggedIn } from 'utils/authUtils';
-import AppLayout from 'components/AppLayout';
+import Notification from './Notification';
+import Layout from './Layout';
 import { fetchUser } from './actions';
 import * as selectors from './selectors';
 
@@ -19,7 +19,12 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     if (!loggedIn()) {
       return <Auth />;
     } else if (currentOrg || location.pathname === '/organization') {
-      return <AppLayout {...this.props} />;
+      return (
+        <div>
+          <Layout {...this.props} />
+          <Notification />
+        </div>
+      );
     }
     return null;
   }
@@ -33,10 +38,9 @@ App.propTypes = {
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { fetchUser },
-    dispatch
-  );
+  return {
+    fetchUser: () => dispatch(fetchUser()),
+  };
 }
 
 const mapState = createStructuredSelector({

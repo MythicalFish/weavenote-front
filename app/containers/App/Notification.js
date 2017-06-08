@@ -39,5 +39,18 @@ const mapState = createStructuredSelector({
   notifications: selectNotifications(),
 });
 
-export default connect(mapState)(Notification);
 
+function notificationOpts(opts) {
+  const defaults = {
+    message: '',
+    position: 'br',
+    autoDismiss: 4,
+  };
+  return Object.assign(defaults, opts);
+}
+
+export function notify(opts) {
+  return Notifications.success(notificationOpts(opts));
+}
+
+export default connect(mapState)(Notification);
