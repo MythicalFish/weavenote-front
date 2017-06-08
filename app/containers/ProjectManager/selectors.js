@@ -71,22 +71,6 @@ export const selectMeasurements = () => createSelector(
  *
  */
 
-export const selectBasicsForm = () => createSelector(
-  selectProject(),
-  (project) => {
-    if (project) {
-      return fromJS({
-        id: project.id,
-        name: project.name,
-        category: project.category,
-        identifier: project.identifier,
-        development_stage_id: project.stage.id,
-        description: project.description,
-      });
-    }
-  }
-);
-
 export const selectComponentForm = () => createSelector(
   selectCurrentComponent(),
   (component) => {

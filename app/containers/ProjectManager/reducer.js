@@ -4,6 +4,7 @@ import * as types from './constants';
 
 const initialState = fromJS({
   project: null,
+  role: null,
   images: [],
   currentImage: 0,
   components: [],
@@ -29,7 +30,8 @@ function projectReducer(state = initialState, action) {
 
     case types.FETCH_PROJECT_SUCCESS:
       return state
-        .set('project', fromJS(action.data));
+        .set('role', fromJS(action.data.role))
+        .set('project', fromJS(action.data.project));
 
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
@@ -67,7 +69,7 @@ function projectReducer(state = initialState, action) {
     case types.FETCH_MATERIAL_COST_SUCCESS:
       return state
         .setIn(['project', 'material_cost'], action.cost);
-      
+
     // Instructions
 
     case types.FETCH_INSTRUCTIONS_SUCCESS:
@@ -97,7 +99,7 @@ function projectReducer(state = initialState, action) {
     case types.SWITCH_INSTRUCTION:
       return state
         .set('currentInstruction', action.index);
-  
+
     // Images
 
     case types.FETCH_IMAGES_SUCCESS:
@@ -130,7 +132,7 @@ function projectReducer(state = initialState, action) {
     case types.UPDATE_MEASUREMENTS:
       return state
         .set('measurements', fromJS([]));
-      
+
     case types.UPDATE_MEASUREMENTS_SUCCESS:
       const { measurements } = action.response;
       return state
@@ -151,7 +153,7 @@ function projectReducer(state = initialState, action) {
     case types.CREATE_MEASUREMENT_NAME_SUCCESS:
       return state
         .set('measurements', fromJS(action.measurements));
-      
+
     default:
       return state;
   }

@@ -5,9 +5,9 @@ import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
 import { updateProject } from '../../actions';
-import { selectBasicsForm } from '../../selectors';
+import { selectProject } from '../../selectors';
 
-let Basics = (props) => {
+const Basics = (props) => {
   const { handleSubmit, pristine, reset, submitting, project } = props;
   const createdOn = <FormattedDate value={project.created_at} day="numeric" month="short" />;
   return (
@@ -31,10 +31,6 @@ Basics.propTypes = {
   reset: PropTypes.func,
 };
 
-Basics = reduxForm({
-  form: 'Basics',
-})(Basics);
-
 export function mapDispatch(dispatch) {
   return {
     onSubmit: (data) => {
@@ -45,9 +41,9 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  initialValues: selectBasicsForm(),
+  initialValues: selectProject(),
 });
 
-Basics = connect(mapState, mapDispatch)(Basics);
-
-export default Basics;
+export default connect(mapState, mapDispatch)(reduxForm({
+  form: 'Basics',
+})(Basics));
