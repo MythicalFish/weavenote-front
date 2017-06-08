@@ -3,9 +3,10 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
 import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
+import notificationWatcher from './notifications';
 import * as types from './constants';
 import * as actions from './actions';
-export default [projectManagerWatcher, materialListWatcher];
+export default [projectManagerWatcher, materialListWatcher, notificationWatcher];
 
 export function* projectManagerWatcher() {
   const watcher = [
