@@ -40,17 +40,22 @@ const mapState = createStructuredSelector({
 });
 
 
-function notificationOpts(opts) {
+function defaultOpts(opts) {
   const defaults = {
     message: '',
     position: 'br',
     autoDismiss: 4,
   };
-  return Object.assign(defaults, opts);
+  if (typeof (opts) === 'object') {
+    return Object.assign(defaults, opts);
+  } else if (typeof (opts) === 'string') {
+    defaults.message = opts;
+  }
+  return defaults;
 }
 
 export function notify(opts) {
-  return Notifications.success(notificationOpts(opts));
+  return Notifications.success(defaultOpts(opts));
 }
 
 export default connect(mapState)(Notification);

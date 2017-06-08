@@ -2,11 +2,6 @@ import { createSelector } from 'reselect';
 
 export const selectDomain = () => (state) => state.get('global');
 
-// Notifications
-
-export const selectNotifications = () => (state) => state.get('notifications');
-
-
 // Stats
 
 export const selectStats = () => createSelector(
