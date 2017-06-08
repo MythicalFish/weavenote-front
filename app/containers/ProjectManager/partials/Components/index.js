@@ -73,7 +73,10 @@ Components.propTypes = {
   fetchMaterialCost: PropTypes.func,
   switchComponent: PropTypes.func,
   formValues: PropTypes.object,
-  materialCost: PropTypes.number,
+  materialCost: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 

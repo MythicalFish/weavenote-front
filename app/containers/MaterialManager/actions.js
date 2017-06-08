@@ -20,6 +20,9 @@ export function createMaterial(material) {
 export function createMaterialSuccess(material) {
   return { type: types.CREATE_MATERIAL_SUCCESS, material };
 }
+export function fetchMaterialAssociations() {
+  return { type: types.FETCH_MATERIAL_ASSOCIATIONS };
+}
 
 // Material types
 

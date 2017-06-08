@@ -8,8 +8,7 @@ import {
 } from './selectors';
 import {
   fetchMaterial, updateMaterial, createMaterial,
-  fetchMaterialTypes, fetchColors, fetchCurrencies, fetchSuppliers, newSupplier,
-  fetchCareLabels, addCareLabel, removeCareLabel,
+  fetchMaterialAssociations, newSupplier, addCareLabel, removeCareLabel,
 } from './actions';
 import Form from './partials/Form';
 import Toolbar from './partials/Toolbar';
@@ -18,11 +17,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
 
   componentDidMount() {
     const { params, types, colors, currencies, suppliers, labels } = this.props;
-    if (!types) { this.props.fetchMaterialTypes(); }
-    if (!colors) { this.props.fetchColors(); }
-    if (!currencies) { this.props.fetchCurrencies(); }
-    if (!suppliers) { this.props.fetchSuppliers(); }
-    if (!labels) { this.props.fetchCareLabels(); }
+    this.props.fetchMaterialAssociations();
     this.props.fetchMaterial(params.id);
   }
 
@@ -66,13 +61,9 @@ MaterialManager.propTypes = {
   createMaterial: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   initialValues: PropTypes.object,
-  fetchMaterialTypes: PropTypes.func.isRequired,
-  fetchCareLabels: PropTypes.func.isRequired,
   types: PropTypes.object,
-  fetchColors: PropTypes.func.isRequired,
-  fetchSuppliers: PropTypes.func.isRequired,
   newSupplier: PropTypes.func.isRequired,
-  fetchCurrencies: PropTypes.func.isRequired,
+  fetchMaterialAssociations: PropTypes.func,
   colors: PropTypes.object,
   suppliers: PropTypes.object,
   currencies: PropTypes.object,
@@ -90,16 +81,12 @@ const mapState = createStructuredSelector({
 
 const mapDispatch = (dispatch) => (bindActionCreators({
   fetchMaterial,
-  fetchMaterialTypes,
   updateMaterial,
   createMaterial,
-  fetchColors,
-  fetchCurrencies,
-  fetchSuppliers,
   newSupplier,
-  fetchCareLabels,
   addCareLabel,
   removeCareLabel,
+  fetchMaterialAssociations,
 }, dispatch));
 
 export default connect(mapState, mapDispatch)(MaterialManager);

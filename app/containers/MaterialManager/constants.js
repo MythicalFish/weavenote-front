@@ -1,6 +1,8 @@
 
 // Material
 
+export const FETCH_MATERIAL_ASSOCIATIONS = '@@app/FETCH_MATERIAL_ASSOCIATIONS';
+
 export const FETCH_MATERIAL = '@@app/FETCH_MATERIAL';
 export const UPDATE_MATERIAL = '@@app/UPDATE_MATERIAL';
 export const CREATE_MATERIAL = '@@app/CREATE_MATERIAL';

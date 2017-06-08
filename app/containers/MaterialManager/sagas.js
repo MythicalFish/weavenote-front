@@ -1,4 +1,5 @@
-import { take, cancel, takeLatest } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { take, cancel, takeLatest, fork, call } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
@@ -9,6 +10,7 @@ export default [materialManagerWatcher];
 
 export function* materialManagerWatcher() {
   const watcher = [
+    yield takeLatest(types.FETCH_MATERIAL_ASSOCIATIONS, fetchMaterialAssociations),
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
@@ -21,6 +23,14 @@ export function* materialManagerWatcher() {
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
+}
+
+export function* fetchMaterialAssociations() {
+  yield fork(fetchMaterialTypes);
+  yield fork(fetchColors);
+  yield fork(fetchCurrencies);
+  yield fork(fetchSuppliers);
+  yield fork(fetchCareLabels);
 }
 
 export function* fetchMaterialTypes() {
