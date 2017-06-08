@@ -5,7 +5,7 @@ import Uploader from 'components/Uploader';
 
 const Form = (props) => {
 
-  const { handleSubmit, submitting, projectID, initialValues: instruction } = props;
+  const { handleSubmit, submitting, initialValues: instruction } = props;
   const img = instruction.get('image');
 
   return (
@@ -16,7 +16,7 @@ const Form = (props) => {
         {img &&
           <img src={img.get('url')} />
         }
-        <Uploader projectID={projectID} onFinish={(d) => { console.log('weeeyyyy: ' + d); }} />
+        <Uploader projectID={instruction.get('projectID')} onFinish={(d) => { console.log('weeeyyyy: ' + d); }} />
         <footer className="p2 center">
           <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
         </footer>

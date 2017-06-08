@@ -126,9 +126,9 @@ export function* updateInstruction({ payload }) {
 }
 
 export function* createInstruction({ payload }) {
-  const { title, description, projectID } = payload.toJS();
-  const instruction = { project_id: projectID, title, description };
-  yield sagas.post(`projects/${projectID}/instructions`, { instruction }, actions.createInstructionSuccess);
+  const { title, description, project_id } = payload.toJS();
+  const instruction = { project_id, title, description };
+  yield sagas.post(`projects/${project_id}/instructions`, { instruction }, actions.createInstructionSuccess);
 }
 
 export function* deleteInstruction(action) {
