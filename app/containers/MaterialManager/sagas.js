@@ -27,9 +27,13 @@ export function* materialManagerWatcher() {
 
 export function* fetchMaterialAssociations() {
   yield fork(fetchMaterialTypes);
+  yield delay(20);
   yield fork(fetchColors);
+  yield delay(20);
   yield fork(fetchCurrencies);
+  yield delay(20);
   yield fork(fetchSuppliers);
+  yield delay(20);
   yield fork(fetchCareLabels);
 }
 
