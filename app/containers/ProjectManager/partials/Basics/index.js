@@ -4,6 +4,7 @@ import { FormattedDate } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
+import Button from 'components/Button';
 import { updateProject } from '../../actions';
 import { selectProject } from '../../selectors';
 
@@ -18,7 +19,7 @@ const Basics = (props) => {
       <DataRow type="display" label="Created on" value={createdOn} />
       <Field name="description" type="textarea" component={DataRow} label="Description" />
       <footer className="p2 center">
-        <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
+        <Button type="submit" disabled={submitting} label="Save" />
       </footer>
     </form>
   );

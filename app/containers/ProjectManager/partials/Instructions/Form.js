@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
+import Button from 'components/Button';
 import Uploader from 'components/Uploader';
 
 const Form = (props) => {
@@ -18,7 +19,7 @@ const Form = (props) => {
         }
         <Uploader projectID={instruction.get('projectID')} onFinish={(d) => { console.log('weeeyyyy: ' + d); }} />
         <footer className="p2 center">
-          <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
+          <Button type="submit" disabled={submitting} label="Save" />
         </footer>
       </div>
     </form>

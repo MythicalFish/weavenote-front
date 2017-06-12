@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form/immutable';
+import Button from 'components/Button';
 import Column from './Column';
 
 const Form = (props) => {
@@ -39,7 +40,7 @@ const Form = (props) => {
         ))}
       </div>
       <footer className="p2 center">
-        <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
+        <Button type="submit" disabled={submitting} label="Save" />
       </footer>
     </form>
   );

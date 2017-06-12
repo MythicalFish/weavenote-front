@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import Price from 'components/Price';
 import Dot from 'components/Dot';
 import DataRow from 'components/DataRow';
+import Button from 'components/Button';
 
 const Form = (props) => {
   const { handleSubmit, submitting } = props;
@@ -23,7 +24,7 @@ const Form = (props) => {
       <Field type="text" name="quantity" label="Quantity" component={DataRow} focus />
       <DataRow type="display" label="Cost" value={materialCost} />
       <footer className="p2 center">
-        <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
+        <Button type="submit" disabled={submitting} label="Save" />
       </footer>
     </form>
   );

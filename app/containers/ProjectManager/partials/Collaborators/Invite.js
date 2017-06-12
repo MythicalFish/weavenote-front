@@ -18,14 +18,13 @@ const Invite = (props) => {
         </div>
       </div>
       <footer className="flex justify-between pt2">
-        <Button type="submit" icon="envelope-o" label="Send invite" />
+        <Button type="submit" icon="envelope-o" label="Send invite" disabled={submitting} />
       </footer>
     </form>
   );
 };
 
 Invite.propTypes = {
-  item: PropTypes.object,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
 };

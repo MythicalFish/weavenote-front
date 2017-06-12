@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
+import Button from 'components/Button';
 import { cantRoleEdit } from 'utils/roles';
 import Supplier from './Supplier';
 import CareLabels from './CareLabels';
@@ -69,7 +70,7 @@ class Form extends React.Component {
           </div>
         </div>
         <footer className="p2 center">
-          <button className="btn-color2x" type="submit" disabled={submitting}>Save</button>
+          <Button type="submit" disabled={submitting} label="Save" />
         </footer>
       </form>
     );

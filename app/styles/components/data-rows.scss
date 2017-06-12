@@ -13,7 +13,6 @@
     @extend .flex;
     min-width: 300px;
     width: 100%;
-    padding: 0;
     position: relative;
     > label {
       @extend .flex-none;
@@ -22,14 +21,13 @@
     }
     > .input {
       @extend .flex-auto;
-      > * {
+      > *, > .select-input > button {
         border: none;
       }
       textarea {
         padding-top: 0!important;
       }
-    }
-
+    } 
     // > *:not(.p0) {
     //   @extend .p2;
     //   &.pr0 {
