@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import Invite from './Invite';
 
 class Collaborators extends React.Component {
 
@@ -9,7 +10,13 @@ class Collaborators extends React.Component {
     const { project } = this.props;
     return (
       <div>
-        Collaborators!
+        <header>Collaborators</header>
+        <div className="p3">
+
+        </div>
+        <footer>
+          <Invite />
+        </footer>
       </div>
     );
   }

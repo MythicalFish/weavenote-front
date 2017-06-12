@@ -6,7 +6,7 @@ export const selectDomain = () => (state) => state.get('ProjectManager');
 export const selectProject = () => createSelector(
   selectDomain(),
   (substate) => {
-    const project = substate.get('project');
+    const project = substate.get('attributes');
     if (project) {
       return project.toJS();
     }

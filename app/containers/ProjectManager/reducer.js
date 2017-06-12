@@ -3,9 +3,10 @@ import { fromJS } from 'immutable';
 import * as types from './constants';
 
 const initialState = fromJS({
-  project: null,
-  role: null,
+  attributes: null,
+  user_role: null,
   images: [],
+  collaborators: [],
   currentImage: 0,
   components: [],
   currentComponent: null,
@@ -25,14 +26,14 @@ function projectReducer(state = initialState, action) {
     // Project
 
     case types.FETCH_PROJECT:
-      return state
-        .set('project', null);
+      return initialState;
 
     case types.FETCH_PROJECT_SUCCESS:
       return state
-        .set('role', fromJS(action.data.role))
-        .set('project', fromJS(action.data.project))
-        .set('material_cost', action.data.material_cost);
+        .set('attributes', fromJS(action.data.attributes))
+        .set('user_role', fromJS(action.data.user_role))
+        .set('material_cost', action.data.material_cost)
+        .set('collaborators', fromJS(action.data.collaborators));
 
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
