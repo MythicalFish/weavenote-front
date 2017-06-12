@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
+import Modal from 'components/Modal';
 import Toolbar from './partials/Toolbar';
 import Basics from './partials/Basics';
 import Components from './partials/Components';
@@ -17,10 +18,16 @@ import { fetchProject } from './actions';
 
 class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
+  state = { showCollaborators: false }
+
   componentDidMount() {
     const { params } = this.props;
     this.props.fetchProject(params.id);
     this.props.changeSection(sections.Basics);
+  }
+
+  toggleCollaborators = () => {
+    this.setState({ showCollaborators: !this.state.showCollaborators });
   }
 
   render() {
@@ -42,18 +49,16 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
         renderedSection = <Instructions {...{ project }} />;
         break;
 
-      case sections.Collaborators.id:
-        renderedSection = <Collaborators {...{ project }} />;
-        break;
-
       default:
         break; // already set
     }
+
     return (
       <div>
         <Toolbar
           changeSection={this.props.changeSection}
           currentSection={currentSection}
+          toggleCollaborators={this.toggleCollaborators}
         />
         <div className="p2 bg-white">
           <div className="container">
@@ -67,6 +72,9 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
             </div>
           </div>
         </div>
+        <Modal isOpened={this.state.showCollaborators}>
+          <Collaborators {...{ project }} />
+        </Modal>
       </div>
     );
   }

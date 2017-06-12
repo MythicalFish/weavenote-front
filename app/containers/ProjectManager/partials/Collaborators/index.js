@@ -5,16 +5,11 @@ import { createStructuredSelector } from 'reselect';
 
 class Collaborators extends React.Component {
 
-  state = { creating: false }
-
-  toggleCreate = () => {
-    this.setState({ creating: !this.state.creating });
-  }
-
   render() {
+    const { project } = this.props;
     return (
       <div>
-        Collaborators
+        Collaborators!
       </div>
     );
   }

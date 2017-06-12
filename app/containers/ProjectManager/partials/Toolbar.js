@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import UserMenu from 'components/UserMenu';
 
 export default function Toolbar(props) {
-  const { changeSection, currentSection } = props;
+  const { changeSection, currentSection, toggleCollaborators } = props;
   return (
     <header className="toolbar">
       <nav>
@@ -56,7 +56,7 @@ export default function Toolbar(props) {
               label={sections.Collaborators.label}
               isActive={sections.Collaborators.id === currentSection.id}
               handleClick={() => {
-                changeSection(sections.Collaborators);
+                toggleCollaborators();
               }}
             />
           </li>
@@ -74,4 +74,5 @@ export default function Toolbar(props) {
 Toolbar.propTypes = {
   changeSection: PropTypes.func,
   currentSection: PropTypes.object,
+  toggleCollaborators: PropTypes.func,
 };
