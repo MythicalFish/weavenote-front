@@ -28,24 +28,5 @@
     > *:not(label) {
       @extend .flex-auto;
     }
-    textarea {
-      width: 100%;
-      padding-top: 0!important;
-    }
-    input:focus {
-      + .focused {
-        display: block;
-      }
-    }
-    .focused {
-      display: none;
-      position: absolute;
-      top: 50%;
-      right: -15px;
-      color: $aqua;
-      font-family: FontAwesome;
-      transform: translateY(-50%);
-      &:after { content: "\f053"; }
-    }
   }
 }
