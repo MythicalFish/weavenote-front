@@ -31,16 +31,25 @@ export function fetchStatsSuccess(stats) {
   };
 }
 
-/*
- *
- *  Sections
- *
- */
-
+// UI actions
 
 export function changeSection(section) {
   return {
     type: types.CHANGE_SECTION,
     section,
+  };
+}
+
+export function showModal({ modalComponent, modalProps }) {
+  return {
+    type: types.SHOW_MODAL,
+    modalComponent,
+    modalProps,
+  };
+}
+
+export function hideModal() {
+  return {
+    type: types.HIDE_MODAL,
   };
 }

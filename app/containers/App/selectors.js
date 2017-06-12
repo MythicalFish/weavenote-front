@@ -42,6 +42,10 @@ export const selectCurrentSection = () => createSelector(
   selectDomain(), (s) => s.get('currentSection').toJS()
 );
 
+export const selectModal = () => createSelector(
+  selectDomain(), (s) => s.get('modal').toJS()
+);
+
 export const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;

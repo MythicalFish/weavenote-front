@@ -22,6 +22,10 @@ const initialState = fromJS({
   user_role: null,
   currentOrganization: null,
   organizations: [],
+  modal: {
+    component: null,
+    props: null,
+  },
   stats: {
     projects: {
       counts: {
@@ -38,10 +42,22 @@ function appReducer(state = initialState, action) {
 
   switch (action.type) {
 
+    // UI actions
+
     case types.App.CHANGE_SECTION:
       return state
         .setIn(['currentSection', 'id'], action.section.id)
         .setIn(['currentSection', 'label'], action.section.label);
+
+    case types.App.SHOW_MODAL:
+      return state
+        .setIn(['modal', 'component'], action.modalComponent)
+        .setIn(['modal', 'props'], action.modalProps);
+
+    case types.App.HIDE_MODAL:
+      return state
+        .setIn(['modal', 'component'], null)
+        .setIn(['modal', 'props'], null);
 
     // User
 
