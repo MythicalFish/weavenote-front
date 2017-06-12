@@ -18,7 +18,8 @@ class Collaborators extends React.Component {
         <footer className="bt1 p2">
           <InviteForm
             onSubmit={(data) => {
-              console.log(data);
+              const { name, email } = data.toJS();
+              this.props.sendInvite({ name, email, project_id: project.id });
             }}
           />
         </footer>
@@ -28,6 +29,8 @@ class Collaborators extends React.Component {
 }
 
 Collaborators.propTypes = {
+  sendInvite: React.PropTypes.func,
+  project: React.PropTypes.object,
 };
 
 

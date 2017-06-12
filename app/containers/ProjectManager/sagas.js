@@ -33,6 +33,8 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.CREATE_MEASUREMENT_GROUP, createMeasurementGroup),
     yield takeLatest(types.CREATE_MEASUREMENT_NAME, createMeasurementName),
 
+    yield takeLatest(types.SEND_INVITE, sendInvite),
+
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -173,5 +175,5 @@ export function* updateMeasurements(action) {
  */
 
 export function* sendInvite(action) {
-  yield sagas.post(`projects/${action.projectID}/invites`, action.data, actions.sendInviteSuccess);
+  yield sagas.post(`projects/${action.data.project_id}/invites`, action.data, actions.sendInviteSuccess);
 }
