@@ -28,5 +28,8 @@
     > *:not(label) {
       @extend .flex-auto;
     }
+    textarea {
+      padding-top: 0!important;
+    }
   }
 }
