@@ -12,12 +12,11 @@ export default class Input extends React.PureComponent {
   render() {
 
     const { props } = this;
-    const { fieldClass, type } = props;
     let field = null;
     let touched = false;
     let error = false;
     let fieldProps;
-    let className = '';
+    const className = props.fieldClass || '';
 
     if (props.input) {
       fieldProps = props.input;
@@ -39,22 +38,22 @@ export default class Input extends React.PureComponent {
       fieldProps.readOnly = true;
     }
 
+    if (props.required) {
+      fieldProps.required = true;
+    }
+
     if (props.meta) {
       touched = props.meta.touched;
       error = props.meta.error;
     }
 
-    if (type === 'select') {
+    if (props.type === 'select') {
       if (!fieldProps.data && props.data) {
         fieldProps.data = props.data;
       }
     }
 
-    if (fieldClass) {
-      className = fieldClass;
-    }
-
-    switch (type) {
+    switch (props.type) {
       case 'display':
         field = <div className="readonly">{props.value}</div>;
         break;
@@ -65,7 +64,7 @@ export default class Input extends React.PureComponent {
         field = <textarea {...fieldProps} />;
         break;
       default:
-        field = <input {...fieldProps} type={type} />;
+        field = <input {...fieldProps} type={props.type} />;
         break;
     }
 

@@ -10,7 +10,7 @@ const Invite = (props) => {
       <div className="row">
         <div className="col-xs-12 col-md-6">
           <label>Email</label>
-          <Field type="text" name="email" component={Input} />
+          <Field type="text" name="email" component={Input} required />
         </div>
         <div className="col-xs-12 col-md-6">
           <label>Name (optional)</label>
