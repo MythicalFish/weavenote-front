@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import Invite from './Invite';
+import InviteForm from 'components/InviteForm';
+import { sendInvite } from '../../actions';
 
 class Collaborators extends React.Component {
 
@@ -15,7 +16,11 @@ class Collaborators extends React.Component {
 
         </div>
         <footer className="bt1 p2">
-          <Invite />
+          <InviteForm
+            onSubmit={(data) => {
+              console.log(data);
+            }}
+          />
         </footer>
       </div>
     );
@@ -28,7 +33,7 @@ Collaborators.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { },
+    { sendInvite },
     dispatch
   );
 }

@@ -165,3 +165,13 @@ export function* updateMeasurements(action) {
     console.error(err); // eslint-disable-line no-console
   }
 }
+
+/*
+ *
+ *  Collaborators
+ *
+ */
+
+export function* sendInvite(action) {
+  yield sagas.post(`projects/${action.projectID}/invites`, action.data, actions.sendInviteSuccess);
+}

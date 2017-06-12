@@ -192,3 +192,18 @@ export function createMeasurementName(projectID) {
 export function createMeasurementNameSuccess(measurements) {
   return { type: types.CREATE_MEASUREMENT_NAME_SUCCESS, measurements };
 }
+
+
+/*
+ *
+ *  Collaborators
+ *
+ */
+
+export function sendInvite(data) {
+  return { type: types.SEND_INVITE, data };
+}
+
+export function sendInviteSuccess() {
+  return { type: types.SEND_INVITE_SUCCESS };
+}

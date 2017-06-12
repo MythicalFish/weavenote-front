@@ -3,14 +3,14 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
-const Invite = (props) => {
+const InviteForm = (props) => {
   const { handleSubmit, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-xs-12 col-md-6">
           <label>Email</label>
-          <Field type="text" name="email" component={Input} required />
+          <Field type="email" name="email" component={Input} required />
         </div>
         <div className="col-xs-12 col-md-6">
           <label>Name (optional)</label>
@@ -24,11 +24,11 @@ const Invite = (props) => {
   );
 };
 
-Invite.propTypes = {
+InviteForm.propTypes = {
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
 };
 
 export default reduxForm({
-  form: 'Invite',
-})(Invite);
+  form: 'InviteForm',
+})(InviteForm);

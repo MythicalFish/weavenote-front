@@ -156,6 +156,8 @@ function projectReducer(state = initialState, action) {
       return state
         .set('measurements', fromJS(action.measurements));
 
+    // Collaborators
+
     default:
       return state;
   }
