@@ -14,7 +14,7 @@ class Collaborators extends React.Component {
         <div className="p3">
 
         </div>
-        <footer>
+        <footer className="bt1 p2">
           <Invite />
         </footer>
       </div>

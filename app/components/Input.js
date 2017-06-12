@@ -17,6 +17,7 @@ export default class Input extends React.PureComponent {
     let touched = false;
     let error = false;
     let fieldProps;
+    let className = '';
 
     if (props.input) {
       fieldProps = props.input;
@@ -49,6 +50,10 @@ export default class Input extends React.PureComponent {
       }
     }
 
+    if (fieldClass) {
+      className = fieldClass;
+    }
+
     switch (type) {
       case 'display':
         field = <div className="readonly">{props.value}</div>;
@@ -65,7 +70,7 @@ export default class Input extends React.PureComponent {
     }
 
     return (
-      <div className={`input ${fieldClass}`}>
+      <div className={`input ${className}`}>
         {field}
         <div className="focused p0"></div>
         {touched && error && <span className="error">{error}</span>}

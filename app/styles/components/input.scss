@@ -12,6 +12,7 @@ textarea {
 
 .input {
   padding: 0!important;
+  position: relative;
   input, textarea, .select-input > button, .readonly {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -22,7 +23,7 @@ textarea {
     -webkit-box-shadow: none!important;
     height: auto;
     width: 100%;
-    border: none;
+    @extend .b1;
     background: transparent;
     font-size: inherit;
     color: inherit;

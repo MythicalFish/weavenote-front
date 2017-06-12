@@ -15,21 +15,26 @@
     width: 100%;
     padding: 0;
     position: relative;
-    > *:not(.p0) {
-      @extend .p2;
-      &.pr0 {
-        padding-right: 0;
-      }
-    }
     > label {
       @extend .flex-none;
       color: $dark6;
+      padding: $space-2;
     }
-    > *:not(label) {
+    > .input {
       @extend .flex-auto;
+      > * {
+        border: none;
+      }
+      textarea {
+        padding-top: 0!important;
+      }
     }
-    textarea {
-      padding-top: 0!important;
-    }
+
+    // > *:not(.p0) {
+    //   @extend .p2;
+    //   &.pr0 {
+    //     padding-right: 0;
+    //   }
+    // }
   }
 }
