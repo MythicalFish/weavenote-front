@@ -81,6 +81,6 @@ const ConsoleErrorStyle = [
   'background: #111',
   'color: #51B2FE',
   'display: block',
-  'padding: 10px',
-  'line-height: 30px',
+  'line-height: 20px',
+  'padding: 5px',
 ].join(';');
