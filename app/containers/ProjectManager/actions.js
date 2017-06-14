@@ -200,8 +200,8 @@ export function createMeasurementNameSuccess(measurements) {
  *
  */
 
-export function sendInvite(data) {
-  return { type: types.SEND_INVITE, data };
+export function sendInvite(invite) {
+  return { type: types.SEND_INVITE, invite };
 }
 
 export function sendInviteSuccess() {

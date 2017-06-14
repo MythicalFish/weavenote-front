@@ -18,8 +18,8 @@ class Collaborators extends React.Component {
         <footer className="bt1 p2">
           <InviteForm
             onSubmit={(data) => {
-              const { name, email } = data.toJS();
-              this.props.sendInvite({ name, email, project_id: project.id });
+              const { name, email, as_guest } = data.toJS();
+              this.props.sendInvite({ name, email, as_guest, project_id: project.id });
             }}
           />
         </footer>

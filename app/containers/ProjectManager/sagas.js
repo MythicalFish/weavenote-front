@@ -174,6 +174,6 @@ export function* updateMeasurements(action) {
  *
  */
 
-export function* sendInvite(action) {
-  yield sagas.post(`projects/${action.data.project_id}/invites`, action.data, actions.sendInviteSuccess);
+export function* sendInvite({ invite }) {
+  yield sagas.post(`projects/${invite.project_id}/invites`, invite, actions.sendInviteSuccess);
 }
