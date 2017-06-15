@@ -14,6 +14,10 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     if (loggedIn()) this.props.fetchUser();
   }
 
+  componentWillUpdate() {
+    if (loggedIn()) this.props.fetchUser();
+  }
+
   render() {
     const { currentOrg } = this.props;
     if (!loggedIn()) {

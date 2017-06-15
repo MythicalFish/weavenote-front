@@ -7,7 +7,11 @@ import AuthService from './AuthService';
 class Auth extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     const Auth0 = new AuthService();
-    Auth0.lock.show();
+    Auth0.lock.on('hash_parsed', (hash) => {
+      if (!hash) {
+        Auth0.lock.show();
+      }
+    });
   }
   render = () => (
     <div className="flex items-middle vh-ymin100 bg-gray-darker">
