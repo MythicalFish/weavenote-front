@@ -19,7 +19,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   }
 
   componentWillUpdate() {
-    if (loggedIn()) this.props.fetchUser();
+    if (loggedIn() && !this.props.user) this.props.fetchUser();
   }
 
   acceptInvitation = (key) => {
@@ -45,6 +45,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 App.propTypes = {
   fetchUser: React.PropTypes.func,
   location: React.PropTypes.object,
+  user: React.PropTypes.object,
   organization: React.PropTypes.object,
 };
 
