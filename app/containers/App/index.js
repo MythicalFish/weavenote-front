@@ -12,17 +12,25 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 
   componentWillMount() {
     if (loggedIn()) this.props.fetchUser();
+    const { invitation: key } = this.props.location.query;
+    if (key) {
+      this.acceptInvitation(key); 
+    }
   }
 
   componentWillUpdate() {
     if (loggedIn()) this.props.fetchUser();
   }
 
+  acceptInvitation = (key) => {
+    console.log(key);
+  }
+
   render() {
-    const { currentOrg } = this.props;
+    const { organization } = this.props;
     if (!loggedIn()) {
       return <Auth />;
-    } else if (currentOrg || location.pathname === '/organization') {
+    } else if (organization || location.pathname === '/organization') {
       return (
         <div>
           <Layout {...this.props} />
@@ -36,9 +44,8 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 
 App.propTypes = {
   fetchUser: React.PropTypes.func,
-  user: React.PropTypes.object,
   location: React.PropTypes.object,
-  currentOrg: React.PropTypes.object,
+  organization: React.PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
@@ -49,8 +56,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   user: selectors.selectUser(),
-  org: selectors.selectOrgs(),
-  currentOrg: selectors.selectCurrentOrg(),
+  organization: selectors.selectCurrentOrg(),
 });
 
 export default connect(mapState, mapDispatch)(App);
