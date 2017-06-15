@@ -20,7 +20,7 @@ const types = {
 const initialState = fromJS({
   user: null,
   user_role: null,
-  currentOrganization: null,
+  current_organization: null,
   organizations: null,
   stats: {
     projects: {
@@ -50,14 +50,14 @@ function appReducer(state = initialState, action) {
         .set('user', action.data.user)
         .set('user_role', action.data.role)
         .set('organizations', fromJS(action.data.organizations))
-        .set('currentOrganization', action.data.current_organization);
+        .set('current_organization', action.data.current_organization);
 
     // Org
 
     case types.Org.CREATE_ORG_SUCCESS:
       return state
         .set('organizations', fromJS(action.data.organizations))
-        .set('currentOrganization', fromJS(action.data.current_organization));
+        .set('current_organization', fromJS(action.data.current_organization));
 
     // Stats
 

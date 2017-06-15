@@ -27,7 +27,7 @@ export const selectOrgs = () => createSelector(
 );
 
 export const selectCurrentOrg = () => createSelector(
-  selectDomain(), (substate) => substate.get('currentOrganization')
+  selectDomain(), (substate) => substate.get('current_organization')
 );
 
 // Materials
