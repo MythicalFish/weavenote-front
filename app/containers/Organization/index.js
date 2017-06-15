@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentOrg, selectOrgs } from 'containers/App/selectors';
+import Header from 'components/Header';
 import { updateOrg, createOrg } from './actions';
 import Create from './views/Create';
 import NoneYet from './views/NoneYet';
@@ -12,34 +13,31 @@ export class Organization extends React.PureComponent { // eslint-disable-line r
 
   state = { view: null }
 
-  componentWillMount() {
-    const { orgs } = this.props;
-    if (orgs.size < 1) {
-      this.setState({ view: 'noneYet' });
-    }
-  }
-
   createOrg = (data) => {
     this.props.createOrg(data);
     this.setState({ view: null });
   }
 
   currentView = () => {
-    switch (this.state.view) {
-      case 'noneYet':
-        return <NoneYet onClick={() => { this.setState({ view: 'create' }); }} />
-      case 'create':
-        return <Create onSubmit={this.createOrg} />;
-      default:
-        return <Manage />;
+    const { orgs } = this.props;
+    if (!orgs) {
+      return null;
+    } else if (this.state.view === 'create') {
+      return <Create onSubmit={this.createOrg} />;
+    } else if (orgs.size < 1) {
+      return <NoneYet onClick={() => { this.setState({ view: 'create' }); }} />
     }
+    return <Manage />;
   }
 
   render() {
     return (
-      <div className="p3 md-p4">
-        <div className="container-narrow">
-          {this.currentView()}
+      <div>
+        <Header />
+        <div className="p3 md-p4">
+          <div className="container-narrow">
+            {this.currentView()}
+          </div>
         </div>
       </div>
     );
