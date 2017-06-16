@@ -15,6 +15,19 @@ export function fetchUserSuccess(data) {
   };
 }
 
+export function acceptInvite(key) {
+  return {
+    type: types.ACCEPT_INVITE,
+    key,
+  };
+}
+
+export function acceptInviteSuccess(data) {
+  return {
+    type: types.ACCEPT_INVITE_SUCCESS,
+    data,
+  };
+}
 
 // Stats
 

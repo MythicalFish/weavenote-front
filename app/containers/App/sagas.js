@@ -12,18 +12,23 @@ export function* appWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_USER, fetchUser),
     yield takeLatest(types.FETCH_USER_SUCCESS, createOrganization),
+    yield takeLatest(types.ACCEPT_INVITE, acceptInvite),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
 
-export function* fetchUser() {
+function* fetchUser() {
   yield sagas.get('user', actions.fetchUserSuccess);
 }
 
-export function* createOrganization(action) {
+function* createOrganization(action) {
   const { current_organization: current } = action.data;
   if (!current) {
     browserHistory.push('/organization');
   }
+}
+
+function* acceptInvite({ key }) {
+  yield sagas.post('accept_invite', { key }, actions.acceptInviteSuccess);
 }

@@ -14,7 +14,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     if (loggedIn()) this.props.fetchUser();
     const { invitation: key } = this.props.location.query;
     if (key) {
-      this.acceptInvitation(key); 
+      this.acceptInvitation(key);
     }
   }
 
