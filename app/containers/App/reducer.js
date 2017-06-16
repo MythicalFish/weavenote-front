@@ -57,6 +57,13 @@ function appReducer(state = initialState, action) {
       return state
         .set('invite', action.invite);
 
+    case types.App.ACCEPT_INVITE_SUCCESS:
+      return state
+        .set('user', action.data.user)
+        .set('user_role', action.data.role)
+        .set('organizations', fromJS(action.data.organizations))
+        .set('current_organization', action.data.current_organization);
+
     // Org
 
     case types.Org.CREATE_ORG_SUCCESS:

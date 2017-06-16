@@ -39,7 +39,7 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
       console.log('LoginForm: email present')
       setTimeout(() => {
         Auth0.lock.show();
-      }, 200);
+      }, 500);
     } else {
       console.log('LoginForm: email not present')
       Auth0.lock.on('hash_parsed', (hash) => {

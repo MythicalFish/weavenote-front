@@ -17,18 +17,26 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   }
 
   componentWillUpdate() {
-    if (loggedIn() && !this.props.user) this.props.fetchUser();
+    setTimeout(() => {
+      this.handleInvite();
+    }, 200);
+  }
+
+  inviteKey = () => {
+    const { invitation: key } = this.props.location.query;
+    if (key) { localStorage.setItem('inviteKey', key); }
+    const k = localStorage.getItem('inviteKey');
+    return k || false;
   }
 
   handleInvite = () => {
-    const { invitation: key } = this.props.location.query;
-    if (key) { localStorage.setItem('invitation', key); }
-    const storedKey = localStorage.getItem('invitation');
-    if (storedKey) {
-      if (loggedIn()) {
-        this.props.acceptInvite(storedKey);
-      } else {
-        this.props.retrieveInvite(storedKey);
+    const key = this.inviteKey();
+    const { invite } = this.props;
+    if (key) {
+      if (!invite) {
+        this.props.retrieveInvite(key);
+      } else if (loggedIn() && invite) {
+        this.props.acceptInvite(key);
       }
     }
   }
