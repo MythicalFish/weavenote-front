@@ -12,6 +12,7 @@ export function* appWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_USER, fetchUser),
     yield takeLatest(types.FETCH_USER_SUCCESS, createOrganization),
+    yield takeLatest(types.RETRIEVE_INVITE, retrieveInvite),
     yield takeLatest(types.ACCEPT_INVITE, acceptInvite),
   ];
   yield take(LOCATION_CHANGE);
@@ -27,6 +28,10 @@ function* createOrganization(action) {
   if (!current) {
     browserHistory.push('/organization');
   }
+}
+
+function* retrieveInvite({ key }) {
+  yield sagas.get('retrieve_invite', actions.retrieveInviteSuccess, { key });
 }
 
 function* acceptInvite({ key }) {

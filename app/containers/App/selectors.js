@@ -30,6 +30,12 @@ export const selectCurrentOrg = () => createSelector(
   selectDomain(), (substate) => substate.get('current_organization')
 );
 
+// Invite
+
+export const selectInvite = () => createSelector(
+  selectDomain(), (substate) => substate.get('invite')
+);
+
 // Materials
 
 export const selectMaterials = () => createSelector(

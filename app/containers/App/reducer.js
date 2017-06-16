@@ -22,6 +22,7 @@ const initialState = fromJS({
   user_role: null,
   current_organization: null,
   organizations: null,
+  invite: null,
   stats: {
     projects: {
       counts: {
