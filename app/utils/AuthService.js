@@ -1,23 +1,11 @@
 import { EventEmitter } from 'events';
 import Auth0Lock from 'auth0-lock';
 
-const LOCK_OPTIONS = {
-  container: 'login-form',
-  theme: {},
-  auth: {
-    redirectUrl: window.location.origin,
-    responseType: 'token',
-    params: {
-      scope: 'openid email',
-    },
-  },
-};
-
 export default class AuthService extends EventEmitter {
 
-  constructor() {
+  constructor(options) {
     super();
-    this.lock = new Auth0Lock(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN, LOCK_OPTIONS);
+    this.lock = new Auth0Lock(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN, options);
     this.lock.on('authenticated', this.doAuthentication.bind(this));
     this.lock.on('authorization_error', this.err.bind(this));
   }

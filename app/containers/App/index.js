@@ -36,7 +36,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   render() {
     const { organization, invite } = this.props;
     if (!loggedIn()) {
-      return <LoginForm {...{ invite }} />;
+      return <LoginForm {...this.props} />;
     } else if (organization || location.pathname === '/organization') {
       return (
         <div>

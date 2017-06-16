@@ -53,6 +53,10 @@ function appReducer(state = initialState, action) {
         .set('organizations', fromJS(action.data.organizations))
         .set('current_organization', action.data.current_organization);
 
+    case types.App.RETRIEVE_INVITE_SUCCESS:
+      return state
+        .set('invite', action.invite);
+
     // Org
 
     case types.Org.CREATE_ORG_SUCCESS:
