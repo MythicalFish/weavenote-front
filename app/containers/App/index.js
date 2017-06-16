@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Auth from 'containers/Auth';
+import LoginForm from 'components/LoginForm';
 import Notification from 'containers/Notification';
 import { loggedIn } from 'utils/authUtils';
 import Layout from './Layout';
@@ -29,7 +29,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   render() {
     const { organization } = this.props;
     if (!loggedIn()) {
-      return <Auth />;
+      return <LoginForm />;
     } else if (organization || location.pathname === '/organization') {
       return (
         <div>

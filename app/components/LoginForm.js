@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import AuthService from './AuthService';
+import AuthService from 'utils/AuthService';
 
-class Auth extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class LoginForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     const Auth0 = new AuthService();
     Auth0.lock.on('hash_parsed', (hash) => {
@@ -36,17 +33,3 @@ class Auth extends React.PureComponent { // eslint-disable-line react/prefer-sta
     </div>
   )
 }
-
-Auth.propTypes = {
-};
-
-export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    {},
-    dispatch
-  );
-}
-
-const mapState = createStructuredSelector({});
-
-export default connect(mapState, mapDispatch)(Auth);
