@@ -18,6 +18,8 @@ export function request(method = 'GET', path, params) {
     .then((r) => {
       if (r.server_error) {
         return console.log(`%c ${r.server_error}`, ConsoleErrorStyle);
+      } else if (r.validation_error) {
+        alert(r.validation_error);
       }
       return r;
     });
