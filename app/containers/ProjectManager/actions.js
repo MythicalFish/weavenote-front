@@ -208,8 +208,8 @@ export function sendInviteSuccess() {
   return { type: types.SEND_INVITE_SUCCESS };
 }
 
-export function fetchInvites(projectID) {
-  return { type: types.FETCH_INVITES, projectID };
+export function fetchInvites(project_id) {
+  return { type: types.FETCH_INVITES, project_id };
 }
 
 export function fetchInvitesSuccess(invites) {

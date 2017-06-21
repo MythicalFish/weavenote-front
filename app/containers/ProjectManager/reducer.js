@@ -7,6 +7,7 @@ const initialState = fromJS({
   user_role: null,
   images: [],
   collaborators: [],
+  invites: [],
   currentImage: 0,
   components: [],
   currentComponent: null,
@@ -158,6 +159,10 @@ function projectReducer(state = initialState, action) {
 
     // Collaborators
 
+    case types.FETCH_INVITES_SUCCESS:
+      return state
+        .set('invites', fromJS(action.invites));
+      
     default:
       return state;
   }

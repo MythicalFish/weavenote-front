@@ -9,7 +9,8 @@ import { selectInvites } from '../../selectors';
 class Collaborators extends React.Component {
 
   componentDidMount() {
-    this.props.fetchInvites();
+    const { fetchInvites: f, project } = this.props;
+    f(project.id);
   }
 
   render() {

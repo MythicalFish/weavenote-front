@@ -179,6 +179,6 @@ export function* sendInvite({ invite }) {
   yield sagas.post('create_invite', invite, actions.sendInviteSuccess);
 }
 
-export function* fetchInvites(action) {
-  yield sagas.get(`projects/${action.projectID}/invites`, actions.fetchInvitesSuccess);
+export function* fetchInvites({ project_id }) {
+  yield sagas.get('invites', actions.fetchInvitesSuccess, { project_id });
 }
