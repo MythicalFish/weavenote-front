@@ -34,6 +34,7 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.CREATE_MEASUREMENT_NAME, createMeasurementName),
 
     yield takeLatest(types.SEND_INVITE, sendInvite),
+    yield takeLatest(types.FETCH_INVITES, fetchInvites),
 
   ];
   yield take(LOCATION_CHANGE);
@@ -176,4 +177,8 @@ export function* updateMeasurements(action) {
 
 export function* sendInvite({ invite }) {
   yield sagas.post('create_invite', invite, actions.sendInviteSuccess);
+}
+
+export function* fetchInvites(action) {
+  yield sagas.get(`projects/${action.projectID}/invites`, actions.fetchInvitesSuccess);
 }

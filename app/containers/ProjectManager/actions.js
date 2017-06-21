@@ -207,3 +207,11 @@ export function sendInvite(invite) {
 export function sendInviteSuccess() {
   return { type: types.SEND_INVITE_SUCCESS };
 }
+
+export function fetchInvites(projectID) {
+  return { type: types.FETCH_INVITES, projectID };
+}
+
+export function fetchInvitesSuccess(invites) {
+  return { type: types.FETCH_INVITES_SUCCESS, invites };
+}

@@ -70,6 +70,11 @@ export const selectMeasurements = () => createSelector(
   (substate) => substate.get('measurements')
 );
 
+
+export const selectInvites = () => createSelector(
+  selectDomain(), (substate) => substate.get('invites'));
+
+
 /*
  *
  *  Selectors for use with redux-form

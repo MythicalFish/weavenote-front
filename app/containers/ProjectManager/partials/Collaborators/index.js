@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import InviteForm from 'components/InviteForm';
-import { sendInvite } from '../../actions';
+import { sendInvite, fetchInvites } from '../../actions';
+import { selectInvites } from '../../selectors';
 
 class Collaborators extends React.Component {
+
+  componentDidMount() {
+    this.props.fetchInvites();
+  }
 
   render() {
     const { project } = this.props;
@@ -29,20 +34,22 @@ class Collaborators extends React.Component {
 }
 
 Collaborators.propTypes = {
-  sendInvite: React.PropTypes.func,
-  project: React.PropTypes.object,
+  sendInvite: PropTypes.func,
+  fetchInvites: PropTypes.func,
+  project: PropTypes.object,
+  invites: PropTypes.object,
 };
 
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { sendInvite },
+    { sendInvite, fetchInvites },
     dispatch
   );
 }
 
 const mapState = createStructuredSelector({
-  
+  invites: selectInvites(),
 });
 
 export default connect(mapState, mapDispatch)(Collaborators);
