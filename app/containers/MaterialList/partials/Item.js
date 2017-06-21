@@ -1,12 +1,12 @@
 import React from 'react';
-import ListItemWrapper from 'components/ListItemWrapper';
+import ListItem from 'components/ListItem';
 import Price from 'components/Price';
 
-export default function ListItem(props) {
+export default function Item(props) {
   const material = props.material.toJS();
   const url = `/materials/${material.id}`;
   return (
-    <ListItemWrapper url={url}>
+    <ListItem url={url}>
       <div className="p1 pr2">
         {material.type.name}
       </div>
@@ -23,10 +23,10 @@ export default function ListItem(props) {
       <div className="p1 pr2">
         <Price value={material.cost_total} currency={material.currency.iso_code} />
       </div>
-    </ListItemWrapper>
+    </ListItem>
   );
 }
 
-ListItem.propTypes = {
+Item.propTypes = {
   material: React.PropTypes.object.isRequired,
 };

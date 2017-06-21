@@ -1,0 +1,10 @@
+.list-item {
+  @extend .flex;
+  @extend .items-center;
+  @extend .justify-between;
+  @extend .bb1;
+  @extend .bg-white;
+  @extend .dark7;
+  @extend .x-fill;
+  @extend .p1;
+}

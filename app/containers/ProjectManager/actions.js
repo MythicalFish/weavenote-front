@@ -192,26 +192,3 @@ export function createMeasurementName(projectID) {
 export function createMeasurementNameSuccess(measurements) {
   return { type: types.CREATE_MEASUREMENT_NAME_SUCCESS, measurements };
 }
-
-
-/*
- *
- *  Collaborators
- *
- */
-
-export function sendInvite(invite) {
-  return { type: types.SEND_INVITE, invite };
-}
-
-export function sendInviteSuccess() {
-  return { type: types.SEND_INVITE_SUCCESS };
-}
-
-export function fetchInvites(project_id) {
-  return { type: types.FETCH_INVITES, project_id };
-}
-
-export function fetchInvitesSuccess(invites) {
-  return { type: types.FETCH_INVITES_SUCCESS, invites };
-}

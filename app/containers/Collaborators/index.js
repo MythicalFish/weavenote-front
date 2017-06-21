@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import InviteForm from 'components/InviteForm';
-import { sendInvite, fetchInvites } from '../../actions';
-import { selectInvites } from '../../selectors';
+import InviteForm from './partials/InviteForm';
+import InvitesList from './partials/InvitesList';
+import { sendInvite, fetchInvites, cancelInvite, updateInvite } from './actions';
+import { selectInvites } from './selectors';
 
 class Collaborators extends React.Component {
 
@@ -14,13 +15,16 @@ class Collaborators extends React.Component {
   }
 
   render() {
-    const { project } = this.props;
+    const { project, invites } = this.props;
     return (
       <div>
         <header>Collaborators</header>
-        <div className="p3">
-
-        </div>
+        {invites.size > 0 &&
+          <div className="p2">
+            <b>Pending invitations</b>
+            <InvitesList {...{ invites }} />
+          </div>
+        }
         <footer className="bt1 p2">
           <InviteForm
             onSubmit={(data) => {
@@ -36,6 +40,8 @@ class Collaborators extends React.Component {
 
 Collaborators.propTypes = {
   sendInvite: PropTypes.func,
+  cancelInvite: PropTypes.func,
+  updateInvite: PropTypes.func,
   fetchInvites: PropTypes.func,
   project: PropTypes.object,
   invites: PropTypes.object,
@@ -44,7 +50,7 @@ Collaborators.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { sendInvite, fetchInvites },
+    { sendInvite, cancelInvite, updateInvite, fetchInvites },
     dispatch
   );
 }

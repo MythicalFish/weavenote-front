@@ -8,7 +8,7 @@ import * as sections from 'containers/App/constants/sections';
 import Header from 'components/Header';
 import { fetchMaterials } from './actions';
 import Toolbar from './partials/Toolbar';
-import ListItem from './partials/ListItem';
+import Item from './partials/Item';
 
 export class MaterialList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -29,7 +29,7 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
         />
         <div className="m2 b1">
           {materials && materials.toArray().map((material) => (
-            <ListItem material={material} key={`material-${material.get('id')}`} />
+            <Item material={material} key={`material-${material.get('id')}`} />
           ))}
         </div>
       </div>

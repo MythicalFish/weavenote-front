@@ -33,9 +33,6 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.CREATE_MEASUREMENT_GROUP, createMeasurementGroup),
     yield takeLatest(types.CREATE_MEASUREMENT_NAME, createMeasurementName),
 
-    yield takeLatest(types.SEND_INVITE, sendInvite),
-    yield takeLatest(types.FETCH_INVITES, fetchInvites),
-
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -167,18 +164,4 @@ export function* updateMeasurements(action) {
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }
-}
-
-/*
- *
- *  Collaborators
- *
- */
-
-export function* sendInvite({ invite }) {
-  yield sagas.post('create_invite', invite, actions.sendInviteSuccess);
-}
-
-export function* fetchInvites({ project_id }) {
-  yield sagas.get('invites', actions.fetchInvitesSuccess, { project_id });
 }

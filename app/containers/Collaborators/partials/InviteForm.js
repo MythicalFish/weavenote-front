@@ -8,11 +8,11 @@ const InviteForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
-        <div className="col-xs-12 col-md-6">
+        <div className="col-xs-12 col-sm-6">
           <label>Email</label>
           <Field type="email" name="email" component={Input} required />
         </div>
-        <div className="col-xs-12 col-md-6">
+        <div className="col-xs-12 col-sm-6">
           <label>Name (optional)</label>
           <Field type="text" name="name" component={Input} />
         </div>

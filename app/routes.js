@@ -174,13 +174,15 @@ export default function createRoutes(store) {
     getComponent(nextState, cb) {
       const importModules = Promise.all([
         import('containers/App/sagas'), // global Saga
+        import('containers/Collaborators/sagas'),
         import('containers/App'),
       ]);
 
       const renderRoute = loadModule(cb);
 
-      importModules.then(([appSagas, component]) => {
+      importModules.then(([appSagas, cSagas, component]) => {
         injectSagas(appSagas.default);
+        injectSagas(cSagas.default);
         renderRoute(component);
       });
 
