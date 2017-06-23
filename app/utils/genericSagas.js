@@ -36,9 +36,9 @@ export function* post(url, params, callback) {
   }
 }
 
-export function* destroy(url, callback) {
+export function* destroy(url, callback, params) {
   try {
-    const response = yield call(API.destroy, url);
+    const response = yield call(API.destroy, url, params);
     yield put(callback(response));
   } catch (err) {
     console.error(err); // eslint-disable-line no-console

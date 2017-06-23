@@ -9,12 +9,10 @@ const InviteForm = (props) => {
     <form onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-xs-12 col-sm-6">
-          <label>Email</label>
-          <Field type="email" name="email" component={Input} required />
+          <Field type="email" name="email" component={Input} required sm placeholder="Email" />
         </div>
         <div className="col-xs-12 col-sm-6">
-          <label>Name (optional)</label>
-          <Field type="text" name="name" component={Input} />
+          <Field type="text" name="name" component={Input} sm placeholder="Name (optional)" />
         </div>
       </div>
       <footer className="flex justify-between pt2">

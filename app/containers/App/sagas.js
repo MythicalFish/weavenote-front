@@ -31,9 +31,9 @@ function* createOrganization(action) {
 }
 
 function* retrieveInvite({ key }) {
-  yield sagas.get('retrieve_invite', actions.retrieveInviteSuccess, { key });
+  yield sagas.get(`invites/${key}`, actions.retrieveInviteSuccess);
 }
 
 function* acceptInvite({ key }) {
-  yield sagas.post('accept_invite', { key }, actions.acceptInviteSuccess);
+  yield sagas.post(`accept_invite/${key}`, {}, actions.acceptInviteSuccess);
 }

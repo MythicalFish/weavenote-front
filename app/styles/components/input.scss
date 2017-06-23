@@ -1,7 +1,7 @@
-::-webkit-input-placeholder { color: $gray-lightest; }
-::-moz-placeholder { color: $gray-lightest; }
-:-ms-input-placeholder { color: $gray-lightest; }
-input:-moz-placeholder { color: $gray-lightest; }
+::-webkit-input-placeholder { color: $dark3; }
+::-moz-placeholder { color: $dark3; }
+:-ms-input-placeholder { color: $dark3; }
+input:-moz-placeholder { color: $dark3; }
 
 textarea {
   min-height: 200px;
@@ -30,6 +30,11 @@ textarea {
     font-family: inherit;
     font-weight: inherit;
     text-align: inherit;
+  }
+  &.input-sm {
+    input {
+      padding: $space-1;
+    }
   }
   input:focus {
     + .focused {

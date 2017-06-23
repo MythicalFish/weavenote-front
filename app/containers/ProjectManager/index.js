@@ -72,9 +72,11 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
             </div>
           </div>
         </div>
-        <Modal isOpened={this.state.showCollaborators}>
-          <Collaborators {...{ project }} />
-        </Modal>
+        {project &&
+          <Modal isOpened={this.state.showCollaborators}>
+            <Collaborators invitable={{ type: 'project', id: project.id }} />
+          </Modal>
+        }
       </div>
     );
   }

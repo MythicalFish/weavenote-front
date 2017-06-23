@@ -11,60 +11,58 @@ export default class Input extends React.PureComponent {
 
   render() {
 
-    const { props } = this;
+    const p = this.props;
     let field = null;
     let touched = false;
     let error = false;
-    let fieldProps;
-    const className = props.fieldClass || '';
+    let fProps;
+    let className = p.fieldClass || '';
+    
+    if (p.sm) {
+      className += 'input-sm';
+    }
 
-    if (props.input) {
-      fieldProps = props.input;
-      if (props.onChanged) {
-        fieldProps.onChanged = props.onChanged; // onChange in use by redux-form
-      }
-      if (props.tail) {
-        fieldProps.tail = props.tail;
-      }
+    if (p.input) {
+      fProps = p.input;
+      if (p.onChanged) fProps.onChanged = p.onChanged; // onChange in use by redux-form
+      if (p.tail) fProps.tail = p.tail;
+      if (p.required) fProps.required = p.required;
+      if (p.placeholder) fProps.placeholder = p.placeholder;
     } else {
-      fieldProps = props;
+      fProps = p;
     }
 
-    if (props.focus) {
-      fieldProps.ref = (input) => { this.nameInput = input; };
+    if (p.focus) {
+      fProps.ref = (input) => { this.nameInput = input; };
     }
 
-    if (props.noEdit) {
-      fieldProps.readOnly = true;
+    if (p.noEdit) {
+      fProps.readOnly = true;
     }
 
-    if (props.required) {
-      fieldProps.required = true;
+    if (p.meta) {
+      touched = p.meta.touched;
+      error = p.meta.error;
     }
 
-    if (props.meta) {
-      touched = props.meta.touched;
-      error = props.meta.error;
-    }
-
-    if (props.type === 'select') {
-      if (!fieldProps.data && props.data) {
-        fieldProps.data = props.data;
+    if (p.type === 'select') {
+      if (!fProps.data && p.data) {
+        fProps.data = p.data;
       }
     }
 
-    switch (props.type) {
+    switch (p.type) {
       case 'display':
-        field = <div className="readonly">{props.value}</div>;
+        field = <div className="readonly">{p.value}</div>;
         break;
       case 'select':
-        field = <SelectInput {...fieldProps} />;
+        field = <SelectInput {...fProps} />;
         break;
       case 'textarea':
-        field = <textarea {...fieldProps} />;
+        field = <textarea {...fProps} />;
         break;
       default:
-        field = <input {...fieldProps} type={props.type} />;
+        field = <input {...fProps} type={p.type} />;
         break;
     }
 
@@ -78,11 +76,3 @@ export default class Input extends React.PureComponent {
   }
 }
 
-Input.propTypes = {
-  focus: PropTypes.bool,
-  value: PropTypes.any,
-  label: PropTypes.string,
-  type: PropTypes.string,
-  input: PropTypes.object,
-  meta: PropTypes.object,
-};

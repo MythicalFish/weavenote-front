@@ -1,5 +1,6 @@
 import * as types from './constants';
 
+
 export function sendInvite(invite) {
   return { type: types.SEND_INVITE, invite };
 }
@@ -8,8 +9,8 @@ export function sendInviteSuccess() {
   return { type: types.SEND_INVITE_SUCCESS };
 }
 
-export function fetchInvites(project_id) {
-  return { type: types.FETCH_INVITES, project_id };
+export function fetchInvites(invitable) {
+  return { type: types.FETCH_INVITES, invitable };
 }
 
 export function fetchInvitesSuccess(invites) {

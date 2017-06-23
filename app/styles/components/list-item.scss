@@ -7,4 +7,13 @@
   @extend .dark7;
   @extend .x-fill;
   @extend .p1;
+  .list-item-controls {
+    button {
+      padding: 0;
+      color: $dark2;
+      &:hover {
+        color: $dark3;
+      }
+    }
+  }
 }

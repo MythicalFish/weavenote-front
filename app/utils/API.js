@@ -37,8 +37,8 @@ export function patch(path, params) {
   return request('PATCH', path, params);
 }
 
-export function destroy(path) {
-  return request('DELETE', path);
+export function destroy(path, params) {
+  return request('DELETE', path, params);
 }
 
 export const accessToken = () => `Bearer: ${localStorage.access_token}`;

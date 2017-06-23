@@ -1,3 +1,4 @@
+
 export const SEND_INVITE = '@@app/SEND_INVITE';
 export const SEND_INVITE_SUCCESS = '@@app/SEND_INVITE_SUCCESS';
 

@@ -10,26 +10,26 @@ import { selectInvites } from './selectors';
 class Collaborators extends React.Component {
 
   componentDidMount() {
-    const { fetchInvites: f, project } = this.props;
-    f(project.id);
+    const p = this.props;
+    p.fetchInvites(p.invitable);
   }
 
   render() {
-    const { project, invites } = this.props;
+    const { invitable, invites } = this.props;
     return (
       <div>
         <header>Collaborators</header>
         {invites.size > 0 &&
           <div className="p2">
             <b>Pending invitations</b>
-            <InvitesList {...{ invites }} />
+            <InvitesList {...this.props} />
           </div>
         }
         <footer className="bt1 p2">
           <InviteForm
             onSubmit={(data) => {
               const { name, email, as_guest } = data.toJS();
-              this.props.sendInvite({ name, email, as_guest, project_id: project.id });
+              this.props.sendInvite({ name, email, as_guest, invitable });
             }}
           />
         </footer>
@@ -43,7 +43,7 @@ Collaborators.propTypes = {
   cancelInvite: PropTypes.func,
   updateInvite: PropTypes.func,
   fetchInvites: PropTypes.func,
-  project: PropTypes.object,
+  invitable: PropTypes.object,
   invites: PropTypes.object,
 };
 
