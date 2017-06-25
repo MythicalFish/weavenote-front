@@ -3,17 +3,17 @@ import 'whatwg-fetch';
 export function request(method = 'GET', path, params) {
 
   let url;
-  const body = requestBody();
+  const request = requestBody();
 
   if (method === 'GET') {
-    url = requestURL({ path, params });
+    url = requestURL({ path, params  });
   } else {
     url = requestURL({ path });
-    body.method = method;
-    body.body = JSON.stringify(params);
+    request.method = method;
+    request.body = JSON.stringify(params);
   }
 
-  return fetch(url, body)
+  return fetch(url, request)
     .then((r) => r.json())
     .then((r) => {
       if (r.server_error) {
@@ -48,7 +48,7 @@ export const accessToken = () => `Bearer: ${localStorage.access_token}`;
 const requestURL = (opts) => {
   let url = `${process.env.API_URL}/${opts.path}`;
   if (opts.params) {
-    url = `${url}?${encodedRequestParams(opts.params)}`;
+    url = `${url}?${toQueryString(opts.params)}`;
   }
   return url;
 };
@@ -63,11 +63,46 @@ function requestBody() {
   };
 }
 
-const encodedRequestParams = (params) => {
-  const esc = encodeURIComponent;
-  return Object.keys(params)
-    .map(k => esc(k) + '=' + esc(params[k]))
-    .join('&');
+const toQueryString = (obj, urlEncode = false) => {
+  if (!obj) return null;
+  const flattenObj = (x, path = []) => {
+    const result = [];
+    Object.keys(x).forEach((key) => {
+      if (!Object.prototype.hasOwnProperty.call(x, key)) return;
+      const newPath = path.slice();
+      newPath.push(key);
+      let vals = [];
+      if (typeof x[key] === 'object') {
+        vals = flattenObj(x[key], newPath);
+      } else {
+        vals.push({ path: newPath, val: x[key] });
+      }
+      vals.forEach((v) => {
+        return result.push(v);
+      });
+    });
+    return result;
+  };
+
+  let parts = flattenObj(obj);
+  parts = parts.map((varInfo) => {
+    if (varInfo.path.length === 1) {
+      varInfo.path = varInfo.path[0]; // eslint-disable-line no-param-reassign
+    } else {
+      const first = varInfo.path[0];
+      const rest = varInfo.path.slice(1);
+      varInfo.path = `${first}[${rest.join('][')}]`; // eslint-disable-line no-param-reassign
+    }
+    return varInfo;
+  });
+
+  const queryString = parts.map((varInfo) => {
+    return `${varInfo.path}=${varInfo.val}`;
+  }).join('&');
+  if (urlEncode) {
+    return encodeURIComponent(queryString);
+  }
+  return queryString;
 };
 
 function checkStatus(response) {
