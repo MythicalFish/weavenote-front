@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form/immutable';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import { sendInvite } from '../actions';
 
 const InviteForm = (props) => {
   const { handleSubmit, submitting } = props;
@@ -31,6 +33,14 @@ InviteForm.propTypes = {
   submitting: PropTypes.bool,
 };
 
-export default reduxForm({
+const mapDispatch = (dispatch) => ({
+  onSubmit(data) {
+    const { name, email, as_guest, invitable } = data.toJS();
+    const invite = { name, email, as_guest };
+    dispatch(sendInvite({ invitable, invite }));
+  },
+});
+
+export default connect(null, mapDispatch)(reduxForm({
   form: 'InviteForm',
-})(InviteForm);
+})(InviteForm));

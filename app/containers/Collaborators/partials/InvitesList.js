@@ -3,12 +3,10 @@ import ListItem from 'components/ListItem';
 
 class InvitesList extends React.PureComponent {
 
-  cancelInvite = (invite) => {
-    const { cancelInvite } = this.props;
-    return () => {
-      cancelInvite(invite);
-    };
-  }
+  cancelInvite = (invite) => (() => {
+    const { invitable } = this.props;
+    this.props.cancelInvite({ invitable, invite });
+  })
 
   render() {
     const { invites } = this.props;
@@ -33,6 +31,7 @@ class InvitesList extends React.PureComponent {
 
 InvitesList.propTypes = {
   invites: PropTypes.object,
+  invitable: PropTypes.object,
   cancelInvite: PropTypes.func,
 };
 

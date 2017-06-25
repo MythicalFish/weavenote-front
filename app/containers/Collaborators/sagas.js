@@ -17,18 +17,22 @@ export function* collaboratorsWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-export function* sendInvite({ params }) {
-  yield sagas.post('invites', params, actions.sendInviteSuccess);
+function* sendInvite({ payload }) {
+  yield sagas.post('invites', payload, actions.sendInviteSuccess);
 }
 
-export function* fetchInvites({ invitable }) {
+function* fetchInvites({ invitable }) {
   yield sagas.get('invites', { invitable }, actions.fetchInvitesSuccess);
 }
 
-export function* updateInvite({ invitable, invite }) {
-  yield sagas.patch(`invites/${invite.get('key')}`, { invite, invitable }, actions.updateInviteSuccess);
+function* updateInvite({ payload }) {
+  yield sagas.patch(url(payload), payload, actions.updateInviteSuccess);
 }
 
-export function* cancelInvite({ invitable, invite }) {
-  yield sagas.destroy(`invites/${invite.get('key')}`, invitable, actions.cancelInviteSuccess);
+function* cancelInvite({ payload }) {
+  yield sagas.destroy(url(payload), payload, actions.cancelInviteSuccess);
+}
+
+const url = (payload) => {
+  return `invites/${payload.invite.get('key')}`;
 }

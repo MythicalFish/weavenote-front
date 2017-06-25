@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import InviteForm from './partials/InviteForm';
 import InvitesList from './partials/InvitesList';
-import { sendInvite, fetchInvites, cancelInvite, updateInvite } from './actions';
+import { fetchInvites, cancelInvite, updateInvite } from './actions';
 import { selectInvites } from './selectors';
 
 class Collaborators extends React.Component {
@@ -27,9 +27,8 @@ class Collaborators extends React.Component {
         }
         <footer className="bt1 p2">
           <InviteForm
-            onSubmit={(data) => {
-              const { name, email, as_guest } = data.toJS();
-              this.props.sendInvite({ name, email, as_guest, invitable });
+            initialValues={{
+              invitable,
             }}
           />
         </footer>
@@ -39,18 +38,13 @@ class Collaborators extends React.Component {
 }
 
 Collaborators.propTypes = {
-  sendInvite: PropTypes.func,
-  cancelInvite: PropTypes.func,
-  updateInvite: PropTypes.func,
-  fetchInvites: PropTypes.func,
-  invitable: PropTypes.object,
   invites: PropTypes.object,
 };
 
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { sendInvite, cancelInvite, updateInvite, fetchInvites },
+    { cancelInvite, updateInvite, fetchInvites },
     dispatch
   );
 }

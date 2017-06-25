@@ -13,7 +13,15 @@ function collaboratorsReducer(state = initialState, action) {
     case types.FETCH_INVITES_SUCCESS:
       return state
         .set('invites', fromJS(action.invites));
+
+    case types.CANCEL_INVITE_SUCCESS:
+      return state
+        .set('invites', fromJS(action.invites));
       
+    case types.SEND_INVITE_SUCCESS:
+      return state
+        .set('invites', fromJS(action.invites));
+
     default:
       return state;
   }
