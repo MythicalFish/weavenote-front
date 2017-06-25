@@ -22,7 +22,7 @@ export function* sendInvite({ params }) {
 }
 
 export function* fetchInvites({ invitable }) {
-  yield sagas.get('invites', { invitable_type, invitable_id }, actions.fetchInvitesSuccess);
+  yield sagas.get('invites', { invitable }, actions.fetchInvitesSuccess);
 }
 
 export function* updateInvite({ invitable, invite }) {
