@@ -3,7 +3,7 @@
 import { call, put, select, cancel } from 'redux-saga/effects';
 import * as API from 'utils/API';
 
-export function* get(url, callback, params = null, selector = false) {
+export function* get(url, params, callback, selector = false) {
   try {
     let entities = null;
     if (selector) {
@@ -36,7 +36,7 @@ export function* post(url, params, callback) {
   }
 }
 
-export function* destroy(url, callback, params) {
+export function* destroy(url, params, callback) {
   try {
     const response = yield call(API.destroy, url, params);
     yield put(callback(response));

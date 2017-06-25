@@ -45,7 +45,7 @@ export function* projectManagerWatcher() {
  */
 
 export function* fetchProject(action) {
-  yield sagas.get(`projects/${action.id}`, actions.fetchProjectSuccess);
+  yield sagas.get(`projects/${action.id}`, null, actions.fetchProjectSuccess);
 }
 
 export function* updateProject(action) {
@@ -61,7 +61,7 @@ export function* updateProject(action) {
  */
 
 export function* fetchImages(action) {
-  yield sagas.get(`projects/${action.projectID}/images`, actions.fetchImagesSuccess);
+  yield sagas.get(`projects/${action.projectID}/images`, null, actions.fetchImagesSuccess);
 }
 
 export function* createImage(action) {
@@ -71,7 +71,7 @@ export function* createImage(action) {
 
 export function* deleteImage(action) {
   const { projectID, imageID } = action.payload;
-  yield sagas.destroy(`projects/${projectID}/images/${imageID}`, actions.deleteImageSuccess);
+  yield sagas.destroy(`projects/${projectID}/images/${imageID}`, null, actions.deleteImageSuccess);
 }
 
 
@@ -82,7 +82,7 @@ export function* deleteImage(action) {
  */
 
 export function* fetchComponents(action) {
-  yield sagas.get(`projects/${action.projectID}/components`, actions.fetchComponentsSuccess);
+  yield sagas.get(`projects/${action.projectID}/components`, null, actions.fetchComponentsSuccess);
 }
 
 export function* updateComponent(action) {
@@ -102,12 +102,12 @@ export function* createComponent({ payload }) {
 }
 
 export function* deleteComponent(action) {
-  yield sagas.destroy(`projects/${action.projectID}/components/${action.id}`, actions.deleteComponentSuccess);
+  yield sagas.destroy(`projects/${action.projectID}/components/${action.id}`, null, actions.deleteComponentSuccess);
 }
 
 export function* doFetchMaterialCost(action) {
   const component = action.component;
-  yield sagas.get(`projects/${component.project_id}/material_cost`, actions.fetchMaterialCostSuccess);
+  yield sagas.get(`projects/${component.project_id}/material_cost`, null, actions.fetchMaterialCostSuccess);
 }
 
 /*
@@ -117,7 +117,7 @@ export function* doFetchMaterialCost(action) {
  */
 
 export function* fetchInstructions(action) {
-  yield sagas.get(`projects/${action.projectID}/instructions`, actions.fetchInstructionsSuccess);
+  yield sagas.get(`projects/${action.projectID}/instructions`, null, actions.fetchInstructionsSuccess);
 }
 
 export function* updateInstruction({ payload }) {
@@ -132,7 +132,7 @@ export function* createInstruction({ payload }) {
 }
 
 export function* deleteInstruction(action) {
-  yield sagas.destroy(`projects/${action.projectID}/instructions/${action.id}`, actions.deleteInstructionSuccess);
+  yield sagas.destroy(`projects/${action.projectID}/instructions/${action.id}`, null, actions.deleteInstructionSuccess);
 }
 
 /*
@@ -142,7 +142,7 @@ export function* deleteInstruction(action) {
  */
 
 export function* fetchMeasurements(action) {
-  yield sagas.get(`projects/${action.projectID}/measurements`, actions.fetchMeasurementsSuccess);
+  yield sagas.get(`projects/${action.projectID}/measurements`, null, actions.fetchMeasurementsSuccess);
 }
 
 export function* createMeasurementGroup(action) {

@@ -38,27 +38,27 @@ export function* fetchMaterialAssociations() {
 }
 
 export function* fetchMaterialTypes() {
-  yield sagas.get('material_types', actions.fetchMaterialTypesSuccess);
+  yield sagas.get('material_types', null, actions.fetchMaterialTypesSuccess);
 }
 
 export function* fetchColors() {
-  yield sagas.get('colors', actions.fetchColorsSuccess);
+  yield sagas.get('colors', null, actions.fetchColorsSuccess);
 }
 
 export function* fetchCurrencies() {
-  yield sagas.get('currencies', actions.fetchCurrenciesSuccess, null, selectors.selectCurrencies);
+  yield sagas.get('currencies', null, actions.fetchCurrenciesSuccess, selectors.selectCurrencies);
 }
 
 export function* fetchSuppliers() {
-  yield sagas.get('suppliers', actions.fetchSuppliersSuccess);
+  yield sagas.get('suppliers', null, actions.fetchSuppliersSuccess);
 }
 
 export function* fetchCareLabels() {
-  yield sagas.get('care_labels', actions.fetchCareLabelsSuccess);
+  yield sagas.get('care_labels', null, actions.fetchCareLabelsSuccess);
 }
 
 export function* fetchMaterial(action) {
-  yield sagas.get(`materials/${action.id}`, actions.fetchMaterialSuccess);
+  yield sagas.get(`materials/${action.id}`, null, actions.fetchMaterialSuccess);
 }
 
 export function* updateMaterial(action) {

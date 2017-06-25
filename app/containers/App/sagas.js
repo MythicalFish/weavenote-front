@@ -20,7 +20,7 @@ export function* appWatcher() {
 }
 
 function* fetchUser() {
-  yield sagas.get('user', actions.fetchUserSuccess);
+  yield sagas.get('user', null, actions.fetchUserSuccess);
 }
 
 function* createOrganization(action) {
@@ -31,7 +31,7 @@ function* createOrganization(action) {
 }
 
 function* retrieveInvite({ key }) {
-  yield sagas.get(`invites/${key}`, actions.retrieveInviteSuccess);
+  yield sagas.get(`invites/${key}`, null, actions.retrieveInviteSuccess);
 }
 
 function* acceptInvite({ key }) {

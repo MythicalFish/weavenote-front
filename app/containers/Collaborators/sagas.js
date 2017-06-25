@@ -21,8 +21,8 @@ export function* sendInvite({ params }) {
   yield sagas.post('invites', params, actions.sendInviteSuccess);
 }
 
-export function* fetchInvites({ invitable_type, invitable_id }) {
-  yield sagas.get('invites', actions.fetchInvitesSuccess, { invitable_type, invitable_id });
+export function* fetchInvites({ invitable }) {
+  yield sagas.get('invites', { invitable_type, invitable_id }, actions.fetchInvitesSuccess);
 }
 
 export function* updateInvite({ invitable, invite }) {
@@ -30,5 +30,5 @@ export function* updateInvite({ invitable, invite }) {
 }
 
 export function* cancelInvite({ invitable, invite }) {
-  yield sagas.destroy(`invites/${invite.get('key')}`, actions.cancelInviteSuccess, invitable);
+  yield sagas.destroy(`invites/${invite.get('key')}`, invitable, actions.cancelInviteSuccess);
 }

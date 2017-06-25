@@ -28,5 +28,5 @@ export function* fileProject(action) {
 }
 
 export function* fetchProjects(action) {
-  yield sagas.get('projects', actions.fetchProjectsSuccess, action.params);
+  yield sagas.get('projects', action.params, actions.fetchProjectsSuccess);
 }
