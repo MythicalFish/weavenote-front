@@ -13,12 +13,10 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
   }
 
   handleClick = (item) => {
-    const { onChange, onChanged } = this.props;
-    onChange(item);
     this.setState({ active: false });
-    if (onChanged) {
-      onChanged(item);
-    }
+    const { onChange, onChanged } = this.props;
+    if (onChange) onChange(item);
+    if (onChanged) onChanged(item);
   }
 
   render() {

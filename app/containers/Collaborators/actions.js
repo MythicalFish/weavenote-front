@@ -6,7 +6,7 @@ export const sendInviteSuccess = (invites) => ({ type: types.SEND_INVITE_SUCCESS
 export const fetchInvites = (invitable) => ({ type: types.FETCH_INVITES, invitable });
 export const fetchInvitesSuccess = (invites) => ({ type: types.FETCH_INVITES_SUCCESS, invites });
 
-export const updateInvite = (invite) => ({ type: types.UPDATE_INVITE, invite });
+export const updateInvite = (payload) => ({ type: types.UPDATE_INVITE, payload });
 export const updateInviteSuccess = () => ({ type: types.UPDATE_INVITE_SUCCESS });
 
 export const cancelInvite = (payload) => ({ type: types.CANCEL_INVITE, payload });

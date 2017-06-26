@@ -19,7 +19,7 @@ class InvitesList extends React.PureComponent {
               {invite.get('email')}
             </div>
             <div>
-              <RoleSelector />
+              <RoleSelector {...{ invite }} />
             </div>
             <div className="list-item-controls">
               <button onClick={this.cancelInvite(invite)}>
