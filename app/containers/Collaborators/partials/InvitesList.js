@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ListItem from 'components/ListItem';
+import RoleSelector from './RoleSelector';
 
 class InvitesList extends React.PureComponent {
 
@@ -16,6 +17,9 @@ class InvitesList extends React.PureComponent {
           <ListItem key={`invite-${index}`}>
             <div>
               {invite.get('email')}
+            </div>
+            <div>
+              <RoleSelector />
             </div>
             <div className="list-item-controls">
               <button onClick={this.cancelInvite(invite)}>
