@@ -3,8 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
-import notificationsWatcher from './notifications';
-export default [notificationsWatcher, collaboratorsWatcher];
+export default [collaboratorsWatcher];
 
 export function* collaboratorsWatcher() {
   const watcher = [
@@ -34,6 +33,4 @@ function* cancelInvite({ payload }) {
   yield sagas.destroy(url(payload), payload, actions.cancelInviteSuccess);
 }
 
-const url = (payload) => {
-  return `invites/${payload.invite.get('key')}`;
-};
+const url = (payload) => (`invites/${payload.invite.get('key')}`);
