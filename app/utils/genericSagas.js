@@ -2,18 +2,24 @@
 
 import { call, put, select, cancel } from 'redux-saga/effects';
 import * as API from 'utils/API';
-import { notifyError } from 'containers/Notification';
+import { notify, notifyError } from 'containers/Notification';
 
 export function* get(url, params, callback, selector = false) {
   try {
-    let entities = null;
+    let response = null;
     if (selector) {
-      entities = yield select(selector());
+      response = yield select(selector());
     }
-    if (!entities) {
-      entities = yield call(API.get, url, params);
+    if (!response) {
+      response = yield call(API.get, url, params);
     }
-    yield put(callback(entities));
+    if (response.message) {
+      yield put(notify(response.message));
+    }
+    if (response.payload) {
+      response = response.payload;
+    }
+    yield put(callback(response));
   } catch (error) {
     yield put(notifyError(error.message));
   }

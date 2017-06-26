@@ -18,8 +18,7 @@ export function request(method = 'GET', path, params) {
     .then((r) => {
       if (r.server_error) {
         console.log(`%c ${r.server_error}`, ConsoleErrorStyle);
-        const err = new Error('Hmm. Something went wrong; we\'ll look into it!');
-        throw (err);
+        throw ('Hmm. Something went wrong; we\'ll look into it!');
       } else if (r.user_error) {
         throw(r.user_error);
       }
