@@ -17,9 +17,11 @@ export function request(method = 'GET', path, params) {
     .then((r) => r.json())
     .then((r) => {
       if (r.server_error) {
-        return console.log(`%c ${r.server_error}`, ConsoleErrorStyle);
-      } else if (r.validation_error) {
-        alert(r.validation_error);
+        console.log(`%c ${r.server_error}`, ConsoleErrorStyle);
+        const err = new Error('Hmm. Something went wrong; we\'ll look into it!');
+        throw (err);
+      } else if (r.user_error) {
+        throw(r.user_error);
       }
       return r;
     });

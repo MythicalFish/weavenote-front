@@ -58,4 +58,8 @@ export function notify(opts) {
   return Notifications.success(defaultOpts(opts));
 }
 
+export function notifyError(opts) {
+  return Notifications.error(defaultOpts(opts));
+}
+
 export default connect(mapState)(Notification);

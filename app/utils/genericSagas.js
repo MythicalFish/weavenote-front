@@ -2,6 +2,7 @@
 
 import { call, put, select, cancel } from 'redux-saga/effects';
 import * as API from 'utils/API';
+import { notifyError } from 'containers/Notification';
 
 export function* get(url, params, callback, selector = false) {
   try {
@@ -13,8 +14,8 @@ export function* get(url, params, callback, selector = false) {
       entities = yield call(API.get, url, params);
     }
     yield put(callback(entities));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
+  } catch (error) {
+    yield put(notifyError(error.message));
   }
 }
 
