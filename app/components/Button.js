@@ -9,7 +9,7 @@ export default function Button(props) {
   const onclick = props.onclick || null;
 
   return (
-    <button className={`btn-color2x ${className}`} type={type} disabled={disabled} onClick={onclick}>
+    <button className={`btn btn-color2x ${className}`} type={type} disabled={disabled} onClick={onclick}>
       {props.icon &&
         <i className={`fa fa-${props.icon} mr1`}></i>
       }
