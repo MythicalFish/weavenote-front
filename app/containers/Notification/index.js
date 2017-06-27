@@ -11,11 +11,22 @@ class Notification extends React.Component { // eslint-disable-line react/prefer
     const style = {
       NotificationItem: {
         DefaultStyle: {
-          margin: '10px 5px 2px 1px',
+          'margin': '5px 0 0 0',
+          'padding': '10px 15px',
+          'border-radius': '4px',
+          'color': '#FFF',
+          'font-size': '1em',
+          'font-weight': 'bold',
+          'text-shadow': '0 0 2px rgba(0,0,0,0.4)',
+          'border-top': 'none',
+          'border-right': '8px solid #28b865',
+          'background': '#2ecc71',
+          'box-shadow': 'none',
         },
-        success: {
-          color: 'green',
-        },
+        error: {
+          'background': '#e74c3c',
+          'border-right': '8px solid #d34334',
+        }
       },
     };
     return (
@@ -45,6 +56,7 @@ function defaultOpts(opts) {
     message: '',
     position: 'br',
     autoDismiss: 4,
+    dismissible: false,
   };
   if (typeof (opts) === 'object') {
     return Object.assign(defaults, opts);
