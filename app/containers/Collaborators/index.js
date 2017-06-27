@@ -4,7 +4,10 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import InviteForm from './partials/InviteForm';
 import InvitesList from './partials/InvitesList';
-import { fetchInvites, cancelInvite, updateInvite } from './actions';
+import CollaboratorsList from './partials/CollaboratorsList';
+import {
+  fetchInvites, cancelInvite, updateInvite, fetchCollaborators, cancelCollaborator, updateCollaborator,
+} from './actions';
 import { selectInvites } from './selectors';
 
 class Collaborators extends React.Component {
@@ -15,13 +18,18 @@ class Collaborators extends React.Component {
   }
 
   render() {
-    const { invitable, invites } = this.props;
+    const { invitable, invites, collaborators } = this.props;
     return (
       <div>
         <header>Collaborators</header>
-        {invites.size > 0 &&
+        {collaborators.size > 0 &&
           <div className="p2">
-            <b>Pending invitations</b>
+            <CollaboratorsList {...this.props} />
+          </div>
+        }
+        {invites.size > 0 &&
+          <div className="bt1 p2">
+            Pending invitations
             <InvitesList {...this.props} />
           </div>
         }
@@ -39,12 +47,21 @@ class Collaborators extends React.Component {
 
 Collaborators.propTypes = {
   invites: PropTypes.object,
+  invitable: PropTypes.object,
+  collaborators: PropTypes.object,
 };
 
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { cancelInvite, updateInvite, fetchInvites },
+    {
+      fetchInvites,
+      updateInvite,
+      cancelInvite,
+      fetchCollaborators,
+      updateCollaborator,
+      cancelCollaborator,
+    },
     dispatch
   );
 }
