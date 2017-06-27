@@ -11,22 +11,22 @@ class Notification extends React.Component { // eslint-disable-line react/prefer
     const style = {
       NotificationItem: {
         DefaultStyle: {
-          'margin': '5px 0 0 0',
-          'padding': '10px 15px',
-          'border-radius': '4px',
-          'color': '#FFF',
-          'font-size': '1em',
-          'font-weight': 'bold',
-          'text-shadow': '0 0 2px rgba(0,0,0,0.4)',
-          'border-top': 'none',
-          'border-right': '8px solid #28b865',
-          'background': '#2ecc71',
-          'box-shadow': 'none',
+          margin: '5px 0 0 0',
+          padding: '10px 15px',
+          borderRadius: '4px',
+          color: '#FFF',
+          fontSize: '1em',
+          fontWeight: 'bold',
+          textShadow: '0 0 2px rgba(0,0,0,0.4)',
+          borderTop: 'none',
+          borderRight: '8px solid #28b865',
+          background: '#2ecc71',
+          boxShadow: 'none',
         },
         error: {
-          'background': '#e74c3c',
-          'border-right': '8px solid #d34334',
-        }
+          background: '#e74c3c',
+          borderRight: '8px solid #d34334',
+        },
       },
     };
     return (
