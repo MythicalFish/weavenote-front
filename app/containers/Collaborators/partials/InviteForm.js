@@ -19,10 +19,12 @@ const InviteForm = (props) => {
       </div>
       <footer className="flex justify-between pt2">
         <div>
-          <label>Invite as guest?</label>
           <Field type="checkbox" name="as_guest" component={Input} />
+          <label className="ml1">Invite as guest?</label>
         </div>
-        <Button type="submit" icon="envelope-o" label="Send invite" disabled={submitting} />
+        <div>
+          <Button type="submit" icon="envelope-o" label="Send invite" disabled={submitting} sm />
+        </div>
       </footer>
     </form>
   );

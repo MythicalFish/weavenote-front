@@ -6,15 +6,16 @@ import InviteForm from './partials/InviteForm';
 import InvitesList from './partials/InvitesList';
 import CollaboratorsList from './partials/CollaboratorsList';
 import {
-  fetchInvites, cancelInvite, updateInvite, fetchCollaborators, cancelCollaborator, updateCollaborator,
+  fetchInvites, cancelInvite, updateInvite, fetchCollaborators, removeCollaborator, updateCollaborator,
 } from './actions';
-import { selectInvites } from './selectors';
+import { selectInvites, selectCollaborators } from './selectors';
 
 class Collaborators extends React.Component {
 
   componentDidMount() {
     const p = this.props;
     p.fetchInvites(p.invitable);
+    p.fetchCollaborators(p.invitable);
   }
 
   render() {
@@ -60,7 +61,7 @@ export function mapDispatch(dispatch) {
       cancelInvite,
       fetchCollaborators,
       updateCollaborator,
-      cancelCollaborator,
+      removeCollaborator,
     },
     dispatch
   );
@@ -68,6 +69,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   invites: selectInvites(),
+  collaborators: selectCollaborators(),
 });
 
 export default connect(mapState, mapDispatch)(Collaborators);

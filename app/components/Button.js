@@ -4,9 +4,12 @@ export default function Button(props) {
 
   const type = props.type || 'button';
   const disabled = props.disabled || false;
-  const className = props.className || '';
   const label = props.label || 'Submit';
   const onclick = props.onclick || null;
+  let className = props.className || '';
+  if (props.sm) {
+    className += ' btn-sm';
+  }
 
   return (
     <button className={`btn btn-color2x ${className}`} type={type} disabled={disabled} onClick={onclick}>

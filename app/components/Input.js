@@ -45,17 +45,12 @@ export default class Input extends React.PureComponent {
       error = p.meta.error;
     }
 
-    if (p.type === 'select') {
-      if (!fProps.data && p.data) {
-        fProps.data = p.data;
-      }
-    }
-
     switch (p.type) {
       case 'display':
         field = <div className="readonly">{p.value}</div>;
         break;
       case 'select':
+        if (!fProps.data && p.data) fProps.data = p.data;
         field = <SelectInput {...fProps} />;
         break;
       case 'textarea':
@@ -64,6 +59,10 @@ export default class Input extends React.PureComponent {
       default:
         field = <input {...fProps} type={p.type} />;
         break;
+    }
+
+    if (p.type === 'checkbox') {
+      return field;
     }
 
     return (
