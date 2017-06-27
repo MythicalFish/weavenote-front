@@ -28,7 +28,7 @@ class RoleSelector extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <div>
         {selected &&
-          <div className="input input-sm">  
+          <div className="input input-inline">  
             <SelectInput value={selected} data={roleTypes} onChange={this.handleChange} />
           </div>
         }

@@ -33,7 +33,14 @@ textarea {
   }
   &.input-sm {
     input, textarea, .select-input > button, .readonly {
-      padding: $space-1;
+      padding: $space-1 $space-2;
+    }
+  }
+  &.input-inline {
+    input, textarea, .select-input > button, .readonly {
+      padding: 0 $space-1;
+      border: none;
+      line-height: inherit;
     }
   }
   input:focus {

@@ -41,6 +41,7 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
 
     if (data) {
       data.forEach((item, index) => {
+        if (item === value) return;
         let i = item;
         if (i.toJS) i = i.toJS();
         options.push((
