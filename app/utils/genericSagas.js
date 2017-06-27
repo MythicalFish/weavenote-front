@@ -23,8 +23,8 @@ export function* patch(url, params, callback) {
   try {
     const response = yield call(API.patch, url, params);
     yield handleResponse(callback, response);
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
+  } catch (error) {
+    yield put(notifyError(error.message));
   }
 }
 
@@ -32,8 +32,8 @@ export function* post(url, params, callback) {
   try {
     const response = yield call(API.post, url, params);
     yield handleResponse(callback, response);
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
+  } catch (error) {
+    yield put(notifyError(error.message));
   }
 }
 
@@ -41,8 +41,8 @@ export function* destroy(url, params, callback) {
   try {
     const response = yield call(API.destroy, url, params);
     yield handleResponse(callback, response);
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
+  } catch (error) {
+    yield put(notifyError(error.message));
   }
 }
 
