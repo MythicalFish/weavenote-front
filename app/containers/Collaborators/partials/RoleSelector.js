@@ -19,8 +19,8 @@ class RoleSelector extends React.PureComponent { // eslint-disable-line react/pr
     return roleTypes.get(key);
   }
   handleChange = (roleType) => {
-    const { invite } = this.props;
-    this.props.updateInvite({ invite, roleType });
+    const { invitable, invite } = this.props;
+    this.props.updateInvite({ invitable, invite, roleType });
   }
   render() {
     const { roleTypes } = this.props;

@@ -10,7 +10,7 @@ class InvitesList extends React.PureComponent {
   })
 
   render() {
-    const { invites } = this.props;
+    const { invitable, invites } = this.props;
     return (
       <div className="y-max8 y-scroll b1 mt1">
         {invites && invites.map((invite, index) => (
@@ -19,7 +19,7 @@ class InvitesList extends React.PureComponent {
               {invite.get('email')}
             </div>
             <div>
-              <RoleSelector {...{ invite }} />
+              <RoleSelector {...{ invitable, invite }} />
             </div>
             <div className="list-item-controls">
               <button onClick={this.cancelInvite(invite)}>

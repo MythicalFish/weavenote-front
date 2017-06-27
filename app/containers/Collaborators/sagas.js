@@ -30,7 +30,7 @@ function* fetchInvites({ invitable }) {
 }
 
 function* updateInvite({ payload }) {
-  const update = { role_type_id: payload.roleType.get('id') };
+  const update = { role_type_id: payload.roleType.get('id'), invitable: payload.invitable };
   yield sagas.patch(url(payload), update, actions.updateInviteSuccess);
 }
 

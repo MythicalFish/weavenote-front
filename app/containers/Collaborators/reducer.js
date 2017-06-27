@@ -23,6 +23,10 @@ function collaboratorsReducer(state = initialState, action) {
       return state
         .set('invites', fromJS(action.invites));
 
+    case types.UPDATE_INVITE_SUCCESS:
+      return state
+        .set('invites', fromJS(action.invites));
+
     case types.FETCH_ROLE_TYPES_SUCCESS:
       return state
         .set('role_types', fromJS(action.role_types));
