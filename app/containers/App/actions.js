@@ -2,6 +2,10 @@ import * as types from './constants/actions';
 
 // Invite
 
+export function setInviteKey(key) {
+  return { type: types.SET_INVITE_KEY, key };
+}
+
 export function fetchInvite(key) {
   return { type: types.FETCH_INVITE, key };
 }
@@ -43,4 +47,8 @@ export function fetchStatsSuccess(stats) {
 
 export function changeSection(section) {
   return { type: types.CHANGE_SECTION, section };
+}
+
+export function initializeOrganization() {
+  return { type: types.INITIALIZE_ORGANIZATION };
 }

@@ -10,11 +10,13 @@ export default [appWatcher];
 
 export function* appWatcher() {
   const watcher = [
-    yield takeLatest(types.FETCH_USER, fetchUser),
-    // yield takeLatest(types.FETCH_USER_SUCCESS, createOrganization),
     yield takeLatest(types.FETCH_INVITE, fetchInvite),
     yield takeLatest(types.HANDLE_INVITE, handleInvite),
     yield takeLatest(types.HANDLE_INVITE_SUCCESS, handleInviteSuccess),
+    yield takeLatest(types.SET_INVITE_KEY, setInviteKey),
+    yield takeLatest(types.FETCH_USER, fetchUser),
+    yield takeLatest(types.INITIALIZE_ORGANIZATION, initializeOrganization),
+
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -24,12 +26,16 @@ function* fetchUser() {
   yield sagas.get('user', null, actions.fetchUserSuccess);
 }
 
-// function* createOrganization(action) {
-//   const { current_organization: current } = action.data;
-//   if (!current) {
-//     browserHistory.push('/organization');
-//   }
-// }
+function* setInviteKey({ key }) {
+  localStorage.setItem('inviteKey', key);
+  browserHistory.push('/');
+}
+
+function* initializeOrganization() {
+  if (location.pathname !== '/organization') {
+    browserHistory.push('/organization');
+  }
+}
 
 function* handleInvite({ key }) {
   yield sagas.post(`accept_invite/${key}`, null, actions.handleInviteSuccess);

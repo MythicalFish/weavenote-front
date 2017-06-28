@@ -2,10 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { browserHistory } from 'react-router';
 import LoginForm from 'components/LoginForm';
 import { loggedIn } from 'utils/authUtils';
-import { fetchUser, fetchInvite, handleInvite } from './actions';
+import { fetchUser, fetchInvite, handleInvite, setInviteKey, initializeOrganization } from './actions';
 import * as selectors from './selectors';
 
 class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -15,13 +14,9 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
     return location.query.invitation;
   }
 
-  storedInviteKey = () => {
-    return localStorage.getItem('inviteKey');
-  }
-
-  storeNewInviteKey = (key) => {
-    localStorage.setItem('inviteKey', key);
-  }
+  storedInviteKey = () => (
+    localStorage.getItem('inviteKey')
+  )
 
   render() {
 
@@ -41,8 +36,7 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
     const storedKey = this.storedInviteKey();
 
     if (newKey) {
-      this.storeNewInviteKey(newKey); // 1
-      browserHistory.push('/'); // 2
+      this.props.setInviteKey(newKey); // 1 & 2
       return null;
     }
 
@@ -67,16 +61,11 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
 
     if (!this.props.user) {
       this.props.fetchUser();
-    }
-
-    if (!this.props.user) {
       return null;
     }
 
     if (!this.props.organization) {
-      if (location.pathname !== '/organization') {
-        browserHistory.push('/organization');
-      }
+      this.props.initializeOrganization();
     }
 
     return this.props.children;
@@ -87,6 +76,8 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
 Gateway.propTypes = {
   children: PropTypes.node,
   fetchUser: PropTypes.func,
+  setInviteKey: PropTypes.func,
+  initializeOrganization: PropTypes.func,
   handleInvite: PropTypes.func,
   fetchInvite: PropTypes.func,
   location: PropTypes.object,
@@ -97,7 +88,7 @@ Gateway.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchUser, fetchInvite, handleInvite },
+    { fetchUser, fetchInvite, handleInvite, setInviteKey, initializeOrganization },
     dispatch
   );
 }
