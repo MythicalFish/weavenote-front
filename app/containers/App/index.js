@@ -10,7 +10,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   render() {
     return (
       <div>
-        <Gateway>
+        <Gateway {...this.props}>
           <Layout {...this.props} />
         </Gateway>
         <Notification />

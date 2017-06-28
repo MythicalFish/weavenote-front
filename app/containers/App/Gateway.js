@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { browserHistory } from 'react-router';
 import LoginForm from 'components/LoginForm';
 import { loggedIn } from 'utils/authUtils';
-import { fetchUser, fetchInvite, acceptInvite } from './actions';
+import { fetchUser, fetchInvite, handleInvite } from './actions';
 import * as selectors from './selectors';
 
 class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -23,28 +23,6 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
     localStorage.setItem('inviteKey', key);
   }
 
-  handleInvite = () => {
-    const key = this.inviteKey();
-    const { invite } = this.props;
-    if (key) {
-      if (!invite) {
-        this.props.fetchInvite(key);
-      } else if (loggedIn() && invite) {
-        this.props.acceptInvite(key);
-      }
-    }
-  }
-
-  hasOrCreatingOrganization = () => {
-    const { organization } = this.props;
-    const { pathname: path } = location;
-    if (organization || path === '/organization') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   render() {
 
     /*
@@ -53,8 +31,8 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
       2. Remove key from URL if present in localStorage
       3. Fetch Invite if key present (for prefilled email address)
       4. Render login if !loggedIn()
-      5. Run acceptInvite() if key present
-      6. Fetch user data afterwards (same saga as point 4)
+      5. Run handleInvite() if key present
+      6. Fetch user data if no key present
       7. Redirect to /organization if no organization
 
     */
@@ -83,22 +61,33 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
     }
 
     if (storedKey) {
-      this.props.handleInvite(storedKey); // 4
-    }
-
-    
-    else {
-      return this.props.children;
-    } else {
+      this.props.handleInvite(storedKey); // 5
       return null;
     }
+
+    if (!this.props.user) {
+      this.props.fetchUser();
+    }
+
+    if (!this.props.user) {
+      return null;
+    }
+
+    if (!this.props.organization) {
+      if (location.pathname !== '/organization') {
+        browserHistory.push('/organization');
+      }
+    }
+
+    return this.props.children;
+
   }
 }
 
 Gateway.propTypes = {
   children: PropTypes.node,
   fetchUser: PropTypes.func,
-  acceptInvite: PropTypes.func,
+  handleInvite: PropTypes.func,
   fetchInvite: PropTypes.func,
   location: PropTypes.object,
   invite: PropTypes.object,
@@ -108,7 +97,7 @@ Gateway.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchUser, fetchInvite, acceptInvite },
+    { fetchUser, fetchInvite, handleInvite },
     dispatch
   );
 }

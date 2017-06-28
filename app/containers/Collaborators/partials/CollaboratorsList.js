@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
 import ListItem from 'components/ListItem';
-import RoleSelector from './RoleSelector';
 
 class CollaboratorsList extends React.PureComponent {
 
-  removeCollaborator = (invite) => (() => {
+  removeCollaborator = (collaborator) => (() => {
     const { invitable } = this.props;
-    this.props.removeCollaborator({ invitable, invite });
+    this.props.removeCollaborator({ invitable, collaborator });
   })
 
   render() {
@@ -17,9 +16,6 @@ class CollaboratorsList extends React.PureComponent {
           <ListItem key={`collaborator-${index}`}>
             <div>
               {collaborator.get('email')}
-            </div>
-            <div>
-              <RoleSelector {...{ invitable, collaborator }} />
             </div>
             <div className="list-item-controls">
               <button onClick={this.removeCollaborator(collaborator)}>
