@@ -27,6 +27,10 @@ class Notification extends React.Component { // eslint-disable-line react/prefer
           background: '#e74c3c',
           borderRight: '8px solid #d34334',
         },
+        warning: {
+          background: '#de6523',
+          borderRight: '8px solid #ce5c1e',
+        },
       },
     };
     return (
@@ -72,6 +76,10 @@ export function notify(opts) {
 
 export function notifyError(opts) {
   return Notifications.error(defaultOpts(opts));
+}
+
+export function notifyWarning(opts) {
+  return Notifications.warning(defaultOpts(opts));
 }
 
 export default connect(mapState)(Notification);

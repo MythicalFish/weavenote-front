@@ -16,13 +16,14 @@ export function request(method = 'GET', path, params) {
   return fetch(url, req)
     .then((r) => r.json())
     .then((r) => {
-      if (r.server_error) {
-        console.log(`%c ${r.server_error}`, ConsoleErrorStyle);
-        throw ({ message: 'Hmm. Something went wrong; we\'ll look into it!' });
-      } else if (r.user_error) {
-        throw(r.user_error);
+      if (r.error) {
+        if (r.error.backtrace) {
+          console.error(`%c ${r.error.backtrace}`, ConsoleErrorStyle);
+        }
+        throw (r);
+      } else {
+        return r;
       }
-      return r;
     });
 }
 
@@ -116,8 +117,7 @@ function checkStatus(response) {
 }
 
 const ConsoleErrorStyle = [
-  'background: #111',
-  'color: #51B2FE',
+  'color: #ff7e00',
   'display: block',
   'line-height: 20px',
   'padding: 5px',
