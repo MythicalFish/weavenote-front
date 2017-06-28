@@ -4,16 +4,7 @@ import AuthService from 'utils/AuthService';
 export default class LoginForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    console.log('LoginForm: mount')
     this.initializeLock();
-  }
-
-  componentDidUpdate() {
-    console.log('LoginForm: update')
-    const { invite } = this.props;
-    if (invite) {
-      this.initializeLock(invite.email);
-    }
   }
 
   lockOptions = {
@@ -33,24 +24,17 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
 
   initializeLock = (email) => {
     const opts = this.lockOptions;
-    if (email) opts.prefill.email = email;
-    const Auth0 = new AuthService(opts);
-    if (email) {
-      console.log('LoginForm: email present')
-      setTimeout(() => {
-        Auth0.lock.show();
-      }, 500);
-    } else {
-      console.log('LoginForm: email not present')
-      Auth0.lock.on('hash_parsed', (hash) => {
-        if (!hash) {
-          Auth0.lock.show();
-        }
-      });
+    const { invite } = this.props;
+    if (invite) {
+      opts.prefill.email = invite.email;
     }
+    const Auth0 = new AuthService(opts);
+    Auth0.lock.on('hash_parsed', (hash) => {
+      if (!hash) {
+        Auth0.lock.show();
+      }
+    });
   }
-
-
 
   render = () => {
     return (

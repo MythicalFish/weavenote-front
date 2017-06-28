@@ -42,12 +42,12 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
 
     if (!loggedIn()) {
       if (storedKey) {
-        this.props.fetchInvite(storedKey); // 3
         const { invite } = this.props;
-        if (invite) {
-          return <LoginForm {...this.props} />; // 4
-        } else {
+        if (!invite) {
+          this.props.fetchInvite(storedKey); // 3
           return null;
+        } else {
+          return <LoginForm {...this.props} />; // 4
         }
       } else {
         return <LoginForm {...this.props} />; // 4
@@ -66,6 +66,7 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
 
     if (!this.props.organization) {
       this.props.initializeOrganization();
+      return null;
     }
 
     return this.props.children;
