@@ -3,17 +3,17 @@ import 'whatwg-fetch';
 export function request(method = 'GET', path, params) {
 
   let url;
-  const request = requestBody();
+  const req = requestBody();
 
   if (method === 'GET') {
     url = requestURL({ path, params  });
   } else {
     url = requestURL({ path });
-    request.method = method;
-    request.body = JSON.stringify(params);
+    req.method = method;
+    req.body = JSON.stringify(params);
   }
 
-  return fetch(url, request)
+  return fetch(url, req)
     .then((r) => r.json())
     .then((r) => {
       if (r.server_error) {
