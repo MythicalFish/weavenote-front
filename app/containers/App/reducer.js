@@ -53,7 +53,7 @@ function appReducer(state = initialState, action) {
         .set('organizations', fromJS(action.data.organizations))
         .set('current_organization', action.data.current_organization);
 
-    case types.App.RETRIEVE_INVITE_SUCCESS:
+    case types.App.FETCH_INVITE_SUCCESS:
       return state
         .set('invite', action.invite);
 

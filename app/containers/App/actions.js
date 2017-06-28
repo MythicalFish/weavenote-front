@@ -1,5 +1,22 @@
 import * as types from './constants/actions';
 
+// Invite
+
+export function fetchInvite(key) {
+  return { type: types.FETCH_INVITE, key };
+}
+
+export function fetchInviteSuccess(invite) {
+  return { type: types.FETCH_INVITE_SUCCESS, invite };
+}
+
+export function handleInvite(key) {
+  return { type: types.HANDLE_INVITE, key };
+}
+
+export function handleInviteSuccess() {
+  return { type: types.HANDLE_INVITE_SUCCESS };
+}
 
 // Users
 
@@ -10,30 +27,6 @@ export function fetchUser() {
 export function fetchUserSuccess(data) {
   return { type: types.FETCH_USER_SUCCESS, data };
 }
-
-
-// Invite
-
-export function handleInvite(key) {
-  return { type: types.HANDLE_INVITE, key };
-}
-
-export function retrieveInvite(key) {
-  return { type: types.RETRIEVE_INVITE, key };
-}
-
-export function retrieveInviteSuccess(invite) {
-  return { type: types.RETRIEVE_INVITE_SUCCESS, invite };
-}
-
-export function acceptInvite(key) {
-  return { type: types.ACCEPT_INVITE, key };
-}
-
-export function acceptInviteSuccess(userData) {
-  return { type: types.ACCEPT_INVITE_SUCCESS, userData };
-}
-
 
 // Stats
 
