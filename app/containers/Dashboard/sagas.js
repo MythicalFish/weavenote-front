@@ -3,6 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { fetchStatsSuccess } from 'containers/App/actions';
 import * as types from 'containers/App/constants/actions';
 import * as API from 'utils/API';
+import * as sagas from 'utils/genericSagas';
 
 export default [dashWatcher];
 
@@ -15,10 +16,5 @@ function* dashWatcher() {
 }
 
 function* fetchStats() {
-  try {
-    const data = yield call(API.get, 'stats');
-    yield put(fetchStatsSuccess(data));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+  yield sagas.get('stats', null, fetchStatsSuccess);
 }
