@@ -18,17 +18,18 @@ export const selectUser = () => createSelector(
   selectDomain(), (substate) => substate.get('user')
 );
 
-export const selectUserRole = () => createSelector(
-  selectDomain(), (substate) => substate.get('user_role')
+export const selectOrganization = () => createSelector(
+  selectDomain(), (substate) => substate.get('organization')
 );
 
-export const selectOrgs = () => createSelector(
+export const selectOrganizationRole = () => createSelector(
+  selectDomain(), (substate) => substate.get('organization_role')
+);
+
+export const selectOrganizations = () => createSelector(
   selectDomain(), (substate) => substate.get('organizations')
 );
 
-export const selectCurrentOrg = () => createSelector(
-  selectDomain(), (substate) => substate.get('current_organization')
-);
 
 // Invite
 

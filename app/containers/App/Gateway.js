@@ -96,7 +96,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   user: selectors.selectUser(),
-  organization: selectors.selectCurrentOrg(),
+  organization: selectors.selectOrganization(),
   invite: selectors.selectInvite(),
 });
 

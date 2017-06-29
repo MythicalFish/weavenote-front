@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
-import { selectUserRole } from 'containers/App/selectors';
+import { selectOrganizationRole } from 'containers/App/selectors';
 import {
   selectMaterial, selectMaterialTypes, selectColors, selectCurrencies, selectSuppliers, selectCareLabels,
 } from './selectors';
@@ -80,7 +80,7 @@ const mapState = createStructuredSelector({
   currencies: selectCurrencies(),
   suppliers: selectSuppliers(),
   labels: selectCareLabels(),
-  userRole: selectUserRole(),
+  userRole: selectOrganizationRole(),
 });
 
 const mapDispatch = (dispatch) => (bindActionCreators({

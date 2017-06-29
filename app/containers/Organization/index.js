@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentOrg, selectOrgs } from 'containers/App/selectors';
+import { selectOrganization, selectOrganizations } from 'containers/App/selectors';
 import Header from 'components/Header';
 import { updateOrg, createOrg } from './actions';
 import Create from './views/Create';
@@ -58,8 +58,8 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  currentOrg: selectCurrentOrg(),
-  orgs: selectOrgs(),
+  currentOrg: selectOrganization(),
+  orgs: selectOrganizations(),
 });
 
 export default connect(mapState, mapDispatch)(Organization);

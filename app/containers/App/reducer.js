@@ -19,8 +19,8 @@ const types = {
 
 const initialState = fromJS({
   user: null,
-  user_role: null,
-  current_organization: null,
+  organization: null,
+  organization_role: null,
   organizations: null,
   invite: null,
   stats: {
@@ -44,9 +44,9 @@ function appReducer(state = initialState, action) {
     case types.App.FETCH_USER_SUCCESS:
       return state
         .set('user', action.data.user)
-        .set('user_role', action.data.role)
-        .set('organizations', fromJS(action.data.organizations))
-        .set('current_organization', action.data.current_organization);
+        .set('organization', action.data.organization)
+        .set('organization_role', action.data.organization_role)
+        .set('organizations', fromJS(action.data.organizations));
 
     case types.App.FETCH_INVITE_SUCCESS:
       return state
@@ -57,7 +57,7 @@ function appReducer(state = initialState, action) {
     case types.Org.CREATE_ORG_SUCCESS:
       return state
         .set('organizations', fromJS(action.data.organizations))
-        .set('current_organization', fromJS(action.data.current_organization));
+        .set('organization', fromJS(action.data.organization));
 
 
     //
