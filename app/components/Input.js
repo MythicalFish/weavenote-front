@@ -36,7 +36,7 @@ export default class Input extends React.PureComponent {
       fProps.ref = (input) => { this.nameInput = input; };
     }
 
-    if (p.noEdit) {
+    if (p.restricted) {
       fProps.readOnly = true;
     }
 

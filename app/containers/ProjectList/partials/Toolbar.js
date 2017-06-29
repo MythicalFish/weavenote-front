@@ -4,10 +4,15 @@ import NavItem from 'components/NavItem';
 import PlusButton from 'components/PlusButton';
 
 export default function Toolbar(props) {
-  const { create, fetch, changeSection, currentSection } = props;
+  const { createProject, fetchProjects, changeSection, currentSection, abilities } = props;
+  const canCreate = abilities.Project.create;
   return (
     <header className="toolbar">
-      <PlusButton onClick={() => { create(); }} />
+      <div>
+        {canCreate &&
+          <PlusButton onClick={() => { createProject(); }} />
+        }
+      </div>
       <nav>
         <ul>
           <li>
@@ -15,7 +20,7 @@ export default function Toolbar(props) {
               label={sections.ActiveProjects.label}
               isActive={currentSection.id === sections.ActiveProjects.id}
               handleClick={() => {
-                fetch();
+                fetchProjects();
                 changeSection(sections.ActiveProjects);
               }}
             />
@@ -25,7 +30,7 @@ export default function Toolbar(props) {
               label={sections.ArchivedProjects.label}
               isActive={currentSection.id === sections.ArchivedProjects.id}
               handleClick={() => {
-                fetch({ archived: true });
+                fetchProjects({ archived: true });
                 changeSection(sections.ArchivedProjects);
               }}
             />
@@ -39,8 +44,8 @@ export default function Toolbar(props) {
 }
 
 Toolbar.propTypes = {
-  fetch: React.PropTypes.func,
-  create: React.PropTypes.func,
+  fetchProjects: React.PropTypes.func,
+  createProject: React.PropTypes.func,
   changeSection: React.PropTypes.func,
   currentSection: React.PropTypes.object,
 };

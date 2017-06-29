@@ -30,6 +30,10 @@ export const selectOrganizations = () => createSelector(
   selectDomain(), (substate) => substate.get('organizations')
 );
 
+export const selectAbilities = () => createSelector(
+  selectDomain(), (substate) => substate.get('abilities')
+);
+
 
 // Invite
 
