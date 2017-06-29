@@ -49,6 +49,3 @@ export function changeSection(section) {
   return { type: types.CHANGE_SECTION, section };
 }
 
-export function initializeOrganization() {
-  return { type: types.INITIALIZE_ORGANIZATION };
-}

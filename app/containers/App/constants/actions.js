@@ -17,4 +17,3 @@ export const FETCH_STATS = '@@app/FETCH_STATS';
 export const FETCH_STATS_SUCCESS = '@@app/FETCH_STATS_SUCCESS';
 
 export const CHANGE_SECTION = '@@app/CHANGE_SECTION';
-export const INITIALIZE_ORGANIZATION = '@@app/INITIALIZE_ORGANIZATION';

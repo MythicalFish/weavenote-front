@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import AuthService from 'utils/AuthService';
+import Auth0Lock from 'auth0-lock';
+import { loggedIn } from 'utils/authUtils';
 
 export default class LoginForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -22,16 +23,28 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
     },
   }
 
-  initializeLock = (email) => {
+  lock = (opts) => (
+    new Auth0Lock(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN, opts)
+  )
+
+  initializeLock = () => {
     const opts = this.lockOptions;
     const { invite } = this.props;
     if (invite) {
       opts.prefill.email = invite.email;
     }
-    const Auth0 = new AuthService(opts);
-    Auth0.lock.on('hash_parsed', (hash) => {
-      if (!hash) {
-        Auth0.lock.show();
+    const lock = this.lock(opts);
+    lock.on('authenticated', (r) => {
+      localStorage.setItem('id_token', r.idToken);
+      localStorage.setItem('access_token', r.accessToken);
+      this.props.fetchUser();
+    });
+    lock.on('authorization_error', (e) => {
+      console.error('Auth error', e);
+    });
+    lock.on('hash_parsed', (hash) => {
+      if (!hash && !loggedIn()) { // <!-- Don't render lock while it's still parsing the tokens given in the URL
+        lock.show();
       }
     });
   }
@@ -64,4 +77,5 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
 
 LoginForm.propTypes = {
   invite: PropTypes.object,
+  fetchUser: PropTypes.func,
 };

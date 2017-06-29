@@ -5,17 +5,10 @@
  */
 
 import { fromJS } from 'immutable';
-import * as MaterialListActionTypes from 'containers/MaterialList/constants';
-import * as OrgActionTypes from 'containers/Organization/constants';
-import * as AppActionTypes from './constants/actions';
+import * as materialActionTypes from 'containers/MaterialList/constants';
+import * as orgActionTypes from 'containers/Organization/constants';
+import * as appActionTypes from './constants/actions';
 import * as sections from './constants/sections';
-
-const types = {
-  App: AppActionTypes,
-  MaterialList: MaterialListActionTypes,
-  Org: OrgActionTypes,
-};
-
 
 const initialState = fromJS({
   user: null,
@@ -41,20 +34,20 @@ function appReducer(state = initialState, action) {
 
     // User
 
-    case types.App.FETCH_USER_SUCCESS:
+    case appActionTypes.FETCH_USER_SUCCESS:
       return state
         .set('user', action.data.user)
         .set('organization', action.data.organization)
         .set('organization_role', action.data.organization_role)
         .set('organizations', fromJS(action.data.organizations));
 
-    case types.App.FETCH_INVITE_SUCCESS:
+    case appActionTypes.FETCH_INVITE_SUCCESS:
       return state
         .set('invite', action.invite);
 
     // Org
 
-    case types.Org.CREATE_ORG_SUCCESS:
+    case orgActionTypes.CREATE_ORGANIZATION_SUCCESS:
       return state
         .set('organizations', fromJS(action.data.organizations))
         .set('organization', fromJS(action.data.organization));
@@ -62,18 +55,18 @@ function appReducer(state = initialState, action) {
 
     //
 
-    case types.App.CHANGE_SECTION:
+    case appActionTypes.CHANGE_SECTION:
       return state
         .setIn(['currentSection', 'id'], action.section.id)
         .setIn(['currentSection', 'label'], action.section.label);
 
-    case types.App.FETCH_STATS_SUCCESS:
+    case appActionTypes.FETCH_STATS_SUCCESS:
       return state
         .set('stats', fromJS(action.stats));
 
     // Materials
 
-    case types.MaterialList.FETCH_MATERIALS_SUCCESS:
+    case materialActionTypes.FETCH_MATERIALS_SUCCESS:
       return state
         .set('materials', fromJS(action.materials));
 

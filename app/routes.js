@@ -42,16 +42,12 @@ export default function createRoutes(store) {
       name: 'Organization',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/Organization/reducer'),
-          import('containers/Organization/sagas'),
           import('containers/Organization'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('Organization', reducer.default);
-          injectSagas(sagas.default);
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 
@@ -173,16 +169,19 @@ export default function createRoutes(store) {
   return {
     getComponent(nextState, cb) {
       const importModules = Promise.all([
-        import('containers/App/sagas'), // global Saga
+        // global Sagas
+        import('containers/App/sagas'), 
         import('containers/Collaborators/sagas'),
+        import('containers/Organization/sagas'),
         import('containers/App'),
       ]);
 
       const renderRoute = loadModule(cb);
 
-      importModules.then(([appSagas, cSagas, component]) => {
+      importModules.then(([appSagas, cSagas, oSagas, component]) => {
         injectSagas(appSagas.default);
         injectSagas(cSagas.default);
+        injectSagas(oSagas.default);
         renderRoute(component);
       });
 

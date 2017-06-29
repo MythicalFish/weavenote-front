@@ -4,10 +4,19 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import LoginForm from 'components/LoginForm';
 import { loggedIn } from 'utils/authUtils';
-import { fetchUser, fetchInvite, handleInvite, setInviteKey, initializeOrganization } from './actions';
+import { initializeOrganization } from 'containers/Organization/actions';
+import { fetchUser, fetchInvite, handleInvite, setInviteKey } from './actions';
 import * as selectors from './selectors';
 
 class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentDidMount() {
+    this.handleMountOrUpdate();
+  }
+
+  componentDidUpdate() {
+    this.handleMountOrUpdate();
+  }
 
   newInviteKey = () => {
     const { location } = this.props;
@@ -17,6 +26,41 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
   storedInviteKey = () => (
     localStorage.getItem('inviteKey')
   )
+
+  handleMountOrUpdate = () => {
+
+    const newKey = this.newInviteKey();
+    const storedKey = this.storedInviteKey();
+
+    if (newKey) {
+      this.props.setInviteKey(newKey); // 1 & 2
+      return;
+    }
+
+    if (!loggedIn()) {
+      if (storedKey) {
+        const { invite } = this.props;
+        if (!invite) {
+          this.props.fetchInvite(storedKey); // 3
+        }
+      }
+      return;
+    }
+
+    if (storedKey) {
+      this.props.handleInvite(storedKey); // 5
+      return;
+    }
+
+    if (!this.props.user) {
+      this.props.fetchUser();
+      return;
+    }
+
+    if (!this.props.organization) {
+      this.props.initializeOrganization();
+    }
+  }
 
   render() {
 
@@ -32,40 +76,36 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
 
     */
 
-    const newKey = this.newInviteKey();
+    const newKey = this.newInviteKey();    
     const storedKey = this.storedInviteKey();
-
-    if (newKey) {
-      this.props.setInviteKey(newKey); // 1 & 2
-      return null;
-    }
+    const { user, invite } = this.props;
 
     if (!loggedIn()) {
+
+      const loginProps = { user, invite, fetchUser: this.props.fetchUser };
+
       if (storedKey) {
-        const { invite } = this.props;
-        if (!invite) {
-          this.props.fetchInvite(storedKey); // 3
+        if (!this.props.invite) {
           return null;
         } else {
-          return <LoginForm {...this.props} />; // 4
+          return <LoginForm {...loginProps} />; // 4
         }
+      } else if (!newKey) {
+        return <LoginForm {...loginProps} />; // 4
       } else {
-        return <LoginForm {...this.props} />; // 4
+        return null;
       }
     }
 
     if (storedKey) {
-      this.props.handleInvite(storedKey); // 5
       return null;
     }
 
     if (!this.props.user) {
-      this.props.fetchUser();
       return null;
     }
 
-    if (!this.props.organization) {
-      this.props.initializeOrganization();
+    if (!this.props.organization && location.pathname !== '/organization') {
       return null;
     }
 
