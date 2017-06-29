@@ -15,7 +15,7 @@ class Notification extends React.Component { // eslint-disable-line react/prefer
           padding: '10px 15px',
           borderRadius: '4px',
           color: '#FFF',
-          fontSize: '1em',
+          fontSize: '.9em',
           fontWeight: 'bold',
           textShadow: '0 0 2px rgba(0,0,0,0.4)',
           borderTop: 'none',
@@ -59,7 +59,7 @@ function defaultOpts(opts) {
   const defaults = {
     message: '',
     position: 'br',
-    autoDismiss: 4,
+    autoDismiss: 5,
     dismissible: false,
   };
   if (typeof (opts) === 'object') {
