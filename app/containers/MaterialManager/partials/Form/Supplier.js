@@ -21,6 +21,7 @@ export default class Supplier extends React.PureComponent {
       component: DataRow,
       data: this.props.suppliers,
       tail: this.Tail,
+      align: 'right',
     };
 
     return (

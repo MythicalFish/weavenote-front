@@ -8,7 +8,7 @@ export default function Layout(props) {
         <Sidebar currentPath={props.location.pathname} />
       </div>
       <div className="flex-auto">
-        {React.Children.toArray(props.children)}
+        {props.children}
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ export class Organization extends React.PureComponent { // eslint-disable-line r
     if (view === 'create') {
       return <Create onSubmit={this.create} />;
     } else if (organizations.size > 0) {
-      return <Manage />;
+      return <Manage {...this.props} />;
     } else if (view === 'start') {
       return <NoneYet onClick={this.startCreate} />;
     } else {
@@ -51,8 +51,8 @@ export class Organization extends React.PureComponent { // eslint-disable-line r
 }
 
 Organization.propTypes = {
-  organization: PropTypes.object,
   user: PropTypes.object,
+  organization: PropTypes.object,
   organizations: PropTypes.object,
   createOrg: PropTypes.func,
 };

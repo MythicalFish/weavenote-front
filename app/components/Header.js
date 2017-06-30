@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import UserMenu from 'components/UserMenu';
+import { selectUser, selectOrganization, selectAbilities } from 'containers/App/selectors';
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -7,7 +11,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
       <div className="flex items-center justify-between p2 bg-white dark8 bb1">
         <div></div>
         <div>
-          <UserMenu />
+          <UserMenu {...this.props} />
         </div>
       </div>
     );
@@ -15,8 +19,22 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
 }
 
 Header.propTypes = {
-  children: React.PropTypes.node,
+  user: PropTypes.object,
+  organization: PropTypes.object,
+  abilities: PropTypes.object,
 };
 
+export function mapDispatch(dispatch) {
+  return bindActionCreators(
+    { },
+    dispatch
+  );
+}
 
-export default Header;
+const mapState = createStructuredSelector({
+  user: selectUser(),
+  organization: selectOrganization(),
+  abilities: selectAbilities(),
+});
+
+export default connect(mapState, mapDispatch)(Header);
