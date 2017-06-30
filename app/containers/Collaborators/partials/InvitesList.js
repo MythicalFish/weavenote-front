@@ -9,8 +9,21 @@ class InvitesList extends React.PureComponent {
     this.props.cancelInvite({ invitable, invite });
   })
 
+  updateInvite = (roleType, invite) => {
+    const { invitable } = this.props;
+    this.props.updateInvite({ invitable, invite, roleType });
+  }
+
+  selectedRoleType = (roleTypes, invite) => {
+    if (!roleTypes) return null;
+    const key = roleTypes.findKey((obj) => (
+      obj.get('id') === invite.get('role_type_id')
+    ));
+    return roleTypes.get(key);
+  }
+
   render() {
-    const { invitable, invites } = this.props;
+    const { invites } = this.props;
     return (
       <div className="y-max8 y-scroll b1 mt1">
         {invites && invites.map((invite, index) => (
@@ -19,7 +32,11 @@ class InvitesList extends React.PureComponent {
               {invite.get('email')}
             </div>
             <div>
-              <RoleSelector {...{ invitable, invite }} />
+              <RoleSelector
+                target={invite}
+                handleChange={this.updateInvite}
+                selectedRoleType={this.selectedRoleType}
+              />
             </div>
             <div className="list-item-controls">
               <button onClick={this.cancelInvite(invite)}>
@@ -37,6 +54,7 @@ InvitesList.propTypes = {
   invites: PropTypes.object,
   invitable: PropTypes.object,
   cancelInvite: PropTypes.func,
+  updateInvite: PropTypes.func,
 };
 
 export default InvitesList;

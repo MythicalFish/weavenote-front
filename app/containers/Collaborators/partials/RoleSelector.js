@@ -2,29 +2,21 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectRoleTypes } from '../selectors';
-import { fetchRoleTypes, updateInvite } from '../actions';
 import SelectInput from 'components/SelectInput';
+import { selectRoleTypes } from '../selectors';
+import { fetchRoleTypes } from '../actions';
 
 class RoleSelector extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchRoleTypes();
   }
-  selectedRoleType = () => {
-    const { roleTypes, invite } = this.props;
-    if (!roleTypes) return null;
-    const key = roleTypes.findKey((obj) => (
-      obj.get('id') === invite.get('role_type_id')
-    ));
-    return roleTypes.get(key);
-  }
   handleChange = (roleType) => {
-    const { invitable, invite } = this.props;
-    this.props.updateInvite({ invitable, invite, roleType });
+    const { target } = this.props;
+    this.props.handleChange(roleType, target);
   }
   render() {
-    const { roleTypes } = this.props;
-    const selected = this.selectedRoleType();
+    const { roleTypes, target } = this.props;
+    const selected = this.props.selectedRoleType(roleTypes, target);
     return (
       <div>
         {selected &&
@@ -38,15 +30,16 @@ class RoleSelector extends React.PureComponent { // eslint-disable-line react/pr
 }
 
 RoleSelector.propTypes = {
+  selectedRoleType: PropTypes.func,
   fetchRoleTypes: PropTypes.func,
-  updateInvite: PropTypes.func,
+  handleChange: PropTypes.func,
   roleTypes: PropTypes.object,
-  invite: PropTypes.object,
+  target: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchRoleTypes, updateInvite },
+    { fetchRoleTypes },
     dispatch
   );
 }
