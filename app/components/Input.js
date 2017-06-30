@@ -51,6 +51,7 @@ export default class Input extends React.PureComponent {
         break;
       case 'select':
         if (!fProps.data && p.data) fProps.data = p.data;
+        if (p.align) fProps.align = p.align;
         field = <SelectInput {...fProps} />;
         break;
       case 'textarea':

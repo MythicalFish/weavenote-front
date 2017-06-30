@@ -44,6 +44,7 @@ class Form extends React.Component {
     const fProps = {
       component: DataRow,
       restricted: this.restricted(),
+      align: 'right',
     };
     return (
       <form onSubmit={handleSubmit}>

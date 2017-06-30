@@ -1,13 +1,19 @@
 import React, { PropTypes } from 'react';
+import Button from 'components/Button';
 
 const NoneYet = (props) => (
-  <div>
-    Looks like you do not belong to a Seamless organization yet.
-    <div className="mt2">
-      <button type="button" className="btn-color2x" onClick={props.onClick}>
-        <i className="fa fa-plus mr1"></i>
-        Create an organization
-      </button>
+  <div className="center">
+    <h1 className="mt0">Get started</h1>
+    <div className="bigger2">
+      <p>
+        Hi there,
+      </p>
+      It looks like you do not belong to a Seamless organization yet.
+      <br />
+      Create one!
+    </div>
+    <div className="mt3">
+      <Button label="Create an organization" onclick={props.onClick} icon="plus" lg />
     </div>
   </div>
 );

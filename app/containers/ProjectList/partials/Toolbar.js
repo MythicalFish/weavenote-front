@@ -6,13 +6,13 @@ import PlusButton from 'components/PlusButton';
 export default function Toolbar(props) {
   const { createProject, fetchProjects, changeSection, currentSection, abilities } = props;
   const canCreate = abilities.Project.create;
+  console.log(canCreate)
   return (
     <header className="toolbar">
-      <div>
-        {canCreate &&
-          <PlusButton onClick={() => { createProject(); }} />
-        }
-      </div>
+      {!canCreate && <div />}
+      {canCreate &&
+        <PlusButton onClick={() => { createProject(); }} />
+      }
       <nav>
         <ul>
           <li>
@@ -48,4 +48,5 @@ Toolbar.propTypes = {
   createProject: React.PropTypes.func,
   changeSection: React.PropTypes.func,
   currentSection: React.PropTypes.object,
+  abilities: React.PropTypes.object,
 };

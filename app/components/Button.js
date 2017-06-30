@@ -9,6 +9,8 @@ export default function Button(props) {
   let className = props.className || '';
   if (props.sm) {
     className += ' btn-sm';
+  } else if (props.lg) {
+    className += ' btn-lg';
   }
 
   return (
@@ -25,6 +27,8 @@ Button.propTypes = {
   className: React.PropTypes.string,
   type: React.PropTypes.string,
   icon: React.PropTypes.string,
+  sm: React.PropTypes.bool,
+  lg: React.PropTypes.bool,
   label: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   onclick: React.PropTypes.func,

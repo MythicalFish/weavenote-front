@@ -30,6 +30,7 @@ button {
   &.btn-color2x {
     border-color: $color2x;
     color: $color2x;
+    background: $white;
     &:hover {
       background: $color2x;
       color: $white;
@@ -38,6 +39,11 @@ button {
   &.btn-sm {
     font-size: .9em;
     padding: 6px 12px;
+  }
+  &.btn-lg {
+    font-size: 1.2em;
+    padding: 14px 24px;
+    border-width: 3px;
   }
 }
 .btn-shy {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ListItem from 'components/ListItem';
-import RoleSelector from './RoleSelector';
+import RoleTypeSelector from './RoleTypeSelector';
 
 class InvitesList extends React.PureComponent {
 
@@ -32,7 +32,7 @@ class InvitesList extends React.PureComponent {
               {invite.get('email')}
             </div>
             <div>
-              <RoleSelector
+              <RoleTypeSelector
                 target={invite}
                 handleChange={this.updateInvite}
                 selectedRoleType={this.selectedRoleType}

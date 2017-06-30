@@ -3,35 +3,35 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import InviteForm from './partials/InviteForm';
-import InvitesList from './partials/InvitesList';
-import CollaboratorsList from './partials/CollaboratorsList';
+import InviteList from './partials/InviteList';
+import RoleList from './partials/RoleList';
 import {
-  fetchInvites, cancelInvite, updateInvite, fetchCollaborators, removeCollaborator, updateCollaborator,
+  fetchInvites, cancelInvite, updateInvite, fetchRoles, removeRole, updateRole,
 } from './actions';
-import { selectInvites, selectCollaborators } from './selectors';
+import { selectInvites, selectRoles } from './selectors';
 
 class Collaborators extends React.Component {
 
   componentDidMount() {
     const p = this.props;
     p.fetchInvites(p.invitable);
-    p.fetchCollaborators(p.invitable);
+    p.fetchRoles(p.invitable);
   }
 
   render() {
-    const { invitable, invites, collaborators } = this.props;
+    const { invitable, invites, roles } = this.props;
     return (
       <div>
         <header>Collaborators</header>
-        {collaborators.size > 0 &&
+        {roles.size > 0 &&
           <div className="p2">
-            <CollaboratorsList {...this.props} />
+            <RoleList {...this.props} />
           </div>
         }
         {invites.size > 0 &&
           <div className="bt1 p2">
             Pending invitations
-            <InvitesList {...this.props} />
+            <InviteList {...this.props} />
           </div>
         }
         <footer className="bt1 p2">
@@ -49,7 +49,7 @@ class Collaborators extends React.Component {
 Collaborators.propTypes = {
   invites: PropTypes.object,
   invitable: PropTypes.object,
-  collaborators: PropTypes.object,
+  roles: PropTypes.object,
 };
 
 
@@ -59,9 +59,9 @@ export function mapDispatch(dispatch) {
       fetchInvites,
       updateInvite,
       cancelInvite,
-      fetchCollaborators,
-      updateCollaborator,
-      removeCollaborator,
+      fetchRoles,
+      updateRole,
+      removeRole,
     },
     dispatch
   );
@@ -69,7 +69,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   invites: selectInvites(),
-  collaborators: selectCollaborators(),
+  roles: selectRoles(),
 });
 
 export default connect(mapState, mapDispatch)(Collaborators);

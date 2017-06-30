@@ -6,7 +6,7 @@ import SelectInput from 'components/SelectInput';
 import { selectRoleTypes } from '../selectors';
 import { fetchRoleTypes } from '../actions';
 
-class RoleSelector extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class RoleTypeSelector extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchRoleTypes();
   }
@@ -29,7 +29,7 @@ class RoleSelector extends React.PureComponent { // eslint-disable-line react/pr
   }
 }
 
-RoleSelector.propTypes = {
+RoleTypeSelector.propTypes = {
   selectedRoleType: PropTypes.func,
   fetchRoleTypes: PropTypes.func,
   handleChange: PropTypes.func,
@@ -48,4 +48,4 @@ const mapState = createStructuredSelector({
   roleTypes: selectRoleTypes(),
 });
 
-export default connect(mapState, mapDispatch)(RoleSelector);
+export default connect(mapState, mapDispatch)(RoleTypeSelector);

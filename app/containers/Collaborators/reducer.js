@@ -4,7 +4,7 @@ import * as types from './constants';
 
 const initialState = fromJS({
   invites: [],
-  collaborators: [],
+  roles: [],
   role_types: null,
 });
 
@@ -30,19 +30,19 @@ function collaboratorsReducer(state = initialState, action) {
       return state
         .set('invites', fromJS(action.invites));
 
-    // Collaborators
+    // Roles
 
-    case types.FETCH_COLLABORATORS_SUCCESS:
+    case types.FETCH_ROLES_SUCCESS:
       return state
-        .set('collaborators', fromJS(action.collaborators));
+        .set('roles', fromJS(action.roles));
 
-    case types.REMOVE_COLLABORATOR_SUCCESS:
+    case types.REMOVE_ROLE_SUCCESS:
       return state
-        .set('collaborators', fromJS(action.collaborators));
+        .set('roles', fromJS(action.roles));
 
-    case types.UPDATE_COLLABORATOR_SUCCESS:
+    case types.UPDATE_ROLE_SUCCESS:
       return state
-        .set('collaborators', fromJS(action.collaborators));
+        .set('roles', fromJS(action.roles));
 
     // Other
 

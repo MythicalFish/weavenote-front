@@ -14,16 +14,16 @@ export const updateInviteSuccess = (invites) => ({ type: types.UPDATE_INVITE_SUC
 export const cancelInvite = (payload) => ({ type: types.CANCEL_INVITE, payload });
 export const cancelInviteSuccess = (invites) => ({ type: types.CANCEL_INVITE_SUCCESS, invites });
 
-// Collaborators
+// roles
 
-export const fetchCollaborators = (invitable) => ({ type: types.FETCH_COLLABORATORS, invitable });
-export const fetchCollaboratorsSuccess = (collaborators) => ({ type: types.FETCH_COLLABORATORS_SUCCESS, collaborators });
+export const fetchRoles = (invitable) => ({ type: types.FETCH_ROLES, invitable });
+export const fetchRolesSuccess = (roles) => ({ type: types.FETCH_ROLES_SUCCESS, roles });
 
-export const updateCollaborator = (payload) => ({ type: types.UPDATE_COLLABORATOR, payload });
-export const updateCollaboratorSuccess = (collaborators) => ({ type: types.UPDATE_COLLABORATOR_SUCCESS, collaborators });
+export const updateRole = (payload) => ({ type: types.UPDATE_ROLE, payload });
+export const updateRoleSuccess = (roles) => ({ type: types.UPDATE_ROLE_SUCCESS, roles });
 
-export const removeCollaborator = (payload) => ({ type: types.REMOVE_COLLABORATOR, payload });
-export const removeCollaboratorSuccess = (collaborators) => ({ type: types.REMOVE_COLLABORATOR_SUCCESS, collaborators });
+export const removeRole = (payload) => ({ type: types.REMOVE_ROLE, payload });
+export const removeRoleSuccess = (roles) => ({ type: types.REMOVE_ROLE_SUCCESS, roles });
 
 // Other
 

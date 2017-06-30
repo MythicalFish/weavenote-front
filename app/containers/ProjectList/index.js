@@ -21,7 +21,7 @@ export class ProjectList extends React.PureComponent { // eslint-disable-line re
     return (
       <div>
         <Header />
-        <Toolbar {...this.props} />
+        <Toolbar {...props} />
         <div className="p2">
           {props.projects && props.projects.map((project, index) => (
             <ListItem

@@ -40,7 +40,7 @@ function appReducer(state = initialState, action) {
         .set('user', action.data.user)
         .set('organization', action.data.organization)
         .set('organization_role', action.data.organization_role)
-        .set('organizations', action.data.organizations)
+        .set('organizations', fromJS(action.data.organizations))
         .set('abilities', action.data.abilities);
 
     case appActionTypes.FETCH_INVITE_SUCCESS:
@@ -53,7 +53,7 @@ function appReducer(state = initialState, action) {
       return state
         .set('organization', action.data.organization)
         .set('organization_role', action.data.organization_role)
-        .set('organizations', action.data.organizations)
+        .set('organizations', fromJS(action.data.organizations))
         .set('abilities', action.data.abilities);
 
 

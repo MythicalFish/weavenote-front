@@ -1,10 +1,11 @@
 import { take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import notificationsWatcher from './notifications';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
 import * as selectors from './selectors';
-export default [collaboratorsWatcher];
+export default [notificationsWatcher, collaboratorsWatcher];
 
 export function* collaboratorsWatcher() {
   const watcher = [
@@ -14,9 +15,9 @@ export function* collaboratorsWatcher() {
     yield takeLatest(types.UPDATE_INVITE, updateInvite),
     yield takeLatest(types.CANCEL_INVITE, cancelInvite),
 
-    yield takeLatest(types.FETCH_COLLABORATORS, fetchCollaborators),
-    yield takeLatest(types.UPDATE_COLLABORATOR, updateCollaborator),
-    yield takeLatest(types.REMOVE_COLLABORATOR, removeCollaborator),
+    yield takeLatest(types.FETCH_ROLES, fetchRoles),
+    yield takeLatest(types.UPDATE_ROLE, updateRole),
+    yield takeLatest(types.REMOVE_ROLE, removeRole),
 
     yield takeLatest(types.FETCH_ROLE_TYPES, fetchRoleTypes),
 
@@ -46,21 +47,21 @@ function* cancelInvite({ payload }) {
   yield sagas.destroy(inviteUrl(payload), payload, actions.cancelInviteSuccess);
 }
 
-// Collaborators
+// Roles
 
-const collaboratorUrl = (payload) => (`collaborators/${payload.collaborator.get('id')}`);
+const roleURL = (payload) => (`roles/${payload.role.get('id')}`);
 
-function* fetchCollaborators({ invitable }) {
-  yield sagas.get('collaborators', { invitable }, actions.fetchCollaboratorsSuccess);
+function* fetchRoles({ invitable }) {
+  yield sagas.get('roles', { invitable }, actions.fetchRolesSuccess);
 }
 
-function* updateCollaborator({ payload }) {
+function* updateRole({ payload }) {
   const update = { role_type_id: payload.roleType.get('id'), invitable: payload.invitable };
-  yield sagas.patch(collaboratorUrl(payload), update, actions.updateCollaboratorSuccess);
+  yield sagas.patch(roleURL(payload), update, actions.updateRoleSuccess);
 }
 
-function* removeCollaborator({ payload }) {
-  yield sagas.destroy(collaboratorUrl(payload), payload, actions.removeCollaboratorSuccess);
+function* removeRole({ payload }) {
+  yield sagas.destroy(roleURL(payload), payload, actions.removeRoleSuccess);
 }
 
 
