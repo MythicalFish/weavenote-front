@@ -15,6 +15,7 @@ const initialState = fromJS({
   organization: null,
   organization_role: null,
   organizations: null,
+  abilities: null,
   invite: null,
   stats: {
     projects: {
@@ -39,7 +40,8 @@ function appReducer(state = initialState, action) {
         .set('user', action.data.user)
         .set('organization', action.data.organization)
         .set('organization_role', action.data.organization_role)
-        .set('organizations', fromJS(action.data.organizations));
+        .set('organizations', action.data.organizations)
+        .set('abilities', action.data.abilities);
 
     case appActionTypes.FETCH_INVITE_SUCCESS:
       return state
@@ -49,8 +51,10 @@ function appReducer(state = initialState, action) {
 
     case orgActionTypes.CREATE_ORGANIZATION_SUCCESS:
       return state
-        .set('organizations', fromJS(action.data.organizations))
-        .set('organization', fromJS(action.data.organization));
+        .set('organization', action.data.organization)
+        .set('organization_role', action.data.organization_role)
+        .set('organizations', action.data.organizations)
+        .set('abilities', action.data.abilities);
 
 
     //

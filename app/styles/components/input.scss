@@ -48,6 +48,11 @@ textarea {
       display: block;
     }
   }
+  input[readonly]:focus {
+    + .focused {
+      display: none;
+    }
+  }
   .focused {
     display: none;
     position: absolute;
@@ -65,12 +70,21 @@ textarea {
   display: inline-block;
   button {
     text-align: inherit;
-    &:after {
-      content: "\f078";
-      font-family: FontAwesome;
-      margin-left: $space-1;
-      font-size: .7em;
-      color: $dark3;
+  }
+  &:not(.noselect) {
+    button {
+      &:after {
+        content: "\f078";
+        font-family: FontAwesome;
+        margin-left: $space-1;
+        font-size: .7em;
+        color: $dark3;
+      }
+    }
+  }
+  &.noselect {
+    button {
+      cursor: default;
     }
   }
 }

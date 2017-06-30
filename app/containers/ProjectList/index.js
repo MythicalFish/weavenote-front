@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
-import { selectCurrentSection } from 'containers/App/selectors';
+import { selectCurrentSection, selectAbilities } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import Header from 'components/Header';
 import Toolbar from './partials/Toolbar';
@@ -21,12 +21,7 @@ export class ProjectList extends React.PureComponent { // eslint-disable-line re
     return (
       <div>
         <Header />
-        <Toolbar
-          currentSection={props.currentSection}
-          changeSection={props.changeSection}
-          create={props.createProject}
-          fetch={props.fetchProjects}
-        />
+        <Toolbar {...this.props} />
         <div className="p2">
           {props.projects && props.projects.map((project, index) => (
             <ListItem
@@ -51,6 +46,7 @@ ProjectList.propTypes = {
   fileProject: PropTypes.func,
   changeSection: PropTypes.func,
   currentSection: PropTypes.object,
+  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
@@ -63,6 +59,7 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   projects: selectProjectsList(),
   currentSection: selectCurrentSection(),
+  abilities: selectAbilities(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectList);

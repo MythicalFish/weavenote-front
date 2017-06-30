@@ -21,7 +21,8 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
   }
 
   render() {
-    const { value, data, className, tail, align } = this.props;
+    const { value, data, className, tail, align, readOnly } = this.props;
+    let inputClass = className;
     let val = value || {};
     let alignment = align || 'left';
     const alignClass = `${alignment}-align`;
@@ -36,9 +37,9 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
         break;  
     }
     const attachment = `top ${alignment}`;
+    if (readOnly) { inputClass += ' noselect'; }
     if (val && val.toJS) { val = val.toJS(); }
     const options = [];
-
     if (data) {
       data.forEach((item, index) => {
         if (item === value) return;
@@ -55,7 +56,7 @@ export default class SelectInput extends React.Component { // eslint-disable-lin
     }
 
     return (
-      <div className={`select-input p0 ${className}`}>
+      <div className={`select-input p0 ${inputClass}`}>
         <TetherComponent
           attachment={attachment}
           constraints={[{

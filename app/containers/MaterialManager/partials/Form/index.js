@@ -30,16 +30,20 @@ class Form extends React.Component {
     return '';
   }
 
+  restricted = () => (
+    !this.props.abilities.Material.update
+  )
+
   render() {
     const {
       handleSubmit, submitting, types, colors, currencies, labels, suppliers, newSupplier,
-      addCareLabel, removeCareLabel, userRole,
+      addCareLabel, removeCareLabel,
     } = this.props;
     const { type } = this.state;
     const { showFor } = this;
     const fProps = {
       component: DataRow,
-      noEdit: cantRoleEdit(userRole),
+      restricted: this.restricted(),
     };
     return (
       <form onSubmit={handleSubmit}>
@@ -69,9 +73,11 @@ class Form extends React.Component {
             <CareLabels {...{ labels, addCareLabel, removeCareLabel }} className={showFor('Fabric')} />
           </div>
         </div>
-        <footer className="p2 center">
-          <Button type="submit" disabled={submitting} label="Save" />
-        </footer>
+        {!this.restricted() &&
+          <footer className="p2 center">
+            <Button type="submit" disabled={submitting} label="Save" />
+          </footer>
+        }
       </form>
     );
   }
@@ -89,6 +95,7 @@ Form.propTypes = {
   suppliers: PropTypes.object,
   labels: PropTypes.object,
   initialValues: PropTypes.object,
+  abilities: PropTypes.object,
 };
 
 export default reduxForm({

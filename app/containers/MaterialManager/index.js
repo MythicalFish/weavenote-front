@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
-import { selectOrganizationRole } from 'containers/App/selectors';
+import { selectAbilities } from 'containers/App/selectors';
 import {
   selectMaterial, selectMaterialTypes, selectColors, selectCurrencies, selectSuppliers, selectCareLabels,
 } from './selectors';
@@ -17,17 +17,17 @@ import Toolbar from './partials/Toolbar';
 export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const { params, types, colors, currencies, suppliers, labels } = this.props;
+    const { params } = this.props;
     this.props.fetchMaterialAssociations();
     this.props.fetchMaterial(params.id);
   }
 
   onSubmit = (values) => {
-    const { params, updateMaterial: update, createMaterial: create } = this.props;
+    const { params } = this.props;
     if (params.id === 'new') {
-      create(values);
+      this.props.createMaterial(values);
     } else {
-      update(values);
+      this.props.updateMaterial(values);
     }
   }
 
@@ -35,7 +35,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
     const {
       initialValues, types, colors, currencies, suppliers,
       newSupplier: n, labels, addCareLabel: a, removeCareLabel: r,
-      userRole,
+      abilities,
     } = this.props;
 
     const { onSubmit } = this;
@@ -48,7 +48,7 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
             {initialValues && types && colors && currencies && suppliers && labels &&
               <Form {...{
                 initialValues, types, colors, currencies, suppliers, labels,
-                newSupplier: n, onSubmit, addCareLabel: a, removeCareLabel: r, userRole }} />
+                newSupplier: n, onSubmit, addCareLabel: a, removeCareLabel: r, abilities }} />
             }
           </div>
         </div>
@@ -70,7 +70,7 @@ MaterialManager.propTypes = {
   suppliers: PropTypes.object,
   currencies: PropTypes.object,
   labels: PropTypes.object,
-  userRole: PropTypes.object,
+  abilities: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
@@ -80,7 +80,7 @@ const mapState = createStructuredSelector({
   currencies: selectCurrencies(),
   suppliers: selectSuppliers(),
   labels: selectCareLabels(),
-  userRole: selectOrganizationRole(),
+  abilities: selectAbilities(),
 });
 
 const mapDispatch = (dispatch) => (bindActionCreators({
