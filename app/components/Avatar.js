@@ -2,8 +2,12 @@ import React, { PropTypes } from 'react';
 
 export default function Avatar(props) {
   const { user } = props;
+  let className = 'avatar';
+  if (props.sm) {
+    className += ' avatar-sm';
+  }
   return (
-    <div className="avatar">
+    <div className={className}>
       <div>
         {user &&
           userLetters(user)
@@ -19,4 +23,5 @@ const userLetters = (user) => (
 
 Avatar.propTypes = {
   user: PropTypes.object,
+  sm: PropTypes.bool,
 };

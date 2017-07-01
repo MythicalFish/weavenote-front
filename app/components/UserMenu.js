@@ -9,7 +9,7 @@ export default function UserMenu(props) {
   return (
     <div>
       {user && organization &&
-        <Dropdown label={UserMenuButton(user)}>
+        <Dropdown label={UserMenuButton(user)} width="13">
           {abilities.Organization.update &&
             <Link to="/organization">Organization settings</Link>
           }
@@ -22,10 +22,11 @@ export default function UserMenu(props) {
 
 const UserMenuButton = (user) => (
   <div className="flex items-center">
-    <div className="mr2">
+    <Avatar {...{ user }} sm />
+    <div className="mx1">
       {user.name}
     </div>
-    <Avatar {...{ user }} />
+    <i className="fa fa-chevron-down dark4 smaller3" />
   </div>
 );
 
