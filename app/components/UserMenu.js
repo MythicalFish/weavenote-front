@@ -8,7 +8,7 @@ export default function UserMenu(props) {
   return (
     <div>
       {user && organization &&
-        <Dropdown label={organization.name}>
+        <Dropdown label={user.name}>
           {abilities.Organization.update &&
             <Link to="/organization">Organization settings</Link>
           }
