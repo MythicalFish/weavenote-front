@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import InviteForm from './partials/InviteForm';
-import InviteList from './partials/InviteList';
-import RoleList from './partials/RoleList';
+import InviteForm from './subcomponents/InviteForm';
+import InviteList from './subcomponents/InviteList';
+import RoleList from './subcomponents/RoleList';
 import {
   fetchInvites, cancelInvite, updateInvite, fetchRoles, removeRole, updateRole,
 } from './actions';

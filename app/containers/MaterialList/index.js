@@ -7,8 +7,8 @@ import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
 import Header from 'components/Header';
 import { fetchMaterials } from './actions';
-import Toolbar from './partials/Toolbar';
-import Item from './partials/Item';
+import Toolbar from './subcomponents/Toolbar';
+import Item from './subcomponents/Item';
 
 export class MaterialList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

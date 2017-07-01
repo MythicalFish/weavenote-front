@@ -11,8 +11,8 @@ import {
   fetchMaterial, updateMaterial, createMaterial,
   fetchMaterialAssociations, newSupplier, addCareLabel, removeCareLabel,
 } from './actions';
-import Form from './partials/Form';
-import Toolbar from './partials/Toolbar';
+import Form from './subcomponents/Form';
+import Toolbar from './subcomponents/Toolbar';
 
 export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

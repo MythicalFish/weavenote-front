@@ -119,7 +119,7 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/MaterialManager/reducer'),
-          import('containers/MaterialManager/partials/Form/reducer'),
+          import('containers/MaterialManager/subcomponents/Form/reducer'),
           import('containers/MaterialManager/sagas'),
           import('containers/MaterialManager'),
         ]);

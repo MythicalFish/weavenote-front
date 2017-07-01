@@ -6,8 +6,8 @@ import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection, selectAbilities } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import Header from 'components/Header';
-import Toolbar from './partials/Toolbar';
-import ListItem from './partials/ListItem';
+import Toolbar from './subcomponents/Toolbar';
+import ListItem from './subcomponents/ListItem';
 import { fetchProjects, createProject, fileProject } from './actions';
 import { selectProjectsList } from './selectors';
 

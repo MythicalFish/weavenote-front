@@ -7,12 +7,12 @@ import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import Modal from 'components/Modal';
 import Collaborators from 'containers/Collaborators';
-import Toolbar from './partials/Toolbar';
-import Basics from './partials/Basics';
-import Components from './partials/Components';
-import Measurements from './partials/Measurements';
-import Instructions from './partials/Instructions';
-import Images from './partials/Images';
+import Toolbar from './subcomponents/Toolbar';
+import Basics from './subcomponents/Basics';
+import Components from './subcomponents/Components';
+import Measurements from './subcomponents/Measurements';
+import Instructions from './subcomponents/Instructions';
+import Images from './subcomponents/Images';
 import { selectProject } from './selectors';
 import { fetchProject } from './actions';
 
