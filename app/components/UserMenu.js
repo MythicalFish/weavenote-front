@@ -10,6 +10,7 @@ export default function UserMenu(props) {
     <div>
       {user && organization &&
         <Dropdown label={UserMenuButton(user)} width="13">
+          <Link to="/profile">Profile</Link>
           {abilities.Organization.update &&
             <Link to="/organization">Organization settings</Link>
           }
