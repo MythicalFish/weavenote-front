@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectOrganization, selectOrganizations, selectUser } from 'containers/App/selectors';
 import Header from 'components/Header';
-import { updateOrg, createOrg } from './actions';
-import Create from './views/Create';
-import NoneYet from './views/NoneYet';
-import Manage from './views/Manage';
+import { createOrganization } from './actions';
+import Create from './subcomponents/Create';
+import NoneYet from './subcomponents/NoneYet';
+import Settings from './subcomponents/Settings';
 
 export class Organization extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -18,7 +18,7 @@ export class Organization extends React.PureComponent { // eslint-disable-line r
   }
 
   create = (data) => {
-    this.props.createOrg(data);
+    this.props.createOrganization(data);
     this.setState({ view: null });
   }
 
@@ -28,7 +28,7 @@ export class Organization extends React.PureComponent { // eslint-disable-line r
     if (view === 'create') {
       return <Create onSubmit={this.create} />;
     } else if (organizations.size > 0) {
-      return <Manage {...this.props} />;
+      return <Settings {...this.props} />;
     } else if (view === 'start') {
       return <NoneYet onClick={this.startCreate} />;
     } else {
@@ -54,12 +54,12 @@ Organization.propTypes = {
   user: PropTypes.object,
   organization: PropTypes.object,
   organizations: PropTypes.object,
-  createOrg: PropTypes.func,
+  createOrganization: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { updateOrg, createOrg },
+    { createOrganization },
     dispatch
   );
 }

@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Collaborators from 'containers/Collaborators';
+import Form from './Form';
+import { updateOrganization } from '../../actions';
 
 class Manage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -11,10 +12,16 @@ class Manage extends React.PureComponent { // eslint-disable-line react/prefer-s
       <div>
         {organization &&
           <div>
-            <h1 className="mt0">
+            <h2 className="mt0">
               {`${organization.name} settings`}
-            </h1>
+            </h2>
             <div className="bg-white p2">
+              <Form
+                initialValues={organization}
+                onSubmit={this.props.handleUpdate}
+              />
+            </div>
+            <div className="bg-white p2 mt2">
               <Collaborators invitable={{ type: 'Organization', id: organization.id }} />
             </div>
           </div>
@@ -26,13 +33,16 @@ class Manage extends React.PureComponent { // eslint-disable-line react/prefer-s
 
 Manage.propTypes = {
   organization: PropTypes.object,
+  handleUpdate: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { },
-    dispatch
-  );
+  return {
+    handleUpdate: (data) => {
+      dispatch(updateOrganization(data));
+    },
+    dispatch,
+  };
 }
 
 const mapState = createStructuredSelector({

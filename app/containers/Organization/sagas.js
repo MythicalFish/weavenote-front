@@ -11,8 +11,9 @@ export default [orgWatcher];
 function* orgWatcher() {
   const watcher = [
     yield takeLatest(types.INITIALIZE_ORGANIZATION, initializeOrganization),
-    yield takeLatest(types.CREATE_ORGANIZATION, createOrg),
+    yield takeLatest(types.CREATE_ORGANIZATION, createOrganization),
     yield takeLatest(types.CREATE_ORGANIZATION_SUCCESS, orgSuccess),
+    yield takeLatest(types.UPDATE_ORGANIZATION, updateOrganization),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -22,13 +23,18 @@ function* initializeOrganization() {
   if (location.pathname !== '/organization') {
     browserHistory.push('/organization');
   }
-} 
+}
 
-function* createOrg({ organization }) {
-  yield sagas.post('organizations', { organization }, actions.createOrgSuccess);
+function* createOrganization({ organization }) {
+  yield sagas.post('organizations', { organization }, actions.createOrganizationSuccess);
+}
+
+function* updateOrganization({ organization }) {
+  yield sagas.patch(orgUrl(organization), { organization }, actions.updateOrganizationSuccess);
 }
 
 function* orgSuccess() {
   browserHistory.push('/');
 }
+const orgUrl = (org) => (`organizations/${org.get('id')}`);
 

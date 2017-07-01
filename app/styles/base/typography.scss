@@ -1,5 +1,5 @@
 $font-family: 'Source Sans Pro', sans-serif;
-$heading-font-family: 'Klavika',sans-serif;
+$heading-font-family: 'Source Sans Pro',sans-serif;
 $monospace-font-family: 'Source Code Pro', Consolas, monospace;
 $letter-spacing: 1;
 
@@ -125,44 +125,3 @@ h3, .h3 {  font-size: $h3; }
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,300');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
-@font-face {
-  font-family: 'Klavika';
-  font-weight: normal;
-  src: url('/fonts/klavika/regular.eot');
-  src: url('/fonts/klavika/regular.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/klavika/regular.woff') format('woff'),
-       url('/fonts/klavika/regular.ttf') format('truetype'),
-       url('/fonts/klavika/regular.svg#Klavika') format('svg');
-}
-
-@font-face {
-  font-family: 'Klavika';
-  font-weight: 300;
-  src: url('/fonts/klavika/light.eot');
-  src: url('/fonts/klavika/light.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/klavika/light.woff') format('woff'),
-       url('/fonts/klavika/light.ttf') format('truetype'),
-       url('/fonts/klavika/light.svg#Klavika') format('svg');
-}
-
-@font-face {
-  font-family: 'Klavika';
-  font-weight: bold;
-  src: url('/fonts/klavika/bold.eot');
-  src: url('/fonts/klavika/bold.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/klavika/bold.woff') format('woff'),
-       url('/fonts/klavika/bold.ttf') format('truetype'),
-       url('/fonts/klavika/bold.svg#Klavika') format('svg');
-}
-
-@font-face {
-  font-family: 'Klavika';
-  font-weight: bolder;
-  src: url('/fonts/klavika/black.eot');
-  src: url('/fonts/klavika/black.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/klavika/black.woff') format('woff'),
-       url('/fonts/klavika/black.ttf') format('truetype'),
-       url('/fonts/klavika/black.svg#Klavika') format('svg');
-}
-
