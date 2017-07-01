@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 class Dropdown extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -29,7 +29,10 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
 }
 
 Dropdown.propTypes = {
-  label: React.PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   children: React.PropTypes.node,
 };
 

@@ -1,0 +1,13 @@
+.avatar {
+  border-radius: 999px;
+  -webkit-border-radius: 999px;
+  background: $color2x;
+  color: $white;
+  font-weight: bold;
+  @extend .flex;
+  @extend .items-center;
+  @extend .justify-center;
+  text-align: center;
+  height: 2em;
+  width: 2em;
+}
