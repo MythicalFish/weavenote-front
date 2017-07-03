@@ -6,13 +6,13 @@ const ListItem = (props) => {
   const material = props.item.get('material').toJS();
   return (
     <AccordionItem {...props}>
-      <div className="x8 pr0">
+      <div className="x10 pr1">
         {material.name}
       </div>
-      <div className="x7 pr0">
+      <div className="x6 pr1">
         {material.type.name}
       </div>
-      <div className="x7 right-align pr0">
+      <div className="x6 pr1">
         {material.color.name}
         <Dot className="ml1" color={material.color.hex_code} />
       </div>

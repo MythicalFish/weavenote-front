@@ -1,42 +1,89 @@
-$sizes_vw: 5,6,7,8,9,10,15,20,25,30,35,40,45,50,75,100;
+$sizes_vw: 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100;
 
 // Viewport size utility classes
 
 @mixin vw-setup($namespace) {
   @each $size in $sizes_vw {
+    .#{$namespace}vh-y#{$size} {
+      height: #{$size}vh;
+    }
+    .#{$namespace}vh-x#{$size} {
+      width: #{$size}vh;
+    }
+    .#{$namespace}vh-sq#{$size} {
+      width: #{$size}vh;
+      height: #{$size}vh;
+    }
+    .#{$namespace}vh-sq#{$size} {
+      width: #{$size}vh;
+      height: #{$size}vh;
+    }
 
-    .#{$namespace}vh-y#{$size} { height: #{$size}vh; }
-    .#{$namespace}vh-x#{$size} { width: #{$size}vh; }
-    .#{$namespace}vh-sq#{$size} { width: #{$size}vh; height: #{$size}vh; }
-    .#{$namespace}vh-sq#{$size} { width: #{$size}vh; height: #{$size}vh; }
+    .#{$namespace}vw-xmax#{$size} {
+      max-width: #{$size}vw;
+    }
+    .#{$namespace}vw-xmin#{$size} {
+      min-width: #{$size}vw;
+    }
+    .#{$namespace}vh-xmax#{$size} {
+      max-width: #{$size}vh;
+    }
+    .#{$namespace}vh-xmin#{$size} {
+      min-width: #{$size}vh;
+    }
 
-    .#{$namespace}vw-xmax#{$size} { max-width: #{$size}vw; }
-    .#{$namespace}vw-xmin#{$size} { min-width: #{$size}vw; }
-    .#{$namespace}vh-xmax#{$size} { max-width: #{$size}vh; }
-    .#{$namespace}vh-xmin#{$size} { min-width: #{$size}vh; }
+    .#{$namespace}vw-ymax#{$size} {
+      max-height: #{$size}vw;
+    }
+    .#{$namespace}vw-ymin#{$size} {
+      min-height: #{$size}vw;
+    }
+    .#{$namespace}vh-ymax#{$size} {
+      max-height: #{$size}vh;
+    }
+    .#{$namespace}vh-ymin#{$size} {
+      min-height: #{$size}vh;
+    }
 
-    .#{$namespace}vw-ymax#{$size} { max-height: #{$size}vw; }
-    .#{$namespace}vw-ymin#{$size} { min-height: #{$size}vw; }
-    .#{$namespace}vh-ymax#{$size} { max-height: #{$size}vh; }
-    .#{$namespace}vh-ymin#{$size} { min-height: #{$size}vh; }
+    .#{$namespace}vw-mr#{$size} {
+      margin-right: #{$size}vw;
+    }
+    .#{$namespace}vw-ml#{$size} {
+      margin-left: #{$size}vw;
+    }
+    .#{$namespace}vw-mb#{$size} {
+      margin-bottom: #{$size}vw;
+    }
+    .#{$namespace}vw-mt#{$size} {
+      margin-top: #{$size}vw;
+    }
 
-    .#{$namespace}vw-mr#{$size} { margin-right: #{$size}vw; }
-    .#{$namespace}vw-ml#{$size} { margin-left: #{$size}vw; }
-    .#{$namespace}vw-mb#{$size} { margin-bottom: #{$size}vw; }
-    .#{$namespace}vw-mt#{$size} { margin-top: #{$size}vw; }
+    .#{$namespace}vh-mr#{$size} {
+      margin-right: #{$size}vh;
+    }
+    .#{$namespace}vh-ml#{$size} {
+      margin-left: #{$size}vh;
+    }
+    .#{$namespace}vh-mb#{$size} {
+      margin-bottom: #{$size}vh;
+    }
+    .#{$namespace}vh-mt#{$size} {
+      margin-top: #{$size}vh;
+    }
 
-    .#{$namespace}vh-mr#{$size} { margin-right: #{$size}vh; }
-    .#{$namespace}vh-ml#{$size} { margin-left: #{$size}vh; }
-    .#{$namespace}vh-mb#{$size} { margin-bottom: #{$size}vh; }
-    .#{$namespace}vh-mt#{$size} { margin-top: #{$size}vh; }
-
-    .#{$namespace}vw-pr#{$size} { padding-right: #{$size}vw; }
-    .#{$namespace}vw-pl#{$size} { padding-left: #{$size}vw; }
-    .#{$namespace}vw-pb#{$size} { padding-bottom: #{$size}vw; }
-    .#{$namespace}vw-pt#{$size} { padding-top: #{$size}vw; }
-
+    .#{$namespace}vw-pr#{$size} {
+      padding-right: #{$size}vw;
+    }
+    .#{$namespace}vw-pl#{$size} {
+      padding-left: #{$size}vw;
+    }
+    .#{$namespace}vw-pb#{$size} {
+      padding-bottom: #{$size}vw;
+    }
+    .#{$namespace}vw-pt#{$size} {
+      padding-top: #{$size}vw;
+    }
   }
-
 }
 
 @include vw-setup('');
@@ -55,21 +102,29 @@ $sizes_vw: 5,6,7,8,9,10,15,20,25,30,35,40,45,50,75,100;
 
 // Other size utility classes
 
-$sizes_em: 5,6,7,8,9,10,12,13,20,25;
+$sizes_em: 5, 6, 7, 8, 9, 10, 12, 13, 20, 25;
 
 @mixin width-setup($namespace) {
   @each $size in $sizes_em {
-
-    .#{$namespace}y#{$size} { height: #{$size}em; }
-    .#{$namespace}x#{$size} { width: #{$size}em; }
-    .#{$namespace}x-max#{$size} { max-width: #{$size}em; }
-    .#{$namespace}y-max#{$size} { max-height: #{$size}em; }
-
+    .#{$namespace}y#{$size} {
+      height: #{$size}em;
+    }
+    .#{$namespace}x#{$size} {
+      width: #{$size}em;
+    }
+    .#{$namespace}x-max#{$size} {
+      max-width: #{$size}em;
+    }
+    .#{$namespace}y-max#{$size} {
+      max-height: #{$size}em;
+    }
   }
 }
 
 @include width-setup('');
-.x-fill { width: 100%; }
+.x-fill {
+  width: 100%;
+}
 
 @media #{$breakpoint-sm} {
   @include width-setup('sm-');

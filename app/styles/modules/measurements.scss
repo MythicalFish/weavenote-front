@@ -1,5 +1,6 @@
 #measurements {
-  input[type="text"], input[type="number"] {
+  input[type="text"],
+  input[type="number"] {
     padding: $space-1;
   }
   .column {
@@ -14,9 +15,7 @@
     }
     input {
       text-align: center;
-      &[type="number"] {
-        padding-right: 0;
-      }
+      width: 100%;
     }
     &:first-child {
       max-width: 200px;

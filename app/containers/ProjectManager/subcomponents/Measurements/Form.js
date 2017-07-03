@@ -4,15 +4,18 @@ import Button from 'components/Button';
 import Column from './Column';
 
 const Form = (props) => {
-
   const { handleSubmit, submitting, initialValues } = props;
   const groupings = [
     {
       constraint: null,
-      items: initialValues.get('names').map((name, index) => {
-        return { type: 'names', index, fieldType: 'text', fieldLength: '16' };
-      }),
-      colClass: 'column',
+      items: initialValues
+        .get('names')
+        .map((name, index) => ({
+          type: 'names',
+          index,
+          fieldType: 'text',
+          fieldLength: '16',
+        })),
     },
   ];
 
@@ -20,7 +23,6 @@ const Form = (props) => {
     const grouping = {
       constraint: { type: 'groups', index: groupIndex },
       items: [],
-      colClass: 'column',
     };
     initialValues.get('values').toJS().forEach((measurement, index) => {
       if (measurement.measurement_group_id === group.id) {
@@ -33,11 +35,9 @@ const Form = (props) => {
   return (
     <form onSubmit={handleSubmit} id="measurements">
       <div className="flex">
-        {groupings.map((grouping, index) => (
-          <div className={`${grouping.colClass}`} key={`group${index}`}>
-            <Column grouping={grouping} />
-          </div>
-        ))}
+        {groupings.map((grouping, index) =>
+          <Column grouping={grouping} key={`group${index}`} />
+        )}
       </div>
       <footer className="p2 center">
         <Button type="submit" disabled={submitting} label="Save" />

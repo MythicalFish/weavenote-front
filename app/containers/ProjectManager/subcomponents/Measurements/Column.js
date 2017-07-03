@@ -1,15 +1,16 @@
 import React from 'react';
 import { Field } from 'redux-form/immutable';
 
-const renderField = ({ input, maxLength, type, meta: { touched, error } }) => (
+const renderField = ({ input, maxLength, type, meta: { touched, error } }) =>
   <div>
     <input {...input} type={type} maxLength={maxLength} />
-  </div>
-);
+  </div>;
 
 export default function Column({ grouping }) {
   const { constraint, items } = grouping;
-  let constraintField = <input type="text" readOnly placeholder="Description" />;
+  let constraintField = (
+    <input type="text" readOnly placeholder="Description" />
+  );
   if (constraint) {
     constraintField = (
       <Field
@@ -21,7 +22,7 @@ export default function Column({ grouping }) {
     );
   }
   return (
-    <div>
+    <div className="column">
       <div>
         {constraintField}
       </div>
@@ -31,7 +32,7 @@ export default function Column({ grouping }) {
           <div key={itemKey}>
             <Field
               name={`${itemKey}.value`}
-              type={item.fieldType || 'number'}
+              type="text"
               component={renderField}
               maxLength={item.fieldLength || 5}
             />

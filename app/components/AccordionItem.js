@@ -9,10 +9,18 @@ const AccordionItem = (props) => {
     switchTarget = null;
   }
   return (
-    <button type="button" className="data-row left-align p2" onClick={() => { switchItem(switchTarget); }}>
-      {props.children}
+    <button
+      type="button"
+      className="data-row left-align p2"
+      onClick={() => {
+        switchItem(switchTarget);
+      }}
+    >
+      <div className="flex-auto flex">
+        {props.children}
+      </div>
       <div className="right-align smaller2 dark2">
-        <i className={`fa ${chevronClass}`}></i>
+        <i className={`fa ${chevronClass}`} />
       </div>
     </button>
   );
