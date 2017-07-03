@@ -1,27 +1,26 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Form from './Form';
-import { updateProfile } from '../../actions';
+import BasicInfo from './BasicInfo';
 
-class Settings extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class Settings extends React.PureComponent {
   render() {
     const { user } = this.props;
     return (
       <div>
         {user &&
           <div>
-            <h2 className="mt0">
-              Profile settings
-            </h2>
+            <h2 className="mt0">Profile settings</h2>
             <div className="bg-white p2">
-              <Form
+              <BasicInfo
                 initialValues={user}
                 onSubmit={this.props.handleUpdate}
               />
             </div>
-          </div>
-        }
+            <div className="bg-white p2 mt2">
+              <h3>Change your password</h3>
+            </div>
+          </div>}
       </div>
     );
   }
@@ -34,14 +33,10 @@ Settings.propTypes = {
 
 export function mapDispatch(dispatch) {
   return {
-    handleUpdate: (data) => {
-      dispatch(updateProfile(data));
-    },
     dispatch,
   };
 }
 
-const mapState = createStructuredSelector({
-});
+const mapState = createStructuredSelector({});
 
 export default connect(mapState, mapDispatch)(Settings);

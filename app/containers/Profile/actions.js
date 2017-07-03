@@ -7,3 +7,11 @@ export function updateProfile(user) {
 export function updateProfileSuccess(data) {
   return { type: types.UPDATE_PROFILE_SUCCESS, data };
 }
+
+export function requestPassword() {
+  return { type: types.REQUEST_PASSWORD };
+}
+
+export function requestPasswordSuccess() {
+  return { type: types.REQUEST_PASSWORD_SUCCESS };
+}
