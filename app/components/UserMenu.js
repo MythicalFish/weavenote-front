@@ -5,11 +5,11 @@ import Avatar from 'components/Avatar';
 import * as authUtils from 'utils/authUtils';
 
 export default function UserMenu(props) {
-  const { user, organization, abilities } = props;
+  const { user, abilities } = props;
   return (
     <div>
-      {user && organization &&
-        <Dropdown label={UserMenuButton(user)} className="right-align">
+      {user &&
+        <Dropdown label={UserMenuButton(props)} className="right-align">
           <Link to="/profile">
             Profile
             <i className="fa fa-user ml1" />
@@ -18,30 +18,43 @@ export default function UserMenu(props) {
             <Link to="/organization">
               Organization
               <i className="fa fa-group ml1" />
-            </Link>
-          }
-          <button onClick={() => { authUtils.logout(); }}>
+            </Link>}
+          <button
+            onClick={() => {
+              authUtils.logout();
+            }}
+          >
             Logout
             <i className="fa fa-eject ml1" />
           </button>
-        </Dropdown>
-      }
+        </Dropdown>}
     </div>
   );
 }
 
-const UserMenuButton = (user) => (
-  <div className="flex items-center">
-    <Avatar {...{ user }} sm />
-    <div className="mx1">
-      {user.get('name')}
+const UserMenuButton = (props) => {
+  const { user, organization } = props;
+  return (
+    <div className="flex items-center">
+      <div className="mx1 right-align">
+        {user.get('name')}
+        {organization &&
+          <div className="dark5 upcase smaller1">
+            {organization.name}
+          </div>}
+      </div>
+      <Avatar {...{ user }} />
+      <i className="fa fa-chevron-down dark4 smaller3 ml1" />
     </div>
-    <i className="fa fa-chevron-down dark4 smaller3" />
-  </div>
-);
+  );
+};
+
+UserMenuButton.propTypes = {
+  user: PropTypes.object,
+  organization: PropTypes.object,
+};
 
 UserMenu.propTypes = {
   user: PropTypes.object,
-  organization: PropTypes.object,
   abilities: PropTypes.object,
 };

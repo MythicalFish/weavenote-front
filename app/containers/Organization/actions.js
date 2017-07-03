@@ -7,8 +7,8 @@ export function initializeOrganization() {
 export function updateOrganization(organization) {
   return { type: types.UPDATE_ORGANIZATION, organization };
 }
-export function updateOrganizationSuccess(organization) {
-  return { type: types.UPDATE_ORGANIZATION_SUCCESS, organization };
+export function updateOrganizationSuccess(data) {
+  return { type: types.UPDATE_ORGANIZATION_SUCCESS, data };
 }
 export function createOrganization(organization) {
   return { type: types.CREATE_ORGANIZATION, organization };

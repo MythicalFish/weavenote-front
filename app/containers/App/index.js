@@ -3,33 +3,29 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Notification from 'containers/Notification';
-import Layout from './Layout';
-import Gateway from './Gateway';
+import Gateway from './subcomponents/Gateway';
 
-class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class App extends React.PureComponent {
   render() {
+    const { location } = this.props;
     return (
-      <div>
-        <Gateway {...this.props}>
-          <Layout {...this.props} />
-        </Gateway>
+      <Gateway {...{ location }}>
+        {this.props.children}
         <Notification />
-      </div>
+      </Gateway>
     );
   }
 }
 
 App.propTypes = {
+  children: PropTypes.node,
+  location: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { },
-    dispatch
-  );
+  return bindActionCreators({}, dispatch);
 }
 
-const mapState = createStructuredSelector({
-});
+const mapState = createStructuredSelector({});
 
 export default connect(mapState, mapDispatch)(App);

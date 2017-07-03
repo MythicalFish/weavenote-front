@@ -2,25 +2,28 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectOrganization, selectOrganizations, selectUser } from 'containers/App/selectors';
-import Header from 'components/Header';
+import {
+  selectOrganization,
+  selectOrganizations,
+  selectUser,
+} from 'containers/App/selectors';
+import Layout from 'components/Layout';
 import { createOrganization } from './actions';
 import Create from './subcomponents/Create';
 import NoneYet from './subcomponents/NoneYet';
 import Settings from './subcomponents/Settings';
 
-export class Organization extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
-  state = { view: 'start' }
+export class Organization extends React.PureComponent {
+  state = { view: 'start' };
 
   startCreate = () => {
     this.setState({ view: 'create' });
-  }
+  };
 
   create = (data) => {
     this.props.createOrganization(data);
     this.setState({ view: null });
-  }
+  };
 
   currentView = () => {
     const { organizations } = this.props;
@@ -34,18 +37,13 @@ export class Organization extends React.PureComponent { // eslint-disable-line r
     } else {
       return null;
     }
-  }
+  };
 
   render() {
     return (
-      <div>
-        <Header />
-        <div className="p3 md-p4">
-          <div className="container-narrow">
-            {this.currentView()}
-          </div>
-        </div>
-      </div>
+      <Layout>
+        {this.currentView()}
+      </Layout>
     );
   }
 }
@@ -58,10 +56,7 @@ Organization.propTypes = {
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { createOrganization },
-    dispatch
-  );
+  return bindActionCreators({ createOrganization }, dispatch);
 }
 
 const mapState = createStructuredSelector({

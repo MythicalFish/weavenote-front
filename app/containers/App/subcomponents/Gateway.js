@@ -2,13 +2,15 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import Layout from './Layout';
 import LoginForm from 'components/LoginForm';
 import { loggedIn } from 'utils/authUtils';
 import { initializeOrganization } from 'containers/Organization/actions';
-import { fetchUser, fetchInvite, handleInvite, setInviteKey } from './actions';
-import * as selectors from './selectors';
+import { fetchUser, fetchInvite, handleInvite, setInviteKey } from '../actions';
+import * as selectors from '../selectors';
 
-class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class Gateway extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
     this.handleMountOrUpdate();
@@ -21,14 +23,11 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
   newInviteKey = () => {
     const { location } = this.props;
     return location.query.invitation;
-  }
+  };
 
-  storedInviteKey = () => (
-    localStorage.getItem('inviteKey')
-  )
+  storedInviteKey = () => localStorage.getItem('inviteKey');
 
   handleMountOrUpdate = () => {
-
     const newKey = this.newInviteKey();
     const storedKey = this.storedInviteKey();
 
@@ -60,10 +59,9 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
     if (!this.props.organization) {
       this.props.initializeOrganization();
     }
-  }
+  };
 
   render() {
-
     /*
 
       1. Store invite key if present in URL
@@ -76,12 +74,11 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
 
     */
 
-    const newKey = this.newInviteKey();    
+    const newKey = this.newInviteKey();
     const storedKey = this.storedInviteKey();
     const { user, invite } = this.props;
 
     if (!loggedIn()) {
-
       const loginProps = { user, invite, fetchUser: this.props.fetchUser };
 
       if (storedKey) {
@@ -109,8 +106,11 @@ class Gateway extends React.PureComponent { // eslint-disable-line react/prefer-
       return null;
     }
 
-    return this.props.children;
-
+    return (
+      <Layout {...{ location }}>
+        {this.props.children}
+      </Layout>
+    );
   }
 }
 
@@ -129,7 +129,13 @@ Gateway.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchUser, fetchInvite, handleInvite, setInviteKey, initializeOrganization },
+    {
+      fetchUser,
+      fetchInvite,
+      handleInvite,
+      setInviteKey,
+      initializeOrganization,
+    },
     dispatch
   );
 }

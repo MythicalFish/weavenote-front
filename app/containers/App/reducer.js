@@ -61,6 +61,9 @@ function appReducer(state = initialState, action) {
         .set('organizations', fromJS(action.data.organizations))
         .set('abilities', action.data.abilities);
 
+    case orgActionTypes.UPDATE_ORGANIZATION_SUCCESS:
+      return state
+        .set('organization', action.data);
 
     //
 
