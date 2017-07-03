@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Sidebar from 'components/Sidebar';
+import Sidebar from './Sidebar';
 
 export default function Layout(props) {
   return (

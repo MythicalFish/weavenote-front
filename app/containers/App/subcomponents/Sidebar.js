@@ -26,7 +26,6 @@ Button.propTypes = {
 };
 
 class Sidebar extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
   render() {
     const { props } = this;
     return (
