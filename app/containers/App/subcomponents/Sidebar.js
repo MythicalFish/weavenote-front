@@ -1,22 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-function Button(props) {
+const Button = (props) => {
   const { path, currentPath, label } = props;
   if (!currentPath) return null;
-  let c;
-  const p1 = path.split('/')[1];
-  const p2 = currentPath.split('/')[1];
-  if (p1 === p2) {
-    c = `${c} active`;
-  }
+  const bClass = buttonClass(path, currentPath);
   return (
     <li>
-      <Link className={c} to={path}>
+      <Link className={bClass} to={path}>
         {label}
       </Link>
     </li>
   );
+};
+
+function isProjectPage(path) {
+  const r = /\/projects{1}\/[0-9]+/;
+  return r.test(path);
+}
+
+function buttonClass(path, currentPath) {
+  const p1 = path.split('/')[1];
+  const p2 = currentPath.split('/')[1];
+  if (p1 === p2) return 'active';
+  return null;
 }
 
 Button.propTypes = {
@@ -28,6 +35,7 @@ Button.propTypes = {
 class Sidebar extends React.PureComponent {
   render() {
     const { props } = this;
+    if (isProjectPage(props.currentPath)) return null;
     return (
       <aside id="sidebar" className="vh-ymin100 bg-color1x light9 br1">
         <div className="pr4">
