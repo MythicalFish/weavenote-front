@@ -3,6 +3,7 @@
 import { call, put, select, cancel } from 'redux-saga/effects';
 import * as API from 'utils/API';
 import { notify, notifyError, notifyWarning } from 'containers/Notification';
+import { logout } from './authUtils';
 
 export function* get(url, params, callback, selector = false) {
   try {
@@ -15,7 +16,7 @@ export function* get(url, params, callback, selector = false) {
     }
     yield handleResponse(callback, response);
   } catch (e) {
-    yield put(notifyError(e.error.message));
+    yield handleError(e.error.message);
   }
 }
 
@@ -24,7 +25,7 @@ export function* patch(url, params, callback) {
     const response = yield call(API.patch, url, params);
     yield handleResponse(callback, response);
   } catch (e) {
-    yield put(notifyError(e.error.message));
+    yield handleError(e.error.message);
   }
 }
 
@@ -33,7 +34,7 @@ export function* post(url, params, callback) {
     const response = yield call(API.post, url, params);
     yield handleResponse(callback, response);
   } catch (e) {
-    yield put(notifyError(e.error.message));
+    yield handleError(e.error.message);
   }
 }
 
@@ -42,7 +43,17 @@ export function* destroy(url, params, callback) {
     const response = yield call(API.destroy, url, params);
     yield handleResponse(callback, response);
   } catch (e) {
-    yield put(notifyError(e.error.message));
+    yield handleError(e.error.message);
+  }
+}
+
+function* handleError(message) {
+  yield put(notifyError(message));
+  if (message === 'Unauthorized') {
+    logout();
+    setTimeout(() => {
+      window.location.replace('/');
+    }, 1000);
   }
 }
 

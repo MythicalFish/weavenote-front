@@ -107,15 +107,6 @@ const toQueryString = (obj, urlEncode = false) => {
   return queryString;
 };
 
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  }
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
-}
-
 const ConsoleErrorStyle = [
   'color: #ff7e00',
   'display: block',
