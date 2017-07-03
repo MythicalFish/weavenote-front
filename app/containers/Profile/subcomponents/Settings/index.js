@@ -1,28 +1,24 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Collaborators from 'containers/Collaborators';
 import Form from './Form';
-import { updateOrganization } from '../../actions';
+import { updateProfile } from '../../actions';
 
 class Settings extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { organization } = this.props;
+    const { user } = this.props;
     return (
       <div>
-        {organization &&
+        {user &&
           <div>
             <h2 className="mt0">
-              {`${organization.name} settings`}
+              Profile settings
             </h2>
             <div className="bg-white p2">
               <Form
-                initialValues={organization}
+                initialValues={user}
                 onSubmit={this.props.handleUpdate}
               />
-            </div>
-            <div className="bg-white p2 mt2">
-              <Collaborators invitable={{ type: 'Organization', id: organization.id }} />
             </div>
           </div>
         }
@@ -32,14 +28,14 @@ class Settings extends React.PureComponent { // eslint-disable-line react/prefer
 }
 
 Settings.propTypes = {
-  organization: PropTypes.object,
+  user: PropTypes.object,
   handleUpdate: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return {
     handleUpdate: (data) => {
-      dispatch(updateOrganization(data));
+      dispatch(updateProfile(data));
     },
     dispatch,
   };

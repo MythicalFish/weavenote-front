@@ -18,7 +18,7 @@ export default function Avatar(props) {
 }
 
 const userLetters = (user) => (
-  user.name.split(' ').map((s) => (s.charAt(0).toUpperCase())).join('')
+  user.get('name').split(' ').map((s) => (s.charAt(0).toUpperCase())).join('')
 );
 
 Avatar.propTypes = {

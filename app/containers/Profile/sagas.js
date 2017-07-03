@@ -2,19 +2,19 @@
 import { take, put, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
-import * as actionType from './constants/actions';
+import * as actionType from './constants';
 import * as actions from './actions';
 
 export default [appWatcher];
 
 export function* appWatcher() {
   const watcher = [
-    yield takeLatest(actionType.SOME_THING, someThing),
+    yield takeLatest(actionType.UPDATE_PROFILE, updateProfile),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
 
-function* someThing() {
-  yield sagas.get('user', null, actions.someThingSuccess);
+function* updateProfile({ user }) {
+  yield sagas.patch('user', { user }, actions.updateProfileSuccess);
 }

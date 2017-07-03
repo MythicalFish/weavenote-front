@@ -47,18 +47,22 @@
       border: 0;
       background: none;
       width: 100%;
-      padding: $space-2;
+      padding: 15px $space-2;
       color: inherit;
       font-family: inherit;
       font-size: inherit;
       font-weight: inherit;
       transition: background-color .1s;
       -webkit-transition: background-color .1s;
+      text-align: inherit;
       &:hover {
         background-color: rgba(0,0,0,0.03);
       }
       &:not(:first-child) {
         border-top: 1px solid $dark1;
+      }
+      .fa {
+        color: $dark5;
       }
     }
   }

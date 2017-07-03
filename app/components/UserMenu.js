@@ -9,12 +9,21 @@ export default function UserMenu(props) {
   return (
     <div>
       {user && organization &&
-        <Dropdown label={UserMenuButton(user)} width="13">
-          <Link to="/profile">Profile</Link>
+        <Dropdown label={UserMenuButton(user)} className="right-align">
+          <Link to="/profile">
+            Profile
+            <i className="fa fa-user ml1" />
+          </Link>
           {abilities.Organization.update &&
-            <Link to="/organization">Organization settings</Link>
+            <Link to="/organization">
+              Organization
+              <i className="fa fa-group ml1" />
+            </Link>
           }
-          <button onClick={() => { authUtils.logout(); }}>Logout</button>
+          <button onClick={() => { authUtils.logout(); }}>
+            Logout
+            <i className="fa fa-eject ml1" />
+          </button>
         </Dropdown>
       }
     </div>
@@ -25,7 +34,7 @@ const UserMenuButton = (user) => (
   <div className="flex items-center">
     <Avatar {...{ user }} sm />
     <div className="mx1">
-      {user.name}
+      {user.get('name')}
     </div>
     <i className="fa fa-chevron-down dark4 smaller3" />
   </div>

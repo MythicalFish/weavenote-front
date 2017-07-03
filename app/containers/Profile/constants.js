@@ -1,0 +1,2 @@
+export const UPDATE_PROFILE = '@@app/UPDATE_PROFILE';
+export const UPDATE_PROFILE_SUCCESS = '@@app/UPDATE_PROFILE_SUCCESS';

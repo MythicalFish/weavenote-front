@@ -7,6 +7,7 @@
 import { fromJS } from 'immutable';
 import * as materialActionTypes from 'containers/MaterialList/constants';
 import * as orgActionTypes from 'containers/Organization/constants';
+import * as profileActionTypes from 'containers/Profile/constants';
 import * as appActionTypes from './constants/actions';
 import * as sections from './constants/sections';
 
@@ -37,11 +38,15 @@ function appReducer(state = initialState, action) {
 
     case appActionTypes.FETCH_USER_SUCCESS:
       return state
-        .set('user', action.data.user)
+        .set('user', fromJS(action.data.user))
         .set('organization', action.data.organization)
         .set('organization_role', action.data.organization_role)
         .set('organizations', fromJS(action.data.organizations))
         .set('abilities', action.data.abilities);
+
+    case profileActionTypes.UPDATE_PROFILE_SUCCESS:
+      return state
+        .setIn(['user', 'name'], action.data.name);
 
     case appActionTypes.FETCH_INVITE_SUCCESS:
       return state

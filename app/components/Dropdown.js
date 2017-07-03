@@ -23,13 +23,15 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
   }
 
   render() {
-    const { label, children, width } = this.props;
+    const { label, children, width, className } = this.props;
     let menu;
     let widthClass = 'x10';
     if (width) widthClass = `x${width}`;
+    let pClass = className || '';
+    pClass += ` ${widthClass} ${this.state.className}`;
     if (this.state.active) {
       menu = (
-        <div className={`dropdown-content center ${widthClass} ${this.state.className}`}>
+        <div className={`dropdown-content center ${pClass}`}>
           {children}
         </div>
       );
@@ -51,6 +53,8 @@ Dropdown.propTypes = {
     PropTypes.object,
   ]),
   children: React.PropTypes.node,
+  width: React.PropTypes.string,
+  className: React.PropTypes.string,
 };
 
 export default Dropdown;
