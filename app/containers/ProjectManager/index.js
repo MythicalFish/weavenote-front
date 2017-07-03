@@ -6,6 +6,7 @@ import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import Modal from 'components/Modal';
+import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import Basics from './subcomponents/Basics';
@@ -16,18 +17,15 @@ import Images from './subcomponents/Images';
 import { selectProject } from './selectors';
 import { fetchProject } from './actions';
 
-class ProjectManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class ProjectManager extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
 
-  state = { showCollaborators: false }
+  state = { activeModal: null };
 
   componentDidMount() {
     const { params } = this.props;
     this.props.fetchProject(params.id);
     this.props.changeSection(sections.Basics);
-  }
-
-  toggleCollaborators = () => {
-    this.setState({ showCollaborators: !this.state.showCollaborators });
   }
 
   render() {
@@ -36,7 +34,6 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
     let renderedSection = <Basics {...{ project }} />;
 
     switch (currentSection.id) {
-
       case sections.Components.id:
         renderedSection = <Components {...{ project }} />;
         break;
@@ -55,16 +52,17 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
 
     return (
       <div>
+        <Header />
         <Toolbar
           changeSection={this.props.changeSection}
           currentSection={currentSection}
-          toggleCollaborators={this.toggleCollaborators}
+          parent={this}
         />
         <div className="p2 bg-white">
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-6 flex justify-center">
-                {project && <Images project={project} /> }
+                {project && <Images project={project} />}
               </div>
               <div className="col-xs-12 col-md-6 flex justify-center">
                 {project && renderedSection}
@@ -73,10 +71,9 @@ class ProjectManager extends React.PureComponent { // eslint-disable-line react/
           </div>
         </div>
         {project &&
-          <Modal isOpened={this.state.showCollaborators}>
+          <Modal parent={this} modalID="collaborators">
             <Collaborators invitable={{ type: 'Project', id: project.id }} />
-          </Modal>
-        }
+          </Modal>}
       </div>
     );
   }
@@ -91,10 +88,7 @@ ProjectManager.propTypes = {
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { changeSection, fetchProject },
-    dispatch
-  );
+  return bindActionCreators({ changeSection, fetchProject }, dispatch);
 }
 
 const mapState = createStructuredSelector({

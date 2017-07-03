@@ -2,15 +2,18 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import BasicInfo from './BasicInfo';
+import { requestPassword } from '../../actions';
+import Button from 'components/Button';
 
 class Settings extends React.PureComponent {
+  requestPassword;
   render() {
-    const { user } = this.props;
+    const { user, dispatch } = this.props;
     return (
       <div>
         {user &&
           <div>
-            <h2 className="mt0">Profile settings</h2>
+            <h2>Profile settings</h2>
             <div className="bg-white p2">
               <BasicInfo
                 initialValues={user}
@@ -18,7 +21,11 @@ class Settings extends React.PureComponent {
               />
             </div>
             <div className="bg-white p2 mt2">
-              <h3>Change your password</h3>
+              <h4>Password</h4>
+              <Button
+                onclick={dispatch(requestPassword())}
+                label="Reset your password"
+              />
             </div>
           </div>}
       </div>
@@ -29,11 +36,12 @@ class Settings extends React.PureComponent {
 Settings.propTypes = {
   user: PropTypes.object,
   handleUpdate: PropTypes.func,
+  dispatch: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return {
-    dispatch,
+    dispatch: (fn) => () => dispatch(fn),
   };
 }
 

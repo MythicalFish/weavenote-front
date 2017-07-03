@@ -1,37 +1,41 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Portal from 'react-portal';
 
-const ModalContent = (props) => {
-  return (
-    <div className={`modal ${props.modalClass}`}>
-      <div className="modal-content">
-        {props.children}
-      </div>
+const ModalContent = (props) =>
+  <div className={`modal ${props.modalClass}`}>
+    <div className="modal-content">
+      {props.children}
     </div>
-  );
-};
+  </div>;
 
-class Modal extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
-  state = { modalClass: '' }
+class Modal extends React.PureComponent {
+  state = { modalClass: '' };
 
   onOpen = (node) => {
     setTimeout(() => {
       this.setState({ modalClass: 'visible' });
     }, 50);
-  }
+  };
 
   beforeClose = (node, close) => {
     this.setState({ modalClass: '' });
     setTimeout(() => {
       close();
+      this.props.parent.setState({ activeModal: null });
     }, 550);
-  }
+  };
 
   render() {
     const { modalClass } = this.state;
+    const { parent, modalID } = this.props;
+    const isOpened = parent.state.activeModal === modalID;
     return (
-      <Portal isOpened={this.props.isOpened} onOpen={this.onOpen} beforeClose={this.beforeClose} closeOnEsc>
+      <Portal
+        isOpened={isOpened}
+        onOpen={this.onOpen}
+        beforeClose={this.beforeClose}
+        closeOnEsc
+      >
         <ModalContent modalClass={modalClass}>
           {this.props.children}
         </ModalContent>
@@ -41,8 +45,9 @@ class Modal extends React.PureComponent { // eslint-disable-line react/prefer-st
 }
 
 Modal.propTypes = {
-  children: React.PropTypes.node,
-  isOpened: React.PropTypes.bool,
+  children: PropTypes.node,
+  parent: PropTypes.object,
+  modalID: PropTypes.string,
 };
 
 export default Modal;

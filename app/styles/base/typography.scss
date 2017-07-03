@@ -1,5 +1,5 @@
 $font-family: 'Source Sans Pro', sans-serif;
-$heading-font-family: 'Source Sans Pro',sans-serif;
+$heading-font-family: 'Source Sans Pro', sans-serif;
 $monospace-font-family: 'Source Code Pro', Consolas, monospace;
 $letter-spacing: 1;
 
@@ -14,9 +14,14 @@ body {
   color: $gray-dark;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: $heading-font-family;
   color: $gray-dark;
+  margin-top: 0;
 }
 
 // Sizing
@@ -33,95 +38,181 @@ $h4: 1em;
 $h5: .875em;
 $h6: .75em;
 
-.h00 { font-size: $h00; }
-.h0 {  font-size: $h0; }
-h1, .h1 {  font-size: $h1; }
-h2, .h2 {  font-size: $h2; }
-h3, .h3 {  font-size: $h3; }
+.h00 {
+  font-size: $h00;
+}
+.h0 {
+  font-size: $h0;
+}
+h1,
+.h1 {
+  font-size: $h1;
+}
+h2,
+.h2 {
+  font-size: $h2;
+}
+h3,
+.h3 {
+  font-size: $h3;
+}
 
 @media #{$breakpoint-sm} {
-  .h00    { font-size: $h000; }
-  .h0     { font-size: $h00; }
-  h1 { font-size: $h0; }
-  .h1 { font-size: $h0!important; }
-  h2 { font-size: $h1; }
-  .h2 { font-size: $h1!important; }
+  .h00 {
+    font-size: $h000;
+  }
+  .h0 {
+    font-size: $h00;
+  }
+  h1 {
+    font-size: $h0;
+  }
+  .h1 {
+    font-size: $h0 !important;
+  }
+  h2 {
+    font-size: $h1;
+  }
+  .h2 {
+    font-size: $h1 !important;
+  }
 }
 @media #{$breakpoint-md} {
-  .h00    { font-size: $h0000; }
-  .h0     { font-size: $h000; }
-  h1 { font-size: $h00; }
-  .h1 { font-size: $h00!important; }
-  h2 { font-size: $h0; }
-  .h2 { font-size: $h0!important; }
+  .h00 {
+    font-size: $h0000;
+  }
+  .h0 {
+    font-size: $h000;
+  }
+  h1 {
+    font-size: $h00;
+  }
+  .h1 {
+    font-size: $h00 !important;
+  }
+  h2 {
+    font-size: $h0;
+  }
+  .h2 {
+    font-size: $h0 !important;
+  }
 }
 @media #{$breakpoint-lg} {
-  .h00    { font-size: $h00000; }
-  .h0     { font-size: $h0000; }
-  h1 { font-size: $h000; }
-  .h1 { font-size: $h000!important; }
-  h2 { font-size: $h00; }
-  .h2 { font-size: $h00!important; }
+  .h00 {
+    font-size: $h00000;
+  }
+  .h0 {
+    font-size: $h0000;
+  }
+  h1 {
+    font-size: $h000;
+  }
+  .h1 {
+    font-size: $h000 !important;
+  }
+  h2 {
+    font-size: $h00;
+  }
+  .h2 {
+    font-size: $h00 !important;
+  }
 }
 
-.upcase { text-transform: uppercase; }
-.nocase { text-transform: none; }
-.thin { font-weight: 300; }
-.thick, b { font-weight: bold; }
-.thicker { font-weight: bolder; }
-.body-font { font-family: 'Source Sans Pro', sans-serif; }
-.heading-font { font-family: 'Klavika', sans-serif; }
+.upcase {
+  text-transform: uppercase;
+}
+.nocase {
+  text-transform: none;
+}
+.thin {
+  font-weight: 300;
+}
+.thick,
+b {
+  font-weight: bold;
+}
+.thicker {
+  font-weight: bolder;
+}
+.body-font {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.heading-font {
+  font-family: 'Klavika', sans-serif;
+}
 
-.bigger1 { font-size: 1.1em; }
-.bigger2 { font-size: 1.2em; }
-.bigger3 { font-size: 1.3em; }
-.bigger4 { font-size: 1.4em; }
-.bigger5 { font-size: 1.5em; }
+.bigger1 {
+  font-size: 1.1em;
+}
+.bigger2 {
+  font-size: 1.2em;
+}
+.bigger3 {
+  font-size: 1.3em;
+}
+.bigger4 {
+  font-size: 1.4em;
+}
+.bigger5 {
+  font-size: 1.5em;
+}
 
-.smaller1 { font-size: 0.9em; }
-.smaller2 { font-size: 0.8em; }
-.smaller3 { font-size: 0.7em; }
-.smaller4 { font-size: 0.6em; }
-.smaller5 { font-size: 0.5em; }
+.smaller1 {
+  font-size: 0.9em;
+}
+.smaller2 {
+  font-size: 0.8em;
+}
+.smaller3 {
+  font-size: 0.7em;
+}
+.smaller4 {
+  font-size: 0.6em;
+}
+.smaller5 {
+  font-size: 0.5em;
+}
 
-.lh0 { line-height: 0; }
-.lh1 { line-height: 1; }
+.lh0 {
+  line-height: 0;
+}
+.lh1 {
+  line-height: 1;
+}
 
 @media #{$breakpoint-sm} {
   .sm-center {
-    text-align: center!important;
+    text-align: center !important;
   }
   .sm-left-align {
-    text-align: left!important;
+    text-align: left !important;
   }
   .sm-right-align {
-    text-align: right!important;
+    text-align: right !important;
   }
 }
 @media #{$breakpoint-md} {
   .md-center {
-    text-align: center!important;
+    text-align: center !important;
   }
   .md-left-align {
-    text-align: left!important;
+    text-align: left !important;
   }
   .md-right-align {
-    text-align: right!important;
+    text-align: right !important;
   }
 }
 @media #{$breakpoint-lg} {
   .lg-center {
-    text-align: center!important;
+    text-align: center !important;
   }
   .lg-left-align {
-    text-align: left!important;
+    text-align: left !important;
   }
   .lg-right-align {
-    text-align: right!important;
+    text-align: right !important;
   }
 }
-
-
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,300');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');

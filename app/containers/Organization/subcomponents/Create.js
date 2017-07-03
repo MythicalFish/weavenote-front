@@ -4,16 +4,27 @@ import DataRow from 'components/DataRow';
 import Button from 'components/Button';
 
 const Create = (props) => {
-
   const { handleSubmit, submitting } = props;
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className="mt0">Your Seamless Organization</h1>
+      <h1>Your Seamless Organization</h1>
       <div className="data-rows">
-        <Field name="name" type="text" component={DataRow} label="Name your organization" focus />
+        <Field
+          name="name"
+          type="text"
+          component={DataRow}
+          label="Name your organization"
+          focus
+        />
         <footer className="p2 center">
-          <Button type="submit" disabled={submitting} label="Create" icon="plus" lg />
+          <Button
+            type="submit"
+            disabled={submitting}
+            label="Create"
+            icon="plus"
+            lg
+          />
         </footer>
       </div>
     </form>

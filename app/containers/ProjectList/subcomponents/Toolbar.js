@@ -4,15 +4,23 @@ import NavItem from 'components/NavItem';
 import PlusButton from 'components/PlusButton';
 
 export default function Toolbar(props) {
-  const { createProject, fetchProjects, changeSection, currentSection, abilities } = props;
+  const {
+    createProject,
+    fetchProjects,
+    changeSection,
+    currentSection,
+    abilities,
+  } = props;
   const canCreate = abilities.Project.create;
-  console.log(canCreate)
   return (
     <header className="toolbar">
       {!canCreate && <div />}
       {canCreate &&
-        <PlusButton onClick={() => { createProject(); }} />
-      }
+        <PlusButton
+          onClick={() => {
+            createProject();
+          }}
+        />}
       <nav>
         <ul>
           <li>
@@ -37,8 +45,7 @@ export default function Toolbar(props) {
           </li>
         </ul>
       </nav>
-      <div>
-      </div>
+      <div />
     </header>
   );
 }

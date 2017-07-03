@@ -5,14 +5,14 @@ import Collaborators from 'containers/Collaborators';
 import Form from './Form';
 import { updateOrganization } from '../../actions';
 
-class Settings extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class Settings extends React.PureComponent {
   render() {
     const { organization } = this.props;
     return (
       <div>
         {organization &&
           <div>
-            <h2 className="mt0">
+            <h2>
               {`${organization.name} settings`}
             </h2>
             <div className="bg-white p2">
@@ -22,10 +22,11 @@ class Settings extends React.PureComponent { // eslint-disable-line react/prefer
               />
             </div>
             <div className="bg-white p2 mt2">
-              <Collaborators invitable={{ type: 'Organization', id: organization.id }} />
+              <Collaborators
+                invitable={{ type: 'Organization', id: organization.id }}
+              />
             </div>
-          </div>
-        }
+          </div>}
       </div>
     );
   }
@@ -45,7 +46,6 @@ export function mapDispatch(dispatch) {
   };
 }
 
-const mapState = createStructuredSelector({
-});
+const mapState = createStructuredSelector({});
 
 export default connect(mapState, mapDispatch)(Settings);
