@@ -1,7 +1,15 @@
-::-webkit-input-placeholder { color: $dark3; }
-::-moz-placeholder { color: $dark3; }
-:-ms-input-placeholder { color: $dark3; }
-input:-moz-placeholder { color: $dark3; }
+::-webkit-input-placeholder {
+  color: $dark3;
+}
+::-moz-placeholder {
+  color: $dark3;
+}
+:-ms-input-placeholder {
+  color: $dark3;
+}
+input:-moz-placeholder {
+  color: $dark3;
+}
 
 textarea {
   min-height: 200px;
@@ -11,16 +19,19 @@ textarea {
 }
 
 .input {
-  padding: 0!important;
+  padding: 0 !important;
   position: relative;
-  input, textarea, .select-input > button, .readonly {
+  input,
+  textarea,
+  .select-input > button,
+  .readonly {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     line-height: 1;
     display: block;
     padding: $space-2;
-    box-shadow: none!important;
-    -webkit-box-shadow: none!important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
     height: auto;
     width: 100%;
     @extend .b1;
@@ -32,12 +43,18 @@ textarea {
     text-align: inherit;
   }
   &.input-sm {
-    input, textarea, .select-input > button, .readonly {
+    input,
+    textarea,
+    .select-input > button,
+    .readonly {
       padding: $space-1 $space-2;
     }
   }
   &.input-inline {
-    input, textarea, .select-input > button, .readonly {
+    input,
+    textarea,
+    .select-input > button,
+    .readonly {
       padding: 0 $space-1;
       border: none;
       line-height: inherit;
@@ -61,7 +78,9 @@ textarea {
     color: $aqua;
     font-family: FontAwesome;
     transform: translateY(-50%);
-    &:after { content: "\f053"; }
+    &:after {
+      content: "\f053";
+    }
   }
 }
 .select-input {
@@ -97,7 +116,7 @@ ul.select-input-options {
   padding: 0;
   background: $white;
   @extend .b1;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   top: -2px;
   max-height: 200px;
@@ -109,7 +128,7 @@ ul.select-input-options {
     &:not(:last-child) {
       @extend .bb1;
     }
-  }
+  } /*
   &.left-align {
     transform: translateX(100%);
     -webkit-transform: translateX(100%);
@@ -123,5 +142,5 @@ ul.select-input-options {
     li {
       text-align: right;
     }
-  }
+  }*/
 }
