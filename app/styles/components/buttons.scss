@@ -1,4 +1,7 @@
-a, a:hover, a:visited, a:active {
+a,
+a:hover,
+a:visited,
+a:active {
   text-decoration: none;
 }
 a {
@@ -18,7 +21,8 @@ button {
   border: none;
   padding: $space-1 $space-2;
 }
-.btn, .btn:focus {
+.btn,
+.btn:focus {
   @extend button;
   @include transition('all .2s');
   border-radius: 999px;
@@ -44,6 +48,9 @@ button {
     font-size: 1.2em;
     padding: 14px 24px;
     border-width: 3px;
+  }
+  &.btn-inline {
+    border: none;
   }
 }
 .btn-shy {

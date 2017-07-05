@@ -11,10 +11,23 @@ const InviteForm = (props) => {
     <form onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-xs-12 col-sm-6">
-          <Field type="email" name="email" component={Input} required sm placeholder="Email" />
+          <Field
+            type="email"
+            name="email"
+            component={Input}
+            required
+            sm
+            placeholder="Email"
+          />
         </div>
         <div className="col-xs-12 col-sm-6">
-          <Field type="text" name="name" component={Input} sm placeholder="Name (optional)" />
+          <Field
+            type="text"
+            name="name"
+            component={Input}
+            sm
+            placeholder="Name (optional)"
+          />
         </div>
       </div>
       <footer className="flex justify-between pt2">
@@ -23,7 +36,13 @@ const InviteForm = (props) => {
           <label className="ml1">Invite as guest?</label>
         </div>
         <div>
-          <Button type="submit" icon="envelope-o" label="Send invite" disabled={submitting} sm />
+          <Button
+            type="submit"
+            icon="envelope-o"
+            label="Send invite"
+            disabled={submitting}
+            small
+          />
         </div>
       </footer>
     </form>
@@ -43,6 +62,8 @@ const mapDispatch = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatch)(reduxForm({
-  form: 'InviteForm',
-})(InviteForm));
+export default connect(null, mapDispatch)(
+  reduxForm({
+    form: 'InviteForm',
+  })(InviteForm)
+);

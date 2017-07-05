@@ -3,8 +3,8 @@ import * as types from './constants';
 export function initializeOrganization() {
   return { type: types.INITIALIZE_ORGANIZATION };
 }
-export function switchOrganization(organization) {
-  return { type: types.SWITCH_ORGANIZATION, organization };
+export function switchOrganization(id) {
+  return { type: types.SWITCH_ORGANIZATION, id };
 }
 export function switchOrganizationSuccess(data) {
   return { type: types.SWITCH_ORGANIZATION_SUCCESS, data };

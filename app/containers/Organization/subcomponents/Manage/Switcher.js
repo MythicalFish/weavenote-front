@@ -1,25 +1,30 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import Dropdown from 'components/Dropdown';
-import { switchOrganization } from '../../actions';
+import SelectInput from 'components/SelectInput';
+import Button from 'components/Button';
 
 class Switcher extends React.PureComponent {
-  switchOrganization = (o) => () => {
-    this.props.switchOrganization(o.id);
+  switchOrganization = (o) => {
+    console.log(o);
+    this.props.switchOrganization(o.get('id'));
   };
   render() {
-    const { organization, organizations } = this.props;
+    const { organization, organizations, startCreate } = this.props;
     return (
-      <div>
-        <Dropdown label={organization.name} className="right-align">
-          {organizations.map((o, i) =>
-            <button type="button" onClick={this.switchOrganization(o)} key={o}>
-              {o.name}
-            </button>
-          )}
-        </Dropdown>
+      <div className="input inline-block">
+        <SelectInput
+          value={organization}
+          data={organizations}
+          onChange={this.switchOrganization}
+          align="right"
+          tail={() =>
+            <Button
+              small
+              inline
+              label="Create new organization"
+              icon="plus"
+              onclick={startCreate}
+            />}
+        />
       </div>
     );
   }
@@ -29,12 +34,7 @@ Switcher.propTypes = {
   organization: PropTypes.object,
   organizations: PropTypes.object,
   switchOrganization: PropTypes.func,
+  startCreate: PropTypes.func,
 };
 
-export function mapDispatch(dispatch) {
-  return bindActionCreators({ switchOrganization }, dispatch);
-}
-
-const mapState = createStructuredSelector({});
-
-export default connect(mapState, mapDispatch)(Switcher);
+export default Switcher;

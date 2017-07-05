@@ -31,7 +31,7 @@ export class Organization extends React.PureComponent {
     if (view === 'create') {
       return <Create onSubmit={this.create} />;
     } else if (organization) {
-      return <Manage {...this.props} />;
+      return <Manage {...this.props} startCreate={this.startCreate} />;
     } else if (view === 'start') {
       return <NoneYet onClick={this.startCreate} />;
     } else {
