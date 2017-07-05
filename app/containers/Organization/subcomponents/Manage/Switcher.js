@@ -6,14 +6,20 @@ import Dropdown from 'components/Dropdown';
 import { switchOrganization } from '../../actions';
 
 class Switcher extends React.PureComponent {
+  switchOrganization = (o) => () => {
+    this.props.switchOrganization(o.id);
+  };
   render() {
     const { organization, organizations } = this.props;
     return (
       <div>
-        {organizations.size > 1 &&
-          <div>
-            Switcher
-          </div>}
+        <Dropdown label={organization.name} className="right-align">
+          {organizations.map((o, i) =>
+            <button type="button" onClick={this.switchOrganization(o)} key={o}>
+              {o.name}
+            </button>
+          )}
+        </Dropdown>
       </div>
     );
   }

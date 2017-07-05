@@ -11,7 +11,7 @@ import Layout from 'components/Layout';
 import { createOrganization } from './actions';
 import Create from './subcomponents/Create';
 import NoneYet from './subcomponents/NoneYet';
-import Settings from './subcomponents/Settings';
+import Manage from './subcomponents/Manage';
 
 export class Organization extends React.PureComponent {
   state = { view: 'start' };
@@ -26,12 +26,12 @@ export class Organization extends React.PureComponent {
   };
 
   currentView = () => {
-    const { organizations } = this.props;
+    const { organization } = this.props;
     const { view } = this.state;
     if (view === 'create') {
       return <Create onSubmit={this.create} />;
-    } else if (organizations.size > 0) {
-      return <Settings {...this.props} />;
+    } else if (organization) {
+      return <Manage {...this.props} />;
     } else if (view === 'start') {
       return <NoneYet onClick={this.startCreate} />;
     } else {

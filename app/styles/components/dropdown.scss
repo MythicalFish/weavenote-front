@@ -1,13 +1,14 @@
-
 .dropdown {
   cursor: pointer;
   display: block;
   position: relative;
-  * { cursor: pointer!important; }
+  * {
+    cursor: pointer !important;
+  }
   > button {
     background: none;
     color: inherit;
-    display: block;
+    display: inline-block;
     padding: $space-1;
     font-weight: inherit;
     font-size: inherit;
@@ -15,8 +16,8 @@
     -webkit-transition: all .2s;
   }
   .dropdown-content {
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all .2s;
     -webkit-transition: all .2s;
     transform: translateY(-20px);
@@ -42,7 +43,8 @@
       transform: translateY(0);
       -webkit-transform: translateY(0);
     }
-    button, a {
+    button,
+    a {
       display: block;
       border: 0;
       background: none;
@@ -56,7 +58,7 @@
       -webkit-transition: background-color .1s;
       text-align: inherit;
       &:hover {
-        background-color: rgba(0,0,0,0.03);
+        background-color: rgba(0, 0, 0, 0.03);
       }
       &:not(:first-child) {
         border-top: 1px solid $dark1;

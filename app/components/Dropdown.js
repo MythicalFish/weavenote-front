@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 
-class Dropdown extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class Dropdown extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
 
-  state = { active: false, className: '' }
+  state = { active: false, className: '' };
 
   toggleState = () => {
     this.setState({ active: !this.state.active });
-  }
+  };
 
   handleClick = () => {
     if (this.state.active) {
@@ -20,15 +21,15 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
         this.setState({ className: 'open' });
       }, 1);
     }
-  }
+  };
 
   render() {
     const { label, children, width, className } = this.props;
     let menu;
     let widthClass = 'x10';
     if (width) widthClass = `x${width}`;
-    let pClass = className || '';
-    pClass += ` ${widthClass} ${this.state.className}`;
+    const dClass = className || '';
+    const pClass = `${dClass} ${widthClass} ${this.state.className}`;
     if (this.state.active) {
       menu = (
         <div className={`dropdown-content center ${pClass}`}>
@@ -37,7 +38,7 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
       );
     }
     return (
-      <div className="dropdown">
+      <div className={`dropdown ${dClass}`}>
         <button type="button" onClick={this.handleClick}>
           {label}
         </button>
@@ -48,10 +49,7 @@ class Dropdown extends React.Component { // eslint-disable-line react/prefer-sta
 }
 
 Dropdown.propTypes = {
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: React.PropTypes.node,
   width: React.PropTypes.string,
   className: React.PropTypes.string,

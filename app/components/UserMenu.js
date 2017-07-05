@@ -14,11 +14,10 @@ export default function UserMenu(props) {
             Profile
             <i className="fa fa-user ml1" />
           </Link>
-          {abilities.Organization.update &&
-            <Link to="/organization">
-              Organization
-              <i className="fa fa-group ml1" />
-            </Link>}
+          <Link to="/organization">
+            Organization
+            <i className="fa fa-group ml1" />
+          </Link>
           <button
             onClick={() => {
               authUtils.logout();

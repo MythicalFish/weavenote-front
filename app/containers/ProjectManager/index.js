@@ -72,6 +72,9 @@ class ProjectManager extends React.PureComponent {
         </div>
         {project &&
           <Modal parent={this} modalID="collaborators">
+            <header>
+              {`Collaborators for ${project.name}`}
+            </header>
             <Collaborators invitable={{ type: 'Project', id: project.id }} />
           </Modal>}
       </div>

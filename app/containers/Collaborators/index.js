@@ -6,12 +6,16 @@ import InviteForm from './subcomponents/InviteForm';
 import InviteList from './subcomponents/InviteList';
 import RoleList from './subcomponents/RoleList';
 import {
-  fetchInvites, cancelInvite, updateInvite, fetchRoles, removeRole, updateRole,
+  fetchInvites,
+  cancelInvite,
+  updateInvite,
+  fetchRoles,
+  removeRole,
+  updateRole,
 } from './actions';
 import { selectInvites, selectRoles } from './selectors';
 
 class Collaborators extends React.Component {
-
   componentDidMount() {
     const p = this.props;
     p.fetchInvites(p.invitable);
@@ -22,18 +26,15 @@ class Collaborators extends React.Component {
     const { invitable, invites, roles } = this.props;
     return (
       <div>
-        <header>Collaborators</header>
         {roles.size > 0 &&
           <div className="p2">
             <RoleList {...this.props} />
-          </div>
-        }
+          </div>}
         {invites.size > 0 &&
           <div className="bt1 p2">
             Pending invitations
             <InviteList {...this.props} />
-          </div>
-        }
+          </div>}
         <footer className="bt1 p2">
           <InviteForm
             initialValues={{
@@ -51,7 +52,6 @@ Collaborators.propTypes = {
   invitable: PropTypes.object,
   roles: PropTypes.object,
 };
-
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
