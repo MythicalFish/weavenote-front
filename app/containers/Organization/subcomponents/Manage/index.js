@@ -33,7 +33,7 @@ class Manage extends React.PureComponent {
         <div className="bg-white p2 mt2">
           <h4>Collaborators</h4>
           <Collaborators
-            invitable={{ type: 'Organization', id: organization.id }}
+            invitable={{ type: 'Organization', id: organization.get('id') }}
           />
         </div>
       </div>

@@ -4,7 +4,6 @@ import Button from 'components/Button';
 
 class Switcher extends React.PureComponent {
   switchOrganization = (o) => {
-    console.log(o);
     this.props.switchOrganization(o.get('id'));
   };
   render() {

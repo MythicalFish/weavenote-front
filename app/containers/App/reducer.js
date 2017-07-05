@@ -12,11 +12,12 @@ import * as appActionTypes from './constants/actions';
 import * as sections from './constants/sections';
 
 const initialState = fromJS({
-  user: null,
-  organization: null,
-  organization_role: null,
-  organizations: null,
-  abilities: null,
+  user: {
+    organization: null,
+    organization_role: null,
+    organizations: null,
+    abilities: null,
+  },
   invite: null,
   stats: {
     projects: {
@@ -31,39 +32,28 @@ const initialState = fromJS({
 });
 
 function appReducer(state = initialState, action) {
-
   switch (action.type) {
-
     // User
 
     case appActionTypes.FETCH_USER_SUCCESS:
-      return state
-        .set('user', fromJS(action.data.user))
-        .set('organization', action.data.organization)
-        .set('organization_role', action.data.organization_role)
-        .set('organizations', fromJS(action.data.organizations))
-        .set('abilities', action.data.abilities);
+      return state.set('user', fromJS(action.data));
 
     case profileActionTypes.UPDATE_PROFILE_SUCCESS:
-      return state
-        .setIn(['user', 'name'], action.data.name);
+      return state.setIn(['user', 'name'], action.data.name);
 
     case appActionTypes.FETCH_INVITE_SUCCESS:
-      return state
-        .set('invite', action.invite);
+      return state.set('invite', action.invite);
 
     // Org
 
+    case orgActionTypes.SWITCH_ORGANIZATION_SUCCESS:
+      return state.set('user', fromJS(action.data));
+
     case orgActionTypes.CREATE_ORGANIZATION_SUCCESS:
-      return state
-        .set('organization', action.data.organization)
-        .set('organization_role', action.data.organization_role)
-        .set('organizations', fromJS(action.data.organizations))
-        .set('abilities', action.data.abilities);
+      return state.set('user', fromJS(action.data));
 
     case orgActionTypes.UPDATE_ORGANIZATION_SUCCESS:
-      return state
-        .set('organization', action.data);
+      return state.setIn(['user', 'organization'], fromJS(action.data));
 
     //
 
@@ -73,14 +63,12 @@ function appReducer(state = initialState, action) {
         .setIn(['currentSection', 'label'], action.section.label);
 
     case appActionTypes.FETCH_STATS_SUCCESS:
-      return state
-        .set('stats', fromJS(action.stats));
+      return state.set('stats', fromJS(action.stats));
 
     // Materials
 
     case materialActionTypes.FETCH_MATERIALS_SUCCESS:
-      return state
-        .set('materials', fromJS(action.materials));
+      return state.set('materials', fromJS(action.materials));
 
     default:
       return state;

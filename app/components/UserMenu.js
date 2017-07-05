@@ -39,7 +39,7 @@ const UserMenuButton = (props) => {
         {user.get('name')}
         {organization &&
           <div className="dark5 upcase smaller1">
-            {organization.name}
+            {organization.get('name')}
           </div>}
       </div>
       <Avatar {...{ user }} />

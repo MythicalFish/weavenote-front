@@ -51,7 +51,7 @@ class Gateway extends React.PureComponent {
       return;
     }
 
-    if (!this.props.user) {
+    if (!this.props.user.get('name')) {
       this.props.fetchUser();
       return;
     }
@@ -98,7 +98,7 @@ class Gateway extends React.PureComponent {
       return null;
     }
 
-    if (!this.props.user) {
+    if (!this.props.user.get('name')) {
       return null;
     }
 
