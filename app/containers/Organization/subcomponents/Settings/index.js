@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Collaborators from 'containers/Collaborators';
 import Form from './Form';
+import Switcher from './Switcher';
 import { updateOrganization } from '../../actions';
 
 class Settings extends React.PureComponent {
@@ -10,6 +11,7 @@ class Settings extends React.PureComponent {
     const { organization } = this.props;
     return (
       <div>
+        <Switcher {...this.props} />
         {organization &&
           <div>
             <h2>

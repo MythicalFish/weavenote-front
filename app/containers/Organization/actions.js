@@ -3,7 +3,12 @@ import * as types from './constants';
 export function initializeOrganization() {
   return { type: types.INITIALIZE_ORGANIZATION };
 }
-
+export function switchOrganization(organization) {
+  return { type: types.SWITCH_ORGANIZATION, organization };
+}
+export function switchOrganizationSuccess(data) {
+  return { type: types.SWITCH_ORGANIZATION_SUCCESS, data };
+}
 export function updateOrganization(organization) {
   return { type: types.UPDATE_ORGANIZATION, organization };
 }

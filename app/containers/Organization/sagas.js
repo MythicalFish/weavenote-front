@@ -1,4 +1,3 @@
-
 import { take, takeLatest, cancel, put } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
@@ -14,6 +13,7 @@ function* orgWatcher() {
     yield takeLatest(types.CREATE_ORGANIZATION, createOrganization),
     yield takeLatest(types.CREATE_ORGANIZATION_SUCCESS, orgSuccess),
     yield takeLatest(types.UPDATE_ORGANIZATION, updateOrganization),
+    yield takeLatest(types.SWITCH_ORGANIZATION, switchOrganization),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -25,16 +25,31 @@ function* initializeOrganization() {
   }
 }
 
+function* switchOrganization({ id }) {
+  yield sagas.get(
+    'switch_organization',
+    { id },
+    actions.switchOrganizationSuccess
+  );
+}
+
 function* createOrganization({ organization }) {
-  yield sagas.post('organizations', { organization }, actions.createOrganizationSuccess);
+  yield sagas.post(
+    'organizations',
+    { organization },
+    actions.createOrganizationSuccess
+  );
 }
 
 function* updateOrganization({ organization }) {
-  yield sagas.patch(orgUrl(organization), { organization }, actions.updateOrganizationSuccess);
+  yield sagas.patch(
+    orgUrl(organization),
+    { organization },
+    actions.updateOrganizationSuccess
+  );
 }
 
 function* orgSuccess() {
   browserHistory.push('/');
 }
-const orgUrl = (org) => (`organizations/${org.get('id')}`);
-
+const orgUrl = (org) => `organizations/${org.get('id')}`;
