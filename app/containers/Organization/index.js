@@ -6,6 +6,7 @@ import {
   selectOrganization,
   selectOrganizations,
   selectUser,
+  selectAbilities,
 } from 'containers/App/selectors';
 import Layout from 'components/Layout';
 import { createOrganization } from './actions';
@@ -63,6 +64,7 @@ const mapState = createStructuredSelector({
   user: selectUser(),
   organization: selectOrganization(),
   organizations: selectOrganizations(),
+  abilities: selectAbilities(),
 });
 
 export default connect(mapState, mapDispatch)(Organization);

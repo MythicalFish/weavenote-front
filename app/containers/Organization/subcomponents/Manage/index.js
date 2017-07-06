@@ -8,7 +8,7 @@ import { updateOrganization, switchOrganization } from '../../actions';
 
 class Manage extends React.PureComponent {
   render() {
-    const { organization } = this.props;
+    const { organization, abilities } = this.props;
     return (
       <div>
         <div className="bg-white p2">
@@ -22,20 +22,23 @@ class Manage extends React.PureComponent {
           </div>
         </div>
 
-        <div className="bg-white p2 mt2">
-          <h4>General</h4>
-          <Settings
-            initialValues={organization}
-            onSubmit={this.props.handleUpdate}
-          />
-        </div>
+        {abilities.Organization.update &&
+          <div>
+            <div className="bg-white p2 mt2">
+              <h4>General</h4>
+              <Settings
+                initialValues={organization}
+                onSubmit={this.props.handleUpdate}
+              />
+            </div>
 
-        <div className="bg-white p2 mt2">
-          <h4>Collaborators</h4>
-          <Collaborators
-            invitable={{ type: 'Organization', id: organization.get('id') }}
-          />
-        </div>
+            <div className="bg-white p2 mt2">
+              <h4>Collaborators</h4>
+              <Collaborators
+                invitable={{ type: 'Organization', id: organization.get('id') }}
+              />
+            </div>
+          </div>}
       </div>
     );
   }
@@ -44,6 +47,7 @@ class Manage extends React.PureComponent {
 Manage.propTypes = {
   organization: PropTypes.object,
   handleUpdate: PropTypes.func,
+  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
