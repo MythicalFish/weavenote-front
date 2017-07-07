@@ -2,34 +2,37 @@ import React, { PropTypes } from 'react';
 import ReactS3Uploader from 'react-s3-uploader';
 import * as API from 'utils/API';
 
-export default class Uploader extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentWillMount() {
-    this.setState({ progress: 0 });
-  }
+class Uploader extends React.Component {
+  state = { progress: 0 };
   onUploadPreprocess(file, next) {
-    console.log(`Pre-process: ${file.name}`); // eslint-disable-line no-console
+    console.log(`Pre-process: ${file.name}`);
     next(file);
   }
   onUploadProgress = (percent, message) => {
     let p = percent;
-    if (percent === 0) { p = 1; }
-    if (percent === 100) { p = 0; }
-    console.log(`Upload progress: ${p}% ${message}`); // eslint-disable-line no-console
+    if (percent === 0) {
+      p = 1;
+    }
+    if (percent === 100) {
+      p = 0;
+    }
+    console.log(`Upload progress: ${p}% ${message}`);
     this.setState({ progress: p });
-  }
-  onFinish = (data) => {
-    console.log('Upload finished:'); // eslint-disable-line no-console
-    this.props.onFinish(data);
-  }
+  };
+  onFinish = (image) => {
+    console.log('Upload finished:');
+    const { imageable } = this.props;
+    this.props.createImage({ imageable, image });
+  };
   onUploadError(message) {
-    console.log(`Upload error: ${message}`); // eslint-disable-line no-console
+    console.log(`Upload error: ${message}`);
   }
   render() {
     return (
       <div>
         {this.state.progress === 0 &&
           <div className="glyph">
-            <i className="fa fa-plus-circle"></i>
+            <i className="fa fa-plus-circle" />
             <ReactS3Uploader
               server={process.env.API_URL}
               signingUrl={'/s3_url'}
@@ -40,22 +43,22 @@ export default class Uploader extends React.Component { // eslint-disable-line r
               onProgress={this.onUploadProgress}
               onError={this.onUploadError}
               onFinish={this.onFinish}
-              scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/ig, '')}
+              scrubFilename={(filename) =>
+                filename.replace(/[^\w\d_\-\.]+/gi, '')}
             />
-          </div>
-        }
+          </div>}
         {this.state.progress > 0 &&
           <div>
             Uploading: {this.state.progress}%
-          </div>
-        }
+          </div>}
       </div>
     );
   }
 }
 
 Uploader.propTypes = {
-  projectID: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]),
-  onFinish: PropTypes.func,
+  imageable: PropTypes.object,
+  createImage: PropTypes.func,
 };
 
+export default Uploader;

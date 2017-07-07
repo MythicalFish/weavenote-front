@@ -114,52 +114,9 @@ export function switchInstruction(index) {
 
 /*
  *
- *  Project images
- *
- */
-
-export function fetchImages(projectID) {
-  return { type: types.FETCH_IMAGES, projectID };
-}
-
-export function fetchImagesSuccess(images) {
-  return { type: types.FETCH_IMAGES_SUCCESS, images };
-}
-
-export function updateImage({ projectID, imageID }) {
-  return { type: types.UPDATE_IMAGE, projectID, imageID };
-}
-
-export function updateImageSuccess() {
-  return { type: types.UPDATE_IMAGE_SUCCESS };
-}
-
-export function createImage(payload) {
-  return { type: types.CREATE_IMAGE, payload };
-}
-
-export function createImageSuccess(image) {
-  return { type: types.CREATE_IMAGE_SUCCESS, image };
-}
-
-export function deleteImage(payload) {
-  return { type: types.DELETE_IMAGE, payload };
-}
-
-export function deleteImageSuccess(images) {
-  return { type: types.DELETE_IMAGE_SUCCESS, images };
-}
-
-export function switchImage(index) {
-  return { type: types.SWITCH_IMAGE, index };
-}
-
-/*
- *
  *  Measurements
  *
  */
-
 
 export function fetchMeasurements(projectID) {
   return { type: types.FETCH_MEASUREMENTS, projectID };

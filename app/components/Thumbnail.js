@@ -1,9 +1,11 @@
 import React from 'react';
-import { IMAGE_PLACEHOLDER } from 'containers/App/constants';
+import { IMAGE_PLACEHOLDER } from 'containers/ImageManager/constants';
 
 const Thumbnail = (props) => {
   let url = props.url;
-  if (!url) { url = IMAGE_PLACEHOLDER; }
+  if (!url) {
+    url = IMAGE_PLACEHOLDER;
+  }
   return (
     <div className="vh-sq7 overflow-hidden b1">
       <img src={url} role="presentation" />

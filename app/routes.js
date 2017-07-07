@@ -37,13 +37,12 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/organization',
       name: 'Organization',
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/Organization'),
-        ]);
+        const importModules = Promise.all([import('containers/Organization')]);
 
         const renderRoute = loadModule(cb);
 
@@ -53,7 +52,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/projects',
       name: 'ProjectList',
       getComponent(nextState, cb) {
@@ -73,7 +73,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/projects/:id',
       name: 'ProjectManager',
       getComponent(nextState, cb) {
@@ -93,7 +94,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/materials',
       name: 'MaterialList',
       getComponent(nextState, cb) {
@@ -113,7 +115,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/materials/:id',
       name: 'MaterialManager',
       getComponent(nextState, cb) {
@@ -135,7 +138,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/contacts',
       name: 'contacts',
       getComponent(nextState, cb) {
@@ -155,7 +159,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/profile',
       name: 'profile',
       getComponent(nextState, cb) {
@@ -175,7 +180,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
@@ -190,18 +196,20 @@ export default function createRoutes(store) {
     getComponent(nextState, cb) {
       const importModules = Promise.all([
         // global Sagas
-        import('containers/App/sagas'), 
+        import('containers/App/sagas'),
         import('containers/Collaborators/sagas'),
         import('containers/Organization/sagas'),
+        import('containers/ImageManager/sagas'),
         import('containers/App'),
       ]);
 
       const renderRoute = loadModule(cb);
 
-      importModules.then(([appSagas, cSagas, oSagas, component]) => {
+      importModules.then(([appSagas, cSagas, oSagas, iSagas, component]) => {
         injectSagas(appSagas.default);
         injectSagas(cSagas.default);
         injectSagas(oSagas.default);
+        injectSagas(iSagas.default);
         renderRoute(component);
       });
 
@@ -209,5 +217,4 @@ export default function createRoutes(store) {
     },
     childRoutes,
   };
-
 }

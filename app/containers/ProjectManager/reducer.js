@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import * as imageActionTypes from 'containers/ImageManager/constants';
 import * as types from './constants';
 
 const initialState = fromJS({
@@ -98,21 +99,23 @@ function projectReducer(state = initialState, action) {
 
     // Images
 
-    case types.FETCH_IMAGES_SUCCESS:
-      return state.set('images', fromJS(action.images));
+    case imageActionTypes.FETCH_IMAGES_SUCCESS:
+      return state.set('images', fromJS(action.response.images));
 
-    case types.UPDATE_IMAGE_SUCCESS:
+    case imageActionTypes.UPDATE_IMAGE_SUCCESS:
       return state;
 
-    case types.CREATE_IMAGE_SUCCESS:
+    case imageActionTypes.CREATE_IMAGE_SUCCESS:
       return state
-        .setIn(['images', imageCount], fromJS(action.image))
+        .set('images', fromJS(action.response.images))
         .set('currentImage', imageCount);
 
-    case types.DELETE_IMAGE_SUCCESS:
-      return state.set('images', fromJS(action.images)).set('currentImage', 0);
+    case imageActionTypes.DELETE_IMAGE_SUCCESS:
+      return state
+        .set('images', fromJS(action.response.images))
+        .set('currentImage', 0);
 
-    case types.SWITCH_IMAGE:
+    case imageActionTypes.SWITCH_IMAGE:
       return state.set('currentImage', action.index);
 
     // Measurements

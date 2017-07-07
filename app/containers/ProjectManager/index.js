@@ -13,8 +13,12 @@ import Basics from './subcomponents/Basics';
 import Components from './subcomponents/Components';
 import Measurements from './subcomponents/Measurements';
 import Instructions from './subcomponents/Instructions';
-import Images from './subcomponents/Images';
-import { selectProject } from './selectors';
+import ImageManager from 'containers/ImageManager';
+import {
+  selectProject,
+  selectProjectImages,
+  selectProjectCurrentImage,
+} from './selectors';
 import { fetchProject } from './actions';
 
 class ProjectManager extends React.PureComponent {
@@ -62,7 +66,12 @@ class ProjectManager extends React.PureComponent {
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-6 flex justify-center">
-                {project && <Images project={project} />}
+                {project &&
+                  <ImageManager
+                    imageable={{ type: 'Project', id: project.id }}
+                    images={this.props.images}
+                    currentImage={this.props.currentImage}
+                  />}
               </div>
               <div className="col-xs-12 col-md-6 flex justify-center">
                 {project && renderedSection}
@@ -97,6 +106,8 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   project: selectProject(),
   currentSection: selectCurrentSection(),
+  images: selectProjectImages(),
+  currentImage: selectProjectCurrentImage(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

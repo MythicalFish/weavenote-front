@@ -5,13 +5,18 @@ function ThumbnailList(props) {
   const { handleClick, images } = props;
   return (
     <ul className="thumbnails">
-      {images && images.toJS().map((image, index) => (
-        <li key={`thumbnail-${index}`}>
-          <button onClick={() => { handleClick(index); }}>
-            <Thumbnail url={image.url} />
-          </button>
-        </li>
-      ))}
+      {images &&
+        images.toJS().map((image, index) =>
+          <li key={`thumbnail-${index}`}>
+            <button
+              onClick={() => {
+                handleClick(index);
+              }}
+            >
+              <Thumbnail url={image.url} />
+            </button>
+          </li>
+        )}
     </ul>
   );
 }

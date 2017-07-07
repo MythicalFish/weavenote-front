@@ -3,72 +3,59 @@ import { fromJS } from 'immutable';
 
 export const selectDomain = () => (state) => state.get('ProjectManager');
 
-export const selectProject = () => createSelector(
-  selectDomain(),
-  (substate) => {
+export const selectProject = () =>
+  createSelector(selectDomain(), (substate) => {
     const project = substate.get('attributes');
     if (project) {
       return project.toJS();
     }
     return project;
-  }
-);
+  });
 
-export const selectMaterialCost = () => createSelector(
-  selectDomain(),
-  (substate) => substate.get('material_cost')
-);
+export const selectMaterialCost = () =>
+  createSelector(selectDomain(), (substate) => substate.get('material_cost'));
 
-export const selectComponents = () => createSelector(
-  selectDomain(),
-  (substate) => substate.get('components')
-);
+export const selectComponents = () =>
+  createSelector(selectDomain(), (substate) => substate.get('components'));
 
-export const selectCurrentComponent = () => createSelector(
-  selectDomain(),
-  (substate) => {
+export const selectCurrentComponent = () =>
+  createSelector(selectDomain(), (substate) => {
     const index = substate.get('currentComponent');
     const component = substate.getIn(['components', index]);
-    if (component) { return component; }
+    if (component) {
+      return component;
+    }
     return null;
-  }
-);
+  });
 
-export const selectInstructions = () => createSelector(
-  selectDomain(),
-  (substate) => substate.get('instructions')
-);
+export const selectInstructions = () =>
+  createSelector(selectDomain(), (substate) => substate.get('instructions'));
 
-export const selectCurrentInstruction = () => createSelector(
-  selectDomain(),
-  (substate) => {
+export const selectCurrentInstruction = () =>
+  createSelector(selectDomain(), (substate) => {
     const index = substate.get('currentInstruction');
     const instruction = substate.getIn(['instructions', index]);
-    if (instruction) { return instruction; }
+    if (instruction) {
+      return instruction;
+    }
     return null;
-  }
-);
+  });
 
+export const selectProjectImages = () =>
+  createSelector(selectDomain(), (substate) => substate.get('images'));
 
-export const selectImages = () => createSelector(
-  selectDomain(),
-  (substate) => substate.get('images')
-);
-
-export const selectCurrentImage = () => createSelector(
-  selectDomain(),
-  (substate) => {
+export const selectProjectCurrentImage = () =>
+  createSelector(selectDomain(), (substate) => {
     const index = substate.get('currentImage');
     const image = substate.getIn(['images', index]);
-    if (image) { return image.toJS(); }
+    if (image) {
+      return image.toJS();
+    }
     return null;
-  }
-);
+  });
 
-export const selectMeasurements = () => createSelector(
-  selectDomain(),
-  (substate) => substate.get('measurements')
-);
+export const selectMeasurements = () =>
+  createSelector(selectDomain(), (substate) => substate.get('measurements'));
 
 /*
  *
@@ -76,9 +63,8 @@ export const selectMeasurements = () => createSelector(
  *
  */
 
-export const selectComponentForm = () => createSelector(
-  selectCurrentComponent(),
-  (component) => {
+export const selectComponentForm = () =>
+  createSelector(selectCurrentComponent(), (component) => {
     if (component) {
       return fromJS({
         id: component.get('id'),
@@ -86,5 +72,4 @@ export const selectComponentForm = () => createSelector(
         project_id: component.get('project_id'),
       });
     }
-  }
-);
+  });
