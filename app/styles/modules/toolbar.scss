@@ -23,7 +23,10 @@
         @extend .flex;
         padding: 0;
         @extend .flex-auto;
-        button {
+        @extend .flex-column;
+        button,
+        a {
+          @extend .flex-auto;
           background: transparent;
           border: none;
           display: block;
