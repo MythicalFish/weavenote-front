@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import ThumbnailList from './subcomponents/ThumbnailList';
 import Uploader from './subcomponents/Uploader';
-import { IMAGE_PLACEHOLDER } from './constants';
 import { deleteImage, createImage, switchImage, fetchImages } from './actions';
 
 class ImageManager extends React.Component {
@@ -12,9 +11,9 @@ class ImageManager extends React.Component {
     this.props.fetchImages(this.props.imageable);
   }
   currentImage() {
-    const { currentImage: c } = this.props;
-    if (c) return c;
-    return { url: IMAGE_PLACEHOLDER };
+    const { currentImage, placeholder } = this.props;
+    if (currentImage) return currentImage;
+    return { url: placeholder || null };
   }
   deleteImage = (id) => {
     const { imageable } = this.props;
@@ -56,6 +55,7 @@ ImageManager.propTypes = {
   imageable: PropTypes.object,
   images: PropTypes.object,
   currentImage: PropTypes.object,
+  placeholder: PropTypes.string,
   deleteImage: PropTypes.func,
   switchImage: PropTypes.func,
   fetchImages: PropTypes.func,

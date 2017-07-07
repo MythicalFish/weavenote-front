@@ -6,7 +6,6 @@ import ImageManager from 'containers/ImageManager';
 
 const Form = (props) => {
   const { handleSubmit, submitting, initialValues: instruction } = props;
-  const img = instruction.get('image');
 
   return (
     <form onSubmit={handleSubmit}>
@@ -24,10 +23,11 @@ const Form = (props) => {
           component={DataRow}
           label="Description"
         />
-        {img && <img src={img.get('url')} />}
-        <ImageManager
-          imageable={{ type: 'Instruction', id: instruction.get('id') }}
-        />
+        {instruction.get('id') &&
+          <ImageManager
+            imageable={{ type: 'Instruction', id: instruction.get('id') }}
+            images={instruction.get('images')}
+          />}
         <footer className="p2 center">
           <Button type="submit" disabled={submitting} label="Save" />
         </footer>

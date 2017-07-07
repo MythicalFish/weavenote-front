@@ -38,3 +38,6 @@ export const CREATE_MEASUREMENT_NAME_SUCCESS =
   '@@app/CREATE_MEASUREMENT_NAME_SUCCESS';
 export const CREATE_MEASUREMENT_GROUP_SUCCESS =
   '@@app/CREATE_MEASUREMENT_GROUP_SUCCESS';
+
+export const IMAGE_PLACEHOLDER =
+  'https://s3-eu-west-1.amazonaws.com/content.mythical.fish/seamless/assets/19jCEX4.jpg';

@@ -100,20 +100,38 @@ function projectReducer(state = initialState, action) {
     // Images
 
     case imageActionTypes.FETCH_IMAGES_SUCCESS:
-      return state.set('images', fromJS(action.response.images));
-
-    case imageActionTypes.UPDATE_IMAGE_SUCCESS:
+      if (action.response.imageable_type === 'Project') {
+        return state.set('images', fromJS(action.response.images));
+      } else if (action.response.imageable_type === 'Instruction') {
+        return state.setIn(
+          ['instructions', currentInstruction, 'images'],
+          fromJS(action.response.images)
+        );
+      }
       return state;
 
     case imageActionTypes.CREATE_IMAGE_SUCCESS:
-      return state
-        .set('images', fromJS(action.response.images))
-        .set('currentImage', imageCount);
+      if (action.response.imageable_type === 'Project') {
+        return state
+          .set('images', fromJS(action.response.images))
+          .set('currentImage', imageCount);
+      } else if (action.response.imageable_type === 'Instruction') {
+        return state.setIn(
+          ['instructions', currentInstruction, 'images'],
+          fromJS(action.response.images)
+        );
+      }
+      return state;
 
     case imageActionTypes.DELETE_IMAGE_SUCCESS:
-      return state
-        .set('images', fromJS(action.response.images))
-        .set('currentImage', 0);
+      if (action.response.imageable_type === 'Project') {
+        return state
+          .set('images', fromJS(action.response.images))
+          .set('currentImage', 0);
+      } else if (action.response.imageable_type === 'Instruction') {
+        return state.setIn(['instructions', currentInstruction, 'images'], []);
+      }
+      return state;
 
     case imageActionTypes.SWITCH_IMAGE:
       return state.set('currentImage', action.index);

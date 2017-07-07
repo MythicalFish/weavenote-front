@@ -20,6 +20,7 @@ import {
   selectProjectCurrentImage,
 } from './selectors';
 import { fetchProject } from './actions';
+import { IMAGE_PLACEHOLDER } from './constants';
 
 class ProjectManager extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -71,6 +72,7 @@ class ProjectManager extends React.PureComponent {
                     imageable={{ type: 'Project', id: project.id }}
                     images={this.props.images}
                     currentImage={this.props.currentImage}
+                    placeholder={IMAGE_PLACEHOLDER}
                   />}
               </div>
               <div className="col-xs-12 col-md-6 flex justify-center">
@@ -92,6 +94,8 @@ class ProjectManager extends React.PureComponent {
 }
 
 ProjectManager.propTypes = {
+  images: React.PropTypes.object,
+  currentImage: React.PropTypes.object,
   project: React.PropTypes.object,
   currentSection: React.PropTypes.object,
   changeSection: React.PropTypes.func,
