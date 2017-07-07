@@ -14,11 +14,7 @@ import Components from './subcomponents/Components';
 import Measurements from './subcomponents/Measurements';
 import Instructions from './subcomponents/Instructions';
 import ImageManager from 'containers/ImageManager';
-import {
-  selectProject,
-  selectProjectImages,
-  selectProjectCurrentImage,
-} from './selectors';
+import { selectProject, selectProjectCurrentImage } from './selectors';
 import { fetchProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
 
@@ -69,8 +65,9 @@ class ProjectManager extends React.PureComponent {
               <div className="col-xs-12 col-md-6 flex justify-center">
                 {project &&
                   <ImageManager
-                    imageable={{ type: 'Project', id: project.id }}
-                    images={this.props.images}
+                    maxImages={5}
+                    imageable={{ type: 'Project', id: project.get('id') }}
+                    images={project.get('images')}
                     currentImage={this.props.currentImage}
                     placeholder={IMAGE_PLACEHOLDER}
                   />}
@@ -84,9 +81,11 @@ class ProjectManager extends React.PureComponent {
         {project &&
           <Modal parent={this} modalID="collaborators">
             <header>
-              {`Collaborators for ${project.name}`}
+              {`Collaborators for ${project.get('name')}`}
             </header>
-            <Collaborators invitable={{ type: 'Project', id: project.id }} />
+            <Collaborators
+              invitable={{ type: 'Project', id: project.get('id') }}
+            />
           </Modal>}
       </div>
     );
@@ -110,7 +109,6 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   project: selectProject(),
   currentSection: selectCurrentSection(),
-  images: selectProjectImages(),
   currentImage: selectProjectCurrentImage(),
 });
 

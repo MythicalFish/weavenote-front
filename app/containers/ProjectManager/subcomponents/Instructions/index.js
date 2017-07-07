@@ -6,51 +6,51 @@ import Accordion from 'components/Accordion';
 import ListItem from './ListItem';
 import Form from './Form';
 import {
-  fetchInstructions, switchInstruction, updateInstruction, createInstruction,
+  fetchInstructions,
+  switchInstruction,
+  updateInstruction,
+  createInstruction,
 } from '../../actions';
 import { selectInstructions, selectCurrentInstruction } from '../../selectors';
 class Instructions extends React.Component {
-
-  state = { creating: false }
+  state = { creating: false };
 
   componentDidMount() {
     const { project } = this.props;
-    this.props.fetchInstructions(project.id);
+    this.props.fetchInstructions(project.get('id'));
   }
 
   toggleCreate = () => {
     this.setState({ creating: !this.state.creating });
-  }
+  };
 
   createInstruction = (data) => {
     this.props.createInstruction(data);
     this.toggleCreate();
-  }
+  };
 
   render() {
     return (
       <div>
-        {
-          this.state.creating
-            ? <Form
-              onSubmit={this.createInstruction}
-              initialValues={{
-                project_id: this.props.project.id,
-                title: '',
-                description: '',
-              }}
-            />
-            : <Accordion
-              items={this.props.instructions}
-              current={this.props.current}
-              toggleCreate={this.toggleCreate}
-              updateItem={this.props.updateInstruction}
-              switchItem={this.props.switchInstruction}
-              formValues={this.props.current}
-              ListItem={ListItem}
-              Form={Form}
-            />
-        }
+        {this.state.creating
+          ? <Form
+            onSubmit={this.createInstruction}
+            initialValues={{
+              project_id: this.props.project.get('id'),
+              title: '',
+              description: '',
+            }}
+          />
+          : <Accordion
+            items={this.props.instructions}
+            current={this.props.current}
+            toggleCreate={this.toggleCreate}
+            updateItem={this.props.updateInstruction}
+            switchItem={this.props.switchInstruction}
+            formValues={this.props.current}
+            ListItem={ListItem}
+            Form={Form}
+          />}
       </div>
     );
   }
@@ -66,10 +66,14 @@ Instructions.propTypes = {
   createInstruction: PropTypes.func,
 };
 
-
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchInstructions, switchInstruction, updateInstruction, createInstruction },
+    {
+      fetchInstructions,
+      switchInstruction,
+      updateInstruction,
+      createInstruction,
+    },
     dispatch
   );
 }

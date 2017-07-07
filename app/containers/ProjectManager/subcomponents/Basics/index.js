@@ -10,14 +10,30 @@ import { selectProject } from '../../selectors';
 
 const Basics = (props) => {
   const { handleSubmit, pristine, reset, submitting, project } = props;
-  const createdOn = <FormattedDate value={project.created_at} day="numeric" month="short" />;
+  const createdOn = (
+    <FormattedDate
+      value={project.get('created_at')}
+      day="numeric"
+      month="short"
+    />
+  );
   return (
     <form className="data-rows" onSubmit={handleSubmit}>
       <Field name="name" type="text" component={DataRow} label="Name" />
       <Field name="category" type="text" component={DataRow} label="Category" />
-      <Field name="identifier" type="text" component={DataRow} label="Identifier" />
+      <Field
+        name="identifier"
+        type="text"
+        component={DataRow}
+        label="Identifier"
+      />
       <DataRow type="display" label="Created on" value={createdOn} />
-      <Field name="description" type="textarea" component={DataRow} label="Description" />
+      <Field
+        name="description"
+        type="textarea"
+        component={DataRow}
+        label="Description"
+      />
       <footer className="p2 center">
         <Button type="submit" disabled={submitting} label="Save" />
       </footer>
@@ -26,6 +42,7 @@ const Basics = (props) => {
 };
 
 Basics.propTypes = {
+  project: PropTypes.object,
   handleSubmit: PropTypes.func,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -45,6 +62,8 @@ const mapState = createStructuredSelector({
   initialValues: selectProject(),
 });
 
-export default connect(mapState, mapDispatch)(reduxForm({
-  form: 'Basics',
-})(Basics));
+export default connect(mapState, mapDispatch)(
+  reduxForm({
+    form: 'Basics',
+  })(Basics)
+);

@@ -12,7 +12,7 @@ class ImageManager extends React.Component {
   }
   currentImage() {
     const { currentImage, placeholder } = this.props;
-    if (currentImage) return currentImage;
+    if (currentImage) return currentImage.toJS();
     return { url: placeholder || null };
   }
   deleteImage = (id) => {
@@ -21,7 +21,7 @@ class ImageManager extends React.Component {
   };
 
   render() {
-    const { images } = this.props;
+    const { images, maxImages } = this.props;
     const image = this.currentImage();
     return (
       <div>
@@ -38,6 +38,7 @@ class ImageManager extends React.Component {
         </div>
         <div>
           {images &&
+            maxImages > 1 &&
             <ThumbnailList
               images={images}
               handleClick={(index) => {
@@ -59,6 +60,7 @@ ImageManager.propTypes = {
   deleteImage: PropTypes.func,
   switchImage: PropTypes.func,
   fetchImages: PropTypes.func,
+  maxImages: PropTypes.number,
 };
 
 export function mapDispatch(dispatch) {

@@ -5,7 +5,6 @@ import * as types from './constants';
 const initialState = fromJS({
   attributes: null,
   user_role: null,
-  images: [],
   collaborators: [],
   currentImage: 0,
   components: [],
@@ -16,7 +15,6 @@ const initialState = fromJS({
 });
 
 function projectReducer(state = initialState, action) {
-  const imageCount = state.get('images').size;
   const currentComponent = state.get('currentComponent');
   const currentInstruction = state.get('currentInstruction');
 
@@ -99,22 +97,11 @@ function projectReducer(state = initialState, action) {
 
     // Images
 
-    case imageActionTypes.FETCH_IMAGES_SUCCESS:
-      if (action.response.imageable_type === 'Project') {
-        return state.set('images', fromJS(action.response.images));
-      } else if (action.response.imageable_type === 'Instruction') {
-        return state.setIn(
-          ['instructions', currentInstruction, 'images'],
-          fromJS(action.response.images)
-        );
-      }
-      return state;
-
     case imageActionTypes.CREATE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
         return state
-          .set('images', fromJS(action.response.images))
-          .set('currentImage', imageCount);
+          .setIn(['attributes', 'images'], fromJS(action.response.images))
+          .set('currentImage', state.getIn(['attributes', 'images']).size);
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(
           ['instructions', currentInstruction, 'images'],
@@ -126,7 +113,7 @@ function projectReducer(state = initialState, action) {
     case imageActionTypes.DELETE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
         return state
-          .set('images', fromJS(action.response.images))
+          .setIn(['attributes', 'images'], fromJS(action.response.images))
           .set('currentImage', 0);
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(['instructions', currentInstruction, 'images'], []);

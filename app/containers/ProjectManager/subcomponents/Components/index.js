@@ -11,51 +11,58 @@ import SelectMaterial from './SelectMaterial';
 import ListItem from './ListItem';
 import Form from './Form';
 import {
-  fetchComponents, switchComponent, updateComponent, createComponent,
+  fetchComponents,
+  switchComponent,
+  updateComponent,
+  createComponent,
   fetchMaterialCost,
 } from '../../actions';
-import { selectComponents, selectCurrentComponent, selectComponentForm, selectMaterialCost } from '../../selectors';
+import {
+  selectComponents,
+  selectCurrentComponent,
+  selectComponentForm,
+  selectMaterialCost,
+} from '../../selectors';
 
-class Components extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class Components extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
 
-  state = { creating: false }
+  state = { creating: false };
 
   componentDidMount() {
     const { project } = this.props;
-    this.props.fetchComponents(project.id);
+    this.props.fetchComponents(project.get('id'));
     this.props.fetchMaterials();
   }
 
   toggleCreate = () => {
     this.setState({ creating: !this.state.creating });
-  }
+  };
 
   render() {
     return (
       <div>
-        {
-          this.state.creating
-            ? <SelectMaterial
-              project={this.props.project}
-              materials={this.props.materials}
-              toggleCreate={this.toggleCreate}
-              createComponent={this.props.createComponent}
-            />
-            : <Accordion
-              items={this.props.components}
-              current={this.props.current}
-              toggleCreate={this.toggleCreate}
-              updateItem={this.props.updateComponent}
-              switchItem={this.props.switchComponent}
-              formValues={this.props.formValues}
-              ListItem={ListItem}
-              Form={Form}
-              footer={{
-                label: 'Material cost',
-                value: <Price value={this.props.materialCost} />,
-              }}
-            />
-        }
+        {this.state.creating
+          ? <SelectMaterial
+            project={this.props.project}
+            materials={this.props.materials}
+            toggleCreate={this.toggleCreate}
+            createComponent={this.props.createComponent}
+          />
+          : <Accordion
+            items={this.props.components}
+            current={this.props.current}
+            toggleCreate={this.toggleCreate}
+            updateItem={this.props.updateComponent}
+            switchItem={this.props.switchComponent}
+            formValues={this.props.formValues}
+            ListItem={ListItem}
+            Form={Form}
+            footer={{
+              label: 'Material cost',
+              value: <Price value={this.props.materialCost} />,
+            }}
+          />}
       </div>
     );
   }
@@ -73,16 +80,19 @@ Components.propTypes = {
   fetchMaterialCost: PropTypes.func,
   switchComponent: PropTypes.func,
   formValues: PropTypes.object,
-  materialCost: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  materialCost: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
-
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchComponents, updateComponent, createComponent, switchComponent, fetchMaterials, fetchMaterialCost },
+    {
+      fetchComponents,
+      updateComponent,
+      createComponent,
+      switchComponent,
+      fetchMaterials,
+      fetchMaterialCost,
+    },
     dispatch
   );
 }

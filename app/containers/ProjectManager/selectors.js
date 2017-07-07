@@ -4,13 +4,7 @@ import { fromJS } from 'immutable';
 export const selectDomain = () => (state) => state.get('ProjectManager');
 
 export const selectProject = () =>
-  createSelector(selectDomain(), (substate) => {
-    const project = substate.get('attributes');
-    if (project) {
-      return project.toJS();
-    }
-    return project;
-  });
+  createSelector(selectDomain(), (s) => s.get('attributes'));
 
 export const selectMaterialCost = () =>
   createSelector(selectDomain(), (substate) => substate.get('material_cost'));
@@ -41,18 +35,8 @@ export const selectCurrentInstruction = () =>
     return null;
   });
 
-export const selectProjectImages = () =>
-  createSelector(selectDomain(), (substate) => substate.get('images'));
-
 export const selectProjectCurrentImage = () =>
-  createSelector(selectDomain(), (substate) => {
-    const index = substate.get('currentImage');
-    const image = substate.getIn(['images', index]);
-    if (image) {
-      return image.toJS();
-    }
-    return null;
-  });
+  createSelector(selectDomain(), (s) => s.getIn(['attributes', 'images', s.get('currentImage')]));
 
 export const selectMeasurements = () =>
   createSelector(selectDomain(), (substate) => substate.get('measurements'));

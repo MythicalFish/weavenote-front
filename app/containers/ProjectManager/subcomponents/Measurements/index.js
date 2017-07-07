@@ -4,27 +4,31 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PlusButton from 'components/PlusButton';
 import { selectMeasurements } from '../../selectors';
-import { fetchMeasurements, updateMeasurements, createMeasurementGroup, createMeasurementName } from '../../actions';
+import {
+  fetchMeasurements,
+  updateMeasurements,
+  createMeasurementGroup,
+  createMeasurementName,
+} from '../../actions';
 import Form from './Form';
 
-class Measurements extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
+class Measurements extends React.PureComponent {
   componentDidMount() {
     const { project } = this.props;
-    this.props.fetchMeasurements(project.id);
+    this.props.fetchMeasurements(project.get('id'));
   }
 
   update = (data) => {
     this.props.updateMeasurements(data);
-  }
+  };
 
   createGroup = (projectID) => {
     this.props.createMeasurementGroup(projectID);
-  }
+  };
 
   createName = (projectID) => {
     this.props.createMeasurementName(projectID);
-  }
+  };
 
   render() {
     const { project, measurements } = this.props;
@@ -32,11 +36,19 @@ class Measurements extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <div>
         <div className="right-align">
-          <PlusButton onClick={() => { this.createGroup(project.id); }} />
+          <PlusButton
+            onClick={() => {
+              this.createGroup(project.get('id'));
+            }}
+          />
         </div>
         <Form initialValues={measurements} onSubmit={this.update} />
         <div>
-          <PlusButton onClick={() => { this.createName(project.id); }} />
+          <PlusButton
+            onClick={() => {
+              this.createName(project.get('id'));
+            }}
+          />
         </div>
       </div>
     );
@@ -54,7 +66,12 @@ Measurements.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchMeasurements, updateMeasurements, createMeasurementGroup, createMeasurementName },
+    {
+      fetchMeasurements,
+      updateMeasurements,
+      createMeasurementGroup,
+      createMeasurementName,
+    },
     dispatch
   );
 }
