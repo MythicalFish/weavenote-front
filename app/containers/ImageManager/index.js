@@ -15,7 +15,7 @@ class ImageManager extends React.Component {
     if (currentImage) return currentImage.toJS();
     return { url: placeholder || null };
   }
-  deleteImage = (id) => {
+  deleteImage = (id) => () => {
     const { imageable } = this.props;
     this.props.deleteImage({ imageable, id });
   };
@@ -27,14 +27,16 @@ class ImageManager extends React.Component {
       <div>
         <div className="flex flex-column items-center">
           {image.id &&
-            <button
-              onClick={() => {
-                this.deleteImage(image.id);
-              }}
-            >
-              Delete
-            </button>}
-          <img src={image.url} role="presentation" className="x-max20" />
+            <div>
+              <div>
+                <button onClick={this.deleteImage(image.id)}>Delete</button>
+              </div>
+              <img
+                src={image.urls.medium}
+                role="presentation"
+                className="x-max20"
+              />
+            </div>}
         </div>
         <div>
           {images &&

@@ -13,7 +13,7 @@ function ThumbnailList(props) {
                 handleClick(index);
               }}
             >
-              <Thumbnail url={image.url} />
+              <Thumbnail url={image.urls.tiny} />
             </button>
           </li>
         )}
