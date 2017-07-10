@@ -21,7 +21,7 @@ class ImageManager extends React.Component {
   };
 
   render() {
-    const { images, maxImages } = this.props;
+    const { images, maxImages, currentImage } = this.props;
     const image = this.currentImage();
     return (
       <div>
@@ -43,6 +43,7 @@ class ImageManager extends React.Component {
             maxImages > 1 &&
             <ThumbnailList
               images={images}
+              currentImage={currentImage}
               handleClick={(index) => {
                 this.props.switchImage(index);
               }}

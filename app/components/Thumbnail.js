@@ -7,7 +7,7 @@ const Thumbnail = (props) => {
     url = IMAGE_PLACEHOLDER;
   }
   return (
-    <div className="vh-sq7 overflow-hidden b1">
+    <div className="">
       <img src={url} role="presentation" />
     </div>
   );

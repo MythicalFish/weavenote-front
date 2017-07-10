@@ -22,9 +22,16 @@ ul.thumbnails {
     button {
       background: transparent;
       border: none;
+      padding: 0;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      overflow: hidden;
       img {
         width: 100%;
       }
+    }
+    &.current {
+      border: 2px solid $color2x;
     }
   }
 }
