@@ -13,6 +13,7 @@ export function* appWatcher() {
     yield takeLatest(types.CREATE_IMAGE, createImage),
     yield takeLatest(types.FETCH_IMAGES, fetchImages),
     yield takeLatest(types.DELETE_IMAGE, deleteImage),
+    yield takeLatest(types.UPDATE_IMAGE, updateImage),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -28,4 +29,8 @@ export function* fetchImages({ imageable }) {
 
 export function* deleteImage({ payload }) {
   yield sagas.destroy(imageUrl(payload), payload, actions.deleteImageSuccess);
+}
+
+export function* updateImage({ payload }) {
+  yield sagas.patch(imageUrl(payload), payload, actions.deleteImageSuccess);
 }

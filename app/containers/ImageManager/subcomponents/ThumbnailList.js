@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import Thumbnail from 'components/Thumbnail';
+import Uploader from './Uploader';
 
 function ThumbnailList(props) {
-  const { handleClick, images, currentImage } = props;
+  const { images, currentImage } = props;
   const thumbnails = [];
   images.forEach((image, index) => {
     const tnProps = {
@@ -15,7 +16,7 @@ function ThumbnailList(props) {
       <li {...tnProps}>
         <button
           onClick={() => {
-            handleClick(index);
+            props.switchImage(index);
           }}
         >
           <Thumbnail url={image.getIn(['urls', 'tiny'])} />
@@ -26,6 +27,9 @@ function ThumbnailList(props) {
   return (
     <ul className="thumbnails">
       {thumbnails}
+      <li>
+        <Uploader {...props} />
+      </li>
     </ul>
   );
 }
@@ -33,7 +37,6 @@ function ThumbnailList(props) {
 ThumbnailList.propTypes = {
   images: PropTypes.object,
   currentImage: PropTypes.object,
-  handleClick: PropTypes.func,
 };
 
 export default ThumbnailList;

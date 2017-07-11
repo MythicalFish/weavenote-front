@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import ThumbnailList from './subcomponents/ThumbnailList';
-import Uploader from './subcomponents/Uploader';
-import { deleteImage, createImage, switchImage, fetchImages } from './actions';
+import ImageForm from './subcomponents/ImageForm';
+import { createImage, switchImage, fetchImages } from './actions';
 
 class ImageManager extends React.Component {
   componentDidMount() {
@@ -15,22 +15,15 @@ class ImageManager extends React.Component {
     if (currentImage) return currentImage.toJS();
     return { url: placeholder || null };
   }
-  deleteImage = (id) => () => {
-    const { imageable } = this.props;
-    this.props.deleteImage({ imageable, id });
-  };
-
   render() {
     const { images, maxImages, currentImage } = this.props;
     const image = this.currentImage();
     return (
       <div>
-        <div className="flex flex-column items-center">
+        <div className="flex flex-column items-center lh0">
           {image.id &&
             <div>
-              <div>
-                <button onClick={this.deleteImage(image.id)}>Delete</button>
-              </div>
+              <ImageForm initialValue={currentImage} {...this.props} />
               <img
                 src={image.urls.medium}
                 role="presentation"
@@ -38,18 +31,9 @@ class ImageManager extends React.Component {
               />
             </div>}
         </div>
-        <div>
-          {images &&
-            maxImages > 1 &&
-            <ThumbnailList
-              images={images}
-              currentImage={currentImage}
-              handleClick={(index) => {
-                this.props.switchImage(index);
-              }}
-            />}
+        <div className="pt1">
+          {images && maxImages > 1 && <ThumbnailList {...this.props} />}
         </div>
-        <Uploader {...this.props} />
       </div>
     );
   }
@@ -60,8 +44,6 @@ ImageManager.propTypes = {
   images: PropTypes.object,
   currentImage: PropTypes.object,
   placeholder: PropTypes.string,
-  deleteImage: PropTypes.func,
-  switchImage: PropTypes.func,
   fetchImages: PropTypes.func,
   maxImages: PropTypes.number,
 };
@@ -70,7 +52,6 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       fetchImages,
-      deleteImage,
       createImage,
       switchImage,
     },

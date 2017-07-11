@@ -20,8 +20,8 @@ export function updateImage(payload) {
   return { type: types.UPDATE_IMAGE, payload };
 }
 
-export function updateImageSuccess() {
-  return { type: types.UPDATE_IMAGE_SUCCESS };
+export function updateImageSuccess(response) {
+  return { type: types.UPDATE_IMAGE_SUCCESS, response };
 }
 
 export function deleteImage(payload) {

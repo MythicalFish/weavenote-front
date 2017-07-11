@@ -3,7 +3,7 @@ import React from 'react';
 export default function Button(props) {
   const type = props.type || 'button';
   const disabled = props.disabled || false;
-  const label = props.label || 'Submit';
+  const label = props.label || null;
   const onclick = props.onclick || null;
   let className = props.className || '';
   if (props.small) {

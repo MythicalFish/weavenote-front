@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactS3Uploader from 'react-s3-uploader';
+import PlusButton from 'components/PlusButton';
 import * as API from 'utils/API';
 
 class Uploader extends React.Component {
@@ -31,8 +32,7 @@ class Uploader extends React.Component {
     return (
       <div>
         {this.state.progress === 0 &&
-          <div className="glyph">
-            <i className="fa fa-plus-circle" />
+          <PlusButton color="gray">
             <ReactS3Uploader
               server={process.env.API_URL}
               signingUrl={'/s3_url'}
@@ -46,7 +46,7 @@ class Uploader extends React.Component {
               scrubFilename={(filename) =>
                 filename.replace(/[^\w\d_\-\.]+/gi, '')}
             />
-          </div>}
+          </PlusButton>}
         {this.state.progress > 0 &&
           <div>
             Uploading: {this.state.progress}%
