@@ -7,7 +7,7 @@ const Thumbnail = (props) => {
     url = IMAGE_PLACEHOLDER;
   }
   return (
-    <div className="">
+    <div className="thumbnail">
       <img src={url} role="presentation" />
     </div>
   );

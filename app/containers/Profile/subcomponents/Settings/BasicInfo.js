@@ -25,7 +25,7 @@ BasicInfo.propTypes = {
 
 export function mapDispatch(dispatch) {
   return {
-    handleUpdate: (data) => {
+    onSubmit: (data) => {
       dispatch(updateProfile(data));
     },
   };

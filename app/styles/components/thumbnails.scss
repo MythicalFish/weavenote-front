@@ -1,5 +1,5 @@
 .thumbnail {
-  @extend .x-max5;
+  width: 4em;
   line-height: 0;
   @extend .flex-none;
   border: none;
@@ -16,8 +16,6 @@ ul.thumbnails {
   @extend .justify-center;
   li {
     @extend .flex-none;
-    width: 4em;
-    height: 4em;
     overflow: hidden;
     button {
       background: $white;
