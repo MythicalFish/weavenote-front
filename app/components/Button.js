@@ -13,8 +13,14 @@ export default function Button(props) {
   }
   if (props.inline) {
     className += ' btn-inline';
+  }
+  if (props.glyph) {
+    className += ' glyph';
+  }
+  if (props.color) {
+    className += ` ${props.color}`;
   } else {
-    className += ' btn-color2x';
+    className += ' color2x';
   }
   return (
     <button
@@ -36,7 +42,9 @@ Button.propTypes = {
   small: React.PropTypes.bool,
   large: React.PropTypes.bool,
   inline: React.PropTypes.bool,
+  glyph: React.PropTypes.bool,
   label: React.PropTypes.string,
+  color: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   onclick: React.PropTypes.func,
 };

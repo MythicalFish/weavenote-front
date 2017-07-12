@@ -32,7 +32,7 @@ class Uploader extends React.Component {
     return (
       <div>
         {this.state.progress === 0 &&
-          <PlusButton color="gray">
+          <PlusButton>
             <ReactS3Uploader
               server={process.env.API_URL}
               signingUrl={'/s3_url'}

@@ -12,22 +12,26 @@ const ImageForm = (props) => {
   const id = currentImage.get('id');
   return (
     <form className="row" onSubmit={handleSubmit}>
-      <div className="col-xs-10">
-        <Field
-          name="name"
-          type="text"
-          component={Input}
-          label="Name"
-          placeholder="Untitled image"
-          onBlur={(d, name) => {
-            const p = { id, name, imageable };
-            props.updateImage(p);
-          }}
-        />
+      <div className="col-xs-10 flex items-end">
+        <div className="mxn1 pb1">
+          <Field
+            name="name"
+            type="text"
+            component={Input}
+            label="Name"
+            placeholder="Untitled image"
+            fieldClass="input-inline"
+            onBlur={(d, name) => {
+              const p = { id, name, imageable };
+              props.updateImage(p);
+            }}
+          />
+        </div>
       </div>
       <div className="col-xs-2">
         <Button
           inline
+          glyph
           icon="trash-o"
           onclick={() => {
             props.deleteImage({ imageable, id });
@@ -52,6 +56,9 @@ export function mapDispatch(dispatch) {
     dispatch
   );
   return {
+    onSubmit: (data) => {
+      console.log(data);
+    },
     ...boundActions,
   };
 }

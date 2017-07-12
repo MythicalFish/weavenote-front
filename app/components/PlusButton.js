@@ -10,6 +10,8 @@ export default function PlusButton(props) {
   };
   if (props.color) {
     iProps.className += ` ${props.color}`;
+  } else {
+    iProps.className += ' gray';
   }
   const icon = <i {...iProps} />;
   if (props.onClick) {

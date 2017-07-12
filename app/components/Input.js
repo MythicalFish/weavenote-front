@@ -1,8 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import SelectInput from 'components/SelectInput';
 
 export default class Input extends React.PureComponent {
-
   componentDidMount() {
     if (this.props.focus) {
       this.nameInput.focus();
@@ -10,14 +9,13 @@ export default class Input extends React.PureComponent {
   }
 
   render() {
-
     const p = this.props;
     let field = null;
     let touched = false;
     let error = false;
     let fProps;
     let className = p.fieldClass || '';
-    
+
     if (p.sm) {
       className += 'input-sm';
     }
@@ -33,7 +31,9 @@ export default class Input extends React.PureComponent {
     }
 
     if (p.focus) {
-      fProps.ref = (input) => { this.nameInput = input; };
+      fProps.ref = (input) => {
+        this.nameInput = input;
+      };
     }
 
     if (p.restricted) {
@@ -47,7 +47,11 @@ export default class Input extends React.PureComponent {
 
     switch (p.type) {
       case 'display':
-        field = <div className="readonly">{p.value}</div>;
+        field = (
+          <div className="readonly">
+            {p.value}
+          </div>
+        );
         break;
       case 'select':
         if (!fProps.data && p.data) fProps.data = p.data;
@@ -69,10 +73,13 @@ export default class Input extends React.PureComponent {
     return (
       <div className={`input ${className}`}>
         {field}
-        <div className="focused p0"></div>
-        {touched && error && <span className="error">{error}</span>}
+        <div className="focused p0" />
+        {touched &&
+          error &&
+          <span className="error">
+            {error}
+          </span>}
       </div>
     );
   }
 }
-

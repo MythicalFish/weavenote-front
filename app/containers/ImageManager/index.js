@@ -23,7 +23,7 @@ class ImageManager extends React.Component {
         <div className="flex flex-column items-center lh0">
           {image.id &&
             <div>
-              <ImageForm initialValue={currentImage} {...this.props} />
+              <ImageForm initialValues={currentImage} {...this.props} />
               <img
                 src={image.urls.medium}
                 role="presentation"
