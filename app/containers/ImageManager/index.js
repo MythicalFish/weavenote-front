@@ -8,32 +8,38 @@ import { createImage, switchImage, fetchImages } from './actions';
 
 class ImageManager extends React.Component {
   componentDidMount() {
-    this.props.fetchImages(this.props.imageable);
+    // this.props.fetchImages(this.props.imageable);
   }
-  currentImage() {
+  values() {
     const { currentImage, placeholder } = this.props;
-    if (currentImage) return currentImage.toJS();
-    return { url: placeholder || null };
+    let values;
+    if (currentImage) {
+      values = currentImage.toJS();
+    } else {
+      values = { url: placeholder || null };
+    }
+    values.imageable = this.props.imageable;
+    return values;
   }
   render() {
-    const { images, maxImages, currentImage } = this.props;
-    const image = this.currentImage();
+    const { images, maxImages } = this.props;
+    const values = this.values();
     return (
       <div>
-        <div className="flex flex-column items-center lh0">
-          {image.id &&
-            <div>
-              <ImageForm initialValues={currentImage} {...this.props} />
-              <img
-                src={image.urls.medium}
-                role="presentation"
-                className="x-max20"
-              />
-            </div>}
-        </div>
-        <div className="pt1">
-          {images && maxImages > 1 && <ThumbnailList {...this.props} />}
-        </div>
+        {values.id &&
+          <div>
+            <ImageForm initialValues={values} {...this.props} />
+            <img
+              src={values.urls.medium}
+              role="presentation"
+              className="x-max20"
+            />
+          </div>}
+        {images &&
+          maxImages > 1 &&
+          <div className="pt1">
+            <ThumbnailList {...this.props} />
+          </div>}
       </div>
     );
   }

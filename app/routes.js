@@ -79,15 +79,17 @@ export default function createRoutes(store) {
       name: 'ProjectManager',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/ProjectManager/reducer'),
+          import('containers/ProjectManager/reducers/general'),
+          import('containers/ProjectManager/reducers/image'),
           import('containers/ProjectManager/sagas'),
           import('containers/ProjectManager'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, formReducer, sagas, component]) => {
           injectReducer('ProjectManager', reducer.default);
+          injectReducer('form', formReducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

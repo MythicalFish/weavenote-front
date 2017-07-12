@@ -64,13 +64,15 @@ class ProjectManager extends React.PureComponent {
             <div className="row">
               <div className="col-xs-12 col-md-6 flex justify-center">
                 {project &&
-                  <ImageManager
-                    maxImages={5}
-                    imageable={{ type: 'Project', id: project.get('id') }}
-                    images={project.get('images')}
-                    currentImage={this.props.currentImage}
-                    placeholder={IMAGE_PLACEHOLDER}
-                  />}
+                  <div className="flex flex-column items-center lh0">
+                    <ImageManager
+                      maxImages={5}
+                      imageable={{ type: 'Project', id: project.get('id') }}
+                      images={project.get('images')}
+                      currentImage={this.props.currentImage}
+                      placeholder={IMAGE_PLACEHOLDER}
+                    />
+                  </div>}
               </div>
               <div className="col-xs-12 col-md-6 flex justify-center">
                 {project && renderedSection}

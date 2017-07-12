@@ -31,6 +31,6 @@ export function deleteImage(payload) {
 export function deleteImageSuccess(response) {
   return { type: types.DELETE_IMAGE_SUCCESS, response };
 }
-export function switchImage(index) {
-  return { type: types.SWITCH_IMAGE, index };
+export function switchImage(payload) {
+  return { type: types.SWITCH_IMAGE, payload };
 }

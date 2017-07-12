@@ -36,7 +36,11 @@ export const selectCurrentInstruction = () =>
   });
 
 export const selectProjectCurrentImage = () =>
-  createSelector(selectDomain(), (s) => s.getIn(['attributes', 'images', s.get('currentImage')]));
+  createSelector(selectDomain(), (s) => s.getIn([
+    'attributes',
+    'images',
+    s.getIn(['currentImage', 'index']),
+  ]));
 
 export const selectMeasurements = () =>
   createSelector(selectDomain(), (substate) => substate.get('measurements'));

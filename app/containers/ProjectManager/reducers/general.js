@@ -1,12 +1,15 @@
 import { fromJS } from 'immutable';
 import * as imageActionTypes from 'containers/ImageManager/constants';
-import * as types from './constants';
+import * as types from '../constants';
 
 const initialState = fromJS({
   attributes: null,
   user_role: null,
   collaborators: [],
-  currentImage: 0,
+  currentImage: {
+    index: 0,
+    values: null,
+  },
   components: [],
   currentComponent: null,
   measurements: [],
@@ -14,6 +17,21 @@ const initialState = fromJS({
   currentInstruction: null,
 });
 
+const imageResponse = (state, action) => {
+  const s = state.setIn(
+    ['attributes', 'images'],
+    fromJS(action.response.images)
+  );
+  if (action.type === imageActionTypes.DELETE_IMAGE_SUCCESS) {
+    s
+      .setIn(['currentImage', 'index'], 0)
+      .setIn(
+        ['currentImage', 'values'],
+        state.getIn(['attributes', 'images', 0])
+      );
+  }
+  return s;
+};
 function projectReducer(state = initialState, action) {
   const currentComponent = state.get('currentComponent');
   const currentInstruction = state.get('currentInstruction');
@@ -99,9 +117,7 @@ function projectReducer(state = initialState, action) {
 
     case imageActionTypes.CREATE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
-        return state
-          .setIn(['attributes', 'images'], fromJS(action.response.images))
-          .set('currentImage', state.getIn(['attributes', 'images']).size);
+        return imageResponse(state, action);
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(
           ['instructions', currentInstruction, 'images'],
@@ -112,16 +128,14 @@ function projectReducer(state = initialState, action) {
 
     case imageActionTypes.DELETE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
-        return state
-          .setIn(['attributes', 'images'], fromJS(action.response.images))
-          .set('currentImage', 0);
+        return imageResponse(state, action);
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(['instructions', currentInstruction, 'images'], []);
       }
       return state;
 
     case imageActionTypes.SWITCH_IMAGE:
-      return state.set('currentImage', action.index);
+      return state.set('currentImage', fromJS(action.payload));
 
     // Measurements
 

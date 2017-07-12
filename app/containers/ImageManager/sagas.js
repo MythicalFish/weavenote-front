@@ -32,5 +32,5 @@ export function* deleteImage({ payload }) {
 }
 
 export function* updateImage({ payload }) {
-  yield sagas.patch(imageUrl(payload), payload, actions.deleteImageSuccess);
+  yield sagas.patch(imageUrl(payload), payload, actions.updateImageSuccess);
 }

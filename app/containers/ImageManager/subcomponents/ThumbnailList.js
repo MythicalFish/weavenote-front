@@ -6,6 +6,8 @@ function ThumbnailList(props) {
   const { images, currentImage } = props;
   const thumbnails = [];
   images.forEach((image, index) => {
+    if (props.maxImages < index) return;
+    const values = image.toJS();
     const tnProps = {
       key: `thumbnail-${index}`,
     };
@@ -16,10 +18,10 @@ function ThumbnailList(props) {
       <li {...tnProps}>
         <button
           onClick={() => {
-            props.switchImage(index);
+            props.switchImage({ index, values });
           }}
         >
-          <Thumbnail url={image.getIn(['urls', 'tiny'])} />
+          <Thumbnail url={values.urls.tiny} />
         </button>
       </li>
     );
@@ -27,9 +29,10 @@ function ThumbnailList(props) {
   return (
     <ul className="thumbnails">
       {thumbnails}
-      <li>
-        <Uploader {...props} />
-      </li>
+      {images.size < props.maxImages &&
+        <li>
+          <Uploader {...props} />
+        </li>}
     </ul>
   );
 }
@@ -37,6 +40,7 @@ function ThumbnailList(props) {
 ThumbnailList.propTypes = {
   images: PropTypes.object,
   currentImage: PropTypes.object,
+  maxImages: PropTypes.number,
 };
 
 export default ThumbnailList;
