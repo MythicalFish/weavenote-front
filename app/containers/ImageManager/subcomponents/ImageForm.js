@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
-import Button from 'components/Button';
+import Glyph from 'components/Glyph';
 import Input from 'components/Input';
 import { deleteImage, updateImage } from '../actions';
 
@@ -29,11 +29,9 @@ const ImageForm = (props) => {
         </div>
       </div>
       <div className="col-xs-2">
-        <Button
-          inline
-          glyph
+        <Glyph
           icon="trash-o"
-          onclick={() => {
+          onClick={() => {
             props.deleteImage({ imageable, id });
           }}
         />
@@ -57,7 +55,8 @@ export function mapDispatch(dispatch) {
   );
   return {
     onSubmit: (data) => {
-      console.log(data);
+      const { id, name, imageable } = data.toJS();
+      dispatch(updateImage({ id, name, imageable }));
     },
     ...boundActions,
   };
