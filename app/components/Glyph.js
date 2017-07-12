@@ -11,7 +11,7 @@ const Glyph = (props) => {
   };
   if (props.onClick) {
     return (
-      <button {...bProps} onClick={props.onClick}>
+      <button {...bProps} onClick={props.onClick} type="button">
         <Icon />
       </button>
     );
