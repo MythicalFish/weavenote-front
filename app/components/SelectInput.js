@@ -4,19 +4,30 @@ import PriceSymbol from 'components/PriceSymbol';
 import TetherComponent from 'react-tether';
 
 export default class SelectInput extends React.PureComponent {
-  state = { active: false };
+  state = { active: false, className: '' };
 
   toggleState = () => {
-    if (!this.props.readOnly) {
-      this.setState({ active: !this.state.active });
-    }
+    this.setState({ active: !this.state.active });
   };
 
-  handleClick = (item) => {
-    this.setState({ active: false });
-    const { onChange, onChanged } = this.props;
-    if (onChange) onChange(item);
-    if (onChanged) onChanged(item);
+  handleClick = (item) => () => {
+    const { readOnly, onChange, onChanged } = this.props;
+    if (readOnly) return;
+    if (this.state.active) {
+      this.setState({ className: '' });
+      setTimeout(() => {
+        this.toggleState();
+        if (item) {
+          if (onChange) onChange(item);
+          if (onChanged) onChanged(item);
+        }
+      }, 200);
+    } else {
+      this.toggleState();
+      setTimeout(() => {
+        this.setState({ className: 'open' });
+      }, 1);
+    }
   };
 
   label = () => {
@@ -39,7 +50,7 @@ export default class SelectInput extends React.PureComponent {
       );
     }
     return (
-      <button onClick={this.toggleState} type="button">
+      <button onClick={this.handleClick()} type="button">
         {labelContent}
       </button>
     );
@@ -48,7 +59,7 @@ export default class SelectInput extends React.PureComponent {
   items = () => {
     const { value, data, children, align } = this.props;
     const alignment = align || 'left';
-    const itemsClass = `select-input-options ${alignment}-align`;
+    const itemsClass = `select-input-options ${alignment}-align ${this.state.className}`;
     if (children) {
       return (
         <div className={itemsClass}>
@@ -64,12 +75,7 @@ export default class SelectInput extends React.PureComponent {
         let i = item;
         if (i.toJS) i = i.toJS();
         items.push(
-          <li
-            key={item}
-            onClick={() => {
-              this.handleClick(item);
-            }}
-          >
+          <li key={item} onClick={this.handleClick(item)}>
             {i.name || i.label}
             {value.iso_code &&
               <PriceSymbol code={i.iso_code} className="bold ml1" />}

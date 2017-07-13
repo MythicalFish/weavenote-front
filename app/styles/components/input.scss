@@ -100,16 +100,33 @@ textarea {
   z-index: 3;
 }
 .select-input-options {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all .2s;
+  -webkit-transition: all .2s;
+  transform: translateY(-20px);
+  -webkit-transform: translateY(-20px);
+  transform-origin: top;
+  -webkit-transform-origin: top;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
   list-style: none;
   margin: 0;
   padding: 0;
-  background: $white;
-  @extend .b1;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
-  top: -2px;
-  max-height: 200px;
+  top: -1px;
+  background: $white;
+  min-width: 120px;
+  max-height: 30vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  @extend .b1;
+  opacity: 0;
+  &.open {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
   > li,
   > button,
   > a {
