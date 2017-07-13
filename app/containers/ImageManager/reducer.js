@@ -5,7 +5,9 @@ export default formReducer.plugin({
   ImageForm: (state, action) => {
     switch (action.type) {
       case types.SWITCH_IMAGE:
-        // return state.set('values', action.payload.values);
+        if (action.payload) {
+          return state.set('values', action.payload.values);
+        }
         return state;
       default:
         return state;

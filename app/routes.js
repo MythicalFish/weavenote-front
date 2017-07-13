@@ -79,8 +79,8 @@ export default function createRoutes(store) {
       name: 'ProjectManager',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/ProjectManager/reducers/general'),
-          import('containers/ProjectManager/reducers/image'),
+          import('containers/ProjectManager/reducer'),
+          import('containers/ImageManager/reducer'),
           import('containers/ProjectManager/sagas'),
           import('containers/ProjectManager'),
         ]);

@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import * as imageActionTypes from 'containers/ImageManager/constants';
-import * as types from '../constants';
+import * as types from './constants';
 
 const initialState = fromJS({
   attributes: null,
@@ -17,21 +17,8 @@ const initialState = fromJS({
   currentInstruction: null,
 });
 
-const imageResponse = (state, action) => {
-  const s = state.setIn(
-    ['attributes', 'images'],
-    fromJS(action.response.images)
-  );
-  if (action.type === imageActionTypes.DELETE_IMAGE_SUCCESS) {
-    s
-      .setIn(['currentImage', 'index'], 0)
-      .setIn(
-        ['currentImage', 'values'],
-        state.getIn(['attributes', 'images', 0])
-      );
-  }
-  return s;
-};
+const setProjectImages = (state, action) => state.setIn(['attributes', 'images'], fromJS(action.response.images));
+
 function projectReducer(state = initialState, action) {
   const currentComponent = state.get('currentComponent');
   const currentInstruction = state.get('currentInstruction');
@@ -117,7 +104,7 @@ function projectReducer(state = initialState, action) {
 
     case imageActionTypes.CREATE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
-        return imageResponse(state, action);
+        return setProjectImages(state, action);
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(
           ['instructions', currentInstruction, 'images'],
@@ -128,7 +115,12 @@ function projectReducer(state = initialState, action) {
 
     case imageActionTypes.DELETE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
-        return imageResponse(state, action);
+        return setProjectImages(state, action)
+          .setIn(['currentImage', 'index'], 0)
+          .setIn(
+            ['currentImage', 'values'],
+            state.getIn(['attributes', 'images', 0])
+          );
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(['instructions', currentInstruction, 'images'], []);
       }

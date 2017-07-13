@@ -17,6 +17,7 @@ function ThumbnailList(props) {
     thumbnails.push(
       <li {...tnProps}>
         <button
+          type="button"
           onClick={() => {
             props.switchImage({ index, values });
           }}
