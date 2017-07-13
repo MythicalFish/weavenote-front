@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Dropdown from 'components/Dropdown';
+import SelectInput from 'components/SelectInput';
 import Thumbnail from 'components/Thumbnail';
 
 export default function ListItem(props) {
@@ -13,25 +13,41 @@ export default function ListItem(props) {
           <Thumbnail url={project.thumbnail_url} />
         </div>
         <div className="p2">
-          <div>{project.name}</div>
+          <div>
+            {project.name}
+          </div>
         </div>
         <div className="p2">
-          <div>#{project.identifier}</div>
+          <div>
+            #{project.identifier}
+          </div>
         </div>
       </Link>
       <div className="flex items-center">
         <div className="p2 smaller1 upcase">
           {project.stage.label}
         </div>
-        <div className="p2 dark3 smaller1">
-          collaborators
-        </div>
+        <div className="p2 dark3 smaller1">collaborators</div>
         <div className="p2">
-          <Dropdown label="...">
+          <SelectInput label="...">
             <Link to={url}>Manage</Link>
-            {!project.archived && <button onClick={() => { fileProject({ id: project.id, archived: true }); }}>Archive</button>}
-            {project.archived && <button onClick={() => { fileProject({ id: project.id, archived: false }); }}>Restore</button>}
-          </Dropdown>
+            {!project.archived &&
+              <button
+                onClick={() => {
+                  fileProject({ id: project.id, archived: true });
+                }}
+              >
+                Archive
+              </button>}
+            {project.archived &&
+              <button
+                onClick={() => {
+                  fileProject({ id: project.id, archived: false });
+                }}
+              >
+                Restore
+              </button>}
+          </SelectInput>
         </div>
       </div>
     </div>

@@ -20,17 +20,27 @@ export default class SelectInput extends React.PureComponent {
   };
 
   label = () => {
-    const { value, button } = this.props;
-    if (button) return button;
-    let val = value;
-    if (!val) val = { name: null };
-    if (val.toJS) val = value.toJS();
+    const { value, label } = this.props;
+    let labelContent;
+    if (label) {
+      labelContent = label;
+    } else {
+      let val = value;
+      if (!val) val = { name: null };
+      if (val.toJS) val = value.toJS();
+      labelContent = (
+        <div>
+          {val.name}
+          {val.iso_code &&
+            <PriceSymbol code={val.iso_code} className="bold ml1" />}
+          {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
+          <i className="fa fa-chevron-down dark4 smaller3 ml1" />
+        </div>
+      );
+    }
     return (
       <button onClick={this.toggleState} type="button">
-        {val.name}
-        {val.iso_code &&
-          <PriceSymbol code={val.iso_code} className="bold ml1" />}
-        {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
+        {labelContent}
       </button>
     );
   };
@@ -38,7 +48,14 @@ export default class SelectInput extends React.PureComponent {
   items = () => {
     const { value, data, children, align } = this.props;
     const alignment = align || 'left';
-    const alignClass = `${alignment}-align`;
+    const itemsClass = `select-input-options ${alignment}-align`;
+    if (children) {
+      return (
+        <div className={itemsClass}>
+          {children}
+        </div>
+      );
+    }
     let items;
     if (data) {
       items = [];
@@ -62,8 +79,8 @@ export default class SelectInput extends React.PureComponent {
       });
     }
     return (
-      <ul className={`select-input-options ${alignClass}`}>
-        {items || children}
+      <ul className={itemsClass}>
+        {items}
       </ul>
     );
   };
