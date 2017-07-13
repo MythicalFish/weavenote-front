@@ -57,7 +57,7 @@ export default class Dropdown extends React.PureComponent {
   };
 
   items = () => {
-    const { value, data, children, align } = this.props;
+    const { value, data, children, align, tail } = this.props;
     const alignment = align || 'left';
     const itemsClass = `dropdown-options ${alignment}-align ${this.state
       .className}`;
@@ -65,6 +65,7 @@ export default class Dropdown extends React.PureComponent {
       return (
         <div className={itemsClass}>
           {children}
+          {this.tail()}
         </div>
       );
     }
@@ -88,6 +89,10 @@ export default class Dropdown extends React.PureComponent {
     return (
       <ul className={itemsClass}>
         {items}
+        {tail &&
+          <li>
+            {this.tail()}
+          </li>}
       </ul>
     );
   };
@@ -96,9 +101,7 @@ export default class Dropdown extends React.PureComponent {
     const { tail } = this.props;
     if (tail) {
       return tail({
-        onClick: () => {
-          this.setState({ active: false });
-        },
+        onClick: this.handleClick(),
       });
     }
     return null;
@@ -125,7 +128,6 @@ export default class Dropdown extends React.PureComponent {
           {this.state.active &&
             <div>
               {this.items()}
-              {this.tail()}
             </div>}
         </TetherComponent>
       </div>
