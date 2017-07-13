@@ -58,18 +58,21 @@ function* handleError(message) {
 }
 
 function* handleResponse(callback, response) {
-  if (response.message) {
-    yield put(notify(response.message));
-  }
-  if (response.warning) {
-    yield put(notifyWarning(response.warning));
-  }
-  let payload;
-  if (response.payload) {
-    payload = response.payload;
+  if (response) {
+    if (response.message) {
+      yield put(notify(response.message));
+    }
+    if (response.warning) {
+      yield put(notifyWarning(response.warning));
+    }
+    let payload;
+    if (response.payload) {
+      payload = response.payload;
+    } else {
+      payload = response;
+    }
+    yield put(callback(payload));
   } else {
-    payload = response;
+    yield put(notifyWarning('No response was given by the API'));
   }
-  yield put(callback(payload));
 }
-

@@ -7,9 +7,8 @@ const initialState = fromJS({
   user_role: null,
   collaborators: [],
   currentImage: 0,
-  components: [],
-  currentComponent: null,
   measurements: [],
+  material_cost: 0,
 });
 
 const setProjectImages = (state, action) =>
@@ -18,9 +17,6 @@ const setProjectImages = (state, action) =>
 const imageCount = (state) => state.getIn(['attributes', 'images']).size;
 
 function projectReducer(state = initialState, action) {
-  const currentComponent = state.get('currentComponent');
-  const currentInstruction = state.get('currentInstruction');
-
   switch (action.type) {
     // Project
 
@@ -31,43 +27,11 @@ function projectReducer(state = initialState, action) {
       return state
         .set('attributes', fromJS(action.data.attributes))
         .set('user_role', fromJS(action.data.user_role))
-        .set('material_cost', action.data.material_cost)
+        .set('material_cost', fromJS(action.data.material_cost))
         .set('collaborators', fromJS(action.data.collaborators));
 
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
-
-    // Components
-
-    case types.FETCH_COMPONENTS_SUCCESS:
-      return state.set('components', fromJS(action.components));
-
-    case types.UPDATE_COMPONENT_SUCCESS:
-      return state
-        .setIn(['components', currentComponent], fromJS(action.component))
-        .set('currentComponent', null);
-
-    case types.CREATE_COMPONENT:
-      return state.set('currentComponent', null);
-
-    case types.CREATE_COMPONENT_SUCCESS:
-      return state
-        .set(
-          'components',
-          state.get('components').insert(0, fromJS(action.component))
-        )
-        .set('currentComponent', 0); // TL;DR: insert at beginning of list
-
-    case types.DELETE_COMPONENT_SUCCESS:
-      return state
-        .set('components', fromJS(action.components))
-        .set('currentComponent', null);
-
-    case types.SWITCH_COMPONENT:
-      return state.set('currentComponent', action.index);
-
-    case types.FETCH_MATERIAL_COST_SUCCESS:
-      return state.set('material_cost', action.cost);
 
     // Images
 

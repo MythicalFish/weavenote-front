@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { selectMaterials } from 'containers/App/selectors';
 import { fetchMaterials } from 'containers/MaterialList/actions';
+import { selectMaterials } from 'containers/App/selectors';
 import Accordion from 'components/Accordion';
 import Price from 'components/Price';
 import SelectMaterial from './SelectMaterial';
@@ -15,18 +15,15 @@ import {
   switchComponent,
   updateComponent,
   createComponent,
-  fetchMaterialCost,
-} from '../../actions';
+} from './actions';
 import {
   selectComponents,
   selectCurrentComponent,
   selectComponentForm,
-  selectMaterialCost,
-} from '../../selectors';
+} from './selectors';
+import { selectMaterialCost } from '../ProjectManager/selectors';
 
 class Components extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
-
   state = { creating: false };
 
   componentDidMount() {
@@ -40,15 +37,11 @@ class Components extends React.Component {
   };
 
   render() {
+    const { toggleCreate } = this;
     return (
       <div>
         {this.state.creating
-          ? <SelectMaterial
-            project={this.props.project}
-            materials={this.props.materials}
-            toggleCreate={this.toggleCreate}
-            createComponent={this.props.createComponent}
-          />
+          ? <SelectMaterial {...this.props} {...{ toggleCreate }} />
           : <Accordion
             items={this.props.components}
             current={this.props.current}
@@ -70,14 +63,11 @@ class Components extends React.Component {
 
 Components.propTypes = {
   project: PropTypes.object,
-  materials: PropTypes.object,
   components: PropTypes.object,
   current: PropTypes.object,
   fetchComponents: PropTypes.func,
-  createComponent: PropTypes.func,
   updateComponent: PropTypes.func,
   fetchMaterials: PropTypes.func,
-  fetchMaterialCost: PropTypes.func,
   switchComponent: PropTypes.func,
   formValues: PropTypes.object,
   materialCost: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -91,7 +81,6 @@ export function mapDispatch(dispatch) {
       createComponent,
       switchComponent,
       fetchMaterials,
-      fetchMaterialCost,
     },
     dispatch
   );

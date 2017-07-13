@@ -2,14 +2,13 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 export default class SelectMaterial extends React.PureComponent {
-
   handleClick = (material) => {
     this.props.createComponent({
-      materialID: material.get('id'),
-      projectID: this.props.project.id,
+      material_id: material.get('id'),
+      project_id: this.props.project.get('id'),
     });
     this.props.toggleCreate();
-  }
+  };
 
   render() {
     const { materials } = this.props;
@@ -17,17 +16,20 @@ export default class SelectMaterial extends React.PureComponent {
       <div>
         Select a material
         <div>
-          {materials && materials.toArray().map((material) => (
-            <button
-              type="button"
-              onClick={() => { this.handleClick(material); }}
-              key={material}
-            >
-              {material.get('name')}
-            </button>
-          ))}
+          {materials &&
+            materials.toArray().map((material) =>
+              <button
+                type="button"
+                onClick={() => {
+                  this.handleClick(material);
+                }}
+                key={material}
+              >
+                {material.get('name')}
+              </button>
+            )}
           <Link to="/materials/new" className="btn-shy">
-            <i className="fa fa-plus mr1"></i>
+            <i className="fa fa-plus mr1" />
             Create a material
           </Link>
         </div>
@@ -47,4 +49,3 @@ SelectMaterial.propTypes = {
   createComponent: PropTypes.func,
   materials: PropTypes.object,
 };
-

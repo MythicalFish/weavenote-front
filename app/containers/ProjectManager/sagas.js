@@ -11,28 +11,17 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
 import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
-import notificationWatcher from './notifications';
 import * as types from './constants';
 import * as actions from './actions';
 import * as imgActions from '../ImageManager/constants';
 import { selectProjectCurrentImage } from './selectors';
 
-export default [
-  projectManagerWatcher,
-  materialListWatcher,
-  notificationWatcher,
-];
+export default [projectManagerWatcher, materialListWatcher];
 
 export function* projectManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_PROJECT, fetchProject),
     yield takeLatest(types.UPDATE_PROJECT, updateProject),
-
-    yield takeLatest(types.FETCH_COMPONENTS, fetchComponents),
-    yield takeLatest(types.UPDATE_COMPONENT, updateComponent),
-    yield takeLatest(types.CREATE_COMPONENT, createComponent),
-    yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
-    yield takeLatest(types.FETCH_MATERIAL_COST, doFetchMaterialCost),
 
     yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
     yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
@@ -68,61 +57,6 @@ export function* updateProject(action) {
     `projects/${project.id}`,
     { project },
     actions.updateProjectSuccess
-  );
-}
-
-/*
- *
- *  Components
- *
- */
-
-export function* fetchComponents(action) {
-  yield sagas.get(
-    `projects/${action.projectID}/components`,
-    null,
-    actions.fetchComponentsSuccess
-  );
-}
-
-export function* updateComponent(action) {
-  let component = action.component.toJS();
-  try {
-    component = yield call(
-      API.patch,
-      `projects/${component.project_id}/components/${component.id}`,
-      { component }
-    );
-    yield put(actions.updateComponentSuccess(component));
-    yield put(actions.fetchMaterialCost(component));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
-}
-
-export function* createComponent({ payload }) {
-  const component = { material_id: payload.materialID };
-  yield sagas.post(
-    `projects/${payload.projectID}/components`,
-    { component },
-    actions.createComponentSuccess
-  );
-}
-
-export function* deleteComponent(action) {
-  yield sagas.destroy(
-    `projects/${action.projectID}/components/${action.id}`,
-    null,
-    actions.deleteComponentSuccess
-  );
-}
-
-export function* doFetchMaterialCost(action) {
-  const component = action.component;
-  yield sagas.get(
-    `projects/${component.project_id}/material_cost`,
-    null,
-    actions.fetchMaterialCostSuccess
   );
 }
 

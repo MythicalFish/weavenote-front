@@ -7,20 +7,18 @@ import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ImageManager from 'containers/ImageManager';
+import ProjectComponents from 'containers/ProjectComponents';
 import Modal from 'components/Modal';
 import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import Basics from './subcomponents/Basics';
-import Components from './subcomponents/Components';
 import Measurements from './subcomponents/Measurements';
 import { selectProject, selectProjectCurrentImage } from './selectors';
 import { fetchProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
 
 class ProjectManager extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
-
   state = { activeModal: null };
 
   componentDidMount() {
@@ -36,7 +34,7 @@ class ProjectManager extends React.PureComponent {
 
     switch (currentSection.id) {
       case sections.Components.id:
-        renderedSection = <Components {...{ project }} />;
+        renderedSection = <ProjectComponents {...{ project }} />;
         break;
 
       case sections.Measurements.id:

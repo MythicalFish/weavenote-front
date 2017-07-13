@@ -6,7 +6,7 @@ export default class Accordion extends React.PureComponent {
   handleSubmit = (data) => {
     const { props } = this;
     props.updateItem(data);
-  }
+  };
   render() {
     let items = [];
     const { props } = this;
@@ -14,7 +14,7 @@ export default class Accordion extends React.PureComponent {
       items = props.items.toArray().map((item, index) => {
         const isCurrent = props.current && props.current === item;
         return (
-          <div key={item}>
+          <div key={`component${index}`}>
             <props.ListItem
               item={item}
               index={index}
@@ -26,8 +26,7 @@ export default class Accordion extends React.PureComponent {
                 item={item}
                 onSubmit={this.handleSubmit}
                 initialValues={props.formValues}
-              />
-            }
+              />}
           </div>
         );
       });
@@ -38,18 +37,17 @@ export default class Accordion extends React.PureComponent {
         <div className="data-rows mt2">
           {items.length > 0
             ? items
-            : <div className="data-row"><div className="p2">No items yet</div></div>
-          }
+            : <div className="data-row">
+              <div className="p2">No items yet</div>
+            </div>}
           {props.footer &&
             <DataRow
               type="display"
               label={props.footer.label}
               value={props.footer.value}
-            />
-          }
+            />}
         </div>
       </div>
     );
   }
 }
-
