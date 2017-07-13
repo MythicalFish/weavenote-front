@@ -38,15 +38,14 @@ export const selectCurrentInstruction = () =>
 export const selectProjectCurrentImage = () =>
   createSelector(selectDomain(), (s) => {
     const i = s.getIn(['attributes', 'images', s.get('currentImage')]);
+    const imageable = {
+      type: 'Project',
+      id: s.getIn(['attributes', 'id']),
+    };
     if (i) {
-      return i
-        .set('imageable', {
-          type: 'Project',
-          id: s.getIn(['attributes', 'id']),
-        })
-        .toJS();
+      return i.set('imageable', imageable).toJS();
     } else {
-      return null;
+      return { imageable };
     }
   });
 

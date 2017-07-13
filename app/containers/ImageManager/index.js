@@ -4,24 +4,20 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import ThumbnailList from './subcomponents/ThumbnailList';
 import ImageForm from './subcomponents/ImageForm';
-import { createImage, switchImage, fetchImages } from './actions';
+import { createImage, switchImage } from './actions';
 
 class ImageManager extends React.Component {
-  componentDidMount() {
-    // this.props.fetchImages(this.props.imageable);
-  }
   render() {
-    const { images, maxImages, currentImage } = this.props;
+    const { images, maxImages, currentImage, placeholder } = this.props;
+    const Image = (props) =>
+      <img src={props.src} role="presentation" className="x-max20" />;
     return (
       <div>
+        {!currentImage.id && placeholder && <Image src={placeholder} />}
         {currentImage.id &&
           <div>
             <ImageForm initialValues={currentImage} {...this.props} />
-            <img
-              src={currentImage.urls.medium}
-              role="presentation"
-              className="x-max20"
-            />
+            <Image src={currentImage.urls.medium} />
           </div>}
         {images &&
           maxImages > 1 &&
@@ -34,18 +30,15 @@ class ImageManager extends React.Component {
 }
 
 ImageManager.propTypes = {
-  imageable: PropTypes.object,
   images: PropTypes.object,
   currentImage: PropTypes.object,
   placeholder: PropTypes.string,
-  fetchImages: PropTypes.func,
   maxImages: PropTypes.number,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      fetchImages,
       createImage,
       switchImage,
     },

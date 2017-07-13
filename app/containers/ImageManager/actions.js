@@ -8,14 +8,6 @@ export function createImageSuccess(response) {
   return { type: types.CREATE_IMAGE_SUCCESS, response };
 }
 
-export function fetchImages(imageable) {
-  return { type: types.FETCH_IMAGES, imageable };
-}
-
-export function fetchImagesSuccess(response) {
-  return { type: types.FETCH_IMAGES_SUCCESS, response };
-}
-
 export function updateImage(payload) {
   return { type: types.UPDATE_IMAGE, payload };
 }

@@ -11,7 +11,6 @@ const imageUrl = (payload) => `images/${payload.id}`;
 export function* appWatcher() {
   const watcher = [
     yield takeLatest(types.CREATE_IMAGE, createImage),
-    yield takeLatest(types.FETCH_IMAGES, fetchImages),
     yield takeLatest(types.DELETE_IMAGE, deleteImage),
     yield takeLatest(types.UPDATE_IMAGE, updateImage),
   ];
@@ -21,10 +20,6 @@ export function* appWatcher() {
 
 function* createImage({ payload }) {
   yield sagas.post('images', payload, actions.createImageSuccess);
-}
-
-export function* fetchImages({ imageable }) {
-  yield sagas.get('images', { imageable }, actions.fetchImagesSuccess);
 }
 
 export function* deleteImage({ payload }) {

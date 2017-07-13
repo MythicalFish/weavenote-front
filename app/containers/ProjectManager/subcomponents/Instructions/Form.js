@@ -26,7 +26,7 @@ const Form = (props) => {
           <ImageManager
             maxImages={1}
             imageable={{ type: 'Instruction', id: instruction.get('id') }}
-            currentImage={instruction.getIn(['images', 0])}
+            currentImage={instruction.getIn(['images', 0]).toJS()}
           />}
         <footer className="p2 center">
           <Button type="submit" disabled={submitting} label="Save" />
