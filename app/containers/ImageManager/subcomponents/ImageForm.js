@@ -8,8 +8,9 @@ import Input from 'components/Input';
 import { deleteImage, updateImage } from '../actions';
 
 const ImageForm = (props) => {
-  const { handleSubmit, imageable, currentImage } = props;
-  const id = currentImage.get('id');
+  const { handleSubmit, currentImage } = props;
+  const id = currentImage.id;
+  const imageable = currentImage.imageable;
   return (
     <form className="row" onSubmit={handleSubmit}>
       <div className="col-xs-10 flex items-end">

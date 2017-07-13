@@ -6,10 +6,7 @@ const initialState = fromJS({
   attributes: null,
   user_role: null,
   collaborators: [],
-  currentImage: {
-    index: 0,
-    values: null,
-  },
+  currentImage: 0,
   components: [],
   currentComponent: null,
   measurements: [],
@@ -17,7 +14,10 @@ const initialState = fromJS({
   currentInstruction: null,
 });
 
-const setProjectImages = (state, action) => state.setIn(['attributes', 'images'], fromJS(action.response.images));
+const setProjectImages = (state, action) =>
+  state.setIn(['attributes', 'images'], fromJS(action.response.images));
+
+const imageCount = (state) => state.getIn(['attributes', 'images']).size;
 
 function projectReducer(state = initialState, action) {
   const currentComponent = state.get('currentComponent');
@@ -104,7 +104,10 @@ function projectReducer(state = initialState, action) {
 
     case imageActionTypes.CREATE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
-        return setProjectImages(state, action);
+        return setProjectImages(state, action).set(
+          'currentImage',
+          imageCount(state)
+        );
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(
           ['instructions', currentInstruction, 'images'],
@@ -115,19 +118,26 @@ function projectReducer(state = initialState, action) {
 
     case imageActionTypes.DELETE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
-        return setProjectImages(state, action)
-          .setIn(['currentImage', 'index'], 0)
-          .setIn(
-            ['currentImage', 'values'],
-            state.getIn(['attributes', 'images', 0])
-          );
+        return setProjectImages(state, action).set(
+          'currentImage',
+          imageCount(state) - 2
+        );
       } else if (action.response.imageable_type === 'Instruction') {
         return state.setIn(['instructions', currentInstruction, 'images'], []);
       }
       return state;
 
+    case imageActionTypes.UPDATE_IMAGE_SUCCESS:
+      if (action.response.imageable_type === 'Project') {
+        return state.setIn(
+          ['attributes', 'images'],
+          fromJS(action.response.images)
+        );
+      }
+      return state;
+
     case imageActionTypes.SWITCH_IMAGE:
-      return state.set('currentImage', fromJS(action.payload));
+      return state.set('currentImage', action.index);
 
     // Measurements
 

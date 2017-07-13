@@ -11,7 +11,7 @@ function ThumbnailList(props) {
     const tnProps = {
       key: `thumbnail-${index}`,
     };
-    if (image === currentImage) {
+    if (image.get('id') === currentImage.id) {
       tnProps.className = 'current';
     }
     thumbnails.push(
@@ -19,7 +19,7 @@ function ThumbnailList(props) {
         <button
           type="button"
           onClick={() => {
-            props.switchImage({ index, values });
+            props.switchImage(index);
           }}
         >
           <Thumbnail url={values.urls.tiny} />

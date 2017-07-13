@@ -36,11 +36,19 @@ export const selectCurrentInstruction = () =>
   });
 
 export const selectProjectCurrentImage = () =>
-  createSelector(selectDomain(), (s) => s.getIn([
-    'attributes',
-    'images',
-    s.getIn(['currentImage', 'index']),
-  ]));
+  createSelector(selectDomain(), (s) => {
+    const i = s.getIn(['attributes', 'images', s.get('currentImage')]);
+    if (i) {
+      return i
+        .set('imageable', {
+          type: 'Project',
+          id: s.getIn(['attributes', 'id']),
+        })
+        .toJS();
+    } else {
+      return null;
+    }
+  });
 
 export const selectMeasurements = () =>
   createSelector(selectDomain(), (substate) => substate.get('measurements'));

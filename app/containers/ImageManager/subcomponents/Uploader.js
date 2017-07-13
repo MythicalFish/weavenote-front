@@ -22,7 +22,7 @@ class Uploader extends React.Component {
   };
   onFinish = (image) => {
     console.log('Upload finished:');
-    const { imageable } = this.props;
+    const { imageable } = this.props.currentImage;
     this.props.createImage({ imageable, image });
   };
   onUploadError(message) {

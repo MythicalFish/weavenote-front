@@ -6,6 +6,7 @@ import {
   takeLatest,
   select,
 } from 'redux-saga/effects';
+import { initialize } from 'redux-form';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
 import * as sagas from 'utils/genericSagas';
@@ -13,6 +14,9 @@ import { materialListWatcher } from 'containers/MaterialList/sagas';
 import notificationWatcher from './notifications';
 import * as types from './constants';
 import * as actions from './actions';
+import * as imgActions from '../ImageManager/constants';
+import { selectProjectCurrentImage } from './selectors';
+
 export default [
   projectManagerWatcher,
   materialListWatcher,
@@ -39,9 +43,18 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
     yield takeLatest(types.CREATE_MEASUREMENT_GROUP, createMeasurementGroup),
     yield takeLatest(types.CREATE_MEASUREMENT_NAME, createMeasurementName),
+
+    yield takeLatest(imgActions.SWITCH_IMAGE, resetImageForm),
+    yield takeLatest(imgActions.DELETE_IMAGE_SUCCESS, resetImageForm),
+    yield takeLatest(imgActions.CREATE_IMAGE_SUCCESS, resetImageForm),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
+}
+
+export function* resetImageForm() {
+  const i = yield select(selectProjectCurrentImage());
+  yield put(initialize('ImageForm', i, { form: 'ImageForm' }));
 }
 
 /*

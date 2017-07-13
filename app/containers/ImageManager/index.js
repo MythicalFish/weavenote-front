@@ -10,27 +10,15 @@ class ImageManager extends React.Component {
   componentDidMount() {
     // this.props.fetchImages(this.props.imageable);
   }
-  values() {
-    const { currentImage, placeholder } = this.props;
-    let values;
-    if (currentImage) {
-      values = currentImage.toJS();
-    } else {
-      values = { url: placeholder || null };
-    }
-    values.imageable = this.props.imageable;
-    return values;
-  }
   render() {
-    const { images, maxImages } = this.props;
-    const values = this.values();
+    const { images, maxImages, currentImage } = this.props;
     return (
       <div>
-        {values.id &&
+        {currentImage.id &&
           <div>
-            <ImageForm initialValues={values} {...this.props} />
+            <ImageForm initialValues={currentImage} {...this.props} />
             <img
-              src={values.urls.medium}
+              src={currentImage.urls.medium}
               role="presentation"
               className="x-max20"
             />
