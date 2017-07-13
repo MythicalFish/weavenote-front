@@ -10,8 +10,6 @@ const initialState = fromJS({
   components: [],
   currentComponent: null,
   measurements: [],
-  instructions: [],
-  currentInstruction: null,
 });
 
 const setProjectImages = (state, action) =>
@@ -71,35 +69,6 @@ function projectReducer(state = initialState, action) {
     case types.FETCH_MATERIAL_COST_SUCCESS:
       return state.set('material_cost', action.cost);
 
-    // Instructions
-
-    case types.FETCH_INSTRUCTIONS_SUCCESS:
-      return state.set('instructions', fromJS(action.instructions));
-
-    case types.UPDATE_INSTRUCTION_SUCCESS:
-      return state
-        .setIn(['instructions', currentInstruction], fromJS(action.instruction))
-        .set('currentInstruction', null);
-
-    case types.CREATE_INSTRUCTION:
-      return state.set('currentInstruction', null);
-
-    case types.CREATE_INSTRUCTION_SUCCESS:
-      return state
-        .set(
-          'instructions',
-          state.get('instructions').insert(0, fromJS(action.instruction))
-        )
-        .set('currentInstruction', 0); // TL;DR: insert at beginning of list
-
-    case types.DELETE_INSTRUCTION_SUCCESS:
-      return state
-        .set('instructions', fromJS(action.instructions))
-        .set('currentInstruction', null);
-
-    case types.SWITCH_INSTRUCTION:
-      return state.set('currentInstruction', action.index);
-
     // Images
 
     case imageActionTypes.CREATE_IMAGE_SUCCESS:
@@ -107,11 +76,6 @@ function projectReducer(state = initialState, action) {
         return setProjectImages(state, action).set(
           'currentImage',
           imageCount(state)
-        );
-      } else if (action.response.imageable_type === 'Instruction') {
-        return state.setIn(
-          ['instructions', currentInstruction, 'images'],
-          fromJS(action.response.images)
         );
       }
       return state;
@@ -122,8 +86,6 @@ function projectReducer(state = initialState, action) {
           'currentImage',
           imageCount(state) - 2
         );
-      } else if (action.response.imageable_type === 'Instruction') {
-        return state.setIn(['instructions', currentInstruction, 'images'], []);
       }
       return state;
 

@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import { reduxForm, Field } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
 import Button from 'components/Button';
 import ImageManager from 'containers/ImageManager';
+import { selectImage } from './selectors';
 
 const Form = (props) => {
   const { handleSubmit, submitting, initialValues: instruction } = props;
@@ -23,11 +27,7 @@ const Form = (props) => {
           label="Description"
         />
         {instruction.get('id') &&
-          <ImageManager
-            maxImages={1}
-            imageable={{ type: 'Instruction', id: instruction.get('id') }}
-            currentImage={instruction.getIn(['images', 0]).toJS()}
-          />}
+          <ImageManager maxImages={1} currentImage={props.image} />}
         <footer className="p2 center">
           <Button type="submit" disabled={submitting} label="Save" />
         </footer>
@@ -40,9 +40,19 @@ Form.propTypes = {
   initialValues: PropTypes.object,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
-  projectID: PropTypes.number,
+  image: PropTypes.object,
 };
 
-export default reduxForm({
-  form: 'Instructions',
-})(Form);
+export function mapDispatch(dispatch) {
+  return bindActionCreators({}, dispatch);
+}
+
+const mapState = createStructuredSelector({
+  image: selectImage(),
+});
+
+export default connect(mapState, mapDispatch)(
+  reduxForm({
+    form: 'Instructions',
+  })(Form)
+);

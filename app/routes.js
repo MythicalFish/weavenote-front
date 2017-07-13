@@ -81,14 +81,18 @@ export default function createRoutes(store) {
         const importModules = Promise.all([
           import('containers/ProjectManager/reducer'),
           import('containers/ProjectManager/sagas'),
+          import('containers/ProjectInstructions/reducer'),
+          import('containers/ProjectInstructions/sagas'),
           import('containers/ProjectManager'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, sagas, iReducer, iSagas, component]) => {
           injectReducer('ProjectManager', reducer.default);
+          injectReducer('ProjectInstructions', iReducer.default);
           injectSagas(sagas.default);
+          injectSagas(iSagas.default);
           renderRoute(component);
         });
 

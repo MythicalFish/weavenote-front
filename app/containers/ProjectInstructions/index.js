@@ -10,9 +10,10 @@ import {
   switchInstruction,
   updateInstruction,
   createInstruction,
-} from '../../actions';
-import { selectInstructions, selectCurrentInstruction } from '../../selectors';
-class Instructions extends React.Component {
+} from './actions';
+import { selectInstructions, selectCurrentInstruction } from './selectors';
+
+class ProjectInstructions extends React.Component {
   state = { creating: false };
 
   componentDidMount() {
@@ -56,7 +57,7 @@ class Instructions extends React.Component {
   }
 }
 
-Instructions.propTypes = {
+ProjectInstructions.propTypes = {
   project: PropTypes.object,
   instructions: PropTypes.object,
   current: PropTypes.object,
@@ -83,4 +84,4 @@ const mapState = createStructuredSelector({
   current: selectCurrentInstruction(),
 });
 
-export default connect(mapState, mapDispatch)(Instructions);
+export default connect(mapState, mapDispatch)(ProjectInstructions);

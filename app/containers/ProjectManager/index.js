@@ -5,6 +5,8 @@ import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
+import ProjectInstructions from 'containers/ProjectInstructions';
+import ImageManager from 'containers/ImageManager';
 import Modal from 'components/Modal';
 import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
@@ -12,8 +14,6 @@ import Toolbar from './subcomponents/Toolbar';
 import Basics from './subcomponents/Basics';
 import Components from './subcomponents/Components';
 import Measurements from './subcomponents/Measurements';
-import Instructions from './subcomponents/Instructions';
-import ImageManager from 'containers/ImageManager';
 import { selectProject, selectProjectCurrentImage } from './selectors';
 import { fetchProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
@@ -44,7 +44,7 @@ class ProjectManager extends React.PureComponent {
         break;
 
       case sections.Instructions.id:
-        renderedSection = <Instructions {...{ project }} />;
+        renderedSection = <ProjectInstructions {...{ project }} />;
         break;
 
       default:

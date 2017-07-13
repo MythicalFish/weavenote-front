@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import ThumbnailList from './subcomponents/ThumbnailList';
 import ImageForm from './subcomponents/ImageForm';
+import Uploader from './subcomponents/Uploader';
 import { createImage, switchImage } from './actions';
 
 class ImageManager extends React.Component {
@@ -24,6 +25,7 @@ class ImageManager extends React.Component {
           <div className="pt1">
             <ThumbnailList {...this.props} />
           </div>}
+        {maxImages === 1 && <Uploader {...this.props} />}
       </div>
     );
   }

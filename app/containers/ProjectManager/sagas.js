@@ -34,11 +34,6 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
     yield takeLatest(types.FETCH_MATERIAL_COST, doFetchMaterialCost),
 
-    yield takeLatest(types.FETCH_INSTRUCTIONS, fetchInstructions),
-    yield takeLatest(types.CREATE_INSTRUCTION, createInstruction),
-    yield takeLatest(types.UPDATE_INSTRUCTION, updateInstruction),
-    yield takeLatest(types.DELETE_INSTRUCTION, deleteInstruction),
-
     yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
     yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
     yield takeLatest(types.CREATE_MEASUREMENT_GROUP, createMeasurementGroup),
@@ -128,47 +123,6 @@ export function* doFetchMaterialCost(action) {
     `projects/${component.project_id}/material_cost`,
     null,
     actions.fetchMaterialCostSuccess
-  );
-}
-
-/*
- *
- *  Instructions
- *
- */
-
-export function* fetchInstructions(action) {
-  yield sagas.get(
-    `projects/${action.projectID}/instructions`,
-    null,
-    actions.fetchInstructionsSuccess
-  );
-}
-
-export function* updateInstruction({ payload }) {
-  const instruction = payload.toJS();
-  yield sagas.patch(
-    `projects/${instruction.project_id}/instructions/${instruction.id}`,
-    { instruction },
-    actions.updateInstructionSuccess
-  );
-}
-
-export function* createInstruction({ payload }) {
-  const { title, description, project_id } = payload.toJS();
-  const instruction = { project_id, title, description };
-  yield sagas.post(
-    `projects/${project_id}/instructions`,
-    { instruction },
-    actions.createInstructionSuccess
-  );
-}
-
-export function* deleteInstruction(action) {
-  yield sagas.destroy(
-    `projects/${action.projectID}/instructions/${action.id}`,
-    null,
-    actions.deleteInstructionSuccess
   );
 }
 
