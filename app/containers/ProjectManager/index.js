@@ -8,12 +8,12 @@ import { changeSection } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ImageManager from 'containers/ImageManager';
 import ProjectComponents from 'containers/ProjectComponents';
+import ProjectMeasurements from 'containers/ProjectMeasurements';
 import Modal from 'components/Modal';
 import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import Basics from './subcomponents/Basics';
-import Measurements from './subcomponents/Measurements';
 import { selectProject, selectProjectCurrentImage } from './selectors';
 import { fetchProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
@@ -38,7 +38,7 @@ class ProjectManager extends React.PureComponent {
         break;
 
       case sections.Measurements.id:
-        renderedSection = <Measurements {...{ project }} />;
+        renderedSection = <ProjectMeasurements {...{ project }} />;
         break;
 
       case sections.Instructions.id:

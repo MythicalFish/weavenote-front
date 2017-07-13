@@ -19,8 +19,5 @@ export const selectProjectCurrentImage = () =>
     }
   });
 
-export const selectMeasurements = () =>
-  createSelector(selectDomain(), (substate) => substate.get('measurements'));
-
 export const selectMaterialCost = () =>
   createSelector(selectDomain(), (substate) => substate.get('material_cost'));

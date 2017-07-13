@@ -85,19 +85,35 @@ export default function createRoutes(store) {
           import('containers/ProjectInstructions/sagas'),
           import('containers/ProjectComponents/reducer'),
           import('containers/ProjectComponents/sagas'),
+          import('containers/ProjectMeasurements/reducer'),
+          import('containers/ProjectMeasurements/sagas'),
           import('containers/ProjectManager'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(
-          ([reducer, sagas, iReducer, iSagas, pReducer, pSagas, component]) => {
+          (
+            [
+              reducer,
+              sagas,
+              iReducer,
+              iSagas,
+              pReducer,
+              pSagas,
+              mReducer,
+              mSagas,
+              component,
+            ]
+          ) => {
             injectReducer('ProjectManager', reducer.default);
             injectReducer('ProjectInstructions', iReducer.default);
             injectReducer('ProjectComponents', pReducer.default);
+            injectReducer('ProjectMeasurements', mReducer.default);
             injectSagas(sagas.default);
             injectSagas(iSagas.default);
             injectSagas(pSagas.default);
+            injectSagas(mSagas.default);
             renderRoute(component);
           }
         );

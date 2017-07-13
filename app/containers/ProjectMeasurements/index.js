@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PlusButton from 'components/PlusButton';
-import { selectMeasurements } from '../../selectors';
+import { selectMeasurements } from './selectors';
 import {
   fetchMeasurements,
   updateMeasurements,
   createMeasurementGroup,
   createMeasurementName,
-} from '../../actions';
+} from './actions';
 import Form from './Form';
 
-class Measurements extends React.PureComponent {
+class ProjectMeasurements extends React.PureComponent {
   componentDidMount() {
     const { project } = this.props;
     this.props.fetchMeasurements(project.get('id'));
@@ -55,7 +55,7 @@ class Measurements extends React.PureComponent {
   }
 }
 
-Measurements.propTypes = {
+ProjectMeasurements.propTypes = {
   project: PropTypes.object,
   measurements: PropTypes.object,
   fetchMeasurements: PropTypes.func,
@@ -80,4 +80,4 @@ const mapState = createStructuredSelector({
   measurements: selectMeasurements(),
 });
 
-export default connect(mapState, mapDispatch)(Measurements);
+export default connect(mapState, mapDispatch)(ProjectMeasurements);
