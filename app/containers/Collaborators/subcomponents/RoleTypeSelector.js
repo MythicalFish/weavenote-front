@@ -2,28 +2,32 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import SelectInput from 'components/SelectInput';
+import Dropdown from 'components/Dropdown';
 import { selectRoleTypes } from '../selectors';
 import { fetchRoleTypes } from '../actions';
 
-class RoleTypeSelector extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class RoleTypeSelector extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchRoleTypes();
   }
   handleChange = (roleType) => {
     const { target } = this.props;
     this.props.handleChange(roleType, target);
-  }
+  };
   render() {
     const { roleTypes, target } = this.props;
     const selected = this.props.selectedRoleType(roleTypes, target);
     return (
       <div>
         {selected &&
-          <div className="input input-inline">  
-            <SelectInput value={selected} data={roleTypes} onChange={this.handleChange} />
-          </div>
-        }
+          <div className="input input-inline">
+            <Dropdown
+              value={selected}
+              data={roleTypes}
+              onChange={this.handleChange}
+            />
+          </div>}
       </div>
     );
   }
@@ -38,10 +42,7 @@ RoleTypeSelector.propTypes = {
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { fetchRoleTypes },
-    dispatch
-  );
+  return bindActionCreators({ fetchRoleTypes }, dispatch);
 }
 
 const mapState = createStructuredSelector({

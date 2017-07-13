@@ -23,7 +23,7 @@ textarea {
   position: relative;
   input,
   textarea,
-  .select-input > button,
+  .dropdown > button,
   .readonly {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -45,7 +45,7 @@ textarea {
   &.input-sm {
     input,
     textarea,
-    .select-input > button,
+    .dropdown > button,
     .readonly {
       padding: $space-1 $space-2;
     }
@@ -53,7 +53,7 @@ textarea {
   &.input-inline {
     input,
     textarea,
-    .select-input > button,
+    .dropdown > button,
     .readonly {
       padding: 0 $space-1;
       border: none;
@@ -80,63 +80,6 @@ textarea {
     transform: translateY(-50%);
     &:after {
       content: "\f053";
-    }
-  }
-}
-.select-input {
-  width: 100%;
-  position: relative;
-  display: inline-block;
-  button {
-    text-align: inherit;
-  }
-  &.noselect {
-    button {
-      cursor: default;
-    }
-  }
-}
-.tether-element {
-  z-index: 3;
-}
-.select-input-options {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: all .2s;
-  -webkit-transition: all .2s;
-  transform: translateY(-20px);
-  -webkit-transform: translateY(-20px);
-  transform-origin: top;
-  -webkit-transform-origin: top;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  top: -1px;
-  background: $white;
-  min-width: 120px;
-  max-height: 30vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  @extend .b1;
-  opacity: 0;
-  &.open {
-    opacity: 1;
-    transform: translateY(0);
-    -webkit-transform: translateY(0);
-  }
-  > li,
-  > button,
-  > a {
-    display: block;
-    padding: $space-1 $space-2;
-    cursor: pointer;
-    width: 100%;
-    text-align: inherit;
-    &:not(:last-child) {
-      @extend .bb1;
     }
   }
 }

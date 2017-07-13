@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import SelectInput from 'components/SelectInput';
+import Dropdown from 'components/Dropdown';
 import Avatar from 'components/Avatar';
 import * as authUtils from 'utils/authUtils';
 
@@ -9,7 +9,7 @@ export default function UserMenu(props) {
   return (
     <div>
       {user &&
-        <SelectInput label={UserMenuButton(props)} align="right">
+        <Dropdown label={UserMenuButton(props)} align="right">
           <Link to="/profile">
             Profile
             <i className="fa fa-user ml1" />
@@ -26,7 +26,7 @@ export default function UserMenu(props) {
             Logout
             <i className="fa fa-eject ml1" />
           </button>
-        </SelectInput>}
+        </Dropdown>}
     </div>
   );
 }

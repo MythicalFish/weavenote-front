@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import SelectInput from 'components/SelectInput';
+import Dropdown from 'components/Dropdown';
 import Button from 'components/Button';
 
 class Switcher extends React.PureComponent {
@@ -10,7 +10,7 @@ class Switcher extends React.PureComponent {
     const { organization, organizations, startCreate } = this.props;
     return (
       <div className="input inline-block">
-        <SelectInput
+        <Dropdown
           value={organization}
           data={organizations}
           onChange={this.switchOrganization}

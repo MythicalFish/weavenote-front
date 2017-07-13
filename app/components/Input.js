@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectInput from 'components/SelectInput';
+import Dropdown from 'components/Dropdown';
 
 export default class Input extends React.PureComponent {
   componentDidMount() {
@@ -56,7 +56,7 @@ export default class Input extends React.PureComponent {
       case 'select':
         if (!fProps.data && p.data) fProps.data = p.data;
         if (p.align) fProps.align = p.align;
-        field = <SelectInput {...fProps} />;
+        field = <Dropdown {...fProps} />;
         break;
       case 'textarea':
         field = <textarea {...fProps} />;

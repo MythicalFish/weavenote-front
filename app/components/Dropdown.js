@@ -3,7 +3,7 @@ import Dot from 'components/Dot';
 import PriceSymbol from 'components/PriceSymbol';
 import TetherComponent from 'react-tether';
 
-export default class SelectInput extends React.PureComponent {
+export default class Dropdown extends React.PureComponent {
   state = { active: false, className: '' };
 
   toggleState = () => {
@@ -59,7 +59,8 @@ export default class SelectInput extends React.PureComponent {
   items = () => {
     const { value, data, children, align } = this.props;
     const alignment = align || 'left';
-    const itemsClass = `select-input-options ${alignment}-align ${this.state.className}`;
+    const itemsClass = `dropdown-options ${alignment}-align ${this.state
+      .className}`;
     if (children) {
       return (
         <div className={itemsClass}>
@@ -118,7 +119,7 @@ export default class SelectInput extends React.PureComponent {
     let inputClass = className;
     if (readOnly) inputClass += ' noselect';
     return (
-      <div className={`select-input p0 ${inputClass}`}>
+      <div className={`dropdown p0 ${inputClass}`}>
         <TetherComponent {...this.tetherOptions}>
           {this.label()}
           {this.state.active &&
@@ -132,7 +133,7 @@ export default class SelectInput extends React.PureComponent {
   }
 }
 
-SelectInput.propTypes = {
+Dropdown.propTypes = {
   value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   className: PropTypes.string,

@@ -21,13 +21,14 @@
     }
     > .input {
       @extend .flex-auto;
-      > *, > .select-input > button {
+      > *,
+      > .dropdown > button {
         border: none;
       }
       textarea {
-        padding-top: 0!important;
+        padding-top: 0 !important;
       }
-    } 
+    }
     // > *:not(.p0) {
     //   @extend .p2;
     //   &.pr0 {

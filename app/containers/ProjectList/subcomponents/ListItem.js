@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import SelectInput from 'components/SelectInput';
+import Dropdown from 'components/Dropdown';
 import Thumbnail from 'components/Thumbnail';
 
 export default function ListItem(props) {
@@ -29,7 +29,7 @@ export default function ListItem(props) {
         </div>
         <div className="p2 dark3 smaller1">collaborators</div>
         <div className="p2">
-          <SelectInput label="...">
+          <Dropdown label="...">
             <Link to={url}>Manage</Link>
             {!project.archived &&
               <button
@@ -47,7 +47,7 @@ export default function ListItem(props) {
               >
                 Restore
               </button>}
-          </SelectInput>
+          </Dropdown>
         </div>
       </div>
     </div>
