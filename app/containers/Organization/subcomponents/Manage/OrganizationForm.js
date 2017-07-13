@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
 import Button from 'components/Button';
 
-const Form = (props) => {
+const OrganizationForm = (props) => {
   const { handleSubmit, submitting } = props;
   return (
     <form className="data-rows" onSubmit={handleSubmit}>
@@ -15,9 +15,9 @@ const Form = (props) => {
   );
 };
 
-Form.propTypes = {
+OrganizationForm.propTypes = {
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
 };
 
-export default reduxForm({ form: 'Form' })(Form);
+export default reduxForm({ form: 'OrganizationForm' })(OrganizationForm);

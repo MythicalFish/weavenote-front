@@ -6,13 +6,23 @@ class Switcher extends React.PureComponent {
   switchOrganization = (o) => {
     this.props.switchOrganization(o.get('id'));
   };
+  otherOrganizations = () => {
+    const { organization, organizations } = this.props;
+    const orgs = [];
+    organizations.forEach((org) => {
+      if (organization.get('id') !== org.get('id')) {
+        orgs.push(org);
+      }
+    });
+    return orgs;
+  };
   render() {
     const { organization, organizations, startCreate } = this.props;
     return (
       <div className="input inline-block">
         <Dropdown
           value={organization}
-          data={organizations}
+          data={this.otherOrganizations()}
           onChange={this.switchOrganization}
           align="right"
           tail={() =>

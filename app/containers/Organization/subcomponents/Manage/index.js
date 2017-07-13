@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Collaborators from 'containers/Collaborators';
-import Settings from './Settings';
+import OrganizationForm from './OrganizationForm';
 import Switcher from './Switcher';
 import { updateOrganization, switchOrganization } from '../../actions';
 
@@ -26,7 +26,7 @@ class Manage extends React.PureComponent {
           <div>
             <div className="bg-white p2 mt2">
               <h4>General</h4>
-              <Settings
+              <OrganizationForm
                 initialValues={organization}
                 onSubmit={this.props.handleUpdate}
               />

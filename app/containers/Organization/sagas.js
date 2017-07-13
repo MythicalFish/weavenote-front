@@ -1,9 +1,11 @@
-import { take, takeLatest, cancel, put } from 'redux-saga/effects';
+import { take, takeLatest, cancel, put, select } from 'redux-saga/effects';
+import { initialize } from 'redux-form';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
+import { selectOrganization } from '../App/selectors';
 
 export default [orgWatcher];
 
@@ -31,6 +33,8 @@ function* switchOrganization({ id }) {
     { id },
     actions.switchOrganizationSuccess
   );
+  const o = yield select(selectOrganization());
+  yield put(initialize('OrganizationForm', o, { form: 'OrganizationForm' }));
 }
 
 function* createOrganization({ organization }) {
