@@ -22,6 +22,7 @@ export function* projectManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_PROJECT, fetchProject),
     yield takeLatest(types.UPDATE_PROJECT, updateProject),
+    yield takeLatest(types.FETCH_MATERIAL_COST, fetchMaterialCost),
 
     yield takeLatest(imgActions.SWITCH_IMAGE, resetImageForm),
     yield takeLatest(imgActions.DELETE_IMAGE_SUCCESS, resetImageForm),
@@ -31,11 +32,19 @@ export function* projectManagerWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-export function* fetchProject(action) {
+function* fetchProject(action) {
   yield sagas.get(`projects/${action.id}`, null, actions.fetchProjectSuccess);
 }
 
-export function* updateProject(action) {
+function* fetchMaterialCost(action) {
+  yield sagas.get(
+    `projects/${action.id}/material_cost`,
+    null,
+    actions.fetchMaterialCostSuccess
+  );
+}
+
+function* updateProject(action) {
   const project = action.project.toJS();
   yield sagas.patch(
     `projects/${project.id}`,
@@ -44,7 +53,7 @@ export function* updateProject(action) {
   );
 }
 
-export function* resetImageForm() {
+function* resetImageForm() {
   const i = yield select(selectProjectCurrentImage());
   yield put(initialize('ImageForm', i, { form: 'ImageForm' }));
 }

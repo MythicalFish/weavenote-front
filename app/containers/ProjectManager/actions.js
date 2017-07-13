@@ -13,3 +13,10 @@ export function updateProject(project) {
 export function updateProjectSuccess() {
   return { type: types.UPDATE_PROJECT_SUCCESS };
 }
+
+export function fetchMaterialCost(id) {
+  return { type: types.FETCH_MATERIAL_COST, id };
+}
+export function fetchMaterialCostSuccess(response) {
+  return { type: types.FETCH_MATERIAL_COST_SUCCESS, response };
+}

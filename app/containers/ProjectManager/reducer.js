@@ -29,6 +29,9 @@ function projectReducer(state = initialState, action) {
         .set('material_cost', fromJS(action.data.material_cost))
         .set('collaborators', fromJS(action.data.collaborators));
 
+    case types.FETCH_MATERIAL_COST_SUCCESS:
+      return state.set('material_cost', fromJS(action.response));
+
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
 

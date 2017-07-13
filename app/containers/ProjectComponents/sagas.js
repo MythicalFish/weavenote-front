@@ -3,7 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
-import { fetchProject } from '../ProjectManager/actions';
+import { fetchMaterialCost } from '../ProjectManager/actions';
 
 export default [componentsWatcher];
 
@@ -37,7 +37,7 @@ export function* updateComponent(action) {
     payload,
     actions.updateComponentSuccess
   );
-  yield put(fetchProject(payload.project_id));
+  yield put(fetchMaterialCost(payload.project_id));
 }
 
 export function* createComponent({ payload }) {
