@@ -9,12 +9,13 @@ import ProjectInstructions from 'containers/ProjectInstructions';
 import ImageManager from 'containers/ImageManager';
 import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
+import Comments from 'containers/Comments';
 import Modal from 'components/Modal';
 import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import Basics from './subcomponents/Basics';
-import { selectProject, selectProjectCurrentImage } from './selectors';
+import { selectProject, selectCurrentImage, selectComments } from './selectors';
 import { fetchProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
 
@@ -30,23 +31,24 @@ class ProjectManager extends React.PureComponent {
   render() {
     const { project, currentSection } = this.props;
 
-    let renderedSection = <Basics {...{ project }} />;
+    let renderedSection;
 
     switch (currentSection.id) {
       case sections.Components.id:
-        renderedSection = <ProjectComponents {...{ project }} />;
+        renderedSection = <ProjectComponents {...this.props} />;
         break;
 
       case sections.Measurements.id:
-        renderedSection = <ProjectMeasurements {...{ project }} />;
+        renderedSection = <ProjectMeasurements {...this.props} />;
         break;
 
       case sections.Instructions.id:
-        renderedSection = <ProjectInstructions {...{ project }} />;
+        renderedSection = <ProjectInstructions {...this.props} />;
         break;
 
       default:
-        break; // already set
+        renderedSection = <Basics {...this.props} />;
+        break;
     }
 
     return (
@@ -60,7 +62,10 @@ class ProjectManager extends React.PureComponent {
         <div className="p2 bg-white">
           <div className="container">
             <div className="row">
-              <div className="col-xs-12 col-md-6 flex justify-center">
+              <div className="col-xs-12 col-md-3">
+                <Comments />
+              </div>
+              <div className="col-xs-12 col-md-5 flex justify-center">
                 {project &&
                   <div className="flex flex-column items-center lh0">
                     <ImageManager
@@ -71,7 +76,7 @@ class ProjectManager extends React.PureComponent {
                     />
                   </div>}
               </div>
-              <div className="col-xs-12 col-md-6 flex justify-center">
+              <div className="col-xs-12 col-md-4 flex justify-center">
                 {project && renderedSection}
               </div>
             </div>
@@ -106,9 +111,10 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
+  comments: selectComments(),
   project: selectProject(),
   currentSection: selectCurrentSection(),
-  currentImage: selectProjectCurrentImage(),
+  currentImage: selectCurrentImage(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

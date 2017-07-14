@@ -5,7 +5,7 @@ export const selectDomain = () => (state) => state.get('ProjectManager');
 export const selectProject = () =>
   createSelector(selectDomain(), (s) => s.get('attributes'));
 
-export const selectProjectCurrentImage = () =>
+export const selectCurrentImage = () =>
   createSelector(selectDomain(), (s) => {
     const i = s.getIn(['attributes', 'images', s.get('currentImage')]);
     const imageable = {
@@ -21,3 +21,6 @@ export const selectProjectCurrentImage = () =>
 
 export const selectMaterialCost = () =>
   createSelector(selectDomain(), (substate) => substate.get('material_cost'));
+
+export const selectComments = () =>
+  createSelector(selectDomain(), (substate) => substate.get('comments'));

@@ -7,6 +7,7 @@ class Comments extends React.PureComponent {
   render() {
     return (
       <div>
+        comments!
         {this.props.children}
       </div>
     );

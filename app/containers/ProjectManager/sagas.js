@@ -6,7 +6,7 @@ import { materialListWatcher } from 'containers/MaterialList/sagas';
 import * as types from './constants';
 import * as actions from './actions';
 import * as imgActions from '../ImageManager/constants';
-import { selectProjectCurrentImage } from './selectors';
+import { selectCurrentImage } from './selectors';
 
 export default [projectManagerWatcher, materialListWatcher];
 
@@ -46,6 +46,6 @@ function* updateProject(action) {
 }
 
 function* resetImageForm() {
-  const i = yield select(selectProjectCurrentImage());
+  const i = yield select(selectCurrentImage());
   yield put(initialize('ImageForm', i, { form: 'ImageForm' }));
 }
