@@ -19,6 +19,8 @@ const setProjectImages = (state, action) =>
 const imageCount = (state) => state.getIn(['attributes', 'images']).size;
 
 function projectReducer(state = initialState, action) {
+  const { response } = action;
+
   switch (action.type) {
     // Project
 
@@ -27,10 +29,11 @@ function projectReducer(state = initialState, action) {
 
     case types.FETCH_PROJECT_SUCCESS:
       return state
-        .set('attributes', fromJS(action.data.attributes))
-        .set('user_role', fromJS(action.data.user_role))
-        .set('material_cost', fromJS(action.data.material_cost))
-        .set('collaborators', fromJS(action.data.collaborators));
+        .set('attributes', fromJS(response.attributes))
+        .set('user_role', fromJS(response.user_role))
+        .set('material_cost', fromJS(response.material_cost))
+        .set('collaborators', fromJS(response.collaborators))
+        .set('comments', fromJS(response.comments));
 
     case types.FETCH_MATERIAL_COST_SUCCESS:
       return state.set('material_cost', fromJS(action.response));

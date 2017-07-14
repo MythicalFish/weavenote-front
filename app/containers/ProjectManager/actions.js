@@ -3,8 +3,8 @@ import * as types from './constants';
 export function fetchProject(id) {
   return { type: types.FETCH_PROJECT, id };
 }
-export function fetchProjectSuccess(data) {
-  return { type: types.FETCH_PROJECT_SUCCESS, data };
+export function fetchProjectSuccess(response) {
+  return { type: types.FETCH_PROJECT_SUCCESS, response };
 }
 
 export function updateProject(project) {
