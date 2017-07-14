@@ -1,14 +1,6 @@
-import {
-  call,
-  put,
-  take,
-  cancel,
-  takeLatest,
-  select,
-} from 'redux-saga/effects';
+import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { initialize } from 'redux-form';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import * as API from 'utils/API';
 import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
 import * as types from './constants';

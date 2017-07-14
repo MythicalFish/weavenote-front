@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
-import * as imageActionTypes from 'containers/ImageManager/constants';
+import * as iTypes from 'containers/ImageManager/constants';
+import * as cTypes from 'containers/Comments/constants';
 import * as types from './constants';
 
 const initialState = fromJS({
@@ -8,6 +9,8 @@ const initialState = fromJS({
   collaborators: [],
   currentImage: 0,
   material_cost: 0,
+  comments: [],
+  currentComment: null,
 });
 
 const setProjectImages = (state, action) =>
@@ -37,7 +40,7 @@ function projectReducer(state = initialState, action) {
 
     // Images
 
-    case imageActionTypes.CREATE_IMAGE_SUCCESS:
+    case iTypes.CREATE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
         return setProjectImages(state, action).set(
           'currentImage',
@@ -46,7 +49,7 @@ function projectReducer(state = initialState, action) {
       }
       return state;
 
-    case imageActionTypes.DELETE_IMAGE_SUCCESS:
+    case iTypes.DELETE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
         return setProjectImages(state, action).set(
           'currentImage',
@@ -55,7 +58,7 @@ function projectReducer(state = initialState, action) {
       }
       return state;
 
-    case imageActionTypes.UPDATE_IMAGE_SUCCESS:
+    case iTypes.UPDATE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
         return state.setIn(
           ['attributes', 'images'],
@@ -64,8 +67,23 @@ function projectReducer(state = initialState, action) {
       }
       return state;
 
-    case imageActionTypes.SWITCH_IMAGE:
+    case iTypes.SWITCH_IMAGE:
       return state.set('currentImage', action.index);
+
+    // Comments
+
+    case cTypes.CREATE_COMMENT_SUCCESS:
+      return state
+        .set('comments', fromJS(action.response))
+        .set('currentComment', commentCount(state));
+
+    case cTypes.UPDATE_COMMENT_SUCCESS:
+      return state;
+
+    case cTypes.DELETE_COMMENT_SUCCESS:
+      return state
+        .set('comments', fromJS(action.response))
+        .set('currentComment', null);
 
     default:
       return state;
