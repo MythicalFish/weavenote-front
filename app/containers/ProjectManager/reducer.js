@@ -17,6 +17,7 @@ const setProjectImages = (state, action) =>
   state.setIn(['attributes', 'images'], fromJS(action.response.images));
 
 const imageCount = (state) => state.getIn(['attributes', 'images']).size;
+const commentCount = (state) => state.get('comments').size;
 
 function projectReducer(state = initialState, action) {
   const { response } = action;

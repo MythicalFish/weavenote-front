@@ -15,7 +15,7 @@ import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import Basics from './subcomponents/Basics';
-import { selectProject, selectCurrentImage, selectComments } from './selectors';
+import * as selectors from './selectors';
 import { fetchProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
 
@@ -51,6 +51,8 @@ class ProjectManager extends React.PureComponent {
         break;
     }
 
+    if (!project) return null;
+
     return (
       <div>
         <Header />
@@ -63,43 +65,46 @@ class ProjectManager extends React.PureComponent {
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-3">
-                <Comments />
+                <Comments
+                  comments={this.props.comments}  
+                  currentComment={this.props.currentComment}
+                  commentable={{ type: 'Project', id: project.get('id') }}
+                />
               </div>
               <div className="col-xs-12 col-md-5 flex justify-center">
-                {project &&
-                  <div className="flex flex-column items-center lh0">
-                    <ImageManager
-                      maxImages={5}
-                      images={project.get('images')}
-                      currentImage={this.props.currentImage}
-                      placeholder={IMAGE_PLACEHOLDER}
-                    />
-                  </div>}
+                <div className="flex flex-column items-center lh0">
+                  <ImageManager
+                    maxImages={5}
+                    images={project.get('images')}
+                    currentImage={this.props.currentImage}
+                    placeholder={IMAGE_PLACEHOLDER}
+                  />
+                </div>
               </div>
               <div className="col-xs-12 col-md-4 flex justify-center">
-                {project && renderedSection}
+                {renderedSection}
               </div>
             </div>
           </div>
         </div>
-        {project &&
-          <Modal parent={this} modalID="collaborators">
-            <header>
-              {`Collaborators for ${project.get('name')}`}
-            </header>
-            <Collaborators
-              invitable={{ type: 'Project', id: project.get('id') }}
-            />
-          </Modal>}
+        <Modal parent={this} modalID="collaborators">
+          <header>
+            {`Collaborators for ${project.get('name')}`}
+          </header>
+          <Collaborators
+            invitable={{ type: 'Project', id: project.get('id') }}
+          />
+        </Modal>
       </div>
     );
   }
 }
 
 ProjectManager.propTypes = {
-  images: React.PropTypes.object,
-  currentImage: React.PropTypes.object,
   project: React.PropTypes.object,
+  comments: React.PropTypes.object,
+  currentComment: React.PropTypes.object,
+  currentImage: React.PropTypes.object,
   currentSection: React.PropTypes.object,
   changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
@@ -111,10 +116,11 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  comments: selectComments(),
-  project: selectProject(),
+  comments: selectors.selectComments(),
+  project: selectors.selectProject(),
+  currentImage: selectors.selectCurrentImage(),
+  currentComment: selectors.selectCurrentComment(),
   currentSection: selectCurrentSection(),
-  currentImage: selectCurrentImage(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

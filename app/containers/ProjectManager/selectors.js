@@ -24,3 +24,9 @@ export const selectMaterialCost = () =>
 
 export const selectComments = () =>
   createSelector(selectDomain(), (substate) => substate.get('comments'));
+
+export const selectCurrentComment = () =>
+  createSelector(selectDomain(), (s) => {
+    const i = s.get('currentComment');
+    return s.getIn(['comments', i]);
+  });
