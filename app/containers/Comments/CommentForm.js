@@ -3,16 +3,25 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
-const CommentForm = (props) => {
-  const { handleSubmit, submitting } = props;
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <Field name="text" type="textarea" component={Input} />
-      <Button type="submit" disabled={submitting} label="Add comment" />
-    </form>
-  );
-};
+class CommentForm extends React.PureComponent {
+  state = { creating: false };
+  toggleState = () => {
+    this.setState({ creating: !this.state.creating });
+  };
+  render() {
+    const { handleSubmit, submitting } = this.props;
+    return (
+      <div>
+        {this.state.creating &&
+          <form onSubmit={handleSubmit}>
+            <Field name="text" type="textarea" component={Input} />
+            <Button type="submit" disabled={submitting} label="Submit" />
+          </form>}
+        <Button label="Leave a comment" inline onclick={this.toggleState} />
+      </div>
+    );
+  }
+}
 
 CommentForm.propTypes = {
   handleSubmit: PropTypes.func,
