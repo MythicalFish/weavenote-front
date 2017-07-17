@@ -5,8 +5,15 @@ const Comment = (props) => {
   const Thing = () => null;
   return (
     <div className="comment">
-      <Avatar user={props.user} small />
-      {props.text}
+      <div className="comment-avatar">
+        <Avatar user={props.user} small />
+        <div className="comment-author">
+          {props.user.name}
+        </div>
+      </div>
+      <div className="comment-body">
+        {props.text}
+      </div>
     </div>
   );
 };

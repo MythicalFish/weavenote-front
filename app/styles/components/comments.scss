@@ -1,0 +1,23 @@
+.comment {
+  @extend .flex;
+  .comment-avatar {
+    @extend .flex-none;
+    position: relative;
+    .comment-author {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      background: $white;
+      padding: $space-1;
+    }
+    &:hover {
+      .comment-author {
+        display: block;
+      }
+    }
+  }
+  .comment-body {
+    @extend .flex-auto;
+  }
+}
