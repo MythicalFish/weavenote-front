@@ -4,20 +4,21 @@ import * as cTypes from 'containers/Comments/constants';
 import * as types from './constants';
 
 const initialState = fromJS({
-  attributes: null,
-  user_role: null,
-  collaborators: [],
+  project: {
+    comments: [],
+    collaborators: [],
+    material_cost: null,
+  },
+  userRole: null,
   currentImage: 0,
-  material_cost: 0,
-  comments: [],
   currentComment: null,
 });
 
 const setProjectImages = (state, action) =>
-  state.setIn(['attributes', 'images'], fromJS(action.response.images));
+  state.setIn(['project', 'images'], fromJS(action.response.images));
 
-const imageCount = (state) => state.getIn(['attributes', 'images']).size;
-const commentCount = (state) => state.get('comments').size;
+const imageCount = (state) => state.getIn(['project', 'images']).size;
+const commentCount = (state) => state.getIn(['project', 'comments']).size;
 
 function projectReducer(state = initialState, action) {
   const { response } = action;
@@ -30,14 +31,11 @@ function projectReducer(state = initialState, action) {
 
     case types.FETCH_PROJECT_SUCCESS:
       return state
-        .set('attributes', fromJS(response.attributes))
-        .set('user_role', fromJS(response.user_role))
-        .set('material_cost', fromJS(response.material_cost))
-        .set('collaborators', fromJS(response.collaborators))
-        .set('comments', fromJS(response.comments));
+        .set('project', fromJS(response.project))
+        .set('userRole', fromJS(response.user_role));
 
     case types.FETCH_MATERIAL_COST_SUCCESS:
-      return state.set('material_cost', fromJS(action.response));
+      return state.setIn(['project', 'material_cost'], fromJS(action.response));
 
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
@@ -65,7 +63,7 @@ function projectReducer(state = initialState, action) {
     case iTypes.UPDATE_IMAGE_SUCCESS:
       if (action.response.imageable_type === 'Project') {
         return state.setIn(
-          ['attributes', 'images'],
+          ['project', 'images'],
           fromJS(action.response.images)
         );
       }
@@ -78,7 +76,7 @@ function projectReducer(state = initialState, action) {
 
     case cTypes.CREATE_COMMENT_SUCCESS:
       return state
-        .set('comments', fromJS(action.response))
+        .setIn(['project', 'comments'], fromJS(action.response))
         .set('currentComment', commentCount(state));
 
     case cTypes.UPDATE_COMMENT_SUCCESS:
@@ -86,7 +84,7 @@ function projectReducer(state = initialState, action) {
 
     case cTypes.DELETE_COMMENT_SUCCESS:
       return state
-        .set('comments', fromJS(action.response))
+        .setIn(['project', 'comments'], fromJS(action.response))
         .set('currentComment', null);
 
     default:

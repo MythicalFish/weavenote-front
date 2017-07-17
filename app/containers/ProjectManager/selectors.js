@@ -3,14 +3,14 @@ import { createSelector } from 'reselect';
 export const selectDomain = () => (state) => state.get('ProjectManager');
 
 export const selectProject = () =>
-  createSelector(selectDomain(), (s) => s.get('attributes'));
+  createSelector(selectDomain(), (s) => s.get('project'));
 
 export const selectCurrentImage = () =>
   createSelector(selectDomain(), (s) => {
-    const i = s.getIn(['attributes', 'images', s.get('currentImage')]);
+    const i = s.getIn(['project', 'images', s.get('currentImage')]);
     const imageable = {
       type: 'Project',
-      id: s.getIn(['attributes', 'id']),
+      id: s.getIn(['project', 'id']),
     };
     if (i) {
       return i.set('imageable', imageable).toJS();
@@ -20,13 +20,17 @@ export const selectCurrentImage = () =>
   });
 
 export const selectMaterialCost = () =>
-  createSelector(selectDomain(), (substate) => substate.get('material_cost'));
+  createSelector(selectDomain(), (substate) =>
+    substate.getIn(['project', 'material_cost'])
+  );
 
 export const selectComments = () =>
-  createSelector(selectDomain(), (substate) => substate.get('comments'));
+  createSelector(selectDomain(), (substate) =>
+    substate.getIn(['project', 'comments'])
+  );
 
 export const selectCurrentComment = () =>
   createSelector(selectDomain(), (s) => {
     const i = s.get('currentComment');
-    return s.getIn(['comments', i]);
+    return s.getIn(['project', 'comments', i]);
   });

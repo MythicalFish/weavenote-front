@@ -30,28 +30,28 @@ class ProjectManager extends React.PureComponent {
 
   render() {
     const { project, currentSection } = this.props;
+    const id = project.get('id');
+    if (!id) return null;
 
-    let renderedSection;
+    let View;
 
     switch (currentSection.id) {
       case sections.Components.id:
-        renderedSection = <ProjectComponents {...this.props} />;
+        View = ProjectComponents;
         break;
 
       case sections.Measurements.id:
-        renderedSection = <ProjectMeasurements {...this.props} />;
+        View = ProjectMeasurements;
         break;
 
       case sections.Instructions.id:
-        renderedSection = <ProjectInstructions {...this.props} />;
+        View = ProjectInstructions;
         break;
 
       default:
-        renderedSection = <Basics {...this.props} />;
+        View = Basics;
         break;
     }
-
-    if (!project) return null;
 
     return (
       <div>
@@ -66,7 +66,7 @@ class ProjectManager extends React.PureComponent {
             <div className="row">
               <div className="col-xs-12 col-md-3">
                 <Comments
-                  comments={this.props.comments}  
+                  comments={this.props.comments}
                   currentComment={this.props.currentComment}
                   commentable={{ type: 'Project', id: project.get('id') }}
                 />
@@ -82,7 +82,7 @@ class ProjectManager extends React.PureComponent {
                 </div>
               </div>
               <div className="col-xs-12 col-md-4 flex justify-center">
-                {renderedSection}
+                <View {...this.props} />
               </div>
             </div>
           </div>
