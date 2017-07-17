@@ -1,27 +1,20 @@
 import React, { PropTypes } from 'react';
 
 export default function Avatar(props) {
-  const { user } = props;
+  let user = props.user || {};
+  if (user.toJS) user = user.toJS();
   let className = 'avatar';
-  if (props.sm) {
+  if (props.small) {
     className += ' avatar-sm';
   }
   return (
     <div className={className}>
-      <div>
-        {user &&
-          userLetters(user)
-        }
-      </div>
+      <img src={user.avatar} role="presentation" />
     </div>
   );
 }
 
-const userLetters = (user) => (
-  user.get('name').split(' ').map((s) => (s.charAt(0).toUpperCase())).join('')
-);
-
 Avatar.propTypes = {
   user: PropTypes.object,
-  sm: PropTypes.bool,
+  small: PropTypes.bool,
 };
