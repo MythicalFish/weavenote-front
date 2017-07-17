@@ -2,13 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import AddComment from './AddComment';
 
 class Comments extends React.PureComponent {
   render() {
     return (
       <div>
         comments!
-        {this.props.children}
+        <AddComment />
       </div>
     );
   }
