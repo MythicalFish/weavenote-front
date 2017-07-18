@@ -32,6 +32,7 @@ class Comments extends React.PureComponent {
       commentable,
       comments,
       creatingComment,
+      createComment: create,
       deleteComment: destroy,
       updateComment: update,
     } = this.props;
@@ -40,7 +41,7 @@ class Comments extends React.PureComponent {
         {comments.map((comment, i) =>
           <Comment
             key={`${commentable.type}Comment${i}`}
-            {...{ comment, commentable, destroy, update }}
+            {...{ comment, commentable, destroy, update, create }}
             isSelected={this.isSelected(comment)}
             isOwnComment={this.isOwnComment(comment)}
             switchComment={this.switchComment(i)}
@@ -48,7 +49,7 @@ class Comments extends React.PureComponent {
         )}
         {creatingComment
           ? <CommentForm
-            onSubmit={this.props.createComment}
+            onSubmit={create}
             initialValues={{ commentable }}
           />
           : <Button

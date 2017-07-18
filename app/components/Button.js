@@ -22,6 +22,9 @@ export default function Button(props) {
   } else {
     className += ' color2x';
   }
+  if (props.shy) {
+    className += ' btn-inline btn-sm';
+  }
   return (
     <button
       className={`btn ${className}`}
@@ -40,6 +43,7 @@ Button.propTypes = {
   type: React.PropTypes.string,
   icon: React.PropTypes.string,
   small: React.PropTypes.bool,
+  shy: React.PropTypes.bool,
   large: React.PropTypes.bool,
   inline: React.PropTypes.bool,
   glyph: React.PropTypes.bool,

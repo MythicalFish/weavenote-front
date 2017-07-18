@@ -64,7 +64,7 @@ class ProjectManager extends React.PureComponent {
         <div className="p2 bg-white">
           <div className="container">
             <div className="row">
-              <div className="col-xs-12 col-md-3">
+              <div className="col-xs-12 last-xs first-md col-md-3">
                 <Comments
                   comments={this.props.comments}
                   currentComment={this.props.currentComment}
@@ -72,7 +72,7 @@ class ProjectManager extends React.PureComponent {
                   commentable={{ type: 'Project', id: project.get('id') }}
                 />
               </div>
-              <div className="col-xs-12 col-md-5 flex justify-center">
+              <div className="col-xs-6 col-md-5 flex justify-center">
                 <div className="flex flex-column items-center lh0">
                   <ImageManager
                     maxImages={5}
@@ -82,7 +82,7 @@ class ProjectManager extends React.PureComponent {
                   />
                 </div>
               </div>
-              <div className="col-xs-12 col-md-4 flex justify-center">
+              <div className="col-xs-6 col-md-4 flex justify-center">
                 <View {...this.props} />
               </div>
             </div>

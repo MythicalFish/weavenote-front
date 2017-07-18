@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react';
 import Avatar from 'components/Avatar';
-import Button from 'components/Button';
 import CommentForm from './CommentForm';
 import CommentReplies from './CommentReplies';
+import CommentReply from './CommentReply';
+import CommentActions from './CommentActions';
 
 class Comment extends React.PureComponent {
-  state = { editing: false, replying: false };
+  state = { isEditing: false, isReplying: false };
   componentDidUpdate = () => {
     if (!this.props.isSelected) {
-      if (this.state.editing) this.toggleEdit();
-      if (this.state.replying) this.toggleReply();
+      if (this.state.isEditing) this.toggleEdit();
+      if (this.state.isReplying) this.toggleReply();
     }
   };
   authorName = () =>
@@ -17,36 +18,28 @@ class Comment extends React.PureComponent {
       ? 'You'
       : this.props.comment.getIn(['user', 'name']);
   toggleEdit = () => {
-    this.setState({ editing: !this.state.editing });
+    this.setState({ isEditing: !this.state.isEditing });
   };
   toggleReply = () => {
-    this.setState({ replying: !this.state.replying });
+    this.setState({ isReplying: !this.state.isReplying });
   };
+  commentClass = () => `comment${this.props.isSelected ? ' selected' : ''}`;
   render() {
-    const {
-      commentable,
-      comment,
-      switchComment,
-      isSelected,
-      isOwnComment,
-    } = this.props;
-    let cClass = 'comment';
-    if (isSelected) cClass += ' selected';
+    const { commentable, comment, switchComment, isSelected } = this.props;
+    const { isEditing, isReplying } = this.state;
+    const { toggleEdit, toggleReply } = this;
     return (
-      <div className={cClass} onClick={switchComment}>
+      <div className={this.commentClass()} onClick={switchComment}>
         <div className="flex">
           <div className="comment-avatar flex-none pr1">
             <Avatar user={comment.get('user')} small />
-            <div className="comment-author">
-              {this.authorName()}
-            </div>
           </div>
           <div className="flex-auto">
             {isSelected &&
               <div>
                 {this.authorName()}
               </div>}
-            {this.state.editing && isSelected
+            {isEditing
               ? <CommentForm
                 onSubmit={this.props.update}
                 initialValues={{ commentable, comment }}
@@ -54,23 +47,11 @@ class Comment extends React.PureComponent {
               : comment.get('text')}
           </div>
         </div>
+        {isSelected &&
+          !isEditing &&
+          <CommentActions {...this.props} {...{ toggleEdit }} />}
+        <CommentReply {...this.props} {...{ toggleReply, isReplying }} />
         <CommentReplies />
-        <div className="comment-actions">
-          {isOwnComment &&
-            <div>
-              <Button onclick={this.toggleEdit} label="Edit" inline />
-              <Button
-                onclick={() => {
-                  this.props.destroy({ comment, commentable });
-                }}
-                label="Remove"
-                inline
-              />
-            </div>}
-          {!isOwnComment &&
-            !this.state.replying &&
-            <Button onclick={this.toggleReply} label="Reply" inline />}
-        </div>
       </div>
     );
   }
@@ -80,7 +61,6 @@ Comment.propTypes = {
   isSelected: PropTypes.bool,
   isOwnComment: PropTypes.bool,
   switchComment: PropTypes.func,
-  destroy: PropTypes.func,
   update: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,

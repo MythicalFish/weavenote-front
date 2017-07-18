@@ -1,24 +1,18 @@
 .comment {
   padding: $space-1;
   border: 1px solid transparent;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
   .comment-avatar {
     position: relative;
-    .comment-author {
-      display: none;
-      position: absolute;
-      left: 100%;
-      top: 0;
-      background: $white;
-      padding: $space-1;
-    }
-    &:hover {
-      .comment-author {
-        display: block;
-      }
-    }
   }
   .comment-actions {
-    display: none;
+    button:not(:last-child) {
+      margin-right: $space-1;
+    }
+  }
+  .comment-reply {
+    opacity: 0;
   }
   &:not(:last-child) {
     margin-bottom: $space-1;
@@ -26,8 +20,8 @@
   &.selected,
   &:hover {
     border-color: $dark1;
-    .comment-actions {
-      display: block;
+    .comment-reply {
+      opacity: 1;
     }
   }
 }

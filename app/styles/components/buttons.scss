@@ -12,6 +12,7 @@ a {
   }
 }
 button {
+  font-weight: normal;
   font-size: inherit;
   font-family: inherit;
   line-height: inherit;
@@ -29,7 +30,6 @@ button {
   -webkit-border-radius: 999px;
   border: 2px solid $gray;
   color: $gray;
-  text-transform: uppercase;
   box-shadow: none;
   &.btn-color2x {
     border-color: $color2x;
@@ -51,6 +51,8 @@ button {
   }
   &.btn-inline {
     border: none;
+    padding: 0;
+    color: $color2x;
   }
 }
 .btn-shy {
