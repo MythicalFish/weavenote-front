@@ -21,6 +21,7 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
     prefill: {
       email: null,
     },
+    allowedConnections: ['Username-Password-Authentication'],
   }
 
   lock = (opts) => (
