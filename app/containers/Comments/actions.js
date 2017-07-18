@@ -1,5 +1,9 @@
 import * as types from './constants';
 
+export function switchComment(index) {
+  return { type: types.SWITCH_COMMENT, index };
+}
+
 export function createComment(payload) {
   return { type: types.CREATE_COMMENT, payload };
 }

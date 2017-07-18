@@ -1,3 +1,5 @@
+export const SWITCH_COMMENT = '@@app/SWITCH_COMMENT';
+
 export const CREATE_COMMENT = '@@app/CREATE_COMMENT';
 export const CREATE_COMMENT_SUCCESS = '@@app/CREATE_COMMENT_SUCCESS';
 

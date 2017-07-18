@@ -77,7 +77,7 @@ function projectReducer(state = initialState, action) {
     case cTypes.CREATE_COMMENT_SUCCESS:
       return state
         .setIn(['project', 'comments'], fromJS(action.response))
-        .set('currentComment', commentCount(state));
+        .set('currentComment', null);
 
     case cTypes.UPDATE_COMMENT_SUCCESS:
       return state;
@@ -86,6 +86,9 @@ function projectReducer(state = initialState, action) {
       return state
         .setIn(['project', 'comments'], fromJS(action.response))
         .set('currentComment', null);
+
+    case cTypes.SWITCH_COMMENT:
+      return state.set('currentComment', action.index);
 
     default:
       return state;

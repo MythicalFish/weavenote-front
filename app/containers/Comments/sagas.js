@@ -32,4 +32,4 @@ function* deleteComment({ payload }) {
   );
 }
 
-const commentURL = (payload) => `comments/${payload.id}`;
+const commentURL = (payload) => `comments/${payload.comment.get('id')}`;

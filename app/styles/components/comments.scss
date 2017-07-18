@@ -1,11 +1,8 @@
 .comment {
-  @extend .flex;
   padding: $space-1;
   border: 1px solid transparent;
   .comment-avatar {
-    @extend .flex-none;
     position: relative;
-    padding-right: $space-1;
     .comment-author {
       display: none;
       position: absolute;
@@ -20,13 +17,11 @@
       }
     }
   }
-  .comment-body {
-    @extend .flex-auto;
-  }
   &:not(:last-child) {
     margin-bottom: $space-1;
   }
-  &.selected {
+  &.selected,
+  &:hover {
     border-color: $dark1;
   }
 }

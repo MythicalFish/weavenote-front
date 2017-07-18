@@ -4,21 +4,13 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 
 class CommentForm extends React.PureComponent {
-  state = { creating: false };
-  toggleState = () => {
-    this.setState({ creating: !this.state.creating });
-  };
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <div>
-        {this.state.creating &&
-          <form onSubmit={handleSubmit}>
-            <Field name="text" type="textarea" component={Input} />
-            <Button type="submit" disabled={submitting} label="Submit" />
-          </form>}
-        <Button label="Leave a comment" inline onclick={this.toggleState} />
-      </div>
+      <form onSubmit={handleSubmit}>
+        <Field name="text" type="textarea" component={Input} focus />
+        <Button type="submit" disabled={submitting} label="Submit" />
+      </form>
     );
   }
 }
