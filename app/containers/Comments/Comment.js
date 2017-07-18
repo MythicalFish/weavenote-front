@@ -5,16 +5,17 @@ import CommentForm from './CommentForm';
 
 class Comment extends React.PureComponent {
   state = { editing: false };
+  componentDidUpdate = () => {
+    if (!this.props.isSelected && this.state.editing) {
+      this.toggleEdit();
+    }
+  };
   authorName = () =>
     this.props.isOwnComment
       ? 'You'
       : this.props.comment.getIn(['user', 'name']);
   toggleEdit = () => {
     this.setState({ editing: !this.state.editing });
-  };
-  updateComment = (data) => {
-    this.props.update(data);
-    this.toggleEdit();
   };
   render() {
     const {
@@ -40,9 +41,9 @@ class Comment extends React.PureComponent {
               <div>
                 {this.authorName()}
               </div>}
-            {this.state.editing
+            {this.state.editing && isSelected
               ? <CommentForm
-                onSubmit={this.updateComment}
+                onSubmit={this.props.update}
                 initialValues={{ commentable, comment }}
               />
               : comment.get('text')}

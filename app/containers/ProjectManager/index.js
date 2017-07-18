@@ -68,6 +68,7 @@ class ProjectManager extends React.PureComponent {
                 <Comments
                   comments={this.props.comments}
                   currentComment={this.props.currentComment}
+                  creatingComment={this.props.creatingComment}
                   commentable={{ type: 'Project', id: project.get('id') }}
                 />
               </div>
@@ -109,6 +110,7 @@ ProjectManager.propTypes = {
   changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
   params: React.PropTypes.object,
+  creatingComment: React.PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
@@ -120,6 +122,7 @@ const mapState = createStructuredSelector({
   project: selectors.selectProject(),
   currentImage: selectors.selectCurrentImage(),
   currentComment: selectors.selectCurrentComment(),
+  creatingComment: selectors.selectCreatingComment(),
   currentSection: selectCurrentSection(),
 });
 

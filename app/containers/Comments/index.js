@@ -11,17 +11,10 @@ import {
   updateComment,
   deleteComment,
   switchComment,
+  startCreateComment,
 } from './actions';
 
 class Comments extends React.PureComponent {
-  state = { creating: false };
-  toggleCreate = () => {
-    this.setState({ creating: !this.state.creating });
-  };
-  createComment = (data) => {
-    this.props.createComment(data);
-    this.toggleCreate();
-  };
   switchComment = (i) => () => {
     this.props.switchComment(i);
   };
@@ -38,6 +31,7 @@ class Comments extends React.PureComponent {
     const {
       commentable,
       comments,
+      creatingComment,
       deleteComment: destroy,
       updateComment: update,
     } = this.props;
@@ -52,15 +46,15 @@ class Comments extends React.PureComponent {
             switchComment={this.switchComment(i)}
           />
         )}
-        {this.state.creating
+        {creatingComment
           ? <CommentForm
-            onSubmit={this.createComment}
+            onSubmit={this.props.createComment}
             initialValues={{ commentable }}
           />
           : <Button
             label="Leave a comment"
             inline
-            onclick={this.toggleCreate}
+            onclick={this.props.startCreateComment}
           />}
       </div>
     );
@@ -68,6 +62,8 @@ class Comments extends React.PureComponent {
 }
 
 Comments.propTypes = {
+  creatingComment: PropTypes.bool,
+  startCreateComment: PropTypes.func,
   createComment: PropTypes.func,
   updateComment: PropTypes.func,
   deleteComment: PropTypes.func,
@@ -80,7 +76,13 @@ Comments.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { createComment, updateComment, deleteComment, switchComment },
+    {
+      startCreateComment,
+      createComment,
+      updateComment,
+      deleteComment,
+      switchComment,
+    },
     dispatch
   );
 }
