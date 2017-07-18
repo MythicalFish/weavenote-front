@@ -2,12 +2,14 @@ import React, { PropTypes } from 'react';
 import Avatar from 'components/Avatar';
 import Button from 'components/Button';
 import CommentForm from './CommentForm';
+import CommentReplies from './CommentReplies';
 
 class Comment extends React.PureComponent {
-  state = { editing: false };
+  state = { editing: false, replying: false };
   componentDidUpdate = () => {
-    if (!this.props.isSelected && this.state.editing) {
-      this.toggleEdit();
+    if (!this.props.isSelected) {
+      if (this.state.editing) this.toggleEdit();
+      if (this.state.replying) this.toggleReply();
     }
   };
   authorName = () =>
@@ -16,6 +18,9 @@ class Comment extends React.PureComponent {
       : this.props.comment.getIn(['user', 'name']);
   toggleEdit = () => {
     this.setState({ editing: !this.state.editing });
+  };
+  toggleReply = () => {
+    this.setState({ replying: !this.state.replying });
   };
   render() {
     const {
@@ -49,9 +54,9 @@ class Comment extends React.PureComponent {
               : comment.get('text')}
           </div>
         </div>
+        <CommentReplies />
         <div className="comment-actions">
           {isOwnComment &&
-            isSelected &&
             <div>
               <Button onclick={this.toggleEdit} label="Edit" inline />
               <Button
@@ -63,8 +68,8 @@ class Comment extends React.PureComponent {
               />
             </div>}
           {!isOwnComment &&
-            isSelected &&
-            <Button onclick={this.startReply} label="Reply" inline />}
+            !this.state.replying &&
+            <Button onclick={this.toggleReply} label="Reply" inline />}
         </div>
       </div>
     );

@@ -17,11 +17,17 @@
       }
     }
   }
+  .comment-actions {
+    display: none;
+  }
   &:not(:last-child) {
     margin-bottom: $space-1;
   }
   &.selected,
   &:hover {
     border-color: $dark1;
+    .comment-actions {
+      display: block;
+    }
   }
 }
