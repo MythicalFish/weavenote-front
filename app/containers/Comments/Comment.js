@@ -1,57 +1,64 @@
 import React, { PropTypes } from 'react';
-import CommentReplies from './CommentReplies';
-import CommentNewReply from './CommentNewReply';
-import CommentBody from './CommentBody';
+import Avatar from 'components/Avatar';
+import CommentForm from './CommentForm';
+import CommentActions from './CommentActions';
 
 class Comment extends React.PureComponent {
-  state = { isReplying: false };
+  state = { isEditing: false };
   componentDidUpdate = () => {
-    if (!this.isSelected()) {
-      if (this.state.isReplying) this.toggleReply();
+    if (!this.props.isSelected) {
+      if (this.state.isEditing) this.toggleEdit();
     }
   };
-  toggleReply = () => {
-    this.setState({ isReplying: !this.state.isReplying });
+  isOwnComment = () => {
+    const { user, comment } = this.props;
+    return user.get('email') === comment.getIn(['user', 'email']);
   };
-  commentClass = () => `comment${this.isSelected() ? ' selected' : ''}`;
-  switchComment = (i) => () => {
-    if (!this.isSelected()) {
-      this.props.switchComment(i);
-    }
-  };
-  isSelected = () => {
-    const { currentComment, comment } = this.props;
-    if (!currentComment) return false;
-    return currentComment.get('id') === comment.get('id');
+  toggleEdit = () => {
+    this.setState({ isEditing: !this.state.isEditing });
   };
   render() {
-    const { index } = this.props;
-    const { isReplying } = this.state;
-    const isSelected = this.isSelected();
-    const { toggleReply, switchComment } = this;
-
-    const cProps = {
-      ...this.props,
-      isReplying,
-      isSelected,
-      toggleReply,
-    };
-
+    const { comment, commentable, isSelected, className } = this.props;
+    const { isEditing } = this.state;
+    const { toggleEdit } = this;
+    const authorName = this.isOwnComment()
+      ? 'You'
+      : comment.getIn(['user', 'name']);
     return (
-      <div className={this.commentClass()} onClick={switchComment(index)}>
-        <CommentBody {...cProps} className="comment-head" />
-        <CommentReplies {...cProps} />
-        <CommentNewReply {...cProps} />
+      <div className={`comment ${className}`}>
+        <div className="flex">
+          <div className="comment-avatar flex-none pl1 pt1">
+            <Avatar user={comment.get('user')} small />
+          </div>
+          <div className="flex-auto p1">
+            {isSelected &&
+              <div>
+                {authorName}
+              </div>}
+            {isEditing
+              ? <CommentForm
+                onSubmit={this.props.updateComment}
+                initialValues={{ commentable, comment }}
+              />
+              : comment.get('text')}
+            {isSelected &&
+              this.isOwnComment() &&
+              !isEditing &&
+              <CommentActions {...this.props} {...{ toggleEdit }} />}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 Comment.propTypes = {
-  switchComment: PropTypes.func,
+  isSelected: PropTypes.bool,
+  updateComment: PropTypes.func,
   comment: PropTypes.object,
-  currentComment: PropTypes.object,
-  index: PropTypes.number,
+  commentable: PropTypes.object,
+  user: PropTypes.object,
+  className: PropTypes.string,
 };
 
 export default Comment;

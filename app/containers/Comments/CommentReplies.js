@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import CommentBody from './CommentBody';
+import Comment from './Comment';
 
 const CommentReplies = (props) => {
   const cProps = { ...props };
@@ -10,7 +10,7 @@ const CommentReplies = (props) => {
       {props.comment
         .get('replies')
         .map((reply) =>
-          <CommentBody
+          <Comment
             className="comment-reply"
             key={`comment${reply.get('id')}`}
             comment={reply}

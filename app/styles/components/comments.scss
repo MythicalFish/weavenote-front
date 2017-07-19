@@ -1,4 +1,4 @@
-.comment {
+.comment-wrapper {
   border: 1px solid transparent;
   border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -6,12 +6,15 @@
     position: relative;
   }
   .comment-actions {
+    margin-top: 4px;
     button:not(:last-child) {
       margin-right: $space-1;
     }
   }
   .comment-newreply {
-    opacity: 0;
+    button.btn-footer {
+      opacity: 0;
+    }
   }
   &:not(:last-child) {
     margin-bottom: $space-1;
@@ -23,7 +26,16 @@
   &:hover {
     border-color: $dark1;
     .comment-newreply {
-      opacity: 1;
+      button {
+        opacity: 1;
+      }
+    }
+  }
+  &.selected {
+    .comment-newreply {
+      button.btn-footer {
+        background-color: $gray-lightest;
+      }
     }
   }
 }

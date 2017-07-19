@@ -29,7 +29,6 @@ button {
   border-radius: 999px;
   -webkit-border-radius: 999px;
   border: 2px solid $gray;
-  color: $gray;
   box-shadow: none;
   &.btn-color2x {
     border-color: $color2x;
@@ -54,11 +53,21 @@ button {
     padding: 0;
     color: $color2x;
   }
+  &.btn-footer {
+    border: none;
+    text-align: inherit;
+    border-radius: 0;
+    -webbkit-border-radius: 0;
+    display: block;
+    width: 100%;
+    padding: $space-2;
+    color: $gray;
+    background: $white;
+  }
 }
 .btn-shy {
-  @extend button;
-  opacity: .7;
-  font-size: .9em;
+  @extend .btn-sm;
+  @extend .btn-inline;
 }
 .glyph {
   background: none;

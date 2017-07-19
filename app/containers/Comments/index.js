@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
 import Button from 'components/Button';
 import CommentForm from './CommentForm';
-import Comment from './Comment';
+import CommentWrapper from './CommentWrapper';
 import {
   createComment,
   updateComment,
@@ -22,7 +22,7 @@ class Comments extends React.PureComponent {
     return (
       <div>
         {comments.map((comment, index) =>
-          <Comment
+          <CommentWrapper
             key={`comment${comment.get('id')}`}
             {...{
               ...cProps,

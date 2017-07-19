@@ -5,7 +5,7 @@ export default function Button(props) {
   const disabled = props.disabled || false;
   const label = props.label || null;
   const onclick = props.onclick || null;
-  let className = props.className || '';
+  let className = props.className || 'btn';
   if (props.small) {
     className += ' btn-sm';
   } else if (props.large) {
@@ -17,17 +17,15 @@ export default function Button(props) {
   if (props.glyph) {
     className += ' glyph';
   }
-  if (props.color) {
-    className += ` ${props.color}`;
-  } else {
-    className += ' color2x';
-  }
   if (props.shy) {
-    className += ' btn-inline btn-sm';
+    className += ' btn-shy';
+  }
+  if (props.footer) {
+    className += ' btn-footer';
   }
   return (
     <button
-      className={`btn ${className}`}
+      className={className}
       type={type}
       disabled={disabled}
       onClick={onclick}
@@ -47,6 +45,7 @@ Button.propTypes = {
   large: React.PropTypes.bool,
   inline: React.PropTypes.bool,
   glyph: React.PropTypes.bool,
+  footer: React.PropTypes.bool,
   label: React.PropTypes.string,
   color: React.PropTypes.string,
   disabled: React.PropTypes.bool,

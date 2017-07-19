@@ -8,7 +8,7 @@ const CommentNewReply = (props) => {
   return (
     <div className="comment-newreply">
       {!isReplying
-        ? <Button onclick={props.toggleReply} label="Reply" shy />
+        ? <Button onclick={props.toggleReply} label="Reply" footer />
         : <CommentForm
           onSubmit={createComment}
           initialValues={{
