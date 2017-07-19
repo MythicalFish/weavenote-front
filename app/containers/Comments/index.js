@@ -15,7 +15,7 @@ import {
   startUpdateComment,
   startReplyComment,
 } from './actions';
-import { selectIsUpdating, selectIsCreating } from './selectors';
+import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
   render() {
@@ -74,8 +74,9 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   user: selectUser(),
-  isCreating: selectIsCreating(),
-  isUpdating: selectIsUpdating(),
+  isCreating: selectors.isCreating(),
+  isUpdating: selectors.isUpdating(),
+  isReplying: selectors.isReplying(),
 });
 
 export default connect(mapState, mapDispatch)(Comments);

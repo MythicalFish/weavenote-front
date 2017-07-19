@@ -4,15 +4,6 @@ import CommentNewReply from './CommentNewReply';
 import Comment from './Comment';
 
 class CommentWrapper extends React.PureComponent {
-  state = { isReplying: false };
-  componentDidUpdate = () => {
-    if (!this.isSelected()) {
-      if (this.state.isReplying) this.toggleReply();
-    }
-  };
-  toggleReply = () => {
-    this.setState({ isReplying: !this.state.isReplying });
-  };
   commentClass = () => `comment-wrapper${this.isSelected() ? ' selected' : ''}`;
   switchComment = (i) => () => {
     if (!this.isSelected()) {
@@ -26,19 +17,15 @@ class CommentWrapper extends React.PureComponent {
   };
   render() {
     const { index } = this.props;
-    const { isReplying } = this.state;
     const isSelected = this.isSelected();
-    const { toggleReply, switchComment } = this;
 
     const cProps = {
       ...this.props,
-      isReplying,
       isSelected,
-      toggleReply,
     };
 
     return (
-      <div className={this.commentClass()} onClick={switchComment(index)}>
+      <div className={this.commentClass()} onClick={this.switchComment(index)}>
         <Comment {...cProps} className="comment-head" />
         <CommentReplies {...cProps} />
         <CommentNewReply {...cProps} />

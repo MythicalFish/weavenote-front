@@ -6,16 +6,17 @@ import CommentActions from './CommentActions';
 class Comment extends React.PureComponent {
   state = { isEditing: false };
   componentDidUpdate = () => {
-    if (!this.props.isSelected) {
-      if (this.state.isEditing) this.toggleEdit();
+    const { isSelected, isUpdating } = this.props;
+    if (!isSelected || !isUpdating) {
+      if (this.state.isEditing) this.toggleEdit(false);
     }
   };
   isOwnComment = () => {
     const { user, comment } = this.props;
     return user.get('email') === comment.getIn(['user', 'email']);
   };
-  toggleEdit = () => {
-    this.setState({ isEditing: !this.state.isEditing });
+  toggleEdit = (b) => {
+    this.setState({ isEditing: b || !this.state.isEditing });
   };
   render() {
     const { comment, commentable, isSelected, className } = this.props;
@@ -54,6 +55,7 @@ class Comment extends React.PureComponent {
 
 Comment.propTypes = {
   isSelected: PropTypes.bool,
+  isUpdating: PropTypes.bool,
   updateComment: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
