@@ -50,8 +50,8 @@ class Comment extends React.PureComponent {
         {isSelected &&
           !isEditing &&
           <CommentActions {...this.props} {...{ toggleEdit }} />}
+        <CommentReplies replies={comment.get('replies')} />
         <CommentReply {...this.props} {...{ toggleReply, isReplying }} />
-        <CommentReplies />
       </div>
     );
   }

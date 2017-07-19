@@ -1,12 +1,22 @@
 import React, { PropTypes } from 'react';
-import CommentForm from './CommentForm';
 
 class CommentReplies extends React.PureComponent {
   render() {
-    return <div />;
+    const { replies } = this.props;
+    return (
+      <div className="comment-replies">
+        {replies.map((reply) =>
+          <div className="comment" key={`comment${reply.get('id')}`}>
+            {reply.get('text')}
+          </div>
+        )}
+      </div>
+    );
   }
 }
 
-CommentReplies.propTypes = {};
+CommentReplies.propTypes = {
+  replies: PropTypes.object,
+};
 
 export default CommentReplies;
