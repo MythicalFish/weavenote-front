@@ -3,14 +3,14 @@ import Button from 'components/Button';
 import CommentForm from './CommentForm';
 
 const CommentReply = (props) => {
-  const { isReplying, create, comment } = props;
+  const { isReplying, createComment, comment } = props;
   if (props.isOwnComment) return null;
   return (
     <div className="comment-reply">
       {!isReplying
         ? <Button onclick={props.toggleReply} label="Reply" shy />
         : <CommentForm
-          onSubmit={create}
+          onSubmit={createComment}
           initialValues={{
             commentable: { type: 'Comment', id: comment.get('id') },
           }}
@@ -23,7 +23,7 @@ CommentReply.propTypes = {
   isOwnComment: PropTypes.bool,
   isReplying: PropTypes.bool,
   toggleReply: PropTypes.func,
-  create: PropTypes.func,
+  createComment: PropTypes.func,
   comment: PropTypes.object,
 };
 

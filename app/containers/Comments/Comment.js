@@ -8,28 +8,40 @@ import CommentActions from './CommentActions';
 class Comment extends React.PureComponent {
   state = { isEditing: false, isReplying: false };
   componentDidUpdate = () => {
-    if (!this.props.isSelected) {
+    if (!this.isSelected()) {
       if (this.state.isEditing) this.toggleEdit();
       if (this.state.isReplying) this.toggleReply();
     }
   };
   authorName = () =>
-    this.props.isOwnComment
-      ? 'You'
-      : this.props.comment.getIn(['user', 'name']);
+    this.isOwnComment() ? 'You' : this.props.comment.getIn(['user', 'name']);
   toggleEdit = () => {
     this.setState({ isEditing: !this.state.isEditing });
   };
   toggleReply = () => {
     this.setState({ isReplying: !this.state.isReplying });
   };
-  commentClass = () => `comment${this.props.isSelected ? ' selected' : ''}`;
+  isOwnComment = () => {
+    const { user, comment } = this.props;
+    return user.get('email') === comment.getIn(['user', 'email']);
+  };
+  commentClass = () => `comment${this.isSelected() ? ' selected' : ''}`;
+  switchComment = (i) => () => {
+    this.props.switchComment(i);
+  };
+  isSelected = () => {
+    const { currentComment, comment } = this.props;
+    if (!currentComment) return false;
+    return currentComment.get('id') === comment.get('id');
+  };
   render() {
-    const { commentable, comment, switchComment, isSelected } = this.props;
+    const { commentable, comment, index } = this.props;
     const { isEditing, isReplying } = this.state;
     const { toggleEdit, toggleReply } = this;
+    const isSelected = this.isSelected();
+    const isOwnComment = this.isOwnComment();
     return (
-      <div className={this.commentClass()} onClick={switchComment}>
+      <div className={this.commentClass()} onClick={this.switchComment(index)}>
         <div className="flex">
           <div className="comment-avatar flex-none pr1">
             <Avatar user={comment.get('user')} small />
@@ -41,13 +53,14 @@ class Comment extends React.PureComponent {
               </div>}
             {isEditing
               ? <CommentForm
-                onSubmit={this.props.update}
+                onSubmit={this.props.updateComment}
                 initialValues={{ commentable, comment }}
               />
               : comment.get('text')}
           </div>
         </div>
         {isSelected &&
+          isOwnComment &&
           !isEditing &&
           <CommentActions {...this.props} {...{ toggleEdit }} />}
         <CommentReplies replies={comment.get('replies')} />
@@ -58,12 +71,13 @@ class Comment extends React.PureComponent {
 }
 
 Comment.propTypes = {
-  isSelected: PropTypes.bool,
-  isOwnComment: PropTypes.bool,
+  user: PropTypes.object,
   switchComment: PropTypes.func,
-  update: PropTypes.func,
+  updateComment: PropTypes.func,
   comment: PropTypes.object,
+  currentComment: PropTypes.object,
   commentable: PropTypes.object,
+  index: PropTypes.number,
 };
 
 export default Comment;

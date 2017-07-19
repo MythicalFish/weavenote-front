@@ -17,6 +17,9 @@
   &:not(:last-child) {
     margin-bottom: $space-1;
   }
+  &:not(.selected):hover {
+    cursor: pointer;
+  }
   &.selected,
   &:hover {
     border-color: $dark1;

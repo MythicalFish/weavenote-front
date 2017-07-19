@@ -15,41 +15,20 @@ import {
 } from './actions';
 
 class Comments extends React.PureComponent {
-  switchComment = (i) => () => {
-    this.props.switchComment(i);
-  };
-  isSelected = (comment) => {
-    const { currentComment } = this.props;
-    if (!currentComment) return false;
-    return currentComment.get('id') === comment.get('id');
-  };
-  isOwnComment = (comment) => {
-    const { user } = this.props;
-    return user.get('email') === comment.getIn(['user', 'email']);
-  };
   render() {
-    const {
-      commentable,
-      comments,
-      creatingComment,
-      createComment: create,
-      deleteComment: destroy,
-      updateComment: update,
-    } = this.props;
+    const { commentable, comments, creatingComment } = this.props;
     return (
       <div>
-        {comments.map((comment, i) =>
+        {comments.map((comment, index) =>
           <Comment
-            key={`${commentable.type}Comment${i}`}
-            {...{ comment, commentable, destroy, update, create }}
-            isSelected={this.isSelected(comment)}
-            isOwnComment={this.isOwnComment(comment)}
-            switchComment={this.switchComment(i)}
+            key={`${commentable.type}Comment${index}`}
+            {...{ comment, index }}
+            {...this.props}
           />
         )}
         {creatingComment
           ? <CommentForm
-            onSubmit={create}
+            onSubmit={this.props.createComment}
             initialValues={{ commentable }}
           />
           : <Button
@@ -66,13 +45,8 @@ Comments.propTypes = {
   creatingComment: PropTypes.bool,
   startCreateComment: PropTypes.func,
   createComment: PropTypes.func,
-  updateComment: PropTypes.func,
-  deleteComment: PropTypes.func,
-  switchComment: PropTypes.func,
   commentable: PropTypes.object,
   comments: PropTypes.object,
-  user: PropTypes.object,
-  currentComment: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {

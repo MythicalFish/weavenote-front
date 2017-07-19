@@ -2,20 +2,19 @@ import React, { PropTypes } from 'react';
 import Button from 'components/Button';
 
 const CommentActions = (props) => {
-  const { isOwnComment, comment, commentable } = props;
+  const { comment, commentable } = props;
   return (
     <div className="comment-actions">
-      {isOwnComment &&
-        <div>
-          <Button onclick={props.toggleEdit} label="Edit" shy />
-          <Button
-            onclick={() => {
-              props.destroy({ comment, commentable });
-            }}
-            label="Remove"
-            shy
-          />
-        </div>}
+      <div>
+        <Button onclick={props.toggleEdit} label="Edit" shy />
+        <Button
+          onclick={() => {
+            props.deleteComment({ comment, commentable });
+          }}
+          label="Remove"
+          shy
+        />
+      </div>
     </div>
   );
 };
@@ -23,7 +22,7 @@ const CommentActions = (props) => {
 CommentActions.propTypes = {
   isOwnComment: PropTypes.bool,
   toggleEdit: PropTypes.func,
-  destroy: PropTypes.func,
+  deleteComment: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
 };
