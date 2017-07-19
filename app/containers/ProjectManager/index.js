@@ -68,7 +68,7 @@ class ProjectManager extends React.PureComponent {
                 <Comments
                   comments={this.props.comments}
                   currentComment={this.props.currentComment}
-                  creatingComment={this.props.creatingComment}
+                  isCreating={this.props.creatingComment}
                   commentable={{ type: 'Project', id: project.get('id') }}
                 />
               </div>

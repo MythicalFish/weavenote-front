@@ -20,7 +20,6 @@ const CommentActions = (props) => {
 };
 
 CommentActions.propTypes = {
-  isOwnComment: PropTypes.bool,
   toggleEdit: PropTypes.func,
   deleteComment: PropTypes.func,
   comment: PropTypes.object,

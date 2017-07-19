@@ -1,14 +1,29 @@
 import React, { PropTypes } from 'react';
+import CommentBody from './CommentBody';
 
 class CommentReplies extends React.PureComponent {
   render() {
-    const { replies } = this.props;
+    const {
+      comment,
+      isSelected,
+      user,
+      deleteComment,
+      updateComment,
+    } = this.props;
     return (
       <div className="comment-replies">
-        {replies.map((reply) =>
-          <div className="comment" key={`comment${reply.get('id')}`}>
-            {reply.get('text')}
-          </div>
+        {comment.get('replies').map((reply) =>
+          <CommentBody
+            key={`comment${reply.get('id')}`}
+            comment={reply}
+            commentable={{ type: 'Comment', id: comment.get('id') }}
+            {...{
+              isSelected,
+              user,
+              deleteComment,
+              updateComment,
+            }}
+          />
         )}
       </div>
     );
@@ -16,7 +31,7 @@ class CommentReplies extends React.PureComponent {
 }
 
 CommentReplies.propTypes = {
-  replies: PropTypes.object,
+  comment: PropTypes.object,
 };
 
 export default CommentReplies;

@@ -16,17 +16,41 @@ import {
 
 class Comments extends React.PureComponent {
   render() {
-    const { commentable, comments, creatingComment } = this.props;
+    const {
+      commentable,
+      comments,
+      isCreating,
+      user,
+      currentComment,
+    } = this.props;
+    const {
+      createComment,
+      updateComment,
+      deleteComment,
+      switchComment,
+    } = this.props;
+    const actions = {
+      createComment,
+      updateComment,
+      deleteComment,
+      switchComment,
+    };
     return (
       <div>
         {comments.map((comment, index) =>
           <Comment
-            key={`${commentable.type}Comment${index}`}
-            {...{ comment, index }}
-            {...this.props}
+            key={`comment${comment.get('id')}`}
+            {...{
+              user,
+              currentComment,
+              commentable,
+              comment,
+              index,
+              ...actions,
+            }}
           />
         )}
-        {creatingComment
+        {isCreating
           ? <CommentForm
             onSubmit={this.props.createComment}
             initialValues={{ commentable }}
@@ -42,11 +66,16 @@ class Comments extends React.PureComponent {
 }
 
 Comments.propTypes = {
-  creatingComment: PropTypes.bool,
+  isCreating: PropTypes.bool,
   startCreateComment: PropTypes.func,
   createComment: PropTypes.func,
+  updateComment: PropTypes.func,
+  deleteComment: PropTypes.func,
+  switchComment: PropTypes.func,
   commentable: PropTypes.object,
   comments: PropTypes.object,
+  user: PropTypes.object,
+  currentComment: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
