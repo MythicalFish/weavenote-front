@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react';
 import Button from 'components/Button';
 import CommentForm from './CommentForm';
 
-const CommentReply = (props) => {
+const CommentNewReply = (props) => {
   const { isReplying, createComment, comment } = props;
   if (props.isOwnComment) return null;
   return (
-    <div className="comment-reply">
+    <div className="comment-newreply">
       {!isReplying
         ? <Button onclick={props.toggleReply} label="Reply" shy />
         : <CommentForm
@@ -19,7 +19,7 @@ const CommentReply = (props) => {
   );
 };
 
-CommentReply.propTypes = {
+CommentNewReply.propTypes = {
   isOwnComment: PropTypes.bool,
   isReplying: PropTypes.bool,
   toggleReply: PropTypes.func,
@@ -27,4 +27,4 @@ CommentReply.propTypes = {
   comment: PropTypes.object,
 };
 
-export default CommentReply;
+export default CommentNewReply;

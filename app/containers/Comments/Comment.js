@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import CommentReplies from './CommentReplies';
-import CommentReply from './CommentReply';
+import CommentNewReply from './CommentNewReply';
 import CommentBody from './CommentBody';
 
 class Comment extends React.PureComponent {
@@ -39,16 +39,15 @@ class Comment extends React.PureComponent {
 
     return (
       <div className={this.commentClass()} onClick={switchComment(index)}>
-        <CommentBody {...cProps} />
+        <CommentBody {...cProps} className="comment-head" />
         <CommentReplies {...cProps} />
-        <CommentReply {...cProps} />
+        <CommentNewReply {...cProps} />
       </div>
     );
   }
 }
 
 Comment.propTypes = {
-  user: PropTypes.object,
   switchComment: PropTypes.func,
   comment: PropTypes.object,
   currentComment: PropTypes.object,

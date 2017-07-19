@@ -1,34 +1,26 @@
 import React, { PropTypes } from 'react';
 import CommentBody from './CommentBody';
 
-class CommentReplies extends React.PureComponent {
-  render() {
-    const {
-      comment,
-      isSelected,
-      user,
-      deleteComment,
-      updateComment,
-    } = this.props;
-    return (
-      <div className="comment-replies">
-        {comment.get('replies').map((reply) =>
+const CommentReplies = (props) => {
+  const cProps = { ...props };
+  delete cProps.comment;
+  delete cProps.commentable;
+  return (
+    <div className="comment-replies">
+      {props.comment
+        .get('replies')
+        .map((reply) =>
           <CommentBody
+            className="comment-reply"
             key={`comment${reply.get('id')}`}
             comment={reply}
-            commentable={{ type: 'Comment', id: comment.get('id') }}
-            {...{
-              isSelected,
-              user,
-              deleteComment,
-              updateComment,
-            }}
+            commentable={{ type: 'Comment', id: props.comment.get('id') }}
+            {...cProps}
           />
         )}
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 CommentReplies.propTypes = {
   comment: PropTypes.object,

@@ -18,13 +18,14 @@ class CommentBody extends React.PureComponent {
     this.setState({ isEditing: !this.state.isEditing });
   };
   render() {
-    const { comment, commentable, isSelected } = this.props;
+    const { comment, commentable, isSelected, className } = this.props;
     const { isEditing } = this.state;
     const { toggleEdit } = this;
-    const authorName = () =>
-      this.isOwnComment() ? 'You' : comment.getIn(['user', 'name']);
+    const authorName = this.isOwnComment()
+      ? 'You'
+      : comment.getIn(['user', 'name']);
     return (
-      <div>
+      <div className={className}>
         <div className="flex">
           <div className="comment-avatar flex-none pr1">
             <Avatar user={comment.get('user')} small />
@@ -53,11 +54,11 @@ class CommentBody extends React.PureComponent {
 
 CommentBody.propTypes = {
   isSelected: PropTypes.bool,
-  isEditing: PropTypes.bool,
-  isOwnComment: PropTypes.bool,
   updateComment: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
+  user: PropTypes.object,
+  className: PropTypes.string,
 };
 
 export default CommentBody;
