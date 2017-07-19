@@ -10,3 +10,6 @@ export const isUpdating = () =>
 
 export const isReplying = () =>
   createSelector(selectDomain(), (s) => s.get('isReplying'));
+
+export const currentComment = () =>
+  createSelector(selectDomain(), (s) => s.get('currentComment'));

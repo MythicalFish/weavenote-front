@@ -3,34 +3,23 @@ import Button from 'components/Button';
 import CommentForm from './CommentForm';
 
 class CommentNewReply extends React.PureComponent {
-  state = { isReplying: false };
-  componentDidUpdate = () => {
-    const { isSelected, isReplying } = this.props;
-    if (!isSelected || !isReplying) {
-      if (this.state.isReplying) this.toggleReply(false);
-    }
-  };
-  toggleReply = (b) => {
-    this.setState({ isReplying: b || !this.state.isReplying });
-  };
   startReply = () => {
-    this.props.startReplyComment();
-    this.toggleReply();
+    const { comment } = this.props;
+    this.props.startReplyComment({ comment });
   };
   render() {
     if (this.props.isOwnComment) return null;
-    const { createComment, comment } = this.props;
-    const { isReplying } = this.state;
+    const { createComment, comment, isReplying } = this.props;
     return (
       <div className="comment-newreply">
-        {!isReplying
-          ? <Button onclick={this.startReply} label="Reply" footer />
-          : <CommentForm
+        {isReplying === comment.get('id')
+          ? <CommentForm
             onSubmit={createComment}
             initialValues={{
               commentable: { type: 'Comment', id: comment.get('id') },
             }}
-          />}
+          />
+          : <Button onclick={this.startReply} label="Reply" footer />}
       </div>
     );
   }
@@ -38,7 +27,7 @@ class CommentNewReply extends React.PureComponent {
 
 CommentNewReply.propTypes = {
   isOwnComment: PropTypes.bool,
-  isReplying: PropTypes.bool,
+  isReplying: PropTypes.number,
   toggleReply: PropTypes.func,
   createComment: PropTypes.func,
   comment: PropTypes.object,

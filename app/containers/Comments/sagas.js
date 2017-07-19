@@ -1,5 +1,7 @@
-import { take, cancel, takeLatest } from 'redux-saga/effects';
+import { put, take, cancel, takeLatest } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { initialize } from 'redux-form';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
@@ -8,6 +10,8 @@ export default [commentsWatcher];
 
 function* commentsWatcher() {
   const watcher = [
+    // yield takeLatest(types.START_CREATE_COMMENT, initializeForm),
+    yield takeLatest(types.START_UPDATE_COMMENT, initializeForm),
     yield takeLatest(types.CREATE_COMMENT, createComment),
     yield takeLatest(types.UPDATE_COMMENT, updateComment),
     yield takeLatest(types.DELETE_COMMENT, deleteComment),
@@ -33,3 +37,8 @@ function* deleteComment({ payload }) {
 }
 
 const commentURL = (payload) => `comments/${payload.comment.get('id')}`;
+
+function* initializeForm({ payload }) {
+  yield delay(50);
+  yield put(initialize('CommentForm', payload, { form: 'CommentForm' }));
+}

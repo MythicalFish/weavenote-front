@@ -9,7 +9,7 @@ class CommentForm extends React.PureComponent {
     return (
       <form onSubmit={handleSubmit}>
         <Field name="comment[text]" type="textarea" component={Input} focus />
-        <Button type="submit" disabled={submitting} label="Submit" inline />
+        <Button type="submit" disabled={submitting} label="Submit" shy />
       </form>
     );
   }

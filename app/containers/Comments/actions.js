@@ -1,7 +1,7 @@
 import * as types from './constants';
 
-export function switchComment(index) {
-  return { type: types.SWITCH_COMMENT, index };
+export function switchComment(payload) {
+  return { type: types.SWITCH_COMMENT, payload };
 }
 
 export function createComment(payload) {
@@ -28,12 +28,12 @@ export function deleteCommentSuccess(response) {
   return { type: types.DELETE_COMMENT_SUCCESS, response };
 }
 
-export function startCreateComment() {
-  return { type: types.START_CREATE_COMMENT };
+export function startCreateComment(payload) {
+  return { type: types.START_CREATE_COMMENT, payload };
 }
-export function startUpdateComment() {
-  return { type: types.START_UPDATE_COMMENT };
+export function startUpdateComment(payload) {
+  return { type: types.START_UPDATE_COMMENT, payload };
 }
-export function startReplyComment() {
-  return { type: types.START_REPLY_COMMENT };
+export function startReplyComment(payload) {
+  return { type: types.START_REPLY_COMMENT, payload };
 }

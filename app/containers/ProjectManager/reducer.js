@@ -11,7 +11,6 @@ const initialState = fromJS({
   },
   userRole: null,
   currentImage: 0,
-  currentComment: null,
 });
 
 const setProjectImages = (state, action) =>
@@ -74,31 +73,14 @@ function projectReducer(state = initialState, action) {
 
     // Comments
 
-    case cTypes.START_CREATE_COMMENT:
-      return state.set('currentComment', null);
-
-    case cTypes.CREATE_COMMENT:
-      return state.set('currentComment', null);
-
     case cTypes.CREATE_COMMENT_SUCCESS:
-      return state
-        .setIn(['project', 'comments'], fromJS(action.response))
-        .set('creatingComment', false);
+      return state.setIn(['project', 'comments'], fromJS(action.response));
 
     case cTypes.UPDATE_COMMENT_SUCCESS:
-      return state
-        .setIn(['project', 'comments'], fromJS(action.response))
-        .set('editingComment', false);
+      return state.setIn(['project', 'comments'], fromJS(action.response));
 
     case cTypes.DELETE_COMMENT_SUCCESS:
-      return state
-        .setIn(['project', 'comments'], fromJS(action.response))
-        .set('currentComment', null);
-
-    case cTypes.SWITCH_COMMENT:
-      return state
-        .set('currentComment', action.index)
-        .set('creatingComment', false);
+      return state.setIn(['project', 'comments'], fromJS(action.response));
 
     default:
       return state;

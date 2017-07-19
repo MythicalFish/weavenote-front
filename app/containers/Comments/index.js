@@ -18,6 +18,10 @@ import {
 import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
+  toggleNew = () => {
+    const { commentable } = this.props;
+    this.props.startCreateComment({ commentable });
+  };
   render() {
     const { commentable, comments, isCreating } = this.props;
     const cProps = { ...this.props };
@@ -39,11 +43,7 @@ class Comments extends React.PureComponent {
             onSubmit={this.props.createComment}
             initialValues={{ commentable }}
           />
-          : <Button
-            label="Leave a comment"
-            inline
-            onclick={this.props.startCreateComment}
-          />}
+          : <Button label="Leave a comment" inline onclick={this.toggleNew} />}
       </div>
     );
   }
@@ -77,6 +77,7 @@ const mapState = createStructuredSelector({
   isCreating: selectors.isCreating(),
   isUpdating: selectors.isUpdating(),
   isReplying: selectors.isReplying(),
+  currentComment: selectors.currentComment(),
 });
 
 export default connect(mapState, mapDispatch)(Comments);

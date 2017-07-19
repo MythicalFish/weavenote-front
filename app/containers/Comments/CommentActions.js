@@ -4,8 +4,7 @@ import Button from 'components/Button';
 const CommentActions = (props) => {
   const { comment, commentable } = props;
   const toggleEdit = () => () => {
-    props.toggleEdit();
-    props.startUpdateComment();
+    props.startUpdateComment({ comment, commentable });
   };
   return (
     <div className="comment-actions">

@@ -4,39 +4,28 @@ import CommentForm from './CommentForm';
 import CommentActions from './CommentActions';
 
 class Comment extends React.PureComponent {
-  state = { isEditing: false };
-  componentDidUpdate = () => {
-    const { isSelected, isUpdating } = this.props;
-    if (!isSelected || !isUpdating) {
-      if (this.state.isEditing) this.toggleEdit(false);
-    }
-  };
   isOwnComment = () => {
     const { user, comment } = this.props;
     return user.get('email') === comment.getIn(['user', 'email']);
   };
-  toggleEdit = (b) => {
-    this.setState({ isEditing: b || !this.state.isEditing });
-  };
   render() {
     const { comment, commentable, isSelected, className } = this.props;
-    const { isEditing } = this.state;
-    const { toggleEdit } = this;
     const authorName = this.isOwnComment()
       ? 'You'
       : comment.getIn(['user', 'name']);
+    const isUpdating = this.props.isUpdating === comment.get('id');
     return (
       <div className={`comment ${className}`}>
         <div className="flex">
-          <div className="comment-avatar flex-none pl1 pt1">
+          <div className="comment-avatar flex-none pl1">
             <Avatar user={comment.get('user')} small />
           </div>
           <div className="flex-auto p1">
             {isSelected &&
-              <div>
+              <div className="bold">
                 {authorName}
               </div>}
-            {isEditing
+            {isUpdating
               ? <CommentForm
                 onSubmit={this.props.updateComment}
                 initialValues={{ commentable, comment }}
@@ -44,8 +33,8 @@ class Comment extends React.PureComponent {
               : comment.get('text')}
             {isSelected &&
               this.isOwnComment() &&
-              !isEditing &&
-              <CommentActions {...this.props} {...{ toggleEdit }} />}
+              !isUpdating &&
+              <CommentActions {...this.props} />}
           </div>
         </div>
       </div>
@@ -55,7 +44,7 @@ class Comment extends React.PureComponent {
 
 Comment.propTypes = {
   isSelected: PropTypes.bool,
-  isUpdating: PropTypes.bool,
+  isUpdating: PropTypes.number,
   updateComment: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,

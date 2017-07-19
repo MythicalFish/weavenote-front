@@ -67,7 +67,6 @@ class ProjectManager extends React.PureComponent {
               <div className="col-xs-12 last-xs first-md col-md-3">
                 <Comments
                   comments={this.props.comments}
-                  currentComment={this.props.currentComment}
                   commentable={{ type: 'Project', id: project.get('id') }}
                 />
               </div>
@@ -103,7 +102,7 @@ class ProjectManager extends React.PureComponent {
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
   comments: React.PropTypes.object,
-  currentComment: React.PropTypes.object,
+  currentComment: React.PropTypes.number,
   currentImage: React.PropTypes.object,
   currentSection: React.PropTypes.object,
   changeSection: React.PropTypes.func,
@@ -119,7 +118,6 @@ const mapState = createStructuredSelector({
   comments: selectors.selectComments(),
   project: selectors.selectProject(),
   currentImage: selectors.selectCurrentImage(),
-  currentComment: selectors.selectCurrentComment(),
   currentSection: selectCurrentSection(),
 });
 

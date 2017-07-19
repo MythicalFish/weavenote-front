@@ -3,9 +3,8 @@
   border-radius: 6px;
   -webkit-border-radius: 6px;
   overflow: hidden;
-  .comment-avatar {
-    position: relative;
-  }
+  font-size: .9em;
+  color: $dark7;
   .comment-actions {
     margin-top: 4px;
     button:not(:last-child) {
@@ -20,6 +19,33 @@
     }
     button.btn-footer {
       opacity: 0;
+    }
+  }
+  .comment {
+    .comment-avatar {
+      &:before {
+        content: ' ';
+        @extend .flex-none;
+        height: $space-1;
+      }
+    }
+    &:not(:last-child) {
+      .comment-avatar {
+        @extend .flex;
+        @extend .flex-column;
+        @extend .items-center;
+        .avatar {
+          @extend .flex-none;
+        }
+        &:after {
+          @extend .flex-auto;
+          content: ' ';
+          display: block;
+          width: 1px;
+          background: $dark1;
+          min-height: $space-1;
+        }
+      }
     }
   }
   &:not(:last-child) {

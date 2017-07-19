@@ -5,18 +5,17 @@ import Comment from './Comment';
 
 class CommentWrapper extends React.PureComponent {
   commentClass = () => `comment-wrapper${this.isSelected() ? ' selected' : ''}`;
-  switchComment = (i) => () => {
+  switchComment = () => {
+    const { comment } = this.props;
     if (!this.isSelected()) {
-      this.props.switchComment(i);
+      this.props.switchComment({ comment });
     }
   };
   isSelected = () => {
     const { currentComment, comment } = this.props;
-    if (!currentComment) return false;
-    return currentComment.get('id') === comment.get('id');
+    return currentComment === comment.get('id');
   };
   render() {
-    const { index } = this.props;
     const isSelected = this.isSelected();
 
     const cProps = {
@@ -25,7 +24,7 @@ class CommentWrapper extends React.PureComponent {
     };
 
     return (
-      <div className={this.commentClass()} onClick={this.switchComment(index)}>
+      <div className={this.commentClass()} onClick={this.switchComment}>
         <Comment {...cProps} className="comment-head" />
         <CommentReplies {...cProps} />
         <CommentNewReply {...cProps} />
@@ -37,7 +36,7 @@ class CommentWrapper extends React.PureComponent {
 CommentWrapper.propTypes = {
   switchComment: PropTypes.func,
   comment: PropTypes.object,
-  currentComment: PropTypes.object,
+  currentComment: PropTypes.number,
   index: PropTypes.number,
 };
 
