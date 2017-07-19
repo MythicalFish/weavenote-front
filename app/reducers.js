@@ -8,12 +8,13 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import globalReducer from 'containers/App/reducer';
-import collaboratorsReducer from 'containers/Collaborators/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 /*
  * Reducers added by me
  */
+import collaboratorsReducer from 'containers/Collaborators/reducer';
+import commentsReducer from 'containers/Comments/reducer';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
 import { reducer as notificationReducer } from 'react-notification-system-redux';
 
@@ -56,6 +57,7 @@ export default function createReducer(asyncReducers) {
     form: reduxFormReducer,
     notifications: notificationReducer,
     collaborators: collaboratorsReducer,
+    Comments: commentsReducer,
     ...asyncReducers,
   });
 }

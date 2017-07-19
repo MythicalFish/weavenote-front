@@ -29,9 +29,6 @@ export const selectComments = () =>
     substate.getIn(['project', 'comments'])
   );
 
-export const selectCreatingComment = () =>
-  createSelector(selectDomain(), (s) => s.get('creatingComment'));
-
 export const selectCurrentComment = () =>
   createSelector(selectDomain(), (s) => {
     const i = s.get('currentComment');

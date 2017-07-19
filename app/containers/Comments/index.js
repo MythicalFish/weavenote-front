@@ -12,7 +12,10 @@ import {
   deleteComment,
   switchComment,
   startCreateComment,
+  startUpdateComment,
+  startReplyComment,
 } from './actions';
+import { selectIsUpdating, selectIsCreating } from './selectors';
 
 class Comments extends React.PureComponent {
   render() {
@@ -58,6 +61,8 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       startCreateComment,
+      startUpdateComment,
+      startReplyComment,
       createComment,
       updateComment,
       deleteComment,
@@ -69,6 +74,8 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   user: selectUser(),
+  isCreating: selectIsCreating(),
+  isUpdating: selectIsUpdating(),
 });
 
 export default connect(mapState, mapDispatch)(Comments);

@@ -2,6 +2,7 @@
   border: 1px solid transparent;
   border-radius: 6px;
   -webkit-border-radius: 6px;
+  overflow: hidden;
   .comment-avatar {
     position: relative;
   }
@@ -12,6 +13,11 @@
     }
   }
   .comment-newreply {
+    border-top: 1px solid transparent;
+    textarea {
+      border: none;
+      background-color: $aqua-haze;
+    }
     button.btn-footer {
       opacity: 0;
     }
@@ -24,7 +30,7 @@
   }
   &.selected,
   &:hover {
-    border-color: $dark1;
+    border-color: $dark2;
     .comment-newreply {
       button {
         opacity: 1;
@@ -33,8 +39,9 @@
   }
   &.selected {
     .comment-newreply {
+      border-color: $dark1;
       button.btn-footer {
-        background-color: $gray-lightest;
+        background-color: $aqua-haze;
       }
     }
   }

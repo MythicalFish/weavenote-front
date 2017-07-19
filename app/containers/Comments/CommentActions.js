@@ -3,10 +3,14 @@ import Button from 'components/Button';
 
 const CommentActions = (props) => {
   const { comment, commentable } = props;
+  const toggleEdit = () => () => {
+    props.toggleEdit();
+    props.startUpdateComment();
+  };
   return (
     <div className="comment-actions">
       <div>
-        <Button onclick={props.toggleEdit} label="Edit" shy />
+        <Button onclick={toggleEdit()} label="Edit" shy />
         <Button
           onclick={() => {
             props.deleteComment({ comment, commentable });

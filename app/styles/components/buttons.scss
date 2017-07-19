@@ -28,17 +28,10 @@ button {
   @include transition('all .2s');
   border-radius: 999px;
   -webkit-border-radius: 999px;
-  border: 2px solid $gray;
+  border: 2px solid $color2x;
   box-shadow: none;
-  &.btn-color2x {
-    border-color: $color2x;
-    color: $color2x;
-    background: $white;
-    &:hover {
-      background: $color2x;
-      color: $white;
-    }
-  }
+  color: $color2x;
+  font-weight: bold;
   &.btn-sm {
     font-size: .9em;
     padding: 6px 12px;
@@ -51,7 +44,6 @@ button {
   &.btn-inline {
     border: none;
     padding: 0;
-    color: $color2x;
   }
   &.btn-footer {
     border: none;
@@ -61,13 +53,15 @@ button {
     display: block;
     width: 100%;
     padding: $space-2;
-    color: $gray;
+    color: $dark3;
     background: $white;
+    font-weight: normal;
   }
 }
 .btn-shy {
   @extend .btn-sm;
   @extend .btn-inline;
+  font-weight: normal;
 }
 .glyph {
   background: none;

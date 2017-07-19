@@ -5,10 +5,14 @@ import CommentForm from './CommentForm';
 const CommentNewReply = (props) => {
   const { isReplying, createComment, comment } = props;
   if (props.isOwnComment) return null;
+  const startReply = () => () => {
+    props.toggleReply();
+    props.startReplyComment();
+  };
   return (
     <div className="comment-newreply">
       {!isReplying
-        ? <Button onclick={props.toggleReply} label="Reply" footer />
+        ? <Button onclick={startReply()} label="Reply" footer />
         : <CommentForm
           onSubmit={createComment}
           initialValues={{

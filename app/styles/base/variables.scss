@@ -2,36 +2,38 @@
       Colors
 \*--------------------------------------*/
 
-$gray-base:              #000;
-$gray-darkest:           lighten($gray-base, 5%);
-$gray-darkerer:          lighten($gray-base, 10%);
-$gray-darker:            lighten($gray-base, 15%);
-$gray-dark:              lighten($gray-base, 30%);
-$gray:                   lighten($gray-base, 50%);
-$gray-light:             lighten($gray-base, 70%);
-$gray-lighter:           lighten($gray-base, 85%);
-$gray-lighterer:         lighten($gray-base, 90%);
-$gray-lightest:          lighten($gray-base, 95%);
+$gray-base: #000;
+$gray-darkest: lighten($gray-base, 5%);
+$gray-darkerer: lighten($gray-base, 10%);
+$gray-darker: lighten($gray-base, 15%);
+$gray-dark: lighten($gray-base, 30%);
+$gray: lighten($gray-base, 50%);
+$gray-light: lighten($gray-base, 70%);
+$gray-lighter: lighten($gray-base, 85%);
+$gray-lighterer: lighten($gray-base, 90%);
+$gray-lightest: lighten($gray-base, 95%);
 
-$light1: rgba(255,255,255,.1);
-$light2: rgba(255,255,255,.2);
-$light3: rgba(255,255,255,.3);
-$light4: rgba(255,255,255,.4);
-$light5: rgba(255,255,255,.5);
-$light6: rgba(255,255,255,.6);
-$light7: rgba(255,255,255,.7);
-$light8: rgba(255,255,255,.8);
-$light9: rgba(255,255,255,.9);
+$light1: rgba(255, 255, 255, .1);
+$light2: rgba(255, 255, 255, .2);
+$light3: rgba(255, 255, 255, .3);
+$light4: rgba(255, 255, 255, .4);
+$light5: rgba(255, 255, 255, .5);
+$light6: rgba(255, 255, 255, .6);
+$light7: rgba(255, 255, 255, .7);
+$light8: rgba(255, 255, 255, .8);
+$light9: rgba(255, 255, 255, .9);
 
-$dark1: rgba(0,0,0,.1);
-$dark2: rgba(0,0,0,.2);
-$dark3: rgba(0,0,0,.3);
-$dark4: rgba(0,0,0,.4);
-$dark5: rgba(0,0,0,.5);
-$dark6: rgba(0,0,0,.6);
-$dark7: rgba(0,0,0,.7);
-$dark8: rgba(0,0,0,.8);
-$dark9: rgba(0,0,0,.9);
+$dark1: rgba(0, 0, 0, .1);
+$dark2: rgba(0, 0, 0, .2);
+$dark3: rgba(0, 0, 0, .3);
+$dark4: rgba(0, 0, 0, .4);
+$dark5: rgba(0, 0, 0, .5);
+$dark6: rgba(0, 0, 0, .6);
+$dark7: rgba(0, 0, 0, .7);
+$dark8: rgba(0, 0, 0, .8);
+$dark9: rgba(0, 0, 0, .9);
+
+$aqua-haze: #f4f8f9;
 
 /*--------------------------------------*\
       Overrides
@@ -39,9 +41,9 @@ $dark9: rgba(0,0,0,.9);
 
 $aqua: #4cbae2;
 $blue: #0074d9;
-$navy: #0B4F6C;
+$navy: #0b4f6c;
 $teal: #39cccc;
-$green: #20BF55;
+$green: #20bf55;
 $olive: #3d9970;
 $lime: #01ff70;
 $yellow: #ffdc00;
