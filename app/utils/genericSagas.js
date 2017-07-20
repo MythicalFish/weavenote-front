@@ -16,7 +16,7 @@ export function* get(url, params, callback, selector = false) {
     }
     yield handleResponse(callback, response);
   } catch (e) {
-    yield handleError(e.error.message);
+    yield handleError(e);
   }
 }
 
@@ -25,7 +25,7 @@ export function* patch(url, params, callback) {
     const response = yield call(API.patch, url, params);
     yield handleResponse(callback, response);
   } catch (e) {
-    yield handleError(e.error.message);
+    yield handleError(e);
   }
 }
 
@@ -34,7 +34,7 @@ export function* post(url, params, callback) {
     const response = yield call(API.post, url, params);
     yield handleResponse(callback, response);
   } catch (e) {
-    yield handleError(e.error.message);
+    yield handleError(e);
   }
 }
 
@@ -43,17 +43,21 @@ export function* destroy(url, params, callback) {
     const response = yield call(API.destroy, url, params);
     yield handleResponse(callback, response);
   } catch (e) {
-    yield handleError(e.error.message);
+    yield handleError(e);
   }
 }
 
-function* handleError(message) {
-  yield put(notifyError(message));
-  if (message === 'Unauthorized') {
+function* handleError({ error }) {
+  const { message } = error;
+  if (error.type === 'warning') {
+    yield put(notifyWarning(message));
+  } else if (error.type === 'bug') {
+    yield put(notifyError(message));
+  } else {
     logout();
     setTimeout(() => {
       window.location.replace('/');
-    }, 1000);
+    }, 100);
   }
 }
 
@@ -61,9 +65,6 @@ function* handleResponse(callback, response) {
   if (response) {
     if (response.message) {
       yield put(notify(response.message));
-    }
-    if (response.warning) {
-      yield put(notifyWarning(response.warning));
     }
     let payload;
     if (response.payload) {
