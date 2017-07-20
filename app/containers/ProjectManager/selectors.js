@@ -6,18 +6,7 @@ export const selectProject = () =>
   createSelector(selectDomain(), (s) => s.get('project'));
 
 export const selectCurrentImage = () =>
-  createSelector(selectDomain(), (s) => {
-    const i = s.getIn(['project', 'images', s.get('currentImage')]);
-    const imageable = {
-      type: 'Project',
-      id: s.getIn(['project', 'id']),
-    };
-    if (i) {
-      return i.set('imageable', imageable).toJS();
-    } else {
-      return { imageable };
-    }
-  });
+  createSelector(selectDomain(), (s) => s.getIn(['project', 'images', s.get('currentImage')]));
 
 export const selectMaterialCost = () =>
   createSelector(selectDomain(), (substate) =>

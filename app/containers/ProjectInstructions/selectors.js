@@ -10,19 +10,7 @@ export const selectCurrentInstruction = () =>
     return s.getIn(['instructions', index]);
   });
 
-export const selectImage = () =>
-  createSelector(selectCurrentInstruction(), (instruction) => {
-    let image;
-    const imageable = {
-      type: 'Instruction',
-      id: null,
-    };
-    if (instruction) {
-      image = instruction.getIn(['images', 0]);
-      imageable.id = instruction.get('id');
-    }
-    if (image) {
-      return image.set('imageable', imageable).toJS();
-    }
-    return { imageable };
-  });
+export const selectImages = () =>
+  createSelector(selectCurrentInstruction(), (instruction) =>
+    instruction.get('images')
+  );

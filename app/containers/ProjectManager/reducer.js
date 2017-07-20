@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 import * as iTypes from 'containers/ImageManager/constants';
 import * as cTypes from 'containers/Comments/constants';
+import { forProject } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({
@@ -13,14 +14,18 @@ const initialState = fromJS({
   currentImage: 0,
 });
 
-const setProjectImages = (state, action) =>
+const setImages = (state, action) =>
   state.setIn(['project', 'images'], fromJS(action.response.images));
 
+const setComments = (state, action) =>
+  state.setIn(['project', 'comments'], fromJS(action.response));
+
 const imageCount = (state) => state.getIn(['project', 'images']).size;
-const commentCount = (state) => state.getIn(['project', 'comments']).size;
 
 function projectReducer(state = initialState, action) {
   const { response } = action;
+
+  if (!forProject(action)) return state;
 
   switch (action.type) {
     // Project
@@ -42,45 +47,30 @@ function projectReducer(state = initialState, action) {
     // Images
 
     case iTypes.CREATE_IMAGE_SUCCESS:
-      if (action.response.imageable_type === 'Project') {
-        return setProjectImages(state, action).set(
-          'currentImage',
-          imageCount(state)
-        );
-      }
-      return state;
+      return setImages(state, action).set('currentImage', imageCount(state));
 
     case iTypes.DELETE_IMAGE_SUCCESS:
-      if (action.response.imageable_type === 'Project') {
-        return setProjectImages(state, action).set(
-          'currentImage',
-          imageCount(state) - 2
-        );
-      }
-      return state;
+      return setImages(state, action).set(
+        'currentImage',
+        imageCount(state) - 2
+      );
 
     case iTypes.UPDATE_IMAGE_SUCCESS:
-      if (action.response.imageable_type === 'Project') {
-        return state.setIn(
-          ['project', 'images'],
-          fromJS(action.response.images)
-        );
-      }
-      return state;
+      return setImages(state, action);
 
     case iTypes.SWITCH_IMAGE:
-      return state.set('currentImage', action.index);
+      return state.set('currentImage', action.payload.index);
 
     // Comments
 
     case cTypes.CREATE_COMMENT_SUCCESS:
-      return state.setIn(['project', 'comments'], fromJS(action.response));
+      return setComments(state, action);
 
     case cTypes.UPDATE_COMMENT_SUCCESS:
-      return state.setIn(['project', 'comments'], fromJS(action.response));
+      return setComments(state, action);
 
     case cTypes.DELETE_COMMENT_SUCCESS:
-      return state.setIn(['project', 'comments'], fromJS(action.response));
+      return setComments(state, action);
 
     default:
       return state;

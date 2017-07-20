@@ -73,6 +73,10 @@ class ProjectManager extends React.PureComponent {
               <div className="col-xs-6 col-md-5 flex justify-center">
                 <div className="flex flex-column items-center lh0">
                   <ImageManager
+                    imageable={{
+                      type: 'Project',
+                      id: project.get('id'),
+                    }}
                     maxImages={5}
                     images={project.get('images')}
                     currentImage={this.props.currentImage}

@@ -6,7 +6,7 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
 import Button from 'components/Button';
 import ImageManager from 'containers/ImageManager';
-import { selectImage } from './selectors';
+import { selectImages } from './selectors';
 
 const Form = (props) => {
   const { handleSubmit, submitting, initialValues: instruction, label } = props;
@@ -27,7 +27,12 @@ const Form = (props) => {
           label="Description"
         />
         {instruction.get('id') &&
-          <ImageManager maxImages={1} currentImage={props.image} />}
+          <ImageManager
+            useModal
+            imageable={{ type: 'Instruction', id: instruction.get('id') }}
+            maxImages={5}
+            images={props.images}
+          />}
         <footer className="p2 center">
           <Button
             type="submit"
@@ -44,7 +49,8 @@ Form.propTypes = {
   initialValues: PropTypes.object,
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
-  image: PropTypes.object,
+  images: PropTypes.object,
+  label: PropTypes.string,
 };
 
 export function mapDispatch(dispatch) {
@@ -52,7 +58,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  image: selectImage(),
+  images: selectImages(),
 });
 
 export default connect(mapState, mapDispatch)(

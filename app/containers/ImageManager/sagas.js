@@ -6,7 +6,11 @@ import * as actions from './actions';
 
 export default [appWatcher];
 
-const imageUrl = (payload) => `images/${payload.id}`;
+const imageUrl = (payload) => {
+  let image = payload.image;
+  if (image.toJS) image = image.toJS();
+  return `images/${image.id}`;
+};
 
 export function* appWatcher() {
   const watcher = [

@@ -9,16 +9,25 @@ import { createImage, switchImage } from './actions';
 
 class ImageManager extends React.Component {
   render() {
-    const { images, maxImages, currentImage, placeholder } = this.props;
+    const {
+      images,
+      maxImages,
+      currentImage,
+      placeholder,
+      useModal,
+    } = this.props;
     const Image = (props) =>
       <img src={props.src} role="presentation" className="x-max20" />;
     return (
       <div>
-        {!currentImage.id && placeholder && <Image src={placeholder} />}
-        {currentImage.id &&
+        {!useModal &&
           <div>
-            <ImageForm initialValues={currentImage} {...this.props} />
-            <Image src={currentImage.urls.medium} />
+            {!currentImage && placeholder && <Image src={placeholder} />}
+            {currentImage &&
+              <div>
+                <ImageForm initialValues={currentImage} {...this.props} />
+                <Image src={currentImage.getIn(['urls', 'medium'])} />
+              </div>}
           </div>}
         {images &&
           maxImages > 1 &&
@@ -36,6 +45,7 @@ ImageManager.propTypes = {
   currentImage: PropTypes.object,
   placeholder: PropTypes.string,
   maxImages: PropTypes.number,
+  useModal: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {

@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import * as iTypes from 'containers/ImageManager/constants';
+import { forInstruction } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({
@@ -8,6 +9,8 @@ const initialState = fromJS({
 });
 
 function instructionReducer(state = initialState, action) {
+  if (!forInstruction(action)) return state;
+
   const currentInstruction = state.get('currentInstruction');
 
   switch (action.type) {
@@ -38,14 +41,13 @@ function instructionReducer(state = initialState, action) {
     case types.SWITCH_INSTRUCTION:
       return state.set('currentInstruction', action.index);
 
+    // Images
+
     case iTypes.CREATE_IMAGE_SUCCESS:
-      if (action.response.imageable_type === 'Instruction') {
-        return state.setIn(
-          ['instructions', currentInstruction, 'images'],
-          fromJS(action.response.images)
-        );
-      }
-      return state;
+      return state.setIn(
+        ['instructions', currentInstruction, 'images'],
+        fromJS(action.response.images)
+      );
 
     default:
       return state;

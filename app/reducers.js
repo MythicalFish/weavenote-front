@@ -15,6 +15,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
  */
 import collaboratorsReducer from 'containers/Collaborators/reducer';
 import commentsReducer from 'containers/Comments/reducer';
+import imageReducer from 'containers/ImageManager/reducer';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
 import { reducer as notificationReducer } from 'react-notification-system-redux';
 
@@ -58,6 +59,7 @@ export default function createReducer(asyncReducers) {
     notifications: notificationReducer,
     collaborators: collaboratorsReducer,
     Comments: commentsReducer,
+    ImageManager: imageReducer,
     ...asyncReducers,
   });
 }
