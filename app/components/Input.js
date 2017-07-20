@@ -7,7 +7,13 @@ export default class Input extends React.PureComponent {
       this.nameInput.focus();
     }
   }
-
+  handleKeyPress(target) {
+    if (target.charCode == 13) {
+      if (!target.shiftKey) {
+        // do submit unless shift+enter
+      }
+    }
+  }
   render() {
     const p = this.props;
     let field = null;
@@ -59,7 +65,7 @@ export default class Input extends React.PureComponent {
         field = <Dropdown {...fProps} />;
         break;
       case 'textarea':
-        field = <textarea {...fProps} />;
+        field = <textarea {...fProps} onKeyPress={this.handleKeyPress} />;
         break;
       default:
         field = <input {...fProps} type={p.type} />;
