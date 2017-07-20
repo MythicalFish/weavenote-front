@@ -1,3 +1,7 @@
+export function idToIndex(id, list) {
+  return list.findKey((obj) => obj.get('id') === id);
+}
+
 export function forProject(action) {
   return forReducer('Project', action);
 }

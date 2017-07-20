@@ -40,7 +40,7 @@ class Comment extends React.PureComponent {
               useModal
               allowEdit={this.isOwnComment() && isSelected}
               imageable={{ type: 'Comment', id: comment.get('id') }}
-              maxImages={5}
+              maxImages={3}
               images={comment.get('images')}
             />
           </div>

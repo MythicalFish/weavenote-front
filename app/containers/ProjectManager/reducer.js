@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
 import * as iTypes from 'containers/ImageManager/constants';
 import * as cTypes from 'containers/Comments/constants';
-import { forProject, forComment } from 'utils/reducerHelpers';
 import * as types from './constants';
+import { setImages } from './reducerHelpers';
 
 const initialState = fromJS({
   project: {
@@ -14,24 +14,12 @@ const initialState = fromJS({
   currentImage: 0,
 });
 
-const setImages = (state, action) =>
-  state.setIn(['project', 'images'], fromJS(action.response.images));
-
-const setComments = (state, action) =>
-  state.setIn(['project', 'comments'], fromJS(action.response));
-
 const imageCount = (state) => state.getIn(['project', 'images']).size;
+
+const setComments = (state, action) => state.setIn(['project', 'comments'], fromJS(action.response));
 
 function projectReducer(state = initialState, action) {
   const { response } = action;
-
-  if (!forProject(action)) return state;
-
-  if (forComment(action)) {
-    if (action.type === iTypes.CREATE_IMAGE_SUCCESS) {
-      return state.setIn(['project', 'comments'], fromJS(action.response));
-    }
-  }
 
   switch (action.type) {
     // Project
@@ -53,13 +41,10 @@ function projectReducer(state = initialState, action) {
     // Images
 
     case iTypes.CREATE_IMAGE_SUCCESS:
-      return setImages(state, action).set('currentImage', imageCount(state));
+      return setImages(state, action, imageCount(state));
 
     case iTypes.DELETE_IMAGE_SUCCESS:
-      return setImages(state, action).set(
-        'currentImage',
-        imageCount(state) - 2
-      );
+      return setImages(state, action, imageCount(state) - 2);
 
     case iTypes.UPDATE_IMAGE_SUCCESS:
       return setImages(state, action);
