@@ -19,15 +19,12 @@ function ThumbnailList(props) {
         <button
           type="button"
           onClick={() => {
-            if (useModal) {
-              console.log('modal now');
-            } else {
-              props.switchImage({
-                index,
-                image,
-                reducer: props.imageable.type,
-              });
-            }
+            if (useModal) props.openModal(props.modalID);
+            props.switchImage({
+              index,
+              image,
+              reducer: props.imageable.type,
+            });
           }}
         >
           <Thumbnail url={values.urls.tiny} />
@@ -53,6 +50,7 @@ ThumbnailList.propTypes = {
   maxImages: PropTypes.number,
   useModal: PropTypes.bool,
   allowEdit: PropTypes.bool,
+  openModal: PropTypes.func,
 };
 
 export default ThumbnailList;

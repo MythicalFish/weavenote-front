@@ -29,6 +29,7 @@ const initialState = fromJS({
   },
   currentSection: sections.Default,
   materials: [],
+  currentModalID: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -69,6 +70,14 @@ function appReducer(state = initialState, action) {
 
     case materialActionTypes.FETCH_MATERIALS_SUCCESS:
       return state.set('materials', fromJS(action.materials));
+
+    // Modal
+
+    case appActionTypes.OPEN_MODAL:
+      return state.set('currentModalID', action.id);
+
+    case appActionTypes.CLOSE_MODAL:
+      return state.set('currentModalID', null);
 
     default:
       return state;

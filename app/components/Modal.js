@@ -1,5 +1,10 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import Portal from 'react-portal';
+import { closeModal } from 'containers/App/actions';
+import { selectCurrentModalID } from 'containers/App/selectors';
 
 const ModalContent = (props) =>
   <div className={`modal ${props.modalClass}`}>
@@ -21,14 +26,14 @@ class Modal extends React.PureComponent {
     this.setState({ modalClass: '' });
     setTimeout(() => {
       close();
-      this.props.parent.setState({ activeModal: null });
+      this.props.closeModal();
     }, 550);
   };
 
   render() {
     const { modalClass } = this.state;
-    const { parent, modalID } = this.props;
-    const isOpened = parent.state.activeModal === modalID;
+    const { modalID, currentModalID } = this.props;
+    const isOpened = currentModalID === modalID;
     return (
       <Portal
         isOpened={isOpened}
@@ -48,6 +53,16 @@ Modal.propTypes = {
   children: PropTypes.node,
   parent: PropTypes.object,
   modalID: PropTypes.string,
+  currentModalID: PropTypes.string,
+  closeModal: PropTypes.func,
 };
 
-export default Modal;
+export function mapDispatch(dispatch) {
+  return bindActionCreators({ closeModal }, dispatch);
+}
+
+const mapState = createStructuredSelector({
+  currentModalID: selectCurrentModalID(),
+});
+
+export default connect(mapState, mapDispatch)(Modal);

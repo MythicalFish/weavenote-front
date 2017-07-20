@@ -60,3 +60,6 @@ export const makeSelectLocationState = () => {
     return prevRoutingStateJS;
   };
 };
+
+export const selectCurrentModalID = () =>
+  createSelector(selectDomain(), (s) => s.get('currentModalID'));

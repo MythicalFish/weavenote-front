@@ -42,10 +42,16 @@ export function fetchStatsSuccess(stats) {
   return { type: types.FETCH_STATS_SUCCESS, stats };
 }
 
-
 // Other
 
 export function changeSection(section) {
   return { type: types.CHANGE_SECTION, section };
 }
 
+export function openModal(id) {
+  return { type: types.OPEN_MODAL, id };
+}
+
+export function closeModal() {
+  return { type: types.CLOSE_MODAL };
+}

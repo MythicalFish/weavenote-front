@@ -16,10 +16,11 @@ const initialState = fromJS({
 
 const imageCount = (state) => state.getIn(['project', 'images']).size;
 
-const setComments = (state, action) => state.setIn(['project', 'comments'], fromJS(action.response));
+const setComments = (state, action) =>
+  state.setIn(['project', 'comments'], fromJS(action.response));
 
 function projectReducer(state = initialState, action) {
-  const { response } = action;
+  const { response, payload } = action;
 
   switch (action.type) {
     // Project
@@ -50,7 +51,11 @@ function projectReducer(state = initialState, action) {
       return setImages(state, action);
 
     case iTypes.SWITCH_IMAGE:
-      return state.set('currentImage', action.payload.index);
+      if (payload.reducer === 'Project') {
+        return state.set('currentImage', action.payload.index);
+      } else {
+        return state;
+      }
 
     // Comments
 

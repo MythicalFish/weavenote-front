@@ -1,5 +1,3 @@
-
-
 export const SET_INVITE_KEY = '@@app/SET_INVITE_KEY';
 
 export const FETCH_INVITE = '@@app/FETCH_INVITE';
@@ -17,3 +15,6 @@ export const FETCH_STATS = '@@app/FETCH_STATS';
 export const FETCH_STATS_SUCCESS = '@@app/FETCH_STATS_SUCCESS';
 
 export const CHANGE_SECTION = '@@app/CHANGE_SECTION';
+
+export const OPEN_MODAL = '@@app/OPEN_MODAL';
+export const CLOSE_MODAL = '@@app/CLOSE_MODAL';

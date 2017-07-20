@@ -2,5 +2,5 @@ import { createSelector } from 'reselect';
 
 const selectDomain = () => (state) => state.get('ImageManager');
 
-export const selectCurrentImage = () =>
-  createSelector(selectDomain(), (s) => s.get('currentImage'));
+export const selectModalImage = () =>
+  createSelector(selectDomain(), (s) => s.get('modalImage'));

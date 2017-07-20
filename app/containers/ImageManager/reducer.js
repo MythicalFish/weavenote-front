@@ -3,7 +3,7 @@ import { forProject } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({
-  currentImage: null,
+  modalImage: null,
 });
 
 function imageReducer(state = initialState, action) {
@@ -11,7 +11,7 @@ function imageReducer(state = initialState, action) {
 
   switch (action.type) {
     case types.SWITCH_IMAGE:
-      return state.set('currentImage', action.payload.image);
+      return state.set('modalImage', action.payload.image);
 
     default:
       return state;

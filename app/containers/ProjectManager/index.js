@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
-import { changeSection } from 'containers/App/actions';
+import { changeSection, openModal } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ImageManager from 'containers/ImageManager';
 import ProjectComponents from 'containers/ProjectComponents';
@@ -20,8 +20,6 @@ import { fetchProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
 
 class ProjectManager extends React.PureComponent {
-  state = { activeModal: null };
-
   componentDidMount() {
     const { params } = this.props;
     this.props.fetchProject(params.id);
@@ -56,11 +54,7 @@ class ProjectManager extends React.PureComponent {
     return (
       <div>
         <Header />
-        <Toolbar
-          changeSection={this.props.changeSection}
-          currentSection={currentSection}
-          parent={this}
-        />
+        <Toolbar {...this.props} />
         <div className="p2 bg-white">
           <div className="container">
             <div className="row">
@@ -91,7 +85,7 @@ class ProjectManager extends React.PureComponent {
             </div>
           </div>
         </div>
-        <Modal parent={this} modalID="collaborators">
+        <Modal modalID="collaborators">
           <header>
             {`Collaborators for ${project.get('name')}`}
           </header>
@@ -116,7 +110,10 @@ ProjectManager.propTypes = {
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators({ changeSection, fetchProject }, dispatch);
+  return bindActionCreators(
+    { changeSection, fetchProject, openModal },
+    dispatch
+  );
 }
 
 const mapState = createStructuredSelector({
