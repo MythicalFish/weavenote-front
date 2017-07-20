@@ -6,6 +6,10 @@ export function forInstruction(action) {
   return forReducer('Instruction', action);
 }
 
+export function forComment(action) {
+  return forReducer('Comment', action);
+}
+
 const forReducer = (reducer, action) => {
   const { response, payload } = action;
   if (!response && !payload) return true;

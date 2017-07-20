@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import * as iTypes from 'containers/ImageManager/constants';
 import * as cTypes from 'containers/Comments/constants';
-import { forProject } from 'utils/reducerHelpers';
+import { forProject, forComment } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({
@@ -26,6 +26,12 @@ function projectReducer(state = initialState, action) {
   const { response } = action;
 
   if (!forProject(action)) return state;
+
+  if (forComment(action)) {
+    if (action.type === iTypes.CREATE_IMAGE_SUCCESS) {
+      return state.setIn(['project', 'comments'], fromJS(action.response));
+    }
+  }
 
   switch (action.type) {
     // Project

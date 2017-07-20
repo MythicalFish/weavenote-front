@@ -15,6 +15,7 @@ class ImageManager extends React.Component {
       currentImage,
       placeholder,
       useModal,
+      allowEdit,
     } = this.props;
     const Image = (props) =>
       <img src={props.src} role="presentation" className="x-max20" />;
@@ -34,7 +35,7 @@ class ImageManager extends React.Component {
           <div className="pt1">
             <ThumbnailList {...this.props} />
           </div>}
-        {maxImages === 1 && <Uploader {...this.props} />}
+        {maxImages === 1 && allowEdit && <Uploader {...this.props} />}
       </div>
     );
   }
@@ -46,6 +47,7 @@ ImageManager.propTypes = {
   placeholder: PropTypes.string,
   maxImages: PropTypes.number,
   useModal: PropTypes.bool,
+  allowEdit: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {

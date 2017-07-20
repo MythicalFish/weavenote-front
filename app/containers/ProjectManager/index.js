@@ -73,6 +73,7 @@ class ProjectManager extends React.PureComponent {
               <div className="col-xs-6 col-md-5 flex justify-center">
                 <div className="flex flex-column items-center lh0">
                   <ImageManager
+                    allowEdit
                     imageable={{
                       type: 'Project',
                       id: project.get('id'),

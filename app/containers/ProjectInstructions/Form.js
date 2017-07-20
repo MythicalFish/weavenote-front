@@ -29,6 +29,7 @@ const Form = (props) => {
         {instruction.get('id') &&
           <ImageManager
             useModal
+            allowEdit
             imageable={{ type: 'Instruction', id: instruction.get('id') }}
             maxImages={5}
             images={props.images}

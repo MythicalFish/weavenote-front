@@ -3,7 +3,7 @@ import Thumbnail from 'components/Thumbnail';
 import Uploader from './Uploader';
 
 function ThumbnailList(props) {
-  const { images, currentImage, useModal } = props;
+  const { images, currentImage, useModal, allowEdit } = props;
   const thumbnails = [];
   images.forEach((image, index) => {
     if (props.maxImages < index) return;
@@ -19,9 +19,14 @@ function ThumbnailList(props) {
         <button
           type="button"
           onClick={() => {
-            props.switchImage({ index, image, reducer: props.imageable.type });
             if (useModal) {
               console.log('modal now');
+            } else {
+              props.switchImage({
+                index,
+                image,
+                reducer: props.imageable.type,
+              });
             }
           }}
         >
@@ -34,6 +39,7 @@ function ThumbnailList(props) {
     <ul className="thumbnails">
       {thumbnails}
       {images.size < props.maxImages &&
+        allowEdit &&
         <li>
           <Uploader {...props} />
         </li>}
@@ -46,6 +52,7 @@ ThumbnailList.propTypes = {
   currentImage: PropTypes.object,
   maxImages: PropTypes.number,
   useModal: PropTypes.bool,
+  allowEdit: PropTypes.bool,
 };
 
 export default ThumbnailList;

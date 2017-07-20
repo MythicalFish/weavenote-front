@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Avatar from 'components/Avatar';
+import ImageManager from 'containers/ImageManager';
 import CommentForm from './CommentForm';
 import CommentActions from './CommentActions';
 
@@ -35,6 +36,13 @@ class Comment extends React.PureComponent {
               this.isOwnComment() &&
               !isUpdating &&
               <CommentActions {...this.props} />}
+            <ImageManager
+              useModal
+              allowEdit={this.isOwnComment() && isSelected}
+              imageable={{ type: 'Comment', id: comment.get('id') }}
+              maxImages={5}
+              images={comment.get('images')}
+            />
           </div>
         </div>
       </div>
