@@ -9,7 +9,7 @@ import ImageManager from 'containers/ImageManager';
 import { selectImage } from './selectors';
 
 const Form = (props) => {
-  const { handleSubmit, submitting, initialValues: instruction } = props;
+  const { handleSubmit, submitting, initialValues: instruction, label } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-rows">
@@ -29,7 +29,11 @@ const Form = (props) => {
         {instruction.get('id') &&
           <ImageManager maxImages={1} currentImage={props.image} />}
         <footer className="p2 center">
-          <Button type="submit" disabled={submitting} label="Save" />
+          <Button
+            type="submit"
+            disabled={submitting}
+            label={label || 'Save instruction'}
+          />
         </footer>
       </div>
     </form>
