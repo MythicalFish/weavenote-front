@@ -15,7 +15,6 @@ class CommentForm extends React.PureComponent {
           focus
           onEnterKey={handleSubmit}
         />
-        <Button type="submit" disabled={submitting} label="Submit" shy />
       </form>
     );
   }
