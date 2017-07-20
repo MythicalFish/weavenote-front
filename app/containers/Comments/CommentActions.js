@@ -23,7 +23,6 @@ const CommentActions = (props) => {
 };
 
 CommentActions.propTypes = {
-  toggleEdit: PropTypes.func,
   deleteComment: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,

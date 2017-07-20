@@ -8,7 +8,13 @@ class CommentForm extends React.PureComponent {
     const { handleSubmit, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Field name="comment[text]" type="textarea" component={Input} focus />
+        <Field
+          name="comment[text]"
+          type="textarea"
+          component={Input}
+          focus
+          onEnterKey={handleSubmit}
+        />
         <Button type="submit" disabled={submitting} label="Submit" shy />
       </form>
     );

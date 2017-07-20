@@ -37,7 +37,6 @@ CommentWrapper.propTypes = {
   switchComment: PropTypes.func,
   comment: PropTypes.object,
   currentComment: PropTypes.number,
-  index: PropTypes.number,
 };
 
 export default CommentWrapper;

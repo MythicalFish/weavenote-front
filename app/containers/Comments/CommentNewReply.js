@@ -28,7 +28,7 @@ class CommentNewReply extends React.PureComponent {
 CommentNewReply.propTypes = {
   isOwnComment: PropTypes.bool,
   isReplying: PropTypes.number,
-  toggleReply: PropTypes.func,
+  startReplyComment: PropTypes.func,
   createComment: PropTypes.func,
   comment: PropTypes.object,
 };
