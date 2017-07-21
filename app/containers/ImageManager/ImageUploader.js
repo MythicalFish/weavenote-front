@@ -61,7 +61,7 @@ class ImageUploader extends React.Component {
         </PlusButton>
         {this.state.progress > 0 &&
           <div>
-            Uploading: {this.state.progress}%
+            {this.state.progress}%
           </div>}
       </div>
     );

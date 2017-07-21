@@ -1,8 +1,12 @@
-.container { 
-  width: 100%; 
+.container {
+  width: 100%;
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+}
+.container-wide {
+  @extend .container;
+  max-width: 2000px;
 }
 .container-narrow {
   @extend .container;

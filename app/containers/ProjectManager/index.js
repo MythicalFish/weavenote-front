@@ -58,7 +58,7 @@ class ProjectManager extends React.PureComponent {
         <Header />
         <Toolbar {...this.props} />
         <div className="p2 bg-white">
-          <div className="container">
+          <div className="container-wide">
             <div className="row">
               <div className="col-xs-12 last-xs first-md col-md-3">
                 <Comments
