@@ -14,7 +14,8 @@ function ThumbnailList(props) {
   const { images, currentImage, type, id, modalImage } = props;
   const thumbnails = [];
   images.forEach((image, index) => {
-    if (props.maxImages < index) return;
+    const count = index + 1;
+    if (count > props.maxImages) return;
     const tid = image.get('id');
     const tnProps = {
       key: `thumbnail-${tid}`,

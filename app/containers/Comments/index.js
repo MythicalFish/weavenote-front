@@ -24,7 +24,7 @@ class Comments extends React.PureComponent {
   };
   render() {
     const { commentable, comments, isCreating } = this.props;
-    const cProps = { ...this.props };
+    const cProps = { ...this.props, maxImages: 3 };
     delete cProps.comments;
     return (
       <div>

@@ -33,6 +33,7 @@ button {
   background: $color2x;
   color: $white;
   font-weight: bold;
+  position: relative;
   &.btn-sm {
     font-size: .9em;
     padding: 6px 12px;
@@ -61,6 +62,18 @@ button {
   }
   &.btn-green {
     background: $lime;
+  }
+}
+label.btn {
+  cursor: pointer;
+  input {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
   }
 }
 .btn-shy {

@@ -10,7 +10,7 @@ export function setImages(state, { response }, imageCount = null) {
   }
   let newState = state;
   if (keyPath) newState = newState.setIn(keyPath, fromJS(response.images));
-  if (type === 'Project' && imageCount) {
+  if (type === 'Project' && imageCount >= 0) {
     newState = newState.set('currentImage', imageCount);
   }
   return newState;

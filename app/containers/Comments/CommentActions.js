@@ -18,10 +18,12 @@ const CommentActions = (props) => {
           label="Remove"
           shy
         />
-        <ImageUploader
-          imageable={{ type: 'Comment', id: comment.get('id') }}
-          label="Add image"
-        />
+        {comment.get('images').size < props.maxImages &&
+          <ImageUploader
+            imageable={{ type: 'Comment', id: comment.get('id') }}
+            label="Add image"
+            className="btn-shy"
+          />}
       </div>
     </div>
   );
@@ -31,6 +33,7 @@ CommentActions.propTypes = {
   deleteComment: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
+  maxImages: PropTypes.number,
 };
 
 export default CommentActions;

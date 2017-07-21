@@ -25,12 +25,9 @@ class ImageManager extends React.PureComponent {
 }
 
 ImageManager.propTypes = {
-  images: PropTypes.object,
   currentImage: PropTypes.object,
   imageable: PropTypes.object,
   placeholder: PropTypes.string,
-  maxImages: PropTypes.number,
-  type: PropTypes.string,
 };
 
 export default ImageManager;

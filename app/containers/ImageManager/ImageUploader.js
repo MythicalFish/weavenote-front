@@ -45,13 +45,20 @@ class ImageUploader extends React.Component {
         onFinish={this.onFinish}
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />;
+    const { label, className } = this.props;
+    if (label) {
+      return (
+        <label className={`btn ${className}`}>
+          {label}
+          <Button />
+        </label>
+      );
+    }
     return (
       <div>
-        {!this.props.label &&
-          <PlusButton>
-            <Button />
-          </PlusButton>}
-        {this.props.label && <Button />}
+        <PlusButton>
+          <Button />
+        </PlusButton>
         {this.state.progress > 0 &&
           <div>
             Uploading: {this.state.progress}%
@@ -65,6 +72,7 @@ ImageUploader.propTypes = {
   imageable: PropTypes.object,
   createImage: PropTypes.func,
   label: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export function mapDispatch(dispatch) {

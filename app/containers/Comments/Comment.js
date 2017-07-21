@@ -40,7 +40,7 @@ class Comment extends React.PureComponent {
               <ThumbnailList
                 images={comment.get('images')}
                 imageable={{ type: 'Comment', id }}
-                maxImages={3}
+                maxImages={this.props.maxImages}
                 type="modal"
                 allowEdit={isOwnComment}
                 id={`Comment${id}`}
@@ -60,6 +60,7 @@ Comment.propTypes = {
   commentable: PropTypes.object,
   user: PropTypes.object,
   className: PropTypes.string,
+  maxImages: PropTypes.number,
 };
 
 export default Comment;

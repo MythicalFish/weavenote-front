@@ -77,7 +77,6 @@ class ProjectManager extends React.PureComponent {
                     maxImages={5}
                     allowEdit
                     showUploader
-                    type="embedded"
                     currentImage={this.props.currentImage}
                     placeholder={IMAGE_PLACEHOLDER}
                   />
