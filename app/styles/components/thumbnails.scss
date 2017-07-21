@@ -22,8 +22,7 @@ ul.thumbnails {
       border: 2px solid $white;
       padding: 0;
       line-height: 0;
-      border-radius: 4px;
-      -webkit-border-radius: 4px;
+      @include roundedCorners();
       overflow: hidden;
       img {
         width: 100%;

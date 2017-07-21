@@ -9,8 +9,3 @@ export const selectCurrentInstruction = () =>
     const index = s.get('currentInstruction');
     return s.getIn(['instructions', index]);
   });
-
-export const selectImages = () =>
-  createSelector(selectCurrentInstruction(), (instruction) =>
-    instruction.get('images')
-  );

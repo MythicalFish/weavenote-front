@@ -11,10 +11,9 @@ class Comment extends React.PureComponent {
   };
   render() {
     const { comment, commentable, isSelected, className } = this.props;
-    const authorName = this.isOwnComment()
-      ? 'You'
-      : comment.getIn(['user', 'name']);
     const isUpdating = this.props.isUpdating === comment.get('id');
+    const isOwnComment = this.isOwnComment();
+    const authorName = isOwnComment ? 'You' : comment.getIn(['user', 'name']);
     return (
       <div className={`comment ${className}`}>
         <div className="flex">
@@ -33,16 +32,17 @@ class Comment extends React.PureComponent {
               />
               : comment.get('text')}
             {isSelected &&
-              this.isOwnComment() &&
+              isOwnComment &&
               !isUpdating &&
               <CommentActions {...this.props} />}
-            <ImageManager
-              useModal
-              allowEdit={this.isOwnComment() && isSelected}
-              imageable={{ type: 'Comment', id: comment.get('id') }}
-              maxImages={3}
-              images={comment.get('images')}
-            />
+            {isSelected &&
+              <ImageManager
+                images={comment.get('images')}
+                imageable={{ type: 'Comment', id: comment.get('id') }}
+                maxImages={3}
+                type="modal"
+                allowEdit={isOwnComment}
+              />}
           </div>
         </div>
       </div>

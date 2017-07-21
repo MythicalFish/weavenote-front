@@ -69,13 +69,15 @@ class ProjectManager extends React.PureComponent {
               <div className="col-xs-6 col-md-5 flex justify-center">
                 <div className="flex flex-column items-center lh0">
                   <ImageManager
-                    allowEdit
+                    images={project.get('images')}
                     imageable={{
                       type: 'Project',
-                      id: project.get('id'),
+                      id,
                     }}
                     maxImages={5}
-                    images={project.get('images')}
+                    allowEdit
+                    showUploader
+                    type="embedded"
                     currentImage={this.props.currentImage}
                     placeholder={IMAGE_PLACEHOLDER}
                   />
@@ -87,7 +89,7 @@ class ProjectManager extends React.PureComponent {
             </div>
           </div>
         </div>
-        <Modal modalID="collaborators">
+        <Modal modalID="collaborators" minWidth="600px">
           <header>
             {`Collaborators for ${project.get('name')}`}
           </header>

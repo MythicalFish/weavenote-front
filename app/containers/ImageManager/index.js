@@ -6,7 +6,6 @@ import Modal from 'components/Modal';
 import { openModal } from 'containers/App/actions';
 import ThumbnailList from './subcomponents/ThumbnailList';
 import ImageForm from './subcomponents/ImageForm';
-import Uploader from './subcomponents/Uploader';
 import { createImage, switchImage } from './actions';
 import { selectModalImage } from './selectors';
 
@@ -18,8 +17,7 @@ class ImageManager extends React.Component {
       currentImage,
       modalImage,
       placeholder,
-      useModal,
-      allowEdit,
+      type,
       imageable,
     } = this.props;
     const modalID = `${imageable.type}Image`;
@@ -27,7 +25,7 @@ class ImageManager extends React.Component {
       <img src={props.src} role="presentation" className="x-max20" />;
     return (
       <div>
-        {!useModal &&
+        {type === 'embedded' &&
           <div>
             {!currentImage && placeholder && <Image src={placeholder} />}
             {currentImage &&
@@ -36,15 +34,18 @@ class ImageManager extends React.Component {
                 <Image src={currentImage.getIn(['urls', 'medium'])} />
               </div>}
           </div>}
+        {type === 'modal' &&
+          <Modal modalID={modalID}>
+            <div className="lh0">
+              {modalImage &&
+                <Image src={modalImage.getIn(['urls', 'large'])} />}
+            </div>
+          </Modal>}
         {images &&
           maxImages > 1 &&
           <div className="pt1">
             <ThumbnailList {...this.props} modalID={modalID} />
           </div>}
-        {maxImages === 1 && allowEdit && <Uploader {...this.props} />}
-        <Modal modalID={modalID}>
-          {modalImage && <Image src={modalImage.getIn(['urls', 'large'])} />}
-        </Modal>
       </div>
     );
   }
@@ -57,8 +58,7 @@ ImageManager.propTypes = {
   imageable: PropTypes.object,
   placeholder: PropTypes.string,
   maxImages: PropTypes.number,
-  useModal: PropTypes.bool,
-  allowEdit: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export function mapDispatch(dispatch) {

@@ -3,15 +3,15 @@ import Thumbnail from 'components/Thumbnail';
 import Uploader from './Uploader';
 
 function ThumbnailList(props) {
-  const { images, currentImage, useModal, allowEdit } = props;
+  const { images, currentImage, type } = props;
   const thumbnails = [];
   images.forEach((image, index) => {
     if (props.maxImages < index) return;
-    const values = image.toJS();
+    const id = image.get('id');
     const tnProps = {
-      key: `thumbnail-${index}`,
+      key: `thumbnail-${id}`,
     };
-    if (currentImage && image.get('id') === currentImage.get('id')) {
+    if (currentImage && currentImage.get('id') === id) {
       tnProps.className = 'current';
     }
     thumbnails.push(
@@ -19,7 +19,7 @@ function ThumbnailList(props) {
         <button
           type="button"
           onClick={() => {
-            if (useModal) props.openModal(props.modalID);
+            if (type === 'modal') props.openModal(props.modalID);
             props.switchImage({
               index,
               image,
@@ -27,7 +27,7 @@ function ThumbnailList(props) {
             });
           }}
         >
-          <Thumbnail url={values.urls.tiny} />
+          <Thumbnail url={image.getIn(['urls', 'tiny'])} />
         </button>
       </li>
     );
@@ -36,7 +36,8 @@ function ThumbnailList(props) {
     <ul className="thumbnails">
       {thumbnails}
       {images.size < props.maxImages &&
-        allowEdit &&
+        props.allowEdit &&
+        props.showUploader &&
         <li>
           <Uploader {...props} />
         </li>}
@@ -48,9 +49,9 @@ ThumbnailList.propTypes = {
   images: PropTypes.object,
   currentImage: PropTypes.object,
   maxImages: PropTypes.number,
-  useModal: PropTypes.bool,
+  type: PropTypes.string,
   allowEdit: PropTypes.bool,
-  openModal: PropTypes.func,
+  showUploader: PropTypes.bool,
 };
 
 export default ThumbnailList;

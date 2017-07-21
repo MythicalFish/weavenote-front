@@ -1,7 +1,6 @@
 .comment-wrapper {
   border: 1px solid transparent;
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
+  @include roundedCorners();
   overflow: hidden;
   font-size: .9em;
   color: $dark7;

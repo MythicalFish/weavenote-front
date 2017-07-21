@@ -6,12 +6,19 @@ import Portal from 'react-portal';
 import { closeModal } from 'containers/App/actions';
 import { selectCurrentModalID } from 'containers/App/selectors';
 
-const ModalContent = (props) =>
-  <div className={`modal ${props.modalClass}`}>
-    <div className="modal-content">
-      {props.children}
+const PseudoModal = (props) => {
+  const p = props;
+  const style = {};
+  if (p.minWidth) style.minWidth = p.minWidth;
+  return (
+    <div className={`modal ${p.modalClass}`}>
+      <div className="modal-bg" onClick={p.closePortal} />
+      <div className="modal-content" style={style}>
+        {p.children}
+      </div>
     </div>
-  </div>;
+  );
+};
 
 class Modal extends React.PureComponent {
   state = { modalClass: '' };
@@ -31,7 +38,6 @@ class Modal extends React.PureComponent {
   };
 
   render() {
-    const { modalClass } = this.state;
     const { modalID, currentModalID } = this.props;
     const isOpened = currentModalID === modalID;
     return (
@@ -41,9 +47,9 @@ class Modal extends React.PureComponent {
         beforeClose={this.beforeClose}
         closeOnEsc
       >
-        <ModalContent modalClass={modalClass}>
+        <PseudoModal {...this.props} {...this.state}>
           {this.props.children}
-        </ModalContent>
+        </PseudoModal>
       </Portal>
     );
   }
@@ -51,7 +57,7 @@ class Modal extends React.PureComponent {
 
 Modal.propTypes = {
   children: PropTypes.node,
-  parent: PropTypes.object,
+  minWidth: PropTypes.string,
   modalID: PropTypes.string,
   currentModalID: PropTypes.string,
   closeModal: PropTypes.func,

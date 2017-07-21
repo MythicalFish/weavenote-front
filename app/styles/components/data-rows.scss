@@ -1,7 +1,6 @@
 .data-rows {
   @extend .b1;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  @include roundedCorners();
   line-height: 1;
   background: $white;
   header {

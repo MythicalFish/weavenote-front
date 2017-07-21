@@ -44,10 +44,10 @@ class ProjectInstructions extends React.Component {
           : <Accordion
             items={this.props.instructions}
             current={this.props.current}
-            toggleCreate={this.toggleCreate}
             updateItem={this.props.updateInstruction}
             switchItem={this.props.switchInstruction}
             formValues={this.props.current}
+            toggleCreate={this.toggleCreate}
             ListItem={ListItem}
             Form={Form}
           />}
