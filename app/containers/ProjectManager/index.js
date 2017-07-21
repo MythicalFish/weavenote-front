@@ -14,9 +14,9 @@ import Modal from 'components/Modal';
 import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
-import Basics from './subcomponents/Basics';
+import ProjectBasics from './subcomponents/ProjectBasics';
 import * as selectors from './selectors';
-import { fetchProject } from './actions';
+import { fetchProject, updateProject } from './actions';
 import { IMAGE_PLACEHOLDER } from './constants';
 
 class ProjectManager extends React.PureComponent {
@@ -30,8 +30,8 @@ class ProjectManager extends React.PureComponent {
     const { project, currentSection } = this.props;
     const id = project.get('id');
     if (!id) return null;
-
     let View;
+    const viewProps = { ...this.props };
 
     switch (currentSection.id) {
       case sections.Components.id:
@@ -47,7 +47,9 @@ class ProjectManager extends React.PureComponent {
         break;
 
       default:
-        View = Basics;
+        View = ProjectBasics;
+        viewProps.initialValues = project;
+        viewProps.onSubmit = this.props.updateProject;
         break;
     }
 
@@ -80,7 +82,7 @@ class ProjectManager extends React.PureComponent {
                 </div>
               </div>
               <div className="col-xs-6 col-md-4 flex justify-center">
-                <View {...this.props} />
+                <View {...viewProps} />
               </div>
             </div>
           </div>
@@ -101,17 +103,17 @@ class ProjectManager extends React.PureComponent {
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
   comments: React.PropTypes.object,
-  currentComment: React.PropTypes.number,
   currentImage: React.PropTypes.object,
   currentSection: React.PropTypes.object,
   changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
+  updateProject: React.PropTypes.func,
   params: React.PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { changeSection, fetchProject, openModal },
+    { changeSection, fetchProject, updateProject, openModal },
     dispatch
   );
 }
