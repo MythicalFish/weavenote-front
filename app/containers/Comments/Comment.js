@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Avatar from 'components/Avatar';
-import ImageManager from 'containers/ImageManager';
+import ThumbnailList from 'containers/ImageManager/ThumbnailList';
 import CommentForm from './CommentForm';
 import CommentActions from './CommentActions';
 
@@ -11,7 +11,8 @@ class Comment extends React.PureComponent {
   };
   render() {
     const { comment, commentable, isSelected, className } = this.props;
-    const isUpdating = this.props.isUpdating === comment.get('id');
+    const id = comment.get('id');
+    const isUpdating = this.props.isUpdating === id;
     const isOwnComment = this.isOwnComment();
     const authorName = isOwnComment ? 'You' : comment.getIn(['user', 'name']);
     return (
@@ -36,12 +37,13 @@ class Comment extends React.PureComponent {
               !isUpdating &&
               <CommentActions {...this.props} />}
             {isSelected &&
-              <ImageManager
+              <ThumbnailList
                 images={comment.get('images')}
-                imageable={{ type: 'Comment', id: comment.get('id') }}
+                imageable={{ type: 'Comment', id }}
                 maxImages={3}
                 type="modal"
                 allowEdit={isOwnComment}
+                id={`Comment${id}`}
               />}
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
+import ImageUploader from 'containers/ImageManager/ImageUploader';
 
 const CommentActions = (props) => {
   const { comment, commentable } = props;
@@ -16,6 +17,10 @@ const CommentActions = (props) => {
           }}
           label="Remove"
           shy
+        />
+        <ImageUploader
+          imageable={{ type: 'Comment', id: comment.get('id') }}
+          label="Add image"
         />
       </div>
     </div>

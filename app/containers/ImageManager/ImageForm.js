@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
 import Glyph from 'components/Glyph';
 import Input from 'components/Input';
-import { deleteImage, updateImage } from '../actions';
+import { deleteImage, updateImage } from './actions';
 
 const ImageForm = (props) => {
   const { handleSubmit, currentImage, imageable } = props;

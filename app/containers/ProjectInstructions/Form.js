@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
 import Button from 'components/Button';
-import ImageManager from 'containers/ImageManager';
+import ThumbnailList from 'containers/ImageManager/ThumbnailList';
 
 const Form = (props) => {
   const { handleSubmit, submitting, initialValues: instruction, label } = props;
@@ -23,7 +23,7 @@ const Form = (props) => {
           label="Description"
         />
         {instruction.get('id') &&
-          <ImageManager
+          <ThumbnailList
             images={instruction.get('images')}
             imageable={{ type: 'Instruction', id: instruction.get('id') }}
             maxImages={5}

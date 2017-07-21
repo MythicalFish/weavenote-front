@@ -3,7 +3,7 @@ import { idToIndex } from 'utils/reducerHelpers';
 
 export function setImages(state, { response }, imageCount = null) {
   const { type, id } = response.imageable;
-  if (type !== 'Project' || 'Comment') return state;
+  if (type !== 'Project' && type !== 'Comment') return state;
   let keyPath = ['project', 'images'];
   if (type === 'Comment') {
     keyPath = commentImageKeyPath(state, id);
