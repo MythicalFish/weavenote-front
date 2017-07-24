@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Image from 'components/Image';
 import ImageThumbnails from 'containers/ImageThumbnails';
+import ImageUploader from 'containers/ImageUploader';
 import ImageForm from 'containers/ImageForm';
 import { PLACEHOLDER } from './constants';
 
@@ -13,13 +14,15 @@ import { PLACEHOLDER } from './constants';
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
   componentDidMount = () => {
-    this.selectImage(this.props.images.get('0'));
+    this.selectImage(this.props.project.getIn(['images', '0']));
   };
   selectImage = (image) => {
     this.setState({ currentImage: image });
   };
   render() {
+    const { project } = this.props;
     const { currentImage } = this.state;
+    console.log(currentImage);
     return (
       <div>
         {!currentImage && <Image src={PLACEHOLDER} />}
@@ -29,7 +32,15 @@ class ProjectImages extends React.PureComponent {
             <Image src={currentImage.getIn(['urls', 'medium'])} />
           </div>}
         <div className="pt1">
-          <ImageThumbnails {...this.props} onSelect={this.selectImage} />
+          <div className="flex">
+            <ImageThumbnails
+              images={project.get('images')}
+              onSelect={this.selectImage}
+            />
+            <ImageUploader
+              imageable={{ type: 'Project', id: project.get('id') }}
+            />
+          </div>
         </div>
       </div>
     );
@@ -37,6 +48,7 @@ class ProjectImages extends React.PureComponent {
 }
 
 ProjectImages.propTypes = {
+  project: PropTypes.object,
   images: PropTypes.object,
   commentAnnotation: PropTypes.object,
 };

@@ -41,7 +41,7 @@ class Comment extends React.PureComponent {
                 images={comment.get('images')}
                 imageable={{ type: 'Comment', id }}
                 maxImages={this.props.maxImages}
-                editable={isOwnComment}
+                deletable={isOwnComment}
               />}
           </div>
         </div>

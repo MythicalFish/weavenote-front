@@ -25,8 +25,10 @@ class ImageUploader extends React.Component {
   };
   onFinish = (image) => {
     console.log('Upload finished:');
-    const { imageable } = this.props;
-    this.props.createImage({ imageable, image });
+    const { imageable, onUploadFinish } = this.props;
+    const payload = { imageable, image };
+    this.props.createImage(payload);
+    if (onUploadFinish) onUploadFinish(payload);
   };
   onUploadError(message) {
     console.log(`Upload error: ${message}`);
@@ -45,10 +47,10 @@ class ImageUploader extends React.Component {
         onFinish={this.onFinish}
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />;
-    const { label, className } = this.props;
+    const { label } = this.props;
     if (label) {
       return (
-        <label className={`btn ${className}`}>
+        <label className="btn">
           {label}
           <Button />
         </label>
@@ -72,7 +74,7 @@ ImageUploader.propTypes = {
   imageable: PropTypes.object,
   createImage: PropTypes.func,
   label: PropTypes.string,
-  className: PropTypes.string,
+  onUploadFinish: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {

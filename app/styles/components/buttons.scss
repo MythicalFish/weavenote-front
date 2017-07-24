@@ -111,3 +111,13 @@ label.btn {
 .glyph-sm {
   font-size: $h3;
 }
+.actions {
+  margin-top: 4px;
+  button,
+  .btn {
+    @extend .btn-shy;
+    &:not(:last-child) {
+      margin-right: $space-1;
+    }
+  }
+}

@@ -8,7 +8,7 @@ const CommentActions = (props) => {
     props.startUpdateComment({ comment, commentable });
   };
   return (
-    <div className="comment-actions">
+    <div className="actions">
       <div>
         <Button onclick={toggleEdit()} label="Edit" shy />
         <Button
@@ -30,7 +30,6 @@ const CommentActions = (props) => {
           <ImageUploader
             imageable={{ type: 'Comment', id: comment.get('id') }}
             label="Add image"
-            className="btn-shy"
           />}
       </div>
     </div>

@@ -3,9 +3,17 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import DataRow from 'components/DataRow';
 import Button from 'components/Button';
 import ImageThumbnails from 'containers/ImageThumbnails';
+import ImageUploader from 'containers/ImageUploader';
 
 const Form = (props) => {
   const { handleSubmit, submitting, initialValues: instruction, label } = props;
+  const iProps = {
+    maxImages: 3,
+    imageable: {
+      type: 'Instruction',
+      id: instruction.get('id'),
+    },
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-rows">
@@ -23,12 +31,16 @@ const Form = (props) => {
           label="Description"
         />
         {instruction.get('id') &&
-          <ImageThumbnails
-            images={instruction.get('images')}
-            imageable={{ type: 'Instruction', id: instruction.get('id') }}
-            maxImages={5}
-            editable
-          />}
+          <div>
+            <div className="actions">
+              <ImageUploader {...iProps} label="Add image" />
+            </div>
+            <ImageThumbnails
+              images={instruction.get('images')}
+              {...iProps}
+              deletable
+            />
+          </div>}
         <footer className="p2 center">
           <Button
             type="submit"
