@@ -14,6 +14,8 @@ import {
   startCreateComment,
   startUpdateComment,
   startReplyComment,
+  startAnnotation,
+  createAnnotation,
 } from './actions';
 import * as selectors from './selectors';
 
@@ -67,6 +69,8 @@ export function mapDispatch(dispatch) {
       updateComment,
       deleteComment,
       switchComment,
+      startAnnotation,
+      createAnnotation,
     },
     dispatch
   );

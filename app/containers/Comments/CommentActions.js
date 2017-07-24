@@ -12,12 +12,20 @@ const CommentActions = (props) => {
       <div>
         <Button onclick={toggleEdit()} label="Edit" shy />
         <Button
+          shy
+          label="Remove"
           onclick={() => {
             props.deleteComment({ comment, commentable });
           }}
-          label="Remove"
-          shy
         />
+        {commentable.type === 'Project' &&
+          <Button
+            shy
+            label="Annotate image"
+            onclick={() => {
+              props.startAnnotation({ comment });
+            }}
+          />}
         {comment.get('images').size < props.maxImages &&
           <ImageUploader
             imageable={{ type: 'Comment', id: comment.get('id') }}
@@ -31,6 +39,7 @@ const CommentActions = (props) => {
 
 CommentActions.propTypes = {
   deleteComment: PropTypes.func,
+  startAnnotation: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
   maxImages: PropTypes.number,

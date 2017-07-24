@@ -37,3 +37,15 @@ export function startUpdateComment(payload) {
 export function startReplyComment(payload) {
   return { type: types.START_REPLY_COMMENT, payload };
 }
+
+export function startAnnotation(payload) {
+  return { type: types.START_ANNOTATION, payload };
+}
+
+export function createAnnotation(payload) {
+  return { type: types.CREATE_ANNOTATION, payload };
+}
+
+export function createAnnotationSuccess(response) {
+  return { type: types.CREATE_ANNOTATION_SUCCESS, response };
+}

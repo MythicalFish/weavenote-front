@@ -6,6 +6,7 @@ const initialState = fromJS({
   isCreating: false,
   isReplying: null,
   currentComment: null,
+  annotation: null,
 });
 
 function commentsReducer(state = initialState, action) {
@@ -17,6 +18,7 @@ function commentsReducer(state = initialState, action) {
         .set('isCreating', false)
         .set('isUpdating', null)
         .set('isReplying', null);
+
     case types.START_CREATE_COMMENT:
       return state
         .set('isCreating', true)
@@ -53,6 +55,9 @@ function commentsReducer(state = initialState, action) {
         .set('isCreating', false)
         .set('isUpdating', null)
         .set('isReplying', null);
+
+    case types.START_ANNOTATION:
+      return state.set('annotation', action.payload);
 
     default:
       return state;

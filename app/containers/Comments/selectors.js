@@ -13,3 +13,6 @@ export const isReplying = () =>
 
 export const currentComment = () =>
   createSelector(selectDomain(), (s) => s.get('currentComment'));
+
+export const commentAnnotation = () =>
+  createSelector(selectDomain(), (s) => s.get('annotation'));
