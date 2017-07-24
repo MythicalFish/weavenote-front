@@ -7,6 +7,7 @@ const CommentActions = (props) => {
   const toggleEdit = () => () => {
     props.editComment({ comment, commentable });
   };
+  const actionTarget = { type: 'Comment', id: comment.get('id') };
   return (
     <div className="actions">
       <div>
@@ -21,16 +22,13 @@ const CommentActions = (props) => {
         {commentable.type === 'Project' &&
           <Button
             shy
-            label="Annotate image"
+            label="Add annotation"
             onclick={() => {
-              props.startAnnotation({ comment });
+              props.startAnnotation(actionTarget);
             }}
           />}
         {comment.get('images').size < props.maxImages &&
-          <ImageUploader
-            imageable={{ type: 'Comment', id: comment.get('id') }}
-            label="Add image"
-          />}
+          <ImageUploader imageable={actionTarget} label="Add image" />}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
+import { startAnnotation } from 'containers/ProjectImages/actions';
 import Button from 'components/Button';
 import CommentForm from './CommentForm';
 import CommentWrapper from './CommentWrapper';
@@ -14,8 +15,6 @@ import {
   writeComment,
   editComment,
   writeReply,
-  startAnnotation,
-  createAnnotation,
 } from './actions';
 import * as selectors from './selectors';
 
@@ -70,7 +69,6 @@ export function mapDispatch(dispatch) {
       deleteComment,
       switchComment,
       startAnnotation,
-      createAnnotation,
     },
     dispatch
   );

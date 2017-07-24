@@ -6,10 +6,10 @@ import Image from 'components/Image';
 import ImageThumbnails from 'containers/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 import ImageForm from 'containers/ImageForm';
+import CurrentImage from './CurrentImage';
 import { PLACEHOLDER } from './constants';
-
-// console.log(e.nativeEvent.offsetX);
-// console.log(e.nativeEvent.offsetY);
+import * as selectors from './selectors';
+import { setAnnotation } from './actions';
 
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
@@ -22,14 +22,13 @@ class ProjectImages extends React.PureComponent {
   render() {
     const { project } = this.props;
     const { currentImage } = this.state;
-    console.log(currentImage);
     return (
       <div>
         {!currentImage && <Image src={PLACEHOLDER} />}
         {currentImage &&
           <div>
             <ImageForm initialValues={currentImage} {...this.props} />
-            <Image src={currentImage.getIn(['urls', 'medium'])} />
+            <CurrentImage {...{ currentImage, ...this.props }} />
           </div>}
         <div className="pt1">
           <div className="flex">
@@ -49,14 +48,14 @@ class ProjectImages extends React.PureComponent {
 
 ProjectImages.propTypes = {
   project: PropTypes.object,
-  images: PropTypes.object,
-  commentAnnotation: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ setAnnotation }, dispatch);
 }
 
-const mapState = createStructuredSelector({});
+const mapState = createStructuredSelector({
+  annotation: selectors.selectAnnotation(),
+});
 
 export default connect(mapState, mapDispatch)(ProjectImages);

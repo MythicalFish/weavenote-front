@@ -87,6 +87,8 @@ export default function createRoutes(store) {
           import('containers/ProjectComponents/sagas'),
           import('containers/ProjectMeasurements/reducer'),
           import('containers/ProjectMeasurements/sagas'),
+          import('containers/ProjectImages/reducer'),
+          import('containers/ProjectImages/sagas'),
           import('containers/ProjectManager'),
         ]);
 
@@ -103,6 +105,8 @@ export default function createRoutes(store) {
               pSagas,
               mReducer,
               mSagas,
+              piReducer,
+              piSagas,
               component,
             ]
           ) => {
@@ -110,10 +114,12 @@ export default function createRoutes(store) {
             injectReducer('ProjectInstructions', iReducer.default);
             injectReducer('ProjectComponents', pReducer.default);
             injectReducer('ProjectMeasurements', mReducer.default);
+            injectReducer('ProjectImages', piReducer.default);
             injectSagas(sagas.default);
             injectSagas(iSagas.default);
             injectSagas(pSagas.default);
             injectSagas(mSagas.default);
+            injectSagas(piSagas.default);
             renderRoute(component);
           }
         );

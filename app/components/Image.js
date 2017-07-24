@@ -5,7 +5,7 @@ const Image = (props) => {
     ...props,
   };
   return <img {...iProps} role="presentation" />;
-}
+};
 
 Image.propTypes = {
   src: PropTypes.string,
