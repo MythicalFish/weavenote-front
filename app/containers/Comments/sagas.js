@@ -10,8 +10,8 @@ export default [commentsWatcher];
 
 function* commentsWatcher() {
   const watcher = [
-    // yield takeLatest(types.START_CREATE_COMMENT, initializeForm),
-    yield takeLatest(types.START_UPDATE_COMMENT, initializeForm),
+    // yield takeLatest(types.WRITE_COMMENT, initializeForm),
+    yield takeLatest(types.EDIT_COMMENT, initializeForm),
     yield takeLatest(types.CREATE_COMMENT, createComment),
     yield takeLatest(types.UPDATE_COMMENT, updateComment),
     yield takeLatest(types.DELETE_COMMENT, deleteComment),

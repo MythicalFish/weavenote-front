@@ -5,7 +5,7 @@ import ImageUploader from 'containers/ImageUploader';
 const CommentActions = (props) => {
   const { comment, commentable } = props;
   const toggleEdit = () => () => {
-    props.startUpdateComment({ comment, commentable });
+    props.editComment({ comment, commentable });
   };
   return (
     <div className="actions">

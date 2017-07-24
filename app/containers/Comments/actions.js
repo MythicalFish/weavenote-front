@@ -28,14 +28,14 @@ export function deleteCommentSuccess(response) {
   return { type: types.DELETE_COMMENT_SUCCESS, response };
 }
 
-export function startCreateComment(payload) {
-  return { type: types.START_CREATE_COMMENT, payload };
+export function writeComment(payload) {
+  return { type: types.WRITE_COMMENT, payload };
 }
-export function startUpdateComment(payload) {
-  return { type: types.START_UPDATE_COMMENT, payload };
+export function editComment(payload) {
+  return { type: types.EDIT_COMMENT, payload };
 }
-export function startReplyComment(payload) {
-  return { type: types.START_REPLY_COMMENT, payload };
+export function writeReply(payload) {
+  return { type: types.WRITE_REPLY, payload };
 }
 
 export function startAnnotation(payload) {

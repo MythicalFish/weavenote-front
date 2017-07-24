@@ -5,7 +5,7 @@ import CommentForm from './CommentForm';
 class CommentNewReply extends React.PureComponent {
   startReply = () => {
     const { comment } = this.props;
-    this.props.startReplyComment({ comment });
+    this.props.writeReply({ comment });
   };
   render() {
     if (this.props.isOwnComment) return null;
@@ -28,7 +28,7 @@ class CommentNewReply extends React.PureComponent {
 CommentNewReply.propTypes = {
   isOwnComment: PropTypes.bool,
   isReplying: PropTypes.number,
-  startReplyComment: PropTypes.func,
+  writeReply: PropTypes.func,
   createComment: PropTypes.func,
   comment: PropTypes.object,
 };

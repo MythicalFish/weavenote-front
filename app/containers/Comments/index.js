@@ -11,9 +11,9 @@ import {
   updateComment,
   deleteComment,
   switchComment,
-  startCreateComment,
-  startUpdateComment,
-  startReplyComment,
+  writeComment,
+  editComment,
+  writeReply,
   startAnnotation,
   createAnnotation,
 } from './actions';
@@ -22,7 +22,7 @@ import * as selectors from './selectors';
 class Comments extends React.PureComponent {
   toggleNew = () => {
     const { commentable } = this.props;
-    this.props.startCreateComment({ commentable });
+    this.props.writeComment({ commentable });
   };
   render() {
     const { commentable, comments, isCreating } = this.props;
@@ -53,7 +53,7 @@ class Comments extends React.PureComponent {
 
 Comments.propTypes = {
   isCreating: PropTypes.bool,
-  startCreateComment: PropTypes.func,
+  writeComment: PropTypes.func,
   createComment: PropTypes.func,
   commentable: PropTypes.object,
   comments: PropTypes.object,
@@ -62,9 +62,9 @@ Comments.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      startCreateComment,
-      startUpdateComment,
-      startReplyComment,
+      writeComment,
+      editComment,
+      writeReply,
       createComment,
       updateComment,
       deleteComment,

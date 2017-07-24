@@ -19,20 +19,20 @@ function commentsReducer(state = initialState, action) {
         .set('isUpdating', null)
         .set('isReplying', null);
 
-    case types.START_CREATE_COMMENT:
+    case types.WRITE_COMMENT:
       return state
         .set('isCreating', true)
         .set('currentComment', null)
         .set('isUpdating', null)
         .set('isReplying', null);
 
-    case types.START_UPDATE_COMMENT:
+    case types.EDIT_COMMENT:
       return state
         .set('isCreating', false)
         .set('isUpdating', id(action))
         .set('isReplying', null);
 
-    case types.START_REPLY_COMMENT:
+    case types.WRITE_REPLY:
       return state
         .set('isCreating', false)
         .set('isUpdating', null)

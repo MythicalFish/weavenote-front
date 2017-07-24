@@ -1,8 +1,8 @@
 export const SWITCH_COMMENT = '@@app/SWITCH_COMMENT';
 
-export const START_REPLY_COMMENT = '@@app/START_REPLY_COMMENT';
-export const START_CREATE_COMMENT = '@@app/START_CREATE_COMMENT';
-export const START_UPDATE_COMMENT = '@@app/START_UPDATE_COMMENT';
+export const WRITE_REPLY = '@@app/WRITE_REPLY';
+export const WRITE_COMMENT = '@@app/WRITE_COMMENT';
+export const EDIT_COMMENT = '@@app/EDIT_COMMENT';
 
 export const CREATE_COMMENT = '@@app/CREATE_COMMENT';
 export const CREATE_COMMENT_SUCCESS = '@@app/CREATE_COMMENT_SUCCESS';
