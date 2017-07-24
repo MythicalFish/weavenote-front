@@ -29,7 +29,8 @@ const initialState = fromJS({
   },
   currentSection: sections.Default,
   materials: [],
-  currentModalID: null,
+  modalID: null,
+  modalImage: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -74,10 +75,13 @@ function appReducer(state = initialState, action) {
     // Modal
 
     case appActionTypes.OPEN_MODAL:
-      return state.set('currentModalID', action.id);
+      return state.set('modalID', action.id);
 
     case appActionTypes.CLOSE_MODAL:
-      return state.set('currentModalID', null);
+      return state.set('modalID', null);
+
+    case appActionTypes.OPEN_IMAGE:
+      return state.set('modalID', 'image').set('modalImage', action.image);
 
     default:
       return state;

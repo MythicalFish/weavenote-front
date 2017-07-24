@@ -6,7 +6,7 @@ import * as sections from 'containers/App/constants/sections';
 import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection, openModal } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
-import ImageManager from 'containers/ImageManager';
+import ProjectImages from 'containers/ProjectImages';
 import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
 import Comments from 'containers/Comments';
@@ -17,7 +17,6 @@ import Toolbar from './subcomponents/Toolbar';
 import ProjectBasics from './subcomponents/ProjectBasics';
 import * as selectors from './selectors';
 import { fetchProject, updateProject } from './actions';
-import { IMAGE_PLACEHOLDER } from './constants';
 
 class ProjectManager extends React.PureComponent {
   componentDidMount() {
@@ -68,17 +67,14 @@ class ProjectManager extends React.PureComponent {
               </div>
               <div className="col-xs-6 col-md-5 flex justify-center">
                 <div className="flex flex-column items-center lh0">
-                  <ImageManager
+                  <ProjectImages
                     images={project.get('images')}
                     imageable={{
                       type: 'Project',
                       id,
                     }}
                     maxImages={5}
-                    allowEdit
-                    showUploader
-                    currentImage={this.props.currentImage}
-                    placeholder={IMAGE_PLACEHOLDER}
+                    editable
                   />
                 </div>
               </div>
@@ -88,7 +84,7 @@ class ProjectManager extends React.PureComponent {
             </div>
           </div>
         </div>
-        <Modal modalID="collaborators" minWidth="600px">
+        <Modal id="collaborators" minWidth="600px">
           <header>
             {`Collaborators for ${project.get('name')}`}
           </header>
@@ -104,7 +100,6 @@ class ProjectManager extends React.PureComponent {
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
   comments: React.PropTypes.object,
-  currentImage: React.PropTypes.object,
   currentSection: React.PropTypes.object,
   changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
@@ -122,7 +117,6 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   comments: selectors.selectComments(),
   project: selectors.selectProject(),
-  currentImage: selectors.selectCurrentImage(),
   currentSection: selectCurrentSection(),
 });
 

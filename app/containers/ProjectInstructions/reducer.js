@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import * as iTypes from 'containers/ImageManager/constants';
+import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
 import { forInstruction } from 'utils/reducerHelpers';
 import * as types from './constants';
 
@@ -43,7 +43,7 @@ function instructionReducer(state = initialState, action) {
 
     // Images
 
-    case iTypes.CREATE_IMAGE_SUCCESS:
+    case CREATE_IMAGE_SUCCESS:
       return state.setIn(
         ['instructions', currentInstruction, 'images'],
         fromJS(action.response.images)

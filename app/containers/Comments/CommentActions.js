@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
-import ImageUploader from 'containers/ImageManager/ImageUploader';
+import ImageUploader from 'containers/ImageUploader';
 
 const CommentActions = (props) => {
   const { comment, commentable } = props;

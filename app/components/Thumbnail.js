@@ -1,10 +1,10 @@
 import React from 'react';
-import { IMAGE_PLACEHOLDER } from 'containers/ProjectManager/constants';
+import { PLACEHOLDER } from 'containers/ProjectImages/constants';
 
 const Thumbnail = (props) => {
   let url = props.url;
   if (!url) {
-    url = IMAGE_PLACEHOLDER;
+    url = PLACEHOLDER;
   }
   return (
     <div className="thumbnail">

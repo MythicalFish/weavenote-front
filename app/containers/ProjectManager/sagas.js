@@ -5,7 +5,6 @@ import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
 import * as types from './constants';
 import * as actions from './actions';
-import * as imgActions from '../ImageManager/constants';
 import * as selectors from './selectors';
 
 export default [projectManagerWatcher, materialListWatcher];
@@ -16,9 +15,9 @@ export function* projectManagerWatcher() {
     yield takeLatest(types.UPDATE_PROJECT, updateProject),
     yield takeLatest(types.FETCH_MATERIAL_COST, fetchMaterialCost),
 
-    yield takeLatest(imgActions.SWITCH_IMAGE, resetImageForm),
-    yield takeLatest(imgActions.DELETE_IMAGE_SUCCESS, resetImageForm),
-    yield takeLatest(imgActions.CREATE_IMAGE_SUCCESS, resetImageForm),
+    //    yield takeLatest(imgActions.SWITCH_IMAGE, resetImageForm),
+    //    yield takeLatest(imgActions.DELETE_IMAGE_SUCCESS, resetImageForm),
+    //    yield takeLatest(imgActions.CREATE_IMAGE_SUCCESS, resetImageForm),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -45,7 +44,7 @@ function* updateProject(action) {
   );
 }
 
-function* resetImageForm() {
-  const i = yield select(selectors.selectCurrentImage());
-  yield put(initialize('ImageForm', i, { form: 'ImageForm' }));
-}
+// function* resetImageForm() {
+//   const i = yield select(selectors.selectCurrentImage());
+//   yield put(initialize('ImageForm', i, { form: 'ImageForm' }));
+// }

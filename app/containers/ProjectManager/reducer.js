@@ -1,5 +1,7 @@
 import { fromJS } from 'immutable';
-import * as iTypes from 'containers/ImageManager/constants';
+import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
+import { DELETE_IMAGE_SUCCESS } from 'containers/ImageThumbnails/constants';
+import { UPDATE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
 import * as cTypes from 'containers/Comments/constants';
 import * as types from './constants';
 import { setImages } from './reducerHelpers';
@@ -41,21 +43,14 @@ function projectReducer(state = initialState, action) {
 
     // Images
 
-    case iTypes.CREATE_IMAGE_SUCCESS:
+    case CREATE_IMAGE_SUCCESS:
       return setImages(state, action, imageCount(state));
 
-    case iTypes.DELETE_IMAGE_SUCCESS:
+    case DELETE_IMAGE_SUCCESS:
       return setImages(state, action, imageCount(state) - 2);
 
-    case iTypes.UPDATE_IMAGE_SUCCESS:
+    case UPDATE_IMAGE_SUCCESS:
       return setImages(state, action);
-
-    case iTypes.SWITCH_IMAGE:
-      if (payload.reducer === 'Project') {
-        return state.set('currentImage', action.payload.index);
-      } else {
-        return state;
-      }
 
     // Comments
 

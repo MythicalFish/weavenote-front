@@ -61,5 +61,8 @@ export const makeSelectLocationState = () => {
   };
 };
 
-export const selectCurrentModalID = () =>
-  createSelector(selectDomain(), (s) => s.get('currentModalID'));
+export const selectModalID = () =>
+  createSelector(selectDomain(), (s) => s.get('modalID'));
+
+export const selectModalImage = () =>
+  createSelector(selectDomain(), (s) => s.get('modalImage'));

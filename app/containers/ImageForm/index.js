@@ -3,13 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
-import Glyph from 'components/Glyph';
 import Input from 'components/Input';
-import { deleteImage, updateImage } from './actions';
+import { updateImage } from './actions';
 
 const ImageForm = (props) => {
-  const { handleSubmit, currentImage, imageable } = props;
-  const id = currentImage.get('id');
+  const { handleSubmit, imageable, initialValues } = props;
+  const id = initialValues.get('id');
   const onSubmit = (image) => {
     props.updateImage({ imageable, image });
   };
@@ -31,14 +30,7 @@ const ImageForm = (props) => {
           />
         </div>
       </div>
-      <div className="col-xs-2">
-        <Glyph
-          icon="trash-o"
-          onClick={() => {
-            props.deleteImage({ imageable, image: { id } });
-          }}
-        />
-      </div>
+      <div className="col-xs-2" />
     </form>
   );
 };
@@ -46,16 +38,12 @@ const ImageForm = (props) => {
 ImageForm.propTypes = {
   handleSubmit: PropTypes.func,
   imageable: PropTypes.object,
-  currentImage: PropTypes.object,
-  deleteImage: PropTypes.func,
+  initialValues: PropTypes.object,
   updateImage: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
-  const boundActions = bindActionCreators(
-    { updateImage, deleteImage },
-    dispatch
-  );
+  const boundActions = bindActionCreators({ updateImage }, dispatch);
   return {
     ...boundActions,
   };

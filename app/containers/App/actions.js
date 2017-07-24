@@ -55,3 +55,7 @@ export function openModal(id) {
 export function closeModal() {
   return { type: types.CLOSE_MODAL };
 }
+
+export function openImage(image) {
+  return { type: types.OPEN_IMAGE, image };
+}

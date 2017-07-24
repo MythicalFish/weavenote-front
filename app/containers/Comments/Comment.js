@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Avatar from 'components/Avatar';
-import ThumbnailList from 'containers/ImageManager/ThumbnailList';
+import ImageThumbnails from 'containers/ImageThumbnails';
 import CommentForm from './CommentForm';
 import CommentActions from './CommentActions';
 
@@ -37,13 +37,11 @@ class Comment extends React.PureComponent {
               !isUpdating &&
               <CommentActions {...this.props} />}
             {isSelected &&
-              <ThumbnailList
+              <ImageThumbnails
                 images={comment.get('images')}
                 imageable={{ type: 'Comment', id }}
                 maxImages={this.props.maxImages}
-                type="modal"
-                allowEdit={isOwnComment}
-                id={`Comment${id}`}
+                editable={isOwnComment}
               />}
           </div>
         </div>

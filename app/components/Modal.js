@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Portal from 'react-portal';
 import { closeModal } from 'containers/App/actions';
-import { selectCurrentModalID } from 'containers/App/selectors';
+import { selectModalID } from 'containers/App/selectors';
 
 const PseudoModal = (props) => {
   const p = props;
@@ -38,8 +38,8 @@ class Modal extends React.PureComponent {
   };
 
   render() {
-    const { modalID, currentModalID } = this.props;
-    const isOpened = currentModalID === modalID;
+    const { modalID, id } = this.props;
+    const isOpened = modalID === id;
     return (
       <Portal
         isOpened={isOpened}
@@ -57,9 +57,8 @@ class Modal extends React.PureComponent {
 
 Modal.propTypes = {
   children: PropTypes.node,
-  minWidth: PropTypes.string,
   modalID: PropTypes.string,
-  currentModalID: PropTypes.string,
+  id: PropTypes.string,
   closeModal: PropTypes.func,
 };
 
@@ -68,7 +67,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  currentModalID: selectCurrentModalID(),
+  modalID: selectModalID(),
 });
 
 export default connect(mapState, mapDispatch)(Modal);

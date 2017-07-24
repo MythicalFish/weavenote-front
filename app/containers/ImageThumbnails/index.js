@@ -3,15 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Thumbnail from 'components/Thumbnail';
-import Modal from 'components/Modal';
-import Image from 'components/Image';
-import { openModal } from 'containers/App/actions';
-import ImageUploader from './ImageUploader';
-import { switchImage } from './actions';
-import { selectModalImage } from './selectors';
+import { openImage } from 'containers/App/actions';
+import ImageUploader from 'containers/ImageUploader';
 
-function ThumbnailList(props) {
-  const { images, currentImage, type, id, modalImage } = props;
+const ImageThumbnails = (props) => {
+  const { images, currentImage } = props;
   const thumbnails = [];
   images.forEach((image, index) => {
     const count = index + 1;
@@ -28,12 +24,11 @@ function ThumbnailList(props) {
         <button
           type="button"
           onClick={() => {
-            if (type === 'modal') props.openModal(id);
-            props.switchImage({
-              index,
-              image,
-              reducer: props.imageable.type,
-            });
+            if (props.onSelect) {
+              props.onSelect(image);
+            } else {
+              props.openImage(image);
+            }
           }}
         >
           <Thumbnail url={image.getIn(['urls', 'tiny'])} />
@@ -46,44 +41,32 @@ function ThumbnailList(props) {
       <ul className="thumbnails">
         {thumbnails}
         {images.size < props.maxImages &&
-          props.allowEdit &&
-          props.showUploader &&
+          props.editable &&
           <li>
-            <ImageUploader {...props} />
+            <ImageUploader imageable={props.imageable} />
           </li>}
       </ul>
-      <Modal modalID={id}>
-        <div className="lh0">
-          {modalImage && <Image src={modalImage.getIn(['urls', 'large'])} />}
-        </div>
-      </Modal>
     </div>
   );
-}
+};
 
-ThumbnailList.propTypes = {
-  modalImage: PropTypes.object,
+ImageThumbnails.propTypes = {
   images: PropTypes.object,
   currentImage: PropTypes.object,
   maxImages: PropTypes.number,
-  type: PropTypes.string,
-  id: PropTypes.string,
-  allowEdit: PropTypes.bool,
-  showUploader: PropTypes.bool,
+  editable: PropTypes.bool,
+  imageable: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      openModal,
-      switchImage,
+      openImage,
     },
     dispatch
   );
 }
 
-const mapState = createStructuredSelector({
-  modalImage: selectModalImage(),
-});
+const mapState = createStructuredSelector({});
 
-export default connect(mapState, mapDispatch)(ThumbnailList);
+export default connect(mapState, mapDispatch)(ImageThumbnails);
