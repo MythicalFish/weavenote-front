@@ -1,7 +1,11 @@
 import * as types from './constants';
 
-export function startAnnotation(payload) {
-  return { type: types.START_ANNOTATION, payload };
+export function addAnnotation(payload) {
+  return { type: types.ADD_ANNOTATION, payload };
+}
+
+export function cancelAnnotation() {
+  return { type: types.CANCEL_ANNOTATION };
 }
 
 export function createAnnotation(payload) {

@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
-import { startAnnotation } from 'containers/ProjectImages/actions';
+import {
+  addAnnotation,
+  cancelAnnotation,
+} from 'containers/ProjectImages/actions';
+import { selectAnnotation } from 'containers/ProjectImages/selectors';
 import Button from 'components/Button';
 import CommentForm from './CommentForm';
 import CommentWrapper from './CommentWrapper';
@@ -15,6 +19,7 @@ import {
   writeComment,
   editComment,
   writeReply,
+  cancelCommentAction,
 } from './actions';
 import * as selectors from './selectors';
 
@@ -43,8 +48,9 @@ class Comments extends React.PureComponent {
           ? <CommentForm
             onSubmit={this.props.createComment}
             initialValues={{ commentable }}
+            {...cProps}
           />
-          : <Button label="Leave a comment" inline onclick={this.toggleNew} />}
+          : <Button label="Leave a comment" inline onClick={this.toggleNew} />}
       </div>
     );
   }
@@ -68,7 +74,9 @@ export function mapDispatch(dispatch) {
       updateComment,
       deleteComment,
       switchComment,
-      startAnnotation,
+      cancelCommentAction,
+      addAnnotation,
+      cancelAnnotation,
     },
     dispatch
   );
@@ -76,8 +84,9 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   user: selectUser(),
+  annotation: selectAnnotation(),
   isCreating: selectors.isCreating(),
-  isUpdating: selectors.isUpdating(),
+  isEditing: selectors.isEditing(),
   isReplying: selectors.isReplying(),
   currentComment: selectors.currentComment(),
 });

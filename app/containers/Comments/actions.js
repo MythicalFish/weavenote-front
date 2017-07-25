@@ -4,6 +4,10 @@ export function switchComment(payload) {
   return { type: types.SWITCH_COMMENT, payload };
 }
 
+export function cancelCommentAction() {
+  return { type: types.CANCEL_COMMENT_ACTION };
+}
+
 export function createComment(payload) {
   return { type: types.CREATE_COMMENT, payload };
 }

@@ -7,21 +7,27 @@ class CommentForm extends React.PureComponent {
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
-        <Field
-          name="comment[text]"
-          type="textarea"
-          component={Input}
-          focus
-          onEnterKey={handleSubmit}
-        />
-      </form>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <Field
+            name="comment[text]"
+            type="textarea"
+            component={Input}
+            focus
+            onEnterKey={handleSubmit}
+          />
+        </form>
+        <div className="actions p1">
+          <Button onClick={this.props.cancelCommentAction} label="Cancel" />
+        </div>
+      </div>
     );
   }
 }
 
 CommentForm.propTypes = {
   handleSubmit: PropTypes.func,
+  cancelCommentAction: PropTypes.func,
   submitting: PropTypes.bool,
 };
 

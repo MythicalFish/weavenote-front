@@ -7,10 +7,12 @@ const initialState = fromJS({
 
 function projectImagesReducer(state = initialState, action) {
   switch (action.type) {
-    case types.START_ANNOTATION:
-      return state.set('annotation', { annotable: action.payload });
+    case types.ADD_ANNOTATION:
+      return state.set('annotation', fromJS({ annotable: action.payload }));
+    case types.CANCEL_ANNOTATION:
+      return state.set('annotation', null);
     case types.SET_ANNOTATION:
-      return state.set('annotation', { position: action.payload });
+      return state.setIn(['annotation', 'position'], action.payload);
     default:
       return state;
   }

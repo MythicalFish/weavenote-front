@@ -18,6 +18,7 @@ class CommentNewReply extends React.PureComponent {
             initialValues={{
               commentable: { type: 'Comment', id: comment.get('id') },
             }}
+            {...this.props}
           />
           : <Button onClick={this.startReply} label="Reply" footer />}
       </div>

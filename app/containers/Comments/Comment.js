@@ -12,7 +12,7 @@ class Comment extends React.PureComponent {
   render() {
     const { comment, commentable, isSelected, className } = this.props;
     const id = comment.get('id');
-    const isUpdating = this.props.isUpdating === id;
+    const isEditing = this.props.isEditing === id;
     const isOwnComment = this.isOwnComment();
     const authorName = isOwnComment ? 'You' : comment.getIn(['user', 'name']);
     return (
@@ -26,15 +26,16 @@ class Comment extends React.PureComponent {
               <div className="bold">
                 {authorName}
               </div>}
-            {isUpdating
+            {isEditing
               ? <CommentForm
                 onSubmit={this.props.updateComment}
                 initialValues={{ commentable, comment }}
+                {...this.props}
               />
               : comment.get('text')}
             {isSelected &&
               isOwnComment &&
-              !isUpdating &&
+              !isEditing &&
               <CommentActions {...this.props} />}
             {isSelected &&
               <ImageThumbnails
@@ -52,7 +53,7 @@ class Comment extends React.PureComponent {
 
 Comment.propTypes = {
   isSelected: PropTypes.bool,
-  isUpdating: PropTypes.number,
+  isEditing: PropTypes.number,
   updateComment: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,

@@ -7,10 +7,11 @@ export default class Input extends React.PureComponent {
       this.nameInput.focus();
     }
   }
-  handleKeyPress = (target) => {
+  handleKeyPress = (target, e) => {
     const { onEnterKey } = this.props;
     if (onEnterKey && target.charCode === 13 && !target.shiftKey) {
       onEnterKey();
+      e.preventDefault();
     }
   };
   render() {

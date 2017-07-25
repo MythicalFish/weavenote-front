@@ -3,42 +3,49 @@ import Button from 'components/Button';
 import ImageUploader from 'containers/ImageUploader';
 
 const CommentActions = (props) => {
-  const { comment, commentable } = props;
-  const toggleEdit = () => () => {
+  const { comment, commentable, annotation } = props;
+  const toggleEdit = () => {
     props.editComment({ comment, commentable });
   };
   const actionTarget = { type: 'Comment', id: comment.get('id') };
   return (
     <div className="actions">
-      <div>
-        <Button onclick={toggleEdit()} label="Edit" shy />
-        <Button
-          shy
-          label="Remove"
-          onclick={() => {
-            props.deleteComment({ comment, commentable });
-          }}
-        />
-        {commentable.type === 'Project' &&
+      {!annotation &&
+        <div>
+          <Button onClick={toggleEdit} label="Edit" />
           <Button
-            shy
-            label="Add annotation"
-            onclick={() => {
-              props.startAnnotation(actionTarget);
+            label="Remove"
+            onClick={() => {
+              props.deleteComment({ comment, commentable });
             }}
-          />}
-        {comment.get('images').size < props.maxImages &&
-          <ImageUploader imageable={actionTarget} label="Add image" />}
-      </div>
+          />
+          {commentable.type === 'Project' &&
+            <Button
+              label="Add annotation"
+              onClick={() => {
+                props.addAnnotation(actionTarget);
+                props.cancelCommentAction();
+              }}
+            />}
+          {comment.get('images').size < props.maxImages &&
+            <ImageUploader imageable={actionTarget} label="Add image" />}
+        </div>}
+      {annotation &&
+        <div>
+          <div>Currently annotating</div>
+          <Button onClick={props.cancelAnnotation} label="Cancel" />
+        </div>}
     </div>
   );
 };
 
 CommentActions.propTypes = {
-  deleteComment: PropTypes.func,
-  startAnnotation: PropTypes.func,
+  addAnnotation: PropTypes.func,
+  cancelAnnotation: PropTypes.func,
+  cancelCommentAction: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
+  annotation: PropTypes.object,
   maxImages: PropTypes.number,
 };
 

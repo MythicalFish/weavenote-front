@@ -1,42 +1,26 @@
 import React, { PropTypes } from 'react';
 import Image from 'components/Image';
-import { Layer, Rect, Stage, Group } from 'react-konva';
+import Canvas from 'components/Canvas';
+import Dot from 'components/CanvasDot';
 
 class CurrentImage extends React.Component {
+  onClickCanvas = (e) => {
+    this.props.setAnnotation({ x: e.evt.offsetX, y: e.evt.offsetY });
+  };
   render() {
-    const { currentImage, annotation, setAnnotation } = this.props;
-    const iProps = {
-      src: currentImage.getIn(['urls', 'medium']),
-    };
-    const Overlay = () =>
-      <Rect
-        width={1000}
-        height={1000}
-        onClick={(e) => {
-          setAnnotation({ x: e.evt.offsetX, y: e.evt.offsetY });
-        }}
-      />;
-    let Dot = null;
-    if (annotation) {
-      iProps.className = annotation ? 'cursor-crosshair' : '';
-      if (annotation.position) {
-        const pos = annotation.position;
-        Dot = () =>
-          <Rect x={pos.x} y={pos.y} width={10} height={10} fill="blue" />;
-      }
+    const { currentImage, annotation } = this.props;
+    const src = currentImage.getIn(['urls', 'medium']);
+    let position;
+    if (annotation && annotation.get('position')) {
+      position = annotation.get('position');
     }
     return (
       <div className="canvas-container">
-        <Image {...iProps} />
+        <Image {...{ src }} />
         {annotation &&
-          <div className="canvas cursor-crosshair">
-            <Stage width={1000} height={1000}>
-              <Layer>
-                <Overlay />
-                {Dot && <Dot />}
-              </Layer>
-            </Stage>
-          </div>}
+          <Canvas onClick={this.onClickCanvas}>
+            {position && <Dot {...{ position }} />}
+          </Canvas>}
       </div>
     );
   }
