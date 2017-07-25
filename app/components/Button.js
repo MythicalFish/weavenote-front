@@ -4,7 +4,6 @@ export default function Button(props) {
   const type = props.type || 'button';
   const disabled = props.disabled || false;
   const label = props.label || null;
-  const onclick = props.onclick || null;
   let className = props.className || 'btn';
   if (props.small) {
     className += ' btn-sm';
@@ -28,7 +27,7 @@ export default function Button(props) {
       className={className}
       type={type}
       disabled={disabled}
-      onClick={onclick}
+      onClick={props.onClick}
     >
       {props.icon && <i className={`fa fa-${props.icon} mr1`} />}
       {label}
@@ -47,7 +46,6 @@ Button.propTypes = {
   glyph: React.PropTypes.bool,
   footer: React.PropTypes.bool,
   label: React.PropTypes.string,
-  color: React.PropTypes.string,
   disabled: React.PropTypes.bool,
-  onclick: React.PropTypes.func,
+  onClick: React.PropTypes.func,
 };

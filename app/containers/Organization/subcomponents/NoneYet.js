@@ -13,7 +13,7 @@ const NoneYet = (props) =>
     <div className="mt3">
       <Button
         label="Create an organization"
-        onclick={props.onClick}
+        onClick={props.onClick}
         icon="plus"
         lg
       />

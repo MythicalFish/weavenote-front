@@ -23,7 +23,7 @@ class Settings extends React.PureComponent {
             <div className="bg-white p2 mt2">
               <h4>Password</h4>
               <Button
-                onclick={dispatch(requestPassword())}
+                onClick={dispatch(requestPassword())}
                 label="Reset your password"
               />
             </div>

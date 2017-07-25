@@ -19,7 +19,7 @@ class CommentNewReply extends React.PureComponent {
               commentable: { type: 'Comment', id: comment.get('id') },
             }}
           />
-          : <Button onclick={this.startReply} label="Reply" footer />}
+          : <Button onClick={this.startReply} label="Reply" footer />}
       </div>
     );
   }
