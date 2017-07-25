@@ -49,9 +49,6 @@ function projectReducer(state = initialState, action) {
     case DELETE_IMAGE_SUCCESS:
       return setImages(state, action, imageCount(state) - 2);
 
-    case UPDATE_IMAGE_SUCCESS:
-      return setImages(state, action);
-
     // Comments
 
     case cTypes.CREATE_COMMENT_SUCCESS:

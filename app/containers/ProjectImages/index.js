@@ -22,12 +22,13 @@ class ProjectImages extends React.PureComponent {
   render() {
     const { project } = this.props;
     const { currentImage } = this.state;
+    const imageable = { type: 'Project', id: project.get('id') };
     return (
       <div>
         {!currentImage && <Image src={PLACEHOLDER} />}
         {currentImage &&
           <div>
-            <ImageForm initialValues={currentImage} {...this.props} />
+            <ImageForm initialValues={currentImage} {...{ imageable }} />
             <CurrentImage {...{ currentImage, ...this.props }} />
           </div>}
         <div className="pt1">
@@ -36,9 +37,7 @@ class ProjectImages extends React.PureComponent {
               images={project.get('images')}
               onSelect={this.selectImage}
             />
-            <ImageUploader
-              imageable={{ type: 'Project', id: project.get('id') }}
-            />
+            <ImageUploader {...{ imageable }} />
           </div>
         </div>
       </div>
