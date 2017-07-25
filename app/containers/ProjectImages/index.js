@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { initialize } from 'redux-form';
 import Image from 'components/Image';
 import ImageThumbnails from 'containers/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
@@ -18,6 +19,7 @@ class ProjectImages extends React.PureComponent {
   };
   selectImage = (image) => {
     this.setState({ currentImage: image });
+    this.props.initialize('ImageForm', image, { form: 'ImageForm' });
   };
   render() {
     const { project } = this.props;
@@ -36,6 +38,7 @@ class ProjectImages extends React.PureComponent {
             <ImageThumbnails
               images={project.get('images')}
               onSelect={this.selectImage}
+              {...{ currentImage }}
             />
             <ImageUploader {...{ imageable }} />
           </div>
@@ -47,10 +50,11 @@ class ProjectImages extends React.PureComponent {
 
 ProjectImages.propTypes = {
   project: PropTypes.object,
+  initialize: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators({ setAnnotation }, dispatch);
+  return bindActionCreators({ setAnnotation, initialize }, dispatch);
 }
 
 const mapState = createStructuredSelector({
