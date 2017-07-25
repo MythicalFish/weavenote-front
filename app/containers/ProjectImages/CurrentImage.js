@@ -8,26 +8,35 @@ class CurrentImage extends React.Component {
     const iProps = {
       src: currentImage.getIn(['urls', 'medium']),
     };
-    let Dot = <Rect x={10} y={10} width={10} height={10} fill="blue" />;
+    const Overlay = () =>
+      <Rect
+        width={1000}
+        height={1000}
+        onClick={(e) => {
+          setAnnotation({ x: e.evt.offsetX, y: e.evt.offsetY });
+        }}
+      />;
+    let Dot = null;
     if (annotation) {
       iProps.className = annotation ? 'cursor-crosshair' : '';
-      iProps.onClick = (c) => {
-        const e = c.nativeEvent;
-        setAnnotation({ x: e.offsetX, y: e.offsetY });
-      };
       if (annotation.position) {
         const pos = annotation.position;
-        Dot = <Rect x={pos.x} y={pos.y} width={10} height={10} fill="blue" />;
+        Dot = () =>
+          <Rect x={pos.x} y={pos.y} width={10} height={10} fill="blue" />;
       }
     }
     return (
       <div className="canvas-container">
         <Image {...iProps} />
-        <div className="canvas">
-          <Stage>
-            <Layer />
-          </Stage>
-        </div>
+        {annotation &&
+          <div className="canvas cursor-crosshair">
+            <Stage width={1000} height={1000}>
+              <Layer>
+                <Overlay />
+                {Dot && <Dot />}
+              </Layer>
+            </Stage>
+          </div>}
       </div>
     );
   }
