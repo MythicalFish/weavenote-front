@@ -12,7 +12,7 @@ const PseudoModal = (props) => {
   if (p.minWidth) style.minWidth = p.minWidth;
   return (
     <div className={`modal ${p.modalClass}`}>
-      <div className="modal-bg" onClick={p.closePortal} />
+      <div onClick={p.closePortal} />
       <div className="modal-content" style={style}>
         {p.children}
       </div>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
+import { bringFocus } from 'containers/App/actions';
 import {
   addAnnotation,
   cancelAnnotation,
@@ -77,6 +78,7 @@ export function mapDispatch(dispatch) {
       cancelCommentAction,
       addAnnotation,
       cancelAnnotation,
+      bringFocus,
     },
     dispatch
   );

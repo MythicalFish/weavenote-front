@@ -7,7 +7,7 @@ import UserMenu from 'components/UserMenu';
 export default function Toolbar(props) {
   const { changeSection, currentSection, openModal } = props;
   return (
-    <header className="toolbar">
+    <header className="toolbar blurrable">
       <nav>
         <ul>
           <li>

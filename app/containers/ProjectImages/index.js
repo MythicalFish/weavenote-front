@@ -7,6 +7,7 @@ import Image from 'components/Image';
 import ImageThumbnails from 'containers/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 import ImageForm from 'containers/ImageForm';
+import { selectFocus } from 'containers/App/selectors';
 import CurrentImage from './CurrentImage';
 import { PLACEHOLDER } from './constants';
 import * as selectors from './selectors';
@@ -30,18 +31,18 @@ class ProjectImages extends React.PureComponent {
         {!currentImage && <Image src={PLACEHOLDER} />}
         {currentImage &&
           <div>
-            <ImageForm initialValues={currentImage} {...{ imageable }} />
+            <div className="blurrable">
+              <ImageForm initialValues={currentImage} {...{ imageable }} />
+            </div>
             <CurrentImage {...{ currentImage, ...this.props }} />
           </div>}
-        <div className="pt1">
-          <div className="flex">
-            <ImageThumbnails
-              images={project.get('images')}
-              onSelect={this.selectImage}
-              {...{ currentImage }}
-            />
-            <ImageUploader {...{ imageable }} />
-          </div>
+        <div className="pt1 flex blurrable">
+          <ImageThumbnails
+            images={project.get('images')}
+            onSelect={this.selectImage}
+            {...{ currentImage }}
+          />
+          <ImageUploader {...{ imageable }} />
         </div>
       </div>
     );
@@ -59,6 +60,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   annotation: selectors.selectAnnotation(),
+  focus: selectFocus(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectImages);

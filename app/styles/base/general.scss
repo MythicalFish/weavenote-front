@@ -1,11 +1,13 @@
 * {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  outline: none!important;
+  outline: none !important;
 }
-html, body {
+html,
+body {
   overflow-x: hidden;
   margin: 0;
+  height: 100%;
 }
 svg {
   fill: inherit;

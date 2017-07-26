@@ -31,6 +31,7 @@ const initialState = fromJS({
   materials: [],
   modalID: null,
   modalImage: null,
+  focus: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -82,6 +83,12 @@ function appReducer(state = initialState, action) {
 
     case appActionTypes.OPEN_IMAGE:
       return state.set('modalID', 'image').set('modalImage', action.image);
+
+    case appActionTypes.BRING_FOCUS:
+      return state.set('focus', action.id);
+
+    case appActionTypes.HIDE_FOCUS:
+      return state.set('focus', null);
 
     default:
       return state;

@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import Notification from 'containers/Notification';
 import Gateway from './subcomponents/Gateway';
 import ModalImage from './subcomponents/ModalImage';
+import Focus from './subcomponents/Focus';
 import * as selectors from './selectors';
 
 class App extends React.PureComponent {
@@ -12,7 +13,9 @@ class App extends React.PureComponent {
     const { location, modalImage } = this.props;
     return (
       <Gateway {...{ location }}>
-        {this.props.children}
+        <Focus {...this.props}>
+          {this.props.children}
+        </Focus>
         <Notification />
         <ModalImage image={modalImage} />
       </Gateway>
@@ -31,7 +34,9 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
+  modalID: selectors.selectModalID(),
   modalImage: selectors.selectModalImage(),
+  focus: selectors.selectFocus(),
 });
 
 export default connect(mapState, mapDispatch)(App);

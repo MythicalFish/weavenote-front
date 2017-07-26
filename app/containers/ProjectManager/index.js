@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
-import { selectCurrentSection } from 'containers/App/selectors';
+import { selectCurrentSection, selectFocus } from 'containers/App/selectors';
 import { changeSection, openModal } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
@@ -59,7 +59,7 @@ class ProjectManager extends React.PureComponent {
         <div className="p2 bg-white">
           <div className="container-wide">
             <div className="row">
-              <div className="col-xs-12 last-xs first-md col-md-3">
+              <div className="col-xs-12 last-xs first-md col-md-3 blurrable">
                 <Comments
                   comments={this.props.comments}
                   commentable={{ type: 'Project', id }}
@@ -70,7 +70,7 @@ class ProjectManager extends React.PureComponent {
                   <ProjectImages project={project} />
                 </div>
               </div>
-              <div className="col-xs-6 col-md-4 flex justify-center">
+              <div className="col-xs-6 col-md-4 flex justify-center blurrable">
                 <View {...viewProps} />
               </div>
             </div>
@@ -108,6 +108,7 @@ const mapState = createStructuredSelector({
   comments: selectors.selectComments(),
   project: selectors.selectProject(),
   currentSection: selectCurrentSection(),
+  focus: selectFocus(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

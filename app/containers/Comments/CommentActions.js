@@ -10,7 +10,7 @@ const CommentActions = (props) => {
   const id = comment.get('id');
   const actionable = { type: 'Comment', id };
   const annotating =
-    annotation.get('type') && annotation.getIn(['annotatable', 'id']) === id;
+    annotation.get('type') && annotation.get('annotatable').id === id;
   return (
     <div className="actions">
       {!annotating &&
@@ -27,6 +27,7 @@ const CommentActions = (props) => {
               label="Add annotation"
               onClick={() => {
                 props.addAnnotation({ type: 'dot', annotatable: actionable });
+                props.bringFocus('annotation');
                 props.cancelCommentAction();
               }}
             />}
@@ -43,6 +44,7 @@ const CommentActions = (props) => {
 };
 
 CommentActions.propTypes = {
+  bringFocus: PropTypes.func,
   addAnnotation: PropTypes.func,
   cancelAnnotation: PropTypes.func,
   cancelCommentAction: PropTypes.func,
