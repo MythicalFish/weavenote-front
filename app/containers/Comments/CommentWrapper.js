@@ -4,7 +4,6 @@ import CommentNewReply from './CommentNewReply';
 import Comment from './Comment';
 
 class CommentWrapper extends React.PureComponent {
-  commentClass = () => `comment-wrapper${this.isSelected() ? ' selected' : ''}`;
   switchComment = () => {
     const { comment } = this.props;
     if (!this.isSelected()) {
@@ -15,16 +14,22 @@ class CommentWrapper extends React.PureComponent {
     const { currentComment, comment } = this.props;
     return currentComment === comment.get('id');
   };
+  isAnnotating = () => {
+    const { annotation, comment } = this.props;
+    const a = annotation.get('annotatable');
+    return a && a.id === comment.get('id');
+  };
   render() {
     const isSelected = this.isSelected();
-
+    const blurClass = this.isAnnotating() ? '' : 'blurrable';
+    const cClass = `comment-wrapper${this.isSelected() ? ' selected' : ''}`;
     const cProps = {
       ...this.props,
       isSelected,
     };
 
     return (
-      <div className={this.commentClass()} onClick={this.switchComment}>
+      <div className={`${cClass}} ${blurClass}`} onClick={this.switchComment}>
         <Comment {...cProps} className="comment-head" />
         <CommentReplies {...cProps} />
         <CommentNewReply {...cProps} />
@@ -36,6 +41,7 @@ class CommentWrapper extends React.PureComponent {
 CommentWrapper.propTypes = {
   switchComment: PropTypes.func,
   comment: PropTypes.object,
+  annotation: PropTypes.object,
   currentComment: PropTypes.number,
 };
 

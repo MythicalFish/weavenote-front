@@ -9,12 +9,13 @@ class Comment extends React.PureComponent {
     const { user, comment } = this.props;
     return user.get('email') === comment.getIn(['user', 'email']);
   };
+  isEditing = () => this.props.isEditing === this.props.comment.get('id');
   render() {
     const { comment, commentable, isSelected, className } = this.props;
     const id = comment.get('id');
-    const isEditing = this.props.isEditing === id;
-    const isOwnComment = this.isOwnComment();
-    const authorName = isOwnComment ? 'You' : comment.getIn(['user', 'name']);
+    const authorName = this.isOwnComment()
+      ? 'You'
+      : comment.getIn(['user', 'name']);
     return (
       <div className={`comment ${className}`}>
         <div className="flex">
@@ -26,7 +27,7 @@ class Comment extends React.PureComponent {
               <div className="bold">
                 {authorName}
               </div>}
-            {isEditing
+            {this.isEditing()
               ? <CommentForm
                 onSubmit={this.props.updateComment}
                 initialValues={{ commentable, comment }}
@@ -34,15 +35,15 @@ class Comment extends React.PureComponent {
               />
               : comment.get('text')}
             {isSelected &&
-              isOwnComment &&
-              !isEditing &&
+              this.isOwnComment() &&
+              !this.isEditing() &&
               <CommentActions {...this.props} />}
             {isSelected &&
               <ImageThumbnails
                 images={comment.get('images')}
                 imageable={{ type: 'Comment', id }}
                 maxImages={this.props.maxImages}
-                deletable={isOwnComment}
+                deletable={this.isOwnComment()}
               />}
           </div>
         </div>

@@ -4,10 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
 import { bringFocus } from 'containers/App/actions';
-import {
-  addAnnotation,
-  cancelAnnotation,
-} from 'containers/ProjectImages/actions';
+import { addAnnotation } from 'containers/ProjectImages/actions';
 import { selectAnnotation } from 'containers/ProjectImages/selectors';
 import Button from 'components/Button';
 import CommentForm from './CommentForm';
@@ -77,7 +74,6 @@ export function mapDispatch(dispatch) {
       switchComment,
       cancelCommentAction,
       addAnnotation,
-      cancelAnnotation,
       bringFocus,
     },
     dispatch

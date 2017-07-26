@@ -59,7 +59,7 @@ class ProjectManager extends React.PureComponent {
         <div className="p2 bg-white">
           <div className="container-wide">
             <div className="row">
-              <div className="col-xs-12 last-xs first-md col-md-3 blurrable">
+              <div className="col-xs-12 last-xs first-md col-md-3">
                 <Comments
                   comments={this.props.comments}
                   commentable={{ type: 'Project', id }}
