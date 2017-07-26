@@ -26,7 +26,7 @@ const CommentActions = (props) => {
             <Button
               label="Add annotation"
               onClick={() => {
-                props.addAnnotation({ type: 'dot', annotatable: actionable });
+                props.addAnnotation({ maxAnchors: 2, annotatable: actionable });
                 props.bringFocus('annotation');
                 props.cancelCommentAction();
               }}

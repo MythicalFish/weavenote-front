@@ -14,19 +14,21 @@ class Annotations extends React.PureComponent {
     `Annotation${annotation.get('id') || 'New'}Anchor${index}`;
   render() {
     const { annotation, size } = this.props;
-    if (!annotation.get('type')) return null;
+    if (!annotation.get('annotatable')) return null;
     const anchors = annotation.get('anchors');
     return (
-      <Canvas onClick={this.setAnnotation} size={size}>
-        {anchors.size === 2 && <Line {...{ anchors }} />}
-        {anchors.map((anchor, index) =>
-          <Anchor
-            key={this.key(annotation, index)}
-            position={pixelPosition(anchor, size)}
-            onDragEnd={this.setAnnotation}
-          />
-        )}
-      </Canvas>
+      <div>
+        <Canvas onClick={this.setAnnotation} size={size}>
+          {anchors.size === 2 && <Line {...{ anchors }} canvasSize={size} />}
+          {anchors.map((anchor, index) =>
+            <Anchor
+              key={this.key(annotation, index)}
+              position={pixelPosition(anchor, size)}
+              onDragEnd={this.setAnnotation}
+            />
+          )}
+        </Canvas>
+      </div>
     );
   }
 }

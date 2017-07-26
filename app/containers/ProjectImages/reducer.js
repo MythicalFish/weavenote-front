@@ -3,15 +3,15 @@ import * as types from './constants';
 
 const initialState = fromJS({
   annotation: {
-    type: null,
-    annotatable: {},
+    maxAnchors: 1,
+    annotatable: null,
     anchors: [],
   },
 });
 
 function projectImagesReducer(state = initialState, action) {
   const annotation = state.get('annotation');
-  const type = annotation.get('type');
+  const maxAnchors = annotation.get('maxAnchors');
   const anchors = annotation.get('anchors');
   const { payload } = action;
   const setAnchor = (i) => state.setIn(['annotation', 'anchors', i], payload);
@@ -22,25 +22,16 @@ function projectImagesReducer(state = initialState, action) {
 
     case types.ADD_ANNOTATION:
       return state
-        .setIn(['annotation', 'type'], payload.type)
+        .setIn(['annotation', 'maxAnchors'], payload.maxAnchors)
         .setIn(['annotation', 'annotatable'], payload.annotatable);
 
     case types.SET_ANNOTATION:
-      if (type === 'dot') {
+      if (maxAnchors === 1) {
         return setAnchor(0);
-      } else if (type === 'line') {
-        switch (anchors.size) {
-          case 2:
-            return setAnchor(0).deleteIn(['annotation', 'anchors', 1]);
-          case 1:
-            return setAnchor(1);
-          case 0:
-            return setAnchor(0);
-          default:
-            return state;
-        }
+      } else if (maxAnchors === anchors.size) {
+        return setAnchor(0).deleteIn(['annotation', 'anchors', 1]);
       }
-      return state;
+      return setAnchor(anchors.size);
 
     default:
       return state;

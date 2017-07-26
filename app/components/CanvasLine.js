@@ -1,14 +1,15 @@
 import React from 'react';
 import { Line } from 'react-konva';
+import { pixelPosition } from 'utils/anchorPosition';
 
-export default function CanvasLine({ anchors }) {
-  const a1 = anchors.get('0');
-  const a2 = anchors.get('1');
+export default function CanvasLine({ anchors, canvasSize }) {
+  const a1 = pixelPosition(anchors.get('0'), canvasSize);
+  const a2 = pixelPosition(anchors.get('1'), canvasSize);
   return (
     <Line
       x={0}
       y={0}
-      points={[a1.get('x'), a1.get('y'), a2.get('x'), a2.get('y')]}
+      points={[a1.x, a1.y, a2.x, a2.y]}
       stroke="#51b2fe"
       strokeWidth={3}
       // shadowColor="white"
@@ -20,4 +21,5 @@ export default function CanvasLine({ anchors }) {
 
 CanvasLine.propTypes = {
   anchors: React.PropTypes.object,
+  canvasSize: React.PropTypes.object,
 };
