@@ -27,8 +27,8 @@ class ProjectManager extends React.PureComponent {
 
   render() {
     const { project, currentSection } = this.props;
+    if (!project) return null;
     const id = project.get('id');
-    if (!id) return null;
     let View;
     const viewProps = { ...this.props };
 
@@ -62,7 +62,7 @@ class ProjectManager extends React.PureComponent {
               <div className="col-xs-12 last-xs first-md col-md-3">
                 <Comments
                   comments={this.props.comments}
-                  commentable={{ type: 'Project', id: project.get('id') }}
+                  commentable={{ type: 'Project', id }}
                 />
               </div>
               <div className="col-xs-6 col-md-5 flex justify-center">
@@ -80,9 +80,7 @@ class ProjectManager extends React.PureComponent {
           <header>
             {`Collaborators for ${project.get('name')}`}
           </header>
-          <Collaborators
-            invitable={{ type: 'Project', id: project.get('id') }}
-          />
+          <Collaborators invitable={{ type: 'Project', id }} />
         </Modal>
       </div>
     );

@@ -7,13 +7,8 @@ import * as types from './constants';
 import { setImages } from './reducerHelpers';
 
 const initialState = fromJS({
-  project: {
-    comments: [],
-    collaborators: [],
-    material_cost: null,
-  },
+  project: null,
   userRole: null,
-  currentImage: 0,
 });
 
 const imageCount = (state) => state.getIn(['project', 'images']).size;
