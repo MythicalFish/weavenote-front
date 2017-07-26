@@ -1,19 +1,24 @@
 import React, { PropTypes } from 'react';
 import Canvas from 'components/Canvas';
-import Dot from 'components/CanvasDot';
+import Anchor from 'components/CanvasAnchor';
 import Line from 'components/CanvasLine';
 
 class Annotations extends React.Component {
-  setPosition = (e) => {
-    this.props.setAnnotation({ x: e.evt.offsetX, y: e.evt.offsetY });
-  };
+  key = (annotation, index) =>
+    `Annotation${annotation.get('id') || 'New'}Anchor${index}`;
   render() {
     const { annotation } = this.props;
-    if (!annotation) return null;
-    const position = annotation.get('position');
+    if (!annotation.get('type')) return null;
     return (
-      <Canvas onClick={this.setPosition}>
-        {position && <Dot {...{ position }} onDragEnd={this.setPosition} />}
+      <Canvas onClick={this.props.setAnnotation}>
+        {annotation
+          .get('anchors')
+          .map((anchor, index) =>
+            <Anchor
+              {...{ anchor, ...this.props }}
+              key={this.key(annotation, index)}
+            />
+          )}
         <Line />
       </Canvas>
     );

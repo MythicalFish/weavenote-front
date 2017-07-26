@@ -7,10 +7,13 @@ const CommentActions = (props) => {
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
   };
-  const actionTarget = { type: 'Comment', id: comment.get('id') };
+  const id = comment.get('id');
+  const actionable = { type: 'Comment', id };
+  const annotating =
+    annotation.get('type') && annotation.getIn(['annotatable', 'id']) === id;
   return (
     <div className="actions">
-      {!annotation &&
+      {!annotating &&
         <div>
           <Button onClick={toggleEdit} label="Edit" />
           <Button
@@ -23,14 +26,14 @@ const CommentActions = (props) => {
             <Button
               label="Add annotation"
               onClick={() => {
-                props.addAnnotation(actionTarget);
+                props.addAnnotation({ type: 'dot', annotatable: actionable });
                 props.cancelCommentAction();
               }}
             />}
           {comment.get('images').size < props.maxImages &&
-            <ImageUploader imageable={actionTarget} label="Add image" />}
+            <ImageUploader imageable={actionable} label="Add image" />}
         </div>}
-      {annotation &&
+      {annotating &&
         <div>
           <div>Currently annotating</div>
           <Button onClick={props.cancelAnnotation} label="Cancel" />

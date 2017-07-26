@@ -16,6 +16,9 @@ export function createAnnotationSuccess(response) {
   return { type: types.CREATE_ANNOTATION_SUCCESS, response };
 }
 
-export function setAnnotation(payload) {
-  return { type: types.SET_ANNOTATION, payload };
+export function setAnnotation(e) {
+  return {
+    type: types.SET_ANNOTATION,
+    payload: { x: e.evt.offsetX, y: e.evt.offsetY },
+  };
 }
