@@ -8,8 +8,8 @@ export function cancelAnnotation() {
   return { type: types.CANCEL_ANNOTATION };
 }
 
-export function createAnnotation(payload) {
-  return { type: types.CREATE_ANNOTATION, payload };
+export function createAnnotation(image) {
+  return { type: types.CREATE_ANNOTATION, image };
 }
 
 export function createAnnotationSuccess(response) {

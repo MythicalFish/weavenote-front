@@ -11,7 +11,7 @@ import { selectFocus } from 'containers/App/selectors';
 import CurrentImage from './CurrentImage';
 import { PLACEHOLDER } from './constants';
 import * as selectors from './selectors';
-import { setAnnotation } from './actions';
+import { setAnnotation, createAnnotation } from './actions';
 
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
@@ -55,7 +55,10 @@ ProjectImages.propTypes = {
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators({ setAnnotation, initialize }, dispatch);
+  return bindActionCreators(
+    { setAnnotation, createAnnotation, initialize },
+    dispatch
+  );
 }
 
 const mapState = createStructuredSelector({

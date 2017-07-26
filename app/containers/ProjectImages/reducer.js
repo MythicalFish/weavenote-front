@@ -6,6 +6,7 @@ const initialState = fromJS({
     maxAnchors: 1,
     annotatable: null,
     anchors: [],
+    image: null,
   },
 });
 

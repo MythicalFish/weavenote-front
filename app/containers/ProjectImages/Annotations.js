@@ -12,6 +12,10 @@ class Annotations extends React.PureComponent {
     const pos = { x: evt.offsetX, y: evt.offsetY };
     setAnnotation(relativePosition(pos, canvasSize));
   };
+  createAnnotation = () => {
+    const { image } = this.props;
+    this.props.createAnnotation(image);
+  };
   key = (annotation, index) =>
     `Annotation${annotation.get('id') || 'New'}Anchor${index}`;
   render() {
@@ -32,7 +36,7 @@ class Annotations extends React.PureComponent {
         </Canvas>
         {annotation.get('maxAnchors') === anchors.size &&
           <div className="mt2 center">
-            <Button label="Save annotation" onClick={() => {}} />
+            <Button label="Save annotation" onClick={this.createAnnotation} />
           </div>}
       </TetherComponent>
     );
@@ -40,9 +44,11 @@ class Annotations extends React.PureComponent {
 }
 
 Annotations.propTypes = {
+  image: PropTypes.object,
   canvasSize: PropTypes.object,
   annotation: PropTypes.object,
   setAnnotation: PropTypes.func,
+  createAnnotation: PropTypes.func,
 };
 
 export default Annotations;
