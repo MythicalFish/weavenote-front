@@ -14,8 +14,7 @@ function projectImagesReducer(state = initialState, action) {
   const type = annotation.get('type');
   const anchors = annotation.get('anchors');
   const { payload } = action;
-  const setAnchor = (i) =>
-    state.setIn(['annotation', 'anchors', i], fromJS(payload));
+  const setAnchor = (i) => state.setIn(['annotation', 'anchors', i], payload);
 
   switch (action.type) {
     case types.CANCEL_ANNOTATION:

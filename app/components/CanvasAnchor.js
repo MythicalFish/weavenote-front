@@ -1,23 +1,23 @@
 import React from 'react';
 import { Circle } from 'react-konva';
 
-export default function Anchor({ anchor, setAnnotation }) {
+export default function Anchor({ position, onDragEnd }) {
   return (
     <Circle
-      x={anchor.get('x')}
-      y={anchor.get('y')}
+      x={position.x}
+      y={position.y}
       width={15}
       height={15}
       fill="#51b2fe"
       strokeWidth={2}
       stroke="#FFF"
       draggable="true"
-      onDragEnd={setAnnotation}
+      onDragEnd={onDragEnd}
     />
   );
 }
 
 Anchor.propTypes = {
-  anchor: React.PropTypes.object,
-  setAnnotation: React.PropTypes.func,
+  position: React.PropTypes.object,
+  onDragEnd: React.PropTypes.func,
 };

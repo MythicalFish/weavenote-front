@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Layer, Rect, Stage } from 'react-konva';
 
 export default function Canvas(props) {
-  const Overlay = () =>
-    <Rect width={1000} height={1000} onClick={props.onClick} />;
+  const { size, onClick } = props;
+  delete size.position;
+  const Overlay = () => <Rect {...size} onClick={onClick} />;
   return (
     <div className="canvas cursor-crosshair">
-      <Stage width={1000} height={1000}>
+      <Stage {...size}>
         <Layer>
           <Overlay />
           {props.children}
@@ -17,6 +18,7 @@ export default function Canvas(props) {
 }
 
 Canvas.propTypes = {
-  children: React.PropTypes.node,
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
+  children: PropTypes.node,
+  size: PropTypes.object,
 };

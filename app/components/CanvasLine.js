@@ -1,21 +1,23 @@
 import React from 'react';
-import { Circle } from 'react-konva';
+import { Line } from 'react-konva';
 
-export default function Line(props) {
+export default function CanvasLine({ anchors }) {
+  const a1 = anchors.get('0');
+  const a2 = anchors.get('1');
   return (
-    <Circle
-      x={10}
-      y={10}
-      width={15}
-      height={15}
-      fill="#000"
-      strokeWidth={2}
-      stroke="#FFF"
-      draggable="true"
+    <Line
+      x={0}
+      y={0}
+      points={[a1.get('x'), a1.get('y'), a2.get('x'), a2.get('y')]}
+      stroke="#51b2fe"
+      strokeWidth={3}
+      // shadowColor="white"
+      // shadowBlur={0}
+      // shadowOffset={{ x: 2, y: 2 }}
     />
   );
 }
 
-Line.propTypes = {
-  position: React.PropTypes.object,
+CanvasLine.propTypes = {
+  anchors: React.PropTypes.object,
 };
