@@ -3,18 +3,15 @@ import AccordionItem from 'components/AccordionItem';
 import Dot from 'components/Dot';
 
 const ListItem = (props) => {
-  const material = props.item.get('material').toJS();
+  const material = props.item.get('material');
   return (
     <AccordionItem {...props}>
-      <div className="x10 pr1">
-        {material.name}
+      <div className="flex-auto pr1">
+        {material.get('name')}
       </div>
-      <div className="x6 pr1">
-        {material.type.name}
-      </div>
-      <div className="x6 pr1">
-        {material.color.name}
-        <Dot className="ml1" color={material.color.hex_code} />
+      <div className="flex-none pr1">
+        {material.getIn(['color', 'name'])}
+        <Dot className="ml1" color={material.getIn(['color', 'hex_code'])} />
       </div>
     </AccordionItem>
   );
