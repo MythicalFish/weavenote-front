@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
 export default function Focus(props) {
-  const { focus, modalID, modalImage } = props;
-  const showBlur = focus || modalID || modalImage;
+  const { focus, modalID } = props;
+  const showBlur = focus || modalID;
   return (
     <div>
       <div className={showBlur && 'overlay'} />
@@ -15,7 +15,6 @@ export default function Focus(props) {
 
 Focus.propTypes = {
   modalID: PropTypes.string,
-  modalImage: PropTypes.object,
   focus: PropTypes.string,
   children: PropTypes.node,
 };
