@@ -11,7 +11,7 @@ import { selectFocus } from 'containers/App/selectors';
 import CurrentImage from './CurrentImage';
 import { PLACEHOLDER } from './constants';
 import * as selectors from './selectors';
-import { setAnnotation, createAnnotation } from './actions';
+import { setAnnotation, createAnnotation, cancelAnnotation } from './actions';
 
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
@@ -56,7 +56,7 @@ ProjectImages.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { setAnnotation, createAnnotation, initialize },
+    { setAnnotation, createAnnotation, initialize, cancelAnnotation },
     dispatch
   );
 }

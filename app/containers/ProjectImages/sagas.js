@@ -8,6 +8,7 @@ import {
 } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
+import * as aActions from 'containers/App/actions';
 import { selectAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
@@ -15,16 +16,30 @@ import * as actions from './actions';
 export default [watch];
 
 function* watch() {
-  const watcher = [yield takeLatest(types.CREATE_ANNOTATION, createAnnotation)];
+  const watcher = [
+    yield takeLatest(types.CREATE_ANNOTATION, createAnnotation),
+    yield takeLatest(types.ADD_ANNOTATION, bringFocus),
+    yield takeLatest(types.CANCEL_ANNOTATION, hideFocus),
+  ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
 
 function* createAnnotation({ image }) {
   const annotation = yield select(selectAnnotation());
+  // annotation = annotation.toJS();
+  // console.log(annotation);
+  // yield delay(10000);
   yield sagas.post(
     'annotations',
     { image, annotation },
     actions.createAnnotationSuccess
   );
+}
+
+function* bringFocus() {
+  yield put(aActions.bringFocus('annotation'));
+}
+function* hideFocus() {
+  yield put(aActions.hideFocus());
 }

@@ -33,10 +33,15 @@ class Annotations extends React.PureComponent {
             />
           )}
         </Canvas>
-        {annotation.get('maxAnchors') === anchors.size &&
-          <div className="canvas-actions">
-            <Button label="Save annotation" onClick={this.createAnnotation} />
-          </div>}
+        <div className="canvas-actions">
+          <Button
+            label="Cancel"
+            secondary
+            onClick={this.props.cancelAnnotation}
+          />
+          {annotation.get('maxAnchors') === anchors.size &&
+            <Button label="Save annotation" onClick={this.createAnnotation} />}
+        </div>
       </div>
     );
   }
@@ -48,6 +53,7 @@ Annotations.propTypes = {
   annotation: PropTypes.object,
   setAnnotation: PropTypes.func,
   createAnnotation: PropTypes.func,
+  cancelAnnotation: PropTypes.func,
 };
 
 export default Annotations;

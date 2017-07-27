@@ -28,7 +28,6 @@ const CommentActions = (props) => {
             label="Annotation"
             onClick={() => {
               props.addAnnotation({ maxAnchors: 1, annotatable: actionable });
-              props.bringFocus('annotation');
               props.cancelCommentAction();
             }}
           />}
@@ -44,7 +43,6 @@ const CommentActions = (props) => {
 };
 
 CommentActions.propTypes = {
-  bringFocus: PropTypes.func,
   addAnnotation: PropTypes.func,
   cancelCommentAction: PropTypes.func,
   comment: PropTypes.object,
