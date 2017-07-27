@@ -6,8 +6,7 @@ const Icon = (props) => {
   let I = FeatherIcons[props.graphic];
   if (!I) I = FeatherIcons.Circle;
   const { color, size } = props;
-  const FeatherIcon = () =>
-    <I className={color || 'color2x'} size={size || 30} />;
+  const FeatherIcon = () => <I className={color || ''} size={size || 30} />;
   const bProps = {
     className: `icon ${props.className}`,
   };

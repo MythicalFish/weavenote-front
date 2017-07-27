@@ -48,7 +48,11 @@ class Comments extends React.PureComponent {
             initialValues={{ commentable }}
             {...cProps}
           />
-          : <Button label="Leave a comment" inline onClick={this.toggleNew} />}
+          : <Button
+            label="Leave a comment"
+            secondary
+            onClick={this.toggleNew}
+          />}
       </div>
     );
   }

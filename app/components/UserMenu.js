@@ -6,26 +6,26 @@ import * as authUtils from 'utils/authUtils';
 import Icon from 'components/Icon';
 
 export default function UserMenu(props) {
-  const { user, abilities } = props;
+  const { user } = props;
+  const MenuItem = (p) =>
+    <div className="flex items-center">
+      <div className="flex-auto">
+        {p.label}
+      </div>
+      <Icon graphic={p.icon} size={16} className="ml1 flex-none" />
+    </div>;
   return (
     <div>
       {user &&
         <Dropdown label={UserMenuButton(props)} align="right">
           <Link to="/profile">
-            Profile
-            <Icon graphic="User" color="dark3" size={16} className="ml1" />
+            <MenuItem icon="User" label="Profile" />
           </Link>
           <Link to="/organization">
-            Organization
-            <Icon graphic="Users" color="dark3" size={16} className="ml1" />
+            <MenuItem icon="Users" label="Organization" />
           </Link>
-          <button
-            onClick={() => {
-              authUtils.logout();
-            }}
-          >
-            Logout
-            <Icon graphic="LogOut" color="dark3" size={16} className="ml1" />
+          <button onClick={authUtils.logout}>
+            <MenuItem icon="LogOut" label="Logout" />
           </button>
         </Dropdown>}
     </div>
@@ -44,7 +44,7 @@ const UserMenuButton = (props) => {
           </div>}
       </div>
       <Avatar {...{ user }} />
-      <Icon graphic="ChevronDown" color="dark3" size={20} className="ml1" />
+      <Icon graphic="ChevronDown" size={20} className="ml1" />
     </div>
   );
 };

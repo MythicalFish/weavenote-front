@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
+import Dropdown from 'components/Dropdown';
 import ImageUploader from 'containers/ImageUploader';
 
 const CommentActions = (props) => {
@@ -10,28 +11,26 @@ const CommentActions = (props) => {
   const id = comment.get('id');
   const actionable = { type: 'Comment', id };
   return (
-    <div className="actions">
-      <div>
-        <Button onClick={toggleEdit} label="Edit" />
+    <Dropdown align="right" className="tr lh0 pt2 pr2 dropdown-inline">
+      <Button onClick={toggleEdit} label="Edit" />
+      <Button
+        label="Remove"
+        onClick={() => {
+          props.deleteComment({ comment, commentable });
+        }}
+      />
+      {commentable.type === 'Project' &&
         <Button
-          label="Remove"
+          label="Add annotation"
           onClick={() => {
-            props.deleteComment({ comment, commentable });
+            props.addAnnotation({ maxAnchors: 1, annotatable: actionable });
+            props.bringFocus('annotation');
+            props.cancelCommentAction();
           }}
-        />
-        {commentable.type === 'Project' &&
-          <Button
-            label="Add annotation"
-            onClick={() => {
-              props.addAnnotation({ maxAnchors: 1, annotatable: actionable });
-              props.bringFocus('annotation');
-              props.cancelCommentAction();
-            }}
-          />}
-        {comment.get('images').size < props.maxImages &&
-          <ImageUploader imageable={actionable} label="Add image" />}
-      </div>
-    </div>
+        />}
+      {comment.get('images').size < props.maxImages &&
+        <ImageUploader imageable={actionable} label="Add image" />}
+    </Dropdown>
   );
 };
 

@@ -17,6 +17,9 @@ export default function Button(props) {
   if (props.shy) {
     className += ' btn-shy';
   }
+  if (props.secondary) {
+    className += ' btn-secondary';
+  }
   if (props.footer) {
     className += ' btn-footer';
   }
@@ -40,6 +43,7 @@ Button.propTypes = {
   small: React.PropTypes.bool,
   shy: React.PropTypes.bool,
   large: React.PropTypes.bool,
+  secondary: React.PropTypes.bool,
   inline: React.PropTypes.bool,
   footer: React.PropTypes.bool,
   label: React.PropTypes.string,

@@ -28,7 +28,7 @@ button {
   @include transition('all .2s');
   border-radius: 999px;
   -webkit-border-radius: 999px;
-  border: none;
+  border: 1px solid $color2x;
   box-shadow: none;
   background: $color2x;
   color: $white;
@@ -59,27 +59,36 @@ button {
     color: $dark3;
     background: $white;
     font-weight: normal;
+    border-color: transparent;
   }
   &.btn-green {
     background: $lime;
   }
+  &.btn-secondary {
+    background: $white;
+    border-color: $gray-lighter;
+    color: $gray;
+    font-weight: normal;
+  }
   .icon {
     height: 1px;
-    width: 25px;
+    width: 27px;
     position: relative;
     overflow: visible;
+    top: 3px;
     svg {
       position: absolute;
-      bottom: -2px;
+      bottom: 0;
       left: 0;
       color: inherit;
     }
   }
   &.btn-sm {
     .icon {
-      width: 20px;
+      width: 23px;
+      top: 2px;
       svg {
-        transform: scale(0.9);
+        transform: scale(0.7);
       }
     }
   }

@@ -41,12 +41,14 @@ export default class Dropdown extends React.PureComponent {
       if (!val) val = { name: null };
       if (val.toJS) val = value.toJS();
       labelContent = (
-        <div>
-          {val.name}
-          {val.iso_code &&
-            <PriceSymbol code={val.iso_code} className="bold ml1" />}
-          {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
-          <Icon graphic="ChevronDown" color="dark3" size={20} />
+        <div className="flex items-center">
+          <div className="flex-auto">
+            {val.name}
+            {val.iso_code &&
+              <PriceSymbol code={val.iso_code} className="bold ml1" />}
+            {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
+          </div>
+          <Icon graphic="ChevronDown" className="flex-none" size={18} />
         </div>
       );
     }
@@ -120,10 +122,10 @@ export default class Dropdown extends React.PureComponent {
 
   render() {
     const { className, readOnly } = this.props;
-    let inputClass = className;
+    let inputClass = className || '';
     if (readOnly) inputClass += ' noselect';
     return (
-      <div className={`dropdown p0 ${inputClass}`}>
+      <div className={`dropdown ${inputClass}`}>
         <TetherComponent {...this.tetherOptions}>
           {this.label()}
           {this.state.active &&

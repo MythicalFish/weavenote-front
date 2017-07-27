@@ -17,24 +17,22 @@ class Switcher extends React.PureComponent {
     return orgs;
   };
   render() {
-    const { organization, organizations, startCreate } = this.props;
+    const { organization, startCreate } = this.props;
     return (
-      <div className="input inline-block">
-        <Dropdown
-          value={organization}
-          data={this.otherOrganizations()}
-          onChange={this.switchOrganization}
-          align="right"
-          tail={() =>
-            <Button
-              small
-              inline
-              label="Create new organization"
-              icon="Plus"
-              onClick={startCreate}
-            />}
-        />
-      </div>
+      <Dropdown
+        value={organization}
+        data={this.otherOrganizations()}
+        onChange={this.switchOrganization}
+        align="right"
+        tail={() =>
+          <Button
+            small
+            inline
+            label="Create new organization"
+            icon="Plus"
+            onClick={startCreate}
+          />}
+      />
     );
   }
 }

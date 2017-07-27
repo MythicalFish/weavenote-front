@@ -4,6 +4,12 @@
   overflow: hidden;
   font-size: .9em;
   color: $dark7;
+  &:not(:last-child) {
+    margin-bottom: $space-1;
+  }
+  &:not(.selected):hover {
+    cursor: pointer;
+  }
   .comment-newreply {
     border-top: 1px solid transparent;
     textarea {
@@ -14,7 +20,25 @@
       opacity: 0;
     }
   }
+  &.selected,
+  &:hover {
+    border-color: $dark2;
+    .comment-newreply {
+      button {
+        opacity: 1;
+      }
+    }
+  }
+  &.selected {
+    .comment-newreply {
+      border-color: $dark1;
+      button.btn-footer {
+        background-color: $aqua-haze;
+      }
+    }
+  }
   .comment {
+    position: relative;
     .comment-avatar {
       &:before {
         content: ' ';
@@ -38,29 +62,6 @@
           background: $dark1;
           min-height: $space-1;
         }
-      }
-    }
-  }
-  &:not(:last-child) {
-    margin-bottom: $space-1;
-  }
-  &:not(.selected):hover {
-    cursor: pointer;
-  }
-  &.selected,
-  &:hover {
-    border-color: $dark2;
-    .comment-newreply {
-      button {
-        opacity: 1;
-      }
-    }
-  }
-  &.selected {
-    .comment-newreply {
-      border-color: $dark1;
-      button.btn-footer {
-        background-color: $aqua-haze;
       }
     }
   }

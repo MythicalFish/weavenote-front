@@ -13,7 +13,6 @@ ul.thumbnails {
   margin: 0;
   list-style: none;
   @extend .flex;
-  @extend .justify-center;
   li {
     @extend .flex-none;
     overflow: hidden;
