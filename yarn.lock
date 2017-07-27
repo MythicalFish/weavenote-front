@@ -6475,6 +6475,10 @@ react-dom@15.4.1, "react-dom@^15.0.0 || ^16.0.0":
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-feather@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-1.0.5.tgz#6b9aa303c76d8d49a7e3db2e75a9334352acf00e"
+
 react-helmet@3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-3.2.2.tgz#1fc4646cbc5d26246ab45d5a84b504ed639810e6"

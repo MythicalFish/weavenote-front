@@ -31,7 +31,7 @@ const ProjectForm = (props) => {
         label="Description"
       />
       <footer className="p2 center">
-        <Button type="submit" disabled={submitting} label="Save" />
+        <Button type="submit" disabled={submitting} label="Save" icon="Save" />
       </footer>
     </form>
   );

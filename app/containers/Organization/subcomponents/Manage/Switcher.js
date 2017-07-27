@@ -30,7 +30,7 @@ class Switcher extends React.PureComponent {
               small
               inline
               label="Create new organization"
-              icon="plus"
+              icon="Plus"
               onClick={startCreate}
             />}
         />

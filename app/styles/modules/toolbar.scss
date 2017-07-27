@@ -8,8 +8,10 @@
   button {
     padding: 0 $space-2;
   }
-  .glyph {
+  .icon {
     padding: 0 $space-3;
+    display: flex;
+    align-items: center;
   }
   nav {
     @extend .flex;

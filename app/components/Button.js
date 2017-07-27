@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from 'components/Icon';
 
 export default function Button(props) {
   const type = props.type || 'button';
@@ -13,9 +14,6 @@ export default function Button(props) {
   if (props.inline) {
     className += ' btn-inline';
   }
-  if (props.glyph) {
-    className += ' glyph';
-  }
   if (props.shy) {
     className += ' btn-shy';
   }
@@ -29,7 +27,7 @@ export default function Button(props) {
       disabled={disabled}
       onClick={props.onClick}
     >
-      {props.icon && <i className={`fa fa-${props.icon} mr1`} />}
+      {props.icon && <Icon graphic={props.icon} size={18} />}
       {label}
     </button>
   );
@@ -43,7 +41,6 @@ Button.propTypes = {
   shy: React.PropTypes.bool,
   large: React.PropTypes.bool,
   inline: React.PropTypes.bool,
-  glyph: React.PropTypes.bool,
   footer: React.PropTypes.bool,
   label: React.PropTypes.string,
   disabled: React.PropTypes.bool,

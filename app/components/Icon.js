@@ -1,41 +1,45 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import * as FeatherIcons from 'react-feather';
 
-const Glyph = (props) => {
-  const Icon = () => {
-    const color = props.color || 'gray';
-    return <i className={`fa fa-${props.icon} ${color}`} />;
-  };
+const Icon = (props) => {
+  let I = FeatherIcons[props.graphic];
+  if (!I) I = FeatherIcons.Circle;
+  const { color, size } = props;
+  const FeatherIcon = () =>
+    <I className={color || 'color2x'} size={size || 30} />;
   const bProps = {
-    className: 'glyph',
+    className: `icon ${props.className}`,
   };
   if (props.onClick) {
     return (
       <button {...bProps} onClick={props.onClick} type="button">
-        <Icon />
+        <FeatherIcon />
       </button>
     );
   } else if (props.to) {
     return (
       <Link {...bProps} to={props.to}>
-        <Icon />
+        <FeatherIcon />
       </Link>
     );
   }
   return (
     <div {...bProps}>
-      <Icon />
+      <FeatherIcon />
       {props.children && props.children}
     </div>
   );
 };
 
-Glyph.propTypes = {
+Icon.propTypes = {
   onClick: PropTypes.func,
   to: PropTypes.string,
+  className: PropTypes.string,
   color: PropTypes.string,
-  icon: PropTypes.string,
+  graphic: PropTypes.string,
   children: PropTypes.node,
+  size: PropTypes.number,
 };
 
-export default Glyph;
+export default Icon;

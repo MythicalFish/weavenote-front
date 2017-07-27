@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
-import { Link } from 'react-router';
 import UserMenu from 'components/UserMenu';
+import Icon from 'components/Icon';
 
 export default function Toolbar(props) {
   const { changeSection, currentSection, openModal } = props;
@@ -11,9 +11,7 @@ export default function Toolbar(props) {
       <nav>
         <ul>
           <li>
-            <Link to="/projects" className="glyph glyph-sm gray">
-              <i className="fa fa-arrow-left" />
-            </Link>
+            <Icon to="/projects" color="gray" graphic="ArrowLeft" size={26} />
           </li>
           <li>
             <NavItem

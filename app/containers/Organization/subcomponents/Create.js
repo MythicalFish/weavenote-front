@@ -22,7 +22,7 @@ const Create = (props) => {
             type="submit"
             disabled={submitting}
             label="Create"
-            icon="plus"
+            icon="Plus"
             lg
           />
         </footer>

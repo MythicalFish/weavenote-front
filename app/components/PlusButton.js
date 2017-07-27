@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import Glyph from 'components/Glyph';
+import Icon from 'components/Icon';
 
 export default function PlusButton(props) {
-  return <Glyph icon="plus-circle" {...props} />;
+  return <Icon graphic="PlusCircle" {...props} />;
 }
 
 PlusButton.propTypes = {

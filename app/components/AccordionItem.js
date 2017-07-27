@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
+import Icon from 'components/Icon';
 
 const AccordionItem = (props) => {
   const { switchItem, isCurrent, index } = props;
-  let chevronClass = 'fa-chevron-down';
+  let chevronClass = 'ChevronDown';
   let switchTarget = index;
   if (isCurrent) {
-    chevronClass = 'fa-chevron-up';
+    chevronClass = 'ChevronUp';
     switchTarget = null;
   }
   return (
@@ -19,8 +20,8 @@ const AccordionItem = (props) => {
       <div className="flex-auto flex">
         {props.children}
       </div>
-      <div className="right-align smaller2 dark2">
-        <i className={`fa ${chevronClass}`} />
+      <div className="right-align">
+        <Icon graphic={chevronClass} color="dark3" size={20} />
       </div>
     </button>
   );

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Dropdown from 'components/Dropdown';
 import Avatar from 'components/Avatar';
 import * as authUtils from 'utils/authUtils';
+import Icon from 'components/Icon';
 
 export default function UserMenu(props) {
   const { user, abilities } = props;
@@ -12,11 +13,11 @@ export default function UserMenu(props) {
         <Dropdown label={UserMenuButton(props)} align="right">
           <Link to="/profile">
             Profile
-            <i className="fa fa-user ml1" />
+            <Icon graphic="User" color="dark3" size={16} className="ml1" />
           </Link>
           <Link to="/organization">
             Organization
-            <i className="fa fa-group ml1" />
+            <Icon graphic="Users" color="dark3" size={16} className="ml1" />
           </Link>
           <button
             onClick={() => {
@@ -24,7 +25,7 @@ export default function UserMenu(props) {
             }}
           >
             Logout
-            <i className="fa fa-eject ml1" />
+            <Icon graphic="LogOut" color="dark3" size={16} className="ml1" />
           </button>
         </Dropdown>}
     </div>
@@ -43,7 +44,7 @@ const UserMenuButton = (props) => {
           </div>}
       </div>
       <Avatar {...{ user }} />
-      <i className="fa fa-chevron-down dark4 smaller3 ml1" />
+      <Icon graphic="ChevronDown" color="dark3" size={20} className="ml1" />
     </div>
   );
 };

@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Icon from 'components/Icon';
 
 export default function Toolbar() {
   return (
     <header className="toolbar">
-      <Link to="/materials" className="glyph glyph-sm gray">
-        <i className="fa fa-arrow-left"></i>
-      </Link>
+      <Icon to="/materials" color="gray" graphic="ArrowLeft" size={26} />
     </header>
   );
 }
