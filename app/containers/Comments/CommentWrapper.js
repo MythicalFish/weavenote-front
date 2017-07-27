@@ -14,14 +14,8 @@ class CommentWrapper extends React.PureComponent {
     const { currentComment, comment } = this.props;
     return currentComment === comment.get('id');
   };
-  isAnnotating = () => {
-    const { annotation, comment } = this.props;
-    const a = annotation.get('annotatable');
-    return a && a.id === comment.get('id');
-  };
   render() {
     const isSelected = this.isSelected();
-    const blurClass = this.isAnnotating() ? '' : 'blurrable';
     const cClass = `comment-wrapper${this.isSelected() ? ' selected' : ''}`;
     const cProps = {
       ...this.props,
@@ -29,7 +23,7 @@ class CommentWrapper extends React.PureComponent {
     };
 
     return (
-      <div className={`${cClass} ${blurClass}`} onClick={this.switchComment}>
+      <div className={cClass} onClick={this.switchComment}>
         <Comment {...cProps} className="comment-head" />
         <CommentReplies {...cProps} />
         <CommentNewReply {...cProps} />

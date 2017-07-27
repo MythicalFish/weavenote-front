@@ -34,6 +34,7 @@ button {
   color: $white;
   font-weight: bold;
   position: relative;
+  line-height: 1;
   &.btn-sm {
     font-size: .9em;
     padding: 6px 12px;
@@ -48,6 +49,7 @@ button {
     background: none;
     color: $color2x;
     padding: 0;
+    line-height: inherit;
   }
   &.btn-footer {
     text-align: inherit;

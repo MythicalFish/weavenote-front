@@ -22,7 +22,7 @@ class Annotations extends React.PureComponent {
     if (!annotation.get('annotatable')) return null;
     const anchors = annotation.get('anchors');
     return (
-      <div id="annotation">
+      <div>
         <Canvas onClick={this.setAnnotation} size={canvasSize}>
           {anchors.size === 2 && <Line {...{ anchors, canvasSize }} />}
           {anchors.map((anchor, index) =>
@@ -34,7 +34,7 @@ class Annotations extends React.PureComponent {
           )}
         </Canvas>
         {annotation.get('maxAnchors') === anchors.size &&
-          <div id="annotation-actions">
+          <div className="canvas-actions">
             <Button label="Save annotation" onClick={this.createAnnotation} />
           </div>}
       </div>
