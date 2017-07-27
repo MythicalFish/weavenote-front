@@ -6,7 +6,7 @@ const initialState = fromJS({
     maxAnchors: 1,
     annotatable: null,
     anchors: [],
-    image: null,
+    type: null,
   },
 });
 
@@ -24,7 +24,8 @@ function projectImagesReducer(state = initialState, action) {
     case types.ADD_ANNOTATION:
       return state
         .setIn(['annotation', 'maxAnchors'], payload.maxAnchors)
-        .setIn(['annotation', 'annotatable'], payload.annotatable);
+        .setIn(['annotation', 'annotatable'], payload.annotatable)
+        .setIn(['annotation', 'type'], payload.type);
 
     case types.SET_ANNOTATION:
       if (maxAnchors === 1) {

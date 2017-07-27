@@ -27,12 +27,10 @@ function* watch() {
 
 function* createAnnotation({ image }) {
   const annotation = yield select(selectAnnotation());
-  // annotation = annotation.toJS();
-  // console.log(annotation);
-  // yield delay(10000);
+  const image_id = image.get('id');
   yield sagas.post(
     'annotations',
-    { image, annotation },
+    { image_id, ...annotation.toJS() },
     actions.createAnnotationSuccess
   );
 }

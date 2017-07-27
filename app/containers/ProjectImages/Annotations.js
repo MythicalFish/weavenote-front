@@ -12,8 +12,8 @@ class Annotations extends React.PureComponent {
     setAnnotation(relativePosition(pos, canvasSize));
   };
   createAnnotation = () => {
-    const { image } = this.props;
-    this.props.createAnnotation(image);
+    const { currentImage } = this.props;
+    this.props.createAnnotation(currentImage);
   };
   key = (annotation, index) =>
     `Annotation${annotation.get('id') || 'New'}Anchor${index}`;
@@ -48,7 +48,7 @@ class Annotations extends React.PureComponent {
 }
 
 Annotations.propTypes = {
-  image: PropTypes.object,
+  currentImage: PropTypes.object,
   canvasSize: PropTypes.object,
   annotation: PropTypes.object,
   setAnnotation: PropTypes.func,

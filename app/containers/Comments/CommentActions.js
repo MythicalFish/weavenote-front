@@ -27,7 +27,11 @@ const CommentActions = (props) => {
             inlineIcon="plus"
             label="Annotation"
             onClick={() => {
-              props.addAnnotation({ maxAnchors: 1, annotatable: actionable });
+              props.addAnnotation({
+                maxAnchors: 1,
+                annotatable: actionable,
+                type: 'dot',
+              });
               props.cancelCommentAction();
             }}
           />}
