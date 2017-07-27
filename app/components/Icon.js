@@ -8,7 +8,7 @@ const Icon = (props) => {
   const { color, size } = props;
   const FeatherIcon = () => <I className={color || ''} size={size || 30} />;
   const bProps = {
-    className: `icon ${props.className}`,
+    className: `icon ${props.className || ''}`,
   };
   if (props.onClick) {
     return (

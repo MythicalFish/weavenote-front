@@ -11,7 +11,6 @@ import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
 import Comments from 'containers/Comments';
 import Modal from 'components/Modal';
-import Header from 'components/Header';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import ProjectBasics from './subcomponents/ProjectBasics';
@@ -54,7 +53,6 @@ class ProjectManager extends React.PureComponent {
 
     return (
       <div>
-        <Header />
         <Toolbar {...this.props} />
         <div className="p2 bg-white">
           <div className="container-wide">

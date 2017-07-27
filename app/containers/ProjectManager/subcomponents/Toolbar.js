@@ -8,11 +8,11 @@ export default function Toolbar(props) {
   const { changeSection, currentSection, openModal } = props;
   return (
     <header className="toolbar blurrable">
+      <div>
+        <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
+      </div>
       <nav>
         <ul>
-          <li>
-            <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
-          </li>
           <li>
             <NavItem
               label={sections.Basics.label}
@@ -60,13 +60,9 @@ export default function Toolbar(props) {
           </li>
         </ul>
       </nav>
-      <nav>
-        <ul>
-          <li>
-            <UserMenu />
-          </li>
-        </ul>
-      </nav>
+      <div className="pr2">
+        <UserMenu />
+      </div>
     </header>
   );
 }
