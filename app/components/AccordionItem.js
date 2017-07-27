@@ -21,7 +21,7 @@ const AccordionItem = (props) => {
         {props.children}
       </div>
       <div className="right-align">
-        <Icon graphic={chevronClass} color="dark3" size={20} />
+        <Icon name={chevronClass} color="dark3" size={20} />
       </div>
     </button>
   );

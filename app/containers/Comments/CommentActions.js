@@ -11,26 +11,35 @@ const CommentActions = (props) => {
   const id = comment.get('id');
   const actionable = { type: 'Comment', id };
   return (
-    <Dropdown align="right" className="tr lh0 pt2 pr2 dropdown-inline">
-      <Button onClick={toggleEdit} label="Edit" />
-      <Button
-        label="Remove"
-        onClick={() => {
-          props.deleteComment({ comment, commentable });
-        }}
-      />
-      {commentable.type === 'Project' &&
+    <div>
+      <Dropdown align="right" className="tr lh0 pt2 pr2 dropdown-inline">
+        <Button onClick={toggleEdit} label="Edit" />
         <Button
-          label="Add annotation"
+          label="Remove"
           onClick={() => {
-            props.addAnnotation({ maxAnchors: 1, annotatable: actionable });
-            props.bringFocus('annotation');
-            props.cancelCommentAction();
+            props.deleteComment({ comment, commentable });
           }}
-        />}
-      {comment.get('images').size < props.maxImages &&
-        <ImageUploader imageable={actionable} label="Add image" />}
-    </Dropdown>
+        />
+      </Dropdown>
+      <div className="actions">
+        {commentable.type === 'Project' &&
+          <Button
+            inlineIcon="plus"
+            label="Annotation"
+            onClick={() => {
+              props.addAnnotation({ maxAnchors: 1, annotatable: actionable });
+              props.bringFocus('annotation');
+              props.cancelCommentAction();
+            }}
+          />}
+        {comment.get('images').size < props.maxImages &&
+          <ImageUploader
+            imageable={actionable}
+            label="Image"
+            inlineIcon="plus"
+          />}
+      </div>
+    </div>
   );
 };
 

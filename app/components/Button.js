@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from 'components/Icon';
+import InlineIcon from 'components/InlineIcon';
 
 export default function Button(props) {
   const type = props.type || 'button';
@@ -30,7 +31,8 @@ export default function Button(props) {
       disabled={disabled}
       onClick={props.onClick}
     >
-      {props.icon && <Icon graphic={props.icon} size={18} />}
+      {props.inlineIcon && <InlineIcon name={props.inlineIcon} />}
+      {props.icon && <Icon name={props.icon} size={18} />}
       {label}
     </button>
   );
@@ -40,6 +42,7 @@ Button.propTypes = {
   className: React.PropTypes.string,
   type: React.PropTypes.string,
   icon: React.PropTypes.string,
+  inlineIcon: React.PropTypes.string,
   small: React.PropTypes.bool,
   shy: React.PropTypes.bool,
   large: React.PropTypes.bool,

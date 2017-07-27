@@ -11,7 +11,7 @@ export default function Toolbar(props) {
       <nav>
         <ul>
           <li>
-            <Icon to="/projects" color="gray" graphic="ArrowLeft" size={26} />
+            <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
           </li>
           <li>
             <NavItem

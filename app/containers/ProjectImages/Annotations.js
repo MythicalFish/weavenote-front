@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import TetherComponent from 'react-tether';
 import Button from 'components/Button';
 import Canvas from 'components/Canvas';
 import Anchor from 'components/CanvasAnchor';
@@ -23,7 +22,7 @@ class Annotations extends React.PureComponent {
     if (!annotation.get('annotatable')) return null;
     const anchors = annotation.get('anchors');
     return (
-      <TetherComponent attachment="top center" targetAttachment="bottom center">
+      <div id="annotation">
         <Canvas onClick={this.setAnnotation} size={canvasSize}>
           {anchors.size === 2 && <Line {...{ anchors, canvasSize }} />}
           {anchors.map((anchor, index) =>
@@ -35,10 +34,10 @@ class Annotations extends React.PureComponent {
           )}
         </Canvas>
         {annotation.get('maxAnchors') === anchors.size &&
-          <div className="mt2 center">
+          <div id="annotation-actions">
             <Button label="Save annotation" onClick={this.createAnnotation} />
           </div>}
-      </TetherComponent>
+      </div>
     );
   }
 }

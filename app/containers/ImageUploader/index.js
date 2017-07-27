@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactS3Uploader from 'react-s3-uploader';
 import PlusButton from 'components/PlusButton';
+import InlineIcon from 'components/InlineIcon';
 import * as API from 'utils/API';
 import { createImage } from './actions';
 
@@ -47,10 +48,11 @@ class ImageUploader extends React.Component {
         onFinish={this.onFinish}
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />;
-    const { label } = this.props;
+    const { label, inlineIcon } = this.props;
     if (label) {
       return (
         <label className="btn">
+          {inlineIcon && <InlineIcon name={inlineIcon} />}
           {label}
           <Button />
         </label>
@@ -74,6 +76,7 @@ ImageUploader.propTypes = {
   imageable: PropTypes.object,
   createImage: PropTypes.func,
   label: PropTypes.string,
+  inlineIcon: PropTypes.string,
   onUploadFinish: PropTypes.func,
 };
 

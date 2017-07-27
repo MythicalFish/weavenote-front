@@ -40,11 +40,7 @@ class InvitesList extends React.PureComponent {
                 />
               </div>
               <div className="list-item-controls">
-                <Icon
-                  onClick={this.cancelInvite(invite)}
-                  graphic="X"
-                  size={15}
-                />
+                <Icon onClick={this.cancelInvite(invite)} name="X" size={15} />
               </div>
             </ListItem>
           )}

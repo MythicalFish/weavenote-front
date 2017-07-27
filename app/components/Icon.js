@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import * as FeatherIcons from 'react-feather';
 
 const Icon = (props) => {
-  let I = FeatherIcons[props.graphic];
+  let I = FeatherIcons[props.name];
   if (!I) I = FeatherIcons.Circle;
   const { color, size } = props;
   const FeatherIcon = () => <I className={color || ''} size={size || 30} />;
@@ -36,7 +36,7 @@ Icon.propTypes = {
   to: PropTypes.string,
   className: PropTypes.string,
   color: PropTypes.string,
-  graphic: PropTypes.string,
+  name: PropTypes.string,
   children: PropTypes.node,
   size: PropTypes.number,
 };

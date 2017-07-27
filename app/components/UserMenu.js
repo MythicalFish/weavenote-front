@@ -12,7 +12,7 @@ export default function UserMenu(props) {
       <div className="flex-auto">
         {p.label}
       </div>
-      <Icon graphic={p.icon} size={16} className="ml1 flex-none" />
+      <Icon name={p.icon} size={16} className="ml1 flex-none" />
     </div>;
   return (
     <div>
@@ -44,7 +44,7 @@ const UserMenuButton = (props) => {
           </div>}
       </div>
       <Avatar {...{ user }} />
-      <Icon graphic="ChevronDown" size={20} className="ml1" />
+      <Icon name="ChevronDown" size={20} className="ml1" />
     </div>
   );
 };
