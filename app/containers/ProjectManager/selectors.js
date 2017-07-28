@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-export const selectDomain = () => (state) => state.get('ProjectManager');
+export const selectDomain = () => (state) => state.getIn(['Project', 'Manager']);
 
 export const selectProject = () =>
   createSelector(selectDomain(), (s) => s.get('project'));

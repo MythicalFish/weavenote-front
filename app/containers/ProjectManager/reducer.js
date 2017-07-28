@@ -1,11 +1,12 @@
 import { fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+import ProjectImageReducer from 'containers/ProjectImages/reducer';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
 import { DELETE_IMAGE_SUCCESS } from 'containers/ImageThumbnails/constants';
 import { UPDATE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
 import * as cTypes from 'containers/Comments/constants';
 import * as types from './constants';
 import { setImages } from './reducerHelpers';
-
 const initialState = fromJS({
   project: null,
   userRole: null,
@@ -14,7 +15,7 @@ const initialState = fromJS({
 const setComments = (state, action) =>
   state.setIn(['project', 'comments'], fromJS(action.response));
 
-function projectReducer(state = initialState, action) {
+function ProjectManagerReducer(state = initialState, action) {
   const { response, payload } = action;
 
   switch (action.type) {
@@ -61,4 +62,7 @@ function projectReducer(state = initialState, action) {
   }
 }
 
-export default projectReducer;
+export default combineReducers({
+  Manager: ProjectManagerReducer,
+  Images: ProjectImageReducer,
+});

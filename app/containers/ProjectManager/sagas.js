@@ -2,12 +2,17 @@ import { take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
+import { ProjectImagesWatcher } from 'containers/ProjectImages/sagas';
 import * as types from './constants';
 import * as actions from './actions';
 
-export default [projectManagerWatcher, materialListWatcher];
+export default [
+  ProjectManagerWatcher,
+  materialListWatcher,
+  ProjectImagesWatcher,
+];
 
-export function* projectManagerWatcher() {
+function* ProjectManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_PROJECT, fetchProject),
     yield takeLatest(types.UPDATE_PROJECT, updateProject),

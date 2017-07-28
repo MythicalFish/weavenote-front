@@ -1,11 +1,4 @@
-import {
-  call,
-  put,
-  take,
-  cancel,
-  takeLatest,
-  select,
-} from 'redux-saga/effects';
+import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as aActions from 'containers/App/actions';
@@ -13,9 +6,7 @@ import { selectNewAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
 
-export default [watch];
-
-function* watch() {
+export function* ProjectImagesWatcher() {
   const watcher = [
     yield takeLatest(types.CREATE_ANNOTATION, createAnnotation),
     yield takeLatest(types.ADD_ANNOTATION, bringFocus),
