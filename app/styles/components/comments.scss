@@ -2,8 +2,33 @@
   border: 1px solid transparent;
   @include roundedCorners();
   overflow: hidden;
-  font-size: .9em;
   color: $dark7;
+  @extend .pt1;
+  .comment {
+    @extend .flex;
+    .comment-avatar {
+      @extend .flex-none;
+      @extend .px1;
+      @extend .flex;
+      @extend .flex-column;
+      @extend .items-center;
+      .avatar {
+        @extend .flex-none;
+      }
+      &:after {
+        @extend .flex-auto;
+        content: ' ';
+        display: block;
+        width: 1px;
+        background: $dark1;
+        min-height: $space-1;
+      }
+    }
+    .comment-body {
+      @extend .flex-auto;
+      @extend .pb1;
+    }
+  }
   &:not(:last-child) {
     margin-bottom: $space-1;
   }
@@ -24,43 +49,11 @@
   &:hover {
     border-color: $dark2;
     .comment-newreply {
+      border-color: $dark1;
       button {
         opacity: 1;
-      }
-    }
-  }
-  &.selected {
-    .comment-newreply {
-      border-color: $dark1;
-      button.btn-footer {
-        background-color: $aqua-haze;
-      }
-    }
-  }
-  .comment {
-    position: relative;
-    .comment-avatar {
-      &:before {
-        content: ' ';
-        @extend .flex-none;
-        height: $space-1;
-      }
-    }
-    &:not(:last-child) {
-      .comment-avatar {
-        @extend .flex;
-        @extend .flex-column;
-        @extend .items-center;
-        .avatar {
-          @extend .flex-none;
-        }
-        &:after {
-          @extend .flex-auto;
-          content: ' ';
-          display: block;
-          width: 1px;
-          background: $dark1;
-          min-height: $space-1;
+        &.btn-footer {
+          background-color: $aqua-haze;
         }
       }
     }

@@ -12,7 +12,7 @@ const CommentActions = (props) => {
   const actionable = { type: 'Comment', id };
   return (
     <div>
-      <Dropdown align="right" className="tr lh0 pt2 pr2 dropdown-inline">
+      <div className="actions smaller1">
         <Button onClick={toggleEdit} label="Edit" />
         <Button
           label="Remove"
@@ -20,8 +20,6 @@ const CommentActions = (props) => {
             props.deleteComment({ comment, commentable });
           }}
         />
-      </Dropdown>
-      <div className="actions">
         {commentable.type === 'Project' &&
           <Button
             inlineIcon="plus"

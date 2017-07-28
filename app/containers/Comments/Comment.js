@@ -18,34 +18,32 @@ class Comment extends React.PureComponent {
       : comment.getIn(['user', 'name']);
     return (
       <div className={`comment ${className}`}>
-        <div className="flex">
-          <div className="comment-avatar flex-none pl1">
-            <Avatar user={comment.get('user')} small />
-          </div>
-          <div className="flex-auto p1">
-            {isSelected &&
-              <div className="bold">
-                {authorName}
-              </div>}
-            {this.isEditing()
-              ? <CommentForm
-                onSubmit={this.props.updateComment}
-                initialValues={{ commentable, comment }}
-                {...this.props}
-              />
-              : comment.get('text')}
-            {isSelected &&
-              this.isOwnComment() &&
-              !this.isEditing() &&
-              <CommentActions {...this.props} />}
-            {isSelected &&
-              <ImageThumbnails
-                images={comment.get('images')}
-                imageable={{ type: 'Comment', id }}
-                maxImages={this.props.maxImages}
-                deletable={this.isOwnComment()}
-              />}
-          </div>
+        <div className="comment-avatar">
+          <Avatar user={comment.get('user')} small />
+        </div>
+        <div className="comment-body">
+          {isSelected &&
+            <div className="bold smaller1">
+              {authorName}
+            </div>}
+          {this.isEditing()
+            ? <CommentForm
+              onSubmit={this.props.updateComment}
+              initialValues={{ commentable, comment }}
+              {...this.props}
+            />
+            : comment.get('text')}
+          {isSelected &&
+            this.isOwnComment() &&
+            !this.isEditing() &&
+            <CommentActions {...this.props} />}
+          {isSelected &&
+            <ImageThumbnails
+              images={comment.get('images')}
+              imageable={{ type: 'Comment', id }}
+              maxImages={this.props.maxImages}
+              deletable={this.isOwnComment()}
+            />}
         </div>
       </div>
     );
