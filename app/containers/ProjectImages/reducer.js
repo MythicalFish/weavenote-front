@@ -3,6 +3,7 @@ import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
 import { DELETE_IMAGE_SUCCESS } from 'containers/ImageThumbnails/constants';
 import { UPDATE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
 import { FETCH_PROJECT_SUCCESS } from 'containers/ProjectManager/constants';
+import { idToIndex } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({
@@ -61,6 +62,10 @@ function ProjectImagesReducer(state = initialState, action) {
       return setAnchor(anchors.size);
 
     case types.CREATE_ANNOTATION_SUCCESS:
+      const index = idToIndex(response.id, state.get('images'));
+      if (index !== undefined) {
+        return state.setIn(['images', index], fromJS(response));
+      }
       return state;
 
     default:
