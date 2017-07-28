@@ -15,16 +15,18 @@ import { setAnnotation, createAnnotation, cancelAnnotation } from './actions';
 
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
-  componentDidMount = () => {
-    this.selectImage(this.props.images.get('0'));
-  };
-  selectImage = (image) => {
-    this.setState({ currentImage: image });
+  componentDidMount() {
+    this.selectImage(0);
+  }
+  selectImage = (index) => {
+    const { images } = this.props;
+    const image = images.get(index);
+    this.setState({ currentImage: index });
     this.props.initialize('ImageForm', image, { form: 'ImageForm' });
   };
   render() {
     const { project, images } = this.props;
-    const { currentImage } = this.state;
+    const currentImage = images.get(this.state.currentImage);
     const imageable = { type: 'Project', id: project.get('id') };
     return (
       <div>

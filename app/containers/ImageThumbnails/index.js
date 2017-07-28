@@ -24,7 +24,7 @@ const ImageThumbnails = (props) => {
           type="button"
           onClick={() => {
             if (props.onSelect) {
-              props.onSelect(image);
+              props.onSelect(index);
             } else {
               props.openImage(image);
             }

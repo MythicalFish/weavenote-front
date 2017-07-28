@@ -11,6 +11,7 @@ export function* ProjectImagesWatcher() {
     yield takeLatest(types.CREATE_ANNOTATION, createAnnotation),
     yield takeLatest(types.ADD_ANNOTATION, bringFocus),
     yield takeLatest(types.CANCEL_ANNOTATION, hideFocus),
+    yield takeLatest(types.CREATE_ANNOTATION_SUCCESS, hideFocus),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));

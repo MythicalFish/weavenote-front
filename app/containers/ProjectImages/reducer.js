@@ -64,7 +64,9 @@ function ProjectImagesReducer(state = initialState, action) {
     case types.CREATE_ANNOTATION_SUCCESS:
       const index = idToIndex(response.id, state.get('images'));
       if (index !== undefined) {
-        return state.setIn(['images', index], fromJS(response));
+        return state
+          .setIn(['images', index], fromJS(response))
+          .set('newAnnotation', initialState.get('newAnnotation'));
       }
       return state;
 

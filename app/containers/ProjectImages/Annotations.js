@@ -22,7 +22,7 @@ class Annotations extends React.PureComponent {
       anchors.forEach((anchor, i) => {
         anchorLayer.push(
           <Anchor
-            key={`Annotation${id}Line${index}`}
+            key={`Annotation${id}Anchor${i}`}
             position={pixelPosition(anchor.toJS(), canvasSize)}
           />
         );
