@@ -1,7 +1,7 @@
 import React from 'react';
 import { Circle } from 'react-konva';
 
-export default function Anchor({ position, onDragEnd }) {
+export default function Anchor({ position, onDragEnd, draggable }) {
   return (
     <Circle
       x={position.x}
@@ -11,13 +11,14 @@ export default function Anchor({ position, onDragEnd }) {
       fill="#51b2fe"
       strokeWidth={2}
       stroke="#FFF"
-      draggable="true"
+      draggable={draggable}
       onDragEnd={onDragEnd}
     />
   );
 }
 
 Anchor.propTypes = {
+  draggable: React.PropTypes.bool,
   position: React.PropTypes.object,
   onDragEnd: React.PropTypes.func,
 };

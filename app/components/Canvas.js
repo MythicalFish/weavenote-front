@@ -6,7 +6,7 @@ export default function Canvas(props) {
   delete size.position;
   const Overlay = () => <Rect {...size} onClick={onClick} />;
   return (
-    <div className="canvas cursor-crosshair">
+    <div className={`canvas ${onClick ? 'cursor-crosshair' : ''}`}>
       <Stage {...size}>
         <Layer>
           <Overlay />
