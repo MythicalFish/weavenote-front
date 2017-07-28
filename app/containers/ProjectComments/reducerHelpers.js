@@ -10,10 +10,10 @@ export function setImages(state, { response }) {
 }
 
 function commentImageKeyPath(state, id) {
-  const comments = state.getIn(['project', 'comments']);
+  const comments = state.get('comments');
   const index = idToIndex(id, comments);
   if (index !== undefined) {
-    return ['project', 'comments', index, 'images'];
+    return ['comments', index, 'images'];
   }
   return commentReplyImageKeyPath(comments, id);
 }
@@ -23,7 +23,7 @@ function commentReplyImageKeyPath(comments, id) {
   comments.forEach((comment, commentIndex) => {
     const index = idToIndex(id, comment.get('replies'));
     if (index !== undefined) {
-      kp = ['project', 'comments', commentIndex, 'replies', index, 'images'];
+      kp = ['comments', commentIndex, 'replies', index, 'images'];
     }
   });
   return kp;

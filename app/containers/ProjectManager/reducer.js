@@ -1,26 +1,17 @@
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
-import ProjectImageReducer from 'containers/ProjectImages/reducer';
-import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
-import { DELETE_IMAGE_SUCCESS } from 'containers/ImageThumbnails/constants';
-import { UPDATE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
-import * as cTypes from 'containers/Comments/constants';
+import ProjectImagesReducer from 'containers/ProjectImages/reducer';
+import ProjectCommentsReducer from 'containers/ProjectComments/reducer';
 import * as types from './constants';
-import { setImages } from './reducerHelpers';
 const initialState = fromJS({
   project: null,
   userRole: null,
 });
 
-const setComments = (state, action) =>
-  state.setIn(['project', 'comments'], fromJS(action.response));
-
 function ProjectManagerReducer(state = initialState, action) {
-  const { response, payload } = action;
+  const { response } = action;
 
   switch (action.type) {
-    // Project
-
     case types.FETCH_PROJECT:
       return initialState;
 
@@ -35,28 +26,6 @@ function ProjectManagerReducer(state = initialState, action) {
     case types.UPDATE_PROJECT_SUCCESS:
       return state;
 
-    // Images
-
-    case CREATE_IMAGE_SUCCESS:
-      return setImages(state, action);
-
-    case DELETE_IMAGE_SUCCESS:
-      return setImages(state, action);
-
-    case UPDATE_IMAGE_SUCCESS:
-      return setImages(state, action);
-
-    // Comments
-
-    case cTypes.CREATE_COMMENT_SUCCESS:
-      return setComments(state, action);
-
-    case cTypes.UPDATE_COMMENT_SUCCESS:
-      return setComments(state, action);
-
-    case cTypes.DELETE_COMMENT_SUCCESS:
-      return setComments(state, action);
-
     default:
       return state;
   }
@@ -64,5 +33,6 @@ function ProjectManagerReducer(state = initialState, action) {
 
 export default combineReducers({
   Manager: ProjectManagerReducer,
-  Images: ProjectImageReducer,
+  Images: ProjectImagesReducer,
+  Comments: ProjectCommentsReducer,
 });

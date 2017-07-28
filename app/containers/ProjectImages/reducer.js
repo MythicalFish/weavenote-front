@@ -15,7 +15,7 @@ const initialState = fromJS({
   images: [],
 });
 
-function ProjectImageReducer(state = initialState, action) {
+function ProjectImagesReducer(state = initialState, action) {
   const { payload, response } = action;
 
   const annotation = state.get('newAnnotation');
@@ -68,4 +68,4 @@ function ProjectImageReducer(state = initialState, action) {
   }
 }
 
-export default ProjectImageReducer;
+export default ProjectImagesReducer;

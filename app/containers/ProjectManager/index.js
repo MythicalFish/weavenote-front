@@ -9,7 +9,7 @@ import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
 import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
-import Comments from 'containers/Comments';
+import ProjectComments from 'containers/ProjectComments';
 import Modal from 'components/Modal';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
@@ -58,10 +58,7 @@ class ProjectManager extends React.PureComponent {
           <div className="container-wide">
             <div className="row">
               <div className="col-xs-12 last-xs first-md col-md-3 blurrable">
-                <Comments
-                  comments={this.props.comments}
-                  commentable={{ type: 'Project', id }}
-                />
+                <ProjectComments project={project} />
               </div>
               <div className="col-xs-6 col-md-5 flex justify-center">
                 <div className="flex flex-column items-center lh0">
@@ -87,7 +84,6 @@ class ProjectManager extends React.PureComponent {
 
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
-  comments: React.PropTypes.object,
   currentSection: React.PropTypes.object,
   changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
@@ -103,7 +99,6 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  comments: selectors.selectComments(),
   project: selectors.selectProject(),
   currentSection: selectCurrentSection(),
   focus: selectFocus(),
