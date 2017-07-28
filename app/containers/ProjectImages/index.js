@@ -16,14 +16,14 @@ import { setAnnotation, createAnnotation, cancelAnnotation } from './actions';
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
   componentDidMount = () => {
-    this.selectImage(this.props.project.getIn(['images', '0']));
+    this.selectImage(this.props.images.get('0'));
   };
   selectImage = (image) => {
     this.setState({ currentImage: image });
     this.props.initialize('ImageForm', image, { form: 'ImageForm' });
   };
   render() {
-    const { project } = this.props;
+    const { project, images } = this.props;
     const { currentImage } = this.state;
     const imageable = { type: 'Project', id: project.get('id') };
     return (
@@ -38,7 +38,7 @@ class ProjectImages extends React.PureComponent {
           </div>}
         <div className="pt1 flex blurrable">
           <ImageThumbnails
-            images={project.get('images')}
+            images={images}
             onSelect={this.selectImage}
             {...{ currentImage }}
           />
@@ -50,6 +50,7 @@ class ProjectImages extends React.PureComponent {
 }
 
 ProjectImages.propTypes = {
+  images: PropTypes.object,
   project: PropTypes.object,
   initialize: PropTypes.func,
 };
@@ -62,7 +63,8 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  annotation: selectors.selectAnnotation(),
+  images: selectors.selectImages(),
+  newAnnotation: selectors.selectNewAnnotation(),
   focus: selectFocus(),
 });
 

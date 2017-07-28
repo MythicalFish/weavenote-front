@@ -1,39 +1,67 @@
 import { fromJS } from 'immutable';
+import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
+import { DELETE_IMAGE_SUCCESS } from 'containers/ImageThumbnails/constants';
+import { UPDATE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
+import { FETCH_PROJECT_SUCCESS } from 'containers/ProjectManager/constants';
 import * as types from './constants';
 
 const initialState = fromJS({
-  annotation: {
+  newAnnotation: {
     maxAnchors: 1,
     annotatable: null,
     anchors: [],
     type: null,
   },
+  images: [],
 });
 
 function projectImagesReducer(state = initialState, action) {
-  const annotation = state.get('annotation');
+  const { payload, response } = action;
+
+  const annotation = state.get('newAnnotation');
   const maxAnchors = annotation.get('maxAnchors');
   const anchors = annotation.get('anchors');
-  const { payload } = action;
-  const setAnchor = (i) => state.setIn(['annotation', 'anchors', i], payload);
+
+  const setAnchor = (i) => state.setIn(['newAnnotation', 'anchors', i], payload);
+
+  const setImages = () => {
+    const { type } = response.imageable;
+    if (type && type !== 'Project') return state;
+    return state.set('images', fromJS(response.images));
+  };
 
   switch (action.type) {
+    case FETCH_PROJECT_SUCCESS:
+      return state.set('images', fromJS(response.images));
+
+    case CREATE_IMAGE_SUCCESS:
+      return setImages();
+
+    case DELETE_IMAGE_SUCCESS:
+      return setImages();
+
+    case UPDATE_IMAGE_SUCCESS:
+      return setImages();
+
     case types.CANCEL_ANNOTATION:
-      return initialState;
+      return state.set('newAnnotation', initialState.get('newAnnotation'));
 
     case types.ADD_ANNOTATION:
       return state
-        .setIn(['annotation', 'maxAnchors'], payload.maxAnchors)
-        .setIn(['annotation', 'annotatable'], payload.annotatable)
-        .setIn(['annotation', 'type'], payload.type);
+        .setIn(['newAnnotation', 'maxAnchors'], payload.maxAnchors)
+        .setIn(['newAnnotation', 'annotatable'], payload.annotatable)
+        .setIn(['newAnnotation', 'type'], payload.type);
 
     case types.SET_ANNOTATION:
       if (maxAnchors === 1) {
         return setAnchor(0);
       } else if (maxAnchors === anchors.size) {
-        return setAnchor(0).deleteIn(['annotation', 'anchors', 1]);
+        return setAnchor(0).deleteIn(['newAnnotation', 'anchors', 1]);
       }
       return setAnchor(anchors.size);
+
+    case types.CREATE_ANNOTATION_SUCCESS:
+      return state;
 
     default:
       return state;

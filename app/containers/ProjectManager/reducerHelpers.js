@@ -1,19 +1,12 @@
 import { fromJS } from 'immutable';
 import { idToIndex } from 'utils/reducerHelpers';
 
-export function setImages(state, { response }, imageCount = null) {
+export function setImages(state, { response }) {
   const { type, id } = response.imageable;
-  if (type !== 'Project' && type !== 'Comment') return state;
-  let keyPath = ['project', 'images'];
-  if (type === 'Comment') {
-    keyPath = commentImageKeyPath(state, id);
-  }
-  let newState = state;
-  if (keyPath) newState = newState.setIn(keyPath, fromJS(response.images));
-  if (type === 'Project' && imageCount >= 0) {
-    newState = newState.set('currentImage', imageCount);
-  }
-  return newState;
+  if (type !== 'Comment') return state;
+  const keyPath = commentImageKeyPath(state, id);
+  if (keyPath) return state.setIn(keyPath, fromJS(response.images));
+  return state;
 }
 
 function commentImageKeyPath(state, id) {

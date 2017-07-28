@@ -18,16 +18,16 @@ class Annotations extends React.PureComponent {
   key = (annotation, index) =>
     `Annotation${annotation.get('id') || 'New'}Anchor${index}`;
   render() {
-    const { annotation, canvasSize } = this.props;
-    if (!annotation.get('annotatable')) return null;
-    const anchors = annotation.get('anchors');
+    const { newAnnotation, canvasSize } = this.props;
+    if (!newAnnotation.get('annotatable')) return null;
+    const anchors = newAnnotation.get('anchors');
     return (
       <div>
         <Canvas onClick={this.setAnnotation} size={canvasSize}>
           {anchors.size === 2 && <Line {...{ anchors, canvasSize }} />}
           {anchors.map((anchor, index) =>
             <Anchor
-              key={this.key(annotation, index)}
+              key={this.key(newAnnotation, index)}
               position={pixelPosition(anchor, canvasSize)}
               onDragEnd={this.setAnnotation}
             />
@@ -39,7 +39,7 @@ class Annotations extends React.PureComponent {
             secondary
             onClick={this.props.cancelAnnotation}
           />
-          {annotation.get('maxAnchors') === anchors.size &&
+          {newAnnotation.get('maxAnchors') === anchors.size &&
             <Button label="Save annotation" onClick={this.createAnnotation} />}
         </div>
       </div>
@@ -50,7 +50,7 @@ class Annotations extends React.PureComponent {
 Annotations.propTypes = {
   currentImage: PropTypes.object,
   canvasSize: PropTypes.object,
-  annotation: PropTypes.object,
+  newAnnotation: PropTypes.object,
   setAnnotation: PropTypes.func,
   createAnnotation: PropTypes.func,
   cancelAnnotation: PropTypes.func,

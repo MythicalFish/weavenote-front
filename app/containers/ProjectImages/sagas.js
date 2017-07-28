@@ -9,7 +9,7 @@ import {
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as aActions from 'containers/App/actions';
-import { selectAnnotation } from './selectors';
+import { selectNewAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -26,7 +26,7 @@ function* watch() {
 }
 
 function* createAnnotation({ image }) {
-  const annotation = yield select(selectAnnotation());
+  const annotation = yield select(selectNewAnnotation());
   const image_id = image.get('id');
   yield sagas.post(
     'annotations',

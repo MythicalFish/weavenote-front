@@ -11,8 +11,6 @@ const initialState = fromJS({
   userRole: null,
 });
 
-const imageCount = (state) => state.getIn(['project', 'images']).size;
-
 const setComments = (state, action) =>
   state.setIn(['project', 'comments'], fromJS(action.response));
 
@@ -39,10 +37,10 @@ function projectReducer(state = initialState, action) {
     // Images
 
     case CREATE_IMAGE_SUCCESS:
-      return setImages(state, action, imageCount(state));
+      return setImages(state, action);
 
     case DELETE_IMAGE_SUCCESS:
-      return setImages(state, action, imageCount(state) - 2);
+      return setImages(state, action);
 
     case UPDATE_IMAGE_SUCCESS:
       return setImages(state, action);
