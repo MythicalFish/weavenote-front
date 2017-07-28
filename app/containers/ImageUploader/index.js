@@ -59,8 +59,8 @@ class ImageUploader extends React.Component {
       );
     }
     return (
-      <div>
-        <PlusButton>
+      <div className="ml1">
+        <PlusButton color="gray" size={25}>
           <Button />
         </PlusButton>
         {this.state.progress > 0 &&

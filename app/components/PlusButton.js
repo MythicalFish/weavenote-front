@@ -2,12 +2,11 @@ import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 
 export default function PlusButton(props) {
-  return <Icon name="PlusCircle" {...props} color="color2x" />;
+  const bProps = { ...props };
+  bProps.color = props.color || 'color2x';
+  return <Icon name="PlusCircle" {...bProps} />;
 }
 
 PlusButton.propTypes = {
-  onClick: PropTypes.func,
-  to: PropTypes.string,
   color: PropTypes.string,
-  children: PropTypes.node,
 };

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Thumbnail from 'components/Thumbnail';
 import { openImage } from 'containers/App/actions';
+import { deleteImage } from './actions';
 
 const ImageThumbnails = (props) => {
   const { images, currentImage } = props;
@@ -48,13 +49,13 @@ ImageThumbnails.propTypes = {
   images: PropTypes.object,
   currentImage: PropTypes.object,
   maxImages: PropTypes.number,
-  deletable: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       openImage,
+      deleteImage,
     },
     dispatch
   );
