@@ -5,7 +5,7 @@ const initialState = fromJS({
   measurements: [],
 });
 
-function projectReducer(state = initialState, action) {
+function ProjectMeasurementsReducer(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_MEASUREMENTS_SUCCESS:
       return state.set('measurements', fromJS(action.measurements));
@@ -31,4 +31,4 @@ function projectReducer(state = initialState, action) {
   }
 }
 
-export default projectReducer;
+export default ProjectMeasurementsReducer;

@@ -7,7 +7,7 @@ const initialState = fromJS({
   materialCost: 0,
 });
 
-function componentReducer(state = initialState, action) {
+function ProjectComponentsReducer(state = initialState, action) {
   const currentComponent = state.get('currentComponent');
 
   switch (action.type) {
@@ -43,4 +43,4 @@ function componentReducer(state = initialState, action) {
   }
 }
 
-export default componentReducer;
+export default ProjectComponentsReducer;

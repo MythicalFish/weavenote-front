@@ -5,9 +5,7 @@ import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
 
-export default [projectManagerWatcher];
-
-export function* projectManagerWatcher() {
+export function* ProjectMeasurementsWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MEASUREMENTS, fetchMeasurements),
     yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
@@ -18,7 +16,7 @@ export function* projectManagerWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-export function* fetchMeasurements(action) {
+function* fetchMeasurements(action) {
   yield sagas.get(
     `projects/${action.projectID}/measurements`,
     null,
@@ -26,7 +24,7 @@ export function* fetchMeasurements(action) {
   );
 }
 
-export function* createMeasurementGroup(action) {
+function* createMeasurementGroup(action) {
   const group = { name: 'X' };
   yield sagas.post(
     `projects/${action.projectID}/measurement_groups`,
@@ -35,7 +33,7 @@ export function* createMeasurementGroup(action) {
   );
 }
 
-export function* createMeasurementName(action) {
+function* createMeasurementName(action) {
   const name = { value: 'Untitled' };
   yield sagas.post(
     `projects/${action.projectID}/measurement_names`,
@@ -44,7 +42,7 @@ export function* createMeasurementName(action) {
   );
 }
 
-export function* updateMeasurements(action) {
+function* updateMeasurements(action) {
   const measurements = action.measurements.toJS();
   const projectID = measurements.groups[0].project_id;
   try {

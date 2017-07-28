@@ -5,8 +5,6 @@ import * as types from './constants';
 import * as actions from './actions';
 import { fetchMaterialCost } from '../ProjectManager/actions';
 
-export default [componentsWatcher];
-
 const componentsURL = (payload, addition = null) => {
   let end = '';
   if (addition) end = `/${addition}`;
@@ -15,7 +13,7 @@ const componentsURL = (payload, addition = null) => {
 
 const componentURL = (payload) => componentsURL(payload, payload.id);
 
-export function* componentsWatcher() {
+export function* ProjectComponentsWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_COMPONENTS, fetchComponents),
     yield takeLatest(types.UPDATE_COMPONENT, updateComponent),
@@ -26,11 +24,11 @@ export function* componentsWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-export function* fetchComponents({ payload }) {
+function* fetchComponents({ payload }) {
   yield sagas.get(componentsURL(payload), null, actions.fetchComponentsSuccess);
 }
 
-export function* updateComponent(action) {
+function* updateComponent(action) {
   const payload = action.payload.toJS();
   yield sagas.patch(
     componentURL(payload),
@@ -40,7 +38,7 @@ export function* updateComponent(action) {
   yield put(fetchMaterialCost(payload.project_id));
 }
 
-export function* createComponent({ payload }) {
+function* createComponent({ payload }) {
   yield sagas.post(
     componentsURL(payload),
     payload,
@@ -48,7 +46,7 @@ export function* createComponent({ payload }) {
   );
 }
 
-export function* deleteComponent({ payload }) {
+function* deleteComponent({ payload }) {
   yield sagas.destroy(
     componentURL(payload),
     null,

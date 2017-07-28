@@ -2,6 +2,9 @@ import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import ProjectImagesReducer from 'containers/ProjectImages/reducer';
 import ProjectCommentsReducer from 'containers/ProjectComments/reducer';
+import ProjectComponentsReducer from 'containers/ProjectComponents/reducer';
+import ProjectInstructionsReducer from 'containers/ProjectInstructions/reducer';
+import ProjectMeasurementsReducer from 'containers/ProjectMeasurements/reducer';
 import * as types from './constants';
 const initialState = fromJS({
   project: null,
@@ -35,4 +38,7 @@ export default combineReducers({
   Manager: ProjectManagerReducer,
   Images: ProjectImagesReducer,
   Comments: ProjectCommentsReducer,
+  Components: ProjectComponentsReducer,
+  Instructions: ProjectInstructionsReducer,
+  Measurements: ProjectMeasurementsReducer,
 });

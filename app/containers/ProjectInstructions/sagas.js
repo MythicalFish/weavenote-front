@@ -4,9 +4,7 @@ import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
 
-export default [instructionWatcher];
-
-function* instructionWatcher() {
+export function* ProjectInstructionsWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_INSTRUCTIONS, fetchInstructions),
     yield takeLatest(types.CREATE_INSTRUCTION, createInstruction),

@@ -8,7 +8,7 @@ const initialState = fromJS({
   currentInstruction: null,
 });
 
-function instructionReducer(state = initialState, action) {
+function ProjectInstructionsReducer(state = initialState, action) {
   if (!forInstruction(action)) return state;
 
   const currentInstruction = state.get('currentInstruction');
@@ -54,4 +54,4 @@ function instructionReducer(state = initialState, action) {
   }
 }
 
-export default instructionReducer;
+export default ProjectInstructionsReducer;
