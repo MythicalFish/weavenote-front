@@ -96,7 +96,7 @@ class Dropdown extends React.PureComponent {
         items.push(
           <li key={item} onClick={this.toggleState(item)}>
             {i.name || i.label}
-            {value.iso_code &&
+            {i.iso_code &&
               <PriceSymbol code={i.iso_code} className="bold ml1" />}
             {i.hex_code && <Dot className="ml1" color={i.hex_code} />}
           </li>
