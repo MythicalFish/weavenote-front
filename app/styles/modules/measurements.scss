@@ -1,36 +1,33 @@
 $bStyle: 1px solid #ccc;
 #measurements {
   font-size: 11px;
-  input[type="text"],
-  input[type="number"],
-  .column-header {
-    padding: $space-1;
-    font-size: inherit;
-  }
   .column {
-    max-width: 70px;
-    border-radius: 4px;
+    @include roundedCorners();
+    max-width: 45px;
     overflow: hidden;
     border: $bStyle;
-    overflow: hidden;
-    input {
+    text-align: center;
+    input,
+    button,
+    label {
       border: none;
       text-align: center;
       width: 100%;
       color: $dark8;
-    }
-    > div {
+      padding: 10px;
+      font-family: inherit;
+      font-size: inherit;
+      text-align: inherit;
+      display: block;
+      border-radius: 0;
+      -webkit-border-radius: 0;
       &:not(:last-child) {
-        input {
-          border-bottom: $bStyle;
-        }
+        border-bottom: $bStyle;
       }
     }
     &:first-child {
       max-width: 200px;
-      input {
-        text-align: left;
-      }
+      text-align: left;
     }
     &:not(:last-child) {
       margin-right: 6px;
