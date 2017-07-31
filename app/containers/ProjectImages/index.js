@@ -8,6 +8,7 @@ import ImageThumbnails from 'containers/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 import ImageForm from 'containers/ImageForm';
 import { selectFocus } from 'containers/App/selectors';
+import { selectCurrentComment } from 'containers/Comments/selectors';
 import CurrentImage from './CurrentImage';
 import { PLACEHOLDER } from './constants';
 import * as selectors from './selectors';
@@ -68,6 +69,7 @@ const mapState = createStructuredSelector({
   images: selectors.selectImages(),
   newAnnotation: selectors.selectNewAnnotation(),
   focus: selectFocus(),
+  currentComment: selectCurrentComment(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectImages);

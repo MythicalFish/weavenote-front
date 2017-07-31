@@ -30,6 +30,19 @@ class Comments extends React.PureComponent {
     delete cProps.comments;
     return (
       <div>
+        <div className="mb2">
+          {isCreating
+            ? <CommentForm
+              onSubmit={this.props.createComment}
+              initialValues={{ commentable }}
+              {...cProps}
+            />
+            : <Button
+              label="Leave a comment"
+              secondary
+              onClick={this.toggleNew}
+            />}
+        </div>
         {comments.map((comment, index) =>
           <CommentWrapper
             key={`comment${comment.get('id')}`}
@@ -40,17 +53,6 @@ class Comments extends React.PureComponent {
             }}
           />
         )}
-        {isCreating
-          ? <CommentForm
-            onSubmit={this.props.createComment}
-            initialValues={{ commentable }}
-            {...cProps}
-          />
-          : <Button
-            label="Leave a comment"
-            secondary
-            onClick={this.toggleNew}
-          />}
       </div>
     );
   }
@@ -86,7 +88,7 @@ const mapState = createStructuredSelector({
   isCreating: selectors.isCreating(),
   isEditing: selectors.isEditing(),
   isReplying: selectors.isReplying(),
-  currentComment: selectors.currentComment(),
+  currentComment: selectors.selectCurrentComment(),
 });
 
 export default connect(mapState, mapDispatch)(Comments);

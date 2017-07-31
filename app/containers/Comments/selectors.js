@@ -11,8 +11,5 @@ export const isEditing = () =>
 export const isReplying = () =>
   createSelector(selectDomain(), (s) => s.get('isReplying'));
 
-export const currentComment = () =>
+export const selectCurrentComment = () =>
   createSelector(selectDomain(), (s) => s.get('currentComment'));
-
-export const commentAnnotation = () =>
-  createSelector(selectDomain(), (s) => s.get('annotation'));

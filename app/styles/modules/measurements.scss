@@ -1,3 +1,4 @@
+$bStyle: 1px solid #ccc;
 #measurements {
   input[type="text"],
   input[type="number"] {
@@ -5,17 +6,21 @@
   }
   .column {
     max-width: 70px;
-    @extend .b1;
     border-radius: 4px;
     overflow: hidden;
-    > div > div {
-      &:not(:last-child) {
-        @extend .bb1;
-      }
-    }
+    border: $bStyle;
+    overflow: hidden;
     input {
+      border: none;
       text-align: center;
       width: 100%;
+    }
+    > div {
+      &:not(:last-child) {
+        input {
+          border-bottom: $bStyle;
+        }
+      }
     }
     &:first-child {
       max-width: 200px;
@@ -24,7 +29,7 @@
       }
     }
     &:not(:last-child) {
-      margin-right: $space-1;
+      margin-right: 6px;
     }
   }
 }

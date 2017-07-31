@@ -1,15 +1,15 @@
 import React from 'react';
 import { Circle } from 'react-konva';
 
-export default function Anchor({ position, onDragEnd, draggable }) {
+export default function Anchor({ position, onDragEnd, draggable, active }) {
   return (
     <Circle
       x={position.x}
       y={position.y}
-      width={15}
-      height={15}
-      fill="#51b2fe"
-      strokeWidth={2}
+      width={22}
+      height={22}
+      fill={active ? '#51b2fe' : '#CCC'}
+      strokeWidth={3}
       stroke="#FFF"
       draggable={draggable}
       onDragEnd={onDragEnd}
@@ -18,6 +18,7 @@ export default function Anchor({ position, onDragEnd, draggable }) {
 }
 
 Anchor.propTypes = {
+  active: React.PropTypes.bool,
   draggable: React.PropTypes.bool,
   position: React.PropTypes.object,
   onDragEnd: React.PropTypes.func,

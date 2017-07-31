@@ -30,6 +30,7 @@ class NewAnnotation extends React.PureComponent {
               position={pixelPosition(anchor, canvasSize)}
               onDragEnd={this.setAnnotation}
               draggable
+              active
             />
           )}
         </Canvas>
