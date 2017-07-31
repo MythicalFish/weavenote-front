@@ -15,40 +15,20 @@ import Form from './Form';
 class ProjectMeasurements extends React.PureComponent {
   componentDidMount() {
     const { project } = this.props;
-    this.props.fetchMeasurements(project.get('id'));
+    this.props.fetch(project.get('id'));
   }
 
-  update = (data) => {
-    this.props.updateMeasurements(data);
-  };
-
-  createGroup = (projectID) => {
-    this.props.createMeasurementGroup(projectID);
-  };
-
-  createName = (projectID) => {
-    this.props.createMeasurementName(projectID);
-  };
-
   render() {
-    const { project, measurements } = this.props;
-    if (measurements.size < 1) return null;
+    const { project, measurements, createGroup, createName } = this.props;
+    if (!measurements) return null;
     return (
       <div>
         <div className="right-align">
-          <PlusButton
-            onClick={() => {
-              this.createGroup(project.get('id'));
-            }}
-          />
+          <PlusButton onClick={() => createGroup(project.get('id'))} />
         </div>
-        <Form initialValues={measurements} onSubmit={this.update} />
+        <Form initialValues={measurements} onSubmit={this.props.update} />
         <div>
-          <PlusButton
-            onClick={() => {
-              this.createName(project.get('id'));
-            }}
-          />
+          <PlusButton onClick={() => createName(project.get('id'))} />
         </div>
       </div>
     );
@@ -58,19 +38,19 @@ class ProjectMeasurements extends React.PureComponent {
 ProjectMeasurements.propTypes = {
   project: PropTypes.object,
   measurements: PropTypes.object,
-  fetchMeasurements: PropTypes.func,
-  updateMeasurements: PropTypes.func,
-  createMeasurementGroup: PropTypes.func,
-  createMeasurementName: PropTypes.func,
+  fetch: PropTypes.func,
+  update: PropTypes.func,
+  createGroup: PropTypes.func,
+  createName: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      fetchMeasurements,
-      updateMeasurements,
-      createMeasurementGroup,
-      createMeasurementName,
+      fetch: fetchMeasurements,
+      update: updateMeasurements,
+      createGroup: (id) => createMeasurementGroup(id),
+      createName: (id) => createMeasurementName(id),
     },
     dispatch
   );

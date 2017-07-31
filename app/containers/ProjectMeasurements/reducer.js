@@ -1,30 +1,21 @@
 import { fromJS } from 'immutable';
 import * as types from './constants';
 
-const initialState = fromJS({
-  measurements: [],
-});
+const initialState = null;
 
-function ProjectMeasurementsReducer(state = initialState, action) {
-  switch (action.type) {
+function ProjectMeasurementsReducer(state = initialState, { type, response }) {
+  switch (type) {
     case types.FETCH_MEASUREMENTS_SUCCESS:
-      return state.set('measurements', fromJS(action.measurements));
+      return fromJS(response);
 
     case types.UPDATE_MEASUREMENTS_SUCCESS:
-      const { measurements } = action.response;
-      return state.set('measurements', fromJS(measurements));
-
-    case types.CREATE_MEASUREMENT_GROUP:
-      return state.set('measurements', fromJS([]));
+      return fromJS(response);
 
     case types.CREATE_MEASUREMENT_GROUP_SUCCESS:
-      return state.set('measurements', fromJS(action.measurements));
-
-    case types.CREATE_MEASUREMENT_NAME:
-      return state.set('measurements', fromJS([]));
+      return fromJS(response);
 
     case types.CREATE_MEASUREMENT_NAME_SUCCESS:
-      return state.set('measurements', fromJS(action.measurements));
+      return fromJS(response);
 
     default:
       return state;
