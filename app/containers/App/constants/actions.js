@@ -21,3 +21,5 @@ export const CLOSE_MODAL = '@@app/CLOSE_MODAL';
 export const OPEN_IMAGE = '@@app/OPEN_IMAGE';
 export const BRING_FOCUS = '@@app/BRING_FOCUS';
 export const HIDE_FOCUS = '@@app/HIDE_FOCUS';
+export const OPEN_DROPDOWN = '@@app/OPEN_DROPDOWN';
+export const CLOSE_DROPDOWN = '@@app/CLOSE_DROPDOWN';

@@ -1,30 +1,44 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import Dot from 'components/Dot';
 import PriceSymbol from 'components/PriceSymbol';
 import Icon from 'components/Icon';
 import TetherComponent from 'react-tether';
+import { selectDropdownID } from 'containers/App/selectors';
+import { openDropdown, closeDropdown } from 'containers/App/actions';
 
-export default class Dropdown extends React.PureComponent {
-  state = { active: false, className: '' };
+class Dropdown extends React.PureComponent {
+  state = { className: '', id: null };
 
-  toggleState = () => {
-    this.setState({ active: !this.state.active });
+  componentDidMount = () => {
+    this.setState({ id: this.randomID() });
   };
 
-  handleClick = (item) => () => {
+  randomID() {
+    return Math.random().toString(36).substring(7);
+  }
+
+  isActive = () => {
+    const { dropdownID } = this.props;
+    return dropdownID === this.state.id;
+  };
+
+  toggleState = (item) => () => {
     const { readOnly, onChange, onChanged } = this.props;
     if (readOnly) return;
-    if (this.state.active) {
+    if (this.isActive()) {
       this.setState({ className: '' });
       setTimeout(() => {
-        this.toggleState();
+        this.props.closeDropdown();
         if (item) {
           if (onChange) onChange(item);
           if (onChanged) onChanged(item);
         }
       }, 200);
     } else {
-      this.toggleState();
+      this.props.openDropdown(this.state.id);
       setTimeout(() => {
         this.setState({ className: 'open' });
       }, 1);
@@ -53,7 +67,7 @@ export default class Dropdown extends React.PureComponent {
       );
     }
     return (
-      <button onClick={this.handleClick()} type="button">
+      <button onClick={this.toggleState()} type="button">
         {labelContent}
       </button>
     );
@@ -66,7 +80,7 @@ export default class Dropdown extends React.PureComponent {
       .className}`;
     if (children) {
       return (
-        <div className={itemsClass}>
+        <div className={itemsClass} onClick={this.toggleState()}>
           {children}
           {this.tail()}
         </div>
@@ -80,7 +94,7 @@ export default class Dropdown extends React.PureComponent {
         let i = item;
         if (i.toJS) i = i.toJS();
         items.push(
-          <li key={item} onClick={this.handleClick(item)}>
+          <li key={item} onClick={this.toggleState(item)}>
             {i.name || i.label}
             {value.iso_code &&
               <PriceSymbol code={i.iso_code} className="bold ml1" />}
@@ -104,7 +118,7 @@ export default class Dropdown extends React.PureComponent {
     const { tail } = this.props;
     if (tail) {
       return tail({
-        onClick: this.handleClick(),
+        onClick: this.toggleState(),
       });
     }
     return null;
@@ -128,7 +142,7 @@ export default class Dropdown extends React.PureComponent {
       <div className={`dropdown ${inputClass}`}>
         <TetherComponent {...this.tetherOptions}>
           {this.label()}
-          {this.state.active &&
+          {this.isActive() &&
             <div>
               {this.items()}
             </div>}
@@ -148,5 +162,23 @@ Dropdown.propTypes = {
   readOnly: PropTypes.bool,
   align: PropTypes.string,
   children: PropTypes.node,
-  button: PropTypes.node,
+  dropdownID: PropTypes.string,
+  closeDropdown: PropTypes.func,
+  openDropdown: PropTypes.func,
 };
+
+export function mapDispatch(dispatch) {
+  return bindActionCreators(
+    {
+      openDropdown,
+      closeDropdown,
+    },
+    dispatch
+  );
+}
+
+const mapState = createStructuredSelector({
+  dropdownID: selectDropdownID(),
+});
+
+export default connect(mapState, mapDispatch)(Dropdown);

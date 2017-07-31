@@ -69,3 +69,6 @@ export const selectModalImage = () =>
 
 export const selectFocus = () =>
   createSelector(selectDomain(), (s) => s.get('focus'));
+
+export const selectDropdownID = () =>
+  createSelector(selectDomain(), (s) => s.get('dropdownID'));

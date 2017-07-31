@@ -67,3 +67,11 @@ export function bringFocus(id) {
 export function hideFocus() {
   return { type: types.HIDE_FOCUS };
 }
+
+export function closeDropdown() {
+  return { type: types.CLOSE_DROPDOWN };
+}
+
+export function openDropdown(id) {
+  return { type: types.OPEN_DROPDOWN, id };
+}

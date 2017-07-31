@@ -32,6 +32,7 @@ const initialState = fromJS({
   modalID: null,
   modalImage: null,
   focus: null,
+  dropdownID: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -73,7 +74,7 @@ function appReducer(state = initialState, action) {
     case materialActionTypes.FETCH_MATERIALS_SUCCESS:
       return state.set('materials', fromJS(action.materials));
 
-    // Modal
+    // Misc
 
     case appActionTypes.OPEN_MODAL:
       return state.set('modalID', action.id);
@@ -89,6 +90,12 @@ function appReducer(state = initialState, action) {
 
     case appActionTypes.HIDE_FOCUS:
       return state.set('focus', null);
+
+    case appActionTypes.OPEN_DROPDOWN:
+      return state.set('dropdownID', action.id);
+
+    case appActionTypes.CLOSE_DROPDOWN:
+      return state.set('dropdownID', null);
 
     default:
       return state;
