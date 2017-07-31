@@ -39,6 +39,7 @@ function commentsReducer(state = initialState, action) {
 
     case types.WRITE_REPLY:
       return state
+        .set('currentComment', id(action))
         .set('isCreating', false)
         .set('isEditing', null)
         .set('isReplying', id(action));

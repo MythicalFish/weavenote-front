@@ -23,9 +23,11 @@ class CommentWrapper extends React.PureComponent {
     };
 
     return (
-      <div className={cClass} onClick={this.switchComment}>
-        <Comment {...cProps} className="comment-head" />
-        <CommentReplies {...cProps} />
+      <div className={cClass}>
+        <div onClick={this.switchComment}>
+          <Comment {...cProps} className="comment-head" />
+          <CommentReplies {...cProps} />
+        </div>
         <CommentNewReply {...cProps} />
       </div>
     );
