@@ -48,7 +48,7 @@ export default class Dropdown extends React.PureComponent {
               <PriceSymbol code={val.iso_code} className="bold ml1" />}
             {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
           </div>
-          <Icon name="ChevronDown" className="flex-none" size={18} />
+          <Icon name="ChevronDown" className="flex-none dark5" size={18} />
         </div>
       );
     }

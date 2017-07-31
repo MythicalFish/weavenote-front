@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PlusButton from 'components/PlusButton';
+import Dropdown from 'components/Dropdown';
 import { selectMeasurements } from './selectors';
 import {
   fetchMeasurements,
@@ -17,19 +18,29 @@ class ProjectMeasurements extends React.PureComponent {
     const { project } = this.props;
     this.props.fetch(project.get('id'));
   }
-
+  hasAny = () => {
+    const { measurements } = this.props;
+    return (
+      measurements.get('groups').size > 0 || measurements.get('names').size > 0
+    );
+  };
   render() {
     const { project, measurements, createGroup, createName } = this.props;
     if (!measurements) return null;
     return (
       <div>
-        <div className="right-align">
-          <PlusButton onClick={() => createGroup(project.get('id'))} />
-        </div>
-        <Form initialValues={measurements} onSubmit={this.props.update} />
-        <div>
-          <PlusButton onClick={() => createName(project.get('id'))} />
-        </div>
+        {this.hasAny()
+          ? <Form initialValues={measurements} onSubmit={this.props.update} />
+          : <div>No measurements added yet</div>}
+
+        <Dropdown label={<PlusButton />}>
+          <button onClick={() => createGroup(project.get('id'))}>
+            Create Column
+          </button>
+          <button onClick={() => createName(project.get('id'))}>
+            Create Row
+          </button>
+        </Dropdown>
       </div>
     );
   }
