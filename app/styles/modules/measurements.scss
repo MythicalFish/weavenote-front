@@ -1,8 +1,11 @@
 $bStyle: 1px solid #ccc;
 #measurements {
+  font-size: 11px;
   input[type="text"],
-  input[type="number"] {
+  input[type="number"],
+  .column-header {
     padding: $space-1;
+    font-size: inherit;
   }
   .column {
     max-width: 70px;

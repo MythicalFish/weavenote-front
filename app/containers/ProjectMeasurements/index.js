@@ -11,7 +11,7 @@ import {
   createMeasurementGroup,
   createMeasurementName,
 } from './actions';
-import Form from './Form';
+import Form from './subcomponents/Form';
 
 class ProjectMeasurements extends React.PureComponent {
   componentDidMount() {
