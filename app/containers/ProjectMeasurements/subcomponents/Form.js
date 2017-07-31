@@ -8,12 +8,15 @@ const Form = (props) => {
 
   return (
     <form onSubmit={handleSubmit} id="measurements" className="flex">
-      <MeasurementNameColumn values={initialValues.get('names')} />
+      <MeasurementNameColumn
+        values={initialValues.get('names')}
+        {...{ handleSubmit }}
+      />
       {initialValues
         .get('groups')
         .map((group, index) =>
           <MeasurementGroupColumn
-            {...{ group, index, initialValues, key: group }}
+            {...{ group, index, initialValues, key: group, handleSubmit }}
           />
         )}
     </form>

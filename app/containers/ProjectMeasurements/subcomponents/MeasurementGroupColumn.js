@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import { fromJS } from 'immutable';
-import Field from './Field';
+import { Field } from 'redux-form/immutable';
+import Input from './Input';
 import MeasurementGroupLabel from './MeasurementGroupLabel';
 
 class MeasurementGroupColumn extends React.PureComponent {
   measurementGroupValues = (group) => {
     const { initialValues } = this.props;
     const values = [];
-    initialValues.get('values').map((value) => {
+    initialValues.get('values').forEach((value) => {
       if (value.get('measurement_group_id') === group.get('id')) {
         values.push(value);
       }
@@ -22,7 +23,12 @@ class MeasurementGroupColumn extends React.PureComponent {
         <MeasurementGroupLabel fieldName={`groups[${index}].name`} />
         {this.measurementGroupValues(group).map((value, i) =>
           //
-          <Field name={groupName(i)} key={groupName(i)} maxLength={5} />
+          <Field
+            name={groupName(i)}
+            key={groupName(i)}
+            component={Input}
+            maxLength={5}
+          />
         )}
       </div>
     );
