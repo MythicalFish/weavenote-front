@@ -9,7 +9,7 @@ const MeasurementNameInput = (props) =>
 class MeasurementNameColumn extends React.PureComponent {
   isFocused = () => !!this.props.current;
   render() {
-    const { values, onBlur, current } = this.props;
+    const { names, onBlur, onFocus, current } = this.props;
     const fieldName = (i) => `names[${i}].value`;
     const columnClass = `column${this.isFocused() ? ' focused' : ''}`;
     return (
@@ -17,23 +17,33 @@ class MeasurementNameColumn extends React.PureComponent {
         <div className="column-header">
           <label>Description</label>
         </div>
-        {values.map((value, index) =>
-          <MeasurementNameInput
-            {...{
-              key: fieldName(index),
-              name: fieldName(index),
-              onBlur,
-            }}
-          />
-        )}
+        {names.map((name, index) => {
+          if (index !== current) {
+            return (
+              <MeasurementNameInput
+                {...{
+                  key: fieldName(index),
+                  name: fieldName(index),
+                  onBlur,
+                }}
+              />
+            );
+          }
+          return (
+            <MeasurementNameLabel
+              {...{ name, onFocus, key: fieldName(index) }}
+            />
+          );
+        })}
       </div>
     );
   }
 }
 
 MeasurementNameColumn.propTypes = {
-  values: PropTypes.object,
+  names: PropTypes.object,
   onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   current: PropTypes.number,
 };
 

@@ -42,7 +42,12 @@ class MeasurementGroupColumn extends React.PureComponent {
         <div className="column-header">
           {this.isRenaming()
             ? <Field
-              {...{ focus, name: groupFieldName, maxLength: 3, ...fProps }}
+              {...{
+                focus: true,
+                name: groupFieldName,
+                maxLength: 3,
+                ...fProps,
+              }}
             />
             : <MeasurementGroupLabel {...{ group, onFocus, rename }} />}
         </div>

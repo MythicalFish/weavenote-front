@@ -22,7 +22,7 @@ const Form = (props) => {
     <form onSubmit={handleSubmit} id="measurements" className="flex">
       <MeasurementNameColumn
         {...{
-          values: initialValues.get('names'),
+          names: initialValues.get('names'),
           current: currentMeasurementName,
           onFocus: focusMeasurementName,
           onBlur,
