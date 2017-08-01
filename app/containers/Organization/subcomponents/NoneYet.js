@@ -6,7 +6,7 @@ const NoneYet = (props) =>
     <h1>Get started</h1>
     <div className="bigger2">
       <p>Hi there,</p>
-      It looks like you do not belong to a Seamless organization yet.
+      It looks like you do not belong to a WeaveNote organization yet.
       <br />
       Create one!
     </div>

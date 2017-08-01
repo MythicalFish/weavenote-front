@@ -55,7 +55,7 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
       <div className="flex items-middle vh-ymin100 bg-gray-darker">
         <div>
           <div className="larger light8 center mb2">
-            Seamless
+            WeaveNote
           </div>
           <div id="login-form"></div>
           <style>{`

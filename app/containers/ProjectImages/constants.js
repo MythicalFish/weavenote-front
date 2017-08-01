@@ -1,5 +1,5 @@
 export const PLACEHOLDER =
-  'https://s3-eu-west-1.amazonaws.com/content.mythical.fish/seamless/assets/19jCEX4.jpg';
+  'https://s3-eu-west-1.amazonaws.com/content.mythical.fish/weavenote/assets/19jCEX4.jpg';
 
 export const ADD_ANNOTATION = '@@app/ADD_ANNOTATION';
 export const CANCEL_ANNOTATION = '@@app/CANCEL_ANNOTATION';
