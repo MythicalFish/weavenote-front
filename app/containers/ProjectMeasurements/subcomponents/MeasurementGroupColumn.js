@@ -8,31 +8,31 @@ class MeasurementGroupColumn extends React.PureComponent {
   measurementGroupValues = (group) => {
     const { initialValues } = this.props;
     const values = [];
-    initialValues.get('values').forEach((value) => {
+    initialValues.get('values').forEach((value, index) => {
       if (value.get('measurement_group_id') === group.get('id')) {
-        values.push(value);
+        values.push(index);
       }
     });
     return fromJS(values);
   };
   render() {
     const { group, index, onSubmit: onBlur } = this.props;
+    const groupFieldName = `groups[${index}].name`;
     const valueFieldName = (i) => `values[${i}].value`;
-    const groupFieldName = (i) => `groups[${i}].name`;
+    const fProps = { component: Input, onBlur };
     return (
       <div className="column">
-        <MeasurementGroupLabel
-          {...{ fieldName: groupFieldName(index), onBlur }}
-        />
-        {this.measurementGroupValues(group).map((value, i) =>
+        {true
+          ? <Field {...{ name: groupFieldName, maxLength: 3, ...fProps }} />
+          : <MeasurementGroupLabel />}
+        {this.measurementGroupValues(group).map((i) =>
           //
           <Field
             {...{
               name: valueFieldName(i),
               key: valueFieldName(i),
-              component: Input,
               maxLength: 5,
-              onBlur,
+              ...fProps,
             }}
           />
         )}

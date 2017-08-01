@@ -1,12 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Field } from 'redux-form/immutable';
-import Input from './Input';
 
-const MeasurementGroupLabel = ({ fieldName }) =>
-  <Field name={fieldName} maxLength={3} component={Input} />;
+const MeasurementGroupLabel = (props) => <div />;
 
-MeasurementGroupLabel.propTypes = {
-  fieldName: PropTypes.string,
-};
+MeasurementGroupLabel.propTypes = {};
 
 export default MeasurementGroupLabel;
