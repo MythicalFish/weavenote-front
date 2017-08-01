@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
+import Focusable from 'containers/Focusable';
 
 const MeasurementNameLabel = ({ name, rename }) =>
   <Dropdown label={name.get('value')}>
@@ -11,4 +12,4 @@ MeasurementNameLabel.propTypes = {
   rename: PropTypes.func,
 };
 
-export default MeasurementNameLabel;
+export default Focusable(MeasurementNameLabel);
