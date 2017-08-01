@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { doFocus } from './actions';
+import { setFocus } from './actions';
 import { selectFocused } from './selectors';
 
 const randomID = () => Math.random().toString(36).substring(7);
@@ -15,23 +15,37 @@ export default function Focusable(Component) {
     };
     render() {
       const { id } = this.state;
-      const { focus, focused } = this.props;
-      const isFocused = focused.id === id;
-      const focusThis = () => focus(id);
-      const unfocusThis = () => focus(null);
+      const { setFocus: set, focused } = this.props;
+      const isFocused = focused.get('id') === id;
+      const focusClass = isFocused ? 'focused' : '';
+      const isDoing = (action) => isFocused && focused.get('action') === action;
+      const focusThis = () => {
+        if (!isFocused) set({ id, action: null });
+      };
+      const unfocusThis = () => set({ id: null, action: null });
+      const doThis = (action) => () => set({ id, action });
       return (
-        <Component {...{ ...this.props, focusThis, unfocusThis, isFocused }} />
+        <Component
+          {...{
+            ...this.props,
+            focusThis,
+            unfocusThis,
+            doThis,
+            isFocused,
+            isDoing,
+            focusClass,
+          }}
+        />
       );
     }
   }
 
   F.propTypes = {
-    focus: PropTypes.func,
+    setFocus: PropTypes.func,
     focused: PropTypes.object,
   };
 
-  const mapDispatch = (dispatch) =>
-    bindActionCreators({ focus: doFocus }, dispatch);
+  const mapDispatch = (dispatch) => bindActionCreators({ setFocus }, dispatch);
 
   const mapState = createStructuredSelector({
     focused: selectFocused(),

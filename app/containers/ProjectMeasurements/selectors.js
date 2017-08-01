@@ -5,9 +5,3 @@ export const selectDomain = () => (state) =>
 
 export const selectMeasurements = () =>
   createSelector(selectDomain(), (s) => s.get('data'));
-
-export const selectCurrentName = () =>
-  createSelector(selectDomain(), (s) => s.get('currentName'));
-
-export const selectCurrentGroup = () =>
-  createSelector(selectDomain(), (s) => s.get('currentGroup'));

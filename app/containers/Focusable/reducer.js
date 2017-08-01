@@ -3,12 +3,13 @@ import * as types from './constants';
 
 const initialState = fromJS({
   id: null,
+  action: null,
 });
 
-function focusReducer(state = initialState, { type, id }) {
+function focusReducer(state = initialState, { type, payload }) {
   switch (type) {
     case types.FOCUS:
-      return state.set('id', id);
+      return fromJS(payload);
     default:
       return state;
   }

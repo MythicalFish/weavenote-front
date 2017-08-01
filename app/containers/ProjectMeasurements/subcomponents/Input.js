@@ -21,8 +21,6 @@ class Input extends React.PureComponent {
 Input.propTypes = {
   input: PropTypes.object,
   focus: PropTypes.bool,
-  // maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  // onBlur: PropTypes.func,
 };
 
 export default Input;

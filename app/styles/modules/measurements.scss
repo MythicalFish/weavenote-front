@@ -26,7 +26,8 @@ $bStyle: 1px solid #ccc;
         border-bottom: $bStyle;
       }
     }
-    input:focus {
+    input:focus,
+    .focused {
       box-shadow: inset 0 0 5px $aqua;
     }
     &:first-child {
@@ -41,18 +42,18 @@ $bStyle: 1px solid #ccc;
     &:not(:last-child) {
       margin-right: 6px;
     }
-    &.focused {
-      border-color: $color2x;
-      * {
-        border-color: $color2x !important;
-      }
-    }
     .column-header {
       border-bottom: $bStyle;
       border-width: 2px;
       * {
         border: none;
       }
+    }
+  }
+  .focused {
+    border-color: $color2x;
+    * {
+      border-color: $color2x !important;
     }
   }
 }

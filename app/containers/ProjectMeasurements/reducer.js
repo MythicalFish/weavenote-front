@@ -22,16 +22,6 @@ function ProjectMeasurementsReducer(state = initialState, action) {
     case types.CREATE_MEASUREMENT_NAME_SUCCESS:
       return setData();
 
-    //
-    case types.UNFOCUS_MEASUREMENTS:
-      return state.set('currentName', null).set('currentGroup', null);
-
-    case types.FOCUS_MEASUREMENT_NAME:
-      return state.set('currentName', action.index).set('currentGroup', null);
-
-    case types.FOCUS_MEASUREMENT_GROUP:
-      return state.set('currentName', null).set('currentGroup', action.index);
-
     default:
       return state;
   }

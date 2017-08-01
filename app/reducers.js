@@ -15,7 +15,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
  */
 import collaboratorsReducer from 'containers/Collaborators/reducer';
 import commentsReducer from 'containers/Comments/reducer';
-import focusReducer from 'containers/Focus/reducer';
+import focusReducer from 'containers/Focusable/reducer';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
 import { reducer as notificationReducer } from 'react-notification-system-redux';
 

@@ -10,9 +10,6 @@ import {
   updateMeasurements,
   createMeasurementGroup,
   createMeasurementName,
-  focusMeasurementGroup,
-  focusMeasurementName,
-  unfocusMeasurements,
 } from './actions';
 import Form from './subcomponents/Form';
 
@@ -55,9 +52,6 @@ ProjectMeasurements.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      focusMeasurementName,
-      focusMeasurementGroup,
-      unfocusMeasurements,
       fetch: fetchMeasurements,
       onSubmit: updateMeasurements,
       createGroup: (id) => createMeasurementGroup(id),
@@ -69,8 +63,6 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   initialValues: selectors.selectMeasurements(),
-  currentMeasurementName: selectors.selectCurrentName(),
-  currentMeasurementGroup: selectors.selectCurrentGroup(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectMeasurements);

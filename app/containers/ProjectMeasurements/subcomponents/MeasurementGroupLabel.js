@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
 
-const MeasurementGroupLabel = ({ group, rename }) =>
+const MeasurementGroupLabel = ({ group, doThis }) =>
   <Dropdown label={group.get('name')}>
-    <button onClick={rename}>Rename</button>
+    <button onClick={doThis('rename')}>Rename</button>
   </Dropdown>;
 
 MeasurementGroupLabel.propTypes = {
-  rename: PropTypes.func,
+  doThis: PropTypes.func,
   group: PropTypes.object,
 };
 
