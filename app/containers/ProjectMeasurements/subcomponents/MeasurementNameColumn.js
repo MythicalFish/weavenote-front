@@ -1,16 +1,23 @@
 import React, { PropTypes } from 'react';
 import MeasurementNameLabel from './MeasurementNameLabel';
+import { Field } from 'redux-form/immutable';
+import Input from './Input';
 
-const MeasurementNameColumn = ({ values, handleSubmit }) => {
-  const fieldName = (i) => `names[${i}].name`;
+const MeasurementNameInput = (props) =>
+  <Field {...{ ...props, maxLength: 8, component: Input }} />;
+
+const MeasurementNameColumn = ({ measurementNames, onSubmit }) => {
+  const fieldName = (i) => `names[${i}].value`;
   return (
     <div className="column">
       <label>Description</label>
-      {values.map((value, index) =>
-        <MeasurementNameLabel
-          fieldName={fieldName(index)}
-          key={fieldName(index)}
-          {...{ handleSubmit }}
+      {measurementNames.map((value, index) =>
+        <MeasurementNameInput
+          {...{
+            key: fieldName(index),
+            name: fieldName(index),
+            onBlur: onSubmit,
+          }}
         />
       )}
     </div>
@@ -18,8 +25,8 @@ const MeasurementNameColumn = ({ values, handleSubmit }) => {
 };
 
 MeasurementNameColumn.propTypes = {
-  values: PropTypes.object,
-  handleSubmit: PropTypes.func,
+  measurementNames: PropTypes.object,
+  onSubmit: PropTypes.func,
 };
 
 export default MeasurementNameColumn;

@@ -2,12 +2,7 @@ import React, { PropTypes } from 'react';
 
 const Input = ({ input }) =>
   //
-  <input
-    {...input}
-    type="text"
-    maxLength={input.maxLength}
-    onBlur={input.onBlur}
-  />;
+  <input {...input} type="text" />;
 
 Input.propTypes = {
   input: PropTypes.object,

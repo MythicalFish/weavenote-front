@@ -8,8 +8,8 @@ export function fetchMeasurementsSuccess(response) {
   return { type: types.FETCH_MEASUREMENTS_SUCCESS, response };
 }
 
-export function updateMeasurements(response) {
-  return { type: types.UPDATE_MEASUREMENTS, response };
+export function updateMeasurements() {
+  return { type: types.UPDATE_MEASUREMENTS };
 }
 
 export function updateMeasurementsSuccess(response) {

@@ -16,18 +16,24 @@ class MeasurementGroupColumn extends React.PureComponent {
     return fromJS(values);
   };
   render() {
-    const { group, index } = this.props;
-    const groupName = (i) => `values[${i}].value`;
+    const { group, index, onSubmit: onBlur } = this.props;
+    const valueFieldName = (i) => `values[${i}].value`;
+    const groupFieldName = (i) => `groups[${i}].name`;
     return (
       <div className="column">
-        <MeasurementGroupLabel fieldName={`groups[${index}].name`} />
+        <MeasurementGroupLabel
+          {...{ fieldName: groupFieldName(index), onBlur }}
+        />
         {this.measurementGroupValues(group).map((value, i) =>
           //
           <Field
-            name={groupName(i)}
-            key={groupName(i)}
-            component={Input}
-            maxLength={5}
+            {...{
+              name: valueFieldName(i),
+              key: valueFieldName(i),
+              component: Input,
+              maxLength: 5,
+              onBlur,
+            }}
           />
         )}
       </div>
@@ -39,6 +45,7 @@ MeasurementGroupColumn.propTypes = {
   initialValues: PropTypes.object,
   group: PropTypes.object,
   index: PropTypes.number,
+  onSubmit: PropTypes.func,
 };
 
 export default MeasurementGroupColumn;

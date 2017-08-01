@@ -7,12 +7,14 @@ import {
   select,
 } from 'redux-saga/effects';
 import { initialize } from 'redux-form';
+import { getFormValues } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as API from 'utils/API';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
 import { selectMeasurements } from './selectors';
+import { selectProject } from '../ProjectManager/selectors';
 
 export function* ProjectMeasurementsWatcher() {
   const watcher = [
@@ -55,19 +57,14 @@ function* createMeasurementName(action) {
   );
 }
 
-function* updateMeasurements(action) {
-  const measurements = action.measurements.toJS();
-  const projectID = measurements.groups[0].project_id;
-  try {
-    const response = yield call(
-      API.patch,
-      `projects/${projectID}/measurements`,
-      { measurements }
-    );
-    yield put(actions.updateMeasurementsSuccess(response));
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-  }
+function* updateMeasurements() {
+  const project = yield select(selectProject());
+  const measurements = yield select(getFormValues('Measurements'));
+  yield sagas.patch(
+    `projects/${project.get('id')}/measurements`,
+    { measurements },
+    actions.updateMeasurementsSuccess
+  );
 }
 
 function* resetForm() {
