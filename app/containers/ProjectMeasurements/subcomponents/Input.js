@@ -1,11 +1,26 @@
 import React, { PropTypes } from 'react';
 
-const Input = ({ input }) =>
-  //
-  <input {...input} type="text" />;
+class Input extends React.PureComponent {
+  componentDidMount() {
+    if (this.props.focus) {
+      this.nameInput.focus();
+    }
+  }
+  render() {
+    const { input, focus } = this.props;
+    const fProps = { ...input };
+    if (focus) {
+      fProps.ref = (f) => {
+        this.nameInput = f;
+      };
+    }
+    return <input {...fProps} type="text" />;
+  }
+}
 
 Input.propTypes = {
   input: PropTypes.object,
+  focus: PropTypes.bool,
   // maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   // onBlur: PropTypes.func,
 };

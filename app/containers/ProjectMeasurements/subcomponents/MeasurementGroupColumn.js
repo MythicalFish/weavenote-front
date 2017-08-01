@@ -10,7 +10,7 @@ class MeasurementGroupColumn extends React.PureComponent {
     if (!this.isFocused() && this.isRenaming()) {
       this.setState({ isRenaming: false });
     }
-  }
+  };
   measurementGroupValues = (group) => {
     const { initialValues } = this.props;
     const values = [];
@@ -38,12 +38,14 @@ class MeasurementGroupColumn extends React.PureComponent {
     const columnClass = `column${this.isFocused() ? ' focused' : ''}`;
     const { rename } = this;
     return (
-      <div className={columnClass}>
-        {this.isRenaming()
-          ? <Field
-            {...{ focus, name: groupFieldName, maxLength: 3, ...fProps }}
-          />
-          : <MeasurementGroupLabel {...{ group, onFocus, rename }} />}
+      <div className={columnClass} onClick={onFocus}>
+        <div className="column-header">
+          {this.isRenaming()
+            ? <Field
+              {...{ focus, name: groupFieldName, maxLength: 3, ...fProps }}
+            />
+            : <MeasurementGroupLabel {...{ group, onFocus, rename }} />}
+        </div>
         {this.measurementGroupValues(group).map((i) =>
           //
           <Field
@@ -51,7 +53,6 @@ class MeasurementGroupColumn extends React.PureComponent {
               name: valueFieldName(i),
               key: valueFieldName(i),
               maxLength: 5,
-              onFocus,
               ...fProps,
             }}
           />

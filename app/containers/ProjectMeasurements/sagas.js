@@ -1,15 +1,7 @@
-import {
-  call,
-  put,
-  take,
-  cancel,
-  takeLatest,
-  select,
-} from 'redux-saga/effects';
+import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { initialize } from 'redux-form';
-import { getFormValues } from 'redux-form/immutable';
+import { getFormValues, isDirty } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import * as API from 'utils/API';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
@@ -58,6 +50,8 @@ function* createMeasurementName(action) {
 }
 
 function* updateMeasurements() {
+  const dirty = yield select(isDirty('Measurements'));
+  if (!dirty) return;
   const project = yield select(selectProject());
   const measurements = yield select(getFormValues('Measurements'));
   yield sagas.patch(
