@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
-import { addAnnotation } from 'containers/ProjectImages/actions';
 import Button from 'components/Button';
 import CommentForm from './CommentForm';
 import CommentWrapper from './CommentWrapper';
@@ -77,7 +76,6 @@ export function mapDispatch(dispatch) {
       deleteComment,
       switchComment,
       cancelCommentAction,
-      addAnnotation,
     },
     dispatch
   );

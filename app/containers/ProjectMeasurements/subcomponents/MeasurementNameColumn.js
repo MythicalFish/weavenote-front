@@ -7,10 +7,20 @@ const MeasurementNameInput = (props) =>
   <Field {...{ ...props, maxLength: 8, component: Input }} />;
 
 class MeasurementNameColumn extends React.PureComponent {
+  state = { isRenaming: null };
+  componentDidUpdate = () => {
+    if (!this.isFocused() && this.isRenaming()) {
+      this.setState({ isRenaming: null });
+    }
+  };
   isFocused = () => !!this.props.current;
+  isRenaming = (i) => this.state.isRenaming === i;
+  rename = (i) => () => {
+    this.setState({ isRenaming: i });
+  };
   render() {
-    const { names, onBlur, onFocus, current } = this.props;
-    const fieldName = (i) => `names[${i}].value`;
+    const { names, onBlur, onFocus } = this.props;
+    const fieldKey = (i) => `names[${i}].value`;
     const columnClass = `column${this.isFocused() ? ' focused' : ''}`;
     return (
       <div className={columnClass}>
@@ -18,12 +28,13 @@ class MeasurementNameColumn extends React.PureComponent {
           <label>Description</label>
         </div>
         {names.map((name, index) => {
-          if (index !== current) {
+          if (this.isRenaming(index)) {
             return (
               <MeasurementNameInput
                 {...{
-                  key: fieldName(index),
-                  name: fieldName(index),
+                  focus: true,
+                  key: fieldKey(index),
+                  name: fieldKey(index),
                   onBlur,
                 }}
               />
@@ -31,7 +42,12 @@ class MeasurementNameColumn extends React.PureComponent {
           }
           return (
             <MeasurementNameLabel
-              {...{ name, onFocus, key: fieldName(index) }}
+              {...{
+                name,
+                onFocus,
+                key: fieldKey(index),
+                rename: this.rename(index),
+              }}
             />
           );
         })}

@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
-import Dropdown from 'components/Dropdown';
 import ImageUploader from 'containers/ImageUploader';
 
 const CommentActions = (props) => {
-  const { comment, commentable } = props;
+  const { comment, commentable, addAnnotation } = props;
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
   };
@@ -20,12 +19,12 @@ const CommentActions = (props) => {
             props.deleteComment({ comment, commentable });
           }}
         />
-        {commentable.type === 'Project' &&
+        {addAnnotation &&
           <Button
             inlineIcon="plus"
             label="Annotation"
             onClick={() => {
-              props.addAnnotation({
+              addAnnotation({
                 maxAnchors: 1,
                 annotatable: actionable,
                 type: 'dot',

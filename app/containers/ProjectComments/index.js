@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Comments from 'containers/Comments';
+import { addAnnotation } from 'containers/ProjectImages/actions';
 import { selectComments } from './selectors';
 
 class ProjectComments extends React.PureComponent {
   render() {
-    const { project, comments } = this.props;
+    const { project } = this.props;
     return (
       <Comments
-        comments={comments}
+        {...this.props}
         commentable={{ type: 'Project', id: project.get('id') }}
       />
     );
@@ -19,11 +20,15 @@ class ProjectComments extends React.PureComponent {
 
 ProjectComments.propTypes = {
   project: PropTypes.object,
-  comments: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators(
+    {
+      addAnnotation,
+    },
+    dispatch
+  );
 }
 
 const mapState = createStructuredSelector({
