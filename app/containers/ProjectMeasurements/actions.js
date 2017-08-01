@@ -31,3 +31,17 @@ export function createMeasurementName(projectID) {
 export function createMeasurementNameSuccess(response) {
   return { type: types.CREATE_MEASUREMENT_NAME_SUCCESS, response };
 }
+
+//
+
+export function unfocusMeasurements() {
+  return { type: types.UNFOCUS_MEASUREMENTS };
+}
+
+export function focusMeasurementName(index) {
+  return { type: types.FOCUS_MEASUREMENT_NAME, index };
+}
+
+export function focusMeasurementGroup(index) {
+  return { type: types.FOCUS_MEASUREMENT_GROUP, index };
+}

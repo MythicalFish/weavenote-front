@@ -1,6 +1,6 @@
 $bStyle: 1px solid #ccc;
 #measurements {
-  font-size: 11px;
+  font-size: .9em;
   .column {
     @include roundedCorners();
     max-width: 45px;
@@ -14,7 +14,7 @@ $bStyle: 1px solid #ccc;
       text-align: center;
       width: 100%;
       color: $dark8;
-      padding: 10px;
+      padding: 10px 5px;
       font-family: inherit;
       font-size: inherit;
       text-align: inherit;
@@ -28,9 +28,17 @@ $bStyle: 1px solid #ccc;
     &:first-child {
       max-width: 200px;
       text-align: left;
+      input,
+      button,
+      label {
+        padding: 10px;
+      }
     }
     &:not(:last-child) {
       margin-right: 6px;
+    }
+    &.focused {
+      border-color: red;
     }
   }
 }

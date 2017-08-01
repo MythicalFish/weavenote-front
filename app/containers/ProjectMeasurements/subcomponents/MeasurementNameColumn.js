@@ -6,17 +6,17 @@ import Input from './Input';
 const MeasurementNameInput = (props) =>
   <Field {...{ ...props, maxLength: 8, component: Input }} />;
 
-const MeasurementNameColumn = ({ measurementNames, onSubmit }) => {
+const MeasurementNameColumn = ({ values, onBlur }) => {
   const fieldName = (i) => `names[${i}].value`;
   return (
     <div className="column">
       <label>Description</label>
-      {measurementNames.map((value, index) =>
+      {values.map((value, index) =>
         <MeasurementNameInput
           {...{
             key: fieldName(index),
             name: fieldName(index),
-            onBlur: onSubmit,
+            onBlur,
           }}
         />
       )}
@@ -25,8 +25,8 @@ const MeasurementNameColumn = ({ measurementNames, onSubmit }) => {
 };
 
 MeasurementNameColumn.propTypes = {
-  measurementNames: PropTypes.object,
-  onSubmit: PropTypes.func,
+  values: PropTypes.object,
+  onBlur: PropTypes.func,
 };
 
 export default MeasurementNameColumn;

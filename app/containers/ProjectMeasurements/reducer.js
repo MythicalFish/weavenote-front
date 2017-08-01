@@ -3,9 +3,12 @@ import * as types from './constants';
 
 const initialState = fromJS({
   data: null,
+  currentName: null,
+  currentGroup: null,
 });
 
-function ProjectMeasurementsReducer(state = initialState, { type, response }) {
+function ProjectMeasurementsReducer(state = initialState, action) {
+  const { type, response, payload } = action;
   const setData = () => state.set('data', fromJS(response));
 
   switch (type) {
@@ -20,6 +23,14 @@ function ProjectMeasurementsReducer(state = initialState, { type, response }) {
       return setData();
 
     //
+    case types.UNFOCUS_MEASUREMENTS:
+      return state.set('currentName', null).set('currentGroup', null);
+
+    case types.FOCUS_MEASUREMENT_NAME:
+      return state.set('currentName', action.index).set('currentGroup', null);
+
+    case types.FOCUS_MEASUREMENT_GROUP:
+      return state.set('currentName', null).set('currentGroup', action.index);
 
     default:
       return state;

@@ -4,12 +4,15 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PlusButton from 'components/PlusButton';
 import Dropdown from 'components/Dropdown';
-import { selectMeasurements } from './selectors';
+import * as selectors from './selectors';
 import {
   fetchMeasurements,
   updateMeasurements,
   createMeasurementGroup,
   createMeasurementName,
+  focusMeasurementGroup,
+  focusMeasurementName,
+  unfocusMeasurements,
 } from './actions';
 import Form from './subcomponents/Form';
 
@@ -19,27 +22,22 @@ class ProjectMeasurements extends React.PureComponent {
     this.props.fetch(project.get('id'));
   }
   hasAny = () => {
-    const { measurements } = this.props;
-    return (
-      measurements.get('groups').size > 0 || measurements.get('names').size > 0
-    );
+    const { initialValues: v } = this.props;
+    return v.get('groups').size > 0 || v.get('names').size > 0;
   };
   render() {
-    const { project, measurements, createGroup, createName } = this.props;
-    if (!measurements) return null;
+    if (!this.props.initialValues) return null;
+    const { project, createGroup, createName } = this.props;
+    const id = project.get('id');
     return (
       <div>
         {this.hasAny()
-          ? <Form initialValues={measurements} onSubmit={this.props.update} />
+          ? <Form {...this.props} />
           : <div>No measurements added yet</div>}
 
         <Dropdown label={<PlusButton />}>
-          <button onClick={() => createGroup(project.get('id'))}>
-            Create Column
-          </button>
-          <button onClick={() => createName(project.get('id'))}>
-            Create Row
-          </button>
+          <button onClick={() => createGroup(id)}>Create Column</button>
+          <button onClick={() => createName(id)}>Create Row</button>
         </Dropdown>
       </div>
     );
@@ -48,9 +46,8 @@ class ProjectMeasurements extends React.PureComponent {
 
 ProjectMeasurements.propTypes = {
   project: PropTypes.object,
-  measurements: PropTypes.object,
+  initialValues: PropTypes.object,
   fetch: PropTypes.func,
-  update: PropTypes.func,
   createGroup: PropTypes.func,
   createName: PropTypes.func,
 };
@@ -58,8 +55,11 @@ ProjectMeasurements.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
+      focusMeasurementName,
+      focusMeasurementGroup,
+      unfocusMeasurements,
       fetch: fetchMeasurements,
-      update: updateMeasurements,
+      onSubmit: updateMeasurements,
       createGroup: (id) => createMeasurementGroup(id),
       createName: (id) => createMeasurementName(id),
     },
@@ -68,7 +68,9 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  measurements: selectMeasurements(),
+  initialValues: selectors.selectMeasurements(),
+  currentMeasurementName: selectors.selectCurrentName(),
+  currentMeasurementGroup: selectors.selectCurrentGroup(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectMeasurements);

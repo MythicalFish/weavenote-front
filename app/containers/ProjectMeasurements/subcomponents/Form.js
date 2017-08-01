@@ -4,15 +4,41 @@ import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroupColumn from './MeasurementGroupColumn';
 
 const Form = (props) => {
-  const { handleSubmit, initialValues, onSubmit } = props;
-  const measurementNames = initialValues.get('names');
-  const measurementGroups = initialValues.get('groups');
+  const {
+    initialValues,
+    handleSubmit,
+    onSubmit,
+    focusMeasurementName,
+    focusMeasurementGroup,
+    unfocusMeasurements,
+    currentMeasurementName,
+    currentMeasurementGroup,
+  } = props;
+  const onBlur = () => {
+    onSubmit();
+    unfocusMeasurements();
+  };
   return (
     <form onSubmit={handleSubmit} id="measurements" className="flex">
-      <MeasurementNameColumn {...{ onSubmit, measurementNames }} />
-      {measurementGroups.map((group, index) =>
+      <MeasurementNameColumn
+        {...{
+          values: initialValues.get('names'),
+          current: currentMeasurementName,
+          onFocus: focusMeasurementName,
+          onBlur,
+        }}
+      />
+      {initialValues.get('groups').map((group, index) =>
         <MeasurementGroupColumn
-          {...{ group, index, initialValues, key: group, onSubmit }}
+          {...{
+            key: group,
+            group,
+            index,
+            initialValues,
+            onFocus: focusMeasurementGroup,
+            onBlur,
+            current: currentMeasurementGroup,
+          }}
         />
       )}
     </form>
@@ -23,6 +49,11 @@ Form.propTypes = {
   initialValues: PropTypes.object,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
+  focusMeasurementGroup: PropTypes.func,
+  focusMeasurementName: PropTypes.func,
+  unfocusMeasurements: PropTypes.func,
+  currentMeasurementGroup: PropTypes.number,
+  currentMeasurementName: PropTypes.number,
 };
 
 export default reduxForm({
