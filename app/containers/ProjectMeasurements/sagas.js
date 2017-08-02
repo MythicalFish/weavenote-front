@@ -1,4 +1,5 @@
 import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import { initialize } from 'redux-form';
 import { getFormValues, isDirty } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
@@ -82,6 +83,7 @@ const groupUrl = (id) => `projects/${id}/measurement_groups`;
 const nameUrl = (id) => `projects/${id}/measurement_names`;
 
 function* resetForm() {
+  yield delay(50);
   const m = yield select(selectMeasurements());
   yield put(initialize('Measurements', m, { form: 'Measurements' }));
 }

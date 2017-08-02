@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Dot from 'components/Dot';
 import PriceSymbol from 'components/PriceSymbol';
-import Icon from 'components/Icon';
 import TetherComponent from 'react-tether';
 import { selectDropdownID } from 'containers/App/selectors';
 import { openDropdown, closeDropdown } from 'containers/App/actions';
@@ -62,7 +61,9 @@ class Dropdown extends React.PureComponent {
               <PriceSymbol code={val.iso_code} className="bold ml1" />}
             {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
           </div>
-          <Icon name="ChevronDown" className="flex-none dark5" size={18} />
+          <div className="flex-none">
+            <i className="fa fa-chevron-down smaller2" />
+          </div>
         </div>
       );
     }

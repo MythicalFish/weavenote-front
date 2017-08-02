@@ -6,11 +6,11 @@ import Text from 'components/CanvasText';
 import { pixelPosition } from 'utils/anchorPosition';
 
 class Annotations extends React.PureComponent {
-  anchorIsActive = (annotation) => {
+  anchorIsActive = (annotatable) => {
     const { currentComment: c } = this.props;
     if (!c) return false;
-    const a = annotation.get('annotatable').toJS();
-    return a.type === 'Comment' && a.id === c;
+    const { type, id } = annotatable.toJS();
+    return type === 'Comment' && id === c;
   };
   isEditing = (annotation) => {
     const { newAnnotation } = this.props;
@@ -25,10 +25,10 @@ class Annotations extends React.PureComponent {
     const anchorLayer = [];
     const lineLayer = [];
     currentImage.get('annotations').forEach((annotation, index) => {
+      const { id, anchors, annotatable } = annotation.toObject();
+      if (!annotatable) return; // Sometimes undefined ??
       if (this.isEditing(annotation)) return;
-      const id = annotation.get('id');
-      const anchors = annotation.get('anchors');
-      const identifier = annotation.getIn(['annotatable', 'identifier']);
+      const identifier = annotatable.get('identifier');
       anchors.forEach((anchor, i) => {
         anchorLayer.push(
           <Anchor
