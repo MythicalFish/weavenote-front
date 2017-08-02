@@ -16,6 +16,8 @@ class NewAnnotation extends React.PureComponent {
     this.props.createAnnotation(currentImage);
   };
   key = (annotation, index) => `NewAnnotationAnchor${index}`;
+  anchorStyle = (annotation) =>
+    annotation.get('type') === 'dot' ? 'default' : 'lineCap';
   render() {
     const { newAnnotation, canvasSize } = this.props;
     if (!newAnnotation.get('annotatable')) return null;
@@ -29,6 +31,7 @@ class NewAnnotation extends React.PureComponent {
               key={this.key(newAnnotation, index)}
               position={pixelPosition(anchor.toJS(), canvasSize)}
               onDragEnd={this.setAnnotation}
+              style={this.anchorStyle(newAnnotation)}
               draggable
               active
             />

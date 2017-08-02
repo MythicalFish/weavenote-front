@@ -25,7 +25,7 @@ function MeasurementNameLabel(props) {
   const Rename = <Input name={inputName} onBlur={submitForm} />;
 
   return (
-    <div onClick={focusThis} className={`column-row ${focusClass}`}>
+    <div onClick={focusThis} className={`column-cell ${focusClass}`}>
       {isDoing('rename') ? Rename : Label}
     </div>
   );

@@ -41,15 +41,15 @@ class MeasurementGroupColumn extends React.PureComponent {
             : <MeasurementGroupLabel {...{ group, doThis, doDelete }} />}
         </div>
         {this.measurementGroupValues(group).map((i) =>
-          //
-          <Field
-            {...{
-              name: valueFieldName(i),
-              key: valueFieldName(i),
-              maxLength: 5,
-              ...fProps,
-            }}
-          />
+          <div className="column-cell" key={valueFieldName(i)}>
+            <Field
+              {...{
+                name: valueFieldName(i),
+                maxLength: 5,
+                ...fProps,
+              }}
+            />
+          </div>
         )}
       </div>
     );

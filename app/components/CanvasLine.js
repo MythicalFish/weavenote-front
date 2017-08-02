@@ -14,11 +14,10 @@ export default function CanvasLine({ anchors, canvasSize }) {
       x={0}
       y={0}
       points={points}
-      stroke="#51b2fe"
+      stroke="#42EA83"
       strokeWidth={3}
-      // shadowColor="white"
-      // shadowBlur={0}
-      // shadowOffset={{ x: 2, y: 2 }}
+      dash={[10, 5]}
+      lineCap="round"
     />
   );
 }

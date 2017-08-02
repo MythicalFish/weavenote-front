@@ -1,6 +1,5 @@
 $bStyle: 1px solid #ccc;
 #measurements {
-  //font-size: .9em;
   color: $dark7;
   .column {
     border-radius: 4px;
@@ -14,7 +13,7 @@ $bStyle: 1px solid #ccc;
       border: none;
       text-align: center;
       width: 100%;
-      color: $dark7;
+      color: inherit;
       padding: 10px 5px;
       font-family: inherit;
       font-size: inherit;
@@ -24,15 +23,11 @@ $bStyle: 1px solid #ccc;
       -webkit-border-radius: 0;
       background: transparent;
     }
-    input,
-    .column-row {
-      &:not(:last-child) {
-        border-bottom: $bStyle;
-      }
-    }
     input:focus,
-    .focused {
-      box-shadow: inset 0 0 5px $aqua;
+    .column-cell.focused {
+      border-color: $color2x;
+      background: $color2x;
+      color: $white;
     }
     &:first-child {
       max-width: 200px;
@@ -46,11 +41,15 @@ $bStyle: 1px solid #ccc;
     &:not(:last-child) {
       margin-right: 6px;
     }
-    .column-header {
+    .column-header,
+    .column-cell {
       border-bottom: $bStyle;
       * {
         border: none;
       }
+    }
+    .column-cell:last-child {
+      border-bottom: none;
     }
   }
   .focused {

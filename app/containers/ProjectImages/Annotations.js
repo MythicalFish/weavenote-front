@@ -17,6 +17,7 @@ class Annotations extends React.PureComponent {
     const { annotatable: n } = newAnnotation.toJS();
     return n && a.type === n.type && a.id === n.id;
   };
+  anchorStyle = (annotation) => annotation.get('type') === 'dot' ? 'default' : 'lineCap';
   render() {
     const { canvasSize, currentImage } = this.props;
     const anchorLayer = [];
@@ -31,6 +32,7 @@ class Annotations extends React.PureComponent {
             key={`Annotation${id}Anchor${i}`}
             position={pixelPosition(anchor.toJS(), canvasSize)}
             active={this.anchorIsActive(annotation)}
+            style={this.anchorStyle(annotation)}
           />
         );
       });
