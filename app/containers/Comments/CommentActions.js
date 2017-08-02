@@ -7,7 +7,7 @@ const CommentActions = (props) => {
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
   };
-  const id = comment.get('id');
+  const { id, is_reply: isReply } = comment.toObject();
   const actionable = { type: 'Comment', id };
   return (
     <div>
@@ -20,6 +20,7 @@ const CommentActions = (props) => {
           }}
         />
         {addAnnotation &&
+          !isReply &&
           <Button
             inlineIcon="plus"
             label="Annotation"
