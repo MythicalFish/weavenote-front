@@ -11,6 +11,8 @@ import {
   updateMeasurements,
   createMeasurementGroup,
   createMeasurementName,
+  deleteMeasurementGroup,
+  deleteMeasurementName,
 } from './actions';
 import Form from './subcomponents/Form';
 
@@ -58,6 +60,8 @@ export function mapDispatch(dispatch) {
       createGroup: (id) => createMeasurementGroup(id),
       createName: (id) => createMeasurementName(id),
       addAnnotation,
+      deleteMeasurementGroup,
+      deleteMeasurementName,
     },
     dispatch
   );

@@ -31,3 +31,19 @@ export function createMeasurementName(projectID) {
 export function createMeasurementNameSuccess(response) {
   return { type: types.CREATE_MEASUREMENT_NAME_SUCCESS, response };
 }
+
+export function deleteMeasurementName(id) {
+  return { type: types.DELETE_MEASUREMENT_NAME, id };
+}
+
+export function deleteMeasurementNameSuccess(response) {
+  return { type: types.DELETE_MEASUREMENT_NAME_SUCCESS, response };
+}
+
+export function deleteMeasurementGroup(id) {
+  return { type: types.DELETE_MEASUREMENT_GROUP, id };
+}
+
+export function deleteMeasurementGroupSuccess(response) {
+  return { type: types.DELETE_MEASUREMENT_GROUP_SUCCESS, response };
+}

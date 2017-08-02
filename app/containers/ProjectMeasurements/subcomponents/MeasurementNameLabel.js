@@ -5,6 +5,7 @@ import Focusable from 'containers/Focusable';
 function MeasurementNameLabel(props) {
   const { name, Input, inputName, submitForm } = props;
   const { doThis, isDoing, focusThis, focusClass } = props;
+
   const annotate = () => {
     props.addAnnotation({
       maxAnchors: 2,
@@ -13,20 +14,19 @@ function MeasurementNameLabel(props) {
     });
   };
 
-  let Label = (
+  const Label = (
     <Dropdown label={name.get('value')}>
       <button onClick={doThis('rename')}>Rename</button>
       <button onClick={annotate}>Annotate</button>
+      <button onClick={() => props.doDelete(name.get('id'))}>Remove</button>
     </Dropdown>
   );
 
-  if (isDoing('rename')) {
-    Label = <Input name={inputName} onBlur={submitForm} />;
-  }
+  const Rename = <Input name={inputName} onBlur={submitForm} />;
 
   return (
     <div onClick={focusThis} className={`column-row ${focusClass}`}>
-      {Label}
+      {isDoing('rename') ? Rename : Label}
     </div>
   );
 }
@@ -40,6 +40,7 @@ MeasurementNameLabel.propTypes = {
   inputName: PropTypes.string,
   Input: PropTypes.func,
   addAnnotation: PropTypes.func,
+  doDelete: PropTypes.func,
 };
 
 export default Focusable(MeasurementNameLabel);

@@ -12,6 +12,7 @@ const Form = (props) => {
           names: initialValues.get('names'),
           submitForm: props.onSubmit,
           addAnnotation,
+          doDelete: props.deleteMeasurementName,
         }}
       />
       {initialValues.get('groups').map((group, index) =>
@@ -22,6 +23,7 @@ const Form = (props) => {
             index,
             initialValues,
             submitForm: props.onSubmit,
+            doDelete: props.deleteMeasurementGroup,
           }}
         />
       )}
@@ -35,6 +37,8 @@ Form.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   addAnnotation: PropTypes.func,
+  deleteMeasurementGroup: PropTypes.func,
+  deleteMeasurementName: PropTypes.func,
 };
 
 export default reduxForm({

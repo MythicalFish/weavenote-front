@@ -4,11 +4,13 @@ import MeasurementNameLabel from './MeasurementNameLabel';
 import Input from './Input';
 
 const MeasurementNameInput = (props) =>
-  <Field {...{ ...props, focus: true, maxLength: 8, component: Input }} />;
+  <Field {...{ ...props, focus: true, maxLength: 12, component: Input }} />;
 
 class MeasurementNameColumn extends React.PureComponent {
   render() {
-    const { names, submitForm, addAnnotation } = this.props;
+    const { names } = this.props;
+    const lProps = { ...this.props };
+    delete lProps.names;
     const fieldKey = (i) => `names[${i}].value`;
     return (
       <div className="column">
@@ -19,11 +21,10 @@ class MeasurementNameColumn extends React.PureComponent {
           <MeasurementNameLabel
             {...{
               name,
-              submitForm,
-              addAnnotation,
               Input: MeasurementNameInput,
               inputName: fieldKey(index),
               key: fieldKey(index),
+              ...lProps,
             }}
           />
         )}
@@ -34,8 +35,6 @@ class MeasurementNameColumn extends React.PureComponent {
 
 MeasurementNameColumn.propTypes = {
   names: PropTypes.object,
-  submitForm: PropTypes.func,
-  addAnnotation: PropTypes.func,
 };
 
 export default MeasurementNameColumn;

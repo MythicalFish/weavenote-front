@@ -18,7 +18,7 @@ class MeasurementGroupColumn extends React.PureComponent {
   };
   render() {
     //
-    const { group, index, submitForm: onBlur } = this.props;
+    const { group, index, submitForm: onBlur, doDelete } = this.props;
     const { doThis, isDoing, focusThis, focusClass } = this.props;
 
     const groupFieldName = `groups[${index}].name`;
@@ -38,7 +38,7 @@ class MeasurementGroupColumn extends React.PureComponent {
                 ...fProps,
               }}
             />
-            : <MeasurementGroupLabel {...{ group, doThis }} />}
+            : <MeasurementGroupLabel {...{ group, doThis, doDelete }} />}
         </div>
         {this.measurementGroupValues(group).map((i) =>
           //

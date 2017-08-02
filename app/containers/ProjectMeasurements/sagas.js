@@ -14,6 +14,8 @@ export function* ProjectMeasurementsWatcher() {
     yield takeLatest(types.UPDATE_MEASUREMENTS, updateMeasurements),
     yield takeLatest(types.CREATE_MEASUREMENT_GROUP, createMeasurementGroup),
     yield takeLatest(types.CREATE_MEASUREMENT_NAME, createMeasurementName),
+    yield takeLatest(types.DELETE_MEASUREMENT_GROUP, deleteMeasurementGroup),
+    yield takeLatest(types.DELETE_MEASUREMENT_NAME, deleteMeasurementName),
 
     yield takeLatest(types.CREATE_MEASUREMENT_GROUP_SUCCESS, resetForm),
     yield takeLatest(types.CREATE_MEASUREMENT_NAME_SUCCESS, resetForm),
@@ -23,27 +25,23 @@ export function* ProjectMeasurementsWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-function* fetchMeasurements(action) {
-  yield sagas.get(
-    `projects/${action.projectID}/measurements`,
-    null,
-    actions.fetchMeasurementsSuccess
-  );
+function* fetchMeasurements({ projectID }) {
+  yield sagas.get(url(projectID), null, actions.fetchMeasurementsSuccess);
 }
 
-function* createMeasurementGroup(action) {
+function* createMeasurementGroup({ projectID }) {
   const group = { name: 'X' };
   yield sagas.post(
-    `projects/${action.projectID}/measurement_groups`,
+    groupUrl(projectID),
     { group },
     actions.createMeasurementGroupSuccess
   );
 }
 
-function* createMeasurementName(action) {
+function* createMeasurementName({ projectID }) {
   const name = { value: 'Untitled' };
   yield sagas.post(
-    `projects/${action.projectID}/measurement_names`,
+    nameUrl(projectID),
     { name },
     actions.createMeasurementNameSuccess
   );
@@ -55,11 +53,33 @@ function* updateMeasurements() {
   const project = yield select(selectProject());
   const measurements = yield select(getFormValues('Measurements'));
   yield sagas.patch(
-    `projects/${project.get('id')}/measurements`,
+    url(project.get('id')),
     { measurements },
     actions.updateMeasurementsSuccess
   );
 }
+
+function* deleteMeasurementGroup({ id }) {
+  const project = yield select(selectProject());
+  yield sagas.destroy(
+    groupUrl(project.get('id')),
+    { id },
+    actions.deleteMeasurementGroupSuccess
+  );
+}
+
+function* deleteMeasurementName({ id }) {
+  const project = yield select(selectProject());
+  yield sagas.destroy(
+    nameUrl(project.get('id')),
+    { id },
+    actions.deleteMeasurementNameSuccess
+  );
+}
+
+const url = (id) => `projects/${id}/measurements`;
+const groupUrl = (id) => `projects/${id}/measurement_groups`;
+const nameUrl = (id) => `projects/${id}/measurement_names`;
 
 function* resetForm() {
   const m = yield select(selectMeasurements());

@@ -21,6 +21,10 @@ function ProjectMeasurementsReducer(state = initialState, action) {
       return setData();
     case types.CREATE_MEASUREMENT_NAME_SUCCESS:
       return setData();
+    case types.DELETE_MEASUREMENT_GROUP_SUCCESS:
+      return setData();
+    case types.DELETE_MEASUREMENT_NAME_SUCCESS:
+      return setData();
 
     default:
       return state;
