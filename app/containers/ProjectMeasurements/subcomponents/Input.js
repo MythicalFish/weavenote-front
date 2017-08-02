@@ -7,8 +7,8 @@ class Input extends React.PureComponent {
     }
   }
   render() {
-    const { input, focus } = this.props;
-    const fProps = { ...input };
+    const { input, focus, maxLength } = this.props;
+    const fProps = { ...input, maxLength: maxLength || 10 };
     if (focus) {
       fProps.ref = (f) => {
         this.nameInput = f;
@@ -21,6 +21,7 @@ class Input extends React.PureComponent {
 Input.propTypes = {
   input: PropTypes.object,
   focus: PropTypes.bool,
+  maxLength: PropTypes.number,
 };
 
 export default Input;

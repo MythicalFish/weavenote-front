@@ -8,7 +8,7 @@ const MeasurementNameInput = (props) =>
 
 class MeasurementNameColumn extends React.PureComponent {
   render() {
-    const { names, submitForm } = this.props;
+    const { names, submitForm, addAnnotation } = this.props;
     const fieldKey = (i) => `names[${i}].value`;
     return (
       <div className="column">
@@ -20,6 +20,7 @@ class MeasurementNameColumn extends React.PureComponent {
             {...{
               name,
               submitForm,
+              addAnnotation,
               Input: MeasurementNameInput,
               inputName: fieldKey(index),
               key: fieldKey(index),
@@ -34,6 +35,7 @@ class MeasurementNameColumn extends React.PureComponent {
 MeasurementNameColumn.propTypes = {
   names: PropTypes.object,
   submitForm: PropTypes.func,
+  addAnnotation: PropTypes.func,
 };
 
 export default MeasurementNameColumn;

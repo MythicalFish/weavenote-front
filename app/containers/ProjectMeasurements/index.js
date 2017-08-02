@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PlusButton from 'components/PlusButton';
 import Dropdown from 'components/Dropdown';
+import { addAnnotation } from 'containers/ProjectImages/actions';
 import * as selectors from './selectors';
 import {
   fetchMeasurements,
@@ -56,6 +57,7 @@ export function mapDispatch(dispatch) {
       onSubmit: updateMeasurements,
       createGroup: (id) => createMeasurementGroup(id),
       createName: (id) => createMeasurementName(id),
+      addAnnotation,
     },
     dispatch
   );

@@ -1,6 +1,7 @@
 $bStyle: 1px solid #ccc;
 #measurements {
-  font-size: .9em;
+  //font-size: .9em;
+  color: $dark7;
   .column {
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -13,7 +14,7 @@ $bStyle: 1px solid #ccc;
       border: none;
       text-align: center;
       width: 100%;
-      color: $dark8;
+      color: $dark7;
       padding: 10px 5px;
       font-family: inherit;
       font-size: inherit;
@@ -22,6 +23,9 @@ $bStyle: 1px solid #ccc;
       border-radius: 0;
       -webkit-border-radius: 0;
       background: transparent;
+    }
+    input,
+    .column-row {
       &:not(:last-child) {
         border-bottom: $bStyle;
       }
@@ -44,7 +48,6 @@ $bStyle: 1px solid #ccc;
     }
     .column-header {
       border-bottom: $bStyle;
-      border-width: 2px;
       * {
         border: none;
       }
