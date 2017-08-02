@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Canvas from 'components/Canvas';
 import Anchor from 'components/CanvasAnchor';
 import Line from 'components/CanvasLine';
+import Text from 'components/CanvasText';
 import { pixelPosition } from 'utils/anchorPosition';
 
 class Annotations extends React.PureComponent {
@@ -17,7 +18,8 @@ class Annotations extends React.PureComponent {
     const { annotatable: n } = newAnnotation.toJS();
     return n && a.type === n.type && a.id === n.id;
   };
-  anchorStyle = (annotation) => annotation.get('type') === 'dot' ? 'default' : 'lineCap';
+  anchorStyle = (annotation) =>
+    annotation.get('type') === 'dot' ? 'default' : 'lineCap';
   render() {
     const { canvasSize, currentImage } = this.props;
     const anchorLayer = [];
@@ -26,6 +28,7 @@ class Annotations extends React.PureComponent {
       if (this.isEditing(annotation)) return;
       const id = annotation.get('id');
       const anchors = annotation.get('anchors');
+      const identifier = annotation.getIn(['annotatable', 'identifier']);
       anchors.forEach((anchor, i) => {
         anchorLayer.push(
           <Anchor
@@ -39,7 +42,12 @@ class Annotations extends React.PureComponent {
       if (anchors.size > 1) {
         lineLayer.push(
           <Line
-            {...{ anchors, canvasSize, key: `Annotation${id}Line${index}` }}
+            {...{
+              anchors,
+              canvasSize,
+              identifier,
+              key: `Annotation${id}Line${index}`,
+            }}
           />
         );
       }
