@@ -47,6 +47,11 @@ $bStyle: 1px solid #ccc;
       * {
         border: none;
       }
+      .identifier {
+        padding-right: 0;
+        font-weight: bold;
+        width: auto;
+      }
     }
     .column-cell:last-child {
       border-bottom: none;
