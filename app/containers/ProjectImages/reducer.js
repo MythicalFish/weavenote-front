@@ -23,7 +23,8 @@ function ProjectImagesReducer(state = initialState, action) {
   const maxAnchors = annotation.get('maxAnchors');
   const anchors = annotation.get('anchors');
 
-  const setAnchor = (i) => state.setIn(['newAnnotation', 'anchors', i], payload);
+  const setAnchor = (i) =>
+    state.setIn(['newAnnotation', 'anchors', i], fromJS(payload));
 
   const setImages = () => {
     const { type } = response.imageable;

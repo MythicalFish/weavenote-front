@@ -3,13 +3,17 @@ import { Line } from 'react-konva';
 import { pixelPosition } from 'utils/anchorPosition';
 
 export default function CanvasLine({ anchors, canvasSize }) {
-  const a1 = pixelPosition(anchors.get('0'), canvasSize);
-  const a2 = pixelPosition(anchors.get('1'), canvasSize);
+  const points = [];
+  anchors.forEach((anchor) => {
+    const pos = pixelPosition(anchor.toJS(), canvasSize);
+    points.push(pos.x);
+    points.push(pos.y);
+  });
   return (
     <Line
       x={0}
       y={0}
-      points={[a1.x, a1.y, a2.x, a2.y]}
+      points={points}
       stroke="#51b2fe"
       strokeWidth={3}
       // shadowColor="white"

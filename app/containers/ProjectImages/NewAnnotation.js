@@ -23,11 +23,11 @@ class NewAnnotation extends React.PureComponent {
     return (
       <div>
         <Canvas onClick={this.setAnnotation} size={canvasSize}>
-          {anchors.size === 2 && <Line {...{ anchors, canvasSize }} />}
+          {anchors.size > 1 && <Line {...{ anchors, canvasSize }} />}
           {anchors.map((anchor, index) =>
             <Anchor
               key={this.key(newAnnotation, index)}
-              position={pixelPosition(anchor, canvasSize)}
+              position={pixelPosition(anchor.toJS(), canvasSize)}
               onDragEnd={this.setAnnotation}
               draggable
               active

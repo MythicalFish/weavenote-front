@@ -25,13 +25,6 @@ class Annotations extends React.PureComponent {
       if (this.isEditing(annotation)) return;
       const id = annotation.get('id');
       const anchors = annotation.get('anchors');
-      if (anchors.size === 2) {
-        lineLayer.push(
-          <Line
-            {...{ anchors, canvasSize, key: `Annotation${id}Line${index}` }}
-          />
-        );
-      }
       anchors.forEach((anchor, i) => {
         anchorLayer.push(
           <Anchor
@@ -41,6 +34,13 @@ class Annotations extends React.PureComponent {
           />
         );
       });
+      if (anchors.size > 1) {
+        lineLayer.push(
+          <Line
+            {...{ anchors, canvasSize, key: `Annotation${id}Line${index}` }}
+          />
+        );
+      }
     });
     return (
       <Canvas size={canvasSize}>
