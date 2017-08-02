@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import ReactS3Uploader from 'react-s3-uploader';
 import PlusButton from 'components/PlusButton';
 import InlineIcon from 'components/InlineIcon';
@@ -8,11 +9,11 @@ import Spinner from 'components/Spinner';
 import { notifyWarning } from 'containers/Notification';
 import * as API from 'utils/API';
 import { createImage } from './actions';
+import { selectIsUploading } from './selectors';
 
 class ImageUploader extends React.PureComponent {
-  state = { progress: 0, uploading: false };
+  state = { progress: 0 };
   onUploadPreprocess = (file, next) => {
-    this.toggleState();
     next(file);
   };
   onUploadProgress = (percent) => {
@@ -23,15 +24,10 @@ class ImageUploader extends React.PureComponent {
     const payload = { imageable, image };
     this.props.createImage(payload);
     if (onUploadFinish) onUploadFinish(payload);
-    this.toggleState();
   };
   onUploadError = (message) => {
     this.props.notifyWarning('Upload error');
-    this.toggleState();
     console.log(`Upload error: ${message}`);
-  };
-  toggleState = () => {
-    this.setState({ uploading: !this.state.uploading });
   };
   render() {
     const Button = () =>
@@ -47,7 +43,10 @@ class ImageUploader extends React.PureComponent {
         onFinish={this.onFinish}
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />;
-    const { label, inlineIcon } = this.props;
+    const { label, inlineIcon, isUploading } = this.props;
+    if (isUploading) {
+      return <Spinner />;
+    }
     if (label) {
       return (
         <label className="btn">
@@ -73,7 +72,12 @@ ImageUploader.propTypes = {
   label: PropTypes.string,
   inlineIcon: PropTypes.string,
   onUploadFinish: PropTypes.func,
+  isUploading: PropTypes.bool,
 };
+
+const mapState = createStructuredSelector({
+  isUploading: selectIsUploading(),
+});
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
@@ -85,4 +89,4 @@ export function mapDispatch(dispatch) {
   );
 }
 
-export default connect(null, mapDispatch)(ImageUploader);
+export default connect(mapState, mapDispatch)(ImageUploader);
