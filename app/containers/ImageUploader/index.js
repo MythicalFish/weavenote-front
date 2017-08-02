@@ -4,36 +4,35 @@ import { bindActionCreators } from 'redux';
 import ReactS3Uploader from 'react-s3-uploader';
 import PlusButton from 'components/PlusButton';
 import InlineIcon from 'components/InlineIcon';
+import Spinner from 'components/Spinner';
+import { notifyWarning } from 'containers/Notification';
 import * as API from 'utils/API';
 import { createImage } from './actions';
 
-class ImageUploader extends React.Component {
-  state = { progress: 0 };
-  onUploadPreprocess(file, next) {
-    console.log(`Pre-process: ${file.name}`);
+class ImageUploader extends React.PureComponent {
+  state = { progress: 0, uploading: false };
+  onUploadPreprocess = (file, next) => {
+    this.toggleState();
     next(file);
-  }
-  onUploadProgress = (percent, message) => {
-    let p = percent;
-    if (percent === 0) {
-      p = 1;
-    }
-    if (percent === 100) {
-      p = 0;
-    }
-    console.log(`Upload progress: ${p}% ${message}`);
-    this.setState({ progress: p });
+  };
+  onUploadProgress = (percent) => {
+    this.setState({ progress: percent });
   };
   onFinish = (image) => {
-    console.log('Upload finished:');
     const { imageable, onUploadFinish } = this.props;
     const payload = { imageable, image };
     this.props.createImage(payload);
     if (onUploadFinish) onUploadFinish(payload);
+    this.toggleState();
   };
-  onUploadError(message) {
+  onUploadError = (message) => {
+    this.props.notifyWarning('Upload error');
+    this.toggleState();
     console.log(`Upload error: ${message}`);
-  }
+  };
+  toggleState = () => {
+    this.setState({ uploading: !this.state.uploading });
+  };
   render() {
     const Button = () =>
       <ReactS3Uploader
@@ -63,10 +62,6 @@ class ImageUploader extends React.Component {
         <PlusButton color="gray" size={25}>
           <Button />
         </PlusButton>
-        {this.state.progress > 0 &&
-          <div>
-            {this.state.progress}%
-          </div>}
       </div>
     );
   }
@@ -84,6 +79,7 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       createImage,
+      notifyWarning,
     },
     dispatch
   );
