@@ -3,6 +3,7 @@ import Avatar from 'components/Avatar';
 import ImageThumbnails from 'containers/ImageThumbnails';
 import Form from './Form';
 import Actions from './Actions';
+import Wrapper from './Wrapper';
 
 class Comment extends React.PureComponent {
   isOwnComment = () => {
@@ -17,35 +18,30 @@ class Comment extends React.PureComponent {
       ? 'You'
       : comment.getIn(['user', 'name']);
     return (
-      <div className={`comment ${className}`}>
-        <div className="comment-avatar">
-          <Avatar user={comment.get('user')} small />
-        </div>
-        <div className="comment-body">
-          {isSelected &&
-            <div className="bold smaller1">
-              {authorName}
-            </div>}
-          {this.isEditing()
-            ? <Form
-              onSubmit={this.props.updateComment}
-              initialValues={{ commentable, comment }}
-              {...this.props}
-            />
-            : comment.get('text')}
-          {isSelected &&
-            this.isOwnComment() &&
-            !this.isEditing() &&
-            <Actions {...this.props} />}
-          {isSelected &&
-            <ImageThumbnails
-              images={comment.get('images')}
-              imageable={{ type: 'Comment', id }}
-              maxImages={this.props.maxImages}
-              deletable={this.isOwnComment()}
-            />}
-        </div>
-      </div>
+      <Wrapper user={comment.get('user')}>
+        {isSelected &&
+          <div className="bold smaller1">
+            {authorName}
+          </div>}
+        {this.isEditing()
+          ? <Form
+            onSubmit={this.props.updateComment}
+            initialValues={{ commentable, comment }}
+            {...this.props}
+          />
+          : comment.get('text')}
+        {isSelected &&
+          this.isOwnComment() &&
+          !this.isEditing() &&
+          <Actions {...this.props} />}
+        {isSelected &&
+          <ImageThumbnails
+            images={comment.get('images')}
+            imageable={{ type: 'Comment', id }}
+            maxImages={this.props.maxImages}
+            deletable={this.isOwnComment()}
+          />}
+      </Wrapper>
     );
   }
 }

@@ -1,25 +1,33 @@
 import React, { PropTypes } from 'react';
 import Form from './Form';
+import Wrapper from './Wrapper';
 
 const NewReply = (props) => {
   if (props.isOwnComment) return null;
-  const { createComment, comment, isReplying } = props;
-  const startReply = () => {
-    props.writeReply({ comment });
-  };
+  const { createComment, comment, isReplying, writeReply } = props;
+  const id = comment.get('id');
+  const commentable = { type: 'Comment', id };
+  if (isReplying === id) {
+    return (
+      <div className="comment-newreply">
+        <Wrapper {...props}>
+          <Form
+            onSubmit={createComment}
+            initialValues={{ commentable }}
+            {...props}
+          />
+        </Wrapper>
+      </div>
+    );
+  }
   return (
-    <div className="comment-newreply">
-      <Form
-        label="Leave reply"
-        isActive={isReplying === comment.get('id')}
-        onFocus={startReply}
-        onSubmit={createComment}
-        initialValues={{
-          commentable: { type: 'Comment', id: comment.get('id') },
-        }}
-        {...props}
-      />
-    </div>
+    <button
+      className="comment-newreply"
+      type="button"
+      onClick={() => writeReply({ comment })}
+    >
+      <Wrapper {...props}>Reply</Wrapper>
+    </button>
   );
 };
 

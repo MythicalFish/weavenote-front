@@ -1,10 +1,10 @@
-.comment-wrapper {
+.comment-thread {
   border: 1px solid transparent;
   @include roundedCorners();
   overflow: hidden;
   color: $dark7;
-  @extend .pt2;
-  .comment {
+  padding: $space-2 0 0 0;
+  .comment-wrapper {
     @extend .flex;
     .comment-avatar {
       @extend .flex-none;
@@ -20,7 +20,7 @@
         content: ' ';
         display: block;
         width: 1px;
-        background: $dark1;
+        background: $gray-lighterer;
         min-height: $space-3;
       }
     }
@@ -37,25 +37,63 @@
   }
   .comment-newreply {
     border-top: 1px solid transparent;
-    textarea {
-      border: none;
-      background-color: $aqua-haze;
-    }
-    button.btn-footer {
+    .comment-wrapper {
       opacity: 0;
     }
   }
   &.selected,
   &:hover {
-    border-color: $dark2;
+    border-color: $gray-lighterer;
     .comment-newreply {
-      border-color: $dark1;
-      button {
-        opacity: 1;
-        &.btn-footer {
-          background-color: $aqua-haze;
-        }
+      border-color: $gray-lighterer;
+      .comment-wrapper {
+        opacity: .6;
       }
     }
+  }
+  &.selected {
+    border-color: $gray-lighter;
+    .comment-newreply {
+      background: $haze;
+      .comment-wrapper {
+        opacity: 1;
+      }
+    }
+  }
+  .input {
+    textarea {
+      background: transparent;
+      border: none;
+      padding: 0;
+      resize: none;
+      min-height: 80px;
+      padding-right: $space-2;
+      color: $dark7;
+    }
+  }
+}
+
+button.comment-thread,
+.comment-newreply {
+  padding: $space-2 0;
+  display: block;
+  width: 100%;
+  text-align: left;
+  color: $dark3;
+  .comment-wrapper {
+    .comment-body {
+      padding: 0;
+    }
+    .comment-avatar {
+      &:after {
+        display: none !important;
+      }
+    }
+  }
+}
+button.comment-thread,
+button.comment-newreply {
+  .comment-wrapper {
+    @extend .items-center;
   }
 }

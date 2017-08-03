@@ -10,7 +10,6 @@ export default [commentsWatcher];
 
 function* commentsWatcher() {
   const watcher = [
-    // yield takeLatest(types.WRITE_COMMENT, initializeForm),
     yield takeLatest(types.EDIT_COMMENT, initializeForm),
     yield takeLatest(types.CREATE_COMMENT, createComment),
     yield takeLatest(types.UPDATE_COMMENT, updateComment),
@@ -39,7 +38,6 @@ function* deleteComment({ payload }) {
 const commentURL = (payload) => `comments/${payload.comment.get('id')}`;
 
 function* initializeForm({ payload }) {
-  console.log('init form');
   yield delay(50);
   yield put(initialize('CommentForm', payload, { form: 'CommentForm' }));
 }

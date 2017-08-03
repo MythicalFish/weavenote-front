@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
-import Button from 'components/Button';
 import NewComment from './subcomponents/NewComment';
-import Wrapper from './subcomponents/Wrapper';
+import Thread from './subcomponents/Thread';
 import {
   createComment,
   updateComment,
@@ -29,7 +28,7 @@ class Comments extends React.PureComponent {
           <NewComment {...cProps} />
         </div>
         {comments.map((comment, index) =>
-          <Wrapper
+          <Thread
             key={`comment${comment.get('id')}`}
             {...{
               ...cProps,

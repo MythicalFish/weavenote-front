@@ -1,22 +1,30 @@
 import React, { PropTypes } from 'react';
 import Form from './Form';
+import Wrapper from './Wrapper';
 
 const NewComment = (props) => {
-  const { commentable, isCreating } = props;
-  const toggleNew = () => {
-    props.writeComment({ commentable });
-  };
+  const { commentable, isCreating, writeComment } = props;
+  if (isCreating) {
+    return (
+      <div className="comment-thread selected">
+        <Wrapper {...props}>
+          <Form
+            onSubmit={props.createComment}
+            initialValues={{ commentable }}
+            {...props}
+          />
+        </Wrapper>
+      </div>
+    );
+  }
   return (
-    <div className="comment-wrapper">
-      <Form
-        label="Leave a comment"
-        isActive={isCreating}
-        onFocus={toggleNew}
-        onSubmit={props.createComment}
-        initialValues={{ commentable }}
-        {...props}
-      />
-    </div>
+    <button
+      className="comment-thread selected"
+      type="button"
+      onClick={() => writeComment({ commentable })}
+    >
+      <Wrapper {...props}>Leave a comment</Wrapper>
+    </button>
   );
 };
 
