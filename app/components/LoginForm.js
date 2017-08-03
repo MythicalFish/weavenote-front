@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import Auth0Lock from 'auth0-lock';
 import { loggedIn } from 'utils/authUtils';
 
-export default class LoginForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class LoginForm extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
     this.initializeLock();
@@ -22,11 +23,10 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
       email: null,
     },
     allowedConnections: ['Username-Password-Authentication'],
-  }
+  };
 
-  lock = (opts) => (
-    new Auth0Lock(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN, opts)
-  )
+  lock = (opts) =>
+    new Auth0Lock(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN, opts);
 
   initializeLock = () => {
     const opts = this.lockOptions;
@@ -44,21 +44,19 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
       console.error('Auth error', e);
     });
     lock.on('hash_parsed', (hash) => {
-      if (!hash && !loggedIn()) { // <!-- Don't render lock while it's still parsing the tokens given in the URL
+      if (!hash && !loggedIn()) {
+        // <!-- Don't render lock while it's still parsing the tokens given in the URL
         lock.show();
       }
     });
-  }
+  };
 
-  render = () => {
-    return (
-      <div className="flex items-middle vh-ymin100 bg-gray-darker">
-        <div>
-          <div className="larger light8 center mb2">
-            WeaveNote
-          </div>
-          <div id="login-form"></div>
-          <style>{`
+  render = () => (
+    <div className="flex items-middle vh-ymin100 bg-gray-darker">
+      <div>
+        <div className="larger light8 center mb2">Weavenote</div>
+        <div id="login-form" />
+        <style>{`
             .auth0-lock-header {
               display: none;
             }
@@ -70,10 +68,9 @@ export default class LoginForm extends React.PureComponent { // eslint-disable-l
               font-weight: bold;
             }
           `}</style>
-        </div>
       </div>
+    </div>
     );
-  }
 }
 
 LoginForm.propTypes = {

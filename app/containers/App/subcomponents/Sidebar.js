@@ -39,7 +39,7 @@ class Sidebar extends React.PureComponent {
     return (
       <aside id="sidebar" className="vh-ymin100 bg-color1x light9 br1">
         <div className="pr4">
-          <header className="bigger3 px4 pt3 pb2 bold">WeaveNote</header>
+          <header className="bigger3 px4 pt3 pb2 bold">Weavenote</header>
         </div>
         <ul className="m0 p0">
           <Button {...props} path="/" label="Dashboard" />

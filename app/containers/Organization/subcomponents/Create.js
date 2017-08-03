@@ -8,7 +8,7 @@ const Create = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Your WeaveNote Organization</h1>
+      <h1>Your Weavenote Organization</h1>
       <div className="data-rows">
         <Field
           name="name"
