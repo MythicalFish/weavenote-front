@@ -27,14 +27,30 @@ export class ProjectList extends React.PureComponent {
         <Header />
         <Toolbar {...props} />
         <div className="container-narrow px2 py4">
-          {props.projects &&
-            props.projects.map((project, index) =>
-              <ListItem
-                key={`project-${index}`}
-                project={project}
-                fileProject={props.fileProject}
-              />
-            )}
+          <table>
+            <thead>
+              <tr>
+                <th />
+                <th>Name</th>
+                <th>Style number</th>
+                <th>Collection</th>
+                <th>Notifications</th>
+                <th>Stage</th>
+                <th>Team</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {props.projects &&
+                props.projects.map((project, index) =>
+                  <ListItem
+                    key={`project-${index}`}
+                    project={project}
+                    fileProject={props.fileProject}
+                  />
+                )}
+            </tbody>
+          </table>
         </div>
       </div>
     );

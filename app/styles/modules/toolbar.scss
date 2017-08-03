@@ -1,16 +1,6 @@
 .toolbar {
-  @extend .bg-white;
-  @extend .flex;
-  @extend .items-stretch;
-  @extend .justify-between;
   height: 70px;
-  .icon {
-    padding: 0 $space-4;
-    display: flex;
-    align-items: center;
-  }
-  > nav,
-  > div {
+  nav {
     @extend .flex;
     > * {
       @extend .flex;
@@ -61,6 +51,17 @@
           }
         }
       }
+    }
+  }
+  &.toolbar-flex {
+    @extend .bg-white;
+    @extend .flex;
+    @extend .items-stretch;
+    @extend .justify-between;
+    .icon {
+      padding: 0 $space-4;
+      display: flex;
+      align-items: center;
     }
   }
 }

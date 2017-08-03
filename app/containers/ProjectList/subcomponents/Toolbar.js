@@ -13,33 +13,39 @@ export default function Toolbar(props) {
   } = props;
   const canCreate = abilities.Project.create;
   return (
-    <header className="toolbar toolbar-compact">
-      {canCreate ? <PlusButton onClick={() => createProject()} /> : <div />}
-      <nav>
-        <ul>
-          <li>
-            <NavItem
-              label={sections.ActiveProjects.label}
-              isActive={currentSection.id === sections.ActiveProjects.id}
-              handleClick={() => {
-                fetchProjects();
-                changeSection(sections.ActiveProjects);
-              }}
-            />
-          </li>
-          <li>
-            <NavItem
-              label={sections.ArchivedProjects.label}
-              isActive={currentSection.id === sections.ArchivedProjects.id}
-              handleClick={() => {
-                fetchProjects({ archived: true });
-                changeSection(sections.ArchivedProjects);
-              }}
-            />
-          </li>
-        </ul>
-      </nav>
-      <div />
+    <header className="toolbar toolbar-compact container-narrow">
+      <div className="row">
+        <div className="col-xs-2">
+          {canCreate && <PlusButton onClick={() => createProject()} />}
+        </div>
+        <div className="col-xs-8 flex justify-center">
+          <nav>
+            <ul>
+              <li>
+                <NavItem
+                  label={sections.ActiveProjects.label}
+                  isActive={currentSection.id === sections.ActiveProjects.id}
+                  handleClick={() => {
+                    fetchProjects();
+                    changeSection(sections.ActiveProjects);
+                  }}
+                />
+              </li>
+              <li>
+                <NavItem
+                  label={sections.ArchivedProjects.label}
+                  isActive={currentSection.id === sections.ArchivedProjects.id}
+                  handleClick={() => {
+                    fetchProjects({ archived: true });
+                    changeSection(sections.ArchivedProjects);
+                  }}
+                />
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="col-xs-2" />
+      </div>
     </header>
   );
 }

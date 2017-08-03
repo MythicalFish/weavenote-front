@@ -14,7 +14,7 @@ const UserMenu = (props) => {
     <Dropdown
       label={UserMenuButton(props)}
       align="right"
-      className="p0 smaller1"
+      className="px2 smaller1 flex items-center"
     >
       <Link to="/profile">
         <MenuItem icon="User" label="Profile" />
@@ -38,8 +38,8 @@ const MenuItem = (p) =>
   </div>;
 
 const UserMenuButton = ({ user, organization }) =>
-  <div className="flex items-center">
-    <div className="mx1 right-align">
+  <div className="flex">
+    <div className="mr1 right-align">
       {user.get('name')}
       {organization &&
         <div className="dark5 upcase smaller1">

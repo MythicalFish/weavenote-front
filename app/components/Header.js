@@ -2,11 +2,8 @@ import React from 'react';
 import UserMenu from 'components/UserMenu';
 
 const Header = () =>
-  <div className="toolbar blurrable">
-    <div />
-    <div className="px2">
-      <UserMenu />
-    </div>
-  </div>;
+  <header className="blurrable flex justify-end py2">
+    <UserMenu />
+  </header>;
 
 export default Header;

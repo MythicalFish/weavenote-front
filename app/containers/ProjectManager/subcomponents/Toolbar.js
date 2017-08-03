@@ -7,10 +7,9 @@ import Icon from 'components/Icon';
 export default function Toolbar(props) {
   const { changeSection, currentSection, openModal } = props;
   return (
-    <header className="toolbar blurrable">
-      <div>
-        <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
-      </div>
+    <header className="toolbar toolbar-flex blurrable bb1">
+      <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
+
       <nav>
         <ul>
           <li>
@@ -60,9 +59,7 @@ export default function Toolbar(props) {
           </li>
         </ul>
       </nav>
-      <div className="pr2">
-        <UserMenu />
-      </div>
+      <UserMenu />
     </header>
   );
 }
