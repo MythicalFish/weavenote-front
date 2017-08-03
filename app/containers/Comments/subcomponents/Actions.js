@@ -12,9 +12,10 @@ const Actions = (props) => {
   return (
     <div>
       <div className="actions smaller1">
-        <Button onClick={toggleEdit} label="Edit" />
+        <Button inlineIcon="edit" onClick={toggleEdit} label="Edit" />
         <Button
-          label="Remove"
+          inlineIcon="close"
+          label="Delete"
           onClick={() => {
             props.deleteComment({ comment, commentable });
           }}
@@ -23,7 +24,7 @@ const Actions = (props) => {
           !isReply &&
           <Button
             inlineIcon="plus"
-            label="Annotation"
+            label="Annotate"
             onClick={() => {
               addAnnotation({
                 maxAnchors: 1,
@@ -36,7 +37,7 @@ const Actions = (props) => {
         {comment.get('images').size < props.maxImages &&
           <ImageUploader
             imageable={actionable}
-            label="Image"
+            label="Add image"
             inlineIcon="plus"
           />}
       </div>

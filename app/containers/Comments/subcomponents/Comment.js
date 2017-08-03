@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react';
-import Avatar from 'components/Avatar';
+import { FormattedDate } from 'react-intl';
 import ImageThumbnails from 'containers/ImageThumbnails';
 import Form from './Form';
 import Actions from './Actions';
 import Wrapper from './Wrapper';
+
+const Date = ({ value }) =>
+  <span className="dark4 smaller1 ml2">
+    <FormattedDate value={value} day="numeric" month="short" />
+  </span>;
 
 class Comment extends React.PureComponent {
   isOwnComment = () => {
@@ -20,8 +25,11 @@ class Comment extends React.PureComponent {
     return (
       <Wrapper user={comment.get('user')}>
         {isSelected &&
-          <div className="bold smaller1">
-            {authorName}
+          <div className="smaller1">
+            <span className="bold">
+              {authorName}
+            </span>
+            <Date value={comment.get('created_at')} />
           </div>}
         {this.isEditing()
           ? <Form
@@ -29,11 +37,9 @@ class Comment extends React.PureComponent {
             initialValues={{ commentable, comment }}
             {...this.props}
           />
-          : comment.get('text')}
-        {isSelected &&
-          this.isOwnComment() &&
-          !this.isEditing() &&
-          <Actions {...this.props} />}
+          : <div className="comment-text">
+            {comment.get('text')}
+          </div>}
         {isSelected &&
           <ImageThumbnails
             images={comment.get('images')}
@@ -41,6 +47,10 @@ class Comment extends React.PureComponent {
             maxImages={this.props.maxImages}
             deletable={this.isOwnComment()}
           />}
+        {isSelected &&
+          this.isOwnComment() &&
+          !this.isEditing() &&
+          <Actions {...this.props} />}
       </Wrapper>
     );
   }
