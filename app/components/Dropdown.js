@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Dot from 'components/Dot';
+import Icon from 'components/Icon';
 import PriceSymbol from 'components/PriceSymbol';
 import TetherComponent from 'react-tether';
 import { selectDropdownID } from 'containers/App/selectors';
@@ -45,31 +46,28 @@ class Dropdown extends React.PureComponent {
   };
 
   label = () => {
-    const { value, label } = this.props;
-    let labelContent;
-    if (label) {
-      labelContent = label;
-    } else {
-      let val = value;
-      if (!val) val = { name: null };
-      if (val.toJS) val = value.toJS();
-      labelContent = (
-        <div className="flex items-center">
-          <div className="flex-auto">
-            {val.name}
-            {val.iso_code &&
-              <PriceSymbol code={val.iso_code} className="bold ml1" />}
-            {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
-          </div>
-          <div className="flex-none">
-            <i className="fa fa-chevron-down smaller2" />
-          </div>
-        </div>
+    const { value, label, icon } = this.props;
+    const bProps = { onClick: this.toggleState(), type: 'button' };
+
+    if (label || icon) {
+      return (
+        <button {...bProps}>
+          {label && label}
+          {icon && <Icon name={icon} />}
+        </button>
       );
     }
+
+    let val = value;
+    if (!val) val = { name: null };
+    if (val.toJS) val = value.toJS();
     return (
-      <button onClick={this.toggleState()} type="button">
-        {labelContent}
+      <button {...bProps}>
+        {val.name}
+        {val.iso_code &&
+          <PriceSymbol code={val.iso_code} className="bold ml1" />}
+        {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
+        <i className="fa fa-chevron-down smaller2" />
       </button>
     );
   };
@@ -164,8 +162,10 @@ Dropdown.propTypes = {
   align: PropTypes.string,
   children: PropTypes.node,
   dropdownID: PropTypes.string,
+  icon: PropTypes.string,
   closeDropdown: PropTypes.func,
   openDropdown: PropTypes.func,
+  label: PropTypes.any,
 };
 
 export function mapDispatch(dispatch) {

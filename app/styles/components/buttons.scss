@@ -20,10 +20,10 @@ button {
   cursor: pointer;
   background: transparent;
   border: none;
-  padding: $space-2 $space-3;
 }
 .btn,
 .btn:focus {
+  padding: $space-2 $space-3;
   @extend button;
   @include transition('all .2s');
   border-radius: 999px;

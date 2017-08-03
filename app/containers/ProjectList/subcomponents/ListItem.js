@@ -5,7 +5,8 @@ import Thumbnail from 'components/Thumbnail';
 
 export default function ListItem(props) {
   const { project, fileProject } = props;
-  const url = `/projects/${project.id}`;
+  const { id, archived } = project;
+  const url = `/projects/${id}`;
   return (
     <div className="bb1 mb2 pb2 bg-white flex justify-between x-fill">
       <Link to={url} className="flex items-center b0 bg-white">
@@ -13,14 +14,10 @@ export default function ListItem(props) {
           <Thumbnail url={project.thumbnail_url} />
         </div>
         <div className="p2">
-          <div>
-            {project.name}
-          </div>
+          {project.name}
         </div>
         <div className="p2">
-          <div>
-            #{project.identifier}
-          </div>
+          #{project.identifier}
         </div>
       </Link>
       <div className="flex items-center">
@@ -29,24 +26,11 @@ export default function ListItem(props) {
         </div>
         <div className="p2 dark3 smaller1">collaborators</div>
         <div className="p2">
-          <Dropdown label="...">
+          <Dropdown icon="MoreHorizontal">
             <Link to={url}>Manage</Link>
-            {!project.archived &&
-              <button
-                onClick={() => {
-                  fileProject({ id: project.id, archived: true });
-                }}
-              >
-                Archive
-              </button>}
-            {project.archived &&
-              <button
-                onClick={() => {
-                  fileProject({ id: project.id, archived: false });
-                }}
-              >
-                Restore
-              </button>}
+            <button onClick={() => fileProject({ id, archived: !archived })}>
+              {archived ? 'Restore' : 'Archive'}
+            </button>
           </Dropdown>
         </div>
       </div>

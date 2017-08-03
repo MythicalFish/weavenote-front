@@ -14,13 +14,7 @@ export default function Toolbar(props) {
   const canCreate = abilities.Project.create;
   return (
     <header className="toolbar toolbar-compact">
-      {!canCreate && <div />}
-      {canCreate &&
-        <PlusButton
-          onClick={() => {
-            createProject();
-          }}
-        />}
+      {canCreate ? <PlusButton onClick={() => createProject()} /> : <div />}
       <nav>
         <ul>
           <li>
