@@ -37,7 +37,7 @@ class Sidebar extends React.PureComponent {
     const { props } = this;
     if (isProjectPage(props.currentPath)) return null;
     return (
-      <aside id="sidebar" className="vh-ymin100 bg-color1x light9 br1">
+      <aside id="sidebar" className="vh-ymin100 bg-bluewood light9 br1">
         <div className="pr4">
           <header className="bigger3 px4 pt3 pb2 bold">Weavenote</header>
         </div>

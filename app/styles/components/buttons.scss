@@ -28,9 +28,9 @@ button {
   @include transition('all .2s');
   border-radius: 999px;
   -webkit-border-radius: 999px;
-  border: 1px solid $color2x;
+  border: 1px solid $malibu;
   box-shadow: none;
-  background: $color2x;
+  background: $malibu;
   color: $white;
   font-weight: bold;
   position: relative;
@@ -47,7 +47,7 @@ button {
   &.btn-inline {
     border: none;
     background: none;
-    color: $color2x;
+    color: $malibu;
     padding: 0;
     line-height: inherit;
   }

@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 export default function Layout(props) {
   return (
     <div className="flex bg-gray-lightest">
-      <div className="flex-none bg-color1x blurrable">
+      <div className="flex-none bg-bluewood blurrable">
         <Sidebar currentPath={props.location.pathname} />
       </div>
       <div className="flex-auto">
