@@ -1,26 +1,32 @@
 $bluewood: #313c54;
 $malibu: #51b2fe;
 $azure: #1382e8;
+$torch: #f30045;
 
 .bg-bluewood {
   background-color: $bluewood;
+}
+.bluewood {
+  color: $bluewood;
 }
 
 .bg-malibu {
   background-color: $malibu;
 }
+.malibu {
+  color: $malibu;
+}
 
 .bg-azure {
   background-color: $azure;
 }
-
-.bluewood {
-  color: $bluewood;
-}
-
-.malibu {
-  color: $malibu;
-}
 .azure {
   color: $azure;
+}
+
+.bg-torch {
+  background-color: $torch;
+}
+.torch {
+  color: $torch;
 }

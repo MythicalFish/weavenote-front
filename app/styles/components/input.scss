@@ -29,7 +29,7 @@ textarea {
     box-sizing: border-box;
     line-height: 1;
     display: block;
-    padding: $space-2;
+    padding: $space-3;
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
     height: auto;
@@ -47,7 +47,7 @@ textarea {
     textarea,
     .dropdown > button,
     .readonly {
-      padding: $space-1 $space-2;
+      padding: $space-2 $space-3;
     }
   }
   &.input-inline {
@@ -55,7 +55,7 @@ textarea {
     textarea,
     .dropdown > button,
     .readonly {
-      padding: 0 $space-1;
+      padding: 0 $space-2;
       border: none;
       line-height: inherit;
     }

@@ -13,7 +13,7 @@ export default function Toolbar(props) {
   } = props;
   const canCreate = abilities.Project.create;
   return (
-    <header className="toolbar">
+    <header className="toolbar toolbar-compact">
       {!canCreate && <div />}
       {canCreate &&
         <PlusButton

@@ -20,7 +20,7 @@ button {
   cursor: pointer;
   background: transparent;
   border: none;
-  padding: $space-1 $space-2;
+  padding: $space-2 $space-3;
 }
 .btn,
 .btn:focus {
@@ -57,7 +57,7 @@ button {
     -webbkit-border-radius: 0;
     display: block;
     width: 100%;
-    padding: $space-2;
+    padding: $space-3;
     color: $dark3;
     background: $white;
     font-weight: normal;
@@ -145,7 +145,7 @@ label.btn {
   .btn {
     @extend .btn-shy;
     &:not(:last-child) {
-      margin-right: $space-1;
+      margin-right: $space-2;
     }
   }
 }

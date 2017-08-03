@@ -33,7 +33,7 @@
       @include roundedCorners();
     }
     header {
-      padding: $space-2;
+      padding: $space-3;
       font-weight: bold;
       @extend .bb1;
     }

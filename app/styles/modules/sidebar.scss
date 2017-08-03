@@ -6,12 +6,11 @@
     a {
       color: $white;
       display: block;
-      @extend .py2;
+      @extend .py1;
       @extend .px4;
       @extend .bigger1;
       &.active {
-        background: $white;
-        color: $bluewood;
+        color: $malibu;
       }
     }
   }

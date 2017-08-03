@@ -21,7 +21,7 @@
         display: block;
         width: 1px;
         background: $dark1;
-        min-height: $space-1;
+        min-height: $space-2;
       }
     }
     .comment-body {
@@ -30,7 +30,7 @@
     }
   }
   &:not(:last-child) {
-    margin-bottom: $space-1;
+    margin-bottom: $space-2;
   }
   &:not(.selected):hover {
     cursor: pointer;
