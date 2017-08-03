@@ -6,11 +6,9 @@ const Button = (props) => {
   if (!currentPath) return null;
   const bClass = buttonClass(path, currentPath);
   return (
-    <li>
-      <Link className={bClass} to={path}>
-        {label}
-      </Link>
-    </li>
+    <Link className={bClass} to={path}>
+      {label}
+    </Link>
   );
 };
 
@@ -35,14 +33,12 @@ Button.propTypes = {
 const Sidebar = (props) => {
   if (isProjectPage(props.currentPath)) return null;
   return (
-    <aside id="sidebar" className="vh-ymin100 bg-bluewood light9 pr4">
-      <div className="pr4 pt4">
-        <header className="bigger3 px4 pt4 pb3 bold">Weavenote</header>
-      </div>
-      <ul className="m0 p0">
+    <aside id="sidebar">
+      <header>Weavenote</header>
+      <nav>
         <Button {...props} path="/projects" label="Projects" />
         <Button {...props} path="/materials" label="Materials" />
-      </ul>
+      </nav>
     </aside>
   );
 };

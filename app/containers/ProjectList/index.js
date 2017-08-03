@@ -26,7 +26,7 @@ export class ProjectList extends React.PureComponent {
       <div>
         <Header />
         <Toolbar {...props} />
-        <div className="p2">
+        <div className="container-narrow px2 py4">
           {props.projects &&
             props.projects.map((project, index) =>
               <ListItem

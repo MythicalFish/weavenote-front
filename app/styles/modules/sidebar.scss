@@ -1,13 +1,18 @@
 #sidebar {
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  background: $bluewood;
+  color: $white;
+  padding: $space-5 $space-5 $space-4 $space-4;
+  @extend .vh-ymin100;
+  header {
+    @extend .bigger3;
+    font-weight: bold;
+    margin-bottom: $space-2;
+  }
+  nav {
     a {
-      color: $white;
+      color: inherit;
       display: block;
-      @extend .py1;
-      @extend .px4;
+      padding: $space-2 0;
       @extend .bigger1;
       &.active {
         color: $malibu;
