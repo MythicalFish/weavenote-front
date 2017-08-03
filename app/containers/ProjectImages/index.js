@@ -39,7 +39,7 @@ class ProjectImages extends React.PureComponent {
             </div>
             <CurrentImage {...{ currentImage, ...this.props }} />
           </div>}
-        <div className="pt1 flex blurrable">
+        <div className="pt3 flex justify-center blurrable">
           <ImageThumbnails
             images={images}
             onSelect={this.selectImage}

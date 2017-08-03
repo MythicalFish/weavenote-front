@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import CommentReplies from './CommentReplies';
-import CommentNewReply from './CommentNewReply';
+import Replies from './Replies';
+import NewReply from './NewReply';
 import Comment from './Comment';
 
-class CommentWrapper extends React.PureComponent {
+class Wrapper extends React.PureComponent {
   switchComment = () => {
     const { comment } = this.props;
     if (!this.isSelected()) {
@@ -26,19 +26,19 @@ class CommentWrapper extends React.PureComponent {
       <div className={cClass}>
         <div onClick={this.switchComment}>
           <Comment {...cProps} className="comment-head" />
-          <CommentReplies {...cProps} />
+          <Replies {...cProps} />
         </div>
-        <CommentNewReply {...cProps} />
+        <NewReply {...cProps} />
       </div>
     );
   }
 }
 
-CommentWrapper.propTypes = {
+Wrapper.propTypes = {
   switchComment: PropTypes.func,
   comment: PropTypes.object,
   annotation: PropTypes.object,
   currentComment: PropTypes.number,
 };
 
-export default CommentWrapper;
+export default Wrapper;

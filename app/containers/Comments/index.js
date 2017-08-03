@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
 import Button from 'components/Button';
-import CommentForm from './CommentForm';
-import CommentWrapper from './CommentWrapper';
+import NewComment from './subcomponents/NewComment';
+import Wrapper from './subcomponents/Wrapper';
 import {
   createComment,
   updateComment,
@@ -19,31 +19,17 @@ import {
 import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
-  toggleNew = () => {
-    const { commentable } = this.props;
-    this.props.writeComment({ commentable });
-  };
   render() {
-    const { commentable, comments, isCreating } = this.props;
+    const { comments } = this.props;
     const cProps = { ...this.props, maxImages: 3 };
     delete cProps.comments;
     return (
       <div>
         <div className="mb2">
-          {isCreating
-            ? <CommentForm
-              onSubmit={this.props.createComment}
-              initialValues={{ commentable }}
-              {...cProps}
-            />
-            : <Button
-              label="Leave a comment"
-              secondary
-              onClick={this.toggleNew}
-            />}
+          <NewComment {...cProps} />
         </div>
         {comments.map((comment, index) =>
-          <CommentWrapper
+          <Wrapper
             key={`comment${comment.get('id')}`}
             {...{
               ...cProps,
@@ -58,10 +44,6 @@ class Comments extends React.PureComponent {
 }
 
 Comments.propTypes = {
-  isCreating: PropTypes.bool,
-  writeComment: PropTypes.func,
-  createComment: PropTypes.func,
-  commentable: PropTypes.object,
   comments: PropTypes.object,
 };
 

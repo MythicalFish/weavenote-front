@@ -13,24 +13,21 @@ const ImageForm = (props) => {
     props.updateImage({ imageable, image });
   };
   return (
-    <form className="row" onSubmit={handleSubmit(onSubmit)}>
-      <div className="col-xs-10 flex items-end">
-        <div className="mxn1 pb1">
-          <Field
-            name="name"
-            type="text"
-            component={Input}
-            label="Name"
-            placeholder="Untitled image"
-            fieldClass="input-inline"
-            onBlur={(d, name) => {
-              const image = { id, name };
-              props.updateImage({ imageable, image });
-            }}
-          />
-        </div>
+    <form className="flex justify-center" onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex-none px3 pb3">
+        <Field
+          name="name"
+          type="text"
+          component={Input}
+          label="Name"
+          placeholder="Untitled image"
+          fieldClass="input-inline bigger1 center"
+          onBlur={(d, name) => {
+            const image = { id, name };
+            props.updateImage({ imageable, image });
+          }}
+        />
       </div>
-      <div className="col-xs-2" />
     </form>
   );
 };

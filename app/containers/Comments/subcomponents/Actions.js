@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Button from 'components/Button';
 import ImageUploader from 'containers/ImageUploader';
 
-const CommentActions = (props) => {
+const Actions = (props) => {
   const { comment, commentable, addAnnotation } = props;
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
@@ -44,7 +44,7 @@ const CommentActions = (props) => {
   );
 };
 
-CommentActions.propTypes = {
+Actions.propTypes = {
   addAnnotation: PropTypes.func,
   cancelCommentAction: PropTypes.func,
   comment: PropTypes.object,
@@ -52,4 +52,4 @@ CommentActions.propTypes = {
   maxImages: PropTypes.number,
 };
 
-export default CommentActions;
+export default Actions;

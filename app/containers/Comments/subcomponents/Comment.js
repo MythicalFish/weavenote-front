@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import Avatar from 'components/Avatar';
 import ImageThumbnails from 'containers/ImageThumbnails';
-import CommentForm from './CommentForm';
-import CommentActions from './CommentActions';
+import Form from './Form';
+import Actions from './Actions';
 
 class Comment extends React.PureComponent {
   isOwnComment = () => {
@@ -27,7 +27,7 @@ class Comment extends React.PureComponent {
               {authorName}
             </div>}
           {this.isEditing()
-            ? <CommentForm
+            ? <Form
               onSubmit={this.props.updateComment}
               initialValues={{ commentable, comment }}
               {...this.props}
@@ -36,7 +36,7 @@ class Comment extends React.PureComponent {
           {isSelected &&
             this.isOwnComment() &&
             !this.isEditing() &&
-            <CommentActions {...this.props} />}
+            <Actions {...this.props} />}
           {isSelected &&
             <ImageThumbnails
               images={comment.get('images')}

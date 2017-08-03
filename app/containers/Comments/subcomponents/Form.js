@@ -5,7 +5,7 @@ import Button from 'components/Button';
 
 class CommentForm extends React.PureComponent {
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -28,7 +28,6 @@ class CommentForm extends React.PureComponent {
 CommentForm.propTypes = {
   handleSubmit: PropTypes.func,
   cancelCommentAction: PropTypes.func,
-  submitting: PropTypes.bool,
 };
 
 export default reduxForm({
