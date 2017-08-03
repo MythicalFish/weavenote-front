@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import Button from 'components/Button';
 import Form from './Form';
 
 const NewComment = (props) => {
@@ -8,14 +7,15 @@ const NewComment = (props) => {
     props.writeComment({ commentable });
   };
   return (
-    <div>
-      {isCreating
-        ? <Form
-          onSubmit={props.createComment}
-          initialValues={{ commentable }}
-          {...props}
-        />
-        : <Button label="Leave a comment" secondary onClick={toggleNew} />}
+    <div className="comment-wrapper">
+      <Form
+        label="Leave a comment"
+        isActive={isCreating}
+        onFocus={toggleNew}
+        onSubmit={props.createComment}
+        initialValues={{ commentable }}
+        {...props}
+      />
     </div>
   );
 };

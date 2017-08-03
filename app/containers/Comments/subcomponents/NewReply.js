@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import Button from 'components/Button';
 import Form from './Form';
 
 const NewReply = (props) => {
@@ -10,15 +9,16 @@ const NewReply = (props) => {
   };
   return (
     <div className="comment-newreply">
-      {isReplying === comment.get('id')
-        ? <Form
-          onSubmit={createComment}
-          initialValues={{
-            commentable: { type: 'Comment', id: comment.get('id') },
-          }}
-          {...props}
-        />
-        : <Button onClick={startReply} label="Reply" footer />}
+      <Form
+        label="Leave reply"
+        isActive={isReplying === comment.get('id')}
+        onFocus={startReply}
+        onSubmit={createComment}
+        initialValues={{
+          commentable: { type: 'Comment', id: comment.get('id') },
+        }}
+        {...props}
+      />
     </div>
   );
 };

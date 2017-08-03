@@ -3,12 +3,12 @@
   @include roundedCorners();
   overflow: hidden;
   color: $dark7;
-  @extend .pt1;
+  @extend .pt2;
   .comment {
     @extend .flex;
     .comment-avatar {
       @extend .flex-none;
-      @extend .px1;
+      @extend .px2;
       @extend .flex;
       @extend .flex-column;
       @extend .items-center;
@@ -21,12 +21,12 @@
         display: block;
         width: 1px;
         background: $dark1;
-        min-height: $space-2;
+        min-height: $space-3;
       }
     }
     .comment-body {
       @extend .flex-auto;
-      @extend .pb1;
+      @extend .pb2;
     }
   }
   &:not(:last-child) {

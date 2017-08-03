@@ -39,6 +39,7 @@ function* deleteComment({ payload }) {
 const commentURL = (payload) => `comments/${payload.comment.get('id')}`;
 
 function* initializeForm({ payload }) {
+  console.log('init form');
   yield delay(50);
   yield put(initialize('CommentForm', payload, { form: 'CommentForm' }));
 }
