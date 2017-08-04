@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect';
+const selectState = () => (state) => state.get('Focus');
 
-const selectFocused = () => (state) => state.get('Focus');
-
-export { selectFocused };
+export { selectState };
