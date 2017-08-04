@@ -13,17 +13,27 @@ export default function Focusable(Component, focusIndex = 0) {
     componentDidMount = () => {
       this.setState({ id: randomID() });
     };
+    globalFocus = () => this.props.globalFocus.get(focusIndex);
     render() {
       const { id } = this.state;
-      const { setFocus: set, state } = this.props;
-      const focused = state.get(focusIndex);
-      const isFocused = focused.get('id') === id;
+      const { setFocus: set } = this.props;
+      const focused = this.globalFocus();
+      const isFocused = focused && focused.get('id') === id;
       const focusClass = isFocused ? 'focused' : '';
       const isDoing = (action) => isFocused && focused.get('action') === action;
       const focusThis = () => {
         if (!isFocused) set({ focusIndex, id, action: null });
       };
-      const unfocusThis = () => set({ focusIndex, id: null, action: null });
+      const unfocusThis = () => {
+        if (isFocused) set({ focusIndex, id: null, action: null });
+      };
+      const toggleThis = () => {
+        if (isFocused) {
+          unfocusThis();
+        } else {
+          focusThis();
+        }
+      };
       const doThis = (action) => () => set({ focusIndex, id, action });
       return (
         <Component
@@ -31,6 +41,7 @@ export default function Focusable(Component, focusIndex = 0) {
             ...this.props,
             focusThis,
             unfocusThis,
+            toggleThis,
             doThis,
             isFocused,
             isDoing,
@@ -43,13 +54,13 @@ export default function Focusable(Component, focusIndex = 0) {
 
   F.propTypes = {
     setFocus: PropTypes.func,
-    state: PropTypes.object,
+    globalFocus: PropTypes.object,
   };
 
   const mapDispatch = (dispatch) => bindActionCreators({ setFocus }, dispatch);
 
   const mapState = createStructuredSelector({
-    state: selectState(),
+    globalFocus: selectState(),
   });
 
   return connect(mapState, mapDispatch)(F);

@@ -79,7 +79,6 @@ export default class Input extends React.PureComponent {
     return (
       <div className={`input ${className}`}>
         {field}
-        <div className="focused p0" />
         {touched &&
           error &&
           <span className="error">

@@ -1,46 +1,32 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createStructuredSelector } from 'reselect';
 import Dot from 'components/Dot';
 import Icon from 'components/Icon';
 import PriceSymbol from 'components/PriceSymbol';
 import TetherComponent from 'react-tether';
-import { selectDropdownID } from 'containers/App/selectors';
-import { openDropdown, closeDropdown } from 'containers/App/actions';
+import Focusable from 'containers/Focusable';
 
 class Dropdown extends React.PureComponent {
-  state = { className: '', id: null };
-
-  componentDidMount = () => {
-    this.setState({ id: this.randomID() });
-  };
-
-  randomID() {
-    return Math.random().toString(36).substring(7);
-  }
-
-  isActive = () => {
-    const { dropdownID } = this.props;
-    return dropdownID === this.state.id;
-  };
+  state = { className: '' };
 
   toggleState = (item) => () => {
     const { readOnly, onChange, onChanged } = this.props;
+    const { focusThis, unfocusThis, isFocused } = this.props;
+
     if (readOnly) return;
-    if (this.isActive()) {
-      this.setState({ className: '' });
+
+    if (isFocused) {
+      // this.setState({ className: '' });
       setTimeout(() => {
-        this.props.closeDropdown();
+        unfocusThis();
         if (item) {
           if (onChange) onChange(item);
           if (onChanged) onChanged(item);
         }
       }, 200);
     } else {
-      this.props.openDropdown(this.state.id);
+      focusThis(this.state.id);
       setTimeout(() => {
-        this.setState({ className: 'open' });
+        // this.setState({ className: 'open' });
       }, 1);
     }
   };
@@ -75,8 +61,7 @@ class Dropdown extends React.PureComponent {
   items = () => {
     const { value, data, children, align, tail } = this.props;
     const alignment = align || 'left';
-    const itemsClass = `dropdown-options ${alignment}-align ${this.state
-      .className}`;
+    const itemsClass = `dropdown-options ${alignment}-align open`;
     if (children) {
       return (
         <div className={itemsClass} onClick={this.toggleState()}>
@@ -134,14 +119,14 @@ class Dropdown extends React.PureComponent {
   };
 
   render() {
-    const { className, readOnly } = this.props;
+    const { className, readOnly, isFocused } = this.props;
     let inputClass = className || '';
     if (readOnly) inputClass += ' noselect';
     return (
       <div className={`dropdown ${inputClass}`}>
         <TetherComponent {...this.tetherOptions}>
           {this.label()}
-          {this.isActive() &&
+          {isFocused &&
             <div>
               {this.items()}
             </div>}
@@ -161,25 +146,11 @@ Dropdown.propTypes = {
   readOnly: PropTypes.bool,
   align: PropTypes.string,
   children: PropTypes.node,
-  dropdownID: PropTypes.string,
   icon: PropTypes.string,
-  closeDropdown: PropTypes.func,
-  openDropdown: PropTypes.func,
+  isFocused: PropTypes.bool,
+  focusThis: PropTypes.func,
+  unfocusThis: PropTypes.func,
   label: PropTypes.any,
 };
 
-export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    {
-      openDropdown,
-      closeDropdown,
-    },
-    dispatch
-  );
-}
-
-const mapState = createStructuredSelector({
-  dropdownID: selectDropdownID(),
-});
-
-export default connect(mapState, mapDispatch)(Dropdown);
+export default Focusable(Dropdown, 1);
