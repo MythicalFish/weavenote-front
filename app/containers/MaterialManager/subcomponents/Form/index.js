@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
-import DataRow from 'components/DataRow';
+import InputRow from 'components/FormInputRow';
 import Button from 'components/Button';
 import Supplier from './Supplier';
 import CareLabels from './CareLabels';
@@ -46,7 +46,7 @@ class Form extends React.Component {
     const { type } = this.state;
     const { showFor } = this;
     const fProps = {
-      component: DataRow,
+      component: InputRow,
       restricted: this.restricted(),
       align: 'right',
     };

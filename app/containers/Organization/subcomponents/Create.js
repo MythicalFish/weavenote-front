@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form/immutable';
-import DataRow from 'components/DataRow';
+import InputRow from 'components/FormInputRow';
 import Button from 'components/Button';
 
 const Create = (props) => {
@@ -13,7 +13,7 @@ const Create = (props) => {
         <Field
           name="name"
           type="text"
-          component={DataRow}
+          component={InputRow}
           label="Name your organization"
           focus
         />

@@ -7,6 +7,7 @@
 @import "base/basscss";
 @import "base/flexboxgrid";
 @import "base/general";
+@import "base/tables";
 
 @import "components/blur";
 @import "components/avatar";
@@ -14,8 +15,8 @@
 @import "components/animations";
 @import "components/buttons";
 @import "components/container";
-@import "components/data-rows";
-@import "components/input";
+@import "components/form-input-row";
+@import "components/form-input";
 @import "components/modal";
 @import "components/dropdown";
 @import "components/thumbnails";
@@ -24,7 +25,11 @@
 @import "components/notifications";
 @import "components/comments";
 @import "components/spinner";
-@import "components/tables";
+@import "components/toolbar";
+@import "components/appear";
+
+@import "modules/sidebar";
+@import "modules/measurements";
 
 @import "utilities/borders";
 @import "utilities/colors";
@@ -32,8 +37,3 @@
 @import "utilities/conceal";
 @import "utilities/widths";
 @import "utilities/misc";
-
-@import "modules/toolbar";
-@import "modules/sidebar";
-@import "modules/appear";
-@import "modules/measurements";

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
-import Input from 'components/Input';
+import Input from 'components/FormInput';
 import { updateImage } from './actions';
 
 const ImageForm = (props) => {

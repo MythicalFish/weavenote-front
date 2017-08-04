@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form/immutable';
-import Input from 'components/Input';
+import Input from 'components/FormInput';
 import Button from 'components/Button';
 
 const CommentForm = (props) =>

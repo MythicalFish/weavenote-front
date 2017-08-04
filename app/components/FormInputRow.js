@@ -1,7 +1,8 @@
 import React from 'react';
-import Input from 'components/Input';
+import Input from 'components/FormInput';
 
-export default class DataRow extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class InputRow extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
     const { props } = this;
     const { label, type, className } = props;
@@ -18,12 +19,13 @@ export default class DataRow extends React.PureComponent { // eslint-disable-lin
 
     return (
       <div className={`data-row ${rowClass}${className || ''}`}>
-        <label>{label}</label>
+        <label>
+          {label}
+        </label>
         <Input {...fieldProps} fieldClass={fieldClass} />
       </div>
     );
   }
 }
 
-DataRow.propTypes = {
-};
+InputRow.propTypes = {};

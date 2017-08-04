@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form/immutable';
-import DataRow from 'components/DataRow';
+import InputRow from 'components/FormInputRow';
 import Button from 'components/Button';
 import ImageThumbnails from 'containers/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
@@ -20,14 +20,14 @@ const Form = (props) => {
         <Field
           name="title"
           type="text"
-          component={DataRow}
+          component={InputRow}
           label="Title"
           focus
         />
         <Field
           name="description"
           type="textarea"
-          component={DataRow}
+          component={InputRow}
           label="Description"
         />
         {instruction.get('id') &&

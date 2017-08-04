@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form/immutable';
-import DataRow from 'components/DataRow';
+import InputRow from 'components/FormInputRow';
 
 export default class Supplier extends React.PureComponent {
   Tail = (props) =>
@@ -21,7 +21,7 @@ export default class Supplier extends React.PureComponent {
       name: 'supplier',
       label: 'Supplier',
       type: 'select',
-      component: DataRow,
+      component: InputRow,
       data: this.props.suppliers,
       tail: this.Tail,
       align: 'right',
@@ -35,7 +35,7 @@ export default class Supplier extends React.PureComponent {
             name="supplier.name"
             label="Name"
             type="text"
-            component={DataRow}
+            component={InputRow}
             focus
           />
           {['Fabric'].includes(selectedType) &&
@@ -43,32 +43,32 @@ export default class Supplier extends React.PureComponent {
               name="supplier.agent"
               label="Agent"
               type="text"
-              component={DataRow}
+              component={InputRow}
             />}
           <Field
             name="supplier.ref"
             label="Reference"
             type="text"
-            component={DataRow}
+            component={InputRow}
           />
           <Field
             name="supplier.color_ref"
             label="Color reference"
             type="text"
-            component={DataRow}
+            component={InputRow}
           />
           {['Fabric'].includes(selectedType) &&
             <Field
               name="supplier.minimum_order"
               label="Minimum order"
               type="text"
-              component={DataRow}
+              component={InputRow}
             />}
           <Field
             name="supplier.comments"
             label="Comments"
             type="textarea"
-            component={DataRow}
+            component={InputRow}
           />
         </div>
       </div>

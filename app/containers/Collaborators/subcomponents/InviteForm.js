@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form/immutable';
-import Input from 'components/Input';
+import Input from 'components/FormInput';
 import Button from 'components/Button';
 import { sendInvite } from '../actions';
 

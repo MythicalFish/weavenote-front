@@ -1,5 +1,5 @@
 import React from 'react';
-import DataRow from 'components/DataRow';
+import InputRow from 'components/FormInputRow';
 import PlusButton from 'components/PlusButton';
 
 export default class Accordion extends React.PureComponent {
@@ -41,7 +41,7 @@ export default class Accordion extends React.PureComponent {
               <div className="p2">No items yet</div>
             </div>}
           {props.footer &&
-            <DataRow
+            <InputRow
               type="display"
               label={props.footer.label}
               value={props.footer.value}
