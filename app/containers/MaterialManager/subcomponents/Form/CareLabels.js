@@ -33,7 +33,7 @@ export default class CareLabels extends React.PureComponent {
 
   render() {
     const { labels, className } = this.props;
-
+    if (!labels) return null;
     return (
       <div className={className}>
         <div className="data-rows">

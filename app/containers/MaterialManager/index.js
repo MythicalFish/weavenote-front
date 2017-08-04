@@ -1,21 +1,31 @@
-import React, { PropTypes } from 'react';
+/* eslint react/prop-types: 0 */
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'components/Header';
 import { selectAbilities } from 'containers/App/selectors';
 import {
-  selectMaterial, selectMaterialTypes, selectColors, selectCurrencies, selectSuppliers, selectCareLabels,
+  selectMaterial,
+  selectMaterialTypes,
+  selectColors,
+  selectCurrencies,
+  selectSuppliers,
+  selectCareLabels,
 } from './selectors';
 import {
-  fetchMaterial, updateMaterial, createMaterial,
-  fetchMaterialAssociations, newSupplier, addCareLabel, removeCareLabel,
+  fetchMaterial,
+  updateMaterial,
+  createMaterial,
+  fetchMaterialAssociations,
+  newSupplier,
+  addCareLabel,
+  removeCareLabel,
 } from './actions';
 import Form from './subcomponents/Form';
 import Toolbar from './subcomponents/Toolbar';
 
-export class MaterialManager extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
+export class MaterialManager extends React.PureComponent {
   componentDidMount() {
     const { params } = this.props;
     this.props.fetchMaterialAssociations();
@@ -29,49 +39,25 @@ export class MaterialManager extends React.PureComponent { // eslint-disable-lin
     } else {
       this.props.updateMaterial(values);
     }
-  }
+  };
 
   render() {
-    const {
-      initialValues, types, colors, currencies, suppliers,
-      newSupplier: n, labels, addCareLabel: a, removeCareLabel: r,
-      abilities,
-    } = this.props;
+    const { initialValues } = this.props;
 
     const { onSubmit } = this;
     return (
       <div>
         <Header />
         <Toolbar />
-        <div className="p2">
-          <div className="container">
-            {initialValues && types && colors && currencies && suppliers && labels &&
-              <Form {...{
-                initialValues, types, colors, currencies, suppliers, labels,
-                newSupplier: n, onSubmit, addCareLabel: a, removeCareLabel: r, abilities }} />
-            }
+        <div className="p4">
+          <div className="container-narrower">
+            {initialValues && <Form {...{ onSubmit, ...this.props }} />}
           </div>
         </div>
       </div>
     );
   }
 }
-
-MaterialManager.propTypes = {
-  fetchMaterial: PropTypes.func.isRequired,
-  updateMaterial: PropTypes.func.isRequired,
-  createMaterial: PropTypes.func.isRequired,
-  params: PropTypes.object.isRequired,
-  initialValues: PropTypes.object,
-  types: PropTypes.object,
-  newSupplier: PropTypes.func.isRequired,
-  fetchMaterialAssociations: PropTypes.func,
-  colors: PropTypes.object,
-  suppliers: PropTypes.object,
-  currencies: PropTypes.object,
-  labels: PropTypes.object,
-  abilities: PropTypes.object,
-};
 
 const mapState = createStructuredSelector({
   initialValues: selectMaterial(),
@@ -83,14 +69,18 @@ const mapState = createStructuredSelector({
   abilities: selectAbilities(),
 });
 
-const mapDispatch = (dispatch) => (bindActionCreators({
-  fetchMaterial,
-  updateMaterial,
-  createMaterial,
-  newSupplier,
-  addCareLabel,
-  removeCareLabel,
-  fetchMaterialAssociations,
-}, dispatch));
+const mapDispatch = (dispatch) =>
+  bindActionCreators(
+    {
+      fetchMaterial,
+      updateMaterial,
+      createMaterial,
+      newSupplier,
+      addCareLabel,
+      removeCareLabel,
+      fetchMaterialAssociations,
+    },
+    dispatch
+  );
 
 export default connect(mapState, mapDispatch)(MaterialManager);

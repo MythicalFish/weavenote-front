@@ -49,11 +49,17 @@ class Dropdown extends React.PureComponent {
     if (val.toJS) val = value.toJS();
     return (
       <button {...bProps}>
-        {val.name}
-        {val.iso_code &&
-          <PriceSymbol code={val.iso_code} className="bold ml1" />}
-        {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
-        <i className="fa fa-chevron-down smaller2" />
+        <div className="flex justify-between">
+          <div className="flex-none">
+            {val.name}
+            {val.iso_code &&
+              <PriceSymbol code={val.iso_code} className="bold ml1" />}
+            {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
+          </div>
+          <div className="flex-none">
+            <i className="fa fa-chevron-down smaller3 opa4" />
+          </div>
+        </div>
       </button>
     );
   };
@@ -119,11 +125,11 @@ class Dropdown extends React.PureComponent {
   };
 
   render() {
-    const { className, readOnly, isFocused } = this.props;
+    const { className, readOnly, isFocused, onFocus } = this.props;
     let inputClass = className || '';
     if (readOnly) inputClass += ' noselect';
     return (
-      <div className={`dropdown ${inputClass}`}>
+      <div className={`dropdown ${inputClass}`} onClick={onFocus}>
         <TetherComponent {...this.tetherOptions}>
           {this.label()}
           {isFocused &&
@@ -148,6 +154,7 @@ Dropdown.propTypes = {
   children: PropTypes.node,
   icon: PropTypes.string,
   isFocused: PropTypes.bool,
+  onFocus: PropTypes.func,
   focusThis: PropTypes.func,
   unfocusThis: PropTypes.func,
   label: PropTypes.any,

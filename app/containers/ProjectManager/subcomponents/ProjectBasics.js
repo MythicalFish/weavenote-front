@@ -14,7 +14,7 @@ const ProjectForm = (props) => {
     />
   );
   return (
-    <form className="p4" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field name="name" type="text" component={InputRow} label="Name" />
       <Field
         name="category"

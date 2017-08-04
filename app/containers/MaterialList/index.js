@@ -2,16 +2,18 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentSection, selectMaterials } from 'containers/App/selectors';
+import {
+  selectCurrentSection,
+  selectMaterials,
+} from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
 import Header from 'components/Header';
 import { fetchMaterials } from './actions';
 import Toolbar from './subcomponents/Toolbar';
-import Item from './subcomponents/Item';
+import ListItem from './subcomponents/ListItem';
 
-export class MaterialList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
+export class MaterialList extends React.PureComponent {
   componentDidMount() {
     this.props.fetchMaterials();
     this.props.changeSection(sections.ActiveMaterials);
@@ -27,10 +29,33 @@ export class MaterialList extends React.PureComponent { // eslint-disable-line r
           currentSection={this.props.currentSection}
           fetch={this.props.fetchMaterials}
         />
-        <div className="m2 b1">
-          {materials && materials.toArray().map((material) => (
-            <Item material={material} key={`material-${material.get('id')}`} />
-          ))}
+        <div className="container-narrow px2 py4">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Ref.</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Supplier</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Tags</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {materials &&
+                materials
+                  .toArray()
+                  .map((material) =>
+                    <ListItem
+                      material={material}
+                      key={`material-${material.get('id')}`}
+                    />
+                  )}
+            </tbody>
+          </table>
         </div>
       </div>
     );
@@ -50,10 +75,7 @@ const mapState = createStructuredSelector({
 });
 
 function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { changeSection, fetchMaterials },
-    dispatch
-  );
+  return bindActionCreators({ changeSection, fetchMaterials }, dispatch);
 }
 
 export default connect(mapState, mapDispatch)(MaterialList);

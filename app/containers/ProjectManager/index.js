@@ -56,15 +56,15 @@ class ProjectManager extends React.PureComponent {
         <Toolbar {...this.props} />
         <div className="container-wide p4">
           <div className="row">
-            <div className="col-xs-12 last-xs first-md col-md-3 blurrable">
+            <div className="col-xs-12 col-md-3 last-xs first-md blurrable">
               <ProjectComments project={project} />
             </div>
-            <div className="col-xs-6 col-md-5 flex justify-center">
-              <div className="flex flex-column items-center lh0">
+            <div className="col-xs-6 col-md-6 flex justify-center">
+              <div className="lh0 px4">
                 <ProjectImages project={project} />
               </div>
             </div>
-            <div className="col-xs-6 col-md-4 flex justify-center blurrable">
+            <div className="col-xs-6 col-md-3 blurrable">
               <View {...viewProps} />
             </div>
           </div>

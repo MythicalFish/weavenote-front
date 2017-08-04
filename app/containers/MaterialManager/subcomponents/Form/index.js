@@ -4,6 +4,7 @@ import InputRow from 'components/FormField';
 import Button from 'components/Button';
 import Supplier from './Supplier';
 import CareLabels from './CareLabels';
+
 class Form extends React.Component {
   state = { type: null };
 
@@ -28,8 +29,6 @@ class Form extends React.Component {
     return '';
   };
 
-  restricted = () => !this.props.abilities.Material.update;
-
   render() {
     const {
       handleSubmit,
@@ -45,117 +44,71 @@ class Form extends React.Component {
     } = this.props;
     const { type } = this.state;
     const { showFor } = this;
-    const fProps = {
-      component: InputRow,
-      restricted: this.restricted(),
-      align: 'right',
+
+    const restricted = !this.props.abilities.Material.update;
+
+    const F = (fProps) => {
+      const p = { ...fProps };
+      p.type = p.type || 'text';
+      p.className = p.c;
+      delete p.c;
+      return <Field {...{ component: InputRow, restricted, ...fProps }} />;
     };
     return (
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <div className="data-rows mb2">
-              <Field
-                name="type"
-                type="select"
-                label="Type"
-                data={types}
-                onChanged={this.switchType}
-                {...fProps}
-              />
-              <Field name="name" type="text" label="Name" {...fProps} />
-              <Field
-                name="identifier"
-                type="text"
-                label="Identifier"
-                {...fProps}
-              />
-              <Field
-                name="color"
-                type="select"
-                label="Color"
-                data={colors}
-                {...fProps}
-              />
-              <Field
-                name="composition"
-                type="text"
-                label="Composition"
-                className={showFor('Fabric')}
-                {...fProps}
-              />
-              <Field
-                name="size"
-                type="text"
-                label="Size"
-                className={showFor(['Button', 'Zip'])}
-                {...fProps}
-              />
-              <Field
-                name="length"
-                type="text"
-                label="Length"
-                className={showFor('Zip')}
-                {...fProps}
-              />
-              <Field
-                name="subtype"
-                type="text"
-                label="Zip Type"
-                className={showFor('Zip')}
-                {...fProps}
-              />
-              <Field
-                name="opening_type"
-                type="text"
-                label="Opening Type"
-                className={showFor('Zip')}
-                {...fProps}
-              />
-            </div>
-            <div className="data-rows">
-              <Field
-                name="currency"
-                type="select"
-                label="Currency"
-                data={currencies}
-                {...fProps}
-              />
-              <Field
-                name="cost_base"
-                type="text"
-                label="Base cost"
-                {...fProps}
-              />
-              <Field
-                name="cost_delivery"
-                type="text"
-                label="Delivery cost"
-                {...fProps}
-              />
-              <Field
-                name="cost_extra1"
-                type="text"
-                label="Extra cost 1"
-                {...fProps}
-              />
-              <Field
-                name="cost_extra2"
-                type="text"
-                label="Extra cost 2"
-                {...fProps}
-              />
+            <div className="pr3">
+              <div className="mb3">
+                <F
+                  name="type"
+                  type="select"
+                  label="Type"
+                  data={types}
+                  onChanged={this.switchType}
+                />
+                <F name="name" label="Name" />
+                <F name="identifier" label="Identifier" />
+                <F name="color" type="select" label="Color" data={colors} />
+                <F
+                  name="composition"
+                  label="Composition"
+                  c={showFor('Fabric')}
+                />
+                <F name="size" label="Size" c={showFor(['Button', 'Zip'])} />
+                <F name="length" label="Length" c={showFor('Zip')} />
+                <F name="subtype" label="Zip Type" c={showFor('Zip')} />
+                <F
+                  name="opening_type"
+                  label="Opening Type"
+                  c={showFor('Zip')}
+                />
+              </div>
+              <div>
+                <F
+                  name="currency"
+                  type="select"
+                  label="Currency"
+                  data={currencies}
+                />
+                <F name="cost_base" label="Base cost" />
+                <F name="cost_delivery" label="Delivery cost" />
+                <F name="cost_extra1" label="Extra cost 1" />
+                <F name="cost_extra2" label="Extra cost 2" />
+              </div>
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <Supplier {...{ suppliers, newSupplier, type }} className="mb2" />
-            <CareLabels
-              {...{ labels, addCareLabel, removeCareLabel }}
-              className={showFor('Fabric')}
-            />
+            <div className="pl3">
+              <Supplier {...{ suppliers, newSupplier, type }} className="mb2" />
+              <CareLabels
+                {...{ labels, addCareLabel, removeCareLabel }}
+                className={showFor('Fabric')}
+              />
+            </div>
           </div>
         </div>
-        {!this.restricted() &&
+        {!restricted &&
           <footer className="p2 center">
             <Button type="submit" disabled={submitting} label="Save" />
           </footer>}

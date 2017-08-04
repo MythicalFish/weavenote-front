@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from 'components/Thumbnail';
 
