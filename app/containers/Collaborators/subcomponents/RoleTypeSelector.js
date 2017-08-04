@@ -7,7 +7,6 @@ import { selectRoleTypes } from '../selectors';
 import { fetchRoleTypes } from '../actions';
 
 class RoleTypeSelector extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchRoleTypes();
   }
@@ -21,13 +20,11 @@ class RoleTypeSelector extends React.PureComponent {
     return (
       <div>
         {selected &&
-          <div className="input input-inline">
-            <Dropdown
-              value={selected}
-              data={roleTypes}
-              onChange={this.handleChange}
-            />
-          </div>}
+          <Dropdown
+            value={selected}
+            data={roleTypes}
+            onChange={this.handleChange}
+          />}
       </div>
     );
   }

@@ -1,20 +1,15 @@
 .input {
-  padding: 0 !important;
   position: relative;
   input,
   textarea,
-  .dropdown > button,
   .readonly {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     line-height: 1;
     display: block;
-    padding: $space-3;
-    box-shadow: none !important;
-    -webkit-box-shadow: none !important;
+    padding: $space-2;
     height: auto;
     width: 100%;
-    @extend .bb1;
+    border: none;
+    border: 1px solid $gray-lighter;
     background: transparent;
     font-size: inherit;
     color: inherit;
@@ -22,6 +17,9 @@
     font-weight: inherit;
     text-align: inherit;
   }
+}
+// Variations
+.input {
   &.input-sm {
     input,
     textarea,

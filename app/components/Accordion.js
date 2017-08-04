@@ -1,5 +1,5 @@
 import React from 'react';
-import InputRow from 'components/FormInputRow';
+import InputRow from 'components/FormField';
 import PlusButton from 'components/PlusButton';
 
 export default class Accordion extends React.PureComponent {

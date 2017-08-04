@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 import { Field, reduxForm } from 'redux-form/immutable';
-import InputRow from 'components/FormInputRow';
+import InputRow from 'components/FormField';
 import Button from 'components/Button';
 
 const ProjectForm = (props) => {
@@ -14,7 +14,7 @@ const ProjectForm = (props) => {
     />
   );
   return (
-    <form className="data-rows" onSubmit={handleSubmit}>
+    <form className="p4" onSubmit={handleSubmit}>
       <Field name="name" type="text" component={InputRow} label="Name" />
       <Field
         name="category"

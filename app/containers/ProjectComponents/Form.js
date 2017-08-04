@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import Price from 'components/Price';
 import Dot from 'components/Dot';
-import InputRow from 'components/FormInputRow';
+import InputRow from 'components/FormField';
 import Button from 'components/Button';
 
 const Form = (props) => {

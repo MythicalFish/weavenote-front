@@ -32,6 +32,7 @@ export default class Input extends React.PureComponent {
       if (p.tail) fProps.tail = p.tail;
       if (p.required) fProps.required = p.required;
       if (p.placeholder) fProps.placeholder = p.placeholder;
+      if (p.onFocus) fProps.onFocus = p.onFocus;
     } else {
       fProps = p;
     }

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form/immutable';
-import InputRow from 'components/FormInputRow';
+import InputRow from 'components/FormField';
 
 export default class Supplier extends React.PureComponent {
   Tail = (props) =>

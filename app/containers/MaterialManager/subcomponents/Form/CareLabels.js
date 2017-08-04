@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { FieldArray } from 'redux-form/immutable';
 import Dropdown from 'components/Dropdown';
-import InputRow from 'components/FormInputRow';
+import InputRow from 'components/FormField';
 
 const renderCareLabels = ({ fields, removeLabel }) =>
   <div>

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import InputRow from 'components/FormInputRow';
+import InputRow from 'components/FormField';
 import Button from 'components/Button';
 import { updateProfile } from '../../actions';
 
