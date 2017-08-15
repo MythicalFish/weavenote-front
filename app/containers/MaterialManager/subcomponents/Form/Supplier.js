@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form/immutable';
-import InputRow from 'components/FormField';
+import FocusableField, { FormField } from 'components/FormField';
 
 export default class Supplier extends React.PureComponent {
   Tail = (props) =>
@@ -15,61 +15,38 @@ export default class Supplier extends React.PureComponent {
     </button>;
 
   render() {
-    const { selectedType, className } = this.props;
+    const { selectedType, className, restricted } = this.props;
 
     const selectorProps = {
       name: 'supplier',
       label: 'Supplier',
       type: 'select',
-      component: InputRow,
+      component: FormField,
       data: this.props.suppliers,
       tail: this.Tail,
       align: 'right',
+      style: 'alt1',
+    };
+
+    const F = (fProps) => {
+      const p = { ...fProps };
+      p.component = FocusableField;
+      p.style = 'alt1';
+      return <Field {...{ restricted, ...p }} />;
     };
 
     return (
       <div className={`data-rows ${className}`}>
         <Field {...selectorProps} />
         <div>
-          <Field
-            name="supplier.name"
-            label="Name"
-            type="text"
-            component={InputRow}
-            focus
-          />
+          <F name="supplier.name" label="Name" />
           {['Fabric'].includes(selectedType) &&
-            <Field
-              name="supplier.agent"
-              label="Agent"
-              type="text"
-              component={InputRow}
-            />}
-          <Field
-            name="supplier.ref"
-            label="Reference"
-            type="text"
-            component={InputRow}
-          />
-          <Field
-            name="supplier.color_ref"
-            label="Color reference"
-            type="text"
-            component={InputRow}
-          />
+            <F name="supplier.agent" label="Agent" />}
+          <F name="supplier.ref" label="Reference" />
+          <F name="supplier.color_ref" label="Color reference" />
           {['Fabric'].includes(selectedType) &&
-            <Field
-              name="supplier.minimum_order"
-              label="Minimum order"
-              type="text"
-              component={InputRow}
-            />}
-          <Field
-            name="supplier.comments"
-            label="Comments"
-            type="textarea"
-            component={InputRow}
-          />
+            <F name="supplier.minimum_order" label="Minimum order" />}
+          <F name="supplier.comments" label="Comments" type="textarea" />
         </div>
       </div>
     );
@@ -81,6 +58,7 @@ Supplier.propTypes = {
   newSupplier: PropTypes.func,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
+  restricted: PropTypes.bool,
   reset: PropTypes.func,
   suppliers: PropTypes.object,
   selectedType: PropTypes.string,

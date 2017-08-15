@@ -52,7 +52,9 @@ export default class Input extends React.PureComponent {
       error = p.meta.error;
     }
 
-    switch (p.type) {
+    const type = p.type || 'text';
+
+    switch (type) {
       case 'display':
         field = (
           <div className="readonly">
@@ -69,7 +71,7 @@ export default class Input extends React.PureComponent {
         field = <textarea {...fProps} onKeyPress={this.handleKeyPress} />;
         break;
       default:
-        field = <input {...fProps} type={p.type} />;
+        field = <input {...fProps} type={type} />;
         break;
     }
 

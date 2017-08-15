@@ -4,6 +4,8 @@
   textarea,
   .readonly,
   .dropdown button {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
     line-height: 1;
     display: block;
     padding: $space-2;
@@ -17,6 +19,7 @@
     font-family: inherit;
     font-weight: inherit;
     text-align: inherit;
+    border-radius: 4px;
   }
 }
 // Variations

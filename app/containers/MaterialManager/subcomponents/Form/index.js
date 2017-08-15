@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
-import InputRow from 'components/FormField';
+import FocusableField, { FormField } from 'components/FormField';
 import Button from 'components/Button';
 import Supplier from './Supplier';
 import CareLabels from './CareLabels';
@@ -49,11 +49,13 @@ class Form extends React.Component {
 
     const F = (fProps) => {
       const p = { ...fProps };
-      p.type = p.type || 'text';
       p.className = p.c;
+      p.component = p.type === 'select' ? FormField : FocusableField;
+      p.style = 'alt1';
       delete p.c;
-      return <Field {...{ component: InputRow, restricted, ...fProps }} />;
+      return <Field {...{ restricted, ...p }} />;
     };
+
     return (
       <form onSubmit={handleSubmit}>
         <div className="row">
@@ -100,7 +102,10 @@ class Form extends React.Component {
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="pl3">
-              <Supplier {...{ suppliers, newSupplier, type }} className="mb2" />
+              <Supplier
+                {...{ suppliers, newSupplier, type, restricted }}
+                className="mb2"
+              />
               <CareLabels
                 {...{ labels, addCareLabel, removeCareLabel }}
                 className={showFor('Fabric')}

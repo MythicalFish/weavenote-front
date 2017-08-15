@@ -1,42 +1,51 @@
 .field {
   position: relative;
   padding-bottom: $space-3;
-  label {
-    font-size: .8em;
-    color: $dark5;
-    line-height: 1;
-  }
-  .input {
-    input,
-    textarea,
-    .dropdown > button,
-    .readonly {
-      box-shadow: none !important;
-      -webkit-box-shadow: none !important;
-      border: none;
-      border-bottom: 1px solid $dark3;
-      padding: $space-1 0 $space-1 0;
-    }
-    &:after {
-      content: ' ';
-      display: block;
-      background: $malibu;
-      height: 2px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      transition: all .5s;
-    }
-  }
-  &.focused {
+  &.field-style-default {
     .input {
+      input,
+      textarea,
+      .dropdown > button,
+      .readonly {
+        border: none;
+        border-bottom: 1px solid $dark3;
+        padding: $space-1 0 $space-1 0;
+      }
       &:after {
-        width: 100%;
+        content: ' ';
+        display: block;
+        background: $malibu;
+        height: 2px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        transition: all .5s;
+      }
+    }
+    &.focused {
+      .input {
+        &:after {
+          width: 100%;
+        }
+      }
+      label {
+        color: $malibu;
       }
     }
     label {
-      color: $malibu;
+      font-size: .8em;
+      margin-bottom: 0;
     }
+  }
+  &.field-style-alt1 {
+    .input {
+    }
+  }
+  label {
+    color: $dark5;
+    line-height: 1;
+    margin-bottom: $space-1;
+    display: block;
   }
 }
