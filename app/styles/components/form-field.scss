@@ -39,6 +39,15 @@
     }
   }
   &.field-style-alt1 {
+    &.focused {
+      .input {
+        input,
+        textarea,
+        .dropdown > button {
+          border-color: $malibu;
+        }
+      }
+    }
     .input {
     }
   }
