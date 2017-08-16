@@ -10,7 +10,10 @@ export default [materialManagerWatcher];
 
 export function* materialManagerWatcher() {
   const watcher = [
-    yield takeLatest(types.FETCH_MATERIAL_ASSOCIATIONS, fetchMaterialAssociations),
+    yield takeLatest(
+      types.FETCH_MATERIAL_ASSOCIATIONS,
+      fetchMaterialAssociations
+    ),
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
@@ -46,7 +49,12 @@ export function* fetchColors() {
 }
 
 export function* fetchCurrencies() {
-  yield sagas.get('currencies', null, actions.fetchCurrenciesSuccess, selectors.selectCurrencies);
+  yield sagas.get(
+    'currencies',
+    null,
+    actions.fetchCurrenciesSuccess,
+    selectors.selectCurrencies
+  );
 }
 
 export function* fetchSuppliers() {
@@ -63,7 +71,11 @@ export function* fetchMaterial(action) {
 
 export function* updateMaterial(action) {
   const material = action.material.toJS();
-  yield sagas.patch(`materials/${material.id}`, { material }, actions.updateMaterialSuccess);
+  yield sagas.patch(
+    `materials/${material.id}`,
+    { material },
+    actions.updateMaterialSuccess
+  );
 }
 
 export function* createMaterial(action) {
