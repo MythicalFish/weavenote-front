@@ -1,5 +1,5 @@
 .thumbnail {
-  width: 4em;
+  width: 3.6em;
   line-height: 0;
   @extend .flex-none;
   border: none;
@@ -15,10 +15,10 @@ ul.thumbnails {
   @extend .flex;
   li {
     @extend .flex-none;
-    overflow: hidden;
-    button {
+    position: relative;
+    > button {
       background: $white;
-      border: 2px solid $white;
+      border: 3px solid $white;
       padding: 0;
       line-height: 0;
       @include roundedCorners();
@@ -28,7 +28,7 @@ ul.thumbnails {
       }
     }
     &.current {
-      button {
+      > button {
         border-color: $azure;
         img {
           //opacity: 0.4;
@@ -37,6 +37,21 @@ ul.thumbnails {
     }
     &:not(:first-child) {
       margin-left: 3px;
+    }
+    .dropdown {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      color: $white;
+      z-index: 2;
+      button {
+        padding: 0;
+        .dot {
+          border: 3px solid $white;
+          background-color: $azure;
+          box-sizing: content-box;
+        }
+      }
     }
   }
 }

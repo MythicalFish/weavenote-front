@@ -6,11 +6,7 @@ import * as actions from './actions';
 
 export default [watch];
 
-const url = (payload) => {
-  let image = payload.image;
-  if (image.toJS) image = image.toJS();
-  return `images/${image.id}`;
-};
+const url = ({ image }) => `images/${image.get('id')}`;
 
 export function* watch() {
   const watcher = [yield takeLatest(types.DELETE_IMAGE, deleteImage)];

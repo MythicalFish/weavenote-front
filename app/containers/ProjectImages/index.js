@@ -34,16 +34,16 @@ class ProjectImages extends React.PureComponent {
         {!currentImage && <Image src={PLACEHOLDER} />}
         {currentImage &&
           <div>
+            <CurrentImage {...{ currentImage, ...this.props }} />
             <div className="blurrable">
               <ImageForm initialValues={currentImage} {...{ imageable }} />
             </div>
-            <CurrentImage {...{ currentImage, ...this.props }} />
           </div>}
         <div className="pt3 flex justify-center blurrable">
           <ImageThumbnails
             images={images}
             onSelect={this.selectImage}
-            {...{ currentImage }}
+            {...{ currentImage, imageable }}
           />
           <ImageUploader {...{ imageable }} />
         </div>

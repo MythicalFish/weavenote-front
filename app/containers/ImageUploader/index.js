@@ -8,12 +8,14 @@ import InlineIcon from 'components/InlineIcon';
 import Spinner from 'components/Spinner';
 import { notifyWarning } from 'containers/Notification';
 import * as API from 'utils/API';
-import { createImage } from './actions';
+import { uploadImage, createImage } from './actions';
 import { selectIsUploading } from './selectors';
 
 class ImageUploader extends React.PureComponent {
   state = { progress: 0 };
   onUploadPreprocess = (file, next) => {
+    const { imageable } = this.props;
+    this.props.uploadImage({ imageable });
     next(file);
   };
   onUploadProgress = (percent) => {
@@ -44,7 +46,7 @@ class ImageUploader extends React.PureComponent {
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />;
     const { label, inlineIcon, isUploading } = this.props;
-    if (isUploading) {
+    if (isUploading === this.props.imageable) {
       return <Spinner />;
     }
     if (label) {
@@ -68,11 +70,12 @@ class ImageUploader extends React.PureComponent {
 
 ImageUploader.propTypes = {
   imageable: PropTypes.object,
+  uploadImage: PropTypes.func,
   createImage: PropTypes.func,
   label: PropTypes.string,
   inlineIcon: PropTypes.string,
   onUploadFinish: PropTypes.func,
-  isUploading: PropTypes.bool,
+  isUploading: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
@@ -82,6 +85,7 @@ const mapState = createStructuredSelector({
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
+      uploadImage,
       createImage,
       notifyWarning,
     },

@@ -2,15 +2,15 @@ import { fromJS } from 'immutable';
 import * as types from './constants';
 
 const initialState = fromJS({
-  isUploading: false,
+  isUploading: null,
 });
 
-function uploadReducer(state = initialState, { type }) {
+function uploadReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case types.CREATE_IMAGE:
-      return state.set('isUploading', true);
+    case types.UPLOAD_IMAGE:
+      return state.set('isUploading', payload.imageable);
     case types.CREATE_IMAGE_SUCCESS:
-      return state.set('isUploading', false);
+      return state.set('isUploading', null);
     default:
       return state;
   }

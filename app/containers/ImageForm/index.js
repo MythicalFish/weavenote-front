@@ -14,14 +14,14 @@ const ImageForm = (props) => {
   };
   return (
     <form className="flex justify-center" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex-none px3 pb3">
+      <div className="flex-none">
         <Field
           name="name"
           type="text"
           component={Input}
           label="Name"
           placeholder="Untitled image"
-          fieldClass="input-inline bigger1 center"
+          fieldClass="input-inline bigger1 center py2"
           onBlur={(d, name) => {
             const image = { id, name };
             props.updateImage({ imageable, image });
