@@ -4,9 +4,9 @@ export default function Blur(props) {
   const { focus, modalID } = props;
   const showBlur = focus || modalID;
   return (
-    <div className="flex">
+    <div className="flex flex-auto">
       <div className={`${showBlur ? 'overlay' : ''}`} />
-      <div className={`flex ${showBlur ? 'blur' : ''}`}>
+      <div className={`flex-auto ${showBlur ? 'blur' : ''}`}>
         {props.children}
       </div>
     </div>

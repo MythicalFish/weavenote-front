@@ -46,7 +46,7 @@ export class MaterialManager extends React.PureComponent {
 
     const { onSubmit } = this;
     return (
-      <div className="flex flex-column bg-gray-lightest">
+      <div>
         <Toolbar />
         <div className="p4">
           <div className="container-narrower">

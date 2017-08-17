@@ -1,7 +1,5 @@
 .box {
-  @extend .p3;
+  @extend .px4;
+  @extend .py3;
   background: $white;
-  &:not(:last-child) {
-    margin-bottom: $space-2;
-  }
 }
