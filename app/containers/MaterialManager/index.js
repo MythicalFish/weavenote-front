@@ -47,7 +47,6 @@ export class MaterialManager extends React.PureComponent {
     const { onSubmit } = this;
     return (
       <div>
-        <Header />
         <Toolbar />
         <div className="p4">
           <div className="container-narrower">

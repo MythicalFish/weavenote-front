@@ -1,7 +1,7 @@
 .field {
   position: relative;
   padding-bottom: $space-3;
-  &.field-style-default {
+  &.field-theme-default {
     .input {
       input,
       textarea,
@@ -38,7 +38,7 @@
       margin-bottom: 0;
     }
   }
-  &.field-style-alt1 {
+  &.field-theme-alt1 {
     &.focused {
       .input {
         input,

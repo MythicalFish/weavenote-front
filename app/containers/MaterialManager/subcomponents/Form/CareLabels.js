@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { FieldArray } from 'redux-form/immutable';
-import Dropdown from 'components/Dropdown';
-import InputRow from 'components/FormField';
+import { FormField } from 'components/FormField';
 
 const renderCareLabels = ({ fields, removeLabel }) =>
   <div>
@@ -37,11 +36,13 @@ export default class CareLabels extends React.PureComponent {
     return (
       <div className={className}>
         <div className="data-rows">
-          <InputRow
+          <FormField
             label="Care labels"
+            value={{ name: 'Select' }}
             type="select"
             data={labels}
             onChange={this.addLabel}
+            theme="alt1"
           />
         </div>
         <FieldArray
@@ -57,4 +58,6 @@ export default class CareLabels extends React.PureComponent {
 CareLabels.propTypes = {
   addCareLabel: PropTypes.func,
   removeCareLabel: PropTypes.func,
+  labels: PropTypes.object,
+  className: PropTypes.string,
 };

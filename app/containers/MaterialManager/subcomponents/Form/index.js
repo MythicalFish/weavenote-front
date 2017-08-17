@@ -2,8 +2,12 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import FocusableField, { FormField } from 'components/FormField';
 import Button from 'components/Button';
-import Supplier from './Supplier';
 import CareLabels from './CareLabels';
+// import Supplier from './Supplier';
+// <Supplier
+//   {...{ suppliers, newSupplier, type, restricted }}
+//   className="mb2"
+// />
 
 class Form extends React.Component {
   state = { type: null };
@@ -51,7 +55,7 @@ class Form extends React.Component {
       const p = { ...fProps };
       p.className = p.c;
       p.component = p.type === 'select' ? FormField : FocusableField;
-      p.style = 'alt1';
+      p.theme = 'alt1';
       delete p.c;
       return <Field {...{ restricted, ...p }} />;
     };
@@ -69,15 +73,29 @@ class Form extends React.Component {
                   data={types}
                   onChanged={this.switchType}
                 />
-                <F name="name" label="Name" />
-                <F name="identifier" label="Identifier" />
-                <F name="color" type="select" label="Color" data={colors} />
+                <div className="row">
+                  <div className="col-xs-8">
+                    <F name="name" label="Name" />
+                  </div>
+                  <div className="col-xs-4">
+                    <F name="identifier" label="Identifier" />
+                  </div>
+                  <div className="col-xs-8">
+                    <F name="color" type="select" label="Color" data={colors} />
+                  </div>
+                  <div className="col-xs-4">
+                    <F
+                      name="size"
+                      label="Size"
+                      c={showFor(['Button', 'Zip'])}
+                    />
+                  </div>
+                </div>
                 <F
                   name="composition"
                   label="Composition"
                   c={showFor('Fabric')}
                 />
-                <F name="size" label="Size" c={showFor(['Button', 'Zip'])} />
                 <F name="length" label="Length" c={showFor('Zip')} />
                 <F name="subtype" label="Zip Type" c={showFor('Zip')} />
                 <F
@@ -86,30 +104,35 @@ class Form extends React.Component {
                   c={showFor('Zip')}
                 />
               </div>
-              <div>
-                <F
-                  name="currency"
-                  type="select"
-                  label="Currency"
-                  data={currencies}
-                />
-                <F name="cost_base" label="Base cost" />
-                <F name="cost_delivery" label="Delivery cost" />
-                <F name="cost_extra1" label="Extra cost 1" />
-                <F name="cost_extra2" label="Extra cost 2" />
-              </div>
+              <CareLabels {...{ labels, addCareLabel, removeCareLabel }} />
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="pl3">
-              <Supplier
-                {...{ suppliers, newSupplier, type, restricted }}
-                className="mb2"
-              />
-              <CareLabels
-                {...{ labels, addCareLabel, removeCareLabel }}
-                className={showFor('Fabric')}
-              />
+              <div>
+                <div className="row">
+                  <div className="col-xs-6">
+                    <F name="cost_base" label="Base cost" />
+                  </div>
+                  <div className="col-xs-6">
+                    <F
+                      name="currency"
+                      type="select"
+                      label="Currency"
+                      data={currencies}
+                    />
+                  </div>
+                  <div className="col-xs-4">
+                    <F name="cost_delivery" label="Delivery cost" />
+                  </div>
+                  <div className="col-xs-4">
+                    <F name="cost_extra1" label="Extra cost 1" />
+                  </div>
+                  <div className="col-xs-4">
+                    <F name="cost_extra2" label="Extra cost 2" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

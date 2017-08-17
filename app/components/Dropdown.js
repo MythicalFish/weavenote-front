@@ -35,7 +35,26 @@ class Dropdown extends React.PureComponent {
     const { value, label, icon } = this.props;
     const bProps = { onClick: this.toggleState(), type: 'button' };
 
-    if (label || icon) {
+    if (value) {
+      let val = value;
+      if (!val) val = { name: null };
+      if (val.toJS) val = value.toJS();
+      return (
+        <button {...bProps}>
+          <div className="flex justify-between">
+            <div className="flex-none">
+              {val.name}
+              {val.iso_code &&
+                <PriceSymbol code={val.iso_code} className="bold ml1" />}
+              {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
+            </div>
+            <div className="flex-none">
+              <i className="fa fa-chevron-down smaller3 opa4" />
+            </div>
+          </div>
+        </button>
+      );
+    } else {
       return (
         <button {...bProps}>
           {label && label}
@@ -43,25 +62,6 @@ class Dropdown extends React.PureComponent {
         </button>
       );
     }
-
-    let val = value;
-    if (!val) val = { name: null };
-    if (val.toJS) val = value.toJS();
-    return (
-      <button {...bProps}>
-        <div className="flex justify-between">
-          <div className="flex-none">
-            {val.name}
-            {val.iso_code &&
-              <PriceSymbol code={val.iso_code} className="bold ml1" />}
-            {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
-          </div>
-          <div className="flex-none">
-            <i className="fa fa-chevron-down smaller3 opa4" />
-          </div>
-        </div>
-      </button>
-    );
   };
 
   items = () => {
@@ -84,23 +84,20 @@ class Dropdown extends React.PureComponent {
         let i = item;
         if (i.toJS) i = i.toJS();
         items.push(
-          <li key={item} onClick={this.toggleState(item)}>
+          <button type="button" key={item} onClick={this.toggleState(item)}>
             {i.name || i.label}
             {i.iso_code &&
               <PriceSymbol code={i.iso_code} className="bold ml1" />}
             {i.hex_code && <Dot className="ml1" color={i.hex_code} />}
-          </li>
+          </button>
         );
       });
     }
     return (
-      <ul className={itemsClass}>
+      <div className={itemsClass}>
         {items}
-        {tail &&
-          <li>
-            {this.tail()}
-          </li>}
-      </ul>
+        {tail && this.tail()}
+      </div>
     );
   };
 

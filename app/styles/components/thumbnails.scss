@@ -21,7 +21,7 @@ ul.thumbnails {
       border: 3px solid $white;
       padding: 0;
       line-height: 0;
-      @include roundedCorners();
+      @include borderRadius();
       overflow: hidden;
       img {
         width: 100%;

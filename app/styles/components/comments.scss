@@ -1,6 +1,6 @@
 .comment-thread {
   border: 1px solid transparent;
-  @include roundedCorners();
+  @include borderRadius();
   overflow: hidden;
   color: $dark7;
   padding: $space-2 0 0 0;

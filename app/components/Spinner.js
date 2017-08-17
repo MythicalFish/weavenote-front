@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
-export default function Spinner(props) {
+export default function Spinner() {
   return (
     <div className="spinner-container">
       <svg
@@ -23,7 +23,3 @@ export default function Spinner(props) {
     </div>
   );
 }
-
-Spinner.propTypes = {
-  children: PropTypes.node,
-};

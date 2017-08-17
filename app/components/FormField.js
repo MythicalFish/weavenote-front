@@ -3,11 +3,11 @@ import Input from 'components/FormInput';
 import Focusable from 'containers/Focusable';
 
 export function FormField(props) {
-  const { label, className, focusClass, style } = props;
+  const { label, className, focusClass, theme } = props;
   let klass = 'field';
   klass += className ? ` ${className}` : '';
   klass += focusClass ? ` ${focusClass}` : '';
-  klass += style ? ` field-style-${style}` : ' field-style-default';
+  klass += theme ? ` field-theme-${theme}` : ' field-theme-default';
   return (
     <div className={klass}>
       <label>
@@ -23,7 +23,7 @@ FormField.propTypes = {
   focusThis: PropTypes.func,
   className: PropTypes.string,
   focusClass: PropTypes.string,
-  style: PropTypes.string,
+  theme: PropTypes.string,
 };
 
 export default Focusable(FormField, 1);

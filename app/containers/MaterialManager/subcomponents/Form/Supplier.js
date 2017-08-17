@@ -25,13 +25,13 @@ export default class Supplier extends React.PureComponent {
       data: this.props.suppliers,
       tail: this.Tail,
       align: 'right',
-      style: 'alt1',
+      theme: 'alt1',
     };
 
     const F = (fProps) => {
       const p = { ...fProps };
       p.component = FocusableField;
-      p.style = 'alt1';
+      p.theme = 'alt1';
       return <Field {...{ restricted, ...p }} />;
     };
 

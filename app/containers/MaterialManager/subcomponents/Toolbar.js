@@ -1,10 +1,12 @@
 import React from 'react';
 import Icon from 'components/Icon';
+import UserMenu from 'components/UserMenu';
 
 export default function Toolbar() {
   return (
-    <header className="toolbar container-narrower px2">
-      <Icon to="/materials" color="gray" name="ArrowLeft" size={26} />
+    <header className="toolbar toolbar-flex blurrable bb1">
+      <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
+      <UserMenu />
     </header>
   );
 }
