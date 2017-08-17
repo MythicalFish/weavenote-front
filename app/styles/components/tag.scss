@@ -1,0 +1,11 @@
+.tag {
+  padding: $space-2;
+  @extend .flex;
+  @extend .justify-between;
+  @extend .items-center;
+  @extend .b1;
+  line-height: 1;
+  &:not(:last-child) {
+    margin-bottom: $space-1;
+  }
+}

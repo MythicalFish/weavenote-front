@@ -16,8 +16,8 @@
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -0.5rem;
-  margin-left: -0.5rem;
+  margin-right: -$space-1;
+  margin-left: -$space-1;
 }
 
 .row.reverse {
@@ -67,8 +67,8 @@
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
+  padding-right: $space-1;
+  padding-left: $space-1;
 }
 
 .col-xs {
@@ -318,8 +318,8 @@
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: $space-1;
+    padding-left: $space-1;
   }
 
   .col-sm {
@@ -570,8 +570,8 @@
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: $space-1;
+    padding-left: $space-1;
   }
 
   .col-md {
@@ -822,8 +822,8 @@
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: $space-1;
+    padding-left: $space-1;
   }
 
   .col-lg {

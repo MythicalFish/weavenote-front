@@ -1,0 +1,7 @@
+.box {
+  @extend .p3;
+  background: $white;
+  &:not(:last-child) {
+    margin-bottom: $space-2;
+  }
+}

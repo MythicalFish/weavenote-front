@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import Notification from 'containers/Notification';
 import Gateway from './subcomponents/Gateway';
 import ModalImage from './subcomponents/ModalImage';
-import Focus from './subcomponents/Focus';
+import Blur from './subcomponents/Blur';
 import * as selectors from './selectors';
 
 class App extends React.PureComponent {
@@ -18,9 +18,9 @@ class App extends React.PureComponent {
     const { location, modalImage } = this.props;
     return (
       <Gateway {...{ location }}>
-        <Focus {...this.props}>
+        <Blur {...this.props}>
           {this.props.children}
-        </Focus>
+        </Blur>
         <Notification />
         <ModalImage image={modalImage} />
       </Gateway>

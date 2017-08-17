@@ -2,12 +2,10 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import FocusableField, { FormField } from 'components/FormField';
 import Button from 'components/Button';
+import Basics from './Basics';
 import CareLabels from './CareLabels';
-// import Supplier from './Supplier';
-// <Supplier
-//   {...{ suppliers, newSupplier, type, restricted }}
-//   className="mb2"
-// />
+import Supplier from './Supplier';
+import Cost from './Cost';
 
 class Form extends React.Component {
   state = { type: null };
@@ -34,20 +32,9 @@ class Form extends React.Component {
   };
 
   render() {
-    const {
-      handleSubmit,
-      submitting,
-      types,
-      colors,
-      currencies,
-      labels,
-      suppliers,
-      newSupplier,
-      addCareLabel,
-      removeCareLabel,
-    } = this.props;
+    const { handleSubmit, submitting } = this.props;
     const { type } = this.state;
-    const { showFor } = this;
+    const { showFor, switchType } = this;
 
     const restricted = !this.props.abilities.Material.update;
 
@@ -60,79 +47,29 @@ class Form extends React.Component {
       return <Field {...{ restricted, ...p }} />;
     };
 
+    const props = { showFor, switchType, F, type, ...this.props };
+
     return (
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <div className="pr3">
-              <div className="mb3">
-                <F
-                  name="type"
-                  type="select"
-                  label="Type"
-                  data={types}
-                  onChanged={this.switchType}
-                />
-                <div className="row">
-                  <div className="col-xs-8">
-                    <F name="name" label="Name" />
-                  </div>
-                  <div className="col-xs-4">
-                    <F name="identifier" label="Identifier" />
-                  </div>
-                  <div className="col-xs-8">
-                    <F name="color" type="select" label="Color" data={colors} />
-                  </div>
-                  <div className="col-xs-4">
-                    <F
-                      name="size"
-                      label="Size"
-                      c={showFor(['Button', 'Zip'])}
-                    />
-                  </div>
-                </div>
-                <F
-                  name="composition"
-                  label="Composition"
-                  c={showFor('Fabric')}
-                />
-                <F name="length" label="Length" c={showFor('Zip')} />
-                <F name="subtype" label="Zip Type" c={showFor('Zip')} />
-                <F
-                  name="opening_type"
-                  label="Opening Type"
-                  c={showFor('Zip')}
-                />
-              </div>
-              <CareLabels {...{ labels, addCareLabel, removeCareLabel }} />
+            <div className="box">
+              <h3>Basics</h3>
+              <Basics {...props} />
+            </div>
+            <div className="box">
+              <h3>Care labels</h3>
+              <CareLabels {...props} />
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            <div className="pl3">
-              <div>
-                <div className="row">
-                  <div className="col-xs-6">
-                    <F name="cost_base" label="Base cost" />
-                  </div>
-                  <div className="col-xs-6">
-                    <F
-                      name="currency"
-                      type="select"
-                      label="Currency"
-                      data={currencies}
-                    />
-                  </div>
-                  <div className="col-xs-4">
-                    <F name="cost_delivery" label="Delivery cost" />
-                  </div>
-                  <div className="col-xs-4">
-                    <F name="cost_extra1" label="Extra cost 1" />
-                  </div>
-                  <div className="col-xs-4">
-                    <F name="cost_extra2" label="Extra cost 2" />
-                  </div>
-                </div>
-              </div>
+            <div className="box">
+              <h3>Cost</h3>
+              <Cost {...props} />
+            </div>
+            <div className="box">
+              <h3>Supplier</h3>
+              <Supplier {...props} />
             </div>
           </div>
         </div>
@@ -148,14 +85,6 @@ class Form extends React.Component {
 Form.propTypes = {
   submitting: PropTypes.bool,
   handleSubmit: PropTypes.func,
-  newSupplier: PropTypes.func,
-  addCareLabel: PropTypes.func,
-  removeCareLabel: PropTypes.func,
-  types: PropTypes.object,
-  colors: PropTypes.object,
-  currencies: PropTypes.object,
-  suppliers: PropTypes.object,
-  labels: PropTypes.object,
   initialValues: PropTypes.object,
   abilities: PropTypes.object,
 };

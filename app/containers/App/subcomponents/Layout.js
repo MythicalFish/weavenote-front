@@ -7,7 +7,7 @@ export default function Layout(props) {
       <div className="flex-none bg-bluewood blurrable">
         <Sidebar currentPath={props.location.pathname} />
       </div>
-      <div className="flex-auto">
+      <div className="flex-auto flex">
         {props.children}
       </div>
     </div>

@@ -1,22 +1,21 @@
 import React, { PropTypes } from 'react';
 import { FieldArray } from 'redux-form/immutable';
 import { FormField } from 'components/FormField';
+import Icon from 'components/Icon';
 
 const renderCareLabels = ({ fields, removeLabel }) =>
   <div>
     {fields.getAll().map((label, index) =>
       <div key={label} className="tag">
-        <span>
+        <div>
           {label.get('name')}
-        </span>
-        <button
-          className="btn-shy"
-          onClick={() => {
-            removeLabel({ label, index });
-          }}
-        >
-          <i className="fa fa-close" />
-        </button>
+        </div>
+        <Icon
+          onClick={() => removeLabel({ label, index })}
+          size={15}
+          name="X"
+          className="p0"
+        />
       </div>
     )}
   </div>;

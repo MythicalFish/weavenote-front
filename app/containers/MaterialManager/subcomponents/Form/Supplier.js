@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form/immutable';
-import FocusableField, { FormField } from 'components/FormField';
+import { FormField } from 'components/FormField';
 
 export default class Supplier extends React.PureComponent {
   Tail = (props) =>
@@ -15,7 +15,7 @@ export default class Supplier extends React.PureComponent {
     </button>;
 
   render() {
-    const { selectedType, className, restricted } = this.props;
+    const { selectedType, restricted, F } = this.props;
 
     const selectorProps = {
       name: 'supplier',
@@ -28,26 +28,23 @@ export default class Supplier extends React.PureComponent {
       theme: 'alt1',
     };
 
-    const F = (fProps) => {
-      const p = { ...fProps };
-      p.component = FocusableField;
-      p.theme = 'alt1';
-      return <Field {...{ restricted, ...p }} />;
-    };
-
     return (
-      <div className={`data-rows ${className}`}>
+      <div>
         <Field {...selectorProps} />
-        <div>
-          <F name="supplier.name" label="Name" />
-          {['Fabric'].includes(selectedType) &&
-            <F name="supplier.agent" label="Agent" />}
-          <F name="supplier.ref" label="Reference" />
-          <F name="supplier.color_ref" label="Color reference" />
-          {['Fabric'].includes(selectedType) &&
-            <F name="supplier.minimum_order" label="Minimum order" />}
-          <F name="supplier.comments" label="Comments" type="textarea" />
+        <div className="row">
+          <div className="col-xs-8">
+            <F name="supplier.name" label="Name" />
+          </div>
+          <div className="col-xs-4">
+            <F name="supplier.ref" label="Ref." />
+          </div>
         </div>
+        {['Fabric'].includes(selectedType) &&
+          <F name="supplier.agent" label="Agent" />}
+        <F name="supplier.color_ref" label="Color reference" />
+        {['Fabric'].includes(selectedType) &&
+          <F name="supplier.minimum_order" label="Minimum order" />}
+        <F name="supplier.comments" label="Comments" type="textarea" />
       </div>
     );
   }
@@ -62,5 +59,4 @@ Supplier.propTypes = {
   reset: PropTypes.func,
   suppliers: PropTypes.object,
   selectedType: PropTypes.string,
-  className: PropTypes.string,
 };

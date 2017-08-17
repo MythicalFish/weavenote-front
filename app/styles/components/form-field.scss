@@ -7,8 +7,9 @@
       textarea,
       .dropdown > button,
       .readonly {
-        border: none;
-        border-bottom: 1px solid $dark3;
+        border-top: none;
+        border-left: none;
+        border-right: none;
         padding: $space-1 0 $space-1 0;
       }
       &:after {

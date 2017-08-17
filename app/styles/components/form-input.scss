@@ -12,14 +12,14 @@
     height: auto;
     width: 100%;
     border: none;
-    border: 1px solid $gray-lighter;
+    border: 1px solid $dark2;
     background: transparent;
     font-size: inherit;
     color: inherit;
     font-family: inherit;
     font-weight: inherit;
     text-align: inherit;
-    border-radius: 4px;
+    @include borderRadius(3px);
   }
 }
 // Variations
