@@ -16,10 +16,10 @@
         @extend .flex-auto;
         @extend .flex-column;
         margin: 0 $space-2;
-        button {
+        button:not(.avatar-list) {
           padding: 0 $space-1;
         }
-        button,
+        button:not(.avatar-list),
         a {
           @extend .flex-auto;
           background: transparent;

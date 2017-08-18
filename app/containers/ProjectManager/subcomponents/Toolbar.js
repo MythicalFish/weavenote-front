@@ -50,15 +50,6 @@ export default function Toolbar(props) {
             />
           </li>
           <li>
-            <NavItem
-              label={sections.Collaborators.label}
-              isActive={sections.Collaborators.id === currentSection.id}
-              handleClick={() => {
-                openModal('collaborators');
-              }}
-            />
-          </li>
-          <li>
             <AvatarList
               avatars={props.avatarList}
               onClick={() => openModal('collaborators')}

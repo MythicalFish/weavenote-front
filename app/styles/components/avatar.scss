@@ -1,31 +1,38 @@
 .avatar {
-  border-radius: 999px;
-  -webkit-border-radius: 999px;
-  background: $gray-lighter;
   height: 2.2rem;
   width: 2.2rem;
-  overflow: hidden;
   position: relative;
+  .avatar-img {
+    line-height: 0;
+    background: $gray-lighter;
+    overflow: hidden;
+    @include borderRadius(999px);
+  }
   &-sm {
-    height: 1.7rem;
-    width: 1.7rem;
+    height: 27px;
+    width: 27px;
   }
 }
+
+$avatarSize: 27px;
+
 .avatar-list {
   @extend .flex;
   @extend .flex-auto;
   @extend .items-center;
-  max-width: 150px;
-  padding-right: 50px;
-  position: relative;
-  .avatar-list-clipper {
-    overflow: hidden;
-    height: 1.7em;
-    .avatar {
-      float: left;
-      margin-right: $space-1;
-    }
+  width: 200px;
+  .avatar,
+  .hidden-count {
+    width: $avatarSize;
+    height: $avatarSize;
+    @extend .flex-none;
   }
-  button {
+  .avatar {
+    margin-right: $space-1;
+  }
+  .hidden-count {
+    border: 1px dashed $dark5;
+    @include borderRadius(999px);
+    font-size: .6rem;
   }
 }

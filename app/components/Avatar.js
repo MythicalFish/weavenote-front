@@ -6,7 +6,9 @@ export default function Avatar({ user, src, small, label }) {
   if (label) klass += ' tooltipped';
   return (
     <div className={klass}>
-      <img src={user ? user.get('avatar') : src} role="presentation" />
+      <div className="avatar-img">
+        <img src={user ? user.get('avatar') : src} role="presentation" />
+      </div>
       {label &&
         <div className="tooltip">
           {label}
