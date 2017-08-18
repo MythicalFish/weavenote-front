@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
 import UserMenu from 'components/UserMenu';
+import AvatarList from 'components/AvatarList';
 import Icon from 'components/Icon';
 
 export default function Toolbar(props) {
@@ -57,6 +58,12 @@ export default function Toolbar(props) {
               }}
             />
           </li>
+          <li>
+            <AvatarList
+              avatars={props.avatarList}
+              onClick={() => openModal('collaborators')}
+            />
+          </li>
         </ul>
       </nav>
       <UserMenu />
@@ -67,5 +74,6 @@ export default function Toolbar(props) {
 Toolbar.propTypes = {
   changeSection: PropTypes.func,
   currentSection: PropTypes.object,
+  avatarList: PropTypes.object,
   openModal: PropTypes.func,
 };

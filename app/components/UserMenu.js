@@ -38,15 +38,15 @@ const MenuItem = (p) =>
   </div>;
 
 const UserMenuButton = ({ user, organization }) =>
-  <div className="flex">
-    <div className="mr1 right-align">
+  <div className="flex items-center">
+    <div className="mr2 right-align smaller1">
       {user.get('name')}
       {organization &&
         <div className="dark5 upcase smaller1">
           {organization.get('name')}
         </div>}
     </div>
-    <Avatar {...{ user }} />
+    <Avatar {...{ user }} small />
   </div>;
 
 UserMenuButton.propTypes = {

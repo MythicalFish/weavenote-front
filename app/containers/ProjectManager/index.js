@@ -98,6 +98,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   project: selectors.selectProject(),
+  avatarList: selectors.selectAvatarList(),
   currentSection: selectCurrentSection(),
   focus: selectFocus(),
 });

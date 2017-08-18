@@ -9,3 +9,6 @@ export const selectMaterialCost = () =>
   createSelector(selectDomain(), (substate) =>
     substate.getIn(['project', 'material_cost'])
   );
+
+export const selectAvatarList = () =>
+  createSelector(selectDomain(), (s) => s.get('avatarList'));

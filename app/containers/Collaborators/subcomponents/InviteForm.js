@@ -38,7 +38,7 @@ const InviteForm = (props) => {
         <div>
           <Button
             type="submit"
-            icon="Mail"
+            inlineIcon="envelope-o"
             label="Send invite"
             disabled={submitting}
             small

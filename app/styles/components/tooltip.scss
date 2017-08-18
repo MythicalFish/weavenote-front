@@ -1,0 +1,65 @@
+.tooltipped {
+  position: relative;
+}
+.tooltip {
+  font-size: 14px;
+  text-align: center;
+  font-style: normal;
+  position: absolute;
+  left: 50%;
+  width: 250px;
+  background: $white;
+  @extend .b1;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  padding: 15px;
+  z-index: 2;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s ease-out;
+  -webkit-transition: 0.2s ease-out;
+  bottom: 102%;
+  transform: translate(-50%, 0px);
+  -webkit-transform: translate(-50%, 0px);
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    border-color: $gray-lighter transparent transparent transparent;
+    top: 100%;
+  }
+}
+
+.tooltip:last-child {
+  bottom: initial;
+  top: 102%;
+  &:before {
+    top: initial;
+    bottom: 100%;
+    border-color: transparent transparent $gray-lighter transparent;
+  }
+}
+
+.tooltipped:hover {
+  .tooltip {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+  }
+  .tooltip:not(:last-child) {
+    transform: translate(-50%, -10px);
+    -webkit-transform: translate(-50%, -10px);
+  }
+  .tooltip:last-child {
+    transform: translate(-50%, 10px);
+    -webkit-transform: translate(-50%, 10px);
+  }
+}

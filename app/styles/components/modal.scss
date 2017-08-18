@@ -29,6 +29,7 @@
     overflow: hidden;
     border: 1px solid $white;
     @include borderRadius();
+    z-index: 2;
     > img {
       @include borderRadius();
     }
