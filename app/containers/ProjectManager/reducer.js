@@ -27,7 +27,7 @@ function ProjectManagerReducer(state = initialState, action) {
     case types.FETCH_MATERIAL_COST_SUCCESS:
       return state.setIn(['project', 'material_cost'], fromJS(action.response));
 
-    case types.UPDATE_PROJECT_SUCCESS:
+    case types.EXPORT_PDF_SUCCESS:
       return state;
 
     default:

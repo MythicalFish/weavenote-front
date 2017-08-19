@@ -15,7 +15,7 @@ import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import ProjectBasics from './subcomponents/ProjectBasics';
 import * as selectors from './selectors';
-import { fetchProject, updateProject } from './actions';
+import { fetchProject, updateProject, exportPDF } from './actions';
 
 class ProjectManager extends React.PureComponent {
   componentDidMount() {
@@ -91,7 +91,7 @@ ProjectManager.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { changeSection, fetchProject, updateProject, openModal },
+    { changeSection, fetchProject, updateProject, openModal, exportPDF },
     dispatch
   );
 }

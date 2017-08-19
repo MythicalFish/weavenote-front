@@ -20,3 +20,10 @@ export function fetchMaterialCost(id) {
 export function fetchMaterialCostSuccess(response) {
   return { type: types.FETCH_MATERIAL_COST_SUCCESS, response };
 }
+
+export function exportPDF(id) {
+  return { type: types.EXPORT_PDF, id };
+}
+export function exportPDFsuccess(response) {
+  return { type: types.EXPORT_PDF_SUCCESS, response };
+}
