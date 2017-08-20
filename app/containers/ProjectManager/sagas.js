@@ -24,7 +24,6 @@ function* ProjectManagerWatcher() {
     yield takeLatest(types.UPDATE_PROJECT, updateProject),
     yield takeLatest(types.FETCH_MATERIAL_COST, fetchMaterialCost),
     yield takeLatest(types.EXPORT_PDF, exportPDF),
-    yield takeLatest(types.EXPORT_PDF_SUCCESS, downloadPDF),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -53,8 +52,4 @@ function* updateProject(action) {
 
 function* exportPDF({ id }) {
   yield sagas.get(`projects/${id}/export`, null, actions.exportPDFsuccess);
-}
-
-function* downloadPDF({ response }) {
-  window.open(response.url);
 }

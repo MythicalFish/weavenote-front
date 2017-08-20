@@ -6,7 +6,13 @@ import AvatarList from 'components/AvatarList';
 import Icon from 'components/Icon';
 
 export default function Toolbar(props) {
-  const { changeSection, currentSection, openModal, exportPDF, project } = props;
+  const {
+    changeSection,
+    currentSection,
+    openModal,
+    exportPDF,
+    project,
+  } = props;
   return (
     <header className="toolbar toolbar-flex blurrable bb1">
       <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
@@ -52,7 +58,10 @@ export default function Toolbar(props) {
           <li>
             <NavItem
               label="Export"
-              handleClick={() => exportPDF(project.get('id'))}
+              handleClick={() => {
+                exportPDF(project.get('id'));
+                openModal('export');
+              }}
             />
           </li>
           <li>

@@ -9,6 +9,10 @@ import * as types from './constants';
 const initialState = fromJS({
   project: null,
   userRole: null,
+  PDFexport: {
+    isExporting: false,
+    downloadURL: null,
+  },
 });
 
 function ProjectManagerReducer(state = initialState, action) {
@@ -27,8 +31,15 @@ function ProjectManagerReducer(state = initialState, action) {
     case types.FETCH_MATERIAL_COST_SUCCESS:
       return state.setIn(['project', 'material_cost'], fromJS(action.response));
 
+    case types.EXPORT_PDF:
+      return state
+        .setIn(['PDFexport', 'isExporting'], true)
+        .setIn(['PDFexport', 'downloadURL'], null);
+      
     case types.EXPORT_PDF_SUCCESS:
-      return state;
+      return state
+        .setIn(['PDFexport', 'isExporting'], false)
+        .setIn(['PDFexport', 'downloadURL'], response.url);
 
     default:
       return state;

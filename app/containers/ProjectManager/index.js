@@ -11,6 +11,8 @@ import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
 import ProjectComments from 'containers/ProjectComments';
 import Modal from 'components/Modal';
+import Spinner from 'components/Spinner';
+import Button from 'components/Button';
 import Collaborators from 'containers/Collaborators';
 import Toolbar from './subcomponents/Toolbar';
 import ProjectBasics from './subcomponents/ProjectBasics';
@@ -25,7 +27,7 @@ class ProjectManager extends React.PureComponent {
   }
 
   render() {
-    const { project, currentSection } = this.props;
+    const { project, currentSection, PDFexport } = this.props;
     if (!project) return null;
     const id = project.get('id');
     let View;
@@ -75,6 +77,14 @@ class ProjectManager extends React.PureComponent {
           </header>
           <Collaborators invitable={{ type: 'Project', id }} />
         </Modal>
+        <Modal id="export">
+          {PDFexport.get('isExporting') &&
+            <Spinner />
+          }
+          {PDFexport.get('downloadURL') &&
+            <Button download={PDFexport.get('downloadURL')} label="Download" icon="DownloadCloud" />
+          }
+        </Modal>
       </div>
     );
   }
@@ -83,6 +93,7 @@ class ProjectManager extends React.PureComponent {
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
   currentSection: React.PropTypes.object,
+  PDFexport: React.PropTypes.object,
   changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
   updateProject: React.PropTypes.func,
@@ -99,6 +110,7 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   project: selectors.selectProject(),
   avatarList: selectors.selectAvatarList(),
+  PDFexport: selectors.selectPDFexport(),
   currentSection: selectCurrentSection(),
   focus: selectFocus(),
 });
