@@ -16,6 +16,11 @@ export default function Button(props) {
     className,
   };
 
+  const { download, newTab } = props;
+  const realLink = download || newTab;
+  if (download) bProps.download = true;
+  if (newTab) bProps.target = '_blank';
+
   const W = ({ children }) => {
     if (props.to) {
       return (
@@ -23,9 +28,9 @@ export default function Button(props) {
           {children}
         </Link>
       );
-    } else if (props.download) {
+    } else if (realLink) {
       return (
-        <a {...bProps} href={props.download} download>
+        <a {...bProps} href={realLink}>
           {children}
         </a>
       );
@@ -62,6 +67,7 @@ Button.propTypes = {
   inlineIcon: React.PropTypes.string,
   small: React.PropTypes.bool,
   download: React.PropTypes.string,
+  newTab: React.PropTypes.string,
   shy: React.PropTypes.bool,
   large: React.PropTypes.bool,
   secondary: React.PropTypes.bool,
