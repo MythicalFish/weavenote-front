@@ -12,20 +12,19 @@ import Header from 'components/Header';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
 import { fetchProjects, createProject, fileProject } from './actions';
-import { selectProjectsList } from './selectors';
+import { selectProjects } from './selectors';
 
 export class ProjectList extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchProjects();
     this.props.changeSection(sections.ActiveProjects);
   }
   render() {
-    const { props } = this;
+    const { projects } = this.props;
     return (
       <div>
         <Header />
-        <Toolbar {...props} />
+        <Toolbar {...this.props} />
         <div className="container-narrow px2 py4">
           <table>
             <thead>
@@ -41,12 +40,12 @@ export class ProjectList extends React.PureComponent {
               </tr>
             </thead>
             <tbody>
-              {props.projects &&
-                props.projects.map((project, index) =>
+              {projects &&
+                projects.map((project, index) =>
                   <ListItem
                     key={`project-${index}`}
-                    project={project}
-                    fileProject={props.fileProject}
+                    project={project.toJS()}
+                    fileProject={this.props.fileProject}
                   />
                 )}
             </tbody>
@@ -58,13 +57,10 @@ export class ProjectList extends React.PureComponent {
 }
 
 ProjectList.propTypes = {
-  projects: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  projects: PropTypes.object,
   fetchProjects: PropTypes.func,
-  createProject: PropTypes.func,
   fileProject: PropTypes.func,
   changeSection: PropTypes.func,
-  currentSection: PropTypes.object,
-  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
@@ -75,7 +71,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  projects: selectProjectsList(),
+  projects: selectProjects(),
   currentSection: selectCurrentSection(),
   abilities: selectAbilities(),
 });
