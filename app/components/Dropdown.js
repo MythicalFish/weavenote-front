@@ -16,13 +16,11 @@ class Dropdown extends React.PureComponent {
 
     if (isFocused) {
       this.setState({ className: '' });
-      setTimeout(() => {
-        unfocusThis();
-        if (item) {
-          if (onChange) onChange(item);
-          if (onChanged) onChanged(item);
-        }
-      }, 200);
+      if (item) {
+        if (onChange) onChange(item);
+        if (onChanged) onChanged(item);
+      }
+      setTimeout(unfocusThis, 200);
     } else {
       focusThis();
       setTimeout(() => {

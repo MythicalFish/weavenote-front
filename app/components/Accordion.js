@@ -14,7 +14,7 @@ export default class Accordion extends React.PureComponent {
       items = props.items.toArray().map((item, index) => {
         const isCurrent = props.current && props.current === item;
         return (
-          <div key={`component${index}`}>
+          <div key={`component${index}`} className="accordion-row">
             <props.ListItem
               item={item}
               index={index}
@@ -22,11 +22,13 @@ export default class Accordion extends React.PureComponent {
               switchItem={props.switchItem}
             />
             {isCurrent &&
-              <props.Form
-                item={item}
-                onSubmit={this.handleSubmit}
-                initialValues={props.formValues}
-              />}
+              <div className="accordion-row-content">
+                <props.Form
+                  item={item}
+                  onSubmit={this.handleSubmit}
+                  initialValues={props.formValues}
+                />
+              </div>}
           </div>
         );
       });
@@ -34,12 +36,8 @@ export default class Accordion extends React.PureComponent {
     return (
       <div>
         <PlusButton onClick={props.toggleCreate} />
-        <div className="data-rows mt2">
-          {items.length > 0
-            ? items
-            : <div className="data-row">
-              <div className="p2">No items yet</div>
-            </div>}
+        <div className="accordion mt2">
+          {items.length > 0 ? items : <div className="p2">No items yet</div>}
           {props.footer &&
             <InputRow
               type="display"

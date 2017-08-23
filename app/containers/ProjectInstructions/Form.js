@@ -16,19 +16,20 @@ const Form = (props) => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div className="data-rows">
+      <div className="">
         <Field
           name="title"
           type="text"
           component={InputRow}
           label="Title"
-          focus
+          theme="alt1"
         />
         <Field
           name="description"
           type="textarea"
           component={InputRow}
           label="Description"
+          theme="alt1"
         />
         {instruction.get('id') &&
           <div>

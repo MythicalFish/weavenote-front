@@ -1,0 +1,26 @@
+.accordion {
+  @extend .b1;
+  @include borderRadius();
+  min-width: 300px;
+  .accordion-row {
+    @extend .bb1;
+    width: 100%;
+    .accordion-row-header {
+      @extend .flex;
+      @extend .items-center;
+      text-align: left;
+      width: 100%;
+      padding: $space-2;
+      div:not(:last-child) {
+        @extend .flex-auto;
+      }
+      div:last-child {
+        @extend .flex-none;
+      }
+    }
+    .accordion-row-content {
+      @extend .bt1;
+      @extend .p2;
+    }
+  }
+}

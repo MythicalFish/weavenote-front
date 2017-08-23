@@ -12,17 +12,15 @@ const AccordionItem = (props) => {
   return (
     <button
       type="button"
-      className="data-row left-align p2"
+      className="accordion-row-header"
       onClick={() => {
         switchItem(switchTarget);
       }}
     >
-      <div className="flex-auto flex">
+      <div>
         {props.children}
       </div>
-      <div className="right-align">
-        <Icon name={chevronClass} color="dark3" size={20} />
-      </div>
+      <Icon name={chevronClass} color="dark3" size={20} />
     </button>
   );
 };

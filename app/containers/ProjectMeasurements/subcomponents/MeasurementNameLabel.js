@@ -3,17 +3,6 @@ import Dropdown from 'components/Dropdown';
 import Focusable from 'utils/Focusable';
 
 class MeasurementNameLabel extends React.PureComponent {
-  state = { isFocused: false };
-  shouldComponentUpdate(props, state) {
-    return !(state.isFocused && props.isFocused);
-  }
-  componentDidUpdate = () => {
-    if (this.props.isFocused && !this.state.isFocused) {
-      this.setState({ isFocused: true });
-    } else if (!this.props.isFocused && this.state.isFocused) {
-      this.setState({ isFocused: false });
-    }
-  };
   render() {
     const { name, Input, inputName, submitForm } = this.props;
     const { doThis, isDoing, focusClass, isFocused } = this.props;

@@ -5,7 +5,9 @@ export default function Focusable(Component) {
   class F extends React.PureComponent {
     state = { isFocused: false, action: null };
     handleClickOutside = () => {
-      if (this.state.isFocused) this.setState({ isFocused: false });
+      setTimeout(() => {
+        if (this.state.isFocused) this.setState({ isFocused: false });
+      }, 220);
     };
     render() {
       const { isFocused, action } = this.state;
