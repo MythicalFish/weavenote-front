@@ -3,24 +3,34 @@ import onClickOutside from 'react-onclickoutside';
 
 export default function Focusable(Component) {
   class F extends React.PureComponent {
-    state = { isFocused: false, action: null };
+    state = { isFocused: false, isActive: false, action: null };
+    isTrulyFocused = () => this.state.isFocused && this.state.isActive;
     handleClickOutside = () => {
-      setTimeout(() => {
-        if (this.state.isFocused) this.setState({ isFocused: false });
-      }, 220);
+      this.doUnfocus();
+    };
+    doUnfocus = () => {
+      if (this.isTrulyFocused()) {
+        this.setState({ isFocused: false });
+        setTimeout(() => this.setState({ isActive: false }), 220);
+      }
     };
     render() {
-      const { isFocused, action } = this.state;
+      const { isFocused, isActive, action } = this.state;
       const focusClass = isFocused ? 'focused' : '';
-      const isDoing = (thing) => isFocused && action === thing;
+      const isDoing = (thing) => this.isTrulyFocused() && action === thing;
       const focusThis = () => {
-        if (!isFocused) this.setState({ isFocused: true });
+        if (!this.isTrulyFocused()) {
+          this.setState({ isActive: true });
+          setTimeout(() => this.setState({ isFocused: true }), 20);
+        }
       };
       const unfocusThis = () => {
-        if (isFocused) this.setState({ isFocused: false });
+        if (this.isTrulyFocused()) {
+          this.doUnfocus();
+        }
       };
       const toggleThis = () => {
-        if (isFocused) {
+        if (this.isTrulyFocused()) {
           unfocusThis();
         } else {
           focusThis();
@@ -37,7 +47,7 @@ export default function Focusable(Component) {
             toggleThis,
             doThis,
             doNothing,
-            isFocused,
+            isFocused: isActive,
             isDoing,
             focusClass,
           }}

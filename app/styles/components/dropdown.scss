@@ -48,7 +48,7 @@
   overflow-x: hidden;
   @extend .b1;
   opacity: 0;
-  &.open {
+  &.focused {
     opacity: 1;
     transform: translateY(0);
     -webkit-transform: translateY(0);

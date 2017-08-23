@@ -6,8 +6,6 @@ import TetherComponent from 'react-tether';
 import Focusable from 'utils/Focusable';
 
 class Dropdown extends React.PureComponent {
-  state = { className: '' };
-
   toggleState = (item) => () => {
     const { readOnly, onChange, onChanged } = this.props;
     const { focusThis, unfocusThis, isFocused } = this.props;
@@ -15,17 +13,13 @@ class Dropdown extends React.PureComponent {
     if (readOnly) return;
 
     if (isFocused) {
-      this.setState({ className: '' });
       if (item) {
         if (onChange) onChange(item);
         if (onChanged) onChanged(item);
       }
-      setTimeout(unfocusThis, 200);
+      unfocusThis();
     } else {
       focusThis();
-      setTimeout(() => {
-        this.setState({ className: 'open' });
-      }, 1);
     }
   };
 
@@ -63,10 +57,9 @@ class Dropdown extends React.PureComponent {
   };
 
   items = () => {
-    const { value, data, children, align, tail } = this.props;
-    const { className } = this.state;
+    const { value, data, children, align, tail, focusClass } = this.props;
     const alignment = align || 'left';
-    const itemsClass = `dropdown-options ${alignment}-align ${className}`;
+    const itemsClass = `dropdown-options ${alignment}-align ${focusClass}`;
     if (children) {
       return (
         <div className={itemsClass} onClick={this.toggleState()}>
@@ -158,6 +151,7 @@ Dropdown.propTypes = {
   focusThis: PropTypes.func,
   unfocusThis: PropTypes.func,
   label: PropTypes.any,
+  focusClass: PropTypes.string,
 };
 
 export default Focusable(Dropdown);

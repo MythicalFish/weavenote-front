@@ -10,7 +10,7 @@ const MaterialCost = ({ cost }) =>
   </div>;
 
 MaterialCost.propTypes = {
-  cost: PropTypes.string,
+  cost: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default MaterialCost;
