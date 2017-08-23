@@ -59,7 +59,7 @@
     @extend .flex;
     @extend .items-stretch;
     @extend .justify-between;
-    .icon {
+    > .icon {
       padding: 0 $space-4;
       display: flex;
       align-items: center;

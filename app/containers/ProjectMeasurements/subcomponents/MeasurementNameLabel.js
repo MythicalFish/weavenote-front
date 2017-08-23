@@ -36,7 +36,7 @@ class MeasurementNameLabel extends React.PureComponent {
               {value}
             </button>}
           {isFocused &&
-            <Dropdown value={{ name: value }}>
+            <Dropdown value={{ name: value }} tether={false}>
               <button onClick={doThis('rename')}>Rename</button>
               <button onClick={annotate}>Annotate</button>
               <button onClick={() => this.props.doDelete(name.get('id'))}>

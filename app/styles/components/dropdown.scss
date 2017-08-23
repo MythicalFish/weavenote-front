@@ -62,12 +62,21 @@
     text-align: inherit;
     border-radius: 0;
     -webkit-border-radius: 0;
-    color: inherit;
+    color: $dark7 !important;
     font-weight: inherit;
     background: inherit;
     border: none;
     &:not(:last-child) {
-      @extend .bb1;
+      border-bottom: 1px solid $dark3 !important;
     }
+  }
+}
+.untethered {
+  position: relative;
+  .dropdown-options {
+    position: absolute;
+    z-index: 3;
+    top: 100%;
+    right: 0;
   }
 }

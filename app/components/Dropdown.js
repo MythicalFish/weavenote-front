@@ -123,18 +123,21 @@ class Dropdown extends React.PureComponent {
   };
 
   render() {
-    const { className, readOnly, isFocused, onFocus } = this.props;
+    const { className, readOnly, isFocused, onFocus, tether } = this.props;
     let inputClass = className || '';
     if (readOnly) inputClass += ' noselect';
+    const useTether = tether === false ? false : true;
     return (
       <div className={`dropdown ${inputClass}`} onClick={onFocus}>
-        <TetherComponent {...this.tetherOptions}>
-          {this.label()}
-          {isFocused &&
-            <div>
-              {this.items()}
-            </div>}
-        </TetherComponent>
+        {useTether
+          ? <TetherComponent {...this.tetherOptions}>
+            {this.label()}
+            {isFocused && this.items()}
+          </TetherComponent>
+          : <div className="untethered">
+            {this.label()}
+            {isFocused && this.items()}
+          </div>}
       </div>
     );
   }
@@ -148,6 +151,7 @@ Dropdown.propTypes = {
   onChanged: PropTypes.func,
   tail: PropTypes.func,
   readOnly: PropTypes.bool,
+  tether: PropTypes.bool,
   align: PropTypes.string,
   children: PropTypes.node,
   icon: PropTypes.string,
