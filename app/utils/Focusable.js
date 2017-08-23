@@ -1,13 +1,21 @@
 import React from 'react';
 import onClickOutside from 'react-onclickoutside';
 
+/*
+  This might look a bit confusing, but basically
+  this HOC provides various focus methods, and
+  a delay is created in the wrapped component by
+  providing isFocused bool, and then focusClass
+  220ms later. This is for CSS animation, and to
+  give any child events time to execute before
+  unmounting (specifically those inside Tether).
+*/
+
 export default function Focusable(Component) {
   class F extends React.PureComponent {
     state = { isFocused: false, isActive: false, action: null };
     isTrulyFocused = () => this.state.isFocused && this.state.isActive;
-    handleClickOutside = () => {
-      this.doUnfocus();
-    };
+    handleClickOutside = () => this.doUnfocus();
     doUnfocus = () => {
       if (this.isTrulyFocused()) {
         this.setState({ isFocused: false });
