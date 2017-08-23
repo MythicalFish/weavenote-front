@@ -35,7 +35,11 @@ class ProjectMeasurements extends React.PureComponent {
           ? <Form {...this.props} />
           : <div>No measurements added yet</div>}
 
-        <Dropdown label={<PlusButton />}>
+        <Dropdown
+          label={<PlusButton />}
+          tether={false}
+          className="inline-block"
+        >
           <button onClick={() => createGroup(id)}>Create Column</button>
           <button onClick={() => createName(id)}>Create Row</button>
         </Dropdown>
