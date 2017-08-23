@@ -157,4 +157,10 @@ Dropdown.propTypes = {
   label: PropTypes.any,
 };
 
-export default Focusable(Dropdown, 1);
+export default Focusable(Dropdown);
+
+// export default function (props) {
+//  return (
+//    <Focusable component={Dropdown} {...props} />
+//  );
+// }

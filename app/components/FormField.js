@@ -26,4 +26,4 @@ FormField.propTypes = {
   theme: PropTypes.string,
 };
 
-export default Focusable(FormField, 1);
+export default Focusable(FormField);

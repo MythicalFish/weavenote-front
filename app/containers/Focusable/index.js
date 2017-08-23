@@ -7,14 +7,16 @@ import { selectState } from './selectors';
 
 const randomID = () => Math.random().toString(36).substring(7);
 
-export default function Focusable(Component, focusIndex = 0) {
+export default function Focusable(Component) {
   class F extends React.PureComponent {
     state = { id: null };
     componentDidMount = () => {
       this.setState({ id: randomID() });
     };
-    globalFocus = () => this.props.globalFocus.get(focusIndex);
+    getFocusIndex = () => this.props.focusIndex || 0;
+    globalFocus = () => this.props.globalFocus.get(this.getFocusIndex());
     render() {
+      const focusIndex = this.getFocusIndex();
       const { id } = this.state;
       const { setFocus: set } = this.props;
       const focused = this.globalFocus();
@@ -55,6 +57,7 @@ export default function Focusable(Component, focusIndex = 0) {
   F.propTypes = {
     setFocus: PropTypes.func,
     globalFocus: PropTypes.object,
+    focusIndex: PropTypes.number,
   };
 
   const mapDispatch = (dispatch) => bindActionCreators({ setFocus }, dispatch);
