@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { fromJS } from 'immutable';
 import { Field } from 'redux-form/immutable';
-import Focusable from 'containers/Focusable';
+import Focusable from 'utils/Focusable';
 import Input from './Input';
 import MeasurementGroupLabel from './MeasurementGroupLabel';
 

@@ -82,7 +82,7 @@ class ProjectManager extends React.PureComponent {
             <Spinner />
           }
           {PDFexport.get('downloadURL') &&
-            <Button download={PDFexport.get('downloadURL')} label="Download" icon="DownloadCloud" />
+            <Button newTab={PDFexport.get('downloadURL')} label="Download" icon="DownloadCloud" />
           }
         </Modal>
       </div>

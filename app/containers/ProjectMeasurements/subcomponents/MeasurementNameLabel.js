@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
-import Focusable from 'containers/Focusable';
+import Focusable from 'utils/Focusable';
 
 class MeasurementNameLabel extends React.PureComponent {
   state = { isFocused: false };

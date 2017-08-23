@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Input from 'components/FormInput';
-import Focusable from 'containers/Focusable';
+import Focusable from 'utils/Focusable';
 
 export function FormField(props) {
   const { label, className, focusClass, theme } = props;

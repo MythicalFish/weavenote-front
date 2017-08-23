@@ -3,7 +3,7 @@ import Dot from 'components/Dot';
 import Icon from 'components/Icon';
 import PriceSymbol from 'components/PriceSymbol';
 import TetherComponent from 'react-tether';
-import Focusable from 'containers/Focusable';
+import Focusable from 'utils/Focusable';
 
 class Dropdown extends React.PureComponent {
   state = { className: '' };
@@ -15,7 +15,7 @@ class Dropdown extends React.PureComponent {
     if (readOnly) return;
 
     if (isFocused) {
-      // this.setState({ className: '' });
+      this.setState({ className: '' });
       setTimeout(() => {
         unfocusThis();
         if (item) {
@@ -24,9 +24,9 @@ class Dropdown extends React.PureComponent {
         }
       }, 200);
     } else {
-      focusThis(this.state.id);
+      focusThis();
       setTimeout(() => {
-        // this.setState({ className: 'open' });
+        this.setState({ className: 'open' });
       }, 1);
     }
   };
@@ -66,8 +66,9 @@ class Dropdown extends React.PureComponent {
 
   items = () => {
     const { value, data, children, align, tail } = this.props;
+    const { className } = this.state;
     const alignment = align || 'left';
-    const itemsClass = `dropdown-options ${alignment}-align open`;
+    const itemsClass = `dropdown-options ${alignment}-align ${className}`;
     if (children) {
       return (
         <div className={itemsClass} onClick={this.toggleState()}>
@@ -158,9 +159,3 @@ Dropdown.propTypes = {
 };
 
 export default Focusable(Dropdown);
-
-// export default function (props) {
-//  return (
-//    <Focusable component={Dropdown} {...props} />
-//  );
-// }
