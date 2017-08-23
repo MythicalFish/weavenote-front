@@ -35,11 +35,6 @@ export const selectAbilities = () =>
 export const selectInvite = () =>
   createSelector(selectDomain(), (s) => s.get('invite'));
 
-// Materials
-
-export const selectMaterials = () =>
-  createSelector(selectDomain(), (s) => s.get('materials'));
-
 // Misc
 
 export const selectCurrentSection = () =>

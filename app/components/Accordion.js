@@ -1,5 +1,5 @@
 import React from 'react';
-import InputRow from 'components/FormField';
+import FormField from 'components/FormField';
 import PlusButton from 'components/PlusButton';
 
 export default class Accordion extends React.PureComponent {
@@ -38,12 +38,7 @@ export default class Accordion extends React.PureComponent {
         <PlusButton onClick={props.toggleCreate} />
         <div className="accordion mt2">
           {items.length > 0 ? items : <div className="p2">No items yet</div>}
-          {props.footer &&
-            <InputRow
-              type="display"
-              label={props.footer.label}
-              value={props.footer.value}
-            />}
+          {props.footer && props.footer}
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import Button from 'components/Button';
 
 export default class SelectMaterial extends React.PureComponent {
   handleClick = (material) => {
@@ -14,29 +14,39 @@ export default class SelectMaterial extends React.PureComponent {
     const { materials } = this.props;
     return (
       <div>
-        Select a material
-        <div>
+        <div className="center mb2 bold">Add material:</div>
+        <div className="accordion">
           {materials &&
             materials.toArray().map((material) =>
               <button
                 type="button"
-                onClick={() => {
-                  this.handleClick(material);
-                }}
+                onClick={() => this.handleClick(material)}
                 key={material}
+                className="accordion-row p2"
               >
-                {material.get('name')}
+                <div>
+                  {material.get('name')}
+                </div>
+                <div>
+                  {material.get('name')}
+                </div>
               </button>
             )}
-          <Link to="/materials/new" className="btn-shy">
-            <i className="fa fa-plus mr1" />
-            Create a material
-          </Link>
         </div>
-        <div className="bt1 mt2 pt1">
-          <button className="btn-shy" onClick={this.props.toggleCreate}>
-            Cancel
-          </button>
+        <div className="pt2 center">
+          <div className="mb2">
+            <Button
+              to="/materials/new"
+              inlineIcon="plus"
+              label="New material"
+              shy
+            />
+          </div>
+          <Button
+            className="btn btn-shy gray"
+            onClick={this.props.toggleCreate}
+            label="Cancel"
+          />
         </div>
       </div>
     );

@@ -3,24 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { fetchMaterials } from 'containers/MaterialList/actions';
-import { selectMaterials } from 'containers/App/selectors';
 import Accordion from 'components/Accordion';
-import Price from 'components/Price';
-import SelectMaterial from './SelectMaterial';
-import ListItem from './ListItem';
-import Form from './Form';
-import {
-  fetchComponents,
-  switchComponent,
-  updateComponent,
-  createComponent,
-} from './actions';
-import {
-  selectComponents,
-  selectCurrentComponent,
-  selectComponentForm,
-} from './selectors';
+import SelectMaterial from './subcomponents/SelectMaterial';
+import ListItem from './subcomponents/ListItem';
+import Form from './subcomponents/Form';
+import MaterialCost from './subcomponents/MaterialCost';
+
+import { fetchMaterials } from '../MaterialList/actions';
+import { selectMaterials } from '../MaterialList/selectors';
+import * as actions from './actions';
+import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
 class Components extends React.Component {
@@ -51,10 +43,7 @@ class Components extends React.Component {
             formValues={this.props.formValues}
             ListItem={ListItem}
             Form={Form}
-            footer={{
-              label: 'Material cost',
-              value: <Price value={this.props.materialCost} />,
-            }}
+            footer={<MaterialCost cost={this.props.materialCost} />}
           />}
       </div>
     );
@@ -76,10 +65,7 @@ Components.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      fetchComponents,
-      updateComponent,
-      createComponent,
-      switchComponent,
+      ...actions,
       fetchMaterials,
     },
     dispatch
@@ -87,10 +73,10 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  components: selectComponents(),
+  components: selectors.selectComponents(),
+  current: selectors.selectCurrentComponent(),
+  formValues: selectors.selectComponentForm(),
   materials: selectMaterials(),
-  current: selectCurrentComponent(),
-  formValues: selectComponentForm(),
   materialCost: selectMaterialCost(),
 });
 

@@ -99,17 +99,11 @@ export default function createRoutes(store) {
       path: '/materials',
       name: 'MaterialList',
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/MaterialList/reducer'),
-          import('containers/MaterialList/sagas'),
-          import('containers/MaterialList'),
-        ]);
+        const importModules = Promise.all([import('containers/MaterialList')]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('MaterialList', reducer.default);
-          injectSagas(sagas.default);
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 
@@ -203,34 +197,23 @@ export default function createRoutes(store) {
         import('containers/ImageUploader/sagas'),
         import('containers/ImageForm/sagas'),
         import('containers/Comments/sagas'),
+        import('containers/MaterialList/sagas'),
         import('containers/App'),
       ]);
 
       const renderRoute = loadModule(cb);
 
-      importModules.then(
-        (
-          [
-            appSagas,
-            cSagas,
-            oSagas,
-            iSagas,
-            iiSagas,
-            iiiSagas,
-            commentSagas,
-            component,
-          ]
-        ) => {
-          injectSagas(appSagas.default);
-          injectSagas(cSagas.default);
-          injectSagas(oSagas.default);
-          injectSagas(iSagas.default);
-          injectSagas(iiSagas.default);
-          injectSagas(iiiSagas.default);
-          injectSagas(commentSagas.default);
-          renderRoute(component);
-        }
-      );
+      importModules.then(([a, b, c, d, e, f, g, h, component]) => {
+        injectSagas(a.default);
+        injectSagas(b.default);
+        injectSagas(c.default);
+        injectSagas(d.default);
+        injectSagas(e.default);
+        injectSagas(f.default);
+        injectSagas(g.default);
+        injectSagas(h.default);
+        renderRoute(component);
+      });
 
       importModules.catch(errorLoading);
     },

@@ -5,7 +5,6 @@
  */
 
 import { fromJS } from 'immutable';
-import * as materialActionTypes from 'containers/MaterialList/constants';
 import * as orgActionTypes from 'containers/Organization/constants';
 import * as profileActionTypes from 'containers/Profile/constants';
 import * as appActionTypes from './constants/actions';
@@ -28,7 +27,6 @@ const initialState = fromJS({
     },
   },
   currentSection: sections.Default,
-  materials: [],
   modalID: null,
   modalImage: null,
   focus: null,
@@ -68,11 +66,6 @@ function appReducer(state = initialState, action) {
 
     case appActionTypes.FETCH_STATS_SUCCESS:
       return state.set('stats', fromJS(action.stats));
-
-    // Materials
-
-    case materialActionTypes.FETCH_MATERIALS_SUCCESS:
-      return state.set('materials', fromJS(action.materials));
 
     // Misc
 

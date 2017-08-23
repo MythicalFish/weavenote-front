@@ -2,16 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import {
-  selectCurrentSection,
-  selectMaterials,
-} from 'containers/App/selectors';
+import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
 import Header from 'components/Header';
 import { fetchMaterials } from './actions';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
+import { selectMaterials } from './selectors';
 
 export class MaterialList extends React.PureComponent {
   componentDidMount() {
