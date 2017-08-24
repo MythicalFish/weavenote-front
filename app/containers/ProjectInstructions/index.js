@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Accordion from 'components/Accordion';
-import ListItem from './ListItem';
-import Form from './Form';
+import ListItem from './subcomponents/ListItem';
+import Form from './subcomponents/Form';
 import {
   fetchInstructions,
   switchInstruction,

@@ -31,7 +31,3 @@ export function deleteComponent({ projectID, id }) {
 export function deleteComponentSuccess(response) {
   return { type: types.DELETE_COMPONENT_SUCCESS, response };
 }
-
-export function switchComponent(index) {
-  return { type: types.SWITCH_COMPONENT, index };
-}

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 
-const AccordionItem = (props) => {
+const AccordionRowHeader = (props) => {
   const { switchItem, isCurrent, index } = props;
   let chevronClass = 'ChevronDown';
   let switchTarget = index;
@@ -13,9 +13,7 @@ const AccordionItem = (props) => {
     <button
       type="button"
       className="accordion-row-header"
-      onClick={() => {
-        switchItem(switchTarget);
-      }}
+      onClick={props.onClick}
     >
       <div className="pr1">
         {props.children}
@@ -25,11 +23,11 @@ const AccordionItem = (props) => {
   );
 };
 
-AccordionItem.propTypes = {
+AccordionRowHeader.propTypes = {
   index: PropTypes.number,
   switchItem: PropTypes.func,
   isCurrent: PropTypes.bool,
   children: PropTypes.node,
 };
 
-export default AccordionItem;
+export default AccordionRowHeader;

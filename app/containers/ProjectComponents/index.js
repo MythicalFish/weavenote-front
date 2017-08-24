@@ -36,7 +36,6 @@ class Components extends React.Component {
           ? <SelectMaterial {...this.props} {...{ toggleCreate }} />
           : <Accordion
             items={this.props.components}
-            current={this.props.current}
             toggleCreate={this.toggleCreate}
             updateItem={this.props.updateComponent}
             switchItem={this.props.switchComponent}
@@ -74,8 +73,6 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   components: selectors.selectComponents(),
-  current: selectors.selectCurrentComponent(),
-  formValues: selectors.selectComponentForm(),
   materials: selectMaterials(),
   materialCost: selectMaterialCost(),
 });

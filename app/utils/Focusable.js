@@ -11,11 +11,13 @@ import onClickOutside from 'react-onclickoutside';
   unmounting (specifically those inside Tether).
 */
 
-export default function Focusable(Component) {
+export default function Focusable(Component, opts = {}) {
   class F extends React.PureComponent {
     state = { isFocused: false, isActive: false, action: null };
     isTrulyFocused = () => this.state.isFocused && this.state.isActive;
-    handleClickOutside = () => this.unfocusThis();
+    handleClickOutside = () => {
+      if (!opts.disableOutside) this.unfocusThis();
+    };
     unfocusThis = () => {
       if (this.isTrulyFocused()) {
         this.setState({ isFocused: false });
