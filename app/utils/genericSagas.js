@@ -53,11 +53,13 @@ function* handleError({ error }) {
     yield put(notifyWarning(message));
   } else if (error.type === 'bug') {
     yield put(notifyError(message));
-  } else {
+  } else if (process.env.NODE_ENV === 'production') {
     logout();
     setTimeout(() => {
       window.location.replace('/');
     }, 100);
+  } else {
+    yield put(notifyError(message));
   }
 }
 

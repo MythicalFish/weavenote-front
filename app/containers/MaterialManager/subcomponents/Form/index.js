@@ -6,6 +6,7 @@ import Basics from './Basics';
 import CareLabels from './CareLabels';
 import Supplier from './Supplier';
 import Cost from './Cost';
+import Images from './Images';
 
 class Form extends React.Component {
   state = { type: null };
@@ -32,7 +33,7 @@ class Form extends React.Component {
   };
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting, initialValues: material } = this.props;
     const { type } = this.state;
     const { showFor, switchType } = this;
 
@@ -56,6 +57,10 @@ class Form extends React.Component {
             <div className="box">
               <h3>Basics</h3>
               <Basics {...props} />
+            </div>
+            <div className="box">
+              <h3>Images</h3>
+              <Images {...{ material }} />
             </div>
             <div className="box">
               <h3>Care labels</h3>

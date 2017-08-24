@@ -42,7 +42,7 @@ export class MaterialManager extends React.PureComponent {
   };
 
   render() {
-    const { initialValues } = this.props;
+    const { initialValues, labels, colors } = this.props;
 
     const { onSubmit } = this;
     return (
@@ -50,7 +50,10 @@ export class MaterialManager extends React.PureComponent {
         <Toolbar />
         <div className="p4">
           <div className="container-narrower">
-            {initialValues && <Form {...{ onSubmit, ...this.props }} />}
+            {initialValues &&
+              labels &&
+              colors &&
+              <Form {...{ onSubmit, ...this.props }} />}
           </div>
         </div>
       </div>
