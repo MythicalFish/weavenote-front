@@ -6,7 +6,7 @@ import FormField from 'components/FormField';
 import Button from 'components/Button';
 
 const Form = (props) => {
-  const { handleSubmit, submitting } = props;
+  const { handleSubmit, onSubmit, submitting } = props;
   const item = props.item.toJS();
   const material = item.material;
   const materialCost = <Price value={item.material_cost} />;
@@ -32,11 +32,10 @@ const Form = (props) => {
         label="Quantity"
         component={FormField}
         focus
+        onBlur={onSubmit}
       />
       <FormField type="display" label="Cost" value={materialCost} />
-      <footer className="p2 center">
-        <Button type="submit" disabled={submitting} label="Save" />
-      </footer>
+      <button type="submit" disabled={submitting} className="conceal" />
     </form>
   );
 };

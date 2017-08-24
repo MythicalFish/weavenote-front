@@ -1,5 +1,6 @@
-import { take, cancel, takeLatest } from 'redux-saga/effects';
+import { take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { getFormValues, isDirty } from 'redux-form/immutable';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
@@ -23,10 +24,14 @@ function* fetchInstructions(action) {
   );
 }
 
-function* updateInstruction({ payload }) {
-  const instruction = payload.toJS();
+function* updateInstruction() {
+  const dirty = yield select(isDirty('Instructions'));
+  if (!dirty) return;
+  const instruction = yield select(getFormValues('Instructions'));
   yield sagas.patch(
-    `projects/${instruction.project_id}/instructions/${instruction.id}`,
+    `projects/${instruction.get('project_id')}/instructions/${instruction.get(
+      'id'
+    )}`,
     { instruction },
     actions.updateInstructionSuccess
   );

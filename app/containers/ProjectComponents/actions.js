@@ -8,8 +8,8 @@ export function fetchComponentsSuccess(response) {
   return { type: types.FETCH_COMPONENTS_SUCCESS, response };
 }
 
-export function updateComponent(payload) {
-  return { type: types.UPDATE_COMPONENT, payload };
+export function updateComponent() {
+  return { type: types.UPDATE_COMPONENT };
 }
 
 export function updateComponentSuccess(response) {

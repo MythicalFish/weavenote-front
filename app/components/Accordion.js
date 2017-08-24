@@ -1,12 +1,7 @@
 import React from 'react';
-import FormField from 'components/FormField';
 import PlusButton from 'components/PlusButton';
 
 export default class Accordion extends React.PureComponent {
-  handleSubmit = (data) => {
-    const { props } = this;
-    props.updateItem(data);
-  };
   render() {
     let items = [];
     const { props } = this;
@@ -25,7 +20,7 @@ export default class Accordion extends React.PureComponent {
               <div className="accordion-row-content">
                 <props.Form
                   item={item}
-                  onSubmit={this.handleSubmit}
+                  onSubmit={props.updateItem}
                   initialValues={props.formValues}
                 />
               </div>}

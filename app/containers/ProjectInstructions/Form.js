@@ -22,33 +22,29 @@ const Form = (props) => {
           type="text"
           component={InputRow}
           label="Title"
-          theme="alt1"
+          focus
+          onBlur={props.onSubmit}
         />
         <Field
           name="description"
           type="textarea"
           component={InputRow}
           label="Description"
-          theme="alt1"
+          onBlur={props.onSubmit}
         />
-        {instruction.get('id') &&
-          <div>
-            <div className="actions">
-              <ImageUploader {...iProps} label="Add image" />
+        {instruction.get('images') &&
+          <div className="field field-theme-default">
+            <label>Images</label>
+            <div className="mt1 flex">
+              <ImageThumbnails
+                images={instruction.get('images')}
+                {...iProps}
+                deletable
+              />
+              <ImageUploader {...iProps} />
             </div>
-            <ImageThumbnails
-              images={instruction.get('images')}
-              {...iProps}
-              deletable
-            />
           </div>}
-        <footer className="p2 center">
-          <Button
-            type="submit"
-            disabled={submitting}
-            label={label || 'Save instruction'}
-          />
-        </footer>
+        <button type="submit" disabled={submitting} className="conceal" />
       </div>
     </form>
   );
@@ -57,6 +53,7 @@ const Form = (props) => {
 Form.propTypes = {
   initialValues: PropTypes.object,
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   label: PropTypes.string,
 };

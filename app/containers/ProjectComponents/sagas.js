@@ -1,5 +1,6 @@
-import { put, take, cancel, takeLatest } from 'redux-saga/effects';
+import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { getFormValues, isDirty } from 'redux-form/immutable';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
@@ -28,14 +29,16 @@ function* fetchComponents({ payload }) {
   yield sagas.get(componentsURL(payload), null, actions.fetchComponentsSuccess);
 }
 
-function* updateComponent(action) {
-  const payload = action.payload.toJS();
+function* updateComponent() {
+  const dirty = yield select(isDirty('Component'));
+  if (!dirty) return;
+  const component = yield select(getFormValues('Component'));
   yield sagas.patch(
-    componentURL(payload),
-    payload,
+    componentURL(component.toJS()),
+    component,
     actions.updateComponentSuccess
   );
-  yield put(fetchMaterialCost(payload.project_id));
+  yield put(fetchMaterialCost(component.get('project_id')));
 }
 
 function* createComponent({ payload }) {

@@ -18,9 +18,7 @@ function ProjectInstructionsReducer(state = initialState, action) {
       return state.set('instructions', fromJS(action.instructions));
 
     case types.UPDATE_INSTRUCTION_SUCCESS:
-      return state
-        .setIn(['instructions', currentInstruction], fromJS(action.instruction))
-        .set('currentInstruction', null);
+      return state.set('instructions', fromJS(action.instructions));
 
     case types.CREATE_INSTRUCTION:
       return state.set('currentInstruction', null);
