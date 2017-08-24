@@ -1,43 +1,26 @@
 import { fromJS } from 'immutable';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
-import { forInstruction } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({
   instructions: [],
-  currentInstruction: null,
 });
 
 function ProjectInstructionsReducer(state = initialState, action) {
-  if (!forInstruction(action)) return state;
-
-  const currentInstruction = state.get('currentInstruction');
+  const { response } = action;
 
   switch (action.type) {
     case types.FETCH_INSTRUCTIONS_SUCCESS:
-      return state.set('instructions', fromJS(action.instructions));
+      return state.set('instructions', fromJS(response));
 
     case types.UPDATE_INSTRUCTION_SUCCESS:
-      return state.set('instructions', fromJS(action.instructions));
-
-    case types.CREATE_INSTRUCTION:
-      return state.set('currentInstruction', null);
+      return state.set('instructions', fromJS(response));
 
     case types.CREATE_INSTRUCTION_SUCCESS:
-      return state
-        .set(
-          'instructions',
-          state.get('instructions').insert(0, fromJS(action.instruction))
-        )
-        .set('currentInstruction', 0); // TL;DR: insert at beginning of list
+      return state.set('instructions', fromJS(response));
 
     case types.DELETE_INSTRUCTION_SUCCESS:
-      return state
-        .set('instructions', fromJS(action.instructions))
-        .set('currentInstruction', null);
-
-    case types.SWITCH_INSTRUCTION:
-      return state.set('currentInstruction', action.index);
+      return state.set('instructions', fromJS(response));
 
     // Images
 

@@ -8,11 +8,10 @@ import ListItem from './subcomponents/ListItem';
 import Form from './subcomponents/Form';
 import {
   fetchInstructions,
-  switchInstruction,
   updateInstruction,
   createInstruction,
 } from './actions';
-import { selectInstructions, selectCurrentInstruction } from './selectors';
+import { selectInstructions } from './selectors';
 
 class ProjectInstructions extends React.Component {
   state = { creating: false };
@@ -41,6 +40,7 @@ class ProjectInstructions extends React.Component {
             initialValues={{
               project_id: this.props.project.get('id'),
             }}
+            disableOnBlur
           />
           : <div>
             <PlusButton onClick={this.toggleCreate} />
@@ -62,7 +62,6 @@ ProjectInstructions.propTypes = {
   instructions: PropTypes.object,
   current: PropTypes.object,
   fetchInstructions: PropTypes.func,
-  switchInstruction: PropTypes.func,
   updateInstruction: PropTypes.func,
   createInstruction: PropTypes.func,
 };
@@ -71,7 +70,6 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       fetchInstructions,
-      switchInstruction,
       updateInstruction,
       createInstruction,
     },
@@ -81,7 +79,6 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   instructions: selectInstructions(),
-  current: selectCurrentInstruction(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectInstructions);

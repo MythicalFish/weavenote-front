@@ -14,6 +14,7 @@ const Form = (props) => {
       id: instruction.get('id'),
     },
   };
+  const onBlur = props.disableOnBlur ? null : props.onSubmit;
   return (
     <form onSubmit={handleSubmit}>
       <div className="">
@@ -23,14 +24,14 @@ const Form = (props) => {
           component={InputRow}
           label="Title"
           focus
-          onBlur={props.onSubmit}
+          onBlur={onBlur}
         />
         <Field
           name="description"
           type="textarea"
           component={InputRow}
           label="Description"
-          onBlur={props.onSubmit}
+          onBlur={onBlur}
         />
         {instruction.get('images') &&
           <div className="field field-theme-default">
@@ -44,7 +45,9 @@ const Form = (props) => {
               <ImageUploader {...iProps} />
             </div>
           </div>}
-        <button type="submit" disabled={submitting} className="conceal" />
+        {!props.disableOnBlur &&
+          <button type="submit" disabled={submitting} className="conceal" />}
+        {props.disableOnBlur && <Button type="submit" label="Create" />}
       </div>
     </form>
   );
@@ -55,6 +58,7 @@ Form.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
+  disableOnBlur: PropTypes.bool,
   label: PropTypes.string,
 };
 

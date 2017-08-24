@@ -4,9 +4,3 @@ export const selectDomain = () => (state) =>
 
 export const selectInstructions = () =>
   createSelector(selectDomain(), (s) => s.get('instructions'));
-
-export const selectCurrentInstruction = () =>
-  createSelector(selectDomain(), (s) => {
-    const index = s.get('currentInstruction');
-    return s.getIn(['instructions', index]);
-  });
