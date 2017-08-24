@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
+import ListItemLabel from './ListItemLabel';
 
 export default class SelectMaterial extends React.PureComponent {
   handleClick = (material) => {
@@ -17,20 +18,16 @@ export default class SelectMaterial extends React.PureComponent {
         <div className="center mb2 bold">Add material:</div>
         <div className="accordion">
           {materials &&
-            materials.toArray().map((material) =>
-              <button
-                type="button"
-                onClick={() => this.handleClick(material)}
-                key={material}
-                className="accordion-row p2"
-              >
-                <div>
-                  {material.get('name')}
-                </div>
-                <div>
-                  {material.get('name')}
-                </div>
-              </button>
+            materials.map((material) =>
+              <div className="accordion-row" key={material}>
+                <button
+                  type="button"
+                  onClick={() => this.handleClick(material)}
+                  className="accordion-row-header"
+                >
+                  <ListItemLabel material={material} />
+                </button>
+              </div>
             )}
         </div>
         <div className="pt2 center">

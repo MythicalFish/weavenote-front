@@ -17,7 +17,7 @@ const AccordionItem = (props) => {
         switchItem(switchTarget);
       }}
     >
-      <div>
+      <div className="pr1">
         {props.children}
       </div>
       <Icon name={chevronClass} color="dark3" size={20} />
