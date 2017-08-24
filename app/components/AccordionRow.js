@@ -24,4 +24,4 @@ AccordionRow.propTypes = {
   isFocused: PropTypes.bool,
 };
 
-export default Focusable(AccordionRow, { disableOutside: true });
+export default Focusable(AccordionRow);
