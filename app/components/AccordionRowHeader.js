@@ -2,12 +2,10 @@ import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 
 const AccordionRowHeader = (props) => {
-  const { switchItem, isCurrent, index } = props;
+  const { isFocused } = props;
   let chevronClass = 'ChevronDown';
-  let switchTarget = index;
-  if (isCurrent) {
+  if (isFocused) {
     chevronClass = 'ChevronUp';
-    switchTarget = null;
   }
   return (
     <button
@@ -24,9 +22,8 @@ const AccordionRowHeader = (props) => {
 };
 
 AccordionRowHeader.propTypes = {
-  index: PropTypes.number,
-  switchItem: PropTypes.func,
-  isCurrent: PropTypes.bool,
+  onClick: PropTypes.func,
+  isFocused: PropTypes.bool,
   children: PropTypes.node,
 };
 

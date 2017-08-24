@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
+import PlusButton from 'components/PlusButton';
 import Accordion from 'components/Accordion';
 import SelectMaterial from './subcomponents/SelectMaterial';
 import ListItem from './subcomponents/ListItem';
@@ -34,16 +35,17 @@ class Components extends React.Component {
       <div>
         {this.state.creating
           ? <SelectMaterial {...this.props} {...{ toggleCreate }} />
-          : <Accordion
-            items={this.props.components}
-            toggleCreate={this.toggleCreate}
-            updateItem={this.props.updateComponent}
-            switchItem={this.props.switchComponent}
-            formValues={this.props.formValues}
-            ListItem={ListItem}
-            Form={Form}
-            footer={<MaterialCost cost={this.props.materialCost} />}
-          />}
+          : <div>
+            <PlusButton onClick={this.toggleCreate} />
+            <Accordion
+              items={this.props.components}
+              updateItem={this.props.updateComponent}
+              formValues={this.props.formValues}
+              ListItem={ListItem}
+              Form={Form}
+              footer={<MaterialCost cost={this.props.materialCost} />}
+            />
+          </div>}
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Accordion from 'components/Accordion';
+import PlusButton from 'components/PlusButton';
 import ListItem from './subcomponents/ListItem';
 import Form from './subcomponents/Form';
 import {
@@ -41,16 +42,16 @@ class ProjectInstructions extends React.Component {
               project_id: this.props.project.get('id'),
             }}
           />
-          : <Accordion
-            items={this.props.instructions}
-            current={this.props.current}
-            updateItem={this.props.updateInstruction}
-            switchItem={this.props.switchInstruction}
-            formValues={this.props.current}
-            toggleCreate={this.toggleCreate}
-            ListItem={ListItem}
-            Form={Form}
-          />}
+          : <div>
+            <PlusButton onClick={this.toggleCreate} />
+            <Accordion
+              items={this.props.instructions}
+              updateItem={this.props.updateInstruction}
+              formValues={this.props.current}
+              ListItem={ListItem}
+              Form={Form}
+            />
+          </div>}
       </div>
     );
   }

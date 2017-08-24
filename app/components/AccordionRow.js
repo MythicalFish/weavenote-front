@@ -3,10 +3,10 @@ import Focusable from 'utils/Focusable';
 import AccordionRowHeader from 'components/AccordionRowHeader';
 
 const AccordionRow = (props) => {
-  const { item, isCurrent, updateItem, isFocused } = props;
+  const { item, updateItem, isFocused } = props;
   return (
     <div className="accordion-row">
-      <AccordionRowHeader onClick={props.toggleThis}>
+      <AccordionRowHeader onClick={props.toggleThis} isFocused={isFocused}>
         <props.ListItem {...props} />
       </AccordionRowHeader>
       {isFocused &&
@@ -17,6 +17,11 @@ const AccordionRow = (props) => {
   );
 };
 
-AccordionRow.propTypes = {};
+AccordionRow.propTypes = {
+  item: PropTypes.object,
+  updateItem: PropTypes.func,
+  toggleThis: PropTypes.func,
+  isFocused: PropTypes.bool,
+};
 
 export default Focusable(AccordionRow, { disableOutside: true });
