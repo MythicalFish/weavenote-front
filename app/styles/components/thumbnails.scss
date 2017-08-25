@@ -1,11 +1,13 @@
 .thumbnail {
-  width: 3.6em;
   line-height: 0;
   @extend .flex-none;
   border: none;
   background: transparent;
   img {
     width: 100%;
+  }
+  &.thumbnail-tiny {
+    width: 3.6em;
   }
 }
 ul.thumbnails {
@@ -16,6 +18,7 @@ ul.thumbnails {
   li {
     @extend .flex-none;
     position: relative;
+    max-width: 100%;
     > button {
       background: $white;
       border: 3px solid $white;

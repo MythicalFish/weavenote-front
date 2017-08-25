@@ -45,7 +45,7 @@ class ImageUploader extends React.PureComponent {
         onFinish={this.onFinish}
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />;
-    const { label, inlineIcon, isUploading } = this.props;
+    const { label, inlineIcon, isUploading, text } = this.props;
     if (isUploading === this.props.imageable) {
       return <Spinner />;
     }
@@ -59,10 +59,14 @@ class ImageUploader extends React.PureComponent {
       );
     }
     return (
-      <div className="ml1">
+      <div className="flex items-center">
         <PlusButton color="gray" size={25}>
           <Button />
         </PlusButton>
+        {text &&
+          <div className="ml1 dark6">
+            {text}
+          </div>}
       </div>
     );
   }
@@ -74,7 +78,9 @@ ImageUploader.propTypes = {
   createImage: PropTypes.func,
   label: PropTypes.string,
   inlineIcon: PropTypes.string,
+  text: PropTypes.string,
   onUploadFinish: PropTypes.func,
+  notifyWarning: PropTypes.func,
   isUploading: PropTypes.object,
 };
 

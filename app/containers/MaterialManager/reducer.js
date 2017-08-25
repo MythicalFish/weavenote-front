@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
-import * as types from './constants';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
+import { DELETE_IMAGE_SUCCESS } from 'containers/ImageThumbnails/constants';
+import * as types from './constants';
 
 const initialState = fromJS({
   material: {
@@ -35,6 +36,8 @@ function materialReducer(state = initialState, action) {
         fromJS(action.material.supplier)
       );
 
+  const isMaterialImage = () => action.response.imageable.type === 'Material';
+
   switch (action.type) {
     // Material
 
@@ -53,11 +56,15 @@ function materialReducer(state = initialState, action) {
       return stateSetMaterial();
 
     case CREATE_IMAGE_SUCCESS:
-      if (action.response.imageable.type !== 'Material') return state;
+      if (!isMaterialImage()) return state;
       return state.setIn(
         ['material', 'images'],
         fromJS(action.response.images)
       );
+
+    case DELETE_IMAGE_SUCCESS:
+      if (!isMaterialImage()) return state;
+      return state.setIn(['material', 'images'], fromJS([]));
 
     // Material types
 

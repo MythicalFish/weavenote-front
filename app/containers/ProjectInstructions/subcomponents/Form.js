@@ -15,6 +15,7 @@ const Form = (props) => {
     },
   };
   const onBlur = props.disableOnBlur ? null : props.onSubmit;
+  const images = instruction.get('images');
   return (
     <form onSubmit={handleSubmit}>
       <div className="">
@@ -33,16 +34,12 @@ const Form = (props) => {
           label="Description"
           onBlur={onBlur}
         />
-        {instruction.get('images') &&
+        {images &&
           <div className="field field-theme-default">
             <label>Images</label>
             <div className="mt1 flex">
-              <ImageThumbnails
-                images={instruction.get('images')}
-                {...iProps}
-                deletable
-              />
-              <ImageUploader {...iProps} />
+              <ImageThumbnails images={images} {...iProps} deletable />
+              {images.size < iProps.maxImages && <ImageUploader {...iProps} />}
             </div>
           </div>}
         {!props.disableOnBlur &&

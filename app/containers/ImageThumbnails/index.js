@@ -11,6 +11,7 @@ import { deleteImage } from './actions';
 const ImageThumbnails = (props) => {
   const { images, currentImage, imageable } = props;
   const thumbnails = [];
+  const size = props.size || 'tiny';
   images.forEach((image, index) => {
     const count = index + 1;
     if (count > props.maxImages) return;
@@ -40,7 +41,7 @@ const ImageThumbnails = (props) => {
             }
           }}
         >
-          <Thumbnail url={image.getIn(['urls', 'tiny'])} />
+          <Thumbnail url={image.getIn(['urls', size])} size={size} />
         </button>
       </li>
     );
@@ -60,6 +61,7 @@ ImageThumbnails.propTypes = {
   currentImage: PropTypes.object,
   maxImages: PropTypes.number,
   deleteImage: PropTypes.func,
+  size: PropTypes.string,
 };
 
 export function mapDispatch(dispatch) {

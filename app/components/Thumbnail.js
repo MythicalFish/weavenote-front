@@ -2,12 +2,10 @@ import React from 'react';
 import { PLACEHOLDER } from 'containers/ProjectImages/constants';
 
 const Thumbnail = (props) => {
-  let url = props.url;
-  if (!url) {
-    url = PLACEHOLDER;
-  }
+  const url = props.url || PLACEHOLDER;
+  const size = props.size || 'tiny';
   return (
-    <div className="thumbnail">
+    <div className={`thumbnail thumbnail-${size}`}>
       <img src={url} role="presentation" />
     </div>
   );
@@ -15,6 +13,7 @@ const Thumbnail = (props) => {
 
 Thumbnail.propTypes = {
   url: React.PropTypes.string,
+  size: React.PropTypes.string,
 };
 
 export default Thumbnail;

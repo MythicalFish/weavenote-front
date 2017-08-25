@@ -6,7 +6,7 @@ import Basics from './Basics';
 import CareLabels from './CareLabels';
 import Supplier from './Supplier';
 import Cost from './Cost';
-import Images from './Images';
+import Image from './Image';
 
 class Form extends React.Component {
   state = { type: null };
@@ -59,8 +59,8 @@ class Form extends React.Component {
               <Basics {...props} />
             </div>
             <div className="box">
-              <h3>Images</h3>
-              <Images {...{ material }} />
+              <h3>Image</h3>
+              <Image {...{ material }} />
             </div>
             <div className="box">
               <h3>Care labels</h3>
