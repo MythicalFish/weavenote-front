@@ -45,7 +45,9 @@ class ProjectImages extends React.PureComponent {
             onSelect={this.selectImage}
             {...{ currentImage, imageable }}
           />
-          <ImageUploader {...{ imageable }} />
+          <div className="ml1">
+            <ImageUploader {...{ imageable }} />
+          </div>
         </div>
       </div>
     );

@@ -37,6 +37,13 @@ ul.thumbnails {
           //opacity: 0.4;
         }
       }
+      .dropdown {
+        button {
+          .dot {
+            background-color: $azure;
+          }
+        }
+      }
     }
     &:not(:first-child) {
       margin-left: 3px;
@@ -51,7 +58,7 @@ ul.thumbnails {
         padding: 0;
         .dot {
           border: 3px solid $white;
-          background-color: $azure;
+          background-color: $gray;
           box-sizing: content-box;
         }
       }
