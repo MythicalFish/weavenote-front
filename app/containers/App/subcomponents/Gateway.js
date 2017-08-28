@@ -70,7 +70,7 @@ class Gateway extends React.PureComponent {
       this.props.fetchGlobalData();
     }
 
-    if (!this.props.organization) {
+    if (!this.props.organization && location.pathname !== '/organization') {
       // Create org if not exists
       browserHistory.push('/organization');
     } else if (location.pathname === '/') {

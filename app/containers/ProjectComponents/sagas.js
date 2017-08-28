@@ -35,16 +35,16 @@ function* updateComponent() {
   const component = yield select(getFormValues('Component'));
   yield sagas.patch(
     componentURL(component.toJS()),
-    component,
+    { component },
     actions.updateComponentSuccess
   );
   yield put(fetchMaterialCost(component.get('project_id')));
 }
 
-function* createComponent({ payload }) {
+function* createComponent({ payload: component }) {
   yield sagas.post(
-    componentsURL(payload),
-    payload,
+    componentsURL(component),
+    { component },
     actions.createComponentSuccess
   );
 }
