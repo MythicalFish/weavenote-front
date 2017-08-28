@@ -3,22 +3,27 @@ import { FieldArray } from 'redux-form/immutable';
 import { FormField } from 'components/FormField';
 import Icon from 'components/Icon';
 
-const renderCareLabels = ({ fields, removeLabel }) =>
-  <div>
-    {fields.getAll().map((label, index) =>
-      <div key={label} className="tag">
-        <div>
-          {label.get('name')}
+const renderCareLabels = ({ fields, removeLabel }) => {
+  const l = fields.getAll();
+  if (!l) return null;
+  return (
+    <div>
+      {l.map((label, index) =>
+        <div key={label} className="tag">
+          <div>
+            {label.get('name')}
+          </div>
+          <Icon
+            onClick={() => removeLabel({ label, index })}
+            size={15}
+            name="X"
+            className="p0"
+          />
         </div>
-        <Icon
-          onClick={() => removeLabel({ label, index })}
-          size={15}
-          name="X"
-          className="p0"
-        />
-      </div>
-    )}
-  </div>;
+      )}
+    </div>
+  );
+};
 
 export default class CareLabels extends React.PureComponent {
   addLabel = (label) => {
@@ -30,8 +35,8 @@ export default class CareLabels extends React.PureComponent {
   };
 
   render() {
-    const { labels, className } = this.props;
-    if (!labels) return null;
+    const { careLabels, className } = this.props;
+    if (!careLabels) return null;
     return (
       <div className={className}>
         <div className="data-rows">
@@ -39,7 +44,7 @@ export default class CareLabels extends React.PureComponent {
             label="Care labels"
             value={{ name: 'Select' }}
             type="select"
-            data={labels}
+            data={careLabels}
             onChange={this.addLabel}
             theme="alt1"
           />
@@ -57,6 +62,6 @@ export default class CareLabels extends React.PureComponent {
 CareLabels.propTypes = {
   addCareLabel: PropTypes.func,
   removeCareLabel: PropTypes.func,
-  labels: PropTypes.object,
+  careLabels: PropTypes.object,
   className: PropTypes.string,
 };

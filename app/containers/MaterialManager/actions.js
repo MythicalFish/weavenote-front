@@ -20,47 +20,8 @@ export function createMaterial(material) {
 export function createMaterialSuccess(material) {
   return { type: types.CREATE_MATERIAL_SUCCESS, material };
 }
-export function fetchMaterialAssociations() {
-  return { type: types.FETCH_MATERIAL_ASSOCIATIONS };
-}
 
-// Material types
-
-export function fetchMaterialTypes() {
-  return { type: types.FETCH_MATERIAL_TYPES };
-}
-export function fetchMaterialTypesSuccess(materialTypes) {
-  return { type: types.FETCH_MATERIAL_TYPES_SUCCESS, materialTypes };
-}
-
-// Colors
-
-export function fetchColors() {
-  return { type: types.FETCH_COLORS };
-}
-export function fetchColorsSuccess(colors) {
-  return { type: types.FETCH_COLORS_SUCCESS, colors };
-}
-
-// Currencies
-
-export function fetchCurrencies() {
-  return { type: types.FETCH_CURRENCIES };
-}
-
-export function fetchCurrenciesSuccess(currencies) {
-  return { type: types.FETCH_CURRENCIES_SUCCESS, currencies };
-}
-
-// Care Labels
-
-export function fetchCareLabels() {
-  return { type: types.FETCH_CARE_LABELS };
-}
-
-export function fetchCareLabelsSuccess(care_labels) {
-  return { type: types.FETCH_CARE_LABELS_SUCCESS, care_labels };
-}
+// Care labels
 
 export function addCareLabel(label) {
   return { type: types.ADD_CARE_LABEL, label };

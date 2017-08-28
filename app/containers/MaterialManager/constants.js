@@ -1,4 +1,3 @@
-
 // Material
 
 export const FETCH_MATERIAL_ASSOCIATIONS = '@@app/FETCH_MATERIAL_ASSOCIATIONS';
@@ -10,25 +9,8 @@ export const FETCH_MATERIAL_SUCCESS = '@@app/FETCH_MATERIAL_SUCCESS';
 export const UPDATE_MATERIAL_SUCCESS = '@@app/UPDATE_MATERIAL_SUCCESS';
 export const CREATE_MATERIAL_SUCCESS = '@@app/CREATE_MATERIAL_SUCCESS';
 
-// Material types
-
-export const FETCH_MATERIAL_TYPES = '@@app/FETCH_MATERIAL_TYPES';
-export const FETCH_MATERIAL_TYPES_SUCCESS = '@@app/FETCH_MATERIAL_TYPES_SUCCESS';
-
-// Colors
-
-export const FETCH_COLORS = '@@app/FETCH_COLORS';
-export const FETCH_COLORS_SUCCESS = '@@app/FETCH_COLORS_SUCCESS';
-
-// Currencies
-
-export const FETCH_CURRENCIES = '@@app/FETCH_CURRENCIES';
-export const FETCH_CURRENCIES_SUCCESS = '@@app/FETCH_CURRENCIES_SUCCESS';
-
 // Care Labels
 
-export const FETCH_CARE_LABELS = '@@app/FETCH_CARE_LABELS';
-export const FETCH_CARE_LABELS_SUCCESS = '@@app/FETCH_CARE_LABELS_SUCCESS';
 export const ADD_CARE_LABEL = '@@app/ADD_CARE_LABEL';
 export const REMOVE_CARE_LABEL = '@@app/REMOVE_CARE_LABEL';
 

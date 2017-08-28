@@ -1,50 +1,39 @@
 import React, { PropTypes } from 'react';
-import { FormattedDate } from 'react-intl';
 import { Field, reduxForm } from 'redux-form/immutable';
-import InputRow from 'components/FormField';
-import Button from 'components/Button';
+import FormField from 'components/FormField';
 
 const ProjectForm = (props) => {
-  const { handleSubmit, submitting, project } = props;
-  const createdOn = (
-    <FormattedDate
-      value={project.get('created_at')}
-      day="numeric"
-      month="short"
-    />
-  );
+  const { onSubmit, handleSubmit, submitting, stages } = props;
+  const f = {
+    component: FormField,
+    onBlur: onSubmit,
+  };
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="name" type="text" component={InputRow} label="Name" />
+      <Field type="text" name="name" label="Name" {...f} />
+      <Field type="text" name="ref_number" label="Reference no." {...f} />
+      <Field type="text" name="color_code" label="Color code" {...f} />
+      <Field type="text" name="collection" label="Collection" {...f} />
       <Field
-        name="category"
-        type="text"
-        component={InputRow}
-        label="Category"
+        name="development_stage"
+        type="select"
+        label="Stage"
+        theme="alt1"
+        data={stages}
+        component={FormField}
+        onBlur={onSubmit}
       />
-      <Field
-        name="identifier"
-        type="text"
-        component={InputRow}
-        label="Identifier"
-      />
-      <InputRow type="display" label="Created on" value={createdOn} />
-      <Field
-        name="description"
-        type="textarea"
-        component={InputRow}
-        label="Description"
-      />
-      <footer className="p2 center">
-        <Button type="submit" disabled={submitting} label="Save" icon="Save" />
-      </footer>
+      <Field type="text" name="target_fob" label="Target FOB" {...f} />
+      <Field type="textarea" name="notes" label="Notes" {...f} />
+      <button type="submit" disabled={submitting} className="conceal" />
     </form>
   );
 };
 
 ProjectForm.propTypes = {
-  project: PropTypes.object,
+  stages: PropTypes.object,
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
 };
 

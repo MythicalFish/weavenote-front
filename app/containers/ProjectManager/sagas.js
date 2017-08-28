@@ -1,5 +1,7 @@
-import { take, cancel, takeLatest } from 'redux-saga/effects';
+import { take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { getFormValues, isDirty } from 'redux-form/immutable';
+
 import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from 'containers/MaterialList/sagas';
 import { ProjectImagesWatcher } from 'containers/ProjectImages/sagas';
@@ -41,10 +43,12 @@ function* fetchMaterialCost(action) {
   );
 }
 
-function* updateProject(action) {
-  const project = action.project.toJS();
+function* updateProject() {
+  const dirty = yield select(isDirty('ProjectForm'));
+  if (!dirty) return;
+  const project = yield select(getFormValues('ProjectForm'));
   yield sagas.patch(
-    `projects/${project.id}`,
+    `projects/${project.get('id')}`,
     { project },
     actions.updateProjectSuccess
   );

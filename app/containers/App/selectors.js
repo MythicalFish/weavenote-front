@@ -64,3 +64,6 @@ export const selectModalImage = () =>
 
 export const selectFocus = () =>
   createSelector(selectDomain(), (s) => s.get('focus'));
+
+export const selectGlobalData = () =>
+  createSelector(selectDomain(), (s) => s.get('globalData'));

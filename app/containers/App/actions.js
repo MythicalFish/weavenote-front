@@ -1,5 +1,15 @@
 import * as types from './constants/actions';
 
+// Global data
+
+export function fetchGlobalData() {
+  return { type: types.FETCH_GLOBAL_DATA };
+}
+
+export function fetchGlobalDataSuccess(response) {
+  return { type: types.FETCH_GLOBAL_DATA_SUCCESS, response };
+}
+
 // Invite
 
 export function setInviteKey(key) {
@@ -30,16 +40,6 @@ export function fetchUser() {
 
 export function fetchUserSuccess(data) {
   return { type: types.FETCH_USER_SUCCESS, data };
-}
-
-// Stats
-
-export function fetchStats() {
-  return { type: types.FETCH_STATS };
-}
-
-export function fetchStatsSuccess(stats) {
-  return { type: types.FETCH_STATS_SUCCESS, stats };
 }
 
 // Other

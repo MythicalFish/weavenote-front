@@ -2,16 +2,20 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { browserHistory } from 'react-router';
 import Layout from './Layout';
 import LoginForm from 'components/LoginForm';
 import { loggedIn } from 'utils/authUtils';
-import { initializeOrganization } from 'containers/Organization/actions';
-import { fetchUser, fetchInvite, handleInvite, setInviteKey } from '../actions';
+import {
+  fetchUser,
+  fetchInvite,
+  handleInvite,
+  setInviteKey,
+  fetchGlobalData,
+} from '../actions';
 import * as selectors from '../selectors';
 
 class Gateway extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
-
   componentDidMount() {
     this.handleMountOrUpdate();
   }
@@ -57,7 +61,17 @@ class Gateway extends React.PureComponent {
     }
 
     if (!this.props.organization) {
-      this.props.initializeOrganization();
+      // Create org if not exists
+      browserHistory.push('/organization');
+    }
+
+    if (location.pathname === '/') {
+      // Root path disabled, redirect to /projects
+      browserHistory.push('/projects');
+    }
+
+    if (!this.props.globalData) {
+      this.props.fetchGlobalData();
     }
   };
 
@@ -115,10 +129,11 @@ class Gateway extends React.PureComponent {
 }
 
 Gateway.propTypes = {
+  fetchGlobalData: PropTypes.func,
+  globalData: PropTypes.object,
   children: PropTypes.node,
   fetchUser: PropTypes.func,
   setInviteKey: PropTypes.func,
-  initializeOrganization: PropTypes.func,
   handleInvite: PropTypes.func,
   fetchInvite: PropTypes.func,
   location: PropTypes.object,
@@ -130,11 +145,11 @@ Gateway.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
+      fetchGlobalData,
       fetchUser,
       fetchInvite,
       handleInvite,
       setInviteKey,
-      initializeOrganization,
     },
     dispatch
   );
@@ -144,6 +159,7 @@ const mapState = createStructuredSelector({
   user: selectors.selectUser(),
   organization: selectors.selectOrganization(),
   invite: selectors.selectInvite(),
+  globalData: selectors.selectGlobalData(),
 });
 
 export default connect(mapState, mapDispatch)(Gateway);

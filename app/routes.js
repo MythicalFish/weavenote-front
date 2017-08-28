@@ -18,27 +18,6 @@ export default function createRoutes(store) {
 
   const childRoutes = [
     {
-      path: '/',
-      name: 'dashboard',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/Dashboard/reducer'),
-          import('containers/Dashboard/sagas'),
-          import('containers/Dashboard'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('dashboard', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-    {
       path: '/organization',
       name: 'Organization',
       getComponent(nextState, cb) {
@@ -126,27 +105,6 @@ export default function createRoutes(store) {
         importModules.then(([reducer, formReducer, sagas, component]) => {
           injectReducer('MaterialManager', reducer.default);
           injectReducer('form', formReducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-    {
-      path: '/contacts',
-      name: 'contacts',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/Contacts/reducer'),
-          import('containers/Contacts/sagas'),
-          import('containers/Contacts'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('contacts', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

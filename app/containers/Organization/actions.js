@@ -1,8 +1,5 @@
 import * as types from './constants';
 
-export function initializeOrganization() {
-  return { type: types.INITIALIZE_ORGANIZATION };
-}
 export function switchOrganization(id) {
   return { type: types.SWITCH_ORGANIZATION, id };
 }

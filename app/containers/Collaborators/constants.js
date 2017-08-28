@@ -1,4 +1,3 @@
-
 // Invites
 
 export const SEND_INVITE = '@@app/SEND_INVITE';
@@ -23,8 +22,3 @@ export const UPDATE_ROLE_SUCCESS = '@@app/UPDATE_ROLE_SUCCESS';
 
 export const REMOVE_ROLE = '@@app/REMOVE_ROLE';
 export const REMOVE_ROLE_SUCCESS = '@@app/REMOVE_ROLE_SUCCESS';
-
-// Other
-
-export const FETCH_ROLE_TYPES = '@@app/FETCH_ROLE_TYPES';
-export const FETCH_ROLE_TYPES_SUCCESS = '@@app/FETCH_ROLE_TYPES_SUCCESS';

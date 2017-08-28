@@ -11,7 +11,6 @@ export default [orgWatcher];
 
 function* orgWatcher() {
   const watcher = [
-    yield takeLatest(types.INITIALIZE_ORGANIZATION, initializeOrganization),
     yield takeLatest(types.CREATE_ORGANIZATION, createOrganization),
     yield takeLatest(types.CREATE_ORGANIZATION_SUCCESS, orgSuccess),
     yield takeLatest(types.UPDATE_ORGANIZATION, updateOrganization),
@@ -19,12 +18,6 @@ function* orgWatcher() {
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
-}
-
-function* initializeOrganization() {
-  if (location.pathname !== '/organization') {
-    browserHistory.push('/organization');
-  }
 }
 
 function* switchOrganization({ id }) {

@@ -7,11 +7,7 @@ const initialState = fromJS({
   material: {
     supplier: {},
   },
-  materialTypes: null,
-  colors: null,
-  currencies: null,
   suppliers: null,
-  care_labels: null,
 });
 
 const labels = (state) => state.get('care_labels');
@@ -66,25 +62,7 @@ function materialReducer(state = initialState, action) {
       if (!isMaterialImage()) return state;
       return state.setIn(['material', 'images'], fromJS([]));
 
-    // Material types
-
-    case types.FETCH_MATERIAL_TYPES_SUCCESS:
-      return state.set('materialTypes', fromJS(action.materialTypes));
-
-    // Colors
-
-    case types.FETCH_COLORS_SUCCESS:
-      return state.set('colors', fromJS(action.colors));
-
-    // Suppliers
-
-    case types.FETCH_SUPPLIERS_SUCCESS:
-      return state.set('suppliers', fromJS(action.suppliers));
-
     // Care Labels
-
-    case types.FETCH_CARE_LABELS_SUCCESS:
-      return state.set('care_labels', fromJS(action.care_labels));
 
     case types.ADD_CARE_LABEL: // deletes here, adds in form state
       return state.deleteIn(['care_labels', labelIndex(state, action.label)]);
@@ -94,11 +72,6 @@ function materialReducer(state = initialState, action) {
         ['care_labels', labelCount(state)],
         action.payload.label
       );
-
-    // Currencies
-
-    case types.FETCH_CURRENCIES_SUCCESS:
-      return state.set('currencies', fromJS(action.currencies));
 
     default:
       return state;

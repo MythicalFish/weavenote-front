@@ -9,6 +9,7 @@ export default [appWatcher];
 
 export function* appWatcher() {
   const watcher = [
+    yield takeLatest(actionType.FETCH_GLOBAL_DATA, fetchGlobalData),
     yield takeLatest(actionType.FETCH_INVITE, fetchInvite),
     yield takeLatest(actionType.HANDLE_INVITE, handleInvite),
     yield takeLatest(actionType.HANDLE_INVITE_SUCCESS, handleInviteSuccess),
@@ -17,6 +18,10 @@ export function* appWatcher() {
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
+}
+
+function* fetchGlobalData() {
+  yield sagas.get('global_data', null, actions.fetchGlobalDataSuccess);
 }
 
 function* fetchUser() {

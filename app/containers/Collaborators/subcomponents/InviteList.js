@@ -35,6 +35,7 @@ class InvitesList extends React.PureComponent {
               <div>
                 <RoleTypeSelector
                   target={invite}
+                  roleTypes={this.props.roleTypes}
                   handleChange={this.updateInvite}
                   selectedRoleType={this.selectedRoleType}
                 />
@@ -52,6 +53,7 @@ class InvitesList extends React.PureComponent {
 InvitesList.propTypes = {
   invites: PropTypes.object,
   invitable: PropTypes.object,
+  roleTypes: PropTypes.object,
   cancelInvite: PropTypes.func,
   updateInvite: PropTypes.func,
 };

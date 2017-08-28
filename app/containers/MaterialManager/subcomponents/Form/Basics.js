@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 export default class Basics extends React.PureComponent {
   render() {
-    const { showFor, types, colors, switchType, F } = this.props;
+    const { showFor, materialTypes, colors, switchType, F } = this.props;
 
     return (
       <div className="row">
@@ -17,7 +17,7 @@ export default class Basics extends React.PureComponent {
             name="type"
             type="select"
             label="Type"
-            data={types}
+            data={materialTypes}
             onChanged={switchType}
           />
         </div>
@@ -47,7 +47,7 @@ export default class Basics extends React.PureComponent {
 Basics.propTypes = {
   showFor: PropTypes.func,
   switchType: PropTypes.func,
-  types: PropTypes.object,
+  materialTypes: PropTypes.object,
   colors: PropTypes.object,
   F: PropTypes.func,
 };

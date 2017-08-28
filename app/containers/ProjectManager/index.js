@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
-import { selectCurrentSection, selectFocus } from 'containers/App/selectors';
+import { selectCurrentSection, selectFocus, selectGlobalData } from 'containers/App/selectors';
 import { changeSection, openModal } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
@@ -50,6 +50,7 @@ class ProjectManager extends React.PureComponent {
         View = ProjectBasics;
         viewProps.initialValues = project;
         viewProps.onSubmit = this.props.updateProject;
+        viewProps.stages = this.props.globalData.stages;
         break;
     }
 
@@ -98,6 +99,7 @@ ProjectManager.propTypes = {
   fetchProject: React.PropTypes.func,
   updateProject: React.PropTypes.func,
   params: React.PropTypes.object,
+  globalData: React.PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
@@ -113,6 +115,7 @@ const mapState = createStructuredSelector({
   PDFexport: selectors.selectPDFexport(),
   currentSection: selectCurrentSection(),
   focus: selectFocus(),
+  globalData: selectGlobalData(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

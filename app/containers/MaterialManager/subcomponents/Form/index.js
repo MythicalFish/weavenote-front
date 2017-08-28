@@ -37,7 +37,7 @@ class Form extends React.Component {
     const { type } = this.state;
     const { showFor, switchType } = this;
 
-    const restricted = !this.props.abilities.Material.update;
+    const restricted = !this.props.abilities.update;
 
     const F = (fProps) => {
       const p = { ...fProps };

@@ -35,7 +35,7 @@ class Dropdown extends React.PureComponent {
         <button {...bProps}>
           <div className="flex justify-between">
             <div className="flex-none">
-              {val.name}
+              {val.name || val.label}
               {val.iso_code &&
                 <PriceSymbol code={val.iso_code} className="bold ml1" />}
               {val.hex_code && <Dot className="ml1" color={val.hex_code} />}

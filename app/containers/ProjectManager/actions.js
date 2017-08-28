@@ -7,8 +7,8 @@ export function fetchProjectSuccess(response) {
   return { type: types.FETCH_PROJECT_SUCCESS, response };
 }
 
-export function updateProject(project) {
-  return { type: types.UPDATE_PROJECT, project };
+export function updateProject() {
+  return { type: types.UPDATE_PROJECT };
 }
 export function updateProjectSuccess() {
   return { type: types.UPDATE_PROJECT_SUCCESS };

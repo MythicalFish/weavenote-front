@@ -3,21 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import Header from 'components/Header';
-import { selectAbilities } from 'containers/App/selectors';
-import {
-  selectMaterial,
-  selectMaterialTypes,
-  selectColors,
-  selectCurrencies,
-  selectSuppliers,
-  selectCareLabels,
-} from './selectors';
+import { selectAbilities, selectGlobalData } from 'containers/App/selectors';
+import { selectMaterial } from './selectors';
 import {
   fetchMaterial,
   updateMaterial,
   createMaterial,
-  fetchMaterialAssociations,
   newSupplier,
   addCareLabel,
   removeCareLabel,
@@ -28,7 +19,6 @@ import Toolbar from './subcomponents/Toolbar';
 export class MaterialManager extends React.PureComponent {
   componentDidMount() {
     const { params } = this.props;
-    this.props.fetchMaterialAssociations();
     this.props.fetchMaterial(params.id);
   }
 
@@ -42,18 +32,21 @@ export class MaterialManager extends React.PureComponent {
   };
 
   render() {
-    const { initialValues, labels, colors } = this.props;
-
+    const { abilities, material, globalData } = this.props;
+    if (!globalData) return null;
     const { onSubmit } = this;
+    const fProps = {
+      initialValues: material,
+      abilities: abilities.Material,
+      onSubmit,
+      ...globalData,
+    };
     return (
       <div>
         <Toolbar />
         <div className="p4">
           <div className="container-narrower">
-            {initialValues &&
-              labels &&
-              colors &&
-              <Form {...{ onSubmit, ...this.props }} />}
+            {material && globalData.colors && <Form {...fProps} />}
           </div>
         </div>
       </div>
@@ -62,12 +55,8 @@ export class MaterialManager extends React.PureComponent {
 }
 
 const mapState = createStructuredSelector({
-  initialValues: selectMaterial(),
-  types: selectMaterialTypes(),
-  colors: selectColors(),
-  currencies: selectCurrencies(),
-  suppliers: selectSuppliers(),
-  labels: selectCareLabels(),
+  material: selectMaterial(),
+  globalData: selectGlobalData(),
   abilities: selectAbilities(),
 });
 
@@ -80,7 +69,6 @@ const mapDispatch = (dispatch) =>
       newSupplier,
       addCareLabel,
       removeCareLabel,
-      fetchMaterialAssociations,
     },
     dispatch
   );

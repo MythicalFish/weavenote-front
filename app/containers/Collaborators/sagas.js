@@ -19,7 +19,6 @@ export function* collaboratorsWatcher() {
     yield takeLatest(types.UPDATE_ROLE, updateRole),
     yield takeLatest(types.REMOVE_ROLE, removeRole),
 
-    yield takeLatest(types.FETCH_ROLE_TYPES, fetchRoleTypes),
     yield takeLatest(types.SEND_INVITE_SUCCESS, resetForm),
   ];
   yield take(LOCATION_CHANGE);
@@ -39,11 +38,11 @@ function* fetchInvites({ invitable }) {
 }
 
 function* updateInvite({ payload }) {
-  const update = {
+  const invite = {
     role_type_id: payload.roleType.get('id'),
     invitable: payload.invitable,
   };
-  yield sagas.patch(inviteUrl(payload), update, actions.updateInviteSuccess);
+  yield sagas.patch(inviteUrl(payload), invite, actions.updateInviteSuccess);
 }
 
 function* cancelInvite({ payload }) {
@@ -72,15 +71,4 @@ function* updateRole({ payload }) {
 
 function* removeRole({ payload }) {
   yield sagas.destroy(roleURL(payload), payload, actions.removeRoleSuccess);
-}
-
-// Other
-
-function* fetchRoleTypes() {
-  yield sagas.get(
-    'role_types',
-    null,
-    actions.fetchRoleTypesSuccess,
-    selectors.selectRoleTypes
-  );
 }

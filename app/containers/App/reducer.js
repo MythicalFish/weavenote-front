@@ -17,24 +17,24 @@ const initialState = fromJS({
     organizations: null,
     abilities: null,
   },
+  globalData: null,
   invite: null,
-  stats: {
-    projects: {
-      counts: {
-        by_stage: [],
-        active: [],
-      },
-    },
-  },
   currentSection: sections.Default,
   modalID: null,
   modalImage: null,
   focus: null,
-  dropdownID: null,
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
+    // Global data
+
+    case appActionTypes.FETCH_GLOBAL_DATA:
+      return state.set('globalData', { fetching: true });
+
+    case appActionTypes.FETCH_GLOBAL_DATA_SUCCESS:
+      return state.set('globalData', fromJS(action.response).toObject());
+
     // User
 
     case appActionTypes.FETCH_USER_SUCCESS:
@@ -63,9 +63,6 @@ function appReducer(state = initialState, action) {
       return state
         .setIn(['currentSection', 'id'], action.section.id)
         .setIn(['currentSection', 'label'], action.section.label);
-
-    case appActionTypes.FETCH_STATS_SUCCESS:
-      return state.set('stats', fromJS(action.stats));
 
     // Misc
 

@@ -11,6 +11,7 @@ export default function Image({ material }) {
     },
   };
   const images = material.get('images');
+  if (!images) return null;
   const uploadLabel = images.size > 0 ? 'Replace image' : 'Upload image';
   return (
     <div>
