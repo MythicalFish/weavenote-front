@@ -12,7 +12,7 @@ import MaterialCost from './subcomponents/MaterialCost';
 
 import { fetchMaterials } from '../MaterialList/actions';
 import { selectMaterials } from '../MaterialList/selectors';
-import * as actions from './actions';
+import { fetchComponents, createComponent, updateComponent } from './actions';
 import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
@@ -31,19 +31,16 @@ class Components extends React.Component {
 
   render() {
     const { toggleCreate } = this;
+    const { updateComponent: updateItem } = this.props;
     return (
       <div>
         {this.state.creating
-          ? <SelectMaterial {...this.props} {...{ toggleCreate }} />
+          ? <SelectMaterial {...{ ...this.props, toggleCreate }} />
           : <div>
-            <PlusButton onClick={this.toggleCreate} />
+            <PlusButton onClick={toggleCreate} />
             <Accordion
-              items={this.props.components}
-              updateItem={this.props.updateComponent}
-              formValues={this.props.formValues}
-              ListItem={ListItem}
-              Form={Form}
-              footer={<MaterialCost cost={this.props.materialCost} />}
+              {...{ ...this.props, ListItem, Form, updateItem }}
+              footer={<MaterialCost {...this.props} />}
             />
           </div>}
       </div>
@@ -53,20 +50,17 @@ class Components extends React.Component {
 
 Components.propTypes = {
   project: PropTypes.object,
-  components: PropTypes.object,
-  current: PropTypes.object,
   fetchComponents: PropTypes.func,
   updateComponent: PropTypes.func,
   fetchMaterials: PropTypes.func,
-  switchComponent: PropTypes.func,
-  formValues: PropTypes.object,
-  materialCost: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      ...actions,
+      updateComponent,
+      fetchComponents,
+      createComponent,
       fetchMaterials,
     },
     dispatch
@@ -74,7 +68,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  components: selectors.selectComponents(),
+  items: selectors.selectComponents(),
   materials: selectMaterials(),
   materialCost: selectMaterialCost(),
 });

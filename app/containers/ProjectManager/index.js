@@ -113,6 +113,8 @@ const mapState = createStructuredSelector({
   project: selectors.selectProject(),
   avatarList: selectors.selectAvatarList(),
   PDFexport: selectors.selectPDFexport(),
+  abilities: selectors.selectAbilities(),
+  userRole: selectors.selectUserRole(),
   currentSection: selectCurrentSection(),
   focus: selectFocus(),
   globalData: selectGlobalData(),

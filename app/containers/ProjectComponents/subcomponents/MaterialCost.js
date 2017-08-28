@@ -1,16 +1,21 @@
 import React, { PropTypes } from 'react';
 import Price from 'components/Price';
 
-const MaterialCost = ({ cost }) =>
-  <div className="p2 flex justify-between bt1">
-    <div>Total</div>
-    <div>
-      <Price value={cost} />
+const MaterialCost = ({ materialCost, userRole }) => {
+  if (userRole === 'Guest') return null;
+  return (
+    <div className="p2 flex justify-between bt1">
+      <div>Total</div>
+      <div>
+        <Price value={materialCost} />
+      </div>
     </div>
-  </div>;
+  );
+};
 
 MaterialCost.propTypes = {
-  cost: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  materialCost: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  userRole: PropTypes.string,
 };
 
 export default MaterialCost;

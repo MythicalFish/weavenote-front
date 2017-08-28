@@ -25,7 +25,7 @@ function ProjectManagerReducer(state = initialState, action) {
     case types.FETCH_PROJECT_SUCCESS:
       return state
         .set('project', fromJS(response.project))
-        .set('userRole', fromJS(response.user_role))
+        .set('userRole', response.user_role)
         .set('abilities', fromJS(response.abilities))
         .set('avatarList', fromJS(response.avatar_list));
 

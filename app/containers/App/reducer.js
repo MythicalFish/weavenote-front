@@ -13,7 +13,7 @@ import * as sections from './constants/sections';
 const initialState = fromJS({
   user: {
     organization: null,
-    organization_role: null,
+    role: null,
     organizations: null,
     abilities: null,
   },

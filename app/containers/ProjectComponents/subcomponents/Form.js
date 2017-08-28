@@ -3,10 +3,9 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import Price from 'components/Price';
 import Dot from 'components/Dot';
 import FormField from 'components/FormField';
-import Button from 'components/Button';
 
 const Form = (props) => {
-  const { handleSubmit, onSubmit, submitting } = props;
+  const { handleSubmit, onSubmit, submitting, userRole } = props;
   const item = props.item.toJS();
   const material = item.material;
   const materialCost = <Price value={item.material_cost} />;
@@ -34,7 +33,8 @@ const Form = (props) => {
         focus
         onBlur={onSubmit}
       />
-      <FormField type="display" label="Cost" value={materialCost} />
+      {userRole !== 'Guest' &&
+        <FormField type="display" label="Cost" value={materialCost} />}
       <button type="submit" disabled={submitting} className="conceal" />
     </form>
   );
@@ -43,7 +43,9 @@ const Form = (props) => {
 Form.propTypes = {
   item: PropTypes.object,
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
+  userRole: PropTypes.string,
 };
 
 export default reduxForm({

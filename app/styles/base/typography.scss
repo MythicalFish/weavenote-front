@@ -180,6 +180,11 @@ b {
   line-height: 1;
 }
 
+.subtle {
+  color: $dark6;
+  @extend .smaller2;
+}
+
 @media #{$breakpoint-sm} {
   .sm-center {
     text-align: center !important;

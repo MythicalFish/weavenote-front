@@ -6,7 +6,8 @@ import Button from 'components/Button';
 import { sendInvite } from '../actions';
 
 const InviteForm = (props) => {
-  const { handleSubmit, submitting } = props;
+  const { handleSubmit, submitting, initialValues } = props;
+  const type = initialValues.getIn(['invitable', 'type']);
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -31,9 +32,30 @@ const InviteForm = (props) => {
         </div>
       </div>
       <footer className="flex justify-between pt2">
-        <div>
+        <div className="flex-auto">
           <Field type="checkbox" name="as_guest" component={Input} />
           <label className="ml1">Invite as guest?</label>
+          <div className="subtle mt3">
+            <div className="mb1 bold">Information regarding roles:</div>
+            <ul>
+              <li>
+                {"Guests can't see anything related to pricing"}
+              </li>
+              <li>
+                {"Guests can't modify or add anything except comments"}
+              </li>
+              {type === 'Project' &&
+                <li>
+                  {
+                    "Users invited only to this project can't see other projects"
+                  }
+                </li>}
+              {type === 'Organization' &&
+                <li>
+                  {'Users invited to this organization can see all projects'}
+                </li>}
+            </ul>
+          </div>
         </div>
         <div>
           <Button
@@ -52,6 +74,7 @@ const InviteForm = (props) => {
 InviteForm.propTypes = {
   handleSubmit: PropTypes.func,
   submitting: PropTypes.bool,
+  initialValues: PropTypes.object,
 };
 
 const mapDispatch = (dispatch) => ({
