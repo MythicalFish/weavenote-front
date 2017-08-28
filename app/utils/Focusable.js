@@ -21,7 +21,7 @@ export default function Focusable(Component, opts = {}) {
     unfocusThis = () => {
       if (this.isTrulyFocused()) {
         this.setState({ isFocused: false });
-        setTimeout(() => this.setState({ isActive: false }), 220);
+        setTimeout(() => this.setState({ isActive: false }), 320);
       }
     };
     focusThis = () => {

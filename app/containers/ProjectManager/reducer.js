@@ -26,6 +26,7 @@ function ProjectManagerReducer(state = initialState, action) {
       return state
         .set('project', fromJS(response.project))
         .set('userRole', fromJS(response.user_role))
+        .set('abilities', fromJS(response.abilities))
         .set('avatarList', fromJS(response.avatar_list));
 
     case types.FETCH_MATERIAL_COST_SUCCESS:
@@ -35,7 +36,7 @@ function ProjectManagerReducer(state = initialState, action) {
       return state
         .setIn(['PDFexport', 'isExporting'], true)
         .setIn(['PDFexport', 'downloadURL'], null);
-      
+
     case types.EXPORT_PDF_SUCCESS:
       return state
         .setIn(['PDFexport', 'isExporting'], false)

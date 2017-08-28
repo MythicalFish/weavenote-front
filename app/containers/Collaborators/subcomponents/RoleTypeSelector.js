@@ -15,7 +15,7 @@ class RoleTypeSelector extends React.PureComponent {
           <Dropdown
             value={selected}
             data={roleTypes}
-            onChange={this.handleChange}
+            onChanged={this.handleChange}
           />}
       </div>
     );

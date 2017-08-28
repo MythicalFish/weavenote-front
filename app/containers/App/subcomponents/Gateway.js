@@ -33,7 +33,8 @@ class Gateway extends React.PureComponent {
 
   enableSignup = () => {
     const { location } = this.props;
-    return location.query.enableSignup !== undefined;
+    if (location.query.enableSignup !== undefined) return true;
+    return !!this.storedInviteKey();
   };
 
   handleMountOrUpdate = () => {
@@ -65,18 +66,16 @@ class Gateway extends React.PureComponent {
       return;
     }
 
+    if (!this.props.globalData) {
+      this.props.fetchGlobalData();
+    }
+
     if (!this.props.organization) {
       // Create org if not exists
       browserHistory.push('/organization');
-    }
-
-    if (location.pathname === '/') {
+    } else if (location.pathname === '/') {
       // Root path disabled, redirect to /projects
       browserHistory.push('/projects');
-    }
-
-    if (!this.props.globalData) {
-      this.props.fetchGlobalData();
     }
   };
 
