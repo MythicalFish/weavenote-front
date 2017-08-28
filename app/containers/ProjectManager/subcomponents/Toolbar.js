@@ -68,6 +68,7 @@ export default function Toolbar(props) {
             <AvatarList
               avatars={props.avatarList}
               onClick={() => openModal('collaborators')}
+              showPlusButton
             />
           </li>
         </ul>

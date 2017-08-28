@@ -47,10 +47,23 @@ class Dropdown extends React.PureComponent {
         </button>
       );
     } else {
+      let I;
+      if (icon) {
+        if (icon === 'more') {
+          I = (
+            <img
+              src="https://s3-eu-west-1.amazonaws.com/content.mythical.fish/weavenote/assets/dots.svg"
+              style={{ height: '5px', opacity: 0.6 }}
+            />
+          );
+        } else {
+          I = <Icon name={icon} />;
+        }
+      }
       return (
         <button {...bProps}>
           {label && label}
-          {icon && <Icon name={icon} />}
+          {I}
         </button>
       );
     }

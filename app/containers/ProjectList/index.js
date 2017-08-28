@@ -44,7 +44,7 @@ export class ProjectList extends React.PureComponent {
                 projects.map((project, index) =>
                   <ListItem
                     key={`project-${index}`}
-                    project={project.toJS()}
+                    project={project}
                     fileProject={this.props.fileProject}
                   />
                 )}

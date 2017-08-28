@@ -2,10 +2,12 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from 'components/Thumbnail';
+import AvatarList from 'components/AvatarList';
 
 export default function ListItem(props) {
   const { project, fileProject } = props;
-  const { id, archived } = project;
+  const id = project.get('id');
+  const archived = project.get('archived');
   const url = `/projects/${id}`;
   const linked = {
     onClick: () => browserHistory.push(url),
@@ -14,23 +16,27 @@ export default function ListItem(props) {
   return (
     <tr>
       <td {...linked}>
-        <Thumbnail url={project.thumbnail_url} />
+        <Thumbnail url={project.get('thumbnail_url')} />
       </td>
       <td {...linked}>
-        {project.name}
+        {project.get('name')}
       </td>
       <td {...linked}>
-        #{project.identifier}
+        {project.get('ref_number')}
       </td>
-      <td {...linked}>.</td>
-      <td {...linked}>.</td>
-      <td className="smaller1 upcase">
-        {project.stage.label}
+      <td {...linked}>
+        {project.get('collection')}
       </td>
-      <td>collaborators</td>
+      <td {...linked} />
+      <td className="smaller1">
+        {project.getIn(['stage', 'label'])}
+      </td>
       <td>
-        <div className="dark5 flex items-end">
-          <Dropdown icon="MoreHorizontal">
+        <AvatarList avatars={project.get('avatar_list')} />
+      </td>
+      <td>
+        <div className="flex items-end">
+          <Dropdown icon="more">
             <Link to={url}>Manage</Link>
             <button onClick={() => fileProject({ id, archived: !archived })}>
               {archived ? 'Restore' : 'Archive'}
