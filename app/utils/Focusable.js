@@ -33,7 +33,7 @@ export default function Focusable(Component, opts = {}) {
     render() {
       const { isFocused, isActive, action } = this.state;
       const focusClass = isFocused ? 'focused' : '';
-      const isDoing = (thing) => this.isTrulyFocused() && action === thing;
+      const isDoing = (thing) => isActive && action === thing;
       const { unfocusThis, focusThis } = this;
       const toggleThis = () =>
         this.isTrulyFocused() ? unfocusThis() : focusThis();

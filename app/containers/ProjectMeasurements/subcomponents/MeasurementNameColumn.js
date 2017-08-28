@@ -4,7 +4,7 @@ import MeasurementNameLabel from './MeasurementNameLabel';
 import Input from './Input';
 
 const MeasurementNameInput = (props) =>
-  <Field {...{ ...props, focus: true, maxLength: 12, component: Input }} />;
+  <Field {...{ ...props, focus: true, maxLength: 25, component: Input }} />;
 
 class MeasurementNameColumn extends React.PureComponent {
   render() {

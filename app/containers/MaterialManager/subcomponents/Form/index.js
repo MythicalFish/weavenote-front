@@ -32,6 +32,16 @@ class Form extends React.Component {
     return '';
   };
 
+  Field = (props) => {
+    const p = { ...props };
+    p.component = p.type === 'select' ? FormField : FocusableField;
+    p.theme = 'alt1';
+    p.className = p.c;
+    delete p.c;
+    const restricted = !this.props.abilities.update;
+    return <Field {...{ ...p, restricted }} />;
+  };
+
   render() {
     const { handleSubmit, submitting, initialValues: material } = this.props;
     const { type } = this.state;
@@ -39,16 +49,13 @@ class Form extends React.Component {
 
     const restricted = !this.props.abilities.update;
 
-    const F = (fProps) => {
-      const p = { ...fProps };
-      p.className = p.c;
-      p.component = p.type === 'select' ? FormField : FocusableField;
-      p.theme = 'alt1';
-      delete p.c;
-      return <Field {...{ restricted, ...p }} />;
+    const props = {
+      showFor,
+      switchType,
+      F: this.Field,
+      type,
+      ...this.props,
     };
-
-    const props = { showFor, switchType, F, type, ...this.props };
 
     return (
       <form onSubmit={handleSubmit}>
