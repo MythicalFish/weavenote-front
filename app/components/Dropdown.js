@@ -27,26 +27,7 @@ class Dropdown extends React.PureComponent {
     const { value, label, icon } = this.props;
     const bProps = { onClick: this.toggleState(), type: 'button' };
 
-    if (value) {
-      let val = value;
-      if (!val) val = { name: null };
-      if (val.toJS) val = value.toJS();
-      return (
-        <button {...bProps}>
-          <div className="flex justify-between">
-            <div className="flex-none">
-              {val.name || val.label}
-              {val.iso_code &&
-                <PriceSymbol code={val.iso_code} className="bold ml1" />}
-              {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
-            </div>
-            <div className="flex-none">
-              <i className="fa fa-chevron-down smaller3 opa4" />
-            </div>
-          </div>
-        </button>
-      );
-    } else {
+    if (label || icon) {
       let I;
       if (icon) {
         if (icon === 'more') {
@@ -67,6 +48,25 @@ class Dropdown extends React.PureComponent {
         </button>
       );
     }
+
+    let val = value;
+    if (!val) val = { name: null };
+    if (val.toJS) val = value.toJS();
+    return (
+      <button {...bProps}>
+        <div className="flex justify-between">
+          <div className="flex-none">
+            {val.name || val.label}
+            {val.iso_code &&
+              <PriceSymbol code={val.iso_code} className="bold ml1" />}
+            {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
+          </div>
+          <div className="flex-none">
+            <i className="fa fa-chevron-down smaller3 opa4" />
+          </div>
+        </div>
+      </button>
+    );
   };
 
   items = () => {
