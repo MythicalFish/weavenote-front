@@ -3,8 +3,6 @@ import Auth0Lock from 'auth0-lock';
 import { loggedIn } from 'utils/authUtils';
 
 export default class LoginForm extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
-
   componentDidMount() {
     this.initializeLock();
   }
@@ -30,6 +28,7 @@ export default class LoginForm extends React.PureComponent {
 
   initializeLock = () => {
     const opts = this.lockOptions;
+    opts.allowSignUp = this.props.enableSignup;
     const { invite } = this.props;
     if (invite) {
       opts.prefill.email = invite.email;
@@ -51,7 +50,7 @@ export default class LoginForm extends React.PureComponent {
     });
   };
 
-  render = () => (
+  render = () =>
     <div className="flex items-middle vh-ymin100 bg-gray-darker">
       <div>
         <div className="larger light8 center mb2">Weavenote</div>
@@ -69,11 +68,11 @@ export default class LoginForm extends React.PureComponent {
             }
           `}</style>
       </div>
-    </div>
-    );
+    </div>;
 }
 
 LoginForm.propTypes = {
   invite: PropTypes.object,
   fetchUser: PropTypes.func,
+  enableSignup: PropTypes.bool,
 };

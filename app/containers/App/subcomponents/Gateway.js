@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { browserHistory } from 'react-router';
-import Layout from './Layout';
 import LoginForm from 'components/LoginForm';
 import { loggedIn } from 'utils/authUtils';
+import Layout from './Layout';
 import {
   fetchUser,
   fetchInvite,
@@ -30,6 +30,11 @@ class Gateway extends React.PureComponent {
   };
 
   storedInviteKey = () => localStorage.getItem('inviteKey');
+
+  enableSignup = () => {
+    const { location } = this.props;
+    return location.query.enableSignup !== undefined;
+  };
 
   handleMountOrUpdate = () => {
     const newKey = this.newInviteKey();
@@ -93,12 +98,18 @@ class Gateway extends React.PureComponent {
     const { user, invite } = this.props;
 
     if (!loggedIn()) {
-      const loginProps = { user, invite, fetchUser: this.props.fetchUser };
+      const loginProps = {
+        user,
+        invite,
+        enableSignup: this.enableSignup(),
+        fetchUser: this.props.fetchUser,
+      };
 
       if (storedKey) {
         if (!this.props.invite) {
           return null;
         } else {
+          loginProps.asda = 1;
           return <LoginForm {...loginProps} />; // 4
         }
       } else if (!newKey) {
