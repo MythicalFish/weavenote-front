@@ -3,23 +3,27 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import InputRow from 'components/FormField';
-import Button from 'components/Button';
 import { updateUser } from '../../actions';
 
-const BasicInfo = (props) => {
-  const { handleSubmit, submitting } = props;
+const UserInfo = (props) => {
+  const { handleSubmit, submitting, onSubmit } = props;
   return (
     <form className="data-rows" onSubmit={handleSubmit}>
-      <Field name="name" type="text" component={InputRow} label="Name" />
-      <footer className="p2 center">
-        <Button type="submit" disabled={submitting} label="Save" />
-      </footer>
+      <Field
+        name="name"
+        type="text"
+        component={InputRow}
+        label="Name"
+        onBlur={onSubmit}
+      />
+      <button type="submit" disabled={submitting} className="conceal" />
     </form>
   );
 };
 
-BasicInfo.propTypes = {
+UserInfo.propTypes = {
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
 };
 
@@ -35,6 +39,6 @@ const mapState = createStructuredSelector({});
 
 export default connect(mapState, mapDispatch)(
   reduxForm({
-    form: 'BasicInfo',
-  })(BasicInfo)
+    form: 'UserInfo',
+  })(UserInfo)
 );

@@ -4,21 +4,19 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
 import Layout from 'components/Layout';
-import Settings from './subcomponents/Settings';
+import Form from './subcomponents/Form';
 
 class Profile extends React.PureComponent {
   render() {
     return (
       <Layout>
-        <Settings {...this.props} />
+        <Form {...this.props} />
       </Layout>
     );
   }
 }
 
-Profile.propTypes = {
-  user: PropTypes.object,
-};
+Profile.propTypes = {};
 
 export function mapDispatch(dispatch) {
   return bindActionCreators({}, dispatch);

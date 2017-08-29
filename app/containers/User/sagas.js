@@ -1,4 +1,5 @@
-import { take, cancel, takeLatest } from 'redux-saga/effects';
+import { take, cancel, takeLatest, select } from 'redux-saga/effects';
+import { getFormValues, isDirty } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
@@ -18,7 +19,8 @@ function* fetchUser() {
   yield sagas.get('user', null, actions.fetchUserSuccess);
 }
 
-function* updateUser({ user }) {
+function* updateUser() {
+  const user = yield select(getFormValues('UserInfo'));
   yield sagas.patch('user', { user }, actions.updateUserSuccess);
 }
 

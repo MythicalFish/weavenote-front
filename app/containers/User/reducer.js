@@ -18,7 +18,7 @@ function UserReducer(state = initialState, action) {
       return fromJS(action.data);
 
     case types.UPDATE_USER_SUCCESS:
-      return state.set('name', action.data.name);
+      return state.set('name', action.response.name);
 
     // Org
 

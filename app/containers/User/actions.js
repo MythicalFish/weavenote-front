@@ -8,12 +8,12 @@ export function fetchUserSuccess(data) {
   return { type: types.FETCH_USER_SUCCESS, data };
 }
 
-export function updateUser(user) {
-  return { type: types.UPDATE_USER, user };
+export function updateUser() {
+  return { type: types.UPDATE_USER };
 }
 
-export function updateUserSuccess(data) {
-  return { type: types.UPDATE_USER_SUCCESS, data };
+export function updateUserSuccess(response) {
+  return { type: types.UPDATE_USER_SUCCESS, response };
 }
 
 export function requestPassword() {

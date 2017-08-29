@@ -1,21 +1,21 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import BasicInfo from './BasicInfo';
+import UserInfo from './UserInfo';
 import { requestPassword } from '../../actions';
 import Button from 'components/Button';
 
-class Settings extends React.PureComponent {
+class Form extends React.PureComponent {
   requestPassword;
   render() {
     const { user, dispatch } = this.props;
     return (
       <div>
-        {user &&
+        {user && (
           <div>
             <h2>Profile settings</h2>
             <div className="bg-white p2">
-              <BasicInfo
+              <UserInfo
                 initialValues={user}
                 onSubmit={this.props.handleUpdate}
               />
@@ -27,13 +27,14 @@ class Settings extends React.PureComponent {
                 label="Reset your password"
               />
             </div>
-          </div>}
+          </div>
+        )}
       </div>
     );
   }
 }
 
-Settings.propTypes = {
+Form.propTypes = {
   user: PropTypes.object,
   handleUpdate: PropTypes.func,
   dispatch: PropTypes.func,
@@ -47,4 +48,4 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({});
 
-export default connect(mapState, mapDispatch)(Settings);
+export default connect(mapState, mapDispatch)(Form);
