@@ -6,7 +6,6 @@ import { initialize } from 'redux-form';
 import Image from 'components/Image';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
-import { selectFocus } from 'containers/App/selectors';
 import { selectCurrentComment } from 'containers/Comments/selectors';
 import CurrentImage from './CurrentImage';
 import { PLACEHOLDER } from './constants';
@@ -31,10 +30,11 @@ class ProjectImages extends React.PureComponent {
     return (
       <div>
         {!currentImage && <Image src={PLACEHOLDER} />}
-        {currentImage &&
-          <div>
+        {currentImage && (
+          <div className="center">
             <CurrentImage {...{ currentImage, imageable, ...this.props }} />
-          </div>}
+          </div>
+        )}
         <div className="pt3 flex justify-center blurrable">
           <ImageThumbnails
             images={images}
@@ -66,7 +66,6 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   images: selectors.selectImages(),
   newAnnotation: selectors.selectNewAnnotation(),
-  focus: selectFocus(),
   currentComment: selectCurrentComment(),
 });
 

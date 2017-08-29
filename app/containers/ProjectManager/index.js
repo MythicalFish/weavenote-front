@@ -66,7 +66,7 @@ class ProjectManager extends React.PureComponent {
             <div className="col-xs-12 col-md-3 last-xs first-md blurrable">
               <ProjectComments project={project} />
             </div>
-            <div className="col-xs-6 col-md-6">
+            <div className="col-xs-6 col-md-6 blurrable">
               <div className="lh0 px4">
                 <ProjectImages project={project} />
               </div>
