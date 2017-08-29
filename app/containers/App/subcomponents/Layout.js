@@ -4,12 +4,10 @@ import Sidebar from './Sidebar';
 export default function Layout(props) {
   return (
     <div className="flex">
-      <div className="flex-none bg-bluewood blurrable">
-        <Sidebar currentPath={props.location.pathname} />
+      <div className="flex-none blurrable">
+        <Sidebar {...props} />
       </div>
-      <div className="flex-auto flex">
-        {props.children}
-      </div>
+      <div className="flex-auto flex">{props.children}</div>
     </div>
   );
 }

@@ -122,7 +122,7 @@ class Gateway extends React.PureComponent {
       return null;
     }
 
-    if (!this.props.user.get('name')) {
+    if (!user.get('name')) {
       return null;
     }
 
@@ -130,7 +130,7 @@ class Gateway extends React.PureComponent {
       return null;
     }
 
-    return <Layout {...{ location }}>{this.props.children}</Layout>;
+    return <Layout {...{ location, user }}>{this.props.children}</Layout>;
   }
 }
 

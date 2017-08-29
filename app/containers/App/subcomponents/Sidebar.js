@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const Button = (props) => {
-  const { path, currentPath, label } = props;
-  if (!currentPath) return null;
-  const bClass = buttonClass(path, currentPath);
+  const { path, location, label } = props;
+  if (!location) return null;
+  const bClass = buttonClass(path, location.pathname);
   return (
     <Link className={bClass} to={path}>
       {label}
@@ -30,21 +30,32 @@ Button.propTypes = {
   currentPath: React.PropTypes.string,
 };
 
+const exposeTo = (role) => !['None', 'Guest'].includes(role);
+
 const Sidebar = (props) => {
-  if (isProjectPage(props.currentPath)) return null;
+  if (isProjectPage(props.location.pathname)) return null;
+  const role = props.user.get('role');
+  if (!role) return null;
   return (
     <aside id="sidebar">
-      <header>Weavenote</header>
-      <nav>
+      <img src={`${process.env.ASSET_HOST}/logo.png`} role="presentation" />
+      <nav className="mt2">
         <Button {...props} path="/projects" label="Projects" />
-        <Button {...props} path="/materials" label="Materials" />
+        {exposeTo(role) && (
+          <Button {...props} path="/materials" label="Materials" />
+        )}
       </nav>
     </aside>
   );
 };
 
 Sidebar.propTypes = {
-  currentPath: PropTypes.string,
+  location: PropTypes.object,
+  user: PropTypes.object,
+};
+
+Button.propTypes = {
+  location: PropTypes.object,
 };
 
 export default Sidebar;

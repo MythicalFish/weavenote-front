@@ -33,7 +33,7 @@ class Dropdown extends React.PureComponent {
         if (icon === 'more') {
           I = (
             <img
-              src="https://s3-eu-west-1.amazonaws.com/content.mythical.fish/weavenote/assets/dots.svg"
+              src={`${process.env.ASSET_HOST}/dots.svg`}
               style={{ height: '5px', opacity: 0.6, maxWidth: '20px' }}
             />
           );

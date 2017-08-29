@@ -1,6 +1,5 @@
 #sidebar {
-  background: $bluewood;
-  color: $white;
+  color: $dark6;
   padding: $space-5 $space-5 $space-4 $space-4;
   @extend .vh-ymin100;
   header {
@@ -15,7 +14,8 @@
       padding: $space-2 0;
       @extend .bigger1;
       &.active {
-        color: $malibu;
+        color: $poiple;
+        font-weight: bold;
       }
     }
   }
