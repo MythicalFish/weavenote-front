@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ImageUploader from 'containers/ImageUploader';
-import ImageThumbnails from 'containers/ImageThumbnails';
+import ImageThumbnails from 'components/ImageThumbnails';
 
 export default function Image({ material }) {
   const iProps = {

@@ -1,0 +1,33 @@
+.image-form-wrapper {
+  position: relative;
+  .image-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $dark7;
+    color: $white;
+    z-index: 3;
+  }
+  .image-form-actions {
+    button {
+      color: $light7;
+    }
+    button:not(:last-child) {
+      margin-right: $space-3;
+    }
+  }
+  > .icon {
+    position: absolute;
+    bottom: $space-2;
+    right: $space-2;
+    z-index: 3;
+  }
+  .image-form-close {
+    position: absolute;
+    top: $space-2;
+    right: $space-2;
+    z-index: 3;
+  }
+}

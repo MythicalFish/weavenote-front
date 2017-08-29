@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form/immutable';
 import InputRow from 'components/FormField';
 import Button from 'components/Button';
-import ImageThumbnails from 'containers/ImageThumbnails';
+import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 
 const Form = (props) => {

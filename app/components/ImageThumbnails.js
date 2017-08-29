@@ -1,15 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { createStructuredSelector } from 'reselect';
 import Thumbnail from 'components/Thumbnail';
-import Dropdown from 'components/Dropdown';
-import Dot from 'components/Dot';
 import { openImage } from 'containers/App/actions';
-import { deleteImage } from './actions';
 
 const ImageThumbnails = (props) => {
-  const { images, currentImage, imageable } = props;
+  const { images, currentImage } = props;
   const thumbnails = [];
   const size = props.size || 'tiny';
   images.forEach((image, index) => {
@@ -23,14 +19,8 @@ const ImageThumbnails = (props) => {
     if (isCurrent) {
       tnProps.className = 'current';
     }
-    const delImage = () => props.deleteImage({ image, imageable });
     thumbnails.push(
       <li {...tnProps}>
-        <Dropdown className="thumbnail-actions" label={<Dot size={8} />}>
-          <button type="button" onClick={delImage}>
-            Delete
-          </button>
-        </Dropdown>
         <button
           type="button"
           onClick={() => {
@@ -57,10 +47,8 @@ const ImageThumbnails = (props) => {
 
 ImageThumbnails.propTypes = {
   images: PropTypes.object,
-  imageable: PropTypes.object,
   currentImage: PropTypes.object,
   maxImages: PropTypes.number,
-  deleteImage: PropTypes.func,
   size: PropTypes.string,
 };
 
@@ -68,12 +56,9 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       openImage,
-      deleteImage,
     },
     dispatch
   );
 }
 
-const mapState = createStructuredSelector({});
-
-export default connect(mapState, mapDispatch)(ImageThumbnails);
+export default connect(null, mapDispatch)(ImageThumbnails);

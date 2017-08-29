@@ -3,7 +3,7 @@ import { combineReducers } from 'redux-immutable';
 import ProjectImageReducer from 'containers/ProjectImages/reducer';
 import { FETCH_PROJECT_SUCCESS } from 'containers/ProjectManager/constants';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
-import { DELETE_IMAGE_SUCCESS } from 'containers/ImageThumbnails/constants';
+import { DELETE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
 import { UPDATE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
 import * as types from 'containers/Comments/constants';
 import { setImages } from './reducerHelpers';

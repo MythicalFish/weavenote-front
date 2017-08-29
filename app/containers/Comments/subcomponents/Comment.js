@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
-import ImageThumbnails from 'containers/ImageThumbnails';
+import ImageThumbnails from 'components/ImageThumbnails';
 import Form from './Form';
 import Actions from './Actions';
 import Wrapper from './Wrapper';
@@ -36,19 +36,16 @@ class Comment extends React.PureComponent {
             <Form
               onSubmit={this.props.updateComment}
               initialValues={{ commentable, comment }}
+              imageable={{ type: 'Comment', id }}
+              maxImages={this.props.maxImages}
+              deletable={this.isOwnComment()}
               {...this.props}
             />
           </div>
           : <div className="comment-text">
             {comment.get('text')}
           </div>}
-        {isSelected &&
-          <ImageThumbnails
-            images={comment.get('images')}
-            imageable={{ type: 'Comment', id }}
-            maxImages={this.props.maxImages}
-            deletable={this.isOwnComment()}
-          />}
+        {isSelected && <ImageThumbnails images={comment.get('images')} />}
         {isSelected &&
           this.isOwnComment() &&
           !this.isEditing() &&

@@ -13,11 +13,23 @@ const url = (payload) => {
 };
 
 export function* watch() {
-  const watcher = [yield takeLatest(types.UPDATE_IMAGE, updateImage)];
+  const watcher = [
+    yield takeLatest(types.UPDATE_IMAGE, updateImage),
+    yield takeLatest(types.DELETE_IMAGE, deleteImage),
+    yield takeLatest(types.MAKE_IMAGE_PRIMARY, makePrimary),
+  ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
 
 export function* updateImage({ payload }) {
   yield sagas.patch(url(payload), payload, actions.updateImageSuccess);
+}
+
+export function* deleteImage({ payload }) {
+  yield sagas.destroy(url(payload), payload, actions.deleteImageSuccess);
+}
+
+export function* makePrimary({ payload }) {
+  yield sagas.patch(url(payload), payload, actions.makePrimarySuccess);
 }

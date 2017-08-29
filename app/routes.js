@@ -151,7 +151,6 @@ export default function createRoutes(store) {
         import('containers/App/sagas'),
         import('containers/Collaborators/sagas'),
         import('containers/Organization/sagas'),
-        import('containers/ImageThumbnails/sagas'),
         import('containers/ImageUploader/sagas'),
         import('containers/ImageForm/sagas'),
         import('containers/Comments/sagas'),
@@ -161,7 +160,7 @@ export default function createRoutes(store) {
 
       const renderRoute = loadModule(cb);
 
-      importModules.then(([a, b, c, d, e, f, g, h, component]) => {
+      importModules.then(([a, b, c, d, e, f, g, component]) => {
         injectSagas(a.default);
         injectSagas(b.default);
         injectSagas(c.default);
@@ -169,7 +168,6 @@ export default function createRoutes(store) {
         injectSagas(e.default);
         injectSagas(f.default);
         injectSagas(g.default);
-        injectSagas(h.default);
         renderRoute(component);
       });
 

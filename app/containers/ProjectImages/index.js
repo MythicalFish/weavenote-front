@@ -4,9 +4,8 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { initialize } from 'redux-form';
 import Image from 'components/Image';
-import ImageThumbnails from 'containers/ImageThumbnails';
+import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
-import ImageForm from 'containers/ImageForm';
 import { selectFocus } from 'containers/App/selectors';
 import { selectCurrentComment } from 'containers/Comments/selectors';
 import CurrentImage from './CurrentImage';
@@ -34,16 +33,13 @@ class ProjectImages extends React.PureComponent {
         {!currentImage && <Image src={PLACEHOLDER} />}
         {currentImage &&
           <div>
-            <CurrentImage {...{ currentImage, ...this.props }} />
-            <div className="blurrable">
-              <ImageForm initialValues={currentImage} {...{ imageable }} />
-            </div>
+            <CurrentImage {...{ currentImage, imageable, ...this.props }} />
           </div>}
         <div className="pt3 flex justify-center blurrable">
           <ImageThumbnails
             images={images}
             onSelect={this.selectImage}
-            {...{ currentImage, imageable }}
+            {...{ currentImage }}
           />
           <div className="ml1">
             <ImageUploader {...{ imageable }} />
