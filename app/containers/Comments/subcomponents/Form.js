@@ -3,27 +3,38 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import Input from 'components/FormInput';
 import Button from 'components/Button';
 
-const CommentForm = (props) =>
+const Form = (props) =>
   <div>
     <form onSubmit={props.handleSubmit}>
-      <Field
-        name="comment[text]"
-        type="textarea"
-        component={Input}
-        focus
-        onEnterKey={props.handleSubmit}
-      />
+      <Textarea {...props} />
+      <Actions {...props} />
     </form>
-    <div className="actions">
-      <Button onClick={props.cancelCommentAction} label="Cancel" />
-    </div>
   </div>;
 
-CommentForm.propTypes = {
+const Textarea = ({ handleSubmit }) =>
+  <Field
+    name="comment[text]"
+    type="textarea"
+    component={Input}
+    onEnterKey={handleSubmit}
+  />;
+
+const Actions = ({ cancelCommentAction }) =>
+  <div className="comment-form-actions">
+    <Button onClick={cancelCommentAction} label="Cancel" shy />
+    <Button type="submit" label="Submit" small />
+  </div>;
+
+Textarea.propTypes = {
   handleSubmit: PropTypes.func,
+};
+Actions.propTypes = {
   cancelCommentAction: PropTypes.func,
+};
+Form.propTypes = {
+  handleSubmit: PropTypes.func,
 };
 
 export default reduxForm({
   form: 'CommentForm',
-})(CommentForm);
+})(Form);

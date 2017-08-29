@@ -74,6 +74,9 @@
       color: $dark7;
     }
   }
+  .comment-edit {
+    padding-top: $space-2;
+  }
 }
 
 button.comment-thread,
@@ -98,5 +101,17 @@ button.comment-thread,
 button.comment-newreply {
   .comment-wrapper {
     @extend .items-center;
+  }
+}
+.comment-form-actions {
+  text-align: right;
+  padding-right: $space-2;
+  .btn-shy {
+    color: $dark4;
+  }
+  button {
+    &:not(:first-child) {
+      margin-left: $space-2;
+    }
   }
 }

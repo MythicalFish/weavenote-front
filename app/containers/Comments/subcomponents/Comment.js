@@ -32,11 +32,13 @@ class Comment extends React.PureComponent {
             <Date value={comment.get('created_at')} />
           </div>}
         {this.isEditing()
-          ? <Form
-            onSubmit={this.props.updateComment}
-            initialValues={{ commentable, comment }}
-            {...this.props}
-          />
+          ? <div className="comment-edit">
+            <Form
+              onSubmit={this.props.updateComment}
+              initialValues={{ commentable, comment }}
+              {...this.props}
+            />
+          </div>
           : <div className="comment-text">
             {comment.get('text')}
           </div>}

@@ -50,18 +50,6 @@ button {
     padding: 0;
     line-height: inherit;
   }
-  &.btn-footer {
-    text-align: inherit;
-    border-radius: 0;
-    -webbkit-border-radius: 0;
-    display: block;
-    width: 100%;
-    padding: $space-3;
-    color: $dark3;
-    background: $white;
-    font-weight: normal;
-    border-color: transparent;
-  }
   &.btn-green {
     background: $lime;
   }
