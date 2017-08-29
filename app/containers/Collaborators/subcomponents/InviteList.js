@@ -27,11 +27,9 @@ class InvitesList extends React.PureComponent {
     return (
       <div className="y-max8 y-scroll b1 mt1">
         {invites &&
-          invites.map((invite, index) =>
+          invites.map((invite, index) => (
             <ListItem key={`invite-${index}`}>
-              <div>
-                {invite.get('email')}
-              </div>
+              <div>{invite.get('email')}</div>
               <div>
                 <RoleTypeSelector
                   target={invite}
@@ -46,7 +44,7 @@ class InvitesList extends React.PureComponent {
                 </button>
               </div>
             </ListItem>
-          )}
+          ))}
       </div>
     );
   }

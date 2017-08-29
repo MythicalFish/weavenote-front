@@ -11,12 +11,13 @@ class RoleTypeSelector extends React.PureComponent {
     const selected = this.props.selectedRoleType(roleTypes, target);
     return (
       <div>
-        {selected &&
+        {selected && (
           <Dropdown
             value={selected}
             data={roleTypes}
             onChanged={this.handleChange}
-          />}
+          />
+        )}
       </div>
     );
   }

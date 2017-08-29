@@ -26,11 +26,9 @@ class RolesList extends React.PureComponent {
     return (
       <div className="y-max8 y-scroll b1 mt1">
         {roles &&
-          roles.map((role, index) =>
+          roles.map((role, index) => (
             <ListItem key={`role-${index}`}>
-              <div>
-                {role.getIn(['user', 'email'])}
-              </div>
+              <div>{role.getIn(['user', 'email'])}</div>
               <div>
                 <RoleTypeSelector
                   target={role}
@@ -45,7 +43,7 @@ class RolesList extends React.PureComponent {
                 </button>
               </div>
             </ListItem>
-          )}
+          ))}
       </div>
     );
   }

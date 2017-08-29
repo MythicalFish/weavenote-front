@@ -24,19 +24,22 @@ class Collaborators extends React.Component {
   }
 
   render() {
+    if (!this.props.globalData) return null;
     const { invitable, invites, roles, globalData: { roleTypes } } = this.props;
     const rProps = { ...this.props, roleTypes };
     return (
       <div>
-        {roles.size > 0 &&
+        {roles.size > 0 && (
           <div className="p2">
             <RoleList {...rProps} />
-          </div>}
-        {invites.size > 0 &&
+          </div>
+        )}
+        {invites.size > 0 && (
           <div className="bt1 p2">
             Pending invitations
             <InviteList {...rProps} />
-          </div>}
+          </div>
+        )}
         <footer className="bt1 p2">
           <InviteForm
             initialValues={{
