@@ -13,7 +13,7 @@ function CurrentImage(props) {
   aProps.canvasSize = props.size;
   const src = currentImage.getIn(['urls', 'medium']);
   return (
-    <div className={`canvas-container ${blurClass}`}>
+    <div className={`canvas-container center ${blurClass}`}>
       <ImageForm
         initialValues={currentImage}
         {...{ imageable, src, hideForm }}

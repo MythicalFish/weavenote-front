@@ -2,10 +2,11 @@ import { take, put, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
+import { UserWatcher } from 'containers/User/sagas';
+import { fetchUser } from 'containers/User/actions';
 import * as actionType from './constants/actions';
 import * as actions from './actions';
-
-export default [appWatcher];
+export default [appWatcher, UserWatcher];
 
 export function* appWatcher() {
   const watcher = [
@@ -14,7 +15,6 @@ export function* appWatcher() {
     yield takeLatest(actionType.HANDLE_INVITE, handleInvite),
     yield takeLatest(actionType.HANDLE_INVITE_SUCCESS, handleInviteSuccess),
     yield takeLatest(actionType.SET_INVITE_KEY, setInviteKey),
-    yield takeLatest(actionType.FETCH_USER, fetchUser),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -22,10 +22,6 @@ export function* appWatcher() {
 
 function* fetchGlobalData() {
   yield sagas.get('global_data', null, actions.fetchGlobalDataSuccess);
-}
-
-function* fetchUser() {
-  yield sagas.get('user', null, actions.fetchUserSuccess);
 }
 
 function* setInviteKey({ key }) {
@@ -39,7 +35,7 @@ function* handleInvite({ key }) {
 
 function* handleInviteSuccess() {
   localStorage.removeItem('inviteKey');
-  yield put(actions.fetchUser());
+  yield put(fetchUser());
 }
 
 function* fetchInvite({ key }) {

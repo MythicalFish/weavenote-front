@@ -1,3 +1,6 @@
+export const FETCH_USER = '@@app/FETCH_USER';
+export const FETCH_USER_SUCCESS = '@@app/FETCH_USER_SUCCESS';
+
 export const UPDATE_PROFILE = '@@app/UPDATE_PROFILE';
 export const UPDATE_PROFILE_SUCCESS = '@@app/UPDATE_PROFILE_SUCCESS';
 

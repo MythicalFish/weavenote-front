@@ -1,17 +1,8 @@
 import { createSelector } from 'reselect';
 
 export const selectDomain = () => (state) => state.get('global');
-
-// Stats
-
-export const selectStats = () =>
-  createSelector(selectDomain(), (s) => {
-    const stats = s.get('stats');
-    if (stats) {
-      return stats.toJS();
-    }
-    return null;
-  });
+export const selectMisc = () =>
+  createSelector(selectDomain(), (s) => s.get('misc'));
 
 // User
 
@@ -33,12 +24,26 @@ export const selectAbilities = () =>
 // Invite
 
 export const selectInvite = () =>
-  createSelector(selectDomain(), (s) => s.get('invite'));
+  createSelector(selectMisc(), (s) => s.get('invite'));
 
 // Misc
 
 export const selectCurrentSection = () =>
-  createSelector(selectDomain(), (s) => s.get('currentSection').toJS());
+  createSelector(selectMisc(), (s) => s.get('currentSection').toJS());
+
+export const selectModalID = () =>
+  createSelector(selectMisc(), (s) => s.get('modalID'));
+
+export const selectModalImage = () =>
+  createSelector(selectMisc(), (s) => s.get('modalImage'));
+
+export const selectFocus = () =>
+  createSelector(selectMisc(), (s) => s.get('focus'));
+
+export const selectGlobalData = () =>
+  createSelector(selectMisc(), (s) => s.get('globalData'));
+
+// Route
 
 export const makeSelectLocationState = () => {
   let prevRoutingState;
@@ -55,15 +60,3 @@ export const makeSelectLocationState = () => {
     return prevRoutingStateJS;
   };
 };
-
-export const selectModalID = () =>
-  createSelector(selectDomain(), (s) => s.get('modalID'));
-
-export const selectModalImage = () =>
-  createSelector(selectDomain(), (s) => s.get('modalImage'));
-
-export const selectFocus = () =>
-  createSelector(selectDomain(), (s) => s.get('focus'));
-
-export const selectGlobalData = () =>
-  createSelector(selectDomain(), (s) => s.get('globalData'));

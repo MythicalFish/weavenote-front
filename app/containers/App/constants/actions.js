@@ -9,9 +9,6 @@ export const FETCH_INVITE_SUCCESS = '@@app/FETCH_INVITE_SUCCESS';
 export const HANDLE_INVITE = '@@app/HANDLE_INVITE';
 export const HANDLE_INVITE_SUCCESS = '@@app/HANDLE_INVITE_SUCCESS';
 
-export const FETCH_USER = '@@app/FETCH_USER';
-export const FETCH_USER_SUCCESS = '@@app/FETCH_USER_SUCCESS';
-
 //
 
 export const CHANGE_SECTION = '@@app/CHANGE_SECTION';

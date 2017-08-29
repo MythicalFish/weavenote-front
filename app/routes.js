@@ -116,17 +116,11 @@ export default function createRoutes(store) {
       path: '/profile',
       name: 'profile',
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/Profile/reducer'),
-          import('containers/Profile/sagas'),
-          import('containers/Profile'),
-        ]);
+        const importModules = Promise.all([import('containers/User')]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('profile', reducer.default);
-          injectSagas(sagas.default);
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 

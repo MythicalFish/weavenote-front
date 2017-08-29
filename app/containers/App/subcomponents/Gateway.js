@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { browserHistory } from 'react-router';
 import LoginForm from 'components/LoginForm';
+import { fetchUser } from 'containers/User/actions';
 import { loggedIn } from 'utils/authUtils';
 import Layout from './Layout';
 import {
-  fetchUser,
   fetchInvite,
   handleInvite,
   setInviteKey,
@@ -130,11 +130,7 @@ class Gateway extends React.PureComponent {
       return null;
     }
 
-    return (
-      <Layout {...{ location }}>
-        {this.props.children}
-      </Layout>
-    );
+    return <Layout {...{ location }}>{this.props.children}</Layout>;
   }
 }
 

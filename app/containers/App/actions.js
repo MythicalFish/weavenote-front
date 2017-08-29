@@ -32,16 +32,6 @@ export function handleInviteSuccess() {
   return { type: types.HANDLE_INVITE_SUCCESS };
 }
 
-// Users
-
-export function fetchUser() {
-  return { type: types.FETCH_USER };
-}
-
-export function fetchUserSuccess(data) {
-  return { type: types.FETCH_USER_SUCCESS, data };
-}
-
 // Other
 
 export function changeSection(section) {
