@@ -11,7 +11,12 @@ import { changeSection } from 'containers/App/actions';
 import Header from 'components/Header';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
-import { fetchProjects, createProject, fileProject } from './actions';
+import {
+  fetchProjects,
+  createProject,
+  fileProject,
+  deleteProject,
+} from './actions';
 import { selectProjects } from './selectors';
 
 export class ProjectList extends React.PureComponent {
@@ -46,6 +51,7 @@ export class ProjectList extends React.PureComponent {
                     key={`project-${index}`}
                     project={project}
                     fileProject={this.props.fileProject}
+                    deleteProject={this.props.deleteProject}
                   />
                 )}
             </tbody>
@@ -61,11 +67,12 @@ ProjectList.propTypes = {
   fetchProjects: PropTypes.func,
   fileProject: PropTypes.func,
   changeSection: PropTypes.func,
+  deleteProject: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchProjects, createProject, fileProject, changeSection },
+    { fetchProjects, createProject, deleteProject, fileProject, changeSection },
     dispatch
   );
 }

@@ -5,7 +5,7 @@ import Thumbnail from 'components/Thumbnail';
 import AvatarList from 'components/AvatarList';
 
 export default function ListItem(props) {
-  const { project, fileProject } = props;
+  const { project, fileProject, deleteProject } = props;
   const id = project.get('id');
   const archived = project.get('archived');
   const url = `/projects/${id}`;
@@ -41,6 +41,7 @@ export default function ListItem(props) {
             <button onClick={() => fileProject({ id, archived: !archived })}>
               {archived ? 'Restore' : 'Archive'}
             </button>
+            <button onClick={() => deleteProject(id)}>Delete</button>
           </Dropdown>
         </div>
       </td>
@@ -51,4 +52,5 @@ export default function ListItem(props) {
 ListItem.propTypes = {
   project: React.PropTypes.object.isRequired,
   fileProject: React.PropTypes.func,
+  deleteProject: React.PropTypes.func,
 };

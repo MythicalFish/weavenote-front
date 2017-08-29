@@ -1,4 +1,3 @@
-
 import { take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
@@ -10,6 +9,7 @@ export default [projectListWatcher];
 export function* projectListWatcher() {
   const watcher = [
     yield takeLatest(types.CREATE_PROJECT, createProject),
+    yield takeLatest(types.DELETE_PROJECT, deleteProject),
     yield takeLatest(types.FILE_PROJECT, fileProject),
     yield takeLatest(types.FETCH_PROJECTS, fetchProjects),
   ];
@@ -18,7 +18,15 @@ export function* projectListWatcher() {
 }
 
 export function* createProject() {
-  yield sagas.post('projects', { project: { name: 'Untitled project' } }, actions.createProjectSuccess);
+  yield sagas.post(
+    'projects',
+    { project: { name: 'Untitled project' } },
+    actions.createProjectSuccess
+  );
+}
+
+export function* deleteProject({ id }) {
+  yield sagas.destroy(`projects/${id}`, null, actions.deleteProjectSuccess);
 }
 
 export function* fileProject(action) {
