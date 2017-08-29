@@ -29,11 +29,15 @@
           height: 100%;
           text-align: center;
           color: $dark4;
-          font-size: .9em;
+          font-size: 0.9em;
           &.active {
             border-bottom: 2px solid $malibu;
             color: $dark8;
           }
+        }
+        .avatar-list {
+          @extend .flex-auto;
+          min-width: 200px;
         }
       }
     }

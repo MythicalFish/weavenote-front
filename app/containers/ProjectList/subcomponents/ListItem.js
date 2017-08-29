@@ -15,26 +15,18 @@ export default function ListItem(props) {
   };
   return (
     <tr>
-      <td {...linked}>
+      <td {...linked} className="cell-fit">
         <Thumbnail url={project.get('thumbnail_url')} />
       </td>
-      <td {...linked}>
-        {project.get('name')}
-      </td>
-      <td {...linked}>
-        {project.get('ref_number')}
-      </td>
-      <td {...linked}>
-        {project.get('collection')}
-      </td>
+      <td {...linked}>{project.get('name')}</td>
+      <td {...linked}>{project.get('ref_number')}</td>
+      <td {...linked}>{project.get('collection')}</td>
       <td {...linked} />
-      <td className="smaller1">
-        {project.getIn(['stage', 'label'])}
-      </td>
+      <td className="smaller1">{project.getIn(['stage', 'label'])}</td>
       <td>
         <AvatarList avatars={project.get('avatar_list')} />
       </td>
-      <td>
+      <td className="pl0 cell-fit">
         <div className="flex items-end">
           <Dropdown icon="more">
             <Link to={url}>Manage</Link>

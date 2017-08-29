@@ -34,7 +34,7 @@ class Dropdown extends React.PureComponent {
           I = (
             <img
               src="https://s3-eu-west-1.amazonaws.com/content.mythical.fish/weavenote/assets/dots.svg"
-              style={{ height: '5px', opacity: 0.6 }}
+              style={{ height: '5px', opacity: 0.6, maxWidth: '20px' }}
             />
           );
         } else {
@@ -57,8 +57,9 @@ class Dropdown extends React.PureComponent {
         <div className="flex justify-between">
           <div className="flex-none">
             {val.name || val.label}
-            {val.iso_code &&
-              <PriceSymbol code={val.iso_code} className="bold ml1" />}
+            {val.iso_code && (
+              <PriceSymbol code={val.iso_code} className="bold ml1" />
+            )}
             {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
           </div>
           <div className="flex-none">
@@ -91,8 +92,9 @@ class Dropdown extends React.PureComponent {
         items.push(
           <button type="button" key={item} onClick={this.toggleState(item)}>
             {i.name || i.label}
-            {i.iso_code &&
-              <PriceSymbol code={i.iso_code} className="bold ml1" />}
+            {i.iso_code && (
+              <PriceSymbol code={i.iso_code} className="bold ml1" />
+            )}
             {i.hex_code && <Dot className="ml1" color={i.hex_code} />}
           </button>
         );
@@ -133,15 +135,17 @@ class Dropdown extends React.PureComponent {
     const useTether = tether === false ? false : true;
     return (
       <div className={`dropdown ${inputClass}`} onClick={onFocus}>
-        {useTether
-          ? <TetherComponent {...this.tetherOptions}>
+        {useTether ? (
+          <TetherComponent {...this.tetherOptions}>
             {this.label()}
             {isFocused && this.items()}
           </TetherComponent>
-          : <div className="untethered">
+        ) : (
+          <div className="untethered">
             {this.label()}
             {isFocused && this.items()}
-          </div>}
+          </div>
+        )}
       </div>
     );
   }

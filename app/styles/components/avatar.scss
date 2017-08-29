@@ -18,9 +18,10 @@ $avatarSize: 27px;
 
 .avatar-list {
   @extend .flex;
-  @extend .flex-auto;
   @extend .items-center;
-  width: 200px;
+  min-width: 90px;
+  max-width: 150px;
+  width: 100%;
   .avatar,
   .hidden-count {
     width: $avatarSize;
@@ -33,6 +34,6 @@ $avatarSize: 27px;
   .hidden-count {
     border: 1px dashed $dark5;
     @include borderRadius(999px);
-    font-size: .6rem;
+    font-size: 0.6rem;
   }
 }
