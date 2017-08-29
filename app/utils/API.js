@@ -1,30 +1,31 @@
 import 'whatwg-fetch';
 
-export function request(method = 'GET', path, params) {
+export const endpoint = () => process.env.NODE_ENV === 'production'
+    ? process.env.API_PROD
+    : process.env.API_DEV;
 
+export function request(method = 'GET', path, params) {
   let url;
   const req = requestBody();
 
   if (method === 'GET') {
-    url = requestURL({ path, params  });
+    url = requestURL({ path, params });
   } else {
     url = requestURL({ path });
     req.method = method;
     req.body = JSON.stringify(params);
   }
 
-  return fetch(url, req)
-    .then((r) => r.json())
-    .then((r) => {
-      if (r.error) {
-        if (r.error.backtrace) {
-          console.error(`%c ${r.error.backtrace}`, ConsoleErrorStyle);
-        }
-        throw (r);
-      } else {
-        return r;
+  return fetch(url, req).then((r) => r.json()).then((r) => {
+    if (r.error) {
+      if (r.error.backtrace) {
+        console.error(`%c ${r.error.backtrace}`, ConsoleErrorStyle);
       }
-    });
+      throw r;
+    } else {
+      return r;
+    }
+  });
 }
 
 export function get(path, params) {
@@ -48,7 +49,7 @@ export const accessToken = () => `Bearer: ${localStorage.access_token}`;
 // Private
 
 const requestURL = (opts) => {
-  let url = `${process.env.API_URL}/${opts.path}`;
+  let url = `${endpoint()}/${opts.path}`;
   if (opts.params) {
     url = `${url}?${toQueryString(opts.params)}`;
   }
@@ -79,9 +80,7 @@ const toQueryString = (obj, urlEncode = false) => {
       } else {
         vals.push({ path: newPath, val: x[key] });
       }
-      vals.forEach((v) => {
-        return result.push(v);
-      });
+      vals.forEach((v) => result.push(v));
     });
     return result;
   };
@@ -98,9 +97,9 @@ const toQueryString = (obj, urlEncode = false) => {
     return varInfo;
   });
 
-  const queryString = parts.map((varInfo) => {
-    return `${varInfo.path}=${varInfo.val}`;
-  }).join('&');
+  const queryString = parts
+    .map((varInfo) => `${varInfo.path}=${varInfo.val}`)
+    .join('&');
   if (urlEncode) {
     return encodeURIComponent(queryString);
   }
