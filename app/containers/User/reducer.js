@@ -17,7 +17,7 @@ function UserReducer(state = initialState, action) {
     case types.FETCH_USER_SUCCESS:
       return fromJS(action.data);
 
-    case types.UPDATE_PROFILE_SUCCESS:
+    case types.UPDATE_USER_SUCCESS:
       return state.set('name', action.data.name);
 
     // Org

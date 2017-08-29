@@ -1,8 +1,8 @@
 export const FETCH_USER = '@@app/FETCH_USER';
 export const FETCH_USER_SUCCESS = '@@app/FETCH_USER_SUCCESS';
 
-export const UPDATE_PROFILE = '@@app/UPDATE_PROFILE';
-export const UPDATE_PROFILE_SUCCESS = '@@app/UPDATE_PROFILE_SUCCESS';
+export const UPDATE_USER = '@@app/UPDATE_USER';
+export const UPDATE_USER_SUCCESS = '@@app/UPDATE_USER_SUCCESS';
 
 export const REQUEST_PASSWORD = '@@app/REQUEST_PASSWORD';
 export const REQUEST_PASSWORD_SUCCESS = '@@app/REQUEST_PASSWORD_SUCCESS';

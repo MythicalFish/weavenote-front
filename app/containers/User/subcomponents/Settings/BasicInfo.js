@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import InputRow from 'components/FormField';
 import Button from 'components/Button';
-import { updateProfile } from '../../actions';
+import { updateUser } from '../../actions';
 
 const BasicInfo = (props) => {
   const { handleSubmit, submitting } = props;
@@ -26,7 +26,7 @@ BasicInfo.propTypes = {
 export function mapDispatch(dispatch) {
   return {
     onSubmit: (data) => {
-      dispatch(updateProfile(data));
+      dispatch(updateUser(data));
     },
   };
 }

@@ -7,7 +7,7 @@ import * as actions from './actions';
 export function* UserWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_USER, fetchUser),
-    yield takeLatest(types.UPDATE_PROFILE, updateProfile),
+    yield takeLatest(types.UPDATE_USER, updateUser),
     yield takeLatest(types.REQUEST_PASSWORD, requestPassword),
   ];
   yield take(LOCATION_CHANGE);
@@ -18,8 +18,8 @@ function* fetchUser() {
   yield sagas.get('user', null, actions.fetchUserSuccess);
 }
 
-function* updateProfile({ user }) {
-  yield sagas.patch('user', { user }, actions.updateProfileSuccess);
+function* updateUser({ user }) {
+  yield sagas.patch('user', { user }, actions.updateUserSuccess);
 }
 
 function* requestPassword() {
