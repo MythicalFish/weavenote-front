@@ -2,7 +2,7 @@
   position: relative;
 }
 .tooltip {
-  font-size: .8rem;
+  font-size: 0.8rem;
   text-align: center;
   font-style: normal;
   position: absolute;
@@ -23,6 +23,7 @@
   transform: translate(-50%, 0px);
   -webkit-transform: translate(-50%, 0px);
   white-space: nowrap;
+  line-height: 1;
   &:before {
     content: '';
     position: absolute;

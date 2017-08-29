@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
-import { selectCurrentSection, selectFocus, selectGlobalData } from 'containers/App/selectors';
+import {
+  selectCurrentSection,
+  selectFocus,
+  selectGlobalData,
+} from 'containers/App/selectors';
 import { changeSection, openModal } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
@@ -62,7 +66,7 @@ class ProjectManager extends React.PureComponent {
             <div className="col-xs-12 col-md-3 last-xs first-md blurrable">
               <ProjectComments project={project} />
             </div>
-            <div className="col-xs-6 col-md-6 flex justify-center">
+            <div className="col-xs-6 col-md-6">
               <div className="lh0 px4">
                 <ProjectImages project={project} />
               </div>
@@ -73,18 +77,18 @@ class ProjectManager extends React.PureComponent {
           </div>
         </div>
         <Modal id="collaborators" minWidth="600px">
-          <header>
-            {`Collaborators for ${project.get('name')}`}
-          </header>
+          <header>{`Collaborators for ${project.get('name')}`}</header>
           <Collaborators invitable={{ type: 'Project', id }} />
         </Modal>
         <Modal id="export">
-          {PDFexport.get('isExporting') &&
-            <Spinner />
-          }
-          {PDFexport.get('downloadURL') &&
-            <Button newTab={PDFexport.get('downloadURL')} label="Download" icon="DownloadCloud" />
-          }
+          {PDFexport.get('isExporting') && <Spinner />}
+          {PDFexport.get('downloadURL') && (
+            <Button
+              newTab={PDFexport.get('downloadURL')}
+              label="Download"
+              icon="DownloadCloud"
+            />
+          )}
         </Modal>
       </div>
     );

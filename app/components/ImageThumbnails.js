@@ -22,6 +22,7 @@ const ImageThumbnails = (props) => {
     thumbnails.push(
       <li {...tnProps}>
         <button
+          className="tooltipped"
           type="button"
           onClick={() => {
             if (props.onSelect) {
@@ -32,15 +33,16 @@ const ImageThumbnails = (props) => {
           }}
         >
           <Thumbnail url={image.getIn(['urls', size])} size={size} />
+          {image.get('name') && (
+            <div className="tooltip">{image.get('name')}</div>
+          )}
         </button>
       </li>
     );
   });
   return (
     <div>
-      <ul className="thumbnails">
-        {thumbnails}
-      </ul>
+      <ul className="thumbnails">{thumbnails}</ul>
     </div>
   );
 };

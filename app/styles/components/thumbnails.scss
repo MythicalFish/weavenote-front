@@ -15,6 +15,7 @@ ul.thumbnails {
   margin: 0;
   list-style: none;
   @extend .flex;
+  @extend .flex-wrap;
   li {
     @extend .flex-none;
     position: relative;
@@ -25,7 +26,6 @@ ul.thumbnails {
       padding: 0;
       line-height: 0;
       @include borderRadius();
-      overflow: hidden;
       img {
         width: 100%;
       }
@@ -45,8 +45,8 @@ ul.thumbnails {
         }
       }
     }
-    &:not(:first-child) {
-      margin-left: 3px;
+    &:not(:last-child) {
+      margin-right: 3px;
     }
     .dropdown {
       position: absolute;
