@@ -65,6 +65,8 @@ class Form extends React.Component {
       ...this.props,
     };
 
+    const submitBtnClass = isNew ? '' : 'conceal';
+
     return (
       <form onSubmit={handleSubmit}>
         <div className="row">
@@ -93,10 +95,14 @@ class Form extends React.Component {
             </div>
           </div>
         </div>
-        {!restricted &&
-        isNew && (
+        {!restricted && (
           <footer className="p2 center">
-            <Button type="submit" disabled={submitting} label="Save" />
+            <Button
+              type="submit"
+              disabled={submitting}
+              label="Save"
+              className={`btn ${submitBtnClass}`}
+            />
           </footer>
         )}
       </form>
