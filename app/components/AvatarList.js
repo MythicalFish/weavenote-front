@@ -34,7 +34,7 @@ const AvatarList = ({ avatars, size, onClick, showPlusButton }) => {
         </div>}
       {hiddenCount === 0 &&
         showPlusButton &&
-        <Icon name="UserPlus" size={20} className="ml1" />}
+        <Icon name="UserPlus" size={20} className="ml1" color="dark5" />}
     </button>
   );
 };
