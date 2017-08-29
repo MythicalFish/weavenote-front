@@ -15,11 +15,3 @@ export function deleteImage(payload) {
 export function deleteImageSuccess(response) {
   return { type: types.DELETE_IMAGE_SUCCESS, response };
 }
-
-export function makePrimary(payload) {
-  return { type: types.MAKE_IMAGE_PRIMARY, payload };
-}
-
-export function makePrimarySuccess(response) {
-  return { type: types.MAKE_IMAGE_PRIMARY_SUCCESS, response };
-}

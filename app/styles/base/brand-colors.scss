@@ -3,6 +3,7 @@ $malibu: #51b2fe;
 $azure: #1382e8;
 $torch: #f30045;
 $haze: #f4f8f9;
+$mako: #404550;
 
 .bg-bluewood {
   background-color: $bluewood;
@@ -37,4 +38,11 @@ $haze: #f4f8f9;
 }
 .haze {
   color: $haze;
+}
+
+.bg-mako {
+  background-color: $mako;
+}
+.mako {
+  color: $mako;
 }

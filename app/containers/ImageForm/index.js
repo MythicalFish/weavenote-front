@@ -3,21 +3,26 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Field, reduxForm } from 'redux-form/immutable';
-import Input from 'components/FormInput';
+import FocusableField from 'components/FormField';
 import Image from 'components/Image';
 import Icon from 'components/Icon';
 import Button from 'components/Button';
 import Focusable from 'utils/Focusable';
-import { updateImage, deleteImage, makePrimary } from './actions';
+import { updateImage, deleteImage } from './actions';
 
 const ImageFormWrapper = (props) => {
-  const { initialValues, focusThis, isFocused } = props;
-  const src = initialValues.getIn(['urls', 'medium']);
+  const { focusThis, isFocused, src } = props;
   return (
     <div className="image-form-wrapper">
       <Image {...{ src }} />
       {isFocused && <ImageForm {...props} />}
-      {!isFocused && <Icon onClick={focusThis} name="Edit" className="dark6" />}
+      {!isFocused && (
+        <div className="image-overlay">
+          <div className="image-actions">
+            <Icon onClick={focusThis} name="Edit" size={20} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -29,7 +34,6 @@ const ImageForm = (props) => {
     props.updateImage({ imageable, image });
     unfocusThis();
   };
-  const src = initialValues.getIn(['urls', 'medium']);
   return (
     <form
       className="image-form flex items-center justify-center"
@@ -41,10 +45,10 @@ const ImageForm = (props) => {
           <Field
             name="name"
             type="text"
-            component={Input}
+            component={FocusableField}
             label="Name"
             placeholder="Untitled image"
-            fieldClass="input-inline bigger1 center py2"
+            fieldClass="center"
             focus
             onBlur={(d, name) => {
               const image = { id, name };
@@ -87,21 +91,17 @@ ImageForm.propTypes = {
   initialValues: PropTypes.object,
   updateImage: PropTypes.func,
   deleteImage: PropTypes.func,
-  makePrimary: PropTypes.func,
   unfocusThis: PropTypes.func,
 };
 
 ImageFormWrapper.propTypes = {
-  initialValues: PropTypes.object,
+  src: PropTypes.string,
   focusThis: PropTypes.func,
   isFocused: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { updateImage, deleteImage, makePrimary },
-    dispatch
-  );
+  return bindActionCreators({ updateImage, deleteImage }, dispatch);
 }
 
 const mapState = createStructuredSelector({});

@@ -19,12 +19,17 @@ export function* ProjectImagesWatcher() {
 
 function* createAnnotation({ image }) {
   const annotation = yield select(selectNewAnnotation());
-  const image_id = image.get('id');
-  yield sagas.post(
-    'annotations',
-    { image_id, ...annotation.toJS() },
-    actions.createAnnotationSuccess
-  );
+  const { annotatable, anchors, type } = annotation.toJS();
+  const params = {
+    annotation: {
+      image_id: image.get('id'),
+      annotation_type: type,
+      annotatable_id: annotatable.id,
+      annotatable_type: annotatable.type,
+      anchors_attributes: anchors,
+    },
+  };
+  yield sagas.post('annotations', params, actions.createAnnotationSuccess);
 }
 
 function* bringFocus() {

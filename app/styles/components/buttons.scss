@@ -35,7 +35,7 @@ button {
   position: relative;
   line-height: 1;
   &.btn-sm {
-    font-size: .9em;
+    font-size: 0.9em;
     padding: 6px 12px;
   }
   &.btn-lg {
@@ -60,7 +60,7 @@ button {
     font-weight: normal;
   }
   i.fa {
-    font-size: .9em;
+    font-size: 0.9em;
     margin-right: 6px;
   }
   .icon {
@@ -139,11 +139,4 @@ label.btn {
       margin-right: $space-2;
     }
   }
-}
-.image-actions {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
 }
