@@ -17,6 +17,7 @@ const Textarea = ({ handleSubmit }) =>
     type="textarea"
     component={Input}
     onEnterKey={handleSubmit}
+    focus
   />;
 
 const Actions = ({ cancelCommentAction }) =>
