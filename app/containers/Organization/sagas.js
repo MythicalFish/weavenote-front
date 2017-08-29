@@ -1,4 +1,5 @@
 import { take, takeLatest, cancel, put, select } from 'redux-saga/effects';
+import { getFormValues } from 'redux-form/immutable';
 import { initialize } from 'redux-form';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
@@ -38,7 +39,8 @@ function* createOrganization({ organization }) {
   );
 }
 
-function* updateOrganization({ organization }) {
+function* updateOrganization() {
+  const organization = yield select(getFormValues('OrgInfo'));
   yield sagas.patch(
     orgUrl(organization),
     { organization },

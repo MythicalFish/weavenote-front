@@ -2,4 +2,5 @@
   @extend .px4;
   @extend .py3;
   background: $white;
+  @include borderRadius();
 }

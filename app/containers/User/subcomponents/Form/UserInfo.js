@@ -15,6 +15,7 @@ const UserInfo = (props) => {
         component={InputRow}
         label="Name"
         onBlur={onSubmit}
+        theme="alt1"
       />
       <button type="submit" disabled={submitting} className="conceal" />
     </form>

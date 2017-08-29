@@ -10,11 +10,11 @@
 }
 .container-narrow {
   @extend .container;
-  max-width: 1100px;
+  max-width: 900px;
 }
 .container-narrower {
   @extend .container;
-  max-width: 900px;
+  max-width: 600px;
 }
 .items-middle {
   @extend .items-center;

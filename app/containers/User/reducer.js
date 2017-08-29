@@ -29,7 +29,7 @@ function UserReducer(state = initialState, action) {
       return fromJS(action.data);
 
     case orgTypes.UPDATE_ORGANIZATION_SUCCESS:
-      return state.set('organization', fromJS(action.data));
+      return state.set('organization', fromJS(action.response));
 
     default:
       return state;

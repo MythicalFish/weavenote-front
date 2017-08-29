@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Collaborators from 'containers/Collaborators';
-import OrganizationForm from './OrganizationForm';
+import OrgInfo from './OrgInfo';
 import Switcher from './Switcher';
 import { updateOrganization, switchOrganization } from '../../actions';
 
@@ -22,11 +22,11 @@ class Manage extends React.PureComponent {
           </div>
         </div>
 
-        {abilities.Organization.update &&
+        {abilities.Organization.update && (
           <div>
             <div className="bg-white p2 mt2">
               <h4>General</h4>
-              <OrganizationForm
+              <OrgInfo
                 initialValues={organization}
                 onSubmit={this.props.handleUpdate}
               />
@@ -38,7 +38,8 @@ class Manage extends React.PureComponent {
                 invitable={{ type: 'Organization', id: organization.get('id') }}
               />
             </div>
-          </div>}
+          </div>
+        )}
       </div>
     );
   }

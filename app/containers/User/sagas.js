@@ -1,5 +1,5 @@
 import { take, cancel, takeLatest, select } from 'redux-saga/effects';
-import { getFormValues, isDirty } from 'redux-form/immutable';
+import { getFormValues } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';

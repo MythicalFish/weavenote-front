@@ -10,7 +10,7 @@ class Form extends React.PureComponent {
   render() {
     const { user, dispatch } = this.props;
     return (
-      <div>
+      <div className="box">
         {user && (
           <div>
             <h2>Profile settings</h2>

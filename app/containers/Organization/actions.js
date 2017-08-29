@@ -6,11 +6,11 @@ export function switchOrganization(id) {
 export function switchOrganizationSuccess(data) {
   return { type: types.SWITCH_ORGANIZATION_SUCCESS, data };
 }
-export function updateOrganization(organization) {
-  return { type: types.UPDATE_ORGANIZATION, organization };
+export function updateOrganization() {
+  return { type: types.UPDATE_ORGANIZATION };
 }
-export function updateOrganizationSuccess(data) {
-  return { type: types.UPDATE_ORGANIZATION_SUCCESS, data };
+export function updateOrganizationSuccess(response) {
+  return { type: types.UPDATE_ORGANIZATION_SUCCESS, response };
 }
 export function createOrganization(organization) {
   return { type: types.CREATE_ORGANIZATION, organization };
