@@ -39,6 +39,7 @@ export class MaterialManager extends React.PureComponent {
       initialValues: material,
       abilities: abilities.Material,
       onSubmit,
+      isNew: this.props.params.id === 'new',
       ...globalData,
     };
     return (

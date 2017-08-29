@@ -1,11 +1,10 @@
-import { delay } from 'redux-saga';
-import { take, cancel, takeLatest, fork, call } from 'redux-saga/effects';
+import { take, cancel, takeLatest, select } from 'redux-saga/effects';
+import { getFormValues, isDirty } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
-import * as selectors from './selectors';
 export default [materialManagerWatcher];
 
 export function* materialManagerWatcher() {
@@ -28,10 +27,12 @@ export function* fetchMaterial(action) {
   yield sagas.get(`materials/${action.id}`, null, actions.fetchMaterialSuccess);
 }
 
-export function* updateMaterial(action) {
-  const material = action.material.toJS();
+export function* updateMaterial() {
+  const dirty = yield select(isDirty('Material'));
+  if (!dirty) return;
+  const material = yield select(getFormValues('Material'));
   yield sagas.patch(
-    `materials/${material.id}`,
+    `materials/${material.get('id')}`,
     { material },
     actions.updateMaterialSuccess
   );

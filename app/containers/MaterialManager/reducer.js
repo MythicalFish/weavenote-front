@@ -17,24 +17,14 @@ const labelIndex = (state, label) =>
 
 const labelCount = (state) => labels(state).size;
 
-const suppliers = (state) => state.get('suppliers');
-
-const supplierIndex = (state, supplier) =>
-  suppliers(state).findKey((obj) => obj.get('id') === supplier.id);
-
 function materialReducer(state = initialState, action) {
-  //
-  const stateSetMaterial = () =>
-    state
-      .set('material', fromJS(action.material))
-      .setIn(
-        ['suppliers', supplierIndex(state, action.material.supplier)],
-        fromJS(action.material.supplier)
-      );
+  const { type, response } = action;
 
-  const isMaterialImage = () => action.response.imageable.type === 'Material';
+  const setMaterial = () => state.set('material', fromJS(response));
 
-  switch (action.type) {
+  const isMaterialImage = () => response.imageable.type === 'Material';
+
+  switch (type) {
     // Material
 
     case types.FETCH_MATERIAL:
@@ -46,17 +36,14 @@ function materialReducer(state = initialState, action) {
       return state.set('material', fromJS(m));
 
     case types.UPDATE_MATERIAL_SUCCESS:
-      return stateSetMaterial();
+      return setMaterial();
 
     case types.CREATE_MATERIAL_SUCCESS:
-      return stateSetMaterial();
+      return setMaterial();
 
     case CREATE_IMAGE_SUCCESS:
       if (!isMaterialImage()) return state;
-      return state.setIn(
-        ['material', 'images'],
-        fromJS(action.response.images)
-      );
+      return state.setIn(['material', 'images'], fromJS(response.images));
 
     case DELETE_IMAGE_SUCCESS:
       if (!isMaterialImage()) return state;

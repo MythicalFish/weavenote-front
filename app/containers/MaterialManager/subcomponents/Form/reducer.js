@@ -10,38 +10,30 @@ const supplierAttributes = (state) => {
   return fromJS(attributes);
 };
 
-const labels = (state) => {
-  return state.getIn(['values', 'care_labels']);
-};
+const labels = (state) => state.getIn(['values', 'care_labels']);
 
-const labelCount = (state) => {
-  return labels(state).size;
-};
+const labelCount = (state) => labels(state).size;
 
 export default formReducer.plugin({
   Material: (state, action) => {
-
     switch (action.type) {
-
-      case types.UPDATE_MATERIAL_SUCCESS:
-        return state
-          .set('values', fromJS(action.material));
-
-      case types.CREATE_MATERIAL_SUCCESS:
-        return state
-          .set('values', fromJS(action.material));
+      // case types.UPDATE_MATERIAL_SUCCESS:
+      //  return state.set('values', fromJS(action.response));
+      //
+      // case types.CREATE_MATERIAL_SUCCESS:
+      //  return state.set('values', fromJS(action.response));
 
       case types.NEW_SUPPLIER:
-        return state
-          .setIn(['values', 'supplier'], supplierAttributes(state));
+        return state.setIn(['values', 'supplier'], supplierAttributes(state));
 
       case types.ADD_CARE_LABEL:
-        return state
-          .setIn(['values', 'care_labels', labelCount(state)], action.label);
-      
+        return state.setIn(
+          ['values', 'care_labels', labelCount(state)],
+          action.label
+        );
+
       case types.REMOVE_CARE_LABEL:
-        return state
-          .deleteIn(['values', 'care_labels', action.payload.index]);
+        return state.deleteIn(['values', 'care_labels', action.payload.index]);
 
       default:
         return state;

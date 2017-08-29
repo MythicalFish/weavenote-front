@@ -39,20 +39,28 @@ class Form extends React.Component {
     p.className = p.c;
     delete p.c;
     const restricted = !this.props.abilities.update;
+    if (!this.props.isNew) {
+      p.onBlur = this.props.onSubmit;
+    }
     return <Field {...{ ...p, restricted }} />;
   };
 
   render() {
-    const { handleSubmit, submitting, initialValues: material } = this.props;
+    const {
+      handleSubmit,
+      submitting,
+      initialValues: material,
+      isNew,
+    } = this.props;
     const { type } = this.state;
-    const { showFor, switchType } = this;
+    const { showFor, switchType, Field: F } = this;
 
     const restricted = !this.props.abilities.update;
 
     const props = {
       showFor,
       switchType,
-      F: this.Field,
+      F,
       type,
       ...this.props,
     };
@@ -86,9 +94,11 @@ class Form extends React.Component {
           </div>
         </div>
         {!restricted &&
+        isNew && (
           <footer className="p2 center">
             <Button type="submit" disabled={submitting} label="Save" />
-          </footer>}
+          </footer>
+        )}
       </form>
     );
   }
@@ -96,7 +106,9 @@ class Form extends React.Component {
 
 Form.propTypes = {
   submitting: PropTypes.bool,
+  isNew: PropTypes.bool,
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   initialValues: PropTypes.object,
   abilities: PropTypes.object,
 };

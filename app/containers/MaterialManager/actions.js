@@ -8,17 +8,17 @@ export function fetchMaterial(id) {
 export function fetchMaterialSuccess(material) {
   return { type: types.FETCH_MATERIAL_SUCCESS, material };
 }
-export function updateMaterial(material) {
-  return { type: types.UPDATE_MATERIAL, material };
+export function updateMaterial() {
+  return { type: types.UPDATE_MATERIAL };
 }
-export function updateMaterialSuccess(material) {
-  return { type: types.UPDATE_MATERIAL_SUCCESS, material };
+export function updateMaterialSuccess(response) {
+  return { type: types.UPDATE_MATERIAL_SUCCESS, response };
 }
 export function createMaterial(material) {
   return { type: types.CREATE_MATERIAL, material };
 }
-export function createMaterialSuccess(material) {
-  return { type: types.CREATE_MATERIAL_SUCCESS, material };
+export function createMaterialSuccess(response) {
+  return { type: types.CREATE_MATERIAL_SUCCESS, response };
 }
 
 // Care labels
