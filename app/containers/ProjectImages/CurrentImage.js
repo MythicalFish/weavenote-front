@@ -5,7 +5,8 @@ import NewAnnotation from './NewAnnotation';
 import Annotations from './Annotations';
 
 function CurrentImage(props) {
-  const { currentImage, focus, imageable } = props;
+  const { currentImage, focus, imageable, newAnnotation } = props;
+  const hideForm = !!newAnnotation.get('type');
   const blurClass = focus === 'annotation' ? 'z3' : 'blurrable';
   const aProps = { ...props };
   delete aProps.size;
@@ -13,7 +14,10 @@ function CurrentImage(props) {
   const src = currentImage.getIn(['urls', 'medium']);
   return (
     <div className={`canvas-container ${blurClass}`}>
-      <ImageForm initialValues={currentImage} {...{ imageable, src }} />
+      <ImageForm
+        initialValues={currentImage}
+        {...{ imageable, src, hideForm }}
+      />
       <Annotations {...aProps} />
       <NewAnnotation {...aProps} />
     </div>

@@ -11,12 +11,13 @@ import Focusable from 'utils/Focusable';
 import { updateImage, deleteImage } from './actions';
 
 const ImageFormWrapper = (props) => {
-  const { focusThis, isFocused, src } = props;
+  const { focusThis, isFocused, src, hideForm } = props;
   return (
     <div className="image-form-wrapper">
       <Image {...{ src }} />
       {isFocused && <ImageForm {...props} />}
-      {!isFocused && (
+      {!isFocused &&
+      !hideForm && (
         <div className="image-overlay">
           <div className="image-actions">
             <Icon onClick={focusThis} name="Edit" size={20} />
@@ -98,6 +99,7 @@ ImageFormWrapper.propTypes = {
   src: PropTypes.string,
   focusThis: PropTypes.func,
   isFocused: PropTypes.bool,
+  hideForm: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
