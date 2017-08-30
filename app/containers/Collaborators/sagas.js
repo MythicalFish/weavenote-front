@@ -19,7 +19,7 @@ export function* collaboratorsWatcher() {
     yield takeLatest(types.UPDATE_ROLE, updateRole),
     yield takeLatest(types.REMOVE_ROLE, removeRole),
 
-    yield takeLatest(types.SEND_INVITE_SUCCESS, resetForm),
+    //yield takeLatest(types.SEND_INVITE_SUCCESS, resetForm),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
