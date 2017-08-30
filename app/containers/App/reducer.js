@@ -17,9 +17,6 @@ function appReducer(state = initialState, action) {
   switch (action.type) {
     // Global data
 
-    case appActionTypes.FETCH_GLOBAL_DATA:
-      return state.set('globalData', { fetching: true });
-
     case appActionTypes.FETCH_GLOBAL_DATA_SUCCESS:
       return state.set('globalData', fromJS(action.response).toObject());
 
