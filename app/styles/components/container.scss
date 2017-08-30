@@ -14,6 +14,10 @@
 }
 .container-narrower {
   @extend .container;
+  max-width: 900px;
+}
+.container-narrowest {
+  @extend .container;
   max-width: 600px;
 }
 .items-middle {

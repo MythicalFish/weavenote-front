@@ -43,7 +43,6 @@ export function* createMaterial(action) {
   yield sagas.post('materials', { material }, actions.createMaterialSuccess);
 }
 
-export function* showMaterial(action) {
-  const material = action.material;
-  browserHistory.push(`/materials/${material.id}`);
+export function* showMaterial({ response: { id } }) {
+  browserHistory.push(`/materials/${id}`);
 }

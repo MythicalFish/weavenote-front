@@ -76,35 +76,31 @@ class Form extends React.Component {
               <Basics {...props} />
             </div>
             <div className="box">
-              <h3>Image</h3>
-              <Image {...{ material }} />
-            </div>
-            <div className="box">
               <h3>Care labels</h3>
               <CareLabels {...props} />
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
+            {material.get('id') &&
+              <div className="box">
+                <h3>Image</h3>
+                <Image {...{ material }} />
+              </div>}
             <div className="box">
               <h3>Cost</h3>
               <Cost {...props} />
             </div>
-            <div className="box">
-              <h3>Supplier</h3>
-              <Supplier {...props} />
-            </div>
           </div>
         </div>
-        {!restricted && (
+        {!restricted &&
           <footer className="p2 center">
             <Button
               type="submit"
               disabled={submitting}
-              label="Save"
+              label="Create material"
               className={`btn ${submitBtnClass}`}
             />
-          </footer>
-        )}
+          </footer>}
       </form>
     );
   }
