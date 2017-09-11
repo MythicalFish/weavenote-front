@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Accordion from 'components/Accordion';
 import Button from 'components/Button';
-import ListItem from './subcomponents/ListItem';
+import RowHeader from './subcomponents/RowHeader';
 import Form from './subcomponents/Form';
 import {
   fetchInstructions,
@@ -54,8 +54,9 @@ class ProjectInstructions extends React.Component {
               items={this.props.instructions}
               updateItem={this.props.updateInstruction}
               formValues={this.props.current}
-              ListItem={ListItem}
+              RowHeader={RowHeader}
               Form={Form}
+              deleteInstruction={this.props.deleteInstruction}
             />
           </div>
         )}

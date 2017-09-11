@@ -28,6 +28,7 @@ class Dropdown extends React.PureComponent {
     const bProps = { onClick: this.toggleState(), type: 'button' };
 
     if (label || icon) {
+      bProps.className = 'p0';
       let I;
       if (icon) {
         if (icon === 'more') {

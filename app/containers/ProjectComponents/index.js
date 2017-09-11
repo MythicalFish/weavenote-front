@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import PlusButton from 'components/PlusButton';
 import Accordion from 'components/Accordion';
 import SelectMaterial from './subcomponents/SelectMaterial';
-import ListItem from './subcomponents/ListItem';
+import RowHeader from './subcomponents/ListItem';
 import Form from './subcomponents/Form';
 import MaterialCost from './subcomponents/MaterialCost';
 
@@ -34,15 +34,17 @@ class Components extends React.Component {
     const { updateComponent: updateItem } = this.props;
     return (
       <div>
-        {this.state.creating
-          ? <SelectMaterial {...{ ...this.props, toggleCreate }} />
-          : <div>
+        {this.state.creating ? (
+          <SelectMaterial {...{ ...this.props, toggleCreate }} />
+        ) : (
+          <div>
             <PlusButton onClick={toggleCreate} />
             <Accordion
-              {...{ ...this.props, ListItem, Form, updateItem }}
+              {...{ ...this.props, RowHeader, Form, updateItem }}
               footer={<MaterialCost {...this.props} />}
             />
-          </div>}
+          </div>
+        )}
       </div>
     );
   }
