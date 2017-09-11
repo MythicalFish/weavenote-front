@@ -24,8 +24,8 @@ export function createInstructionSuccess(response) {
   return { type: types.CREATE_INSTRUCTION_SUCCESS, response };
 }
 
-export function deleteInstruction({ projectID, id }) {
-  return { type: types.DELETE_INSTRUCTION, projectID, id };
+export function deleteInstruction(payload) {
+  return { type: types.DELETE_INSTRUCTION, payload };
 }
 
 export function deleteInstructionSuccess(response) {

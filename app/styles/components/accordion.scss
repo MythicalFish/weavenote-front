@@ -6,16 +6,23 @@
     @extend .bb1;
     width: 100%;
     .accordion-row-header {
-      @extend .flex;
-      @extend .items-center;
-      text-align: left;
+      padding: 0;
+      display: block;
       width: 100%;
-      padding: $space-2;
-      div:not(:last-child) {
-        @extend .flex-auto;
-      }
-      div:last-child {
-        @extend .flex-none;
+      > div {
+        @extend .flex;
+        @extend .items-center;
+        text-align: left;
+        width: 100%;
+        padding: $space-2;
+        div:not(:last-child) {
+          @extend .flex-auto;
+        }
+        div:last-child {
+          @extend .flex-none;
+          @extend .flex;
+          @extend .items-center;
+        }
       }
     }
     .accordion-row-content {

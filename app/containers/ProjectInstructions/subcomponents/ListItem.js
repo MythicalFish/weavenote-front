@@ -1,12 +1,18 @@
 import React, { PropTypes } from 'react';
 
-const ListItem = (props) =>
+const ListItem = ({ item, Chevron }) => (
   <div>
-    {props.item.get('title')}
-  </div>;
+    <div className="pr1">{item.get('title')}</div>
+    <div>
+      <Chevron />
+      <div className="">x</div>
+    </div>
+  </div>
+);
 
 ListItem.propTypes = {
   item: PropTypes.object,
+  Chevron: PropTypes.func,
 };
 
 export default ListItem;

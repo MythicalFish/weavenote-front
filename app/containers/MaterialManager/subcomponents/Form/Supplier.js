@@ -3,7 +3,7 @@ import { Field } from 'redux-form/immutable';
 import { FormField } from 'components/FormField';
 
 export default class Supplier extends React.PureComponent {
-  Tail = (props) =>
+  Tail = (props) => (
     <button
       onClick={() => {
         this.props.newSupplier();
@@ -11,8 +11,9 @@ export default class Supplier extends React.PureComponent {
       }}
     >
       <i className="fa fa-plus mr1" />
-      Create a supplier
-    </button>;
+      Add a factory
+    </button>
+  );
 
   render() {
     const { selectedType, restricted, F } = this.props;
@@ -39,11 +40,13 @@ export default class Supplier extends React.PureComponent {
             <F name="supplier.ref" label="Ref." />
           </div>
         </div>
-        {['Fabric'].includes(selectedType) &&
-          <F name="supplier.agent" label="Agent" />}
+        {['Fabric'].includes(selectedType) && (
+          <F name="supplier.agent" label="Agent" />
+        )}
         <F name="supplier.color_ref" label="Color reference" />
-        {['Fabric'].includes(selectedType) &&
-          <F name="supplier.minimum_order" label="Minimum order" />}
+        {['Fabric'].includes(selectedType) && (
+          <F name="supplier.minimum_order" label="Minimum order" />
+        )}
         <F name="supplier.comments" label="Comments" type="textarea" />
       </div>
     );

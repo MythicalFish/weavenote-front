@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Accordion from 'components/Accordion';
-import PlusButton from 'components/PlusButton';
+import Button from 'components/Button';
 import ListItem from './subcomponents/ListItem';
 import Form from './subcomponents/Form';
 import {
   fetchInstructions,
   updateInstruction,
   createInstruction,
+  deleteInstruction,
 } from './actions';
 import { selectInstructions } from './selectors';
 
@@ -33,8 +34,8 @@ class ProjectInstructions extends React.Component {
   render() {
     return (
       <div>
-        {this.state.creating
-          ? <Form
+        {this.state.creating ? (
+          <Form
             onSubmit={this.createInstruction}
             label="Add instruction"
             initialValues={{
@@ -42,8 +43,13 @@ class ProjectInstructions extends React.Component {
             }}
             disableOnBlur
           />
-          : <div>
-            <PlusButton onClick={this.toggleCreate} />
+        ) : (
+          <div>
+            <Button
+              onClick={this.toggleCreate}
+              label="Add Instruction"
+              icon="Plus"
+            />
             <Accordion
               items={this.props.instructions}
               updateItem={this.props.updateInstruction}
@@ -51,7 +57,8 @@ class ProjectInstructions extends React.Component {
               ListItem={ListItem}
               Form={Form}
             />
-          </div>}
+          </div>
+        )}
       </div>
     );
   }
@@ -72,6 +79,7 @@ export function mapDispatch(dispatch) {
       fetchInstructions,
       updateInstruction,
       createInstruction,
+      deleteInstruction,
     },
     dispatch
   );

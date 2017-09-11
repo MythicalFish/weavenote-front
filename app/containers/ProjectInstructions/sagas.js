@@ -47,9 +47,9 @@ function* createInstruction({ payload }) {
   );
 }
 
-function* deleteInstruction(action) {
+function* deleteInstruction({ payload }) {
   yield sagas.destroy(
-    `projects/${action.projectID}/instructions/${action.id}`,
+    `projects/${payload.project_id}/instructions/${payload.id}`,
     null,
     actions.deleteInstructionSuccess
   );

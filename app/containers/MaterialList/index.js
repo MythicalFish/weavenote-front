@@ -35,7 +35,7 @@ export class MaterialList extends React.PureComponent {
                 <th>Ref.</th>
                 <th>Name</th>
                 <th>Color</th>
-                <th>Supplier</th>
+                <th>Factory</th>
                 <th>Price</th>
                 <th>Status</th>
                 <th>Tags</th>
@@ -46,12 +46,12 @@ export class MaterialList extends React.PureComponent {
               {materials &&
                 materials
                   .toArray()
-                  .map((material) =>
+                  .map((material) => (
                     <ListItem
                       material={material}
                       key={`material-${material.get('id')}`}
                     />
-                  )}
+                  ))}
             </tbody>
           </table>
         </div>

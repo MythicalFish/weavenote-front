@@ -24,6 +24,7 @@ const Form = (props) => {
           type="text"
           component={InputRow}
           label="Title"
+          placeholder="Eg. Ironing"
           focus
           onBlur={onBlur}
         />
@@ -34,16 +35,18 @@ const Form = (props) => {
           label="Description"
           onBlur={onBlur}
         />
-        {images &&
+        {images && (
           <div className="field field-theme-default">
             <label>Images</label>
             <div className="mt1 flex">
               <ImageThumbnails images={images} {...iProps} deletable />
               {images.size < iProps.maxImages && <ImageUploader {...iProps} />}
             </div>
-          </div>}
-        {!props.disableOnBlur &&
-          <button type="submit" disabled={submitting} className="conceal" />}
+          </div>
+        )}
+        {!props.disableOnBlur && (
+          <button type="submit" disabled={submitting} className="conceal" />
+        )}
         {props.disableOnBlur && <Button type="submit" label="Create" />}
       </div>
     </form>
