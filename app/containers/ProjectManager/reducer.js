@@ -3,7 +3,9 @@ import { combineReducers } from 'redux-immutable';
 import ProjectImagesReducer from 'containers/ProjectImages/reducer';
 import ProjectCommentsReducer from 'containers/ProjectComments/reducer';
 import ProjectComponentsReducer from 'containers/ProjectComponents/reducer';
-import ProjectInstructionsReducer from 'containers/ProjectInstructions/reducer';
+import ProjectInstructionsReducer, {
+  formReducer as instructionFormReducer,
+} from 'containers/ProjectInstructions/reducer';
 import ProjectMeasurementsReducer from 'containers/ProjectMeasurements/reducer';
 import * as types from './constants';
 const initialState = fromJS({
@@ -55,3 +57,5 @@ export default combineReducers({
   Instructions: ProjectInstructionsReducer,
   Measurements: ProjectMeasurementsReducer,
 });
+
+export { instructionFormReducer };

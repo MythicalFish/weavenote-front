@@ -4,6 +4,7 @@ import { getFormValues, isDirty } from 'redux-form/immutable';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
+import { selectProjectID } from '../ProjectManager/selectors';
 
 export function* ProjectInstructionsWatcher() {
   const watcher = [
@@ -38,11 +39,10 @@ function* updateInstruction() {
 }
 
 function* createInstruction({ payload }) {
-  const { title, description, project_id } = payload.toJS();
-  const instruction = { project_id, title, description };
+  const projectID = yield select(selectProjectID());
   yield sagas.post(
-    `projects/${project_id}/instructions`,
-    { instruction },
+    `projects/${projectID}/instructions`,
+    { instruction: payload },
     actions.createInstructionSuccess
   );
 }

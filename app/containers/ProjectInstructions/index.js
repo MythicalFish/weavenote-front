@@ -38,10 +38,8 @@ class ProjectInstructions extends React.Component {
           <Form
             onSubmit={this.createInstruction}
             label="Add instruction"
-            initialValues={{
-              project_id: this.props.project.get('id'),
-            }}
-            disableOnBlur
+            initialValues={{ image_ids: [] }}
+            disableSaveOnBlur
           />
         ) : (
           <div>

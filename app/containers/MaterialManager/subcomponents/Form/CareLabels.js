@@ -8,11 +8,9 @@ const renderCareLabels = ({ fields, removeLabel }) => {
   if (!l) return null;
   return (
     <div>
-      {l.map((label, index) =>
+      {l.map((label, index) => (
         <div key={label} className="tag">
-          <div>
-            {label.get('name')}
-          </div>
+          <div>{label.get('name')}</div>
           <Icon
             onClick={() => removeLabel({ label, index })}
             size={15}
@@ -20,18 +18,18 @@ const renderCareLabels = ({ fields, removeLabel }) => {
             className="p0"
           />
         </div>
-      )}
+      ))}
     </div>
   );
 };
 
 export default class CareLabels extends React.PureComponent {
   addLabel = (label) => {
-    this.props.addCareLabel(label);
+    this.props.addLabel(label);
   };
 
   removeLabel = (label) => {
-    this.props.removeCareLabel(label);
+    this.props.removeLabel(label);
   };
 
   render() {
@@ -60,8 +58,8 @@ export default class CareLabels extends React.PureComponent {
 }
 
 CareLabels.propTypes = {
-  addCareLabel: PropTypes.func,
-  removeCareLabel: PropTypes.func,
+  addLabel: PropTypes.func,
+  removeLabel: PropTypes.func,
   careLabels: PropTypes.object,
   className: PropTypes.string,
 };

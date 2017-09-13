@@ -67,6 +67,7 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('Project', reducer.default);
+          injectReducer('form', reducer.instructionFormReducer);
           injectSagas(sagas.default);
           renderRoute(component);
         });
