@@ -3,6 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from 'components/Thumbnail';
 import AvatarList from 'components/AvatarList';
+import confirm from 'utils/confirm';
 
 export default function ListItem(props) {
   const { project, fileProject, deleteProject } = props;
@@ -33,7 +34,17 @@ export default function ListItem(props) {
             <button onClick={() => fileProject({ id, archived: !archived })}>
               {archived ? 'Restore' : 'Archive'}
             </button>
-            <button onClick={() => deleteProject(id)}>Delete</button>
+            <button
+              onClick={() => {
+                confirm(
+                  'Are you sure you want to delete this project?'
+                ).then(() => {
+                  deleteProject(id);
+                });
+              }}
+            >
+              Delete
+            </button>
           </Dropdown>
         </div>
       </td>

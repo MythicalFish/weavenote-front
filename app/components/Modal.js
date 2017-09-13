@@ -6,13 +6,15 @@ import Portal from 'react-portal';
 import { closeModal } from 'containers/App/actions';
 import { selectModalID } from 'containers/App/selectors';
 
-const PseudoModal = (props) => {
+const ModalMarkup = (props) => {
   const p = props;
   const style = {};
   if (p.minWidth) style.minWidth = p.minWidth;
+  const modalClass = p.isOpen ? 'visible' : p.modalClass;
+  const modalBGClass = p.isOpen ? 'overlay' : '';
   return (
-    <div className={`modal ${p.modalClass}`}>
-      <div className="modal-bg" onClick={p.closePortal} />
+    <div className={`modal ${modalClass}`}>
+      <div className={`modal-bg ${modalBGClass}`} onClick={p.closePortal} />
       <div className="modal-content" style={style}>
         {p.children}
       </div>
@@ -47,9 +49,9 @@ class Modal extends React.PureComponent {
         beforeClose={this.beforeClose}
         closeOnEsc
       >
-        <PseudoModal {...this.props} {...this.state}>
+        <ModalMarkup {...this.props} {...this.state}>
           {this.props.children}
-        </PseudoModal>
+        </ModalMarkup>
       </Portal>
     );
   }
@@ -71,3 +73,4 @@ const mapState = createStructuredSelector({
 });
 
 export default connect(mapState, mapDispatch)(Modal);
+export { ModalMarkup };

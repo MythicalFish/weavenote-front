@@ -46,14 +46,14 @@ export class ProjectList extends React.PureComponent {
             </thead>
             <tbody>
               {projects &&
-                projects.map((project, index) =>
+                projects.map((project, index) => (
                   <ListItem
                     key={`project-${index}`}
                     project={project}
                     fileProject={this.props.fileProject}
                     deleteProject={this.props.deleteProject}
                   />
-                )}
+                ))}
             </tbody>
           </table>
         </div>

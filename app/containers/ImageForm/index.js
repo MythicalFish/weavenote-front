@@ -8,6 +8,7 @@ import Image from 'components/Image';
 import Icon from 'components/Icon';
 import Button from 'components/Button';
 import Focusable from 'utils/Focusable';
+import confirm from 'utils/confirm';
 import { updateImage, deleteImage } from './actions';
 
 const ImageFormWrapper = (props) => {
@@ -64,9 +65,13 @@ const ImageForm = (props) => {
             inline
             small
             onClick={() => {
-              const image = { id };
-              props.deleteImage({ imageable, image });
-              unfocusThis();
+              confirm(
+                'Are you sure you want to delete this image?'
+              ).then(() => {
+                const image = { id };
+                props.deleteImage({ imageable, image });
+                unfocusThis();
+              });
             }}
           />
           <Button
