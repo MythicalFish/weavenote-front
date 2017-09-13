@@ -1,12 +1,10 @@
 import { put, take, cancel, takeLatest } from 'redux-saga/effects';
 import { initialize } from 'redux-form';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import notificationsWatcher from './notifications';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
-import * as selectors from './selectors';
-export default [notificationsWatcher, collaboratorsWatcher];
+export default [collaboratorsWatcher];
 
 export function* collaboratorsWatcher() {
   const watcher = [
@@ -19,7 +17,7 @@ export function* collaboratorsWatcher() {
     yield takeLatest(types.UPDATE_ROLE, updateRole),
     yield takeLatest(types.REMOVE_ROLE, removeRole),
 
-    //yield takeLatest(types.SEND_INVITE_SUCCESS, resetForm),
+    // yield takeLatest(types.SEND_INVITE_SUCCESS, resetForm),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -66,11 +64,15 @@ function* fetchRoles({ invitable }) {
 }
 
 function* updateRole({ payload }) {
-  const update = {
+  const role = {
     role_type_id: payload.roleType.get('id'),
-    invitable: payload.invitable,
   };
-  yield sagas.patch(roleURL(payload), update, actions.updateRoleSuccess);
+  const invitable = payload.invitable;
+  yield sagas.patch(
+    roleURL(payload),
+    { role, invitable },
+    actions.updateRoleSuccess
+  );
 }
 
 function* removeRole({ payload }) {

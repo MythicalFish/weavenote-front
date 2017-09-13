@@ -24,13 +24,13 @@
   }
 }
 .tether-element {
-  z-index: 3;
+  z-index: 4;
 }
 .dropdown-options {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: all .2s;
-  -webkit-transition: all .2s;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
   transform: translateY(-20px);
   -webkit-transform: translateY(-20px);
   transform-origin: top;
