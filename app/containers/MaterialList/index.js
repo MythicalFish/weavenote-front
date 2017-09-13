@@ -6,7 +6,7 @@ import { selectCurrentSection } from 'containers/App/selectors';
 import { changeSection } from 'containers/App/actions';
 import * as sections from 'containers/App/constants/sections';
 import Header from 'components/Header';
-import { fetchMaterials } from './actions';
+import { fetchMaterials, deleteMaterial } from './actions';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
 import { selectMaterials } from './selectors';
@@ -50,6 +50,7 @@ export class MaterialList extends React.PureComponent {
                     <ListItem
                       material={material}
                       key={`material-${material.get('id')}`}
+                      deleteMaterial={this.props.deleteMaterial}
                     />
                   ))}
             </tbody>
@@ -64,6 +65,7 @@ MaterialList.propTypes = {
   fetchMaterials: PropTypes.func.isRequired,
   currentSection: PropTypes.object,
   changeSection: PropTypes.func,
+  deleteMaterial: PropTypes.func,
   materials: PropTypes.object,
 };
 
@@ -73,7 +75,10 @@ const mapState = createStructuredSelector({
 });
 
 function mapDispatch(dispatch) {
-  return bindActionCreators({ changeSection, fetchMaterials }, dispatch);
+  return bindActionCreators(
+    { changeSection, fetchMaterials, deleteMaterial },
+    dispatch
+  );
 }
 
 export default connect(mapState, mapDispatch)(MaterialList);

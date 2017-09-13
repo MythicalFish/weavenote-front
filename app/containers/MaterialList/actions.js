@@ -6,10 +6,10 @@ export function fetchMaterials() {
   };
 }
 
-export function fetchMaterialsSuccess(materials) {
+export function fetchMaterialsSuccess(response) {
   return {
     type: types.FETCH_MATERIALS_SUCCESS,
-    materials,
+    response,
   };
 }
 
@@ -25,4 +25,12 @@ export function fileMaterialSuccess(list) {
     type: types.FILE_MATERIAL_SUCCESS,
     list,
   };
+}
+
+export function deleteMaterial(id) {
+  return { type: types.DELETE_MATERIAL, id };
+}
+
+export function deleteMaterialSuccess(response) {
+  return { type: types.DELETE_MATERIAL_SUCCESS, response };
 }

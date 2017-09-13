@@ -1,4 +1,3 @@
-
 import { take, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
@@ -9,6 +8,7 @@ export default [materialListWatcher];
 export function* materialListWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIALS, fetchMaterials),
+    yield takeLatest(types.DELETE_MATERIAL, deleteMaterial),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -16,4 +16,8 @@ export function* materialListWatcher() {
 
 export function* fetchMaterials() {
   yield sagas.get('materials', null, actions.fetchMaterialsSuccess);
+}
+
+export function* deleteMaterial({ id }) {
+  yield sagas.destroy(`materials/${id}`, null, actions.deleteMaterialSuccess);
 }
