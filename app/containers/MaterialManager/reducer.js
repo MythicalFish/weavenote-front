@@ -8,6 +8,7 @@ const initialState = fromJS({
     supplier: {},
   },
   suppliers: null,
+  care_labels: [],
 });
 
 const labels = (state) => state.get('care_labels');

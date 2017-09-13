@@ -39,6 +39,8 @@ export class MaterialManager extends React.PureComponent {
       initialValues: material,
       abilities: abilities.Material,
       onSubmit,
+      addLabel: this.props.addCareLabel,
+      removeLabel: this.props.removeCareLabel,
       isNew: this.props.params.id === 'new',
       ...globalData,
     };
