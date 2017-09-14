@@ -19,17 +19,16 @@ export default function Focusable(Component, opts = {}) {
       if (!opts.disableOutside) this.unfocusThis();
     };
     unfocusThis = () => {
-      const { afterLoseFocus } = this.props;
-      return new Promise((resolve) => {
-        if (this.isTrulyFocused()) {
-          this.setState({ isFocused: false });
-          setTimeout(() => {
-            this.setState({ isActive: false });
-            resolve();
-            if (afterLoseFocus) afterLoseFocus();
-          }, 320);
+      setTimeout(() => {
+        if (this.componentIsMounted) {
+          if (this.isTrulyFocused()) {
+            this.setState({ isFocused: false });
+            setTimeout(() => {
+              this.setState({ isActive: false });
+            }, 320);
+          }
         }
-      });
+      }, 100);
     };
     focusThis = () => {
       if (!this.isTrulyFocused()) {
@@ -58,6 +57,9 @@ export default function Focusable(Component, opts = {}) {
             isFocused: isActive,
             isDoing,
             focusClass,
+            ref: (ref) => {
+              this.componentIsMounted = !!ref;
+            },
           }}
         />
       );

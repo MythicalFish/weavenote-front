@@ -41,11 +41,7 @@ export class Organization extends React.PureComponent {
   };
 
   render() {
-    return (
-      <Layout>
-        {this.currentView()}
-      </Layout>
-    );
+    return <Layout>{this.currentView()}</Layout>;
   }
 }
 

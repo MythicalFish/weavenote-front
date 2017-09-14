@@ -24,14 +24,15 @@ class Switcher extends React.PureComponent {
         data={this.otherOrganizations()}
         onChange={this.switchOrganization}
         align="right"
-        tail={() =>
+        tail={() => (
           <Button
             small
             inline
             label="Create new organization"
             icon="Plus"
             onClick={startCreate}
-          />}
+          />
+        )}
       />
     );
   }

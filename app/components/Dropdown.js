@@ -77,9 +77,9 @@ class Dropdown extends React.PureComponent {
     const itemsClass = `dropdown-options ${alignment}-align ${focusClass}`;
     if (children) {
       return (
-        <div className={itemsClass} onClick={this.toggleState()}>
+        <div className={itemsClass}>
           {children}
-          {this.tail()}
+          {tail && tail()}
         </div>
       );
     }
@@ -104,19 +104,9 @@ class Dropdown extends React.PureComponent {
     return (
       <div className={itemsClass}>
         {items}
-        {tail && this.tail()}
+        {tail && tail()}
       </div>
     );
-  };
-
-  tail = () => {
-    const { tail } = this.props;
-    if (tail) {
-      return tail({
-        onClick: this.toggleState(),
-      });
-    }
-    return null;
   };
 
   tetherOptions = {
