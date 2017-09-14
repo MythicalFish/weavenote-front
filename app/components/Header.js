@@ -1,9 +1,10 @@
 import React from 'react';
 import UserMenu from 'components/UserMenu';
 
-const Header = () =>
+const Header = () => (
   <header className="blurrable flex justify-end py3">
     <UserMenu />
-  </header>;
+  </header>
+);
 
 export default Header;

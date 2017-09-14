@@ -6,11 +6,11 @@ export default class Basics extends React.PureComponent {
 
     return (
       <div className="row">
-        <div className="col-xs-8">
-          <F name="name" label="Name" />
+        <div className="col-xs-6">
+          <F name="name" label="Material Name" />
         </div>
-        <div className="col-xs-4">
-          <F name="identifier" label="Ref." />
+        <div className="col-xs-6">
+          <F name="identifier" label="Reference" />
         </div>
         <div className="col-xs-12">
           <F

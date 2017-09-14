@@ -17,13 +17,18 @@ export function* ProjectMeasurementsWatcher() {
     yield takeLatest(types.CREATE_MEASUREMENT_NAME, createMeasurementName),
     yield takeLatest(types.DELETE_MEASUREMENT_GROUP, deleteMeasurementGroup),
     yield takeLatest(types.DELETE_MEASUREMENT_NAME, deleteMeasurementName),
-
-    yield takeLatest(types.CREATE_MEASUREMENT_GROUP_SUCCESS, resetForm),
-    yield takeLatest(types.CREATE_MEASUREMENT_NAME_SUCCESS, resetForm),
-    yield takeLatest(types.UPDATE_MEASUREMENTS_SUCCESS, resetForm),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
+}
+
+const url = (id) => `projects/${id}/measurements`;
+const groupUrl = (id) => `projects/${id}/measurement_groups`;
+const nameUrl = (id) => `projects/${id}/measurement_names`;
+
+function* resetForm() {
+  const m = yield select(selectMeasurements());
+  yield put(initialize('Measurements', m, { form: 'Measurements' }));
 }
 
 function* fetchMeasurements({ projectID }) {
@@ -37,6 +42,7 @@ function* createMeasurementGroup({ projectID }) {
     { group },
     actions.createMeasurementGroupSuccess
   );
+  yield resetForm();
 }
 
 function* createMeasurementName({ projectID }) {
@@ -46,6 +52,7 @@ function* createMeasurementName({ projectID }) {
     { name },
     actions.createMeasurementNameSuccess
   );
+  yield resetForm();
 }
 
 function* updateMeasurements() {
@@ -67,6 +74,7 @@ function* deleteMeasurementGroup({ id }) {
     { id },
     actions.deleteMeasurementGroupSuccess
   );
+  yield resetForm();
 }
 
 function* deleteMeasurementName({ id }) {
@@ -76,14 +84,5 @@ function* deleteMeasurementName({ id }) {
     { id },
     actions.deleteMeasurementNameSuccess
   );
-}
-
-const url = (id) => `projects/${id}/measurements`;
-const groupUrl = (id) => `projects/${id}/measurement_groups`;
-const nameUrl = (id) => `projects/${id}/measurement_names`;
-
-function* resetForm() {
-  yield delay(50);
-  const m = yield select(selectMeasurements());
-  yield put(initialize('Measurements', m, { form: 'Measurements' }));
+  yield resetForm();
 }

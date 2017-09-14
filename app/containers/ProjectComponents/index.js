@@ -12,7 +12,12 @@ import MaterialCost from './subcomponents/MaterialCost';
 
 import { fetchMaterials } from '../MaterialList/actions';
 import { selectMaterials } from '../MaterialList/selectors';
-import { fetchComponents, createComponent, updateComponent } from './actions';
+import {
+  fetchComponents,
+  createComponent,
+  updateComponent,
+  deleteComponent,
+} from './actions';
 import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
@@ -31,7 +36,6 @@ class Components extends React.Component {
 
   render() {
     const { toggleCreate } = this;
-    const { updateComponent: updateItem } = this.props;
     return (
       <div>
         {this.state.creating ? (
@@ -40,7 +44,7 @@ class Components extends React.Component {
           <div>
             <PlusButton onClick={toggleCreate} />
             <Accordion
-              {...{ ...this.props, RowHeader, Form, updateItem }}
+              {...{ ...this.props, RowHeader, Form }}
               footer={<MaterialCost {...this.props} />}
             />
           </div>
@@ -60,7 +64,8 @@ Components.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      updateComponent,
+      updateItem: updateComponent,
+      deleteComponent,
       fetchComponents,
       createComponent,
       fetchMaterials,

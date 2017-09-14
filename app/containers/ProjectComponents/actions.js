@@ -24,8 +24,8 @@ export function createComponentSuccess(response) {
   return { type: types.CREATE_COMPONENT_SUCCESS, response };
 }
 
-export function deleteComponent({ projectID, id }) {
-  return { type: types.DELETE_COMPONENT, projectID, id };
+export function deleteComponent(payload) {
+  return { type: types.DELETE_COMPONENT, payload };
 }
 
 export function deleteComponentSuccess(response) {

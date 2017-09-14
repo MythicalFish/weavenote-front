@@ -72,7 +72,7 @@ class Form extends React.Component {
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <div className="box">
-              <h3>Basics</h3>
+              <h3>Material</h3>
               <Basics {...props} />
             </div>
             <div className="box">
@@ -81,18 +81,19 @@ class Form extends React.Component {
             </div>
           </div>
           <div className="col-xs-12 col-md-6">
-            {material.get('id') &&
+            {material.get('id') && (
               <div className="box">
                 <h3>Image</h3>
                 <Image {...{ material }} />
-              </div>}
+              </div>
+            )}
             <div className="box">
               <h3>Cost</h3>
               <Cost {...props} />
             </div>
           </div>
         </div>
-        {!restricted &&
+        {!restricted && (
           <footer className="p2 center">
             <Button
               type="submit"
@@ -100,7 +101,8 @@ class Form extends React.Component {
               label="Create material"
               className={`btn ${submitBtnClass}`}
             />
-          </footer>}
+          </footer>
+        )}
       </form>
     );
   }

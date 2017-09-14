@@ -2,20 +2,21 @@ import React, { PropTypes } from 'react';
 import Input from 'components/FormInput';
 import Focusable from 'utils/Focusable';
 
-export function FormField(props) {
-  const { label, className, focusClass, theme } = props;
-  let klass = 'field';
-  klass += className ? ` ${className}` : '';
-  klass += focusClass ? ` ${focusClass}` : '';
-  klass += theme ? ` field-theme-${theme}` : ' field-theme-default';
-  return (
-    <div className={klass}>
-      <label>
-        {label}
-      </label>
-      <Input {...props} onFocus={props.focusThis} />
-    </div>
-  );
+// Keep it a class (otherwise breaks Focusable)
+class FormField extends React.PureComponent {
+  render() {
+    const { label, className, focusClass, theme } = this.props;
+    let klass = 'field';
+    klass += className ? ` ${className}` : '';
+    klass += focusClass ? ` ${focusClass}` : '';
+    klass += theme ? ` field-theme-${theme}` : ' field-theme-default';
+    return (
+      <div className={klass}>
+        <label>{label}</label>
+        <Input {...this.props} onFocus={this.props.focusThis} />
+      </div>
+    );
+  }
 }
 
 FormField.propTypes = {
@@ -27,3 +28,4 @@ FormField.propTypes = {
 };
 
 export default Focusable(FormField);
+export { FormField };

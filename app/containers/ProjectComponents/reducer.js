@@ -18,7 +18,7 @@ function ProjectComponentsReducer(state = initialState, action) {
       return state.set('components', fromJS(action.response));
 
     case types.DELETE_COMPONENT_SUCCESS:
-      return state.set('components', fromJS(action.components));
+      return state.set('components', fromJS(action.response));
 
     default:
       return state;

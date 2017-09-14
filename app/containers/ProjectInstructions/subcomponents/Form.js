@@ -36,14 +36,7 @@ const Form = (props) => {
           label="Description"
           onBlur={onBlur}
         />
-        {images && (
-          <div className="field field-theme-default">
-            <label>Images</label>
-            <div className="mt1 flex">
-              <ImageThumbnails images={images} {...iProps} />
-            </div>
-          </div>
-        )}
+        <ImageThumbnails images={images} {...iProps} />
         {images.size < iProps.maxImages && (
           <ImageUploader
             {...iProps}
@@ -55,7 +48,19 @@ const Form = (props) => {
         {!props.disableSaveOnBlur && (
           <button type="submit" disabled={submitting} className="conceal" />
         )}
-        {props.disableSaveOnBlur && <Button type="submit" label="Create" />}
+        {props.disableSaveOnBlur && (
+          <div className="right-align">
+            <span className="mr2">
+              <Button
+                secondary
+                inline
+                label="Cancel"
+                onClick={props.toggleCreate}
+              />
+            </span>
+            <Button type="submit" label="Create" />
+          </div>
+        )}
       </div>
     </form>
   );

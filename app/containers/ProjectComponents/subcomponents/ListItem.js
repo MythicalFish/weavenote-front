@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import Dropdown from 'components/Dropdown';
 import ListItemLabel from './ListItemLabel';
 
-const ListItem = ({ item, Chevron, ToggleArea }) => {
+const ListItem = ({ item, Chevron, ToggleArea, deleteComponent }) => {
   const material = item.get('material');
   return (
     <div className="accordion-row-header">
@@ -9,6 +10,11 @@ const ListItem = ({ item, Chevron, ToggleArea }) => {
         <ListItemLabel material={material} />
         <Chevron />
       </ToggleArea>
+      <Dropdown icon="more">
+        <button onClick={() => deleteComponent({ ...item.toJS() })}>
+          Delete
+        </button>
+      </Dropdown>
     </div>
   );
 };
@@ -16,6 +22,7 @@ const ListItem = ({ item, Chevron, ToggleArea }) => {
 ListItem.propTypes = {
   item: PropTypes.object,
   Chevron: PropTypes.func,
+  deleteComponent: PropTypes.func,
   ToggleArea: PropTypes.func,
 };
 

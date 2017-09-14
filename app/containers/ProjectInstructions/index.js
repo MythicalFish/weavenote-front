@@ -40,6 +40,7 @@ class ProjectInstructions extends React.Component {
             label="Add instruction"
             initialValues={{ image_ids: [] }}
             disableSaveOnBlur
+            toggleCreate={this.toggleCreate}
           />
         ) : (
           <div>

@@ -6,26 +6,27 @@ import onClickOutside from 'react-onclickoutside';
   this HOC provides various focus methods, and
   a delay is created in the wrapped component by
   providing isFocused bool, and then focusClass
-  220ms later. This is for CSS animation, and to
+  320ms later. This is for CSS animation, and to
   give any child events time to execute before
   unmounting (specifically those inside Tether).
 */
 
-export default function Focusable(Component, opts = {}) {
-  class F extends React.PureComponent {
+export default function F(Component, opts = {}) {
+  class Focusable extends React.PureComponent {
     state = { isFocused: false, isActive: false, action: null };
     isTrulyFocused = () => this.state.isFocused && this.state.isActive;
     handleClickOutside = () => {
       if (!opts.disableOutside) this.unfocusThis();
     };
     unfocusThis = () => {
+      const delay = opts.delay >= 0 ? opts.delay : 320;
       setTimeout(() => {
         if (this.componentIsMounted) {
           if (this.isTrulyFocused()) {
             this.setState({ isFocused: false });
             setTimeout(() => {
               this.setState({ isActive: false });
-            }, 320);
+            }, delay);
           }
         }
       }, 100);
@@ -36,13 +37,13 @@ export default function Focusable(Component, opts = {}) {
         setTimeout(() => this.setState({ isFocused: true }), 20);
       }
     };
+    toggleThis = () =>
+      this.isTrulyFocused() ? this.unfocusThis() : this.focusThis();
     render() {
       const { isFocused, isActive, action } = this.state;
       const focusClass = isFocused ? 'focused' : '';
       const isDoing = (thing) => isActive && action === thing;
-      const { unfocusThis, focusThis } = this;
-      const toggleThis = () =>
-        this.isTrulyFocused() ? unfocusThis() : focusThis();
+      const { unfocusThis, focusThis, toggleThis } = this;
       const doThis = (thing) => () => this.setState({ action: thing });
       const doNothing = () => doThis(null);
       return (
@@ -66,5 +67,5 @@ export default function Focusable(Component, opts = {}) {
     }
   }
 
-  return onClickOutside(F);
+  return onClickOutside(Focusable);
 }

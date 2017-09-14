@@ -55,4 +55,5 @@ function* deleteComponent({ payload }) {
     null,
     actions.deleteComponentSuccess
   );
+  yield put(fetchMaterialCost(payload.project_id));
 }
