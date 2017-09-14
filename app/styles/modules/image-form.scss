@@ -19,8 +19,8 @@
       background: $mako;
       @include borderRadius();
       display: none;
-      padding: $space-1;
       .icon {
+        padding: $space-1 !important;
         color: $white;
         padding: 0;
       }

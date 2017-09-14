@@ -32,7 +32,7 @@ class ProjectImages extends React.PureComponent {
         {!currentImage && <Image src={PLACEHOLDER} />}
         {currentImage && (
           <div className="center">
-            <CurrentImage {...{ currentImage, imageable, ...this.props }} />
+            <CurrentImage {...{ currentImage, ...this.props }} />
           </div>
         )}
         <div className="pt3 flex justify-center blurrable">

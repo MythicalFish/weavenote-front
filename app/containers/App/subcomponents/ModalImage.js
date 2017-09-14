@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import Modal from 'components/Modal';
-import Image from 'components/Image';
+import ImageForm from 'containers/ImageForm';
 
-const ModalImage = ({ image }) =>
+const ModalImage = ({ image }) => (
   <Modal id="image">
     <div className="lh0">
-      {image && <Image src={image.getIn(['urls', 'large'])} />}
+      {image && <ImageForm initialValues={image} imgID={image.get('id')} />}
     </div>
-  </Modal>;
+  </Modal>
+);
 
 ModalImage.propTypes = {
   image: PropTypes.object,

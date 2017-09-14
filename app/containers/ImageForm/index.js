@@ -11,26 +11,31 @@ import Focusable from 'utils/Focusable';
 import confirm from 'utils/confirm';
 import { updateImage, deleteImage } from './actions';
 
-const ImageFormWrapper = (props) => {
-  const { focusThis, isFocused, src, hideForm } = props;
-  return (
-    <div className="image-form-wrapper">
-      <Image {...{ src }} />
-      {isFocused && <ImageForm {...props} />}
-      {!isFocused &&
-      !hideForm && (
-        <div className="image-overlay">
-          <div className="image-actions">
-            <Icon onClick={focusThis} name="Edit" size={20} />
+// Keep it a class (otherwise breaks Focusable)
+class ImageFormWrapper extends React.PureComponent {
+  render() {
+    const { focusThis, isFocused, initialValues, formHidden } = this.props;
+    return (
+      <div className="image-form-wrapper">
+        <Image src={initialValues.getIn(['urls', 'medium'])} />
+        {isFocused && <ImageForm {...this.props} />}
+        {!isFocused &&
+        !formHidden && (
+          <div className="image-overlay">
+            <div className="image-actions">
+              <Icon onClick={focusThis} name="Edit" size={20} />
+            </div>
           </div>
-        </div>
-      )}
-    </div>
-  );
-};
+        )}
+      </div>
+    );
+  }
+}
 
 const ImageForm = (props) => {
-  const { handleSubmit, imageable, initialValues, unfocusThis } = props;
+  const { handleSubmit, initialValues, unfocusThis } = props;
+  console.log(initialValues.toJS());
+  const imageable = initialValues.get('imageable_info').toJS();
   const id = initialValues.get('id');
   const onSubmit = (image) => {
     props.updateImage({ imageable, image });
@@ -104,7 +109,7 @@ ImageFormWrapper.propTypes = {
   src: PropTypes.string,
   focusThis: PropTypes.func,
   isFocused: PropTypes.bool,
-  hideForm: PropTypes.bool,
+  formHidden: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
