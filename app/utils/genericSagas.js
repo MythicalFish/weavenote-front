@@ -66,7 +66,7 @@ function* handleError({ error }) {
 function* handleResponse(callback, response) {
   if (response) {
     if (response.message) {
-      // yield put(notify(response.message));
+      yield put(notify(response.message));
     }
     let payload;
     if (response.payload) {
