@@ -1,7 +1,7 @@
 import React from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
-import PlusButton from 'components/PlusButton';
+import Button from 'components/Button';
 
 export default function Toolbar(props) {
   const {
@@ -16,7 +16,13 @@ export default function Toolbar(props) {
     <header className="toolbar toolbar-compact container-narrow px2">
       <div className="row">
         <div className="col-xs-2">
-          {canCreate && <PlusButton onClick={() => createProject()} />}
+          {canCreate && (
+            <Button
+              onClick={() => createProject()}
+              label="New Project"
+              icon="Plus"
+            />
+          )}
         </div>
         <div className="col-xs-8 flex justify-center">
           <nav>

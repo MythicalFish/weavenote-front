@@ -1,7 +1,7 @@
 import React from 'react';
 import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
-import PlusButton from 'components/PlusButton';
+import Button from 'components/Button';
 
 export default function Toolbar(props) {
   const { fetch, changeSection, currentSection } = props;
@@ -9,7 +9,7 @@ export default function Toolbar(props) {
     <header className="toolbar toolbar-compact container-narrow px2">
       <div className="row">
         <div className="col-xs-2">
-          <PlusButton to="/materials/new" />
+          <Button to="/materials/new" label="New Material" icon="Plus" />
         </div>
         <div className="col-xs-8 flex justify-center">
           <nav>

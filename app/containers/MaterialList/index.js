@@ -37,8 +37,6 @@ export class MaterialList extends React.PureComponent {
                 <th>Color</th>
                 <th>Factory</th>
                 <th>Price</th>
-                <th>Status</th>
-                <th>Tags</th>
                 <th />
               </tr>
             </thead>

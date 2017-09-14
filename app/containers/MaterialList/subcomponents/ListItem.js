@@ -27,8 +27,6 @@ export default function ListItem({ material, deleteMaterial }) {
           currency={material.getIn(['currency', 'iso_code'])}
         />
       </td>
-      <td />
-      <td />
       <td className="right-align">
         <Dropdown icon="more">
           <Link to={url}>Manage</Link>

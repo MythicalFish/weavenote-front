@@ -32,7 +32,7 @@ class ImageUploader extends React.PureComponent {
     console.log(`Upload error: ${message}`);
   };
   render() {
-    const Button = () =>
+    const uploader = (
       <ReactS3Uploader
         server={API.endpoint()}
         signingUrl={'/s3_url'}
@@ -44,30 +44,25 @@ class ImageUploader extends React.PureComponent {
         onError={this.onUploadError}
         onFinish={this.onFinish}
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
-      />;
-    const { label, inlineIcon, isUploading, text } = this.props;
+      />
+    );
+    const { label, inlineIcon, isUploading, btnClass } = this.props;
     if (isUploading === this.props.imageable) {
       return <Spinner />;
     }
     if (label) {
       return (
-        <label className="btn">
+        <label className={`btn ${btnClass && btnClass}`}>
           {inlineIcon && <InlineIcon name={inlineIcon} />}
           {label}
-          <Button />
+          {uploader}
         </label>
       );
     }
     return (
-      <div className="flex items-center">
-        <PlusButton color="gray" size={25}>
-          <Button />
-        </PlusButton>
-        {text &&
-          <div className="ml1 dark6">
-            {text}
-          </div>}
-      </div>
+      <PlusButton color="gray" size={25}>
+        {uploader}
+      </PlusButton>
     );
   }
 }
@@ -77,8 +72,8 @@ ImageUploader.propTypes = {
   uploadImage: PropTypes.func,
   createImage: PropTypes.func,
   label: PropTypes.string,
+  btnClass: PropTypes.string,
   inlineIcon: PropTypes.string,
-  text: PropTypes.string,
   onUploadFinish: PropTypes.func,
   notifyWarning: PropTypes.func,
   isUploading: PropTypes.object,

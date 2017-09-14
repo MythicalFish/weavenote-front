@@ -44,7 +44,14 @@ const Form = (props) => {
             </div>
           </div>
         )}
-        {images.size < iProps.maxImages && <ImageUploader {...iProps} />}
+        {images.size < iProps.maxImages && (
+          <ImageUploader
+            {...iProps}
+            label="Upload image"
+            btnClass="btn-secondary btn-sm"
+            inlineIcon="file-image-o"
+          />
+        )}
         {!props.disableSaveOnBlur && (
           <button type="submit" disabled={submitting} className="conceal" />
         )}

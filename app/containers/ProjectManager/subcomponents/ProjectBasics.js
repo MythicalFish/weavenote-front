@@ -10,7 +10,7 @@ const ProjectForm = (props) => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Field type="text" name="name" label="Name" {...f} />
+      <Field type="text" name="name" label="Name" {...f} focus />
       <Field type="text" name="ref_number" label="Reference no." {...f} />
       <Field type="text" name="color_code" label="Color" {...f} />
       <Field type="text" name="collection" label="Collection" {...f} />

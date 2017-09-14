@@ -15,11 +15,17 @@ export default function Image({ material }) {
   const uploadLabel = images.size > 0 ? 'Replace image' : 'Upload image';
   return (
     <div>
-      {images.size > 0 &&
+      {images.size > 0 && (
         <div className="mb2">
           <ImageThumbnails {...iProps} images={images} size="small" />
-        </div>}
-      <ImageUploader {...iProps} text={uploadLabel} />
+        </div>
+      )}
+      <ImageUploader
+        {...iProps}
+        label={uploadLabel}
+        btnClass="btn-secondary btn-sm"
+        inlineIcon="file-image-o"
+      />
     </div>
   );
 }
