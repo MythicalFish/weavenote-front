@@ -11,26 +11,23 @@ import Focusable from 'utils/Focusable';
 import confirm from 'utils/confirm';
 import { updateImage, deleteImage } from './actions';
 
-// Keep it a class (otherwise breaks Focusable)
-class ImageFormWrapper extends React.PureComponent {
-  render() {
-    const { focusThis, isFocused, initialValues, formHidden } = this.props;
-    return (
-      <div className="image-form-wrapper">
-        <Image src={initialValues.getIn(['urls', 'medium'])} />
-        {isFocused && <ImageForm {...this.props} />}
-        {!isFocused &&
-        !formHidden && (
-          <div className="image-overlay">
-            <div className="image-actions">
-              <Icon onClick={focusThis} name="Edit" size={20} />
-            </div>
+const ImageFormWrapper = (props) => {
+  const { focusThis, isFocused, initialValues, formHidden } = props;
+  return (
+    <div className="image-form-wrapper">
+      <Image src={initialValues.getIn(['urls', 'medium'])} />
+      {isFocused && <ImageForm {...props} />}
+      {!isFocused &&
+      !formHidden && (
+        <div className="image-overlay">
+          <div className="image-actions">
+            <Icon onClick={focusThis} name="Edit" size={20} />
           </div>
-        )}
-      </div>
-    );
-  }
-}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const ImageForm = (props) => {
   const { handleSubmit, initialValues, unfocusThis } = props;

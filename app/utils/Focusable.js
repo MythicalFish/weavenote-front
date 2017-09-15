@@ -11,6 +11,16 @@ import onClickOutside from 'react-onclickoutside';
   unmounting (specifically those inside Tether).
 */
 
+class FocusPseudo extends React.PureComponent {
+  // This Component allows componentIsMounted (below)
+  // to work (it doesn't if the wrapped component is
+  // a pure function).
+  render() {
+    const { Component } = this.props;
+    return <Component {...this.props} />;
+  }
+}
+
 export default function F(Component, opts = {}) {
   class Focusable extends React.PureComponent {
     state = { isFocused: false, isActive: false, action: null };
@@ -29,7 +39,7 @@ export default function F(Component, opts = {}) {
             }, delay);
           }
         }
-      }, 100);
+      }, 200);
     };
     focusThis = () => {
       if (!this.isTrulyFocused()) {
@@ -47,7 +57,7 @@ export default function F(Component, opts = {}) {
       const doThis = (thing) => () => this.setState({ action: thing });
       const doNothing = () => doThis(null);
       return (
-        <Component
+        <FocusPseudo
           {...{
             ...this.props,
             focusThis,
@@ -58,8 +68,9 @@ export default function F(Component, opts = {}) {
             isFocused: isActive,
             isDoing,
             focusClass,
+            Component,
             ref: (ref) => {
-              this.componentIsMounted = !!ref;
+              this.componentIsMounted = ref;
             },
           }}
         />
