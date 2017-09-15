@@ -44,3 +44,42 @@
     }
   }
 }
+form {
+  width: 100%;
+}
+textarea {
+  min-height: 140px;
+  resize: vertical;
+  width: 100%;
+  line-height: 1.4;
+}
+
+// Placeholder styling
+// (Don't combine these, doesn't work otherwise)
+
+::-webkit-input-placeholder {
+  color: $gray;
+}
+:-moz-placeholder {
+  color: $gray;
+  opacity: 1;
+}
+::-moz-placeholder {
+  color: $gray;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  color: $gray;
+}
+::-ms-input-placeholder {
+  color: $gray;
+}
+:focus::-webkit-input-placeholder {
+  text-indent: -999px;
+}
+:focus::-moz-placeholder {
+  text-indent: -999px;
+}
+:focus::-ms-input-placeholder {
+  text-indent: -999px;
+}

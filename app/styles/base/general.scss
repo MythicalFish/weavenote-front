@@ -15,22 +15,6 @@ svg {
 img {
   max-width: 100%;
 }
-form {
-  width: 100%;
-}
-::-webkit-input-placeholder,
-::-moz-placeholder,
-:-ms-input-placeholder,
-input:-moz-placeholder {
-  color: $dark3;
-}
-
-textarea {
-  min-height: 140px;
-  resize: vertical;
-  width: 100%;
-  line-height: 1.4;
-}
 .cell-fit {
   white-space: nowrap;
   width: 1%;
