@@ -11,7 +11,7 @@ import {
 import Layout from 'components/Layout';
 import { createOrganization } from './actions';
 import Create from './subcomponents/Create';
-import NoneYet from './subcomponents/NoneYet';
+import GetStarted from './subcomponents/GetStarted';
 import Manage from './subcomponents/Manage';
 
 export class Organization extends React.PureComponent {
@@ -34,7 +34,7 @@ export class Organization extends React.PureComponent {
     } else if (organization) {
       return <Manage {...this.props} startCreate={this.startCreate} />;
     } else if (view === 'start') {
-      return <NoneYet onClick={this.startCreate} />;
+      return <GetStarted onClick={this.startCreate} />;
     } else {
       return null;
     }
