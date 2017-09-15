@@ -35,7 +35,7 @@ export default function F(Component, opts = {}) {
           if (this.isTrulyFocused()) {
             this.setState({ isFocused: false });
             setTimeout(() => {
-              this.setState({ isActive: false });
+              if (this.componentIsMounted) this.setState({ isActive: false });
             }, delay);
           }
         }
@@ -70,7 +70,7 @@ export default function F(Component, opts = {}) {
             focusClass,
             Component,
             ref: (ref) => {
-              this.componentIsMounted = ref;
+              this.componentIsMounted = !!ref;
             },
           }}
         />
