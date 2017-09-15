@@ -12,9 +12,10 @@ import confirm from 'utils/confirm';
 import { updateImage, deleteImage } from './actions';
 
 const ImageFormWrapper = (props) => {
-  const { focusThis, isFocused, initialValues, formHidden } = props;
+  const { focusThis, isFocused, initialValues, formHidden, theme } = props;
+  const themeClass = theme ? `theme-${theme}` : '';
   return (
-    <div className="image-form-wrapper">
+    <div className={`image-form-wrapper ${themeClass}`}>
       <Image src={initialValues.getIn(['urls', 'medium'])} />
       {isFocused && <ImageForm {...props} />}
       {!isFocused &&
@@ -31,7 +32,6 @@ const ImageFormWrapper = (props) => {
 
 const ImageForm = (props) => {
   const { handleSubmit, initialValues, unfocusThis } = props;
-  console.log(initialValues.toJS());
   const imageable = initialValues.get('imageable_info').toJS();
   const id = initialValues.get('id');
   const onSubmit = (image) => {
@@ -95,7 +95,6 @@ const ImageForm = (props) => {
 
 ImageForm.propTypes = {
   handleSubmit: PropTypes.func,
-  imageable: PropTypes.object,
   initialValues: PropTypes.object,
   updateImage: PropTypes.func,
   deleteImage: PropTypes.func,
@@ -103,10 +102,11 @@ ImageForm.propTypes = {
 };
 
 ImageFormWrapper.propTypes = {
-  src: PropTypes.string,
+  initialValues: PropTypes.object,
   focusThis: PropTypes.func,
   isFocused: PropTypes.bool,
   formHidden: PropTypes.bool,
+  theme: PropTypes.string,
 };
 
 export function mapDispatch(dispatch) {

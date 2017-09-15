@@ -1,7 +1,10 @@
 import { fromJS } from 'immutable';
 import { reducer as fReducer } from 'redux-form/immutable';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
-import { DELETE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
+import {
+  DELETE_IMAGE_SUCCESS,
+  UPDATE_IMAGE_SUCCESS,
+} from 'containers/ImageForm/constants';
 import { idToIndex } from 'utils/reducerHelpers';
 import * as types from './constants';
 
@@ -11,14 +14,12 @@ function reducer(state = initialState, action) {
   const { response } = action;
 
   const isInstructionImage = () => response.imageable.type === 'Instruction';
+  const isNewInstruction = () => !response.imageable.id;
 
   const setImages = () => {
+    if (!isInstructionImage()) return state;
+    if (isNewInstruction()) return state;
     const { id } = response.imageable;
-    if (!id) {
-      // No ID means new Instruction, so set
-      // the Image ID in the form reducer.
-      return state;
-    }
     const index = idToIndex(id, state);
     return state.setIn([index, 'images'], fromJS(response.images));
   };
@@ -37,11 +38,12 @@ function reducer(state = initialState, action) {
       return fromJS(response);
 
     case CREATE_IMAGE_SUCCESS:
-      if (!isInstructionImage()) return state;
+      return setImages();
+
+    case UPDATE_IMAGE_SUCCESS:
       return setImages();
 
     case DELETE_IMAGE_SUCCESS:
-      if (!isInstructionImage()) return state;
       return setImages();
 
     default:

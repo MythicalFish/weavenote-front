@@ -6,7 +6,6 @@ import Annotations from './Annotations';
 
 function CurrentImage(props) {
   const { currentImage, newAnnotation } = props;
-  const formHidden = !!newAnnotation.get('type');
   const aProps = { ...props };
   delete aProps.size;
   aProps.canvasSize = props.size;
@@ -14,7 +13,8 @@ function CurrentImage(props) {
     <div className={'canvas-container'}>
       <ImageForm
         initialValues={currentImage}
-        {...{ formHidden }}
+        formIsHidden={!!newAnnotation.get('type')}
+        enableReinitialize
         imgID={currentImage.get('id')} // This is only to cause a re-render
       />
       <Annotations {...aProps} />

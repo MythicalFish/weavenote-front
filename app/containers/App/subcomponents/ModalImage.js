@@ -5,7 +5,14 @@ import ImageForm from 'containers/ImageForm';
 const ModalImage = ({ image }) => (
   <Modal id="image">
     <div className="lh0">
-      {image && <ImageForm initialValues={image} imgID={image.get('id')} />}
+      {image && (
+        <ImageForm
+          initialValues={image}
+          imgID={image.get('id')}
+          enableReinitialize
+          theme="alt"
+        />
+      )}
     </div>
   </Modal>
 );
