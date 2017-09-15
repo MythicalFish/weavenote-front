@@ -1,19 +1,21 @@
 import React, { PropTypes } from 'react';
 import Modal from 'components/Modal';
+import Image from 'components/Image';
 import ImageForm from 'containers/ImageForm';
 
 const ModalImage = ({ image }) => (
   <Modal id="image">
-    <div className="lh0">
-      {image && (
+    {image && (
+      <div className="lh0">
+        <Image src={image.getIn(['urls', 'medium'])} />
         <ImageForm
           initialValues={image}
           imgID={image.get('id')}
           enableReinitialize
-          theme="alt"
+          disablePrimary
         />
-      )}
-    </div>
+      </div>
+    )}
   </Modal>
 );
 

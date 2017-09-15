@@ -7,7 +7,7 @@ import Image from 'components/Image';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 import { selectCurrentComment } from 'containers/Comments/selectors';
-import CurrentImage from './CurrentImage';
+import ImageUI from './ImageUI';
 import { PLACEHOLDER } from './constants';
 import * as selectors from './selectors';
 import { setAnnotation, createAnnotation, cancelAnnotation } from './actions';
@@ -25,21 +25,21 @@ class ProjectImages extends React.PureComponent {
   };
   render() {
     const { project, images } = this.props;
-    const currentImage = images.get(this.state.currentImage);
+    const image = images.get(this.state.currentImage);
     const imageable = { type: 'Project', id: project.get('id') };
     return (
       <div>
-        {!currentImage && <Image src={PLACEHOLDER} />}
-        {currentImage && (
+        {!image && <Image src={PLACEHOLDER} />}
+        {image && (
           <div className="center">
-            <CurrentImage {...{ currentImage, ...this.props }} />
+            <ImageUI {...{ image, ...this.props }} />
           </div>
         )}
         <div className="pt3 flex justify-center blurrable">
           <ImageThumbnails
             images={images}
             onSelect={this.selectImage}
-            {...{ currentImage }}
+            currentImage={image}
           />
           <div className="ml1">
             <ImageUploader {...{ imageable }} />

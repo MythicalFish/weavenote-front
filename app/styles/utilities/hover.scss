@@ -1,0 +1,8 @@
+.hoverable {
+  position: relative;
+  &:not(:hover) {
+    .on-hover {
+      @extend .conceal;
+    }
+  }
+}

@@ -1,53 +1,37 @@
-.image-form-wrapper {
-  position: relative;
-  .image-overlay {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 4;
-    &:hover {
-      .image-actions {
-        display: block;
-      }
+.image-actions {
+  position: absolute;
+  top: $space-2;
+  left: $space-2;
+  background: $mako;
+  @include borderRadius();
+  .icon {
+    padding: $space-1 !important;
+    color: $white;
+    padding: 0;
+  }
+}
+
+.image-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $dark7;
+  color: $white;
+  z-index: 4;
+  .image-form-actions {
+    button {
+      color: $light7;
     }
-    .image-actions {
-      position: absolute;
-      top: $space-2;
-      left: $space-2;
-      background: $mako;
-      @include borderRadius();
-      display: none;
-      .icon {
-        padding: $space-1 !important;
-        color: $white;
-        padding: 0;
-      }
+    button:not(:last-child) {
+      margin-right: $space-3;
     }
   }
-  .image-form {
+  .image-form-close {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: $dark7;
-    color: $white;
-    z-index: 4;
-    .image-form-actions {
-      button {
-        color: $light7;
-      }
-      button:not(:last-child) {
-        margin-right: $space-3;
-      }
-    }
-    .image-form-close {
-      position: absolute;
-      top: $space-2;
-      right: $space-2;
-      z-index: 3;
-    }
+    top: $space-2;
+    right: $space-2;
+    z-index: 3;
   }
 }
