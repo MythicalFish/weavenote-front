@@ -14,7 +14,6 @@ const ProjectForm = (props) => {
       <Field type="text" name="ref_number" label="Reference no." {...f} />
       <Field type="text" name="color_code" label="Color" {...f} />
       <Field type="text" name="collection" label="Collection" {...f} />
-      <Field type="text" name="development_stage" label="Stage" {...f} />
       <Field type="text" name="target_fob" label="Target price" {...f} />
       <Field type="textarea" name="notes" label="Details" {...f} />
       <button type="submit" disabled={submitting} className="conceal" />

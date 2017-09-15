@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import Portal from 'react-portal';
 import { closeModal } from 'containers/App/actions';
 import { selectModalID } from 'containers/App/selectors';
+import Icon from 'components/Icon';
 
 const ModalMarkup = (props) => {
   const p = props;
@@ -15,8 +16,12 @@ const ModalMarkup = (props) => {
   return (
     <div className={`modal ${modalClass}`}>
       <div className={`modal-bg ${modalBGClass}`} onClick={p.closePortal} />
-      <div className="modal-content" style={style}>
-        {p.children}
+      <div className="modal-content">
+        <div className="modal-body" style={style}>
+          <Icon name="X" className="modal-close" onClick={p.closePortal} />
+          {p.children}
+        </div>
+        {p.footer && p.footer}
       </div>
     </div>
   );

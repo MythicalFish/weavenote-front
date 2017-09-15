@@ -8,7 +8,7 @@ import confirm from 'utils/confirm';
 import { updateImage, deleteImage } from './actions';
 
 const ImageForm = (props) => {
-  const { handleSubmit, initialValues, disablePrimary } = props;
+  const { handleSubmit, initialValues, altTheme } = props;
   const imageable = initialValues.get('imageable_info').toJS();
   const id = initialValues.get('id');
   const onSubmit = (image) => {
@@ -21,7 +21,7 @@ const ImageForm = (props) => {
           name="name"
           type="text"
           component={FocusableField}
-          label="Name"
+          label={!altTheme ? 'Name' : null}
           placeholder="Untitled image"
           fieldClass="center"
           focus
@@ -44,7 +44,7 @@ const ImageForm = (props) => {
             });
           }}
         />
-        {!disablePrimary && (
+        {!altTheme && (
           <Button
             inlineIcon="star-o"
             label="Set as primary"
@@ -66,7 +66,7 @@ ImageForm.propTypes = {
   initialValues: PropTypes.object,
   updateImage: PropTypes.func,
   deleteImage: PropTypes.func,
-  disablePrimary: PropTypes.bool,
+  altTheme: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {

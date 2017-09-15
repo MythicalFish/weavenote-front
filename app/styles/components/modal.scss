@@ -23,24 +23,29 @@
   }
   .modal-content {
     @extend .flex-none;
-    background: $white;
     max-width: 600px;
-    box-shadow: 0 0 30px rgba(49, 60, 84, 0.1);
-    overflow: hidden;
-    border: 1px solid $white;
-    @include borderRadius();
     z-index: 2;
-    > img {
-      @include borderRadius();
-    }
-    header {
-      padding: $space-3;
-      font-weight: bold;
-      @extend .bb1;
-    }
-    .modal-header,
     .modal-body {
-      @extend .p4;
+      background: $white;
+      box-shadow: 0 0 30px rgba(49, 60, 84, 0.1);
+      overflow: hidden;
+      border: 1px solid $white;
+      @include borderRadius();
+      position: relative;
+      > img {
+        @include borderRadius();
+      }
+      header {
+        padding: $space-3;
+        font-weight: bold;
+        @extend .bb1;
+      }
+      .modal-close {
+        position: absolute;
+        top: $space-2;
+        right: $space-2;
+        z-index: 2;
+      }
     }
   }
 }
@@ -51,5 +56,5 @@
   left: 0;
   right: 0;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
 }

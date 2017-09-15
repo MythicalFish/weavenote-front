@@ -39,7 +39,6 @@ export class ProjectList extends React.PureComponent {
                 <th>Style number</th>
                 <th>Collection</th>
                 <th>Notifications</th>
-                <th>Stage</th>
                 <th>Team</th>
                 <th />
               </tr>

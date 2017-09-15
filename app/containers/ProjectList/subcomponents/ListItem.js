@@ -23,7 +23,6 @@ export default function ListItem(props) {
       <td {...linked}>{project.get('ref_number')}</td>
       <td {...linked}>{project.get('collection')}</td>
       <td {...linked} />
-      <td className="smaller1">{project.getIn(['stage', 'label'])}</td>
       <td>
         <AvatarList avatars={project.get('avatar_list')} />
       </td>
