@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import Modal from 'components/Modal';
 import Image from 'components/Image';
 import ImageForm from 'containers/ImageForm';
+import DeleteButton from 'containers/ImageForm/DeleteButton';
 
 const Form = ({ image }) => (
-  <div className="bg-white p2 mt1 rounded">
+  <div className="mt1">
     {image && (
       <ImageForm
         initialValues={image}
@@ -17,10 +18,24 @@ const Form = ({ image }) => (
 );
 
 const ModalImage = ({ image }) => (
-  <Modal id="image" footer={<Form image={image} />}>
+  <Modal id="image" noCloseOutside>
     {image && (
-      <div className="lh0">
-        <Image src={image.getIn(['urls', 'medium'])} className="vh-ymax75" />
+      <div>
+        <div className="lh1 relative">
+          <Image src={image.getIn(['urls', 'medium'])} className="vh-ymax75" />
+          <div className="br pb2 pr2">
+            <DeleteButton
+              image={image}
+              attributes={{
+                inlineIcon: 'trash-o',
+                secondary: true,
+                label: 'Delete',
+                small: true,
+              }}
+            />
+          </div>
+        </div>
+        <Form image={image} />
       </div>
     )}
   </Modal>

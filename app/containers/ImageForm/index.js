@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form/immutable';
 import FocusableField from 'components/FormField';
 import Button from 'components/Button';
-import confirm from 'utils/confirm';
-import { updateImage, deleteImage } from './actions';
+import { updateImage } from './actions';
+import DeleteButton from './DeleteButton';
 
 const ImageForm = (props) => {
   const { handleSubmit, initialValues, altTheme } = props;
@@ -16,35 +16,30 @@ const ImageForm = (props) => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb3">
-        <Field
-          name="name"
-          type="text"
-          component={FocusableField}
-          label={!altTheme ? 'Name' : null}
-          placeholder="Untitled image"
-          fieldClass="center"
-          focus
-          onBlur={(d, name) => {
-            const image = { id, name };
-            props.updateImage({ imageable, image });
-          }}
-        />
-      </div>
-      <div className="image-form-actions center">
-        <Button
-          inlineIcon="trash-o"
-          label="Delete"
-          inline
-          small
-          onClick={() => {
-            confirm('Are you sure you want to delete this image?').then(() => {
-              const image = { id };
-              props.deleteImage({ imageable, image });
-            });
-          }}
-        />
-        {!altTheme && (
+      <Field
+        name="name"
+        type="text"
+        component={FocusableField}
+        label={!altTheme ? 'Name' : null}
+        placeholder="Untitled image"
+        fieldClass="center"
+        focus
+        onBlur={(d, name) => {
+          const image = { id, name };
+          props.updateImage({ imageable, image });
+        }}
+      />
+      {!altTheme && (
+        <div className="image-form-actions center mt3">
+          <DeleteButton
+            image={initialValues}
+            attributes={{
+              inlineIcon: 'trash-o',
+              label: 'Delete',
+              inline: true,
+              small: true,
+            }}
+          />
           <Button
             inlineIcon="star-o"
             label="Set as primary"
@@ -55,8 +50,8 @@ const ImageForm = (props) => {
               props.updateImage({ imageable, image });
             }}
           />
-        )}
-      </div>
+        </div>
+      )}
     </form>
   );
 };
@@ -65,12 +60,11 @@ ImageForm.propTypes = {
   handleSubmit: PropTypes.func,
   initialValues: PropTypes.object,
   updateImage: PropTypes.func,
-  deleteImage: PropTypes.func,
   altTheme: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators({ updateImage, deleteImage }, dispatch);
+  return bindActionCreators({ updateImage }, dispatch);
 }
 
 export default connect(null, mapDispatch)(

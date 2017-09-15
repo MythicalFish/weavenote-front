@@ -1,0 +1,22 @@
+.bl,
+.br,
+.tr,
+.tl {
+  position: absolute;
+}
+.bl {
+  bottom: 0;
+  left: 0;
+}
+.br {
+  bottom: 0;
+  right: 0;
+}
+.tl {
+  top: 0;
+  left: 0;
+}
+.tr {
+  top: 0;
+  right: 0;
+}

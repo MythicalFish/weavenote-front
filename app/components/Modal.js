@@ -15,10 +15,17 @@ const ModalMarkup = (props) => {
   const modalBGClass = p.isOpen ? 'overlay' : '';
   return (
     <div className={`modal ${modalClass}`}>
-      <div className={`modal-bg ${modalBGClass}`} onClick={p.closePortal} />
+      <div
+        className={`modal-bg ${modalBGClass}`}
+        onClick={() => {
+          if (!p.noCloseOutside) p.closePortal();
+        }}
+      />
       <div className="modal-content">
         <div className="modal-body" style={style}>
-          <Icon name="X" className="modal-close" onClick={p.closePortal} />
+          {!props.hideCloseButton && (
+            <Icon name="X" className="modal-close" onClick={p.closePortal} />
+          )}
           {p.children}
         </div>
         {p.footer && p.footer}
@@ -67,6 +74,9 @@ Modal.propTypes = {
   modalID: PropTypes.string,
   id: PropTypes.string,
   closeModal: PropTypes.func,
+};
+ModalMarkup.propTypes = {
+  hideCloseButton: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
