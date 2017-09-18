@@ -1,5 +1,9 @@
 .hoverable {
   position: relative;
+  .on-hover {
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+  }
   &:not(:hover) {
     .on-hover {
       @extend .conceal;

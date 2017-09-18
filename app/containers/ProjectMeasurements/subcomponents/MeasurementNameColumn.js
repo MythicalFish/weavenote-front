@@ -4,13 +4,7 @@ import MeasurementNameLabel from './MeasurementNameLabel';
 import Input from './Input';
 
 const MeasurementNameInput = (props) => (
-  <Field
-    {...props}
-    focus
-    maxLength={25}
-    component={Input}
-    placeholder="Untitled"
-  />
+  <Field {...props} maxLength={25} component={Input} placeholder="Untitled" />
 );
 
 class MeasurementNameColumn extends React.PureComponent {
@@ -22,7 +16,7 @@ class MeasurementNameColumn extends React.PureComponent {
     return (
       <div className="column">
         <div className="column-header">
-          <label>Description</label>
+          <label className="opa5">Description</label>
         </div>
         {names.map((name, index) => (
           <MeasurementNameLabel

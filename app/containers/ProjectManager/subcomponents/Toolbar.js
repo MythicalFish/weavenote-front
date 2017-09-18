@@ -14,7 +14,7 @@ export default function Toolbar(props) {
     project,
   } = props;
   return (
-    <header className="toolbar toolbar-flex blurrable bb1">
+    <header id="app-header" className="toolbar toolbar-flex blurrable bb1">
       <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
 
       <nav>

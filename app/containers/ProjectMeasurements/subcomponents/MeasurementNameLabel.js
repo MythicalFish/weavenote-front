@@ -1,47 +1,38 @@
 import React, { PropTypes } from 'react';
-import Dropdown from 'components/Dropdown';
 import Focusable from 'utils/Focusable';
+import DeleteButton from './DeleteButton';
 
-class MeasurementNameLabel extends React.PureComponent {
-  render() {
-    const { name, Input, inputName, submitForm } = this.props;
-    const { doThis, focusClass, doNothing, focusAction } = this.props;
-    const value = name.get('value');
-    const annotate = () => {
-      this.props.addAnnotation({
-        maxAnchors: 2,
-        annotatable: { type: 'MeasurementName', id: name.get('id') },
-        type: 'line',
-      });
-    };
+const MeasurementNameLabel = (props) => {
+  const { name, Input, inputName, submitForm } = props;
+  const { focusClass, doNothing } = props;
+  // const annotate = () => {
+  //   props.addAnnotation({
+  //     maxAnchors: 2,
+  //     annotatable: { type: 'MeasurementName', id: name.get('id') },
+  //     type: 'line',
+  //   });
+  // };
 
-    const Label = () => (
-      <Dropdown value={{ name: value }}>
-        <button onClick={() => doThis('rename')}>Rename</button>
-        <button onClick={() => this.props.doDelete(name.get('id'))}>
-          Remove
-        </button>
-      </Dropdown>
-    );
-
-    const Rename = () => (
-      <Input
-        name={inputName}
-        onBlur={() => {
-          doNothing();
-          submitForm();
-        }}
+  return (
+    <div className="column-cell hoverable relative">
+      <DeleteButton
+        resourceName="row"
+        onClick={() => props.doDelete(name.get('id'))}
+        className="left-of"
       />
-    );
-
-    return (
-      <div className={`column-cell flex ${focusClass}`}>
+      <div className={`flex ${focusClass}`}>
         <label className="identifier flex-none">{name.get('identifier')}</label>
-        {focusAction === 'rename' ? <Rename /> : <Label />}
+        <Input
+          name={inputName}
+          onBlur={() => {
+            doNothing();
+            submitForm();
+          }}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 MeasurementNameLabel.propTypes = {
   name: PropTypes.object,
   submitForm: PropTypes.func,

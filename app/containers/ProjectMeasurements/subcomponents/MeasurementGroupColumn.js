@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { fromJS } from 'immutable';
 import { Field } from 'redux-form/immutable';
 import Focusable from 'utils/Focusable';
-import Icon from 'components/Icon';
+import DeleteButton from './DeleteButton';
 import Input from './Input';
 
 class MeasurementGroupColumn extends React.PureComponent {
@@ -20,7 +20,6 @@ class MeasurementGroupColumn extends React.PureComponent {
     const { index, submitForm } = this.props;
     return (
       <Field
-        focus
         name={`groups[${index}].name`}
         maxLength={3}
         onBlur={submitForm}
@@ -52,11 +51,10 @@ class MeasurementGroupColumn extends React.PureComponent {
     return (
       <div className={columnClass} onClick={focusThis}>
         <div className="column-header relative">
-          <Icon
-            name="Trash"
-            size={15}
+          <DeleteButton
+            resourceName="column"
             onClick={() => doDelete(group.get('id'))}
-            className="on-hover above opa5"
+            className="above"
           />
           <GroupNameField />
         </div>

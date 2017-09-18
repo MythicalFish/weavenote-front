@@ -45,10 +45,9 @@ function* createMeasurementGroup({ projectID }) {
 }
 
 function* createMeasurementName({ projectID }) {
-  const name = { value: 'Untitled' };
   yield sagas.post(
     nameUrl(projectID),
-    { name },
+    null,
     actions.createMeasurementNameSuccess
   );
   yield resetForm();
