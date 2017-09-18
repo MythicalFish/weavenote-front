@@ -2,19 +2,20 @@ $bStyle: 1px solid #ccc;
 #measurements {
   color: $dark7;
   @extend .flex;
+  @extend .items-start;
   @extend .flex-none;
   width: auto;
   .column {
+    @extend .flex-none;
     border-radius: 4px;
     -webkit-border-radius: 4px;
-    max-width: 45px;
+    //max-width: 200px;
     border: $bStyle;
     text-align: center;
     input,
     label {
       border: none;
       text-align: center;
-      width: 100%;
       color: inherit;
       padding: 10px 5px;
       font-family: inherit;

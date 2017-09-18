@@ -33,7 +33,7 @@ class MeasurementGroupColumn extends React.PureComponent {
     return (
       <Field
         name={`values[${index}].value`}
-        maxLength={5}
+        maxLength={8}
         onBlur={submitForm}
         component={Input}
         placeholder="0"
