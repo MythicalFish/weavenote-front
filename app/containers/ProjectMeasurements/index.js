@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { addAnnotation } from 'containers/ProjectImages/actions';
 import * as selectors from './selectors';
 import {
   fetchMeasurements,
@@ -52,7 +51,6 @@ export function mapDispatch(dispatch) {
       createName: (id) => createMeasurementName(id),
       deleteGroup: (id) => deleteMeasurementGroup(id),
       deleteName: (id) => deleteMeasurementName(id),
-      addAnnotation,
     },
     dispatch
   );

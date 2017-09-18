@@ -12,21 +12,20 @@ class NewAnnotation extends React.PureComponent {
     setAnnotation(relativePosition(pos, canvasSize));
   };
   createAnnotation = () => {
-    const { currentImage } = this.props;
-    this.props.createAnnotation(currentImage);
+    const { image } = this.props;
+    this.props.createAnnotation(image);
   };
   key = (annotation, index) => `NewAnnotationAnchor${index}`;
   anchorStyle = (annotation) =>
     annotation.get('type') === 'dot' ? 'default' : 'lineCap';
   render() {
     const { newAnnotation, canvasSize } = this.props;
-    if (!newAnnotation.get('annotatable')) return null;
     const anchors = newAnnotation.get('anchors');
     return (
       <div>
         <Canvas onClick={this.setAnnotation} size={canvasSize}>
           {anchors.size > 1 && <Line {...{ anchors, canvasSize }} />}
-          {anchors.map((anchor, index) =>
+          {anchors.map((anchor, index) => (
             <Anchor
               key={this.key(newAnnotation, index)}
               position={pixelPosition(anchor.toJS(), canvasSize)}
@@ -35,7 +34,7 @@ class NewAnnotation extends React.PureComponent {
               draggable
               active
             />
-          )}
+          ))}
         </Canvas>
         <div className="canvas-actions">
           <Button
@@ -43,8 +42,9 @@ class NewAnnotation extends React.PureComponent {
             secondary
             onClick={this.props.cancelAnnotation}
           />
-          {newAnnotation.get('maxAnchors') === anchors.size &&
-            <Button label="Save annotation" onClick={this.createAnnotation} />}
+          {newAnnotation.get('maxAnchors') === anchors.size && (
+            <Button label="Save annotation" onClick={this.createAnnotation} />
+          )}
         </div>
       </div>
     );
@@ -52,7 +52,7 @@ class NewAnnotation extends React.PureComponent {
 }
 
 NewAnnotation.propTypes = {
-  currentImage: PropTypes.object,
+  image: PropTypes.object,
   canvasSize: PropTypes.object,
   newAnnotation: PropTypes.object,
   setAnnotation: PropTypes.func,

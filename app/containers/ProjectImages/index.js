@@ -10,7 +10,12 @@ import { selectCurrentComment } from 'containers/Comments/selectors';
 import ImageUI from './ImageUI';
 import { PLACEHOLDER } from './constants';
 import * as selectors from './selectors';
-import { setAnnotation, createAnnotation, cancelAnnotation } from './actions';
+import {
+  setAnnotation,
+  createAnnotation,
+  cancelAnnotation,
+  addAnnotation,
+} from './actions';
 
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
@@ -58,7 +63,13 @@ ProjectImages.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { setAnnotation, createAnnotation, initialize, cancelAnnotation },
+    {
+      setAnnotation,
+      createAnnotation,
+      initialize,
+      cancelAnnotation,
+      addAnnotation,
+    },
     dispatch
   );
 }

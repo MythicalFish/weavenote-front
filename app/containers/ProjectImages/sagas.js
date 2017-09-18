@@ -12,16 +12,20 @@ export function* ProjectImagesWatcher() {
 }
 
 function* createAnnotation({ image }) {
-  const annotation = yield select(selectNewAnnotation());
-  const { annotatable, anchors, type } = annotation.toJS();
-  const params = {
-    annotation: {
-      image_id: image.get('id'),
-      annotation_type: type,
-      annotatable_id: annotatable.id,
-      annotatable_type: annotatable.type,
-      anchors_attributes: anchors,
-    },
+  const a = yield select(selectNewAnnotation());
+  const { annotatable, anchors, type } = a.toJS();
+  const annotation = {
+    image_id: image.get('id'),
+    annotation_type: type,
+    anchors_attributes: anchors,
   };
-  yield sagas.post('annotations', params, actions.createAnnotationSuccess);
+  if (annotatable) {
+    annotation.annotatable_id = annotatable.id;
+    annotation.annotatable_type = annotatable.type;
+  }
+  yield sagas.post(
+    'annotations',
+    { annotation },
+    actions.createAnnotationSuccess
+  );
 }

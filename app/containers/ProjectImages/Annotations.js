@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import Canvas from 'components/Canvas';
 import Anchor from 'components/CanvasAnchor';
 import Line from 'components/CanvasLine';
-import Text from 'components/CanvasText';
 import { pixelPosition } from 'utils/anchorPosition';
 
 class Annotations extends React.PureComponent {
@@ -21,16 +20,15 @@ class Annotations extends React.PureComponent {
   anchorStyle = (type) => (type === 'dot' ? 'default' : 'lineCap');
 
   render() {
-    const { canvasSize, currentImage } = this.props;
+    const { canvasSize, image, currentView } = this.props;
     const anchorLayer = [];
     const lineLayer = [];
 
-    currentImage.get('annotations').forEach((annotation, index) => {
+    image.get('annotations').forEach((annotation, index) => {
       const { id, anchors, annotatable, type } = annotation.toObject();
-      if (!annotatable) return; // Sometimes undefined ??
       if (this.isEditing(annotation)) return;
-      const identifier = annotatable.get('identifier');
       const isActive = this.anchorIsActive(annotatable);
+      if (type === 'line' && currentView !== 'Measurements') return;
       anchors.forEach((anchor, i) => {
         anchorLayer.push(
           <Anchor
@@ -47,7 +45,6 @@ class Annotations extends React.PureComponent {
             {...{
               anchors,
               canvasSize,
-              identifier,
               key: `Annotation${id}Line${index}`,
             }}
           />
@@ -65,9 +62,10 @@ class Annotations extends React.PureComponent {
 
 Annotations.propTypes = {
   currentComment: PropTypes.number,
-  currentImage: PropTypes.object,
+  image: PropTypes.object,
   canvasSize: PropTypes.object,
   newAnnotation: PropTypes.object,
+  currentView: PropTypes.string,
 };
 
 export default Annotations;

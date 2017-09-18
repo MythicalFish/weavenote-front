@@ -15,10 +15,10 @@ function ImageUI(props) {
     <div className="canvas-container">
       <div className="hoverable">
         <Image src={initialValues.getIn(['urls', 'medium'])} />
+        <Annotations {...aProps} />
         {!isFocused && !formIsHidden && <ImageActions {...props} />}
       </div>
       {isFocused && <ImageForm {...{ initialValues, ...props }} />}
-      {formIsHidden && <Annotations {...aProps} />}
       {formIsHidden && <NewAnnotation {...aProps} />}
     </div>
   );

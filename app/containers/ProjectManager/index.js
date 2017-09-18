@@ -33,8 +33,9 @@ class ProjectManager extends React.PureComponent {
     const id = project.get('id');
     let View;
     const viewProps = { ...this.props };
+    const currentView = this.state.view;
 
-    switch (this.state.view) {
+    switch (currentView) {
       case 'Materials':
         View = ProjectComponents;
         break;
@@ -58,8 +59,8 @@ class ProjectManager extends React.PureComponent {
       <div>
         <Toolbar
           {...this.props}
+          {...{ currentView }}
           changeView={this.changeView}
-          currentView={this.state.view}
         />
         <div className="container-wide p4">
           <div className="row">
@@ -68,7 +69,7 @@ class ProjectManager extends React.PureComponent {
             </div>
             <div className="col-xs-6 col-md-6 blurrable">
               <div className="lh0 px4">
-                <ProjectImages project={project} />
+                <ProjectImages {...{ project, currentView }} />
               </div>
             </div>
             <div className="col-xs-6 col-md-3 blurrable">
