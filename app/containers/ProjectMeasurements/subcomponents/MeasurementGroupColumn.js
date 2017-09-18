@@ -42,7 +42,7 @@ class MeasurementGroupColumn extends React.PureComponent {
   render() {
     //
     const { group, index, doDelete } = this.props;
-    const { doThis, isDoing, focusThis, focusClass } = this.props;
+    const { doThis, focusAction, focusThis, focusClass } = this.props;
     const { GroupNameField, ValueField } = this;
 
     const columnClass = `column ${focusClass}`;
@@ -50,15 +50,17 @@ class MeasurementGroupColumn extends React.PureComponent {
     return (
       <div className={columnClass} onClick={focusThis}>
         <div className="column-header">
-          {isDoing('rename')
-            ? <GroupNameField />
-            : <MeasurementGroupLabel {...{ group, doThis, doDelete }} />}
+          {focusAction === 'rename' ? (
+            <GroupNameField />
+          ) : (
+            <MeasurementGroupLabel {...{ group, doThis, doDelete }} />
+          )}
         </div>
-        {this.measurementGroupValues(group).map((i) =>
+        {this.measurementGroupValues(group).map((i) => (
           <div className="column-cell" key={`group${index}value${i}`}>
             <ValueField index={i} />
           </div>
-        )}
+        ))}
       </div>
     );
   }
@@ -70,7 +72,7 @@ MeasurementGroupColumn.propTypes = {
   index: PropTypes.number,
   submitForm: PropTypes.func,
   doThis: PropTypes.func,
-  isDoing: PropTypes.func,
+  focusAction: PropTypes.string,
   focusThis: PropTypes.func,
   doDelete: PropTypes.func,
   focusClass: PropTypes.string,

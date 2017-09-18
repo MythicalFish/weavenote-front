@@ -26,10 +26,9 @@ $bStyle: 1px solid #ccc;
       -webkit-border-radius: 0;
       background: transparent;
     }
-    input:focus,
     .column-cell.focused {
-      border-color: $malibu;
-      background: $malibu;
+      border-color: $poiple;
+      background: $poiple;
       color: $white;
     }
     &:first-child {
@@ -58,12 +57,6 @@ $bStyle: 1px solid #ccc;
     }
     .column-cell:last-child {
       border-bottom: none;
-    }
-  }
-  .focused {
-    border-color: $malibu;
-    * {
-      border-color: $malibu !important;
     }
   }
 }

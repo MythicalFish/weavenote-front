@@ -44,18 +44,22 @@ export default function F(Component, opts = {}) {
     focusThis = () => {
       if (!this.isTrulyFocused()) {
         this.setState({ isActive: true });
-        setTimeout(() => this.setState({ isFocused: true }), 20);
+        setTimeout(() => {
+          if (this.componentIsMounted && !this.state.isFocused) {
+            this.setState({ isFocused: true });
+          }
+        }, 20);
       }
     };
     toggleThis = () =>
       this.isTrulyFocused() ? this.unfocusThis() : this.focusThis();
+    doThis = (thing) => this.setState({ action: thing });
+    doNothing = () => this.doThis(null);
     render() {
       const { isFocused, isActive, action } = this.state;
       const focusClass = isFocused ? 'focused' : '';
-      const isDoing = (thing) => isActive && action === thing;
       const { unfocusThis, focusThis, toggleThis } = this;
-      const doThis = (thing) => () => this.setState({ action: thing });
-      const doNothing = () => doThis(null);
+      const { doNothing, doThis } = this;
       return (
         <FocusPseudo
           {...{
@@ -66,7 +70,7 @@ export default function F(Component, opts = {}) {
             doThis,
             doNothing,
             isFocused: isActive,
-            isDoing,
+            focusAction: action,
             focusClass,
             Component,
             ref: (ref) => {
