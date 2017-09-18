@@ -5,14 +5,7 @@ import Focusable from 'utils/Focusable';
 class MeasurementNameLabel extends React.PureComponent {
   render() {
     const { name, Input, inputName, submitForm } = this.props;
-    const {
-      doThis,
-      focusClass,
-      isFocused,
-      doNothing,
-      unfocusThis,
-      focusAction,
-    } = this.props;
+    const { doThis, focusClass, doNothing, focusAction } = this.props;
     const value = name.get('value');
     const annotate = () => {
       this.props.addAnnotation({
@@ -25,7 +18,6 @@ class MeasurementNameLabel extends React.PureComponent {
     const Label = () => (
       <Dropdown value={{ name: value }}>
         <button onClick={() => doThis('rename')}>Rename</button>
-        <button onClick={annotate}>Annotate</button>
         <button onClick={() => this.props.doDelete(name.get('id'))}>
           Remove
         </button>
@@ -37,7 +29,6 @@ class MeasurementNameLabel extends React.PureComponent {
         name={inputName}
         onBlur={() => {
           doNothing();
-          unfocusThis();
           submitForm();
         }}
       />
@@ -54,15 +45,14 @@ class MeasurementNameLabel extends React.PureComponent {
 MeasurementNameLabel.propTypes = {
   name: PropTypes.object,
   submitForm: PropTypes.func,
-  currentAction: PropTypes.string,
-  focusThis: PropTypes.func,
+  focusAction: PropTypes.string,
+  doNothing: PropTypes.func,
   doThis: PropTypes.func,
   focusClass: PropTypes.string,
   inputName: PropTypes.string,
   Input: PropTypes.func,
   addAnnotation: PropTypes.func,
   doDelete: PropTypes.func,
-  isFocused: PropTypes.bool,
 };
 
 export default Focusable(MeasurementNameLabel);
