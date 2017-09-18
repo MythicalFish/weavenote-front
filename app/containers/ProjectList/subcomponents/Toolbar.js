@@ -1,5 +1,4 @@
 import React from 'react';
-import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
 import Button from 'components/Button';
 
@@ -7,11 +6,21 @@ export default function Toolbar(props) {
   const {
     createProject,
     fetchProjects,
-    changeSection,
-    currentSection,
+    changeView,
+    currentView,
     abilities,
   } = props;
   const canCreate = abilities.Project.create;
+  const Nav = ({ name, params }) => (
+    <NavItem
+      label={name}
+      isActive={currentView === name}
+      handleClick={() => {
+        fetchProjects(params);
+        changeView(name);
+      }}
+    />
+  );
   return (
     <header className="toolbar toolbar-compact container-narrow px2">
       <div className="row">
@@ -28,24 +37,10 @@ export default function Toolbar(props) {
           <nav>
             <ul>
               <li>
-                <NavItem
-                  label={sections.ActiveProjects.label}
-                  isActive={currentSection.id === sections.ActiveProjects.id}
-                  handleClick={() => {
-                    fetchProjects();
-                    changeSection(sections.ActiveProjects);
-                  }}
-                />
+                <Nav name="Active Projects" />
               </li>
               <li>
-                <NavItem
-                  label={sections.ArchivedProjects.label}
-                  isActive={currentSection.id === sections.ArchivedProjects.id}
-                  handleClick={() => {
-                    fetchProjects({ archived: true });
-                    changeSection(sections.ArchivedProjects);
-                  }}
-                />
+                <Nav name="Archive" params={{ archived: true }} />
               </li>
             </ul>
           </nav>
@@ -59,7 +54,7 @@ export default function Toolbar(props) {
 Toolbar.propTypes = {
   fetchProjects: React.PropTypes.func,
   createProject: React.PropTypes.func,
-  changeSection: React.PropTypes.func,
-  currentSection: React.PropTypes.object,
+  changeView: React.PropTypes.func,
+  currentView: React.PropTypes.string,
   abilities: React.PropTypes.object,
 };

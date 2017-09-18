@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import * as sections from 'containers/App/constants/sections';
-import {
-  selectCurrentSection,
-  selectFocus,
-  selectGlobalData,
-} from 'containers/App/selectors';
-import { changeSection, openModal } from 'containers/App/actions';
+import { selectFocus } from 'containers/App/selectors';
+import { openModal } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
 import ProjectComponents from 'containers/ProjectComponents';
@@ -24,29 +20,31 @@ import * as selectors from './selectors';
 import { fetchProject, updateProject, exportPDF } from './actions';
 
 class ProjectManager extends React.PureComponent {
+  state = { view: 'Basics' };
   componentDidMount() {
     const { params } = this.props;
     this.props.fetchProject(params.id);
-    this.props.changeSection(sections.Basics);
   }
-
+  changeView = (view) => {
+    this.setState({ view });
+  };
   render() {
-    const { project, currentSection, PDFexport } = this.props;
+    const { project, PDFexport } = this.props;
     if (!project) return null;
     const id = project.get('id');
     let View;
     const viewProps = { ...this.props };
 
-    switch (currentSection.id) {
-      case sections.Components.id:
+    switch (this.state.view) {
+      case 'Materials':
         View = ProjectComponents;
         break;
 
-      case sections.Measurements.id:
+      case 'Measurements':
         View = ProjectMeasurements;
         break;
 
-      case sections.Instructions.id:
+      case 'Instructions':
         View = ProjectInstructions;
         break;
 
@@ -54,13 +52,16 @@ class ProjectManager extends React.PureComponent {
         View = ProjectBasics;
         viewProps.initialValues = project;
         viewProps.onSubmit = this.props.updateProject;
-        viewProps.stages = this.props.globalData.stages;
         break;
     }
 
     return (
       <div>
-        <Toolbar {...this.props} />
+        <Toolbar
+          {...this.props}
+          changeView={this.changeView}
+          currentView={this.state.view}
+        />
         <div className="container-wide p4">
           <div className="row">
             <div className="col-xs-12 col-md-3 last-xs first-md blurrable">
@@ -97,18 +98,16 @@ class ProjectManager extends React.PureComponent {
 
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
-  currentSection: React.PropTypes.object,
   PDFexport: React.PropTypes.object,
   changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
   updateProject: React.PropTypes.func,
   params: React.PropTypes.object,
-  globalData: React.PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { changeSection, fetchProject, updateProject, openModal, exportPDF },
+    { fetchProject, updateProject, openModal, exportPDF },
     dispatch
   );
 }
@@ -119,9 +118,7 @@ const mapState = createStructuredSelector({
   PDFexport: selectors.selectPDFexport(),
   abilities: selectors.selectAbilities(),
   userRole: selectors.selectUserRole(),
-  currentSection: selectCurrentSection(),
   focus: selectFocus(),
-  globalData: selectGlobalData(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

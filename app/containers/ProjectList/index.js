@@ -2,12 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import * as sections from 'containers/App/constants/sections';
-import {
-  selectCurrentSection,
-  selectAbilities,
-} from 'containers/App/selectors';
-import { changeSection } from 'containers/App/actions';
+import { selectAbilities } from 'containers/App/selectors';
 import Header from 'components/Header';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
@@ -20,16 +15,23 @@ import {
 import { selectProjects } from './selectors';
 
 export class ProjectList extends React.PureComponent {
+  state = { view: 'Active Projects' };
   componentDidMount() {
     this.props.fetchProjects();
-    this.props.changeSection(sections.ActiveProjects);
   }
+  changeView = (view) => {
+    this.setState({ view });
+  };
   render() {
     const { projects } = this.props;
     return (
       <div>
         <Header />
-        <Toolbar {...this.props} />
+        <Toolbar
+          {...this.props}
+          currentView={this.state.view}
+          changeView={this.changeView}
+        />
         <div className="container-narrow px2 py4">
           <table>
             <thead>
@@ -65,20 +67,18 @@ ProjectList.propTypes = {
   projects: PropTypes.object,
   fetchProjects: PropTypes.func,
   fileProject: PropTypes.func,
-  changeSection: PropTypes.func,
   deleteProject: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchProjects, createProject, deleteProject, fileProject, changeSection },
+    { fetchProjects, createProject, deleteProject, fileProject },
     dispatch
   );
 }
 
 const mapState = createStructuredSelector({
   projects: selectProjects(),
-  currentSection: selectCurrentSection(),
   abilities: selectAbilities(),
 });
 
