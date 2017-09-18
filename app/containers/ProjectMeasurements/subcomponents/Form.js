@@ -1,44 +1,67 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form/immutable';
+import PlusButton from 'components/PlusButton';
 import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroupColumn from './MeasurementGroupColumn';
 
 const Form = (props) => {
-  const { initialValues, addAnnotation } = props;
+  const { initialValues, addAnnotation, project } = props;
+  const id = project.get('id');
   return (
-    <form onSubmit={props.handleSubmit} id="measurements" className="flex">
-      <MeasurementNameColumn
-        {...{
-          names: initialValues.get('names'),
-          submitForm: props.onSubmit,
-          addAnnotation,
-          doDelete: props.deleteMeasurementName,
-        }}
-      />
-      {initialValues.get('groups').map((group, index) =>
-        <MeasurementGroupColumn
-          {...{
-            key: group,
-            group,
-            index,
-            initialValues,
-            submitForm: props.onSubmit,
-            doDelete: props.deleteMeasurementGroup,
-          }}
+    <div>
+      <div className="flex">
+        <form onSubmit={props.handleSubmit} id="measurements">
+          <MeasurementNameColumn
+            {...{
+              names: initialValues.get('names'),
+              submitForm: props.onSubmit,
+              addAnnotation,
+              doDelete: props.deleteName,
+            }}
+          />
+          {initialValues.get('groups').map((group, index) => (
+            <MeasurementGroupColumn
+              {...{
+                key: group,
+                group,
+                index,
+                initialValues,
+                submitForm: props.onSubmit,
+                doDelete: props.deleteGroup,
+              }}
+            />
+          ))}
+          <button type="submit" className="conceal" />
+        </form>
+        <div>
+          <PlusButton
+            size={25}
+            onClick={() => props.createGroup(id)}
+            className="p0"
+          />
+        </div>
+      </div>
+      <div className="pt1">
+        <PlusButton
+          size={25}
+          onClick={() => props.createName(id)}
+          className="p0"
         />
-      )}
-      <button type="submit" className="conceal" />
-    </form>
+      </div>
+    </div>
   );
 };
 
 Form.propTypes = {
   initialValues: PropTypes.object,
+  project: PropTypes.object,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   addAnnotation: PropTypes.func,
-  deleteMeasurementGroup: PropTypes.func,
-  deleteMeasurementName: PropTypes.func,
+  deleteGroup: PropTypes.func,
+  deleteName: PropTypes.func,
+  createName: PropTypes.func,
+  createGroup: PropTypes.func,
 };
 
 export default reduxForm({

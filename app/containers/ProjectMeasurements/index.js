@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import PlusButton from 'components/PlusButton';
-import Dropdown from 'components/Dropdown';
 import { addAnnotation } from 'containers/ProjectImages/actions';
 import * as selectors from './selectors';
 import {
@@ -27,18 +25,13 @@ class ProjectMeasurements extends React.PureComponent {
   };
   render() {
     if (!this.props.initialValues) return null;
-    const { project, createGroup, createName } = this.props;
-    const id = project.get('id');
     return (
       <div>
-        {this.hasAny()
-          ? <Form {...this.props} />
-          : <div>No measurements added yet</div>}
-
-        <Dropdown label={<PlusButton />} className="inline-block">
-          <button onClick={() => createGroup(id)}>Create Column</button>
-          <button onClick={() => createName(id)}>Create Row</button>
-        </Dropdown>
+        {this.hasAny() ? (
+          <Form {...this.props} />
+        ) : (
+          <div>No measurements added yet</div>
+        )}
       </div>
     );
   }
@@ -48,8 +41,6 @@ ProjectMeasurements.propTypes = {
   project: PropTypes.object,
   initialValues: PropTypes.object,
   fetch: PropTypes.func,
-  createGroup: PropTypes.func,
-  createName: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
@@ -59,9 +50,9 @@ export function mapDispatch(dispatch) {
       onSubmit: updateMeasurements,
       createGroup: (id) => createMeasurementGroup(id),
       createName: (id) => createMeasurementName(id),
+      deleteGroup: (id) => deleteMeasurementGroup(id),
+      deleteName: (id) => deleteMeasurementName(id),
       addAnnotation,
-      deleteMeasurementGroup,
-      deleteMeasurementName,
     },
     dispatch
   );

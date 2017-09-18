@@ -1,6 +1,9 @@
 $bStyle: 1px solid #ccc;
 #measurements {
   color: $dark7;
+  @extend .flex;
+  @extend .flex-none;
+  width: auto;
   .column {
     border-radius: 4px;
     -webkit-border-radius: 4px;
