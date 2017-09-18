@@ -3,8 +3,15 @@ import { Field } from 'redux-form/immutable';
 import MeasurementNameLabel from './MeasurementNameLabel';
 import Input from './Input';
 
-const MeasurementNameInput = (props) =>
-  <Field {...{ ...props, focus: true, maxLength: 25, component: Input }} />;
+const MeasurementNameInput = (props) => (
+  <Field
+    {...props}
+    focus
+    maxLength={25}
+    component={Input}
+    placeholder="Untitled"
+  />
+);
 
 class MeasurementNameColumn extends React.PureComponent {
   render() {
@@ -17,7 +24,7 @@ class MeasurementNameColumn extends React.PureComponent {
         <div className="column-header">
           <label>Description</label>
         </div>
-        {names.map((name, index) =>
+        {names.map((name, index) => (
           <MeasurementNameLabel
             {...{
               name,
@@ -27,7 +34,7 @@ class MeasurementNameColumn extends React.PureComponent {
               ...lProps,
             }}
           />
-        )}
+        ))}
       </div>
     );
   }

@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { fromJS } from 'immutable';
 import { Field } from 'redux-form/immutable';
 import Focusable from 'utils/Focusable';
+import Icon from 'components/Icon';
 import Input from './Input';
-import MeasurementGroupLabel from './MeasurementGroupLabel';
 
 class MeasurementGroupColumn extends React.PureComponent {
   measurementGroupValues = (group) => {
@@ -25,6 +25,7 @@ class MeasurementGroupColumn extends React.PureComponent {
         maxLength={3}
         onBlur={submitForm}
         component={Input}
+        placeholder="x"
       />
     );
   };
@@ -36,25 +37,28 @@ class MeasurementGroupColumn extends React.PureComponent {
         maxLength={5}
         onBlur={submitForm}
         component={Input}
+        placeholder="0"
       />
     );
   };
   render() {
     //
     const { group, index, doDelete } = this.props;
-    const { doThis, focusAction, focusThis, focusClass } = this.props;
+    const { focusThis, focusClass } = this.props;
     const { GroupNameField, ValueField } = this;
 
-    const columnClass = `column ${focusClass}`;
+    const columnClass = `column hoverable ${focusClass}`;
 
     return (
       <div className={columnClass} onClick={focusThis}>
-        <div className="column-header">
-          {focusAction === 'rename' ? (
-            <GroupNameField />
-          ) : (
-            <MeasurementGroupLabel {...{ group, doThis, doDelete }} />
-          )}
+        <div className="column-header relative">
+          <Icon
+            name="Trash"
+            size={15}
+            onClick={() => doDelete(group.get('id'))}
+            className="on-hover above opa5"
+          />
+          <GroupNameField />
         </div>
         {this.measurementGroupValues(group).map((i) => (
           <div className="column-cell" key={`group${index}value${i}`}>
@@ -71,8 +75,6 @@ MeasurementGroupColumn.propTypes = {
   group: PropTypes.object,
   index: PropTypes.number,
   submitForm: PropTypes.func,
-  doThis: PropTypes.func,
-  focusAction: PropTypes.string,
   focusThis: PropTypes.func,
   doDelete: PropTypes.func,
   focusClass: PropTypes.string,

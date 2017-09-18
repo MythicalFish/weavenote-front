@@ -36,10 +36,9 @@ function* fetchMeasurements({ projectID }) {
 }
 
 function* createMeasurementGroup({ projectID }) {
-  const group = { name: 'X' };
   yield sagas.post(
     groupUrl(projectID),
-    { group },
+    null,
     actions.createMeasurementGroupSuccess
   );
   yield resetForm();
