@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
 import { UserWatcher } from 'containers/User/sagas';
 import { fetchUser } from 'containers/User/actions';
-import * as actionType from './constants/actions';
+import * as actionType from './constants';
 import * as actions from './actions';
 export default [appWatcher, UserWatcher];
 

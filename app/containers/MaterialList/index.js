@@ -2,9 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentSection } from 'containers/App/selectors';
-import { changeSection } from 'containers/App/actions';
-import * as sections from 'containers/App/constants/sections';
 import Header from 'components/Header';
 import { fetchMaterials, deleteMaterial } from './actions';
 import Toolbar from './subcomponents/Toolbar';
@@ -12,19 +9,21 @@ import ListItem from './subcomponents/ListItem';
 import { selectMaterials } from './selectors';
 
 export class MaterialList extends React.PureComponent {
+  state = { view: 'Materials' };
   componentDidMount() {
     this.props.fetchMaterials();
-    this.props.changeSection(sections.ActiveMaterials);
   }
-
+  changeView = (view) => {
+    this.setState({ view });
+  };
   render() {
     const { materials } = this.props;
     return (
       <div>
         <Header />
         <Toolbar
-          changeSection={this.props.changeSection}
-          currentSection={this.props.currentSection}
+          changeView={this.changeView}
+          currentView={this.state.view}
           fetch={this.props.fetchMaterials}
         />
         <div className="container-narrow px2 py4">
@@ -61,22 +60,16 @@ export class MaterialList extends React.PureComponent {
 
 MaterialList.propTypes = {
   fetchMaterials: PropTypes.func.isRequired,
-  currentSection: PropTypes.object,
-  changeSection: PropTypes.func,
   deleteMaterial: PropTypes.func,
   materials: PropTypes.object,
 };
 
 const mapState = createStructuredSelector({
   materials: selectMaterials(),
-  currentSection: selectCurrentSection(),
 });
 
 function mapDispatch(dispatch) {
-  return bindActionCreators(
-    { changeSection, fetchMaterials, deleteMaterial },
-    dispatch
-  );
+  return bindActionCreators({ fetchMaterials, deleteMaterial }, dispatch);
 }
 
 export default connect(mapState, mapDispatch)(MaterialList);

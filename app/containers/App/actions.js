@@ -1,4 +1,4 @@
-import * as types from './constants/actions';
+import * as types from './constants';
 
 // Global data
 
@@ -33,10 +33,6 @@ export function handleInviteSuccess() {
 }
 
 // Other
-
-export function changeSection(section) {
-  return { type: types.CHANGE_SECTION, section };
-}
 
 export function openModal(id) {
   return { type: types.OPEN_MODAL, id };

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import * as sections from 'containers/App/constants/sections';
 import { selectFocus } from 'containers/App/selectors';
 import { openModal } from 'containers/App/actions';
 import ProjectInstructions from 'containers/ProjectInstructions';

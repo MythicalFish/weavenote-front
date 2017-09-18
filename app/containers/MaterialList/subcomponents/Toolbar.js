@@ -1,10 +1,19 @@
 import React from 'react';
-import * as sections from 'containers/App/constants/sections';
 import NavItem from 'components/NavItem';
 import Button from 'components/Button';
 
 export default function Toolbar(props) {
-  const { fetch, changeSection, currentSection } = props;
+  const { fetch, changeView, currentView } = props;
+  const Nav = ({ name, params }) => (
+    <NavItem
+      label={name}
+      isActive={currentView === name}
+      handleClick={() => {
+        fetch(params);
+        changeView(name);
+      }}
+    />
+  );
   return (
     <header className="toolbar toolbar-compact container-narrow px2">
       <div className="row">
@@ -15,24 +24,10 @@ export default function Toolbar(props) {
           <nav>
             <ul>
               <li>
-                <NavItem
-                  label={sections.ActiveMaterials.label}
-                  isActive={currentSection.id === sections.ActiveMaterials.id}
-                  handleClick={() => {
-                    fetch();
-                    changeSection(sections.ActiveMaterials);
-                  }}
-                />
+                <Nav name="Materials" />
               </li>
               <li>
-                <NavItem
-                  label={sections.ArchivedMaterials.label}
-                  isActive={currentSection.id === sections.ArchivedMaterials.id}
-                  handleClick={() => {
-                    fetch({ archived: true });
-                    changeSection(sections.ArchivedMaterials);
-                  }}
-                />
+                <Nav name="Archive" params={{ archived: true }} />
               </li>
             </ul>
           </nav>
@@ -45,6 +40,6 @@ export default function Toolbar(props) {
 
 Toolbar.propTypes = {
   fetch: React.PropTypes.func,
-  changeSection: React.PropTypes.func,
-  currentSection: React.PropTypes.object,
+  changeView: React.PropTypes.func,
+  currentView: React.PropTypes.string,
 };

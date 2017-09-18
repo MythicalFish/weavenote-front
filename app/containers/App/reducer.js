@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import UserReducer from 'containers/User/reducer';
-import * as appActionTypes from './constants/actions';
-import * as sections from './constants/sections';
+import * as appActionTypes from './constants';
 
 const initialState = fromJS({
   globalData: null,
   invite: null,
-  currentSection: sections.Default,
   modalID: null,
   modalImage: null,
   focus: null,
@@ -24,11 +22,6 @@ function appReducer(state = initialState, action) {
 
     case appActionTypes.FETCH_INVITE_SUCCESS:
       return state.set('invite', action.invite);
-
-    case appActionTypes.CHANGE_SECTION:
-      return state
-        .setIn(['currentSection', 'id'], action.section.id)
-        .setIn(['currentSection', 'label'], action.section.label);
 
     // Misc
 

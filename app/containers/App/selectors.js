@@ -28,9 +28,6 @@ export const selectInvite = () =>
 
 // Misc
 
-export const selectCurrentSection = () =>
-  createSelector(selectMisc(), (s) => s.get('currentSection').toJS());
-
 export const selectModalID = () =>
   createSelector(selectMisc(), (s) => s.get('modalID'));
 
