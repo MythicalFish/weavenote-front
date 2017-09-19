@@ -5,16 +5,22 @@ class Input extends React.PureComponent {
     if (this.props.focus) this.element.focus();
     this.scaleInput();
   }
+  minSize = 3;
   handleChange = (event) => {
     const { input } = this.props;
     this.scaleInput();
     input.onChange(event);
   };
   scaleInput = () => {
-    const { element: e } = this;
+    const { element: e, minSize: min } = this;
     let length = e.value.length;
-    length = length > 1 ? length : 1;
-    e.style.width = `${length * 20}px`;
+    length = length <= min ? min : length;
+    length += 1;
+    e.size = length;
+    // const base = 10;
+    // let width = base;
+    // width += length * base;
+    // e.style.minWidth = `${width}px`;
   };
   render() {
     const { input, maxLength } = this.props;
@@ -30,7 +36,7 @@ class Input extends React.PureComponent {
       placeholder: this.props.placeholder || null,
       onChange: this.handleChange,
     };
-    return <input {...fProps} type="text" />;
+    return <input {...fProps} type="text" size={this.minSize} />;
   }
 }
 

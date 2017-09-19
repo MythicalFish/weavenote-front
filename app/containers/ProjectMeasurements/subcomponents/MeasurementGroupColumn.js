@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { fromJS } from 'immutable';
 import { Field } from 'redux-form/immutable';
-import Focusable from 'utils/Focusable';
 import DeleteButton from './DeleteButton';
 import Input from './Input';
 
@@ -33,7 +32,7 @@ class MeasurementGroupColumn extends React.PureComponent {
     return (
       <Field
         name={`values[${index}].value`}
-        maxLength={8}
+        maxLength={16}
         onBlur={submitForm}
         component={Input}
         placeholder="0"
@@ -43,13 +42,10 @@ class MeasurementGroupColumn extends React.PureComponent {
   render() {
     //
     const { group, index, doDelete } = this.props;
-    const { focusThis, focusClass } = this.props;
     const { GroupNameField, ValueField } = this;
 
-    const columnClass = `column hoverable ${focusClass}`;
-
     return (
-      <div className={columnClass} onClick={focusThis}>
+      <div className="column hoverable">
         <div className="column-header relative">
           <DeleteButton
             resourceName="column"
@@ -73,9 +69,7 @@ MeasurementGroupColumn.propTypes = {
   group: PropTypes.object,
   index: PropTypes.number,
   submitForm: PropTypes.func,
-  focusThis: PropTypes.func,
   doDelete: PropTypes.func,
-  focusClass: PropTypes.string,
 };
 
-export default Focusable(MeasurementGroupColumn);
+export default MeasurementGroupColumn;

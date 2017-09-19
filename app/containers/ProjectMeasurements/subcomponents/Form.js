@@ -31,7 +31,7 @@ const Form = (props) => {
               }}
             />
           ))}
-          <div className="column flex-auto" />
+
           <button type="submit" className="conceal" />
         </form>
         <div>
