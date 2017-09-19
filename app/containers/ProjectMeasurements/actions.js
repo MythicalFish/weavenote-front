@@ -47,3 +47,11 @@ export function deleteMeasurementGroup(id) {
 export function deleteMeasurementGroupSuccess(response) {
   return { type: types.DELETE_MEASUREMENT_GROUP_SUCCESS, response };
 }
+
+export function reorderMeasurementNames(payload) {
+  return { type: types.REORDER_MEASUREMENT_NAMES, payload };
+}
+
+export function reorderMeasurementGroups(payload) {
+  return { type: types.REORDER_MEASUREMENT_GROUPS, payload };
+}

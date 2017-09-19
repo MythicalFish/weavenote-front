@@ -17,6 +17,7 @@ const Form = (props) => {
               submitForm: props.onSubmit,
               addAnnotation,
               doDelete: props.deleteName,
+              doReorder: props.reorderNames,
             }}
           />
           {initialValues.get('groups').map((group, index) => (
@@ -63,6 +64,7 @@ Form.propTypes = {
   deleteName: PropTypes.func,
   createName: PropTypes.func,
   createGroup: PropTypes.func,
+  reorderNames: PropTypes.func,
 };
 
 export default reduxForm({

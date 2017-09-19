@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react';
-import Focusable from 'utils/Focusable';
+import { SortableElement } from 'react-sortable-hoc';
 import DeleteButton from './DeleteButton';
 
-const MeasurementNameLabel = (props) => {
+const MeasurementNameLabel = SortableElement((props) => {
   const { name, Input, inputName, submitForm } = props;
-  const { focusClass, doNothing } = props;
-
   return (
     <div className="column-cell hoverable relative">
       <DeleteButton
@@ -13,26 +11,22 @@ const MeasurementNameLabel = (props) => {
         onClick={() => props.doDelete(name.get('id'))}
         className="left-of"
       />
-      <div className={`flex ${focusClass}`}>
-        <label className="identifier flex-none">{name.get('identifier')}</label>
-        <Input
-          name={inputName}
-          onBlur={() => {
-            doNothing();
-            submitForm();
-          }}
-        />
+      <div className="flex">
+        <label className="handle identifier flex-none">
+          {name.get('identifier')}
+        </label>
+        <Input name={inputName} onBlur={submitForm} />
       </div>
     </div>
   );
-};
+});
+
 MeasurementNameLabel.propTypes = {
   name: PropTypes.object,
   submitForm: PropTypes.func,
-  doNothing: PropTypes.func,
-  focusClass: PropTypes.string,
+  doDelete: PropTypes.func,
   inputName: PropTypes.string,
   Input: PropTypes.func,
 };
 
-export default Focusable(MeasurementNameLabel);
+export default MeasurementNameLabel;

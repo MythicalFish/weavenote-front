@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form/immutable';
+import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import MeasurementNameLabel from './MeasurementNameLabel';
 import Input from './Input';
 
@@ -7,35 +8,49 @@ const MeasurementNameInput = (props) => (
   <Field {...props} maxLength={25} component={Input} placeholder="Untitled" />
 );
 
-class MeasurementNameColumn extends React.PureComponent {
-  render() {
-    const { names } = this.props;
-    const lProps = { ...this.props };
-    delete lProps.names;
-    const fieldKey = (i) => `names[${i}].value`;
-    return (
-      <div className="column">
-        <div className="column-header">
-          <label className="opa5">Description</label>
-        </div>
-        {names.map((name, index) => (
-          <MeasurementNameLabel
-            {...{
-              name,
-              Input: MeasurementNameInput,
-              inputName: fieldKey(index),
-              key: fieldKey(index),
-              ...lProps,
-            }}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+const SortableList = SortableContainer((props) => {
+  const fieldKey = (i) => `names[${i}].value`;
+  const { names } = props;
+  const lProps = { ...props };
+  delete lProps.names;
+  return (
+    <div>
+      {names.map((name, index) => (
+        <MeasurementNameLabel
+          {...{
+            name,
+            Input: MeasurementNameInput,
+            inputName: fieldKey(index),
+            index,
+            key: fieldKey(index),
+            ...lProps,
+          }}
+        />
+      ))}
+    </div>
+  );
+});
+
+const MeasurementNameColumn = (props) => (
+  <div className="column">
+    <div className="column-header">
+      <label className="opa5">Description</label>
+    </div>
+    <SortableList
+      {...props}
+      lockToContainerEdges
+      distance={10}
+      onSortEnd={({ oldIndex, newIndex }) => {
+        const names = arrayMove(props.names.toArray(), oldIndex, newIndex);
+        props.doReorder({ names });
+      }}
+    />
+  </div>
+);
 
 MeasurementNameColumn.propTypes = {
   names: PropTypes.object,
+  doReorder: PropTypes.func,
 };
 
 export default MeasurementNameColumn;

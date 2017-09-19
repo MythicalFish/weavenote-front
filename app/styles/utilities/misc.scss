@@ -9,6 +9,9 @@
 .cursor-crosshair {
   cursor: crosshair;
 }
+.handle {
+  cursor: move;
+}
 .y-scroll {
   overflow-y: auto;
 }
@@ -26,4 +29,11 @@
 .cell-fit {
   white-space: nowrap;
   width: 1%;
+}
+.draggable-container {
+  position: relative;
+}
+.react-draggable-dragging {
+  z-index: 2;
+  box-shadow: inset 0 0 3px $dark5;
 }

@@ -24,7 +24,7 @@
   .modal-content {
     @extend .flex-none;
     max-width: 600px;
-    z-index: 2;
+    z-index: 3;
     .modal-body {
       background: $white;
       box-shadow: 0 0 30px rgba(49, 60, 84, 0.1);

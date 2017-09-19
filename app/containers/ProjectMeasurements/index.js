@@ -10,6 +10,8 @@ import {
   createMeasurementName,
   deleteMeasurementGroup,
   deleteMeasurementName,
+  reorderMeasurementNames,
+  reorderMeasurementGroups,
 } from './actions';
 import Form from './subcomponents/Form';
 
@@ -23,11 +25,18 @@ class ProjectMeasurements extends React.PureComponent {
     return v.get('groups').size > 0 || v.get('names').size > 0;
   };
   render() {
-    if (!this.props.initialValues) return null;
+    const { initialValues: m } = this.props;
+    if (!m) return null;
     return (
       <div>
         {this.hasAny() ? (
-          <Form {...this.props} />
+          <Form
+            {...{
+              ...this.props,
+              lastUpdated: m.get('timestamp'),
+              enableReinitialize: true,
+            }}
+          />
         ) : (
           <div>No measurements added yet</div>
         )}
@@ -51,6 +60,8 @@ export function mapDispatch(dispatch) {
       createName: (id) => createMeasurementName(id),
       deleteGroup: (id) => deleteMeasurementGroup(id),
       deleteName: (id) => deleteMeasurementName(id),
+      reorderNames: (payload) => reorderMeasurementNames(payload),
+      reorderGroups: (payload) => reorderMeasurementGroups(payload),
     },
     dispatch
   );
