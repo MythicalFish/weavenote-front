@@ -12,28 +12,6 @@ $bStyle: 1px solid #ccc;
     max-width: 240px;
     border: $bStyle;
     text-align: center;
-    input,
-    label {
-      border: none;
-      text-align: center;
-      color: inherit;
-      padding: 10px 5px;
-      font-family: inherit;
-      font-size: inherit;
-      text-align: inherit;
-      display: block;
-      border-radius: 0;
-      -webkit-border-radius: 0;
-      background: transparent;
-    }
-    input {
-      width: 100%;
-    }
-    .column-cell.focused {
-      border-color: $poiple;
-      background: $poiple;
-      color: $white;
-    }
     &:first-child {
       text-align: left;
       input,
@@ -46,19 +24,46 @@ $bStyle: 1px solid #ccc;
     }
     .column-header,
     .column-cell {
-      border-bottom: $bStyle;
-      background: $white;
-      > * {
-        border: none;
-      }
-      .identifier {
-        padding-right: 0;
-        font-weight: bold;
-        width: auto;
-      }
+      border-top: none;
+      border-left: none;
+      border-right: none;
     }
     .column-cell:last-child {
       border-bottom: none;
+      border-radius: 0 0 4px 4px;
     }
+    .column-header {
+      border-radius: 4px 4px 0 0;
+    }
+  }
+}
+.column-header,
+.column-cell {
+  border: $bStyle;
+  background: $white;
+  > * {
+    border: none;
+  }
+  .identifier {
+    padding-right: 0;
+    font-weight: bold;
+    width: auto;
+  }
+  input,
+  label {
+    border: none;
+    text-align: center;
+    color: inherit;
+    padding: 10px 5px;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: inherit;
+    display: block;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    background: transparent;
+  }
+  input {
+    width: 100%;
   }
 }
