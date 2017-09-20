@@ -13,18 +13,25 @@ const ModalMarkup = (props) => {
   if (p.minWidth) style.minWidth = p.minWidth;
   const modalClass = p.isOpen ? 'visible' : p.modalClass;
   const modalBGClass = p.isOpen ? 'overlay' : '';
+  const doClose = () => {
+    if (p.closeFunc) {
+      p.closeFunc();
+    } else if (p.closeModal) {
+      p.closeModal();
+    }
+  };
   return (
     <div className={`modal ${modalClass}`}>
       <div
         className={`modal-bg ${modalBGClass}`}
         onClick={() => {
-          if (!p.noCloseOutside) p.closePortal();
+          if (!p.noCloseOutside) doClose();
         }}
       />
       <div className="modal-content">
         <div className="modal-body" style={style}>
           {!props.hideCloseButton && (
-            <Icon name="X" className="modal-close" onClick={p.closePortal} />
+            <Icon name="X" className="modal-close" onClick={doClose} />
           )}
           {p.children}
         </div>

@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { ModalMarkup } from 'components/Modal';
+import Button from 'components/Button';
 import * as selectors from './selectors';
 import {
   fetchMeasurements,
@@ -15,6 +17,7 @@ import {
 import Form from './subcomponents/Form';
 
 class ProjectMeasurements extends React.PureComponent {
+  state = { modal: false };
   componentDidMount() {
     const { project } = this.props;
     this.props.fetch(project.get('id'));
@@ -26,7 +29,7 @@ class ProjectMeasurements extends React.PureComponent {
   render() {
     const { initialValues: m } = this.props;
     if (!m) return null;
-    return (
+    const Measurements = () => (
       <div>
         {this.hasAny() ? (
           <Form
@@ -39,6 +42,36 @@ class ProjectMeasurements extends React.PureComponent {
         ) : (
           <div>No measurements added yet</div>
         )}
+      </div>
+    );
+    const Wrapper = ({ children }) => {
+      const { modal } = this.state;
+      if (!modal) return children;
+      return (
+        <ModalMarkup
+          isOpen
+          noCloseOutside
+          closeFunc={() => {
+            this.setState({ modal: false });
+          }}
+        >
+          <div className="p4">{children}</div>
+        </ModalMarkup>
+      );
+    };
+    return (
+      <div>
+        <Wrapper>
+          <Measurements />
+        </Wrapper>
+        <div className="mt3">
+          <Button
+            label="View in modal"
+            secondary
+            small
+            onClick={() => this.setState({ modal: true })}
+          />
+        </div>
       </div>
     );
   }
