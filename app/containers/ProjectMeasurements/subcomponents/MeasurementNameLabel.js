@@ -8,7 +8,7 @@ const MeasurementNameLabel = SortableElement((props) => {
     <div className="column-cell hoverable relative">
       <DeleteButton
         resourceName="row"
-        onClick={() => props.doDelete(name.get('id'))}
+        onClick={() => props.deleteName(name.get('id'))}
         className="left-of"
       />
       <div className="flex">
@@ -24,7 +24,7 @@ const MeasurementNameLabel = SortableElement((props) => {
 MeasurementNameLabel.propTypes = {
   name: PropTypes.object,
   submitForm: PropTypes.func,
-  doDelete: PropTypes.func,
+  deleteName: PropTypes.func,
   inputName: PropTypes.string,
   Input: PropTypes.func,
 };

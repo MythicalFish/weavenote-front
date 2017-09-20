@@ -32,8 +32,8 @@ const SortableList = SortableContainer((props) => {
 });
 
 const MeasurementNameColumn = (props) => (
-  <div className="column">
-    <div className="column-header">
+  <div className="column left-align">
+    <div className="column-header px1">
       <label className="opa5">Description</label>
     </div>
     <SortableList
@@ -42,7 +42,7 @@ const MeasurementNameColumn = (props) => (
       distance={10}
       onSortEnd={({ oldIndex, newIndex }) => {
         const names = arrayMove(props.names.toArray(), oldIndex, newIndex);
-        props.doReorder({ names });
+        props.reorder({ names });
       }}
     />
   </div>
@@ -50,7 +50,7 @@ const MeasurementNameColumn = (props) => (
 
 MeasurementNameColumn.propTypes = {
   names: PropTypes.object,
-  doReorder: PropTypes.func,
+  reorder: PropTypes.func,
 };
 
 export default MeasurementNameColumn;

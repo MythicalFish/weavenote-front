@@ -1,5 +1,5 @@
 $bStyle: 1px solid #ccc;
-#measurements {
+.columns {
   color: $dark7;
   @extend .flex;
   @extend .items-start;
@@ -11,14 +11,6 @@ $bStyle: 1px solid #ccc;
     -webkit-border-radius: 4px;
     max-width: 240px;
     border: $bStyle;
-    text-align: center;
-    &:first-child {
-      text-align: left;
-      input,
-      label {
-        padding: 10px;
-      }
-    }
     &:not(:last-child) {
       margin-right: 6px;
     }
@@ -45,7 +37,8 @@ $bStyle: 1px solid #ccc;
     border: none;
   }
   .identifier {
-    padding-right: 0;
+    padding-right: $space-1;
+    padding-left: $space-2;
     font-weight: bold;
     width: auto;
   }

@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import { fromJS } from 'immutable';
 import { Field } from 'redux-form/immutable';
+import { SortableElement } from 'react-sortable-hoc';
 import DeleteButton from './DeleteButton';
 import Input from './Input';
 
-class MeasurementGroupColumn extends React.PureComponent {
+class MeasurementGroup extends React.PureComponent {
   measurementGroupValues = (group) => {
     const { initialValues } = this.props;
     const values = [];
@@ -16,10 +17,10 @@ class MeasurementGroupColumn extends React.PureComponent {
     return fromJS(values);
   };
   GroupNameField = () => {
-    const { index, submitForm } = this.props;
+    const { fieldName, submitForm } = this.props;
     return (
       <Field
-        name={`groups[${index}].name`}
+        name={fieldName}
         maxLength={3}
         onBlur={submitForm}
         component={Input}
@@ -41,11 +42,10 @@ class MeasurementGroupColumn extends React.PureComponent {
   };
   render() {
     //
-    const { group, index, doDelete } = this.props;
+    const { group, fieldName, doDelete } = this.props;
     const { GroupNameField, ValueField } = this;
-
     return (
-      <div className="column hoverable">
+      <div className="column hoverable center">
         <div className="column-header relative">
           <DeleteButton
             resourceName="column"
@@ -55,7 +55,7 @@ class MeasurementGroupColumn extends React.PureComponent {
           <GroupNameField />
         </div>
         {this.measurementGroupValues(group).map((i) => (
-          <div className="column-cell" key={`group${index}value${i}`}>
+          <div className="column-cell" key={`${fieldName}[${i}]`}>
             <ValueField index={i} />
           </div>
         ))}
@@ -64,12 +64,12 @@ class MeasurementGroupColumn extends React.PureComponent {
   }
 }
 
-MeasurementGroupColumn.propTypes = {
+MeasurementGroup.propTypes = {
   initialValues: PropTypes.object,
   group: PropTypes.object,
-  index: PropTypes.number,
+  fieldName: PropTypes.string,
   submitForm: PropTypes.func,
   doDelete: PropTypes.func,
 };
 
-export default MeasurementGroupColumn;
+export default SortableElement(MeasurementGroup);

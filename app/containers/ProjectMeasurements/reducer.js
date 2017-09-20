@@ -25,8 +25,6 @@ function ProjectMeasurementsReducer(state = initialState, action) {
       return setData();
     case types.DELETE_MEASUREMENT_NAME_SUCCESS:
       return setData();
-    case types.REORDER_MEASUREMENT_NAMES:
-      return state.setIn(['data', 'names'], fromJS(payload.names));
 
     default:
       return state;

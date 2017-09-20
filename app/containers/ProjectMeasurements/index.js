@@ -10,8 +10,7 @@ import {
   createMeasurementName,
   deleteMeasurementGroup,
   deleteMeasurementName,
-  reorderMeasurementNames,
-  reorderMeasurementGroups,
+  reorderMeasurements,
 } from './actions';
 import Form from './subcomponents/Form';
 
@@ -60,8 +59,7 @@ export function mapDispatch(dispatch) {
       createName: (id) => createMeasurementName(id),
       deleteGroup: (id) => deleteMeasurementGroup(id),
       deleteName: (id) => deleteMeasurementName(id),
-      reorderNames: (payload) => reorderMeasurementNames(payload),
-      reorderGroups: (payload) => reorderMeasurementGroups(payload),
+      reorder: (payload) => reorderMeasurements(payload),
     },
     dispatch
   );

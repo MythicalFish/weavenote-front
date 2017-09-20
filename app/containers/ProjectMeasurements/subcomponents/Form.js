@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form/immutable';
 import PlusButton from 'components/PlusButton';
 import MeasurementNameColumn from './MeasurementNameColumn';
-import MeasurementGroupColumn from './MeasurementGroupColumn';
+import MeasurementGroups from './MeasurementGroups';
 
 const Form = (props) => {
   const { initialValues, addAnnotation, project } = props;
@@ -10,29 +10,15 @@ const Form = (props) => {
   return (
     <div>
       <div className="flex">
-        <form onSubmit={props.handleSubmit} id="measurements">
+        <form onSubmit={props.handleSubmit} className="columns">
           <MeasurementNameColumn
             {...{
               names: initialValues.get('names'),
               submitForm: props.onSubmit,
-              addAnnotation,
-              doDelete: props.deleteName,
-              doReorder: props.reorderNames,
+              ...props,
             }}
           />
-          {initialValues.get('groups').map((group, index) => (
-            <MeasurementGroupColumn
-              {...{
-                key: group,
-                group,
-                index,
-                initialValues,
-                submitForm: props.onSubmit,
-                doDelete: props.deleteGroup,
-              }}
-            />
-          ))}
-
+          <MeasurementGroups {...props} />
           <button type="submit" className="conceal" />
         </form>
         <div>
