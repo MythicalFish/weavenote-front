@@ -17,7 +17,7 @@
       &:after {
         content: ' ';
         display: block;
-        background: $malibu;
+        background: $poiple;
         height: 2px;
         position: absolute;
         bottom: 0;
@@ -33,7 +33,7 @@
         }
       }
       label {
-        color: $malibu;
+        color: $poiple;
       }
     }
     label {
@@ -47,7 +47,7 @@
         input,
         textarea,
         .dropdown > button {
-          border-color: $malibu;
+          border-color: $poiple;
         }
       }
     }

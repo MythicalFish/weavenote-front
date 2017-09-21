@@ -32,36 +32,11 @@ ul.thumbnails {
     }
     &.current {
       > button {
-        border-color: $azure;
-        img {
-          //opacity: 0.4;
-        }
-      }
-      .dropdown {
-        button {
-          .dot {
-            background-color: $azure;
-          }
-        }
+        border-color: $poiple;
       }
     }
     &:not(:last-child) {
       margin-right: 3px;
-    }
-    .dropdown {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      color: $white;
-      z-index: 2;
-      button {
-        padding: 0;
-        .dot {
-          border: 3px solid $white;
-          background-color: $gray;
-          box-sizing: content-box;
-        }
-      }
     }
   }
 }
