@@ -3,10 +3,17 @@ import Icon from 'components/Icon';
 import ImageForm from 'containers/ImageForm';
 
 const Form = (props) => {
-  const { unfocusThis, initialValues } = props;
+  const { unfocusThis, doNothing, initialValues } = props;
   return (
     <div className="image-form flex items-center justify-center">
-      <Icon name="X" className="image-form-close" onClick={unfocusThis} />
+      <Icon
+        name="X"
+        className="image-form-close"
+        onClick={() => {
+          doNothing();
+          unfocusThis();
+        }}
+      />
       <div className="flex-none">
         <ImageForm
           initialValues={initialValues}
@@ -21,6 +28,7 @@ const Form = (props) => {
 Form.propTypes = {
   initialValues: PropTypes.object,
   unfocusThis: PropTypes.func,
+  doNothing: PropTypes.func,
 };
 
 export default Form;

@@ -5,7 +5,7 @@ import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroups from './MeasurementGroups';
 
 const Form = (props) => {
-  const { initialValues, addAnnotation, project } = props;
+  const { initialValues, startAnnotation, project } = props;
   const id = project.get('id');
   return (
     <div>
@@ -45,7 +45,7 @@ Form.propTypes = {
   project: PropTypes.object,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
-  addAnnotation: PropTypes.func,
+  startAnnotation: PropTypes.func,
   deleteGroup: PropTypes.func,
   deleteName: PropTypes.func,
   createName: PropTypes.func,

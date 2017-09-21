@@ -23,7 +23,12 @@ class FocusPseudo extends React.PureComponent {
 
 export default function F(Component, opts = {}) {
   class Focusable extends React.PureComponent {
-    state = { isFocused: false, isActive: false, action: null };
+    state = {
+      isFocused: false,
+      isActive: false,
+      action: null,
+      actionVars: null,
+    };
     isTrulyFocused = () => this.state.isFocused && this.state.isActive;
     handleClickOutside = () => {
       if (!opts.disableOutside) this.unfocusThis();
@@ -53,13 +58,15 @@ export default function F(Component, opts = {}) {
     };
     toggleThis = () =>
       this.isTrulyFocused() ? this.unfocusThis() : this.focusThis();
-    doThis = (thing) => this.setState({ action: thing });
+    doThis = (thing, actionVars = null) =>
+      this.setState({ action: thing, actionVars });
     doNothing = () => this.doThis(null);
+    isDoing = (action) => action === this.state.action;
     render() {
-      const { isFocused, isActive, action } = this.state;
+      const { isFocused, isActive, action, actionVars } = this.state;
       const focusClass = isFocused ? 'focused' : '';
       const { unfocusThis, focusThis, toggleThis } = this;
-      const { doNothing, doThis } = this;
+      const { doNothing, doThis, isDoing } = this;
       return (
         <FocusPseudo
           {...{
@@ -70,7 +77,8 @@ export default function F(Component, opts = {}) {
             doThis,
             doNothing,
             isFocused: isActive,
-            focusAction: action,
+            isDoing,
+            actionVars,
             focusClass,
             Component,
             ref: (ref) => {

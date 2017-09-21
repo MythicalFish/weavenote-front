@@ -3,7 +3,7 @@ import Button from 'components/Button';
 import ImageUploader from 'containers/ImageUploader';
 
 const Actions = (props) => {
-  const { comment, commentable, addAnnotation } = props;
+  const { comment, commentable, startAnnotation } = props;
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
   };
@@ -20,33 +20,35 @@ const Actions = (props) => {
             props.deleteComment({ comment, commentable });
           }}
         />
-        {addAnnotation &&
-          !isReply &&
+        {startAnnotation &&
+        !isReply && (
           <Button
             inlineIcon="plus"
             label="Annotate"
             onClick={() => {
-              addAnnotation({
+              startAnnotation({
                 maxAnchors: 1,
                 annotatable: actionable,
                 type: 'dot',
               });
               props.cancelCommentAction();
             }}
-          />}
-        {comment.get('images').size < props.maxImages &&
+          />
+        )}
+        {comment.get('images').size < props.maxImages && (
           <ImageUploader
             imageable={actionable}
             label="Add image"
             inlineIcon="plus"
-          />}
+          />
+        )}
       </div>
     </div>
   );
 };
 
 Actions.propTypes = {
-  addAnnotation: PropTypes.func,
+  startAnnotation: PropTypes.func,
   cancelCommentAction: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,

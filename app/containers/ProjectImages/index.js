@@ -6,8 +6,6 @@ import { initialize } from 'redux-form';
 import Image from 'components/Image';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
-import { selectIsAnnotating } from 'containers/ImageAnnotations/selectors';
-import { addAnnotation } from 'containers/ImageAnnotations/actions';
 import { selectImages } from './selectors';
 import ImageUI from './ImageUI';
 import { PLACEHOLDER } from './constants';
@@ -60,14 +58,12 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       initialize,
-      addAnnotation,
     },
     dispatch
   );
 }
 
 const mapState = createStructuredSelector({
-  isAnnotating: selectIsAnnotating(),
   images: selectImages(),
 });
 

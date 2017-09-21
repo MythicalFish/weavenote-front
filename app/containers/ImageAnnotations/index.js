@@ -7,20 +7,25 @@ import Anchor from 'components/CanvasAnchor';
 import Line from 'components/CanvasLine';
 import NewAnnotation from './NewAnnotation';
 import { pixelPosition } from './utils';
-import { selectNewAnnotation, selectIsAnnotating } from './selectors';
-import { setAnnotation, createAnnotation, cancelAnnotation } from './actions';
+import { selectNewAnnotation } from './selectors';
+import {
+  startAnnotation,
+  setAnnotation,
+  createAnnotation,
+  cancelAnnotation,
+} from './actions';
 
 class ImageAnnotations extends React.PureComponent {
   isEditing = (annotation) => {
     const { newAnnotation } = this.props;
-    const { annotatable: a } = annotation.toJS();
-    const { annotatable: n } = newAnnotation.toJS();
-    return n && a.type === n.type && a.id === n.id;
+    const a = annotation.toJS();
+    const n = newAnnotation.toJS();
+    return a.id === n.id;
   };
   anchorStyle = (type) => (type === 'dot' ? 'default' : 'lineCap');
 
   render() {
-    const { canvasSize, image, currentView, isAnnotating } = this.props;
+    const { canvasSize, image, currentView, isDoing } = this.props;
     const anchorLayer = [];
     const lineLayer = [];
 
@@ -56,7 +61,7 @@ class ImageAnnotations extends React.PureComponent {
           {lineLayer}
           {anchorLayer}
         </Canvas>
-        {isAnnotating && <NewAnnotation {...this.props} />}
+        {isDoing('annotate') && <NewAnnotation {...this.props} />}
       </div>
     );
   }
@@ -67,12 +72,13 @@ ImageAnnotations.propTypes = {
   canvasSize: PropTypes.object,
   newAnnotation: PropTypes.object,
   currentView: PropTypes.string,
-  isAnnotating: PropTypes.bool,
+  isDoing: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
+      startAnnotation,
       setAnnotation,
       createAnnotation,
       cancelAnnotation,
@@ -83,7 +89,6 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   newAnnotation: selectNewAnnotation(),
-  isAnnotating: selectIsAnnotating(),
 });
 
 export default connect(mapState, mapDispatch)(ImageAnnotations);
