@@ -29,6 +29,7 @@ class Annotations extends React.PureComponent {
       if (this.isEditing(annotation)) return;
       const isActive = this.anchorIsActive(annotatable);
       if (type === 'line' && currentView !== 'Measurements') return;
+      if (type !== 'line' && currentView === 'Measurements') return;
       anchors.forEach((anchor, i) => {
         anchorLayer.push(
           <Anchor
