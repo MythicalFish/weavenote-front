@@ -8,6 +8,7 @@ import Line from 'components/CanvasLine';
 import NewAnnotation from './NewAnnotation';
 import { pixelPosition } from './utils';
 import { selectNewAnnotation } from './selectors';
+import { writeComment } from '../Comments/actions';
 import {
   startAnnotation,
   setAnnotation,
@@ -82,6 +83,7 @@ export function mapDispatch(dispatch) {
       setAnnotation,
       createAnnotation,
       cancelAnnotation,
+      writeComment,
     },
     dispatch
   );

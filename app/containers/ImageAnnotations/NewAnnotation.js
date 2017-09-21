@@ -14,7 +14,7 @@ class NewAnnotation extends React.PureComponent {
     const pos = { x: evt.offsetX, y: evt.offsetY };
     setAnnotation(relativePosition(pos, canvasSize));
     if (actionVars.type === 'dot') {
-      console.log('start comment');
+      this.props.writeComment();
     }
   };
   createAnnotation = () => {
@@ -62,10 +62,9 @@ NewAnnotation.propTypes = {
   newAnnotation: PropTypes.object,
   setAnnotation: PropTypes.func,
   createAnnotation: PropTypes.func,
-  doNothing: PropTypes.func,
-  isDoing: PropTypes.func,
   actionVars: PropTypes.object,
   startAnnotation: PropTypes.func,
+  writeComment: PropTypes.func,
 };
 
 export default NewAnnotation;
