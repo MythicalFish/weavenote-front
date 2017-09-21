@@ -5,9 +5,11 @@
   background: $mako;
   @include borderRadius();
   .icon {
-    padding: $space-1 !important;
+    padding: $space-2 $space-3;
     color: $white;
-    padding: 0;
+    &:not(:last-child) {
+      border-right: 1px solid $light2;
+    }
   }
 }
 

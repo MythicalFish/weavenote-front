@@ -2,6 +2,12 @@ import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 
 const ImageActions = (props) => {
+  const addDot = () => {
+    props.addAnnotation({
+      maxAnchors: 1,
+      type: 'dot',
+    });
+  };
   const addLine = () => {
     props.addAnnotation({
       maxAnchors: 2,
@@ -10,10 +16,16 @@ const ImageActions = (props) => {
   };
   return (
     <div className="on-hover image-actions">
-      <Icon onClick={props.focusThis} name="Edit" size={20} />
+      <Icon onClick={addDot} name="Circle" size={20} tooltip="Annotate" />
       {props.currentView === 'Measurements' && (
-        <Icon onClick={addLine} name="MoreHorizontal" size={20} />
+        <Icon
+          onClick={addLine}
+          name="MoreHorizontal"
+          size={20}
+          tooltip="Add line"
+        />
       )}
+      <Icon onClick={props.focusThis} name="Edit" size={20} tooltip="Edit" />
     </div>
   );
 };

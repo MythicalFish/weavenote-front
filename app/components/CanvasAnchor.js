@@ -17,22 +17,32 @@ const styles = {
   },
 };
 
-export default function Anchor(props) {
-  const { position, onDragEnd, draggable, active } = props;
-  const style = props.style || 'default';
-  const aProps = styles[style];
-  if (active && style === 'default') aProps.fill = '#51b2fe';
-  return (
-    <Circle
-      {...{
-        x: position.x,
-        y: position.y,
-        draggable,
-        onDragEnd,
-        ...aProps,
-      }}
-    />
-  );
+class Anchor extends React.PureComponent {
+  state = { hovering: false, action: null };
+  styleName = this.props.style || 'default';
+  style = () => {
+    const s = { ...styles[this.styleName] };
+    if (this.styleName !== 'default') return s;
+    if (this.state.hovering) s.fill = '#51b2fe';
+    return s;
+  };
+  toggleHover = () => this.setState({ hovering: !this.state.hovering });
+  render() {
+    const { position, onDragEnd, draggable, active } = this.props;
+    return (
+      <Circle
+        {...{
+          x: position.x,
+          y: position.y,
+          draggable,
+          onDragEnd,
+          ...this.style(),
+          onMouseOver: () => this.toggleHover(),
+          onMouseOut: () => this.toggleHover(),
+        }}
+      />
+    );
+  }
 }
 
 Anchor.propTypes = {
@@ -42,3 +52,5 @@ Anchor.propTypes = {
   position: React.PropTypes.object,
   onDragEnd: React.PropTypes.func,
 };
+
+export default Anchor;
