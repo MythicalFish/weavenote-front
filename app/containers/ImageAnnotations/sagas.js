@@ -5,7 +5,7 @@ import { selectNewAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
 
-export function* ProjectImagesWatcher() {
+export function* ImageAnnotationsWatcher() {
   const watcher = [yield takeLatest(types.CREATE_ANNOTATION, createAnnotation)];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Comments from 'containers/Comments';
-import { addAnnotation } from 'containers/ProjectImages/actions';
+import { addAnnotation } from 'containers/ImageAnnotations/actions';
 import { selectComments } from './selectors';
 
 class ProjectComments extends React.PureComponent {

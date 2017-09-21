@@ -6,16 +6,11 @@ import { initialize } from 'redux-form';
 import Image from 'components/Image';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
-import { selectCurrentComment } from 'containers/Comments/selectors';
+import { selectIsAnnotating } from 'containers/ImageAnnotations/selectors';
+import { addAnnotation } from 'containers/ImageAnnotations/actions';
+import { selectImages } from './selectors';
 import ImageUI from './ImageUI';
 import { PLACEHOLDER } from './constants';
-import * as selectors from './selectors';
-import {
-  setAnnotation,
-  createAnnotation,
-  cancelAnnotation,
-  addAnnotation,
-} from './actions';
 
 class ProjectImages extends React.PureComponent {
   state = { currentImage: null };
@@ -64,10 +59,7 @@ ProjectImages.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      setAnnotation,
-      createAnnotation,
       initialize,
-      cancelAnnotation,
       addAnnotation,
     },
     dispatch
@@ -75,9 +67,8 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  images: selectors.selectImages(),
-  newAnnotation: selectors.selectNewAnnotation(),
-  currentComment: selectCurrentComment(),
+  isAnnotating: selectIsAnnotating(),
+  images: selectImages(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectImages);
