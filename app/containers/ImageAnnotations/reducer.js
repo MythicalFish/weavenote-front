@@ -22,7 +22,7 @@ function ImageAnnotationsWatcher(state = initialState, action) {
 
     case types.START_ANNOTATION:
       return state
-        .set('isAnnotating', true)
+        .set('annotatable', fromJS(payload.annotatable))
         .set('maxAnchors', payload.maxAnchors)
         .set('type', payload.type);
 

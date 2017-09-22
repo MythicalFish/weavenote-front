@@ -33,8 +33,10 @@ export function* post(url, params, callback) {
   try {
     const response = yield call(API.post, url, params);
     yield handleResponse(callback, response);
+    return response;
   } catch (e) {
     yield handleError(e);
+    return e;
   }
 }
 
@@ -53,13 +55,12 @@ function* handleError({ error }) {
     yield put(notifyWarning(message));
   } else if (error.type === 'bug') {
     yield put(notifyError(message));
-  } else if (process.env.NODE_ENV === 'production') {
+  } else {
+    // Don't know what's happening, so logout
     logout();
     setTimeout(() => {
       window.location.replace('/');
     }, 100);
-  } else {
-    yield put(notifyError(message));
   }
 }
 

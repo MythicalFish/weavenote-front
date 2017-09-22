@@ -1,8 +1,13 @@
-import { put, take, cancel, takeLatest } from 'redux-saga/effects';
+import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { initialize } from 'redux-form';
 import * as sagas from 'utils/genericSagas';
+import { selectNewAnnotation } from 'containers/ImageAnnotations/selectors';
+import {
+  setAnnotation,
+  createAnnotation,
+} from 'containers/ImageAnnotations/actions';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -20,7 +25,17 @@ function* commentsWatcher() {
 }
 
 function* createComment({ payload }) {
-  yield sagas.post('comments', payload, actions.createCommentSuccess);
+  const response = yield sagas.post(
+    'comments',
+    payload,
+    actions.createCommentSuccess
+  );
+  const annotation = yield select(selectNewAnnotation());
+  if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
+    // Set comment ID in new annotation if present, then create the annotation
+    yield put(setAnnotation({ annotatable: { id: response.payload[0].id } }));
+    yield put(createAnnotation());
+  }
 }
 
 function* updateComment({ payload }) {
