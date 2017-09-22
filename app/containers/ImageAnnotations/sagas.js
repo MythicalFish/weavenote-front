@@ -11,17 +11,17 @@ export function* ImageAnnotationsWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-function* createAnnotation({ image }) {
-  const a = yield select(selectNewAnnotation());
-  const { annotatable, anchors, type } = a.toJS();
+function* createAnnotation() {
+  const data = yield select(selectNewAnnotation());
+  const a = data.toJS();
   const annotation = {
-    image_id: image.get('id'),
-    annotation_type: type,
-    anchors_attributes: anchors,
+    image_id: a.imageID,
+    annotation_type: a.type,
+    anchors_attributes: a.anchors,
   };
-  if (annotatable) {
-    annotation.annotatable_id = annotatable.id;
-    annotation.annotatable_type = annotatable.type;
+  if (a.annotatable) {
+    annotation.annotatable_id = a.annotatable.id;
+    annotation.annotatable_type = a.annotatable.type;
   }
   yield sagas.post(
     'annotations',

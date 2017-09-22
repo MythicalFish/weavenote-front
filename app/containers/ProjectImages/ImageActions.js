@@ -3,6 +3,7 @@ import Icon from 'components/Icon';
 
 const ImageActions = (props) => {
   const { currentView, focusThis, doThis } = props;
+  const imageID = props.image.get('id');
   const doThing = (action, vars = null) => {
     focusThis();
     doThis(action, vars);
@@ -13,6 +14,7 @@ const ImageActions = (props) => {
         <Icon
           onClick={() =>
             doThing('annotate', {
+              imageID,
               type: 'dot',
               annotatable: { type: 'Comment', id: null },
               maxAnchors: 1,
@@ -24,7 +26,8 @@ const ImageActions = (props) => {
       )}
       {currentView === 'Measurements' && (
         <Icon
-          onClick={() => doThing('annotate', { type: 'line', maxAnchors: 2 })}
+          onClick={() =>
+            doThing('annotate', { imageID, type: 'line', maxAnchors: 2 })}
           name="MoreHorizontal"
           size={20}
           tooltip="Add line"
@@ -44,6 +47,7 @@ ImageActions.propTypes = {
   focusThis: PropTypes.func,
   doThis: PropTypes.func,
   currentView: PropTypes.string,
+  image: PropTypes.object,
 };
 
 export default ImageActions;

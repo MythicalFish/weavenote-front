@@ -11,6 +11,7 @@ import { selectNewAnnotation } from './selectors';
 import { writeComment } from '../Comments/actions';
 import {
   startAnnotation,
+  setAnchor,
   setAnnotation,
   createAnnotation,
   cancelAnnotation,
@@ -80,6 +81,7 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       startAnnotation,
+      setAnchor,
       setAnnotation,
       createAnnotation,
       cancelAnnotation,

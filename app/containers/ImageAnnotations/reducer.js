@@ -6,6 +6,7 @@ const initialState = fromJS({
   annotatable: null,
   anchors: [],
   type: null,
+  imageID: null,
 });
 
 function ImageAnnotationsWatcher(state = initialState, action) {
@@ -20,13 +21,10 @@ function ImageAnnotationsWatcher(state = initialState, action) {
     case types.CANCEL_ANNOTATION:
       return initialState;
 
-    case types.START_ANNOTATION:
-      return state
-        .set('annotatable', fromJS(payload.annotatable))
-        .set('maxAnchors', payload.maxAnchors)
-        .set('type', payload.type);
-
     case types.SET_ANNOTATION:
+      return fromJS(Object.assign(state.toJS(), payload));
+
+    case types.SET_ANCHOR:
       if (maxAnchors === 1) {
         return setAnchor(0);
       } else if (maxAnchors === anchors.size) {
