@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Canvas from 'components/Canvas';
-import Anchor from 'components/CanvasAnchor';
-import Line from 'components/CanvasLine';
-import NewAnnotation from './NewAnnotation';
-import { pixelPosition } from './utils';
-import { selectNewAnnotation } from './selectors';
+import Annotation from './Annotation';
+import { selectNewAnnotation, selectIsAnnotating } from './selectors';
 import { writeComment } from '../Comments/actions';
+import { relativePosition } from './utils';
 import {
-  startAnnotation,
   setAnchor,
   setAnnotation,
   createAnnotation,
@@ -18,53 +15,31 @@ import {
 } from './actions';
 
 class ImageAnnotations extends React.PureComponent {
-  isEditing = (annotation) => {
-    const { newAnnotation } = this.props;
-    const a = annotation.toJS();
-    const n = newAnnotation.toJS();
-    return a.id === n.id;
+  handleClick = ({ evt: e }) => {
+    const { setAnchor: set, canvasSize, newAnnotation } = this.props;
+    const pos = { x: e.offsetX, y: e.offsetY };
+    set(relativePosition(pos, canvasSize));
+    if (newAnnotation.get('type') === 'dot') this.props.writeComment();
   };
-  anchorStyle = (type) => (type === 'dot' ? 'default' : 'lineCap');
-
   render() {
-    const { canvasSize, image, currentView, isDoing } = this.props;
-    const anchorLayer = [];
-    const lineLayer = [];
-
-    image.get('annotations').forEach((annotation, index) => {
-      const { id, anchors, type } = annotation.toObject();
-      if (this.isEditing(annotation)) return;
-      if (type === 'line' && currentView !== 'Measurements') return;
-      if (type !== 'line' && currentView === 'Measurements') return;
-      anchors.forEach((anchor, i) => {
-        anchorLayer.push(
-          <Anchor
-            key={`Annotation${id}Anchor${i}`}
-            position={pixelPosition(anchor.toJS(), canvasSize)}
-            style={this.anchorStyle(type)}
-          />
-        );
-      });
-      if (anchors.size > 1) {
-        lineLayer.push(
-          <Line
-            {...{
-              anchors,
-              canvasSize,
-              key: `Annotation${id}Line${index}`,
-            }}
-          />
-        );
-      }
-    });
+    const { canvasSize, image, newAnnotation } = this.props;
+    const cProps = { size: canvasSize };
+    if (this.props.isAnnotating) cProps.onClick = this.handleClick;
     return (
-      <div>
-        <Canvas size={canvasSize}>
-          {lineLayer}
-          {anchorLayer}
-        </Canvas>
-        {isDoing('annotate') && <NewAnnotation {...this.props} />}
-      </div>
+      <Canvas {...cProps}>
+        {image
+          .get('annotations')
+          .map((annotation, index) => (
+            <Annotation
+              key={`Annotation${index}`}
+              data={annotation}
+              {...this.props}
+            />
+          ))}
+        {this.props.isAnnotating && (
+          <Annotation data={newAnnotation} {...this.props} />
+        )}
+      </Canvas>
     );
   }
 }
@@ -73,14 +48,14 @@ ImageAnnotations.propTypes = {
   image: PropTypes.object,
   canvasSize: PropTypes.object,
   newAnnotation: PropTypes.object,
-  currentView: PropTypes.string,
-  isDoing: PropTypes.func,
+  isAnnotating: PropTypes.bool,
+  setAnchor: PropTypes.func,
+  writeComment: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      startAnnotation,
       setAnchor,
       setAnnotation,
       createAnnotation,
@@ -93,6 +68,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   newAnnotation: selectNewAnnotation(),
+  isAnnotating: selectIsAnnotating(),
 });
 
 export default connect(mapState, mapDispatch)(ImageAnnotations);

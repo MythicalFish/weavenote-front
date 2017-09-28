@@ -28,7 +28,7 @@ class Anchor extends React.PureComponent {
   };
   toggleHover = () => this.setState({ hovering: !this.state.hovering });
   render() {
-    const { position, onDragEnd, draggable, active } = this.props;
+    const { position, onDragEnd, draggable, onHover } = this.props;
     return (
       <Circle
         {...{
@@ -47,10 +47,10 @@ class Anchor extends React.PureComponent {
 
 Anchor.propTypes = {
   style: React.PropTypes.string,
-  active: React.PropTypes.bool,
   draggable: React.PropTypes.bool,
   position: React.PropTypes.object,
   onDragEnd: React.PropTypes.func,
+  onHover: React.PropTypes.func,
 };
 
 export default Anchor;

@@ -2,11 +2,13 @@ import { fromJS } from 'immutable';
 import * as types from './constants';
 
 const initialState = fromJS({
+  isAnnotating: false,
   maxAnchors: 1,
   annotatable: null,
   anchors: [],
   type: null,
   imageID: null,
+  id: 'New',
 });
 
 function ImageAnnotationsWatcher(state = initialState, action) {
@@ -18,6 +20,12 @@ function ImageAnnotationsWatcher(state = initialState, action) {
 
   switch (type) {
     //
+    case types.START_ANNOTATION:
+      return fromJS(Object.assign(initialState.toJS(), payload)).set(
+        'isAnnotating',
+        true
+      );
+
     case types.CANCEL_ANNOTATION:
       return initialState;
 

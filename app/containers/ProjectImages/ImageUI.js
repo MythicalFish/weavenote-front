@@ -7,14 +7,14 @@ import ImageForm from './ImageForm';
 import ImageActions from './ImageActions';
 
 function ImageUI(props) {
-  const { image, isDoing } = props;
+  const { image, isAnnotating, isFocused } = props;
   const aProps = { ...props, canvasSize: props.size };
   return (
     <div className="canvas-container hoverable">
       <Image src={image.getIn(['urls', 'medium'])} />
       <ImageAnnotations {...aProps} />
-      {!isDoing('annotate') && <ImageActions {...props} />}
-      {isDoing('form') && <ImageForm {...{ initialValues: image, ...props }} />}
+      {!isAnnotating && <ImageActions {...props} />}
+      {isFocused && <ImageForm {...{ initialValues: image, ...props }} />}
     </div>
   );
 }
@@ -22,7 +22,8 @@ function ImageUI(props) {
 ImageUI.propTypes = {
   image: PropTypes.object,
   size: PropTypes.object,
-  isDoing: PropTypes.func,
+  isFocused: PropTypes.bool,
+  isAnnotating: PropTypes.bool,
 };
 
 export default sizeMe({ monitorHeight: true })(Focusable(ImageUI));

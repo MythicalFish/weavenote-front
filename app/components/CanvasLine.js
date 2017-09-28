@@ -1,15 +1,13 @@
 import React, { PropTypes } from 'react';
 import { Group, Line } from 'react-konva';
-import { pixelPosition } from 'utils/anchorPosition';
 import Text from './CanvasText';
 
-export default function CanvasLine({ anchors, canvasSize, identifier }) {
+export default function CanvasLine({ position, identifier }) {
   const color = '#42EA83';
   const points = [];
   let midpointX = 0;
   let midpointY = 0;
-  anchors.forEach((anchor) => {
-    const pos = pixelPosition(anchor.toJS(), canvasSize);
+  position.forEach((pos) => {
     points.push(pos.x);
     points.push(pos.y);
     midpointX += pos.x;
@@ -28,14 +26,14 @@ export default function CanvasLine({ anchors, canvasSize, identifier }) {
         dash={[10, 5]}
         lineCap="round"
       />
-      {identifier &&
-        <Text value={identifier} x={midpointX} y={midpointY} color={color} />}
+      {identifier && (
+        <Text value={identifier} x={midpointX} y={midpointY} color={color} />
+      )}
     </Group>
   );
 }
 
 CanvasLine.propTypes = {
-  anchors: PropTypes.object,
-  canvasSize: PropTypes.object,
+  position: PropTypes.array,
   identifier: PropTypes.string,
 };

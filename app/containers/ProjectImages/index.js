@@ -7,6 +7,8 @@ import Image from 'components/Image';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 import { selectImages } from './selectors';
+import { selectIsAnnotating } from '../ImageAnnotations/selectors';
+import { startAnnotation } from '../ImageAnnotations/actions';
 import ImageUI from './ImageUI';
 import { PLACEHOLDER } from './constants';
 
@@ -58,6 +60,7 @@ export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
       initialize,
+      startAnnotation,
     },
     dispatch
   );
@@ -65,6 +68,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   images: selectImages(),
+  isAnnotating: selectIsAnnotating(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectImages);

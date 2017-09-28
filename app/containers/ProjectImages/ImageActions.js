@@ -2,18 +2,14 @@ import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 
 const ImageActions = (props) => {
-  const { currentView, focusThis, doThis } = props;
+  const { currentView, focusThis, startAnnotation } = props;
   const imageID = props.image.get('id');
-  const doThing = (action, vars = null) => {
-    focusThis();
-    doThis(action, vars);
-  };
   return (
     <div className="on-hover image-actions">
       {currentView !== 'Measurements' && (
         <Icon
           onClick={() =>
-            doThing('annotate', {
+            startAnnotation({
               imageID,
               type: 'dot',
               annotatable: { type: 'Comment', id: null },
@@ -27,25 +23,20 @@ const ImageActions = (props) => {
       {currentView === 'Measurements' && (
         <Icon
           onClick={() =>
-            doThing('annotate', { imageID, type: 'line', maxAnchors: 2 })}
+            startAnnotation({ imageID, type: 'line', maxAnchors: 2 })}
           name="MoreHorizontal"
           size={20}
           tooltip="Add line"
         />
       )}
-      <Icon
-        onClick={() => doThing('form')}
-        name="Edit"
-        size={20}
-        tooltip="Edit"
-      />
+      <Icon onClick={focusThis} name="Edit" size={20} tooltip="Edit" />
     </div>
   );
 };
 
 ImageActions.propTypes = {
   focusThis: PropTypes.func,
-  doThis: PropTypes.func,
+  startAnnotation: PropTypes.func,
   currentView: PropTypes.string,
   image: PropTypes.object,
 };
