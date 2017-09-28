@@ -1,3 +1,4 @@
+export const FOCUS_ANNOTATION = '@@app/FOCUS_ANNOTATION';
 export const START_ANNOTATION = '@@app/START_ANNOTATION';
 export const CANCEL_ANNOTATION = '@@app/CANCEL_ANNOTATION';
 export const SET_ANNOTATION = '@@app/SET_ANNOTATION';

@@ -4,10 +4,10 @@ import NewReply from './NewReply';
 import Comment from './Comment';
 
 class Thread extends React.PureComponent {
-  switchComment = () => {
+  focusComment = () => {
     const { comment } = this.props;
     if (!this.isSelected()) {
-      this.props.switchComment({ comment });
+      this.props.focusComment({ comment });
     }
   };
   isSelected = () => {
@@ -24,7 +24,7 @@ class Thread extends React.PureComponent {
 
     return (
       <div className={cClass}>
-        <div onClick={this.switchComment}>
+        <div onClick={this.focusComment}>
           <Comment {...cProps} />
           <Replies {...cProps} />
         </div>
@@ -35,7 +35,7 @@ class Thread extends React.PureComponent {
 }
 
 Thread.propTypes = {
-  switchComment: PropTypes.func,
+  focusComment: PropTypes.func,
   comment: PropTypes.object,
   annotation: PropTypes.object,
   currentComment: PropTypes.number,

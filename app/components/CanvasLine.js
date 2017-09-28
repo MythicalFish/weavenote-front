@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { Group, Line } from 'react-konva';
 import Text from './CanvasText';
 
-export default function CanvasLine({ position, identifier }) {
+export default function CanvasLine(props) {
+  const { position, identifier, isVisible } = props;
   const color = '#42EA83';
   const points = [];
   let midpointX = 0;
@@ -15,6 +16,8 @@ export default function CanvasLine({ position, identifier }) {
   });
   midpointX /= 2;
   midpointY /= 2;
+  const style = {};
+  if (!isVisible) style.opacity = 0;
   return (
     <Group>
       <Line
@@ -25,6 +28,7 @@ export default function CanvasLine({ position, identifier }) {
         strokeWidth={3}
         dash={[10, 5]}
         lineCap="round"
+        {...style}
       />
       {identifier && (
         <Text value={identifier} x={midpointX} y={midpointY} color={color} />
@@ -36,4 +40,5 @@ export default function CanvasLine({ position, identifier }) {
 CanvasLine.propTypes = {
   position: PropTypes.array,
   identifier: PropTypes.string,
+  isVisible: PropTypes.bool,
 };

@@ -1,7 +1,7 @@
 import * as types from './constants';
 
-export function switchComment(payload) {
-  return { type: types.SWITCH_COMMENT, payload };
+export function focusComment(payload) {
+  return { type: types.FOCUS_COMMENT, payload };
 }
 
 export function cancelCommentAction() {

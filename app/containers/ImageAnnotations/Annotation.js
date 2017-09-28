@@ -5,11 +5,25 @@ import Line from 'components/CanvasLine';
 import { pixelPosition } from './utils';
 
 const Annotation = (props) => {
-  const { data, currentView, canvasSize } = props;
-  const { id, anchors, type } = data.toObject();
-  const anchorStyle = type === 'dot' ? 'default' : 'lineCap';
-  if (type === 'line' && currentView !== 'Measurements') return <Group />;
-  if (type !== 'line' && currentView === 'Measurements') return <Group />;
+  const { data, currentView: view, canvasSize, user } = props;
+  const { focusComment, focusAnnotation, focusedAnnotation } = props;
+  const { id, anchors, type, annotatable } = data.toObject();
+  const aProps = {
+    anchorStyle: type === 'dot' ? 'default' : 'lineCap',
+    isFocused: focusedAnnotation === id,
+    isEditable: user.get('id') === data.get('user_id'),
+    isVisible:
+      (view === 'Measurements' && type === 'line') ||
+      (view !== 'Measurements' && type !== 'line'),
+    onClick: () => {
+      focusAnnotation(id);
+      if (data.getIn(['annotatable', 'type']) === 'Comment') {
+        focusComment(annotatable.get('id'));
+      } else {
+        focusComment(null);
+      }
+    },
+  };
   const anchorPairs = [];
   anchors.forEach((anchor, index) => {
     if (index > 0) {
@@ -24,13 +38,14 @@ const Annotation = (props) => {
         <Anchor
           key={`Annotation${id}Anchor${i}`}
           position={pos(anchor)}
-          style={anchorStyle}
+          {...aProps}
         />
       ))}
       {anchorPairs.map((pair) => (
         <Line
-          position={[pos(pair[0]), pos(pair[1])]}
           key={`Annotation${id}Line`}
+          position={[pos(pair[0]), pos(pair[1])]}
+          {...aProps}
         />
       ))}
     </Group>
@@ -38,9 +53,13 @@ const Annotation = (props) => {
 };
 
 Annotation.propTypes = {
+  user: PropTypes.object,
   data: PropTypes.object,
   canvasSize: PropTypes.object,
   currentView: PropTypes.string,
+  focusComment: PropTypes.func,
+  focusAnnotation: PropTypes.func,
+  focusedAnnotation: PropTypes.number,
 };
 
 export default Annotation;

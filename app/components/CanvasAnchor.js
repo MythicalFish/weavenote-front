@@ -1,5 +1,6 @@
 import React from 'react';
-import { Circle } from 'react-konva';
+import { Group, Circle } from 'react-konva';
+import { toggleState } from 'utils/misc';
 
 const styles = {
   default: {
@@ -17,40 +18,51 @@ const styles = {
   },
 };
 
+const activeColor = '#51b2fe';
+
 class Anchor extends React.PureComponent {
-  state = { hovering: false, action: null };
-  styleName = this.props.style || 'default';
+  state = { action: null };
+  styleName = this.props.anchorStyle || 'default';
+
   style = () => {
     const s = { ...styles[this.styleName] };
-    if (this.styleName !== 'default') return s;
-    if (this.state.hovering) s.fill = '#51b2fe';
+    if (this.state.hovering) s.fill = activeColor;
+    if (this.props.isFocused) s.fill = activeColor;
+    if (!this.props.isVisible) s.opacity = 0;
     return s;
   };
-  toggleHover = () => this.setState({ hovering: !this.state.hovering });
+  hover = () => {
+    if (this.props.isEditable) toggleState(this, 'hovering');
+  };
+  click = () => {
+    this.props.onClick();
+    toggleState(this, 'active');
+  };
   render() {
-    const { position, onDragEnd, draggable, onHover } = this.props;
+    const { position, isEditable, onClick } = this.props;
     return (
-      <Circle
-        {...{
-          x: position.x,
-          y: position.y,
-          draggable,
-          onDragEnd,
-          ...this.style(),
-          onMouseOver: () => this.toggleHover(),
-          onMouseOut: () => this.toggleHover(),
-        }}
-      />
+      <Group {...position}>
+        <Circle
+          {...{
+            draggable: isEditable,
+            ...this.style(),
+            onMouseOver: this.hover,
+            onMouseOut: this.hover,
+            onMouseDown: onClick,
+          }}
+        />
+      </Group>
     );
   }
 }
 
 Anchor.propTypes = {
-  style: React.PropTypes.string,
-  draggable: React.PropTypes.bool,
+  anchorStyle: React.PropTypes.string,
+  isEditable: React.PropTypes.bool,
+  isVisible: React.PropTypes.bool,
+  isFocused: React.PropTypes.bool,
   position: React.PropTypes.object,
-  onDragEnd: React.PropTypes.func,
-  onHover: React.PropTypes.func,
+  onClick: React.PropTypes.func,
 };
 
 export default Anchor;

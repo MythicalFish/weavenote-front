@@ -9,7 +9,10 @@ const initialState = fromJS({
 });
 
 function commentsReducer(state = initialState, action) {
-  const id = ({ payload }) => payload.comment.get('id');
+  const id = ({ payload }) => {
+    if (payload && payload.comment) return payload.comment.get('id');
+    return payload;
+  };
   switch (action.type) {
     case types.CANCEL_COMMENT_ACTION:
       return state
@@ -17,7 +20,7 @@ function commentsReducer(state = initialState, action) {
         .set('isEditing', null)
         .set('isReplying', null);
 
-    case types.SWITCH_COMMENT:
+    case types.FOCUS_COMMENT:
       return state
         .set('currentComment', id(action))
         .set('isCreating', false)

@@ -1,4 +1,4 @@
-export const SWITCH_COMMENT = '@@app/SWITCH_COMMENT';
+export const FOCUS_COMMENT = '@@app/FOCUS_COMMENT';
 export const CANCEL_COMMENT_ACTION = '@@app/CANCEL_COMMENT_ACTION';
 
 export const WRITE_REPLY = '@@app/WRITE_REPLY';

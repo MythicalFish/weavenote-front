@@ -1,14 +1,18 @@
 import { fromJS } from 'immutable';
+import assign from 'object-assign-deep';
 import * as types from './constants';
 
 const initialState = fromJS({
-  isAnnotating: false,
-  maxAnchors: 1,
-  annotatable: null,
-  anchors: [],
-  type: null,
-  imageID: null,
-  id: 'New',
+  focused: null,
+  new: {
+    isAnnotating: false,
+    maxAnchors: 1,
+    annotatable: null,
+    anchors: [],
+    type: null,
+    imageID: null,
+    id: 'New',
+  },
 });
 
 function ImageAnnotationsWatcher(state = initialState, action) {
@@ -20,8 +24,11 @@ function ImageAnnotationsWatcher(state = initialState, action) {
 
   switch (type) {
     //
+    case types.FOCUS_ANNOTATION:
+      return initialState.set('focus', payload);
+
     case types.START_ANNOTATION:
-      return fromJS(Object.assign(initialState.toJS(), payload)).set(
+      return fromJS(assign(initialState.toJS(), payload)).set(
         'isAnnotating',
         true
       );
@@ -30,7 +37,7 @@ function ImageAnnotationsWatcher(state = initialState, action) {
       return initialState;
 
     case types.SET_ANNOTATION:
-      return fromJS(Object.assign(state.toJS(), payload));
+      return fromJS(assign(state.toJS(), payload));
 
     case types.SET_ANCHOR:
       if (maxAnchors === 1) {

@@ -4,18 +4,24 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Canvas from 'components/Canvas';
 import Annotation from './Annotation';
-import { selectNewAnnotation, selectIsAnnotating } from './selectors';
-import { writeComment } from '../Comments/actions';
+import { selectUser } from '../App/selectors';
+import {
+  selectNewAnnotation,
+  selectIsAnnotating,
+  selectFocusedAnnotation,
+} from './selectors';
+import { focusComment, writeComment } from '../Comments/actions';
 import { relativePosition } from './utils';
 import {
   setAnchor,
   setAnnotation,
   createAnnotation,
   cancelAnnotation,
+  focusAnnotation,
 } from './actions';
 
 class ImageAnnotations extends React.PureComponent {
-  handleClick = ({ evt: e }) => {
+  canvasClick = ({ evt: e }) => {
     const { setAnchor: set, canvasSize, newAnnotation } = this.props;
     const pos = { x: e.offsetX, y: e.offsetY };
     set(relativePosition(pos, canvasSize));
@@ -24,7 +30,7 @@ class ImageAnnotations extends React.PureComponent {
   render() {
     const { canvasSize, image, newAnnotation } = this.props;
     const cProps = { size: canvasSize };
-    if (this.props.isAnnotating) cProps.onClick = this.handleClick;
+    if (this.props.isAnnotating) cProps.onClick = this.canvasClick;
     return (
       <Canvas {...cProps}>
         {image
@@ -60,6 +66,8 @@ export function mapDispatch(dispatch) {
       setAnnotation,
       createAnnotation,
       cancelAnnotation,
+      focusAnnotation,
+      focusComment,
       writeComment,
     },
     dispatch
@@ -69,6 +77,8 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   newAnnotation: selectNewAnnotation(),
   isAnnotating: selectIsAnnotating(),
+  focusedAnnotation: selectFocusedAnnotation(),
+  user: selectUser(),
 });
 
 export default connect(mapState, mapDispatch)(ImageAnnotations);

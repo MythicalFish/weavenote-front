@@ -1,5 +1,9 @@
 import * as types from './constants';
 
+export function focusAnnotation(payload) {
+  return { type: types.FOCUS_ANNOTATION, payload };
+}
+
 export function startAnnotation(payload) {
   return { type: types.START_ANNOTATION, payload };
 }

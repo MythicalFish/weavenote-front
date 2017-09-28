@@ -9,7 +9,7 @@ import {
   createComment,
   updateComment,
   deleteComment,
-  switchComment,
+  focusComment,
   writeComment,
   editComment,
   writeReply,
@@ -27,7 +27,7 @@ class Comments extends React.PureComponent {
         <div className="mb2">
           <NewComment {...cProps} />
         </div>
-        {comments.map((comment, index) =>
+        {comments.map((comment, index) => (
           <Thread
             key={`comment${comment.get('id')}`}
             {...{
@@ -36,7 +36,7 @@ class Comments extends React.PureComponent {
               index,
             }}
           />
-        )}
+        ))}
       </div>
     );
   }
@@ -55,7 +55,7 @@ export function mapDispatch(dispatch) {
       createComment,
       updateComment,
       deleteComment,
-      switchComment,
+      focusComment,
       cancelCommentAction,
     },
     dispatch
