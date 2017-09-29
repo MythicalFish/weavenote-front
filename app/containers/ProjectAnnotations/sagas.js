@@ -5,11 +5,17 @@ import { selectNewAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
 
-export function* ImageAnnotationsWatcher() {
-  const watcher = [yield takeLatest(types.CREATE_ANNOTATION, createAnnotation)];
+export function* ProjectAnnotationsWatcher() {
+  const watcher = [
+    yield takeLatest(types.CREATE_ANNOTATION, createAnnotation),
+    yield takeLatest(types.UPDATE_ANNOTATION, updateAnnotation),
+    yield takeLatest(types.DELETE_ANNOTATION, deleteAnnotation),
+  ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
+
+const url = (annotation) => `annotations/${annotation.get('id')}`;
 
 function* createAnnotation() {
   const data = yield select(selectNewAnnotation());
@@ -27,5 +33,22 @@ function* createAnnotation() {
     'annotations',
     { annotation },
     actions.createAnnotationSuccess
+  );
+}
+
+function* updateAnnotation({ payload }) {
+  const { id, image_id, anchors: anchors_attributes } = payload;
+  yield sagas.patch(
+    `annotations/${id}`,
+    { annotation: { anchors_attributes, image_id } },
+    actions.updateAnnotationSuccess
+  );
+}
+
+function* deleteAnnotation({ payload: annotation }) {
+  yield sagas.destroy(
+    url(annotation),
+    { annotation },
+    actions.deleteAnnotationSuccess
   );
 }

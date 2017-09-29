@@ -3,11 +3,11 @@ import { delay } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { initialize } from 'redux-form';
 import * as sagas from 'utils/genericSagas';
-import { selectNewAnnotation } from 'containers/ImageAnnotations/selectors';
+import { selectNewAnnotation } from 'containers/ProjectAnnotations/selectors';
 import {
-  setAnnotation,
+  buildAnnotation,
   createAnnotation,
-} from 'containers/ImageAnnotations/actions';
+} from 'containers/ProjectAnnotations/actions';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -33,7 +33,7 @@ function* createComment({ payload }) {
   const annotation = yield select(selectNewAnnotation());
   if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
     // Set comment ID in new annotation if present, then create the annotation
-    yield put(setAnnotation({ annotatable: { id: response.payload[0].id } }));
+    yield put(buildAnnotation({ annotatable: { id: response.payload[0].id } }));
     yield put(createAnnotation());
   }
 }

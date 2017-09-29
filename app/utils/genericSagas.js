@@ -57,10 +57,12 @@ function* handleError({ error }) {
     yield put(notifyError(message));
   } else {
     // Don't know what's happening, so logout
-    logout();
-    setTimeout(() => {
-      window.location.replace('/');
-    }, 100);
+    if (process.env.production) {
+      logout();
+      setTimeout(() => {
+        window.location.replace('/');
+      }, 100);
+    }
   }
 }
 

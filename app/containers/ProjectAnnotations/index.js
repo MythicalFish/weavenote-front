@@ -6,21 +6,23 @@ import Canvas from 'components/Canvas';
 import Annotation from './Annotation';
 import { selectUser } from '../App/selectors';
 import {
+  selectExisting,
   selectNewAnnotation,
-  selectIsAnnotating,
   selectFocusedAnnotation,
 } from './selectors';
 import { focusComment, writeComment } from '../Comments/actions';
 import { relativePosition } from './utils';
 import {
+  buildAnnotation,
   setAnchor,
-  setAnnotation,
   createAnnotation,
+  updateAnnotation,
+  deleteAnnotation,
   cancelAnnotation,
   focusAnnotation,
 } from './actions';
 
-class ImageAnnotations extends React.PureComponent {
+class ProjectAnnotations extends React.PureComponent {
   canvasClick = ({ evt: e }) => {
     const { setAnchor: set, canvasSize, newAnnotation } = this.props;
     const pos = { x: e.offsetX, y: e.offsetY };
@@ -28,13 +30,13 @@ class ImageAnnotations extends React.PureComponent {
     if (newAnnotation.get('type') === 'dot') this.props.writeComment();
   };
   render() {
-    const { canvasSize, image, newAnnotation } = this.props;
+    const { annotations, canvasSize, imageID, newAnnotation } = this.props;
     const cProps = { size: canvasSize };
     if (this.props.isAnnotating) cProps.onClick = this.canvasClick;
     return (
       <Canvas {...cProps}>
-        {image
-          .get('annotations')
+        {annotations
+          .filter((a) => a.get('image_id') === imageID)
           .map((annotation, index) => (
             <Annotation
               key={`Annotation${index}`}
@@ -50,8 +52,9 @@ class ImageAnnotations extends React.PureComponent {
   }
 }
 
-ImageAnnotations.propTypes = {
-  image: PropTypes.object,
+ProjectAnnotations.propTypes = {
+  imageID: PropTypes.number,
+  annotations: PropTypes.object,
   canvasSize: PropTypes.object,
   newAnnotation: PropTypes.object,
   isAnnotating: PropTypes.bool,
@@ -62,9 +65,11 @@ ImageAnnotations.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
+      buildAnnotation,
       setAnchor,
-      setAnnotation,
       createAnnotation,
+      updateAnnotation,
+      deleteAnnotation,
       cancelAnnotation,
       focusAnnotation,
       focusComment,
@@ -75,10 +80,10 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
+  annotations: selectExisting(),
   newAnnotation: selectNewAnnotation(),
-  isAnnotating: selectIsAnnotating(),
   focusedAnnotation: selectFocusedAnnotation(),
   user: selectUser(),
 });
 
-export default connect(mapState, mapDispatch)(ImageAnnotations);
+export default connect(mapState, mapDispatch)(ProjectAnnotations);

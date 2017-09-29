@@ -20,8 +20,24 @@ export function createAnnotationSuccess(response) {
   return { type: types.CREATE_ANNOTATION_SUCCESS, response };
 }
 
-export function setAnnotation(payload) {
-  return { type: types.SET_ANNOTATION, payload };
+export function updateAnnotation(payload) {
+  return { type: types.UPDATE_ANNOTATION, payload };
+}
+
+export function updateAnnotationSuccess(response) {
+  return { type: types.UPDATE_ANNOTATION_SUCCESS, response };
+}
+
+export function deleteAnnotation(payload) {
+  return { type: types.DELETE_ANNOTATION, payload };
+}
+
+export function deleteAnnotationSuccess(response) {
+  return { type: types.DELETE_ANNOTATION_SUCCESS, response };
+}
+
+export function buildAnnotation(payload) {
+  return { type: types.BUILD_ANNOTATION, payload };
 }
 
 export function setAnchor(payload) {

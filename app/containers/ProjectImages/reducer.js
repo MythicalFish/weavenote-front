@@ -1,12 +1,10 @@
 import { fromJS } from 'immutable';
-import { idToIndex } from 'utils/reducerHelpers';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
 import {
   DELETE_IMAGE_SUCCESS,
   UPDATE_IMAGE_SUCCESS,
 } from 'containers/ImageForm/constants';
 import { FETCH_PROJECT_SUCCESS } from 'containers/ProjectManager/constants';
-import { CREATE_ANNOTATION_SUCCESS } from 'containers/ImageAnnotations/constants';
 
 const initialState = fromJS([]);
 
@@ -18,8 +16,6 @@ function ProjectImagesReducer(state = initialState, action) {
     if (type && type !== 'Project') return state;
     return fromJS(response.images);
   };
-
-  const imageIndex = () => idToIndex(response.id, state);
 
   switch (action.type) {
     case FETCH_PROJECT_SUCCESS:
@@ -33,9 +29,6 @@ function ProjectImagesReducer(state = initialState, action) {
 
     case UPDATE_IMAGE_SUCCESS:
       return setImages();
-
-    case CREATE_ANNOTATION_SUCCESS:
-      return state.set(imageIndex(), fromJS(response));
 
     default:
       return state;

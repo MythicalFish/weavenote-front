@@ -7,8 +7,8 @@ import Image from 'components/Image';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 import { selectImages } from './selectors';
-import { selectIsAnnotating } from '../ImageAnnotations/selectors';
-import { startAnnotation } from '../ImageAnnotations/actions';
+import { selectIsAnnotating } from '../ProjectAnnotations/selectors';
+import { startAnnotation } from '../ProjectAnnotations/actions';
 import ImageUI from './ImageUI';
 import { PLACEHOLDER } from './constants';
 

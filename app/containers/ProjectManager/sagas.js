@@ -6,7 +6,7 @@ import { materialListWatcher } from 'containers/MaterialList/sagas';
 import { ProjectInstructionsWatcher } from 'containers/ProjectInstructions/sagas';
 import { ProjectMeasurementsWatcher } from 'containers/ProjectMeasurements/sagas';
 import { ProjectComponentsWatcher } from 'containers/ProjectComponents/sagas';
-import { ImageAnnotationsWatcher } from 'containers/ImageAnnotations/sagas';
+import { ProjectAnnotationsWatcher } from 'containers/ProjectAnnotations/sagas';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -16,7 +16,7 @@ export default [
   ProjectInstructionsWatcher,
   ProjectMeasurementsWatcher,
   ProjectComponentsWatcher,
-  ImageAnnotationsWatcher,
+  ProjectAnnotationsWatcher,
 ];
 
 function* ProjectManagerWatcher() {

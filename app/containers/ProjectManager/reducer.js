@@ -7,7 +7,7 @@ import ProjectInstructionsReducer, {
   formReducer as instructionFormReducer,
 } from 'containers/ProjectInstructions/reducer';
 import ProjectMeasurementsReducer from 'containers/ProjectMeasurements/reducer';
-import ImageAnnotationsReducer from 'containers/ImageAnnotations/reducer';
+import ProjectAnnotationsReducer from 'containers/ProjectAnnotations/reducer';
 import * as types from './constants';
 const initialState = fromJS({
   project: null,
@@ -53,7 +53,7 @@ function ProjectManagerReducer(state = initialState, action) {
 export default combineReducers({
   Manager: ProjectManagerReducer,
   Images: ProjectImagesReducer,
-  ImageAnnotation: ImageAnnotationsReducer,
+  Annotations: ProjectAnnotationsReducer,
   Comments: ProjectCommentsReducer,
   Components: ProjectComponentsReducer,
   Instructions: ProjectInstructionsReducer,

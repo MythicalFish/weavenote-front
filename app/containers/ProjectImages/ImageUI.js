@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react';
 import sizeMe from 'react-sizeme';
 import Focusable from 'utils/Focusable';
-import ImageAnnotations from 'containers/ImageAnnotations';
+import ProjectAnnotations from 'containers/ProjectAnnotations';
 import Image from 'components/Image';
 import ImageForm from './ImageForm';
 import ImageActions from './ImageActions';
 
 function ImageUI(props) {
-  const { image, isAnnotating, isFocused } = props;
-  const aProps = { ...props, canvasSize: props.size };
+  const { image, isAnnotating, isFocused, size: canvasSize } = props;
+  const aProps = { imageID: image.get('id'), canvasSize, isAnnotating };
   return (
     <div className="canvas-container hoverable">
       <Image src={image.getIn(['urls', 'medium'])} />
-      <ImageAnnotations {...aProps} />
+      <ProjectAnnotations {...aProps} />
       {!isAnnotating && <ImageActions {...props} />}
       {isFocused && <ImageForm {...{ initialValues: image, ...props }} />}
     </div>

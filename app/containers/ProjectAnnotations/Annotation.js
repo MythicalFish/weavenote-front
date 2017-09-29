@@ -1,21 +1,27 @@
 import React, { PropTypes } from 'react';
 import { Group } from 'react-konva';
+import { idToIndex } from 'utils/reducerHelpers';
 import Anchor from 'components/CanvasAnchor';
 import Line from 'components/CanvasLine';
-import { pixelPosition } from './utils';
+import { pixelPosition, relativePosition } from './utils';
 
 const Annotation = (props) => {
   const { data, currentView: view, canvasSize, user } = props;
   const { focusComment, focusAnnotation, focusedAnnotation } = props;
+  const { isAnnotating, updateAnnotation, deleteAnnotation } = props;
   const { id, anchors, type, annotatable } = data.toObject();
+  const isNew = !id;
   const aProps = {
+    isNew,
     anchorStyle: type === 'dot' ? 'default' : 'lineCap',
     isFocused: focusedAnnotation === id,
-    isEditable: user.get('id') === data.get('user_id'),
+    isEditable: isNew || user.get('id') === data.get('user_id'),
     isVisible:
       (view === 'Measurements' && type === 'line') ||
       (view !== 'Measurements' && type !== 'line'),
     onClick: () => {
+      if (isNew) return;
+      if (!isNew && isAnnotating) return;
       focusAnnotation(id);
       if (data.getIn(['annotatable', 'type']) === 'Comment') {
         focusComment(annotatable.get('id'));
@@ -23,6 +29,15 @@ const Annotation = (props) => {
         focusComment(null);
       }
     },
+  };
+  const onDragEnd = (anchor) => ({ evt: e }) => {
+    const id = anchor.get('id');
+    const anchorIndex = idToIndex(id, anchors);
+    const newPos = relativePosition({ x: e.offsetX, y: e.offsetY }, canvasSize);
+    const annotation = data
+      .setIn(['anchors', anchorIndex], { id, ...newPos })
+      .toJS();
+    updateAnnotation(annotation);
   };
   const anchorPairs = [];
   anchors.forEach((anchor, index) => {
@@ -39,6 +54,7 @@ const Annotation = (props) => {
           key={`Annotation${id}Anchor${i}`}
           position={pos(anchor)}
           {...aProps}
+          onDragEnd={onDragEnd(anchor)}
         />
       ))}
       {anchorPairs.map((pair) => (
@@ -59,7 +75,10 @@ Annotation.propTypes = {
   currentView: PropTypes.string,
   focusComment: PropTypes.func,
   focusAnnotation: PropTypes.func,
+  updateAnnotation: PropTypes.func,
+  deleteAnnotation: PropTypes.func,
   focusedAnnotation: PropTypes.number,
+  isAnnotating: PropTypes.bool,
 };
 
 export default Annotation;

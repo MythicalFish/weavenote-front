@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Comments from 'containers/Comments';
-import { setAnnotation } from 'containers/ImageAnnotations/actions';
+import { buildAnnotation } from 'containers/ProjectAnnotations/actions';
 import { selectComments } from './selectors';
 
 class ProjectComments extends React.PureComponent {
@@ -25,7 +25,7 @@ ProjectComments.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      setAnnotation,
+      buildAnnotation,
     },
     dispatch
   );
