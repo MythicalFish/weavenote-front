@@ -7,7 +7,7 @@ import { pixelPosition, relativePosition } from './utils';
 
 const Annotation = (props) => {
   const { data, currentView: view, canvasSize, user } = props;
-  const { focusComment, focusAnnotation, focusedAnnotation } = props;
+  const { focusComment, focusAnnotation, focusedAnnotation, setAnchor } = props;
   const { isAnnotating, updateAnnotation, deleteAnnotation } = props;
   const { id, anchors, type, annotatable } = data.toObject();
   const isNew = !id;
@@ -31,13 +31,17 @@ const Annotation = (props) => {
     },
   };
   const onDragEnd = (anchor) => ({ evt: e }) => {
-    const id = anchor.get('id');
-    const anchorIndex = idToIndex(id, anchors);
     const newPos = relativePosition({ x: e.offsetX, y: e.offsetY }, canvasSize);
-    const annotation = data
-      .setIn(['anchors', anchorIndex], { id, ...newPos })
-      .toJS();
-    updateAnnotation(annotation);
+    if (isNew) {
+      setAnchor(newPos);
+    } else {
+      const id = anchor.get('id');
+      const anchorIndex = idToIndex(id, anchors);
+      const annotation = data
+        .setIn(['anchors', anchorIndex], { id, ...newPos })
+        .toJS();
+      updateAnnotation(annotation);
+    }
   };
   const anchorPairs = [];
   anchors.forEach((anchor, index) => {
@@ -77,6 +81,7 @@ Annotation.propTypes = {
   focusAnnotation: PropTypes.func,
   updateAnnotation: PropTypes.func,
   deleteAnnotation: PropTypes.func,
+  setAnchor: PropTypes.func,
   focusedAnnotation: PropTypes.number,
   isAnnotating: PropTypes.bool,
 };
