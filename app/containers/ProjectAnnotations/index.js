@@ -11,7 +11,7 @@ import {
   selectFocusedAnnotation,
 } from './selectors';
 import { focusComment, writeComment } from '../Comments/actions';
-import { relativePosition } from './utils';
+import { getPosition, isVisible } from './utils';
 import {
   buildAnnotation,
   setAnchor,
@@ -23,11 +23,17 @@ import {
 } from './actions';
 
 class ProjectAnnotations extends React.PureComponent {
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown, false);
+  }
   canvasClick = ({ evt: e }) => {
-    const { setAnchor: set, canvasSize, newAnnotation } = this.props;
-    const pos = { x: e.offsetX, y: e.offsetY };
-    set(relativePosition(pos, canvasSize));
-    if (newAnnotation.get('type') === 'dot') this.props.writeComment();
+    const { setAnchor: set, canvasSize } = this.props;
+    set(getPosition(e, canvasSize));
+  };
+  handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      if (this.props.isAnnotating) this.props.cancelAnnotation();
+    }
   };
   render() {
     const { annotations, canvasSize, imageID, newAnnotation } = this.props;
@@ -60,6 +66,7 @@ ProjectAnnotations.propTypes = {
   isAnnotating: PropTypes.bool,
   setAnchor: PropTypes.func,
   writeComment: PropTypes.func,
+  cancelAnnotation: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {

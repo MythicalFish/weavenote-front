@@ -11,3 +11,8 @@ export function pixelPosition(anchor, size) {
     y: anchor.y * size.height,
   };
 }
+
+export function getPosition(event, canvasSize) {
+  const { offsetX: x, offsetY: y } = event;
+  return relativePosition({ x, y }, canvasSize);
+}

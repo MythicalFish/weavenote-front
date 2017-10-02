@@ -21,10 +21,17 @@ const circleStyles = {
 
 const menuStyle = {
   fill: '#FFF',
-  width: 100,
+  width: 30,
   height: 30,
-  x: -50,
+  x: -15,
   y: 10,
+  cursor: 'pointer',
+};
+
+const hiddenStyle = {
+  opacity: 0,
+  height: 0,
+  width: 0,
 };
 
 const activeColor = '#51b2fe';
@@ -35,10 +42,10 @@ class Anchor extends React.PureComponent {
 
   circleStyle = () => {
     const { isFocused, isVisible, isEditable, isNew } = this.props;
+    if (!isVisible) return hiddenStyle;
     const { isHovering } = this.state;
     const s = { ...circleStyles[this.styleName] };
     if (isHovering || isNew) s.fill = activeColor;
-    if (!isVisible) s.opacity = 0;
     if (isFocused) {
       s.cursor = 'default';
       s.fill = activeColor;
@@ -47,23 +54,14 @@ class Anchor extends React.PureComponent {
     return s;
   };
   menuStyle = () => {
-    const s = { ...menuStyle };
-    if (!this.state.isHovering) {
-      s.opacity = 0;
-      s.height = 0;
-      s.width = 0;
-    }
-    return s;
+    if (!this.state.isHovering) return hiddenStyle;
+    return menuStyle;
   };
   hover = () => {
     if (this.props.isEditable) toggleState(this, 'isHovering');
   };
-  click = () => {
-    this.props.onClick();
-    toggleState(this, 'active');
-  };
   render() {
-    const { position, isEditable, onClick, onDragEnd } = this.props;
+    const { position, isEditable, onFocus, onDragEnd } = this.props;
     return (
       <Group
         {...{
@@ -71,14 +69,12 @@ class Anchor extends React.PureComponent {
           draggable: isEditable,
           onMouseOver: this.hover,
           onMouseOut: this.hover,
-          onMouseDown: onClick,
+          onMouseDown: onFocus,
           onDragEnd,
         }}
       >
         <Circle {...this.circleStyle()} />
-        <Rect {...this.menuStyle()}>
-          <Text text="asd" />
-        </Rect>
+        <Rect {...this.menuStyle()} />
       </Group>
     );
   }
@@ -91,7 +87,7 @@ Anchor.propTypes = {
   isFocused: React.PropTypes.bool,
   isNew: React.PropTypes.bool,
   position: React.PropTypes.object,
-  onClick: React.PropTypes.func,
+  onFocus: React.PropTypes.func,
   onDragEnd: React.PropTypes.func,
 };
 

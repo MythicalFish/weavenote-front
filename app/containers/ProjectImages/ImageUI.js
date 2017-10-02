@@ -7,8 +7,19 @@ import ImageForm from './ImageForm';
 import ImageActions from './ImageActions';
 
 function ImageUI(props) {
-  const { image, isAnnotating, isFocused, size: canvasSize } = props;
-  const aProps = { imageID: image.get('id'), canvasSize, isAnnotating };
+  const {
+    image,
+    isAnnotating,
+    isFocused,
+    size: canvasSize,
+    currentView,
+  } = props;
+  const aProps = {
+    imageID: image.get('id'),
+    canvasSize,
+    isAnnotating,
+    currentView,
+  };
   return (
     <div className="canvas-container hoverable">
       <Image src={image.getIn(['urls', 'medium'])} />
@@ -24,6 +35,7 @@ ImageUI.propTypes = {
   size: PropTypes.object,
   isFocused: PropTypes.bool,
   isAnnotating: PropTypes.bool,
+  currentView: PropTypes.string,
 };
 
 export default sizeMe({ monitorHeight: true })(Focusable(ImageUI));
