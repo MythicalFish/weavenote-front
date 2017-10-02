@@ -35,11 +35,6 @@ const Annotation = (props) => {
     onMouseDown: (e) => {
       if (isNew || isAnnotating) return;
       focusAnnotation(annotation);
-      // if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
-      //  focusComment(annotatable.get('id'));
-      // } else {
-      //  focusComment(null);
-      // }
       if (isOwnAnnotation) {
         showMenu({ x: e.offsetX, y: e.offsetY });
       } else {

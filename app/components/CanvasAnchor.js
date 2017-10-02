@@ -9,7 +9,6 @@ const circleStyles = {
     fill: '#CCC',
     strokeWidth: 3,
     stroke: '#FFF',
-    cursor: 'pointer',
   },
   lineCap: {
     width: 8,
@@ -32,15 +31,13 @@ class Anchor extends React.PureComponent {
   styleName = this.props.anchorStyle || 'default';
 
   circleStyle = () => {
-    const { isFocused, isVisible, draggable, isNew } = this.props;
+    const { isFocused, isVisible, isNew } = this.props;
     if (!isVisible) return hiddenStyle;
     const { isHovering } = this.state;
     const s = { ...circleStyles[this.styleName] };
     if (isHovering || isNew) s.fill = activeColor;
     if (isFocused) {
-      s.cursor = 'default';
       s.fill = activeColor;
-      if (draggable) s.cursor = 'move';
     }
     return s;
   };
