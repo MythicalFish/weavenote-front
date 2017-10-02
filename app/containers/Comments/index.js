@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import onClickOutside from 'react-onclickoutside';
 import { selectUser } from 'containers/App/selectors';
 import NewComment from './subcomponents/NewComment';
 import Thread from './subcomponents/Thread';
@@ -18,6 +19,12 @@ import {
 import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
+  handleClickOutside = () => {
+    const p = this.props;
+    if (p.isCreating || p.isReplying || p.isEditing || p.currentComment) {
+      p.cancelCommentAction();
+    }
+  };
   render() {
     const { comments } = this.props;
     const cProps = { ...this.props, maxImages: 3 };
@@ -70,4 +77,4 @@ const mapState = createStructuredSelector({
   currentComment: selectors.selectCurrentComment(),
 });
 
-export default connect(mapState, mapDispatch)(Comments);
+export default connect(mapState, mapDispatch)(onClickOutside(Comments));

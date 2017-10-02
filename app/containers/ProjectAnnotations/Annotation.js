@@ -3,44 +3,61 @@ import { Group } from 'react-konva';
 import { idToIndex } from 'utils/reducerHelpers';
 import Anchor from 'components/CanvasAnchor';
 import Line from 'components/CanvasLine';
-import { pixelPosition, relativePosition } from './utils';
+import { pixelPosition, getPosition } from './utils';
 
 const Annotation = (props) => {
-  const { data, currentView: view, canvasSize, user } = props;
-  const { focusComment, focusAnnotation, focusedAnnotation, setAnchor } = props;
-  const { isAnnotating, updateAnnotation, deleteAnnotation } = props;
-  const { id, anchors, type, annotatable } = data.toObject();
+  const {
+    annotation,
+    currentView: view,
+    canvasSize,
+    user,
+    focusAnnotation,
+    focusedAnnotation,
+    setAnchor,
+    isAnnotating,
+    updateAnnotation,
+    showMenu,
+    hideMenu,
+  } = props;
+  const { id, type, annotatable } = annotation.toJS();
+  console.log(annotation.toJS());
+  const anchors = annotation.get('anchors');
   const isNew = !id;
+  const isOwnAnnotation = user.get('id') === annotation.get('user_id');
+  const isFocused = focusedAnnotation.id === id;
   const aProps = {
     isNew,
+    isFocused,
     anchorStyle: type === 'dot' ? 'default' : 'lineCap',
-    isFocused: focusedAnnotation === id,
-    isEditable: isNew || user.get('id') === data.get('user_id'),
+    draggable: isNew || isOwnAnnotation,
     isVisible:
       (view === 'Measurements' && type === 'line') ||
       (view !== 'Measurements' && type !== 'line'),
-    onClick: () => {
-      if (isNew) return;
-      if (!isNew && isAnnotating) return;
-      focusAnnotation(id);
-      if (data.getIn(['annotatable', 'type']) === 'Comment') {
-        focusComment(annotatable.get('id'));
+    onMouseDown: (e) => {
+      if (isNew || isAnnotating) return;
+      focusAnnotation({ id, annotatable });
+      // if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
+      //  focusComment(annotatable.get('id'));
+      // } else {
+      //  focusComment(null);
+      // }
+      if (isOwnAnnotation) {
+        showMenu({ x: e.offsetX, y: e.offsetY });
       } else {
-        focusComment(null);
+        hideMenu();
       }
     },
   };
   const onDragEnd = (anchor) => ({ evt: e }) => {
-    const newPos = relativePosition({ x: e.offsetX, y: e.offsetY }, canvasSize);
+    const newPos = getPosition(e, canvasSize);
     if (isNew) {
       setAnchor(newPos);
     } else {
       const id = anchor.get('id');
       const anchorIndex = idToIndex(id, anchors);
-      const annotation = data
-        .setIn(['anchors', anchorIndex], { id, ...newPos })
-        .toJS();
-      updateAnnotation(annotation);
+      updateAnnotation(
+        annotation.setIn(['anchors', anchorIndex], { id, ...newPos }).toJS()
+      );
     }
   };
   const anchorPairs = [];
@@ -74,15 +91,15 @@ const Annotation = (props) => {
 
 Annotation.propTypes = {
   user: PropTypes.object,
-  data: PropTypes.object,
+  annotation: PropTypes.object,
   canvasSize: PropTypes.object,
   currentView: PropTypes.string,
-  focusComment: PropTypes.func,
   focusAnnotation: PropTypes.func,
   updateAnnotation: PropTypes.func,
-  deleteAnnotation: PropTypes.func,
+  showMenu: PropTypes.func,
+  hideMenu: PropTypes.func,
   setAnchor: PropTypes.func,
-  focusedAnnotation: PropTypes.number,
+  focusedAnnotation: PropTypes.object,
   isAnnotating: PropTypes.bool,
 };
 

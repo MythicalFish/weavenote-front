@@ -19,15 +19,6 @@ const circleStyles = {
   },
 };
 
-const menuStyle = {
-  fill: '#FFF',
-  width: 30,
-  height: 30,
-  x: -15,
-  y: 10,
-  cursor: 'pointer',
-};
-
 const hiddenStyle = {
   opacity: 0,
   height: 0,
@@ -41,7 +32,7 @@ class Anchor extends React.PureComponent {
   styleName = this.props.anchorStyle || 'default';
 
   circleStyle = () => {
-    const { isFocused, isVisible, isEditable, isNew } = this.props;
+    const { isFocused, isVisible, draggable, isNew } = this.props;
     if (!isVisible) return hiddenStyle;
     const { isHovering } = this.state;
     const s = { ...circleStyles[this.styleName] };
@@ -49,32 +40,35 @@ class Anchor extends React.PureComponent {
     if (isFocused) {
       s.cursor = 'default';
       s.fill = activeColor;
-      if (isEditable) s.cursor = 'move';
+      if (draggable) s.cursor = 'move';
     }
     return s;
   };
-  menuStyle = () => {
-    if (!this.state.isHovering) return hiddenStyle;
-    return menuStyle;
+  mouseOver = ({ evt }) => {
+    toggleState(this, 'isHovering');
+    const { onMouseOver } = this.props;
+    if (onMouseOver) onMouseOver(evt);
   };
-  hover = () => {
-    if (this.props.isEditable) toggleState(this, 'isHovering');
+  mouseOut = ({ evt }) => {
+    toggleState(this, 'isHovering');
+    const { onMouseOut } = this.props;
+    if (onMouseOut) onMouseOut(evt);
   };
+  mouseDown = ({ evt }) => this.props.onMouseDown(evt);
   render() {
-    const { position, isEditable, onFocus, onDragEnd } = this.props;
+    const { position, draggable, onDragEnd } = this.props;
     return (
       <Group
         {...{
           ...position,
-          draggable: isEditable,
-          onMouseOver: this.hover,
-          onMouseOut: this.hover,
-          onMouseDown: onFocus,
+          draggable,
+          onMouseOver: this.mouseOver,
+          onMouseOut: this.mouseOut,
+          onMouseDown: this.mouseDown,
           onDragEnd,
         }}
       >
         <Circle {...this.circleStyle()} />
-        <Rect {...this.menuStyle()} />
       </Group>
     );
   }
@@ -82,13 +76,15 @@ class Anchor extends React.PureComponent {
 
 Anchor.propTypes = {
   anchorStyle: React.PropTypes.string,
-  isEditable: React.PropTypes.bool,
+  draggable: React.PropTypes.bool,
   isVisible: React.PropTypes.bool,
   isFocused: React.PropTypes.bool,
   isNew: React.PropTypes.bool,
   position: React.PropTypes.object,
-  onFocus: React.PropTypes.func,
+  onMouseDown: React.PropTypes.func,
   onDragEnd: React.PropTypes.func,
+  onMouseOver: React.PropTypes.func,
+  onMouseOut: React.PropTypes.func,
 };
 
 export default Anchor;

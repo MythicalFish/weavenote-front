@@ -17,8 +17,6 @@ export function* ProjectAnnotationsWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-const url = (annotation) => `annotations/${annotation.get('id')}`;
-
 function* createAnnotation() {
   const data = yield select(selectNewAnnotation());
   const a = data.toJS();
@@ -47,10 +45,11 @@ function* updateAnnotation({ payload }) {
   );
 }
 
-function* deleteAnnotation({ payload: annotation }) {
+function* deleteAnnotation({ payload }) {
+  const { id, image_id } = payload;
   yield sagas.destroy(
-    url(annotation),
-    { annotation },
+    `annotations/${id}`,
+    { annotation: { image_id } },
     actions.deleteAnnotationSuccess
   );
 }

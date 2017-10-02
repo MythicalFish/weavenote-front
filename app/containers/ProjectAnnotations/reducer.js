@@ -5,7 +5,7 @@ import { FETCH_PROJECT_SUCCESS } from '../ProjectManager/constants';
 
 const initialState = fromJS({
   existing: [],
-  focused: null,
+  focused: {},
   isAnnotating: false,
   new: {
     maxAnchors: 1,
@@ -57,6 +57,9 @@ function AnnotationsReducer(state = initialState, action) {
       return resetState(fromJS(response));
 
     case types.UPDATE_ANNOTATION_SUCCESS:
+      return resetState(fromJS(response));
+
+    case types.DELETE_ANNOTATION_SUCCESS:
       return resetState(fromJS(response));
 
     default:

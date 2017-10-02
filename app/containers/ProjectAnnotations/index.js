@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Canvas from 'components/Canvas';
+import AnnotationUI from './AnnotationUI';
 import Annotation from './Annotation';
 import { selectUser } from '../App/selectors';
 import {
@@ -10,8 +11,8 @@ import {
   selectNewAnnotation,
   selectFocusedAnnotation,
 } from './selectors';
-import { focusComment, writeComment } from '../Comments/actions';
-import { getPosition, isVisible } from './utils';
+import { writeComment } from '../Comments/actions';
+import { getPosition } from './utils';
 import {
   buildAnnotation,
   setAnchor,
@@ -23,17 +24,9 @@ import {
 } from './actions';
 
 class ProjectAnnotations extends React.PureComponent {
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown, false);
-  }
   canvasClick = ({ evt: e }) => {
     const { setAnchor: set, canvasSize } = this.props;
     set(getPosition(e, canvasSize));
-  };
-  handleKeyDown = (e) => {
-    if (e.keyCode === 27) {
-      if (this.props.isAnnotating) this.props.cancelAnnotation();
-    }
   };
   render() {
     const { annotations, canvasSize, imageID, newAnnotation } = this.props;
@@ -46,12 +39,12 @@ class ProjectAnnotations extends React.PureComponent {
           .map((annotation, index) => (
             <Annotation
               key={`Annotation${index}`}
-              data={annotation}
+              annotation={annotation}
               {...this.props}
             />
           ))}
         {this.props.isAnnotating && (
-          <Annotation data={newAnnotation} {...this.props} />
+          <Annotation annotation={newAnnotation} {...this.props} />
         )}
       </Canvas>
     );
@@ -65,8 +58,6 @@ ProjectAnnotations.propTypes = {
   newAnnotation: PropTypes.object,
   isAnnotating: PropTypes.bool,
   setAnchor: PropTypes.func,
-  writeComment: PropTypes.func,
-  cancelAnnotation: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
@@ -79,7 +70,6 @@ export function mapDispatch(dispatch) {
       deleteAnnotation,
       cancelAnnotation,
       focusAnnotation,
-      focusComment,
       writeComment,
     },
     dispatch
@@ -93,4 +83,4 @@ const mapState = createStructuredSelector({
   user: selectUser(),
 });
 
-export default connect(mapState, mapDispatch)(ProjectAnnotations);
+export default connect(mapState, mapDispatch)(AnnotationUI(ProjectAnnotations));

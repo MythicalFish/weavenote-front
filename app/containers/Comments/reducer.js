@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import * as types from './constants';
+import { FOCUS_ANNOTATION } from '../ProjectAnnotations/constants';
 
 const initialState = fromJS({
   isEditing: null,
@@ -9,30 +10,33 @@ const initialState = fromJS({
 });
 
 function commentsReducer(state = initialState, action) {
-  const id = ({ payload }) => {
+  const { type, payload } = action;
+  const id = () => {
     if (payload && payload.comment) return payload.comment.get('id');
     return payload;
   };
+  const annotationComment = () => {
+    console.log(payload);
+    if (payload) {
+      const a = payload.annotatable;
+      if (a && a.type === 'Comment') {
+        return a.id;
+      }
+    }
+    return null;
+  };
   switch (action.type) {
     case types.CANCEL_COMMENT_ACTION:
-      return state
-        .set('isCreating', false)
-        .set('isEditing', null)
-        .set('isReplying', null);
+      return initialState;
+
+    case FOCUS_ANNOTATION:
+      return initialState.set('currentComment', annotationComment());
 
     case types.FOCUS_COMMENT:
-      return state
-        .set('currentComment', id(action))
-        .set('isCreating', false)
-        .set('isEditing', null)
-        .set('isReplying', null);
+      return initialState.set('currentComment', id(action));
 
     case types.WRITE_COMMENT:
-      return state
-        .set('isCreating', true)
-        .set('currentComment', null)
-        .set('isEditing', null)
-        .set('isReplying', null);
+      return initialState.set('isCreating', true);
 
     case types.EDIT_COMMENT:
       return state

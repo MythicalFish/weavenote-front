@@ -1,0 +1,15 @@
+.annotation-actions {
+  @include borderRadius();
+  position: absolute;
+  transform: translate(-50%, -150%);
+  -webkit-transform: translate(-50%, -150%);
+  background: $white;
+  z-index: 2;
+  .icon {
+    padding: $space-1 $space-2;
+    color: $dark5;
+    &:not(:last-child) {
+      border-right: 1px solid $dark2;
+    }
+  }
+}
