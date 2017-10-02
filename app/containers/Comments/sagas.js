@@ -10,6 +10,8 @@ import {
 } from 'containers/ProjectAnnotations/actions';
 import * as types from './constants';
 import * as actions from './actions';
+import { selectProjectID } from '../ProjectManager/selectors';
+import { fetchProject } from '../ProjectManager/actions';
 
 export default [commentsWatcher];
 
@@ -48,6 +50,8 @@ function* deleteComment({ payload }) {
     payload,
     actions.deleteCommentSuccess
   );
+  const projectID = yield select(selectProjectID());
+  yield put(fetchProject(projectID));
 }
 
 const commentURL = (payload) => `comments/${payload.comment.get('id')}`;

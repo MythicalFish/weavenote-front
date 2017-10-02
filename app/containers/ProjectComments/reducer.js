@@ -5,15 +5,11 @@ import { CREATE_IMAGE_SUCCESS } from '../ImageUploader/constants';
 import {
   DELETE_IMAGE_SUCCESS,
   UPDATE_IMAGE_SUCCESS,
-} from 'containers/ImageForm/constants';
-import * as types from 'containers/Comments/constants';
+} from '../ImageForm/constants';
+import * as types from '../Comments/constants';
 import { setImages } from './reducerHelpers';
-const initialState = fromJS({
-  comments: [],
-});
 
-const setComments = (state, action) =>
-  state.set('comments', fromJS(action.response));
+const initialState = fromJS([]);
 
 export default function ProjectCommentsReducer(state = initialState, action) {
   const { response } = action;
@@ -21,10 +17,10 @@ export default function ProjectCommentsReducer(state = initialState, action) {
   switch (action.type) {
     // Init
     case FETCH_PROJECT_SUCCESS:
-      return state.set('comments', fromJS(response.comments));
+      return fromJS(response.comments);
 
     case FETCH_COMMENTS_SUCCESS:
-      return state.set('comments', fromJS(response));
+      return fromJS(response);
 
     // Images
 
@@ -40,13 +36,13 @@ export default function ProjectCommentsReducer(state = initialState, action) {
     // Comments
 
     case types.CREATE_COMMENT_SUCCESS:
-      return setComments(state, action);
+      return fromJS(action.response);
 
     case types.UPDATE_COMMENT_SUCCESS:
-      return setComments(state, action);
+      return fromJS(action.response);
 
     case types.DELETE_COMMENT_SUCCESS:
-      return setComments(state, action);
+      return fromJS(action.response);
 
     default:
       return state;

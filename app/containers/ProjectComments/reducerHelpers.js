@@ -9,8 +9,7 @@ export function setImages(state, { response }) {
   return state;
 }
 
-function commentImageKeyPath(state, id) {
-  const comments = state.get('comments');
+function commentImageKeyPath(comments, id) {
   const index = idToIndex(id, comments);
   if (index !== undefined) {
     return ['comments', index, 'images'];
