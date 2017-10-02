@@ -2,6 +2,7 @@ import { fromJS } from 'immutable';
 import assign from 'object-assign-deep';
 import * as types from './constants';
 import { FETCH_PROJECT_SUCCESS } from '../ProjectManager/constants';
+import { FOCUS_COMMENT } from '../Comments/constants';
 
 const initialState = fromJS({
   existing: [],
@@ -28,13 +29,26 @@ function AnnotationsReducer(state = initialState, action) {
   const resetState = (r = null) =>
     initialState.set('existing', r || state.get('existing'));
 
+  const commentAnnotation = () => {
+    if (payload) {
+      const a = payload.annotatable;
+      if (a && a.type === 'Comment') {
+        return a.id;
+      }
+    }
+    return null;
+  };
+
   switch (type) {
     //
     case FETCH_PROJECT_SUCCESS:
       return state.set('existing', fromJS(response.annotations));
 
     case types.FOCUS_ANNOTATION:
-      return state.set('focused', payload);
+      return state.set('focused', payload.get('id'));
+
+    case FOCUS_COMMENT:
+      return state.set('focused', commentAnnotation());
 
     case types.START_ANNOTATION:
       return buildAnnotation().set('isAnnotating', true);

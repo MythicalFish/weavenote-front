@@ -1,0 +1,2 @@
+export const FETCH_COMMENTS = '@@app/FETCH_COMMENTS';
+export const FETCH_COMMENTS_SUCCESS = '@@app/FETCH_COMMENTS_SUCCESS';

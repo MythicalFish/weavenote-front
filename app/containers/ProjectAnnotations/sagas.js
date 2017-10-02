@@ -5,6 +5,8 @@ import { selectNewAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
 import { writeComment } from '../Comments/actions';
+import { selectProjectID } from '../ProjectManager/selectors';
+import { fetchComments } from '../ProjectComments/actions';
 
 export function* ProjectAnnotationsWatcher() {
   const watcher = [
@@ -52,6 +54,8 @@ function* deleteAnnotation({ payload }) {
     { annotation: { image_id } },
     actions.deleteAnnotationSuccess
   );
+  const projectID = yield select(selectProjectID());
+  yield put(fetchComments({ commentable: { type: 'Project', id: projectID } }));
 }
 
 function* handleSetAnchor() {

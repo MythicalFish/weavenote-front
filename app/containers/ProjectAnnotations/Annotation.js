@@ -19,12 +19,11 @@ const Annotation = (props) => {
     showMenu,
     hideMenu,
   } = props;
-  const { id, type, annotatable } = annotation.toJS();
-  console.log(annotation.toJS());
+  const { id, type } = annotation.toJS();
   const anchors = annotation.get('anchors');
   const isNew = !id;
   const isOwnAnnotation = user.get('id') === annotation.get('user_id');
-  const isFocused = focusedAnnotation.id === id;
+  const isFocused = focusedAnnotation.get('id') === id;
   const aProps = {
     isNew,
     isFocused,
@@ -35,7 +34,7 @@ const Annotation = (props) => {
       (view !== 'Measurements' && type !== 'line'),
     onMouseDown: (e) => {
       if (isNew || isAnnotating) return;
-      focusAnnotation({ id, annotatable });
+      focusAnnotation(annotation);
       // if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
       //  focusComment(annotatable.get('id'));
       // } else {

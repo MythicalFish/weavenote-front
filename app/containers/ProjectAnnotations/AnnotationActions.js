@@ -7,10 +7,11 @@ const AnnotationActions = (props) => {
   const {
     position,
     deleteAnnotation,
-    focusedAnnotation: { id },
     imageID: image_id,
     hideMenu,
+    focusedAnnotation,
   } = props;
+  const id = focusedAnnotation.get('id');
   const style = {
     left: position.x,
     top: position.y,

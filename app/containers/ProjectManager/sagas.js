@@ -2,11 +2,12 @@ import { take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { getFormValues, isDirty } from 'redux-form/immutable';
 import * as sagas from 'utils/genericSagas';
-import { materialListWatcher } from 'containers/MaterialList/sagas';
-import { ProjectInstructionsWatcher } from 'containers/ProjectInstructions/sagas';
-import { ProjectMeasurementsWatcher } from 'containers/ProjectMeasurements/sagas';
-import { ProjectComponentsWatcher } from 'containers/ProjectComponents/sagas';
-import { ProjectAnnotationsWatcher } from 'containers/ProjectAnnotations/sagas';
+import { materialListWatcher } from '../MaterialList/sagas';
+import { ProjectInstructionsWatcher } from '../ProjectInstructions/sagas';
+import { ProjectMeasurementsWatcher } from '../ProjectMeasurements/sagas';
+import { ProjectComponentsWatcher } from '../ProjectComponents/sagas';
+import { ProjectAnnotationsWatcher } from '../ProjectAnnotations/sagas';
+import { ProjectCommentsWatcher } from '../ProjectComments/sagas';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -17,6 +18,7 @@ export default [
   ProjectMeasurementsWatcher,
   ProjectComponentsWatcher,
   ProjectAnnotationsWatcher,
+  ProjectCommentsWatcher,
 ];
 
 function* ProjectManagerWatcher() {

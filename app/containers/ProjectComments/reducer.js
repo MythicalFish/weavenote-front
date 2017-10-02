@@ -1,10 +1,11 @@
 import { fromJS } from 'immutable';
-import { combineReducers } from 'redux-immutable';
-import ProjectImageReducer from 'containers/ProjectImages/reducer';
-import { FETCH_PROJECT_SUCCESS } from 'containers/ProjectManager/constants';
-import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
-import { DELETE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
-import { UPDATE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
+import { FETCH_COMMENTS_SUCCESS } from './constants';
+import { FETCH_PROJECT_SUCCESS } from '../ProjectManager/constants';
+import { CREATE_IMAGE_SUCCESS } from '../ImageUploader/constants';
+import {
+  DELETE_IMAGE_SUCCESS,
+  UPDATE_IMAGE_SUCCESS,
+} from 'containers/ImageForm/constants';
 import * as types from 'containers/Comments/constants';
 import { setImages } from './reducerHelpers';
 const initialState = fromJS({
@@ -21,6 +22,9 @@ export default function ProjectCommentsReducer(state = initialState, action) {
     // Init
     case FETCH_PROJECT_SUCCESS:
       return state.set('comments', fromJS(response.comments));
+
+    case FETCH_COMMENTS_SUCCESS:
+      return state.set('comments', fromJS(response));
 
     // Images
 

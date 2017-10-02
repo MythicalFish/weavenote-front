@@ -16,16 +16,12 @@ function commentsReducer(state = initialState, action) {
     return payload;
   };
   const annotationComment = () => {
-    console.log(payload);
-    if (payload) {
-      const a = payload.annotatable;
-      if (a && a.type === 'Comment') {
-        return a.id;
-      }
+    if (payload.getIn(['annotatable', 'type']) === 'Comment') {
+      return payload.getIn(['annotatable', 'id']);
     }
     return null;
   };
-  switch (action.type) {
+  switch (type) {
     case types.CANCEL_COMMENT_ACTION:
       return initialState;
 
