@@ -1,38 +1,45 @@
 import React, { PropTypes } from 'react';
 import { Layer, Rect, Stage } from 'react-konva';
 
-class Canvas extends React.PureComponent {
-  state = { cursor: 'default' };
-  style = () => {
-    const s = {};
-    if (this.props.onClick) {
-      s.cursor = 'crosshair';
-    } else {
-      s.cursor = this.state.cursor;
+export function withCanvas(Component) {
+  // HOC for providing the ref to children
+  class C extends React.PureComponent {
+    handleRef = (ref) => (this.canvasRef = ref);
+    render() {
+      return (
+        <CanvasContainer {...this.props} ref={this.handleRef}>
+          <Component {...this.props} canvasRef={this.canvasRef} />
+        </CanvasContainer>
+      );
     }
-    return { style: s };
-  };
+  }
+  return C;
+}
+
+class CanvasContainer extends React.PureComponent {
+  state = { cursor: 'default' };
   render() {
-    const { size, onClick } = this.props;
-    delete size.position;
-    const Overlay = () => <Rect {...size} onClick={onClick} />;
+    const style = { cursor: this.state.cursor };
+    if (this.props.onClick) style.cursor = 'crosshair';
+    const { canvasSize, onClick } = this.props;
+    delete canvasSize.position;
     return (
-      <div className="canvas" {...this.style()}>
-        <Stage {...size}>
-          <Layer>
-            <Overlay />
-            {this.props.children}
-          </Layer>
+      <div className="canvas" style={style}>
+        <Stage {...canvasSize}>
+          {this.props.children}
+          {onClick && (
+            <Layer>
+              <Rect {...canvasSize} onClick={onClick} />
+            </Layer>
+          )}
         </Stage>
       </div>
     );
   }
 }
 
-Canvas.propTypes = {
+CanvasContainer.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node,
-  size: PropTypes.object,
+  canvasSize: PropTypes.object,
 };
-
-export default Canvas;

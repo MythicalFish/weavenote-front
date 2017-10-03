@@ -2,17 +2,16 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import Canvas from 'components/Canvas';
+import Canvas from './AnnotationCanvas';
 import AnnotationUI from './AnnotationUI';
-import Annotation from './Annotation';
 import { selectUser } from '../App/selectors';
+import { getPosition } from './utils';
 import {
   selectExisting,
   selectNewAnnotation,
   selectFocusedAnnotation,
 } from './selectors';
 import { writeComment } from '../Comments/actions';
-import { getPosition } from './utils';
 import {
   buildAnnotation,
   setAnchor,
@@ -23,40 +22,18 @@ import {
   focusAnnotation,
 } from './actions';
 
-class ProjectAnnotations extends React.PureComponent {
-  canvasClick = ({ evt: e }) => {
-    const { setAnchor: set, canvasSize } = this.props;
-    set(getPosition(e, canvasSize));
+const ProjectAnnotations = (props) => {
+  const cProps = { onClick: null };
+  const canvasClick = ({ evt: e }) => {
+    props.setAnchor(getPosition(e, props.canvasSize));
   };
-  render() {
-    const { annotations, canvasSize, imageID, newAnnotation } = this.props;
-    const cProps = { size: canvasSize };
-    if (this.props.isAnnotating) cProps.onClick = this.canvasClick;
-    return (
-      <Canvas {...cProps}>
-        {annotations
-          .filter((a) => a.get('image_id') === imageID)
-          .map((annotation, index) => (
-            <Annotation
-              key={`Annotation${index}`}
-              annotation={annotation}
-              {...this.props}
-            />
-          ))}
-        {this.props.isAnnotating && (
-          <Annotation annotation={newAnnotation} {...this.props} />
-        )}
-      </Canvas>
-    );
-  }
-}
+  if (props.isAnnotating) cProps.onClick = canvasClick;
+  return <Canvas {...props} {...cProps} />;
+};
 
 ProjectAnnotations.propTypes = {
-  imageID: PropTypes.number,
-  annotations: PropTypes.object,
-  canvasSize: PropTypes.object,
-  newAnnotation: PropTypes.object,
   isAnnotating: PropTypes.bool,
+  canvasSize: PropTypes.object,
   setAnchor: PropTypes.func,
 };
 
