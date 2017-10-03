@@ -71,7 +71,7 @@ function AnnotationsReducer(state = initialState, action) {
       return resetState(fromJS(response));
 
     case types.UPDATE_ANNOTATION_SUCCESS:
-      return resetState(fromJS(response));
+      return state.set('existing', fromJS(response));
 
     case types.DELETE_ANNOTATION_SUCCESS:
       return resetState(fromJS(response));

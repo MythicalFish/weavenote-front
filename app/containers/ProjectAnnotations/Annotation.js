@@ -34,7 +34,7 @@ const Annotation = (props) => {
     isVisible:
       (view === 'Measurements' && type === 'line') ||
       (view !== 'Measurements' && type !== 'line'),
-    onMouseDown: (e) => {
+    onMouseUp: (e) => {
       if (isNew || isAnnotating) return;
       focusAnnotation(annotation);
       if (isOwnAnnotation) {
@@ -48,6 +48,9 @@ const Annotation = (props) => {
     },
     onMouseOut: () => {
       canvasRef.setState({ cursor: 'default' });
+    },
+    onDragStart: () => {
+      hideMenu();
     },
   };
   const onDragEnd = (anchor) => ({ evt: e }) => {
@@ -75,19 +78,19 @@ const Annotation = (props) => {
   const pos = (anchor) => pixelPosition(anchor.toJS(), canvasSize);
   return (
     <Group>
+      {anchorPairs.map((pair, i) => (
+        <Line
+          key={`Annotation${id}Line${i}`}
+          position={[pos(pair[0]), pos(pair[1])]}
+          {...aProps}
+        />
+      ))}
       {anchors.map((anchor, i) => (
         <Anchor
           key={`Annotation${id}Anchor${i}`}
           position={pos(anchor)}
           {...aProps}
           onDragEnd={onDragEnd(anchor)}
-        />
-      ))}
-      {anchorPairs.map((pair, i) => (
-        <Line
-          key={`Annotation${id}Line${i}`}
-          position={[pos(pair[0]), pos(pair[1])]}
-          {...aProps}
         />
       ))}
     </Group>

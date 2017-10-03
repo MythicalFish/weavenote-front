@@ -2,7 +2,7 @@ import React from 'react';
 import { Group, Circle, Rect, Text } from 'react-konva';
 import { toggleState } from 'utils/misc';
 
-const circleStyles = {
+const styles = {
   default: {
     width: 22,
     height: 22,
@@ -30,11 +30,11 @@ class Anchor extends React.PureComponent {
   state = { action: null };
   styleName = this.props.anchorStyle || 'default';
 
-  circleStyle = () => {
+  style = () => {
     const { isFocused, isVisible, isNew } = this.props;
     if (!isVisible) return hiddenStyle;
     const { isHovering } = this.state;
-    const s = { ...circleStyles[this.styleName] };
+    const s = { ...styles[this.styleName] };
     if (isHovering || isNew) s.fill = activeColor;
     if (isFocused) {
       s.fill = activeColor;
@@ -51,21 +51,22 @@ class Anchor extends React.PureComponent {
     const { onMouseOut } = this.props;
     if (onMouseOut) onMouseOut(evt);
   };
-  mouseDown = ({ evt }) => this.props.onMouseDown(evt);
+  mouseUp = ({ evt }) => this.props.onMouseUp(evt);
   render() {
-    const { position, draggable, onDragEnd } = this.props;
+    const { position, draggable, onDragEnd, onDragStart } = this.props;
     return (
       <Group
         {...{
           ...position,
           draggable,
+          onDragEnd,
+          onDragStart,
           onMouseOver: this.mouseOver,
           onMouseOut: this.mouseOut,
-          onMouseDown: this.mouseDown,
-          onDragEnd,
+          onMouseUp: this.mouseUp,
         }}
       >
-        <Circle {...this.circleStyle()} />
+        <Circle {...this.style()} />
       </Group>
     );
   }
@@ -78,8 +79,9 @@ Anchor.propTypes = {
   isFocused: React.PropTypes.bool,
   isNew: React.PropTypes.bool,
   position: React.PropTypes.object,
-  onMouseDown: React.PropTypes.func,
+  onMouseUp: React.PropTypes.func,
   onDragEnd: React.PropTypes.func,
+  onDragStart: React.PropTypes.func,
   onMouseOver: React.PropTypes.func,
   onMouseOut: React.PropTypes.func,
 };
