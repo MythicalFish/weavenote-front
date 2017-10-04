@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
-import { idToIndex } from 'utils/reducerHelpers';
 import { toggleState } from 'utils/misc';
 import { Group } from 'react-konva';
-import { getPosition, pixelPosition } from 'utils/canvasPosition';
+import { pixelPosition, anchorPoints } from 'utils/canvasPosition';
 import Anchor from './CanvasAnchor';
 import Line from './CanvasLine';
 import Text from './CanvasText';
@@ -16,22 +15,27 @@ const hiddenStyle = {
 class CanvasAnnotation extends React.PureComponent {
   state = { isHovering: false };
   getPosition = (anchor) => pixelPosition(anchor.toJS(), this.props.canvasSize);
-  mouseOver = ({ evt }) => {
+  handleMouseOver = ({ evt }) => {
     toggleState(this, 'isHovering');
     const { onMouseOver } = this.props;
     if (onMouseOver) onMouseOver(evt);
   };
-  mouseOut = ({ evt }) => {
+  handleMouseOut = ({ evt }) => {
     toggleState(this, 'isHovering');
     const { onMouseOut } = this.props;
     if (onMouseOut) onMouseOut(evt);
   };
-  mouseUp = ({ evt }) => this.props.onMouseUp(evt);
-  handleAnchorDragEnd = (anchor) => ({ evt: e }) => {
-    const anchorID = anchor.get('id');
-    const anchorIndex = idToIndex(anchorID, this.props.anchors);
-    const newPos = getPosition(e, this.props.canvasSize);
-    this.props.handleAnchorDragEnd(anchorIndex, newPos);
+  handleMouseUp = () =>
+    this.props.onMouseUp({ position: this.points().midpoint });
+  handleAnchorDragEnd = (anchor) => ({ evt: event }) =>
+    this.props.handleAnchorDragEnd({ anchor, event });
+  handleAnchorMouseOver = () => {
+    if (this.props.isDraggable) {
+      this.props.canvasRef.setState({ cursor: 'move' });
+    }
+  };
+  handleAnchorMouseOut = () => {
+    this.props.canvasRef.setState({ cursor: 'default' });
   };
   style = () => {
     if (this.props.isVisible) return {};
@@ -39,26 +43,27 @@ class CanvasAnnotation extends React.PureComponent {
   };
   groupProps = () => ({
     ...this.style(),
-    onMouseOver: this.mouseOver,
-    onMouseOut: this.mouseOut,
-    onMouseUp: this.mouseUp,
+    onMouseOver: this.handleMouseOver,
+    onMouseOut: this.handleMouseOut,
+    onMouseUp: this.handleMouseUp,
   });
+  isActive = () => this.props.isActive || this.state.isHovering;
+  points = () => {
+    const { anchors, canvasSize } = this.props;
+    return anchorPoints(anchors, canvasSize);
+  };
   render() {
     const { anchors, identifier, theme } = this.props;
-    const lineAnchorPoints = [];
-    const midpoint = { x: 0, y: 0 };
-    anchors.forEach((anchor) => {
-      const pos = this.getPosition(anchor);
-      lineAnchorPoints.push(pos.x);
-      lineAnchorPoints.push(pos.y);
-      midpoint.x += pos.x;
-      midpoint.y += pos.y;
-    });
-    midpoint.x /= 2;
-    midpoint.y /= 2;
+    const points = this.points();
     return (
       <Group {...this.groupProps()}>
-        {anchors.size > 1 && <Line points={lineAnchorPoints} theme={theme} />}
+        {anchors.size > 1 && (
+          <Line
+            points={points.lineAnchors}
+            theme={theme}
+            isActive={this.isActive()}
+          />
+        )}
         {anchors.map((anchor, i) => (
           <Anchor
             key={`Anchor${i}`}
@@ -67,23 +72,31 @@ class CanvasAnnotation extends React.PureComponent {
             onDragStart={this.props.handleAnchorDragStart}
             onDragEnd={this.handleAnchorDragEnd(anchor)}
             isDraggable={this.props.isDraggable}
-            isFocused={this.props.isFocused}
-            parentIsHovering={this.state.isHovering}
+            isActive={this.isActive()}
+            onMouseOver={this.handleAnchorMouseOver}
+            onMouseOut={this.handleAnchorMouseOut}
           />
         ))}
-        {identifier && <Text value={identifier} position={midpoint} />}
+        {identifier && (
+          <Text
+            value={identifier}
+            position={points.midpoint}
+            isActive={this.isActive()}
+          />
+        )}
       </Group>
     );
   }
 }
 
 CanvasAnnotation.propTypes = {
-  isFocused: PropTypes.bool,
   isVisible: PropTypes.bool,
+  isActive: PropTypes.bool,
   isDraggable: PropTypes.bool,
   theme: PropTypes.string,
   identifier: PropTypes.string,
   canvasSize: PropTypes.object,
+  canvasRef: PropTypes.object,
   anchors: PropTypes.object,
   onMouseUp: PropTypes.func,
   onMouseOver: PropTypes.func,

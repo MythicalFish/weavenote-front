@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import CanvasAnnotation from 'components/CanvasAnnotation';
-import { pixelPosition } from 'utils/canvasPosition';
+import { getPosition, anchorPoints } from 'utils/canvasPosition';
+import { idToIndex } from 'utils/reducerHelpers';
+
 const Annotation = (props) => {
   const {
     annotation,
@@ -16,7 +18,7 @@ const Annotation = (props) => {
     hideMenu,
     canvasRef,
   } = props;
-  const { id, type } = annotation.toJS();
+  const { id, type, anchors } = annotation.toObject();
   const isNew = !id;
   const isOwnAnnotation = user.get('id') === annotation.get('user_id');
   const isFocused = focusedAnnotation.get('id') === id;
@@ -26,44 +28,39 @@ const Annotation = (props) => {
     (view !== 'Measurements' && type !== 'line');
 
   const aProps = {
-    isNew,
-    isFocused,
     isDraggable,
     isVisible,
     type,
     canvasSize,
-    anchors: annotation.get('anchors'),
+    canvasRef,
+    anchors,
+    isActive: isFocused || isNew,
     theme: type === 'dot' ? 'default' : 'lineCap',
-    lineStyle: 'default',
-    onMouseUp: (e) => {
+    onMouseUp: ({ position }) => {
       if (isNew || isAnnotating) return;
       focusAnnotation(annotation);
       if (isOwnAnnotation) {
-        showMenu({ x: e.offsetX, y: e.offsetY });
+        showMenu(position);
       } else {
         hideMenu();
       }
     },
-    onMouseOver: () => {
-      if (isDraggable) canvasRef.setState({ cursor: 'move' });
-    },
-    onMouseOut: () => {
-      canvasRef.setState({ cursor: 'default' });
-    },
     handleAnchorDragStart: () => {
       hideMenu();
     },
-    handleAnchorDragEnd: (anchorIndex, newPosition) => {
+    handleAnchorDragEnd: ({ anchor, event }) => {
+      const anchorID = anchor.get('id');
+      const anchorIndex = idToIndex(anchorID, anchors);
+      const newPos = getPosition(event, canvasSize);
+      const a = annotation
+        .setIn(['anchors', anchorIndex], { id: anchorID, ...newPos })
+        .toJS();
       if (isNew) {
-        setAnchor(newPosition);
+        setAnchor(newPos);
       } else {
-        updateAnnotation(
-          annotation
-            .setIn(['anchors', anchorIndex, 'x'], newPosition.x)
-            .setIn(['anchors', anchorIndex, 'y'], newPosition.y)
-            .toJS()
-        );
-        showMenu({ ...pixelPosition(newPosition, canvasSize) });
+        updateAnnotation(a);
+
+        showMenu({ x: event.offsetX, y: event.offsetY });
       }
     },
   };
