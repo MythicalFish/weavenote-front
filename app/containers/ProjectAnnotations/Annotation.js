@@ -26,7 +26,6 @@ const Annotation = (props) => {
     (view !== 'Measurements' && type !== 'line');
 
   const aProps = {
-    id,
     isNew,
     isFocused,
     isDraggable,

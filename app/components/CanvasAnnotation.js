@@ -44,7 +44,7 @@ class CanvasAnnotation extends React.PureComponent {
     onMouseUp: this.mouseUp,
   });
   render() {
-    const { id, anchors, identifier } = this.props;
+    const { anchors, identifier, theme } = this.props;
     const lineAnchorPoints = [];
     const midpoint = { x: 0, y: 0 };
     anchors.forEach((anchor) => {
@@ -58,13 +58,11 @@ class CanvasAnnotation extends React.PureComponent {
     midpoint.y /= 2;
     return (
       <Group {...this.groupProps()}>
-        {anchors.size > 1 && (
-          <Line key={`Annotation${id}Line`} points={lineAnchorPoints} />
-        )}
+        {anchors.size > 1 && <Line points={lineAnchorPoints} theme={theme} />}
         {anchors.map((anchor, i) => (
           <Anchor
-            key={`Annotation${id}Anchor${i}`}
-            theme={this.props.theme}
+            key={`Anchor${i}`}
+            theme={theme}
             position={this.getPosition(anchor)}
             onDragStart={this.props.handleAnchorDragStart}
             onDragEnd={this.handleAnchorDragEnd(anchor)}
@@ -83,7 +81,6 @@ CanvasAnnotation.propTypes = {
   isFocused: PropTypes.bool,
   isVisible: PropTypes.bool,
   isDraggable: PropTypes.bool,
-  id: PropTypes.number,
   theme: PropTypes.string,
   identifier: PropTypes.string,
   canvasSize: PropTypes.object,
