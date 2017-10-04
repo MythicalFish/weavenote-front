@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import CanvasAnnotation from 'components/CanvasAnnotation';
-
+import { pixelPosition } from 'utils/canvasPosition';
 const Annotation = (props) => {
   const {
     annotation,
@@ -63,7 +63,7 @@ const Annotation = (props) => {
             .setIn(['anchors', anchorIndex, 'y'], newPosition.y)
             .toJS()
         );
-        showMenu({ ...newPosition });
+        showMenu({ ...pixelPosition(newPosition, canvasSize) });
       }
     },
   };

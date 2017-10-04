@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react';
+import { fromJS } from 'immutable';
 import onClickOutside from 'react-onclickoutside';
 import Actions from './AnnotationActions';
 
 const AnnotationUI = (Component) => {
   class UI extends React.PureComponent {
     static propTypes = {
+      focusAnnotation: PropTypes.func,
+      focusedAnnotation: PropTypes.object,
       cancelAnnotation: PropTypes.func,
       isAnnotating: PropTypes.bool,
     };
@@ -20,6 +23,9 @@ const AnnotationUI = (Component) => {
     };
     cancelActions = () => {
       if (this.props.isAnnotating) this.props.cancelAnnotation();
+      if (this.props.focusedAnnotation.get('id')) {
+        this.props.focusAnnotation(fromJS({}));
+      }
       this.hideMenu();
     };
     showMenu = (position) => {
