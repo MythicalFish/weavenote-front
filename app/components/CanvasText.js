@@ -1,13 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Text } from 'react-konva';
 
-export default function CanvasText({ value, x, y, color }) {
-  return <Text x={x} y={y} text={value} fill={color} fontSize={20} />;
+export default function CanvasText({ value, position, color }) {
+  return <Text text={value} fill={color} fontSize={20} {...position} />;
 }
 
 CanvasText.propTypes = {
-  x: PropTypes.number,
-  y: PropTypes.number,
+  position: PropTypes.object,
   value: PropTypes.string,
   color: PropTypes.string,
 };

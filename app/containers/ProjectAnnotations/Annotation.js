@@ -1,9 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Group } from 'react-konva';
-import { idToIndex } from 'utils/reducerHelpers';
-import Anchor from 'components/CanvasAnchor';
-import Line from 'components/CanvasLine';
-import { pixelPosition, getPosition } from './utils';
+import CanvasAnnotation from 'components/CanvasAnnotation';
 
 const Annotation = (props) => {
   const {
@@ -21,19 +17,25 @@ const Annotation = (props) => {
     canvasRef,
   } = props;
   const { id, type } = annotation.toJS();
-  const anchors = annotation.get('anchors');
   const isNew = !id;
   const isOwnAnnotation = user.get('id') === annotation.get('user_id');
   const isFocused = focusedAnnotation.get('id') === id;
   const isDraggable = (isFocused && isOwnAnnotation) || isNew;
+  const isVisible =
+    (view === 'Measurements' && type === 'line') ||
+    (view !== 'Measurements' && type !== 'line');
+
   const aProps = {
+    id,
     isNew,
     isFocused,
-    anchorStyle: type === 'dot' ? 'default' : 'lineCap',
-    draggable: isDraggable,
-    isVisible:
-      (view === 'Measurements' && type === 'line') ||
-      (view !== 'Measurements' && type !== 'line'),
+    isDraggable,
+    isVisible,
+    type,
+    canvasSize,
+    anchors: annotation.get('anchors'),
+    theme: type === 'dot' ? 'default' : 'lineCap',
+    lineStyle: 'default',
     onMouseUp: (e) => {
       if (isNew || isAnnotating) return;
       focusAnnotation(annotation);
@@ -49,52 +51,25 @@ const Annotation = (props) => {
     onMouseOut: () => {
       canvasRef.setState({ cursor: 'default' });
     },
-    onDragStart: () => {
+    handleAnchorDragStart: () => {
       hideMenu();
     },
+    handleAnchorDragEnd: (anchorIndex, newPosition) => {
+      if (isNew) {
+        setAnchor(newPosition);
+      } else {
+        updateAnnotation(
+          annotation
+            .setIn(['anchors', anchorIndex, 'x'], newPosition.x)
+            .setIn(['anchors', anchorIndex, 'y'], newPosition.y)
+            .toJS()
+        );
+        showMenu({ ...newPosition });
+      }
+    },
   };
-  const onDragEnd = (anchor) => ({ evt: e }) => {
-    const newPos = getPosition(e, canvasSize);
-    if (isNew) {
-      setAnchor(newPos);
-    } else {
-      const anchorID = anchor.get('id');
-      const anchorIndex = idToIndex(anchorID, anchors);
-      updateAnnotation(
-        annotation
-          .setIn(['anchors', anchorIndex], { id: anchorID, ...newPos })
-          .toJS()
-      );
-      showMenu({ x: e.offsetX, y: e.offsetY });
-    }
-  };
-  const anchorPairs = [];
-  anchors.forEach((anchor, index) => {
-    if (index > 0) {
-      const previous = anchors.get(index - 1);
-      anchorPairs.push([previous, anchor]);
-    }
-  });
-  const pos = (anchor) => pixelPosition(anchor.toJS(), canvasSize);
-  return (
-    <Group>
-      {anchorPairs.map((pair, i) => (
-        <Line
-          key={`Annotation${id}Line${i}`}
-          position={[pos(pair[0]), pos(pair[1])]}
-          {...aProps}
-        />
-      ))}
-      {anchors.map((anchor, i) => (
-        <Anchor
-          key={`Annotation${id}Anchor${i}`}
-          position={pos(anchor)}
-          {...aProps}
-          onDragEnd={onDragEnd(anchor)}
-        />
-      ))}
-    </Group>
-  );
+
+  return <CanvasAnnotation {...aProps} />;
 };
 
 Annotation.propTypes = {

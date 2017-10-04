@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { getPosition } from 'utils/canvasPosition';
 import Canvas from './AnnotationCanvas';
 import AnnotationUI from './AnnotationUI';
 import { selectUser } from '../App/selectors';
-import { getPosition } from './utils';
 import {
   selectExisting,
   selectNewAnnotation,
