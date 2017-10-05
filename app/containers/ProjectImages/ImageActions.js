@@ -29,6 +29,15 @@ const ImageActions = (props) => {
           tooltip="Add line"
         />
       )}
+      {currentView === 'Measurements' && (
+        <Icon
+          onClick={() =>
+            startAnnotation({ imageID, type: 'arrow', maxAnchors: 2 })}
+          name="ArrowDownRight"
+          size={20}
+          tooltip="Add arrow"
+        />
+      )}
       <Icon onClick={focusThis} name="Edit" size={20} tooltip="Edit" />
     </div>
   );

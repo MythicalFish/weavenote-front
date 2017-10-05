@@ -4,7 +4,7 @@ $monospace-font-family: 'Source Code Pro', Consolas, monospace;
 $letter-spacing: 1;
 
 $heading-line-height: 1.25;
-$caps-letter-spacing: .2em;
+$caps-letter-spacing: 0.2em;
 
 body {
   font-family: $font-family;
@@ -35,8 +35,8 @@ $h1: 2em;
 $h2: 1.8em;
 $h3: 1.25em;
 $h4: 1em;
-$h5: .875em;
-$h6: .75em;
+$h5: 0.875em;
+$h6: 0.75em;
 
 .h00 {
   font-size: $h00;
@@ -179,7 +179,9 @@ b {
 .lh1 {
   line-height: 1;
 }
-
+.lh2 {
+  line-height: 2;
+}
 .subtle {
   color: $dark6;
   @extend .smaller2;

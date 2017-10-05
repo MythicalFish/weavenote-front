@@ -22,7 +22,7 @@ class Comments extends React.PureComponent {
   handleClickOutside = () => {
     const p = this.props;
     if (p.isCreating || p.isReplying || p.isEditing || p.currentComment) {
-      // p.cancelCommentAction();
+      p.cancelCommentAction();
     }
   };
   render() {

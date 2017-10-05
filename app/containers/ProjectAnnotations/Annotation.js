@@ -23,9 +23,12 @@ const Annotation = (props) => {
   const isOwnAnnotation = user.get('id') === annotation.get('user_id');
   const isFocused = focusedAnnotation.get('id') === id;
   const isDraggable = (isFocused && isOwnAnnotation) || isNew;
-  const isVisible =
-    (view === 'Measurements' && type === 'line') ||
-    (view !== 'Measurements' && type !== 'line');
+  let isVisible = false;
+  if (['line', 'arrow'].includes(type)) {
+    if (view === 'Measurements') isVisible = true;
+  } else if (view !== 'Measurements') {
+    isVisible = true;
+  }
 
   const aProps = {
     isDraggable,
@@ -34,8 +37,8 @@ const Annotation = (props) => {
     canvasSize,
     canvasRef,
     anchors,
+    isNew,
     isActive: isFocused || isNew,
-    theme: type === 'dot' ? 'default' : 'lineCap',
     onMouseUp: ({ position }) => {
       if (isNew || isAnnotating) return;
       focusAnnotation(annotation);

@@ -9,7 +9,13 @@ const themes = {
     strokeWidth: 3,
     stroke: '#FFF',
   },
-  lineCap: {
+  line: {
+    width: 8,
+    height: 8,
+    fill: '#42EA83',
+    strokeWidth: 0,
+  },
+  arrow: {
     width: 8,
     height: 8,
     fill: '#42EA83',
@@ -20,18 +26,19 @@ const themes = {
 const activeColor = '#51b2fe';
 
 const Anchor = (props) => {
-  const { onMouseOut, onMouseOver, onMouseUp } = props;
-  const theme = props.theme || 'default';
+  const { handleMouseOut, handleMouseOver, handleMouseUp, type } = props;
+  const theme = themes[type] ? type : 'default';
   const style = { ...themes[theme] };
   if (props.isActive) style.fill = activeColor;
-  const handleMouseOver = (e) => {
-    if (onMouseOver) onMouseOver(e.evt);
+  if (!props.isNew && type === 'arrow') style.opacity = 0;
+  const onMouseOver = (e) => {
+    if (handleMouseOver) handleMouseOver(e.evt);
   };
-  const handleMouseOut = (e) => {
-    if (onMouseOut) onMouseOut(e.evt);
+  const onMouseOut = (e) => {
+    if (handleMouseOut) handleMouseOut(e.evt);
   };
-  const handleMouseUp = (e) => {
-    if (onMouseUp) onMouseUp(e.evt);
+  const onMouseUp = (e) => {
+    if (handleMouseUp) handleMouseUp(e.evt);
   };
   return (
     <Circle
@@ -39,26 +46,27 @@ const Anchor = (props) => {
         ...style,
         ...props.position,
         draggable: props.isDraggable,
-        onDragEnd: props.onDragEnd,
-        onDragStart: props.onDragStart,
-        onMouseOver: handleMouseOver,
-        onMouseOut: handleMouseOut,
-        onMouseUp: handleMouseUp,
+        onDragEnd: props.handleDragEnd,
+        onDragStart: props.handleDragStart,
+        onMouseOver,
+        onMouseOut,
+        onMouseUp,
       }}
     />
   );
 };
 
 Anchor.propTypes = {
-  theme: React.PropTypes.string,
+  type: React.PropTypes.string,
+  isNew: React.PropTypes.bool,
   isDraggable: React.PropTypes.bool,
   isActive: React.PropTypes.bool,
   position: React.PropTypes.object,
-  onMouseUp: React.PropTypes.func,
-  onDragEnd: React.PropTypes.func,
-  onDragStart: React.PropTypes.func,
-  onMouseOver: React.PropTypes.func,
-  onMouseOut: React.PropTypes.func,
+  handleDragEnd: React.PropTypes.func,
+  handleDragStart: React.PropTypes.func,
+  handleMouseUp: React.PropTypes.func,
+  handleMouseOver: React.PropTypes.func,
+  handleMouseOut: React.PropTypes.func,
 };
 
 export default Anchor;

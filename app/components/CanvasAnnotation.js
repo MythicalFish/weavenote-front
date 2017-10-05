@@ -4,6 +4,7 @@ import { Group } from 'react-konva';
 import { pixelPosition, anchorPoints } from 'utils/canvasPosition';
 import Anchor from './CanvasAnchor';
 import Line from './CanvasLine';
+import Arrow from './CanvasArrow';
 import Text from './CanvasText';
 
 const hiddenStyle = {
@@ -47,41 +48,51 @@ class CanvasAnnotation extends React.PureComponent {
     onMouseOut: this.handleMouseOut,
     onMouseUp: this.handleMouseUp,
   });
-  isActive = () => this.props.isActive || this.state.isHovering;
   points = () => {
     const { anchors, canvasSize } = this.props;
     return anchorPoints(anchors, canvasSize);
   };
   render() {
-    const { anchors, identifier, theme } = this.props;
-    const points = this.points();
+    const { anchors, identifier, type, isNew } = this.props;
+    const { lineAnchors: points } = this.points();
+    const isActive = this.props.isActive || this.state.isHovering;
+    const objects = [];
+    if (anchors.size > 1) {
+      const lProps = { key: type, type, points, isActive };
+      switch (type) {
+        case 'arrow':
+          objects.push(<Arrow {...lProps} />);
+          break;
+        default:
+          objects.push(<Line {...lProps} />);
+          break;
+      }
+    }
+    anchors.forEach((anchor, i) => {
+      objects.push(
+        <Anchor
+          key={`Anchor${i}`}
+          type={type}
+          isActive={isActive}
+          isNew={isNew}
+          position={this.getPosition(anchor)}
+          isDraggable={this.props.isDraggable}
+          handleDragStart={this.props.handleAnchorDragStart}
+          handleDragEnd={this.handleAnchorDragEnd(anchor)}
+          handleMouseOver={this.handleAnchorMouseOver}
+          handleMouseOut={this.handleAnchorMouseOut}
+        />
+      );
+    });
+
     return (
       <Group {...this.groupProps()}>
-        {anchors.size > 1 && (
-          <Line
-            points={points.lineAnchors}
-            theme={theme}
-            isActive={this.isActive()}
-          />
-        )}
-        {anchors.map((anchor, i) => (
-          <Anchor
-            key={`Anchor${i}`}
-            theme={theme}
-            position={this.getPosition(anchor)}
-            onDragStart={this.props.handleAnchorDragStart}
-            onDragEnd={this.handleAnchorDragEnd(anchor)}
-            isDraggable={this.props.isDraggable}
-            isActive={this.isActive()}
-            onMouseOver={this.handleAnchorMouseOver}
-            onMouseOut={this.handleAnchorMouseOut}
-          />
-        ))}
+        {objects}
         {identifier && (
           <Text
             value={identifier}
             position={points.midpoint}
-            isActive={this.isActive()}
+            isActive={isActive}
           />
         )}
       </Group>
@@ -90,10 +101,11 @@ class CanvasAnnotation extends React.PureComponent {
 }
 
 CanvasAnnotation.propTypes = {
+  isNew: PropTypes.bool,
   isVisible: PropTypes.bool,
   isActive: PropTypes.bool,
   isDraggable: PropTypes.bool,
-  theme: PropTypes.string,
+  type: PropTypes.string,
   identifier: PropTypes.string,
   canvasSize: PropTypes.object,
   canvasRef: PropTypes.object,

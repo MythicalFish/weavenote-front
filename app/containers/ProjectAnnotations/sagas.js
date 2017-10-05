@@ -62,6 +62,7 @@ function* handleSetAnchor() {
   const annotation = yield select(selectNewAnnotation());
   switch (annotation.get('type')) {
     case 'line':
+    case 'arrow':
       if (annotation.get('anchors').size > 1) {
         yield put(actions.createAnnotation());
       }
