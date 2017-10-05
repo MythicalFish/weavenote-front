@@ -6,7 +6,7 @@ const NewComment = (props) => {
   const { commentable, isCreating, writeComment } = props;
   if (isCreating) {
     return (
-      <div className="comment-thread selected ignore-react-onclickoutside">
+      <div className="comment-thread selected">
         <Wrapper {...props}>
           <Form
             onSubmit={props.createComment}
