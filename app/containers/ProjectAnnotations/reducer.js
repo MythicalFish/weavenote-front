@@ -29,15 +29,7 @@ function AnnotationsReducer(state = initialState, action) {
   const resetState = (r = null) =>
     initialState.set('existing', r || state.get('existing'));
 
-  const commentAnnotation = () => {
-    if (payload) {
-      const a = payload.annotatable;
-      if (a && a.type === 'Comment') {
-        return a.id;
-      }
-    }
-    return null;
-  };
+  const commentAnnotation = () => payload.comment.getIn(['annotation', 'id']);
 
   switch (type) {
     //
