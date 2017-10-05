@@ -1,26 +1,20 @@
 $bStyle: 1px solid #ccc;
-.columns {
+.column {
   color: $dark7;
-  @extend .flex;
-  @extend .items-start;
-  @extend .flex-none;
-  width: auto;
-  .column {
-    @extend .flex-none;
-    max-width: 240px;
-    border: $bStyle;
-    &:not(:last-child) {
-      margin-right: 6px;
-    }
-    .column-header,
-    .column-cell {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-    }
-    .column-cell:last-child {
-      border-bottom: none;
-    }
+  border: $bStyle;
+  flex: none;
+  max-width: 240px;
+  &:not(:last-child) {
+    margin-right: $space-1;
+  }
+  .column-header,
+  .column-cell {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .column-cell:last-child {
+    border-bottom: none;
   }
 }
 .column-header,

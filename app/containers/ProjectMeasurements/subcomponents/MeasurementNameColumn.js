@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form/immutable';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
-import MeasurementNameLabel from './MeasurementNameLabel';
-import Input from './Input';
+import Label from './MeasurementNameLabel';
+import I from './Input';
 
-const MeasurementNameInput = (props) => (
-  <Field {...props} maxLength={25} component={Input} placeholder="Untitled" />
+const Input = (props) => (
+  <Field {...props} maxLength={25} component={I} placeholder="Untitled" />
 );
 
 const SortableList = SortableContainer((props) => {
@@ -14,16 +14,16 @@ const SortableList = SortableContainer((props) => {
   const lProps = { ...props };
   delete lProps.names;
   return (
-    <div>
+    <div className="column-body">
       {names.map((name, index) => (
-        <MeasurementNameLabel
+        <Label
           {...{
             name,
-            Input: MeasurementNameInput,
-            inputName: fieldKey(index),
+            Input,
             index,
-            key: fieldKey(index),
             ...lProps,
+            key: fieldKey(index),
+            inputName: fieldKey(index),
           }}
         />
       ))}

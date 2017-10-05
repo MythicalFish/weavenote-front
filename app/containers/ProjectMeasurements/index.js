@@ -59,7 +59,7 @@ class ProjectMeasurements extends React.PureComponent {
     const { initialValues: m } = this.props;
     if (!m) return null;
     return (
-      <div>
+      <div className="y-fill">
         <Wrapper>
           <Measurements />
         </Wrapper>

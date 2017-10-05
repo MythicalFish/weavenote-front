@@ -1,26 +1,29 @@
 import React, { PropTypes } from 'react';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
+import ScrollArea from 'components/ScrollArea';
 import MeasurementGroup from './MeasurementGroup';
 
 const SortableMeasurementGroups = SortableContainer((props) => {
   const { initialValues } = props;
   const fieldKey = (i) => `groups[${i}].name`;
   return (
-    <div className="columns mr1">
-      {initialValues.get('groups').map((group, index) => (
-        <MeasurementGroup
-          {...{
-            index,
-            key: fieldKey(index),
-            fieldName: fieldKey(index),
-            group,
-            initialValues,
-            submitForm: props.onSubmit,
-            doDelete: props.deleteGroup,
-          }}
-        />
-      ))}
-    </div>
+    <ScrollArea>
+      <div className="flex">
+        {initialValues.get('groups').map((group, index) => (
+          <MeasurementGroup
+            {...{
+              index,
+              key: fieldKey(index),
+              fieldName: fieldKey(index),
+              group,
+              initialValues,
+              submitForm: props.onSubmit,
+              doDelete: props.deleteGroup,
+            }}
+          />
+        ))}
+      </div>
+    </ScrollArea>
   );
 });
 

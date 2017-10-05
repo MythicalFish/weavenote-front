@@ -5,16 +5,13 @@ import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroups from './MeasurementGroups';
 
 const Form = (props) => {
-  const { initialValues, startAnnotation, project } = props;
+  const { initialValues, project } = props;
   const id = project.get('id');
   return (
-    <div>
-      <div className="flex">
-        <form
-          onSubmit={props.handleSubmit}
-          className="columns"
-          id="measurements"
-        >
+    <div className="y-fill">
+      <form onSubmit={props.handleSubmit} className="flex" id="measurements">
+        <button type="submit" className="conceal" />
+        <div className="flex-none mr1">
           <MeasurementNameColumn
             {...{
               names: initialValues.get('names'),
@@ -22,17 +19,18 @@ const Form = (props) => {
               ...props,
             }}
           />
+        </div>
+        <div className="flex-auto">
           <MeasurementGroups {...props} />
-          <button type="submit" className="conceal" />
-        </form>
-        <div>
+        </div>
+        <div className="flex-none">
           <PlusButton
             size={25}
             onClick={() => props.createGroup(id)}
             className="p0"
           />
         </div>
-      </div>
+      </form>
       <div className="pt1">
         <PlusButton
           size={25}
@@ -49,12 +47,7 @@ Form.propTypes = {
   project: PropTypes.object,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
-  startAnnotation: PropTypes.func,
-  deleteGroup: PropTypes.func,
-  deleteName: PropTypes.func,
   createName: PropTypes.func,
-  createGroup: PropTypes.func,
-  reorderNames: PropTypes.func,
 };
 
 export default reduxForm({
