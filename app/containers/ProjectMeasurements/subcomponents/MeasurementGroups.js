@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import MeasurementGroup from './MeasurementGroup';
 
-const Sortable = SortableContainer((props) => {
+const SortableMeasurementGroups = SortableContainer((props) => {
   const { initialValues } = props;
   const fieldKey = (i) => `groups[${i}].name`;
   return (
@@ -25,7 +25,7 @@ const Sortable = SortableContainer((props) => {
 });
 
 const MeasurementGroups = (props) => (
-  <Sortable
+  <SortableMeasurementGroups
     {...props}
     lockToContainerEdges
     distance={10}

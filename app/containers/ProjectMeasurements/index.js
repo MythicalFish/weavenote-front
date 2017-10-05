@@ -26,39 +26,38 @@ class ProjectMeasurements extends React.PureComponent {
     const { initialValues: v } = this.props;
     return v.get('groups').size > 0 || v.get('names').size > 0;
   };
+  Wrapper = ({ children }) => {
+    const { modal } = this.state;
+    if (!modal) return children;
+    return (
+      <ModalMarkup
+        isOpen
+        noCloseOutside
+        closeFunc={() => {
+          this.setState({ modal: false });
+        }}
+      >
+        <div className="p4">{children}</div>
+      </ModalMarkup>
+    );
+  };
+  Measurements = () => {
+    if (!this.hasAny()) return <div>No measurements added yet</div>;
+    const { initialValues: m } = this.props;
+    return (
+      <Form
+        {...{
+          ...this.props,
+          lastUpdated: m.get('timestamp'),
+          enableReinitialize: true,
+        }}
+      />
+    );
+  };
   render() {
+    const { Wrapper, Measurements } = this;
     const { initialValues: m } = this.props;
     if (!m) return null;
-    const Measurements = () => (
-      <div>
-        {this.hasAny() ? (
-          <Form
-            {...{
-              ...this.props,
-              lastUpdated: m.get('timestamp'),
-              enableReinitialize: true,
-            }}
-          />
-        ) : (
-          <div>No measurements added yet</div>
-        )}
-      </div>
-    );
-    const Wrapper = ({ children }) => {
-      const { modal } = this.state;
-      if (!modal) return children;
-      return (
-        <ModalMarkup
-          isOpen
-          noCloseOutside
-          closeFunc={() => {
-            this.setState({ modal: false });
-          }}
-        >
-          <div className="p4">{children}</div>
-        </ModalMarkup>
-      );
-    };
     return (
       <div>
         <Wrapper>

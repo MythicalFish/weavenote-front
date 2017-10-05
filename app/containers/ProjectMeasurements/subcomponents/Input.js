@@ -17,10 +17,6 @@ class Input extends React.PureComponent {
     length = length <= min ? min : length;
     length += 1;
     e.size = length;
-    // const base = 10;
-    // let width = base;
-    // width += length * base;
-    // e.style.minWidth = `${width}px`;
   };
   render() {
     const { input, maxLength } = this.props;

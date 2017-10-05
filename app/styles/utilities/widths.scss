@@ -125,7 +125,9 @@ $sizes_em: 5, 6, 7, 8, 9, 10, 12, 13, 20, 25;
 .x-fill {
   width: 100%;
 }
-
+.y-fill {
+  height: 100%;
+}
 @media #{$breakpoint-sm} {
   @include width-setup('sm-');
 }

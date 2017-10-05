@@ -37,7 +37,7 @@ const Sidebar = (props) => {
   const role = props.user.get('role');
   if (!role) return null;
   return (
-    <aside id="sidebar">
+    <aside id="sidebar" className="flex-none blurrable">
       <img src={`${process.env.ASSET_HOST}/logo.png`} role="presentation" />
       <nav className="mt2">
         <Button {...props} path="/projects" label="Projects" />

@@ -28,7 +28,7 @@ class ProjectImages extends React.PureComponent {
     const image = images.get(this.state.currentImage);
     const imageable = { type: 'Project', id: project.get('id') };
     return (
-      <div>
+      <div className="lh0 px2">
         {!image && <Image src={PLACEHOLDER} />}
         {image && (
           <div className="center">

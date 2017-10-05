@@ -47,6 +47,7 @@ class MeasurementGroup extends React.PureComponent {
     return (
       <div className="column hoverable center">
         <div className="column-header relative">
+          <div className="handle-above" />
           <DeleteButton
             resourceName="column"
             onClick={() => doDelete(group.get('id'))}

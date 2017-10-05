@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectFocus } from 'containers/App/selectors';
 import { openModal } from 'containers/App/actions';
+import ScrollArea from 'components/ScrollArea';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
 import ProjectComponents from 'containers/ProjectComponents';
@@ -55,25 +56,36 @@ class ProjectManager extends React.PureComponent {
         break;
     }
 
+    const ViewWrapper = ({ children }) => {
+      if (currentView === 'Measurements') return children;
+      return <ScrollArea className="pr2">{children}</ScrollArea>;
+    };
+
     return (
-      <div>
+      <div className="y-fill">
         <Toolbar
           {...this.props}
           {...{ currentView }}
           changeView={this.changeView}
         />
-        <div className="container-wide p4">
-          <div className="row">
-            <div className="col-xs-12 col-md-3 last-xs first-md blurrable">
-              <ProjectComments project={project} />
-            </div>
-            <div className="col-xs-6 col-md-6 blurrable">
-              <div className="lh0 px4">
-                <ProjectImages {...{ project, currentView }} />
+        <div className="container-wide p4 y-fill">
+          <div className="relative y-fill">
+            <div className="row ontop">
+              <div className="col-xs-12 col-md-3 last-xs first-md">
+                <ScrollArea className="pr2">
+                  <ProjectComments project={project} />
+                </ScrollArea>
               </div>
-            </div>
-            <div className="col-xs-6 col-md-3 blurrable">
-              <View {...viewProps} />
+              <div className="col-xs-6 col-md-6">
+                <ScrollArea>
+                  <ProjectImages {...{ project, currentView }} />
+                </ScrollArea>
+              </div>
+              <div className="col-xs-6 col-md-3">
+                <ViewWrapper>
+                  <View {...viewProps} />
+                </ViewWrapper>
+              </div>
             </div>
           </div>
         </div>

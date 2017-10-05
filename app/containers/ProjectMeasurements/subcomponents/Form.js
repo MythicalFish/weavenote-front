@@ -10,7 +10,11 @@ const Form = (props) => {
   return (
     <div>
       <div className="flex">
-        <form onSubmit={props.handleSubmit} className="columns">
+        <form
+          onSubmit={props.handleSubmit}
+          className="columns"
+          id="measurements"
+        >
           <MeasurementNameColumn
             {...{
               names: initialValues.get('names'),

@@ -2,6 +2,7 @@
 .br,
 .tr,
 .tl,
+.ontop,
 .above,
 .left-of {
   position: absolute;
@@ -33,4 +34,10 @@
   left: 0;
   transform: translate(-100%, -50%);
   -webkit-transform: translate(-100%, -50%);
+}
+.ontop {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

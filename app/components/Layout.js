@@ -7,9 +7,7 @@ export default function Layout(props) {
       <Header />
       <div className="p3 md-p4">
         <div className="container-narrowest">
-          <div className="box b1 py4">
-            {props.children}
-          </div>
+          <div className="box b1 py4">{props.children}</div>
         </div>
       </div>
     </div>

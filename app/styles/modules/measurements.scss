@@ -1,0 +1,19 @@
+#measurements {
+  .column-cell,
+  .column-header {
+    button.icon {
+      background: $mako;
+      color: $white;
+      padding: 8px;
+      @include borderRadius(3px);
+    }
+    button.left-of {
+      transform: translate(-46px, -50%);
+      -webkit-transform: translate(-46px, -50%);
+    }
+    button.above {
+      transform: translate(-50%, -46px);
+      -webkit-transform: translate(-50%, -46px);
+    }
+  }
+}

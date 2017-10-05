@@ -12,7 +12,7 @@ const DeleteButton = ({ onClick, className, resourceName }) => (
       ).then(() => {
         onClick();
       })}
-    className={`opa5 on-hover ${className}`}
+    className={`on-hover ${className}`}
   />
 );
 
