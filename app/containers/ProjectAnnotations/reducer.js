@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import assign from 'object-assign-deep';
+import assign from 'assign-deep';
 import * as types from './constants';
 import { FETCH_PROJECT_SUCCESS } from '../ProjectManager/constants';
 import { FOCUS_COMMENT } from '../Comments/constants';

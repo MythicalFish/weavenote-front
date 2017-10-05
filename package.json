@@ -208,6 +208,7 @@
     "testRegex": "tests/.*\\.test\\.js$"
   },
   "dependencies": {
+    "assign-deep": "^0.4.6",
     "auth0-lock": "^10.14.0",
     "babel-polyfill": "6.20.0",
     "basscss-sass": "^4.0.0",
@@ -225,7 +226,6 @@
     "konva": "^1.6.3",
     "lodash": "4.17.2",
     "minimist": "1.2.0",
-    "object-assign-deep": "^0.3.1",
     "react": "15.4.1",
     "react-confirm": "^0.1.15",
     "react-dom": "15.4.1",
