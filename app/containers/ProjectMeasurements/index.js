@@ -23,8 +23,8 @@ class ProjectMeasurements extends React.PureComponent {
     this.props.fetch(project.get('id'));
   }
   hasAny = () => {
-    const { initialValues: v } = this.props;
-    return v.get('groups').size > 0 || v.get('names').size > 0;
+    const { measurements: v } = this.props;
+    return v.groups.length > 0 || v.names.length > 0;
   };
   Wrapper = ({ children }) => {
     const { modal } = this.state;
@@ -43,12 +43,12 @@ class ProjectMeasurements extends React.PureComponent {
   };
   Measurements = () => {
     if (!this.hasAny()) return <div>No measurements added yet</div>;
-    const { initialValues: m } = this.props;
+    const { measurements: m } = this.props;
     return (
       <Form
         {...{
           ...this.props,
-          lastUpdated: m.get('timestamp'),
+          lastUpdated: m.timestamp,
           enableReinitialize: true,
         }}
       />
@@ -56,7 +56,7 @@ class ProjectMeasurements extends React.PureComponent {
   };
   render() {
     const { Wrapper, Measurements } = this;
-    const { initialValues: m } = this.props;
+    const { measurements: m } = this.props;
     if (!m) return null;
     return (
       <div className="y-fill">
@@ -78,7 +78,7 @@ class ProjectMeasurements extends React.PureComponent {
 
 ProjectMeasurements.propTypes = {
   project: PropTypes.object,
-  initialValues: PropTypes.object,
+  measurements: PropTypes.object,
   fetch: PropTypes.func,
 };
 
@@ -98,7 +98,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  initialValues: selectors.selectMeasurements(),
+  measurements: selectors.selectMeasurements(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectMeasurements);

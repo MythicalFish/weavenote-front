@@ -3,7 +3,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 class ScrollArea extends React.PureComponent {
   handleUpdate = (e) => {
-    console.log(e);
+    // console.log(e);
   };
   render() {
     return <Scrollbars autoHide onUpdate={this.handleUpdate} {...this.props} />;

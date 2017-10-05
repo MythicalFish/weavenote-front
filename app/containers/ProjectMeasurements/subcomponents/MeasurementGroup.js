@@ -1,42 +1,41 @@
 import React, { PropTypes } from 'react';
 import { fromJS } from 'immutable';
-import { Field } from 'redux-form/immutable';
 import { SortableElement } from 'react-sortable-hoc';
 import DeleteButton from './DeleteButton';
 import Input from './Input';
 
 class MeasurementGroup extends React.PureComponent {
   measurementGroupValues = (group) => {
-    const { initialValues } = this.props;
+    const { measurements } = this.props;
     const values = [];
-    initialValues.get('values').forEach((value, index) => {
-      if (value.get('measurement_group_id') === group.get('id')) {
-        values.push(index);
+    measurements.values.forEach((value, index) => {
+      if (value.measurement_group_id === group.id) {
+        values.push({ value, index });
       }
     });
-    return fromJS(values);
+    return values;
   };
   GroupNameField = () => {
-    const { fieldName, submitForm } = this.props;
+    const { fieldName, submitForm, group } = this.props;
     return (
-      <Field
+      <Input
         name={fieldName}
         maxLength={3}
         onBlur={submitForm}
-        component={Input}
         placeholder="x"
+        value={group.name}
       />
     );
   };
-  ValueField = ({ index }) => {
+  ValueField = ({ index, value }) => {
     const { submitForm } = this.props;
     return (
-      <Field
+      <Input
         name={`values[${index}].value`}
         maxLength={16}
         onBlur={submitForm}
-        component={Input}
         placeholder="0"
+        value={value}
       />
     );
   };
@@ -50,14 +49,14 @@ class MeasurementGroup extends React.PureComponent {
           <div className="handle-above" />
           <DeleteButton
             resourceName="column"
-            onClick={() => doDelete(group.get('id'))}
+            onClick={() => doDelete(group.id)}
             className="above"
           />
           <GroupNameField />
         </div>
-        {this.measurementGroupValues(group).map((i) => (
-          <div className="column-cell" key={`${fieldName}[${i}]`}>
-            <ValueField index={i} />
+        {this.measurementGroupValues(group).map(({ value, index }) => (
+          <div className="column-cell" key={`${fieldName}[${index}]`}>
+            <ValueField index={index} value={value.value} />
           </div>
         ))}
       </div>
@@ -66,7 +65,7 @@ class MeasurementGroup extends React.PureComponent {
 }
 
 MeasurementGroup.propTypes = {
-  initialValues: PropTypes.object,
+  measurements: PropTypes.object,
   group: PropTypes.object,
   fieldName: PropTypes.string,
   submitForm: PropTypes.func,

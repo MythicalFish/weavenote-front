@@ -1,12 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Field } from 'redux-form/immutable';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import Label from './MeasurementNameLabel';
-import I from './Input';
-
-const Input = (props) => (
-  <Field {...props} maxLength={25} component={I} placeholder="Untitled" />
-);
 
 const SortableList = SortableContainer((props) => {
   const fieldKey = (i) => `names[${i}].value`;
@@ -19,7 +13,6 @@ const SortableList = SortableContainer((props) => {
         <Label
           {...{
             name,
-            Input,
             index,
             ...lProps,
             key: fieldKey(index),
@@ -41,7 +34,7 @@ const MeasurementNameColumn = (props) => (
       lockToContainerEdges
       distance={10}
       onSortEnd={({ oldIndex, newIndex }) => {
-        const names = arrayMove(props.names.toArray(), oldIndex, newIndex);
+        const names = arrayMove(props.names, oldIndex, newIndex);
         props.reorder({ names });
       }}
     />
@@ -49,7 +42,7 @@ const MeasurementNameColumn = (props) => (
 );
 
 MeasurementNameColumn.propTypes = {
-  names: PropTypes.object,
+  names: PropTypes.array,
   reorder: PropTypes.func,
 };
 

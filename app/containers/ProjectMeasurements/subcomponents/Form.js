@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
-import { reduxForm } from 'redux-form/immutable';
 import PlusButton from 'components/PlusButton';
 import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroups from './MeasurementGroups';
 
 const Form = (props) => {
-  const { initialValues, project } = props;
+  const { measurements, project } = props;
   const id = project.get('id');
   return (
     <div className="y-fill">
@@ -14,7 +13,7 @@ const Form = (props) => {
         <div className="flex-none mr1">
           <MeasurementNameColumn
             {...{
-              names: initialValues.get('names'),
+              names: measurements.names,
               submitForm: props.onSubmit,
               ...props,
             }}
@@ -43,13 +42,11 @@ const Form = (props) => {
 };
 
 Form.propTypes = {
-  initialValues: PropTypes.object,
+  measurements: PropTypes.object,
   project: PropTypes.object,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   createName: PropTypes.func,
 };
 
-export default reduxForm({
-  form: 'Measurements',
-})(Form);
+export default Form;

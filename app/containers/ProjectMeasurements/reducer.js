@@ -9,20 +9,22 @@ const initialState = fromJS({
 
 function ProjectMeasurementsReducer(state = initialState, action) {
   const { type, response, payload } = action;
-  const setData = () => state.set('data', fromJS(response));
+  const setData = () => state.set('data', response);
 
   switch (type) {
     //
+    case types.SET_MEASUREMENTS:
+      return state.set(
+        'data',
+        state.get('data')[payload.type][payload.index][payload.attribute][
+          payload.value
+        ]
+      );
     case types.FETCH_MEASUREMENTS_SUCCESS:
-      return setData();
     case types.UPDATE_MEASUREMENTS_SUCCESS:
-      return setData();
     case types.CREATE_MEASUREMENT_GROUP_SUCCESS:
-      return setData();
     case types.CREATE_MEASUREMENT_NAME_SUCCESS:
-      return setData();
     case types.DELETE_MEASUREMENT_GROUP_SUCCESS:
-      return setData();
     case types.DELETE_MEASUREMENT_NAME_SUCCESS:
       return setData();
 
