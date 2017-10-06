@@ -1,18 +1,16 @@
 import React, { PropTypes } from 'react';
+import { debounce } from 'utils/misc';
 
 class Input extends React.PureComponent {
   componentDidMount() {
     if (this.props.focus) this.element.focus();
     this.scaleInput();
   }
+  doUpdate = debounce(() => {
+    const { handleChange } = this.props;
+    if (handleChange) handleChange(this.state.value);
+  }, 1000);
   minSize = 3;
-  handleChange = (event) => {
-    const { element } = this;
-    console.log(element.value);
-    const { onChange } = this.props;
-    this.scaleInput();
-    if (onChange) onChange(event);
-  };
   scaleInput = () => {
     const { element: e, minSize: min } = this;
     let length = e.value.length;
@@ -21,26 +19,28 @@ class Input extends React.PureComponent {
     e.size = length;
   };
   render() {
-    const { value } = this.props;
-    const i = { ...this.props };
-    delete i.onChange;
-    delete i.value;
-    if (value) i.value = value;
+    const { defaultValue, maxLength, placeholder } = this.props;
     const fProps = {
-      ...i,
+      placeholder,
+      defaultValue,
+      maxLength: maxLength || 12,
       ref: (f) => (this.element = f),
       onFocus: () => this.element.select(),
-      placeholder: this.props.placeholder || null,
-      onChange: this.handleChange,
+      onChange: (event) => {
+        this.setState({ value: event.target.value });
+        this.doUpdate();
+      },
     };
     return <input {...fProps} type="text" size={this.minSize} />;
   }
 }
 
 Input.propTypes = {
-  onChange: PropTypes.func,
   focus: PropTypes.bool,
   placeholder: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  handleChange: PropTypes.func,
+  maxLength: PropTypes.number,
 };
 
 export default Input;

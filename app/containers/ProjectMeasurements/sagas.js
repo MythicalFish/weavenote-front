@@ -1,5 +1,4 @@
 import { take, cancel, takeLatest, select } from 'redux-saga/effects';
-import { getFormValues, isDirty } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
@@ -44,14 +43,11 @@ function* createMeasurementName({ projectID }) {
   );
 }
 
-function* updateMeasurements() {
-  const dirty = yield select(isDirty('Measurements'));
-  if (!dirty) return;
+function* updateMeasurements({ payload }) {
   const project = yield select(selectProject());
-  const measurements = yield select(getFormValues('Measurements'));
   yield sagas.patch(
     url(project.get('id')),
-    { measurements },
+    { measurements: payload },
     actions.updateMeasurementsSuccess
   );
 }

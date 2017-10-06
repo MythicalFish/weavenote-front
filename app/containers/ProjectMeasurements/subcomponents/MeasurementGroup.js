@@ -1,48 +1,23 @@
 import React, { PropTypes } from 'react';
-import { fromJS } from 'immutable';
 import { SortableElement } from 'react-sortable-hoc';
 import DeleteButton from './DeleteButton';
 import Input from './Input';
 
 class MeasurementGroup extends React.PureComponent {
-  measurementGroupValues = (group) => {
-    const { measurements } = this.props;
-    const values = [];
-    measurements.values.forEach((value, index) => {
-      if (value.measurement_group_id === group.id) {
-        values.push({ value, index });
-      }
+  handleValueChange = (v) => (value) => {
+    this.props.updateMeasurements({
+      values: [Object.assign(v, { value })],
     });
-    return values;
   };
-  GroupNameField = () => {
-    const { fieldName, submitForm, group } = this.props;
-    return (
-      <Input
-        name={fieldName}
-        maxLength={3}
-        onBlur={submitForm}
-        placeholder="x"
-        value={group.name}
-      />
-    );
-  };
-  ValueField = ({ index, value }) => {
-    const { submitForm } = this.props;
-    return (
-      <Input
-        name={`values[${index}].value`}
-        maxLength={16}
-        onBlur={submitForm}
-        placeholder="0"
-        value={value}
-      />
-    );
+  handleGroupChange = (value) => {
+    const { group } = this.props;
+    this.props.updateMeasurements({
+      groups: [Object.assign(group, { name: value })],
+    });
   };
   render() {
     //
-    const { group, fieldName, doDelete } = this.props;
-    const { GroupNameField, ValueField } = this;
+    const { measurements, group, fieldName, doDelete } = this.props;
     return (
       <div className="column hoverable center">
         <div className="column-header relative">
@@ -52,13 +27,25 @@ class MeasurementGroup extends React.PureComponent {
             onClick={() => doDelete(group.id)}
             className="above"
           />
-          <GroupNameField />
+          <Input
+            maxLength={3}
+            placeholder="x"
+            defaultValue={group.name}
+            handleChange={this.handleGroupChange}
+          />
         </div>
-        {this.measurementGroupValues(group).map(({ value, index }) => (
-          <div className="column-cell" key={`${fieldName}[${index}]`}>
-            <ValueField index={index} value={value.value} />
-          </div>
-        ))}
+        {measurements.values
+          .filter((value) => value.measurement_group_id === group.id)
+          .map((value) => (
+            <div className="column-cell" key={`${fieldName}[${value.id}]`}>
+              <Input
+                maxLength={16}
+                placeholder="0"
+                defaultValue={value.value}
+                handleChange={this.handleValueChange(value)}
+              />
+            </div>
+          ))}
       </div>
     );
   }
@@ -70,6 +57,7 @@ MeasurementGroup.propTypes = {
   fieldName: PropTypes.string,
   submitForm: PropTypes.func,
   doDelete: PropTypes.func,
+  updateMeasurements: PropTypes.func,
 };
 
 export default SortableElement(MeasurementGroup);

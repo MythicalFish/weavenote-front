@@ -20,7 +20,7 @@ class ProjectMeasurements extends React.PureComponent {
   state = { modal: false };
   componentDidMount() {
     const { project } = this.props;
-    this.props.fetch(project.get('id'));
+    this.props.fetchMeasurements(project.get('id'));
   }
   hasAny = () => {
     const { measurements: v } = this.props;
@@ -79,14 +79,14 @@ class ProjectMeasurements extends React.PureComponent {
 ProjectMeasurements.propTypes = {
   project: PropTypes.object,
   measurements: PropTypes.object,
-  fetch: PropTypes.func,
+  fetchMeasurements: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      fetch: fetchMeasurements,
-      onSubmit: updateMeasurements,
+      fetchMeasurements,
+      updateMeasurements,
       createGroup: (id) => createMeasurementGroup(id),
       createName: (id) => createMeasurementName(id),
       deleteGroup: (id) => deleteMeasurementGroup(id),

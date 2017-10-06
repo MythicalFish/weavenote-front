@@ -4,20 +4,14 @@ import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroups from './MeasurementGroups';
 
 const Form = (props) => {
-  const { measurements, project } = props;
+  const { project } = props;
   const id = project.get('id');
   return (
     <div className="y-fill">
       <form onSubmit={props.handleSubmit} className="flex" id="measurements">
         <button type="submit" className="conceal" />
         <div className="flex-none mr1">
-          <MeasurementNameColumn
-            {...{
-              names: measurements.names,
-              submitForm: props.onSubmit,
-              ...props,
-            }}
-          />
+          <MeasurementNameColumn {...props} />
         </div>
         <div className="flex-auto">
           <MeasurementGroups {...props} />
@@ -45,7 +39,6 @@ Form.propTypes = {
   measurements: PropTypes.object,
   project: PropTypes.object,
   handleSubmit: PropTypes.func,
-  onSubmit: PropTypes.func,
   createName: PropTypes.func,
 };
 

@@ -3,20 +3,18 @@ import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import Label from './MeasurementNameLabel';
 
 const SortableList = SortableContainer((props) => {
-  const fieldKey = (i) => `names[${i}].value`;
-  const { names } = props;
+  const { measurements } = props;
   const lProps = { ...props };
-  delete lProps.names;
+  delete lProps.measurements;
   return (
     <div className="column-body">
-      {names.map((name, index) => (
+      {measurements.names.map((name, index) => (
         <Label
           {...{
             name,
             index,
             ...lProps,
-            key: fieldKey(index),
-            inputName: fieldKey(index),
+            key: `names[${name.id}].value`,
           }}
         />
       ))}
@@ -34,15 +32,17 @@ const MeasurementNameColumn = (props) => (
       lockToContainerEdges
       distance={10}
       onSortEnd={({ oldIndex, newIndex }) => {
-        const names = arrayMove(props.names, oldIndex, newIndex);
-        props.reorder({ names });
+        const { measurements } = props;
+        const { names } = measurements;
+        measurements.names = arrayMove(names, oldIndex, newIndex);
+        props.reorder(measurements);
       }}
     />
   </div>
 );
 
 MeasurementNameColumn.propTypes = {
-  names: PropTypes.array,
+  measurements: PropTypes.object,
   reorder: PropTypes.func,
 };
 

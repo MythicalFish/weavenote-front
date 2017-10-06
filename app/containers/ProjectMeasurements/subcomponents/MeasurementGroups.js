@@ -4,8 +4,7 @@ import ScrollArea from 'components/ScrollArea';
 import MeasurementGroup from './MeasurementGroup';
 
 const SortableMeasurementGroups = SortableContainer((props) => {
-  const { measurements } = props;
-  const fieldKey = (i) => `groups[${i}].name`;
+  const { measurements, updateMeasurements } = props;
   return (
     <ScrollArea>
       <div className="flex">
@@ -13,12 +12,11 @@ const SortableMeasurementGroups = SortableContainer((props) => {
           <MeasurementGroup
             {...{
               index,
-              key: fieldKey(index),
-              fieldName: fieldKey(index),
+              key: `groups[${group.id}].name`,
               group,
               measurements,
-              submitForm: props.onSubmit,
               doDelete: props.deleteGroup,
+              updateMeasurements,
             }}
           />
         ))}
@@ -34,8 +32,10 @@ const MeasurementGroups = (props) => (
     distance={10}
     axis="x"
     onSortEnd={({ oldIndex, newIndex }) => {
-      const groups = arrayMove(props.measurements.groups, oldIndex, newIndex);
-      props.reorder({ groups });
+      const { measurements } = props;
+      const { groups } = measurements;
+      measurements.groups = arrayMove(groups, oldIndex, newIndex);
+      props.reorder(measurements);
     }}
   />
 );
