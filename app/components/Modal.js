@@ -11,6 +11,7 @@ const ModalMarkup = (props) => {
   const p = props;
   const style = {};
   if (p.minWidth) style.minWidth = p.minWidth;
+  if (p.maxWidth) style.maxWidth = p.maxWidth;
   const modalClass = p.isOpen ? 'visible' : p.modalClass;
   const modalBGClass = p.isOpen ? 'overlay' : '';
   const doClose = () => {

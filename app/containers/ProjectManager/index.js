@@ -69,23 +69,21 @@ class ProjectManager extends React.PureComponent {
           changeView={this.changeView}
         />
         <div className="container-wide p4 y-fill">
-          <div className="relative y-fill">
-            <div className="row ontop">
-              <div className="col-xs-12 col-md-3 last-xs first-md">
-                <ScrollArea className="pr2">
-                  <ProjectComments project={project} />
-                </ScrollArea>
-              </div>
-              <div className="col-xs-6 col-md-6">
-                <ScrollArea>
-                  <ProjectImages {...{ project, currentView }} />
-                </ScrollArea>
-              </div>
-              <div className="col-xs-6 col-md-3">
-                <ViewWrapper>
-                  <View {...viewProps} />
-                </ViewWrapper>
-              </div>
+          <div className="row y-fill">
+            <div className="col-xs-12 col-md-3 y-fill">
+              <ScrollArea className="pr2">
+                <ProjectComments project={project} />
+              </ScrollArea>
+            </div>
+            <div className="col-xs-6 col-md-6 y-fill">
+              <ScrollArea>
+                <ProjectImages {...{ project, currentView }} />
+              </ScrollArea>
+            </div>
+            <div className="col-xs-6 col-md-3 y-fill">
+              <ViewWrapper>
+                <View {...viewProps} />
+              </ViewWrapper>
             </div>
           </div>
         </div>

@@ -22,10 +22,6 @@ class ProjectMeasurements extends React.PureComponent {
     const { project } = this.props;
     this.props.fetchMeasurements(project.get('id'));
   }
-  hasAny = () => {
-    const { measurements: v } = this.props;
-    return v.groups.length > 0 || v.names.length > 0;
-  };
   Wrapper = ({ children }) => {
     const { modal } = this.state;
     if (!modal) return children;
@@ -33,45 +29,28 @@ class ProjectMeasurements extends React.PureComponent {
       <ModalMarkup
         isOpen
         noCloseOutside
-        closeFunc={() => {
-          this.setState({ modal: false });
-        }}
+        maxWidth="100%"
+        closeFunc={() => this.setState({ modal: false })}
       >
         <div className="p4">{children}</div>
       </ModalMarkup>
     );
   };
-  Measurements = () => {
-    if (!this.hasAny()) return <div>No measurements added yet</div>;
-    const { measurements: m } = this.props;
-    return (
-      <Form
-        {...{
-          ...this.props,
-          lastUpdated: m.timestamp,
-          enableReinitialize: true,
-        }}
-      />
-    );
-  };
   render() {
-    const { Wrapper, Measurements } = this;
+    const { Wrapper } = this;
     const { measurements: m } = this.props;
     if (!m) return null;
     return (
-      <div className="y-fill">
-        <Wrapper>
-          <Measurements />
-        </Wrapper>
-        <div className="mt3">
-          <Button
-            label="View in modal"
-            secondary
-            small
-            onClick={() => this.setState({ modal: true })}
-          />
-        </div>
-      </div>
+      <Wrapper>
+        <Form
+          {...{
+            ...this.props,
+            lastUpdated: m.timestamp,
+            enableReinitialize: true,
+            showInModal: () => this.setState({ modal: true }),
+          }}
+        />
+      </Wrapper>
     );
   }
 }

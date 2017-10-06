@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
+import Button from 'components/Button';
 import PlusButton from 'components/PlusButton';
 import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroups from './MeasurementGroups';
 
 const Form = (props) => {
-  const { project } = props;
+  const { project, showInModal } = props;
   const id = project.get('id');
   return (
-    <div className="y-fill">
-      <form onSubmit={props.handleSubmit} className="flex" id="measurements">
-        <button type="submit" className="conceal" />
+    <div className="y-fill flex flex-column">
+      <div className="flex-auto flex" id="measurements">
         <div className="flex-none mr1">
           <MeasurementNameColumn {...props} />
         </div>
@@ -23,23 +23,23 @@ const Form = (props) => {
             className="p0"
           />
         </div>
-      </form>
-      <div className="pt1">
+      </div>
+      <div className="pt1 flex">
         <PlusButton
           size={25}
           onClick={() => props.createName(id)}
           className="p0"
         />
+        <Button label="View in modal" secondary small onClick={showInModal} />
       </div>
     </div>
   );
 };
 
 Form.propTypes = {
-  measurements: PropTypes.object,
   project: PropTypes.object,
-  handleSubmit: PropTypes.func,
   createName: PropTypes.func,
+  showInModal: PropTypes.func,
 };
 
 export default Form;
