@@ -36,8 +36,8 @@ class MeasurementGroup extends React.PureComponent {
         </div>
         {measurements.values
           .filter((value) => value.measurement_group_id === group.id)
-          .map((value) => (
-            <div className="column-cell" key={`${fieldName}[${value.id}]`}>
+          .map((value, i) => (
+            <div className="column-cell" key={`${fieldName}[${i}]`}>
               <Input
                 maxLength={16}
                 placeholder="0"
