@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectAbilities, selectGlobalData } from 'containers/App/selectors';
+import Header from 'components/Header';
 import { selectMaterial } from './selectors';
 import {
   fetchMaterial,
@@ -14,7 +15,6 @@ import {
   removeCareLabel,
 } from './actions';
 import Form from './subcomponents/Form';
-import Toolbar from './subcomponents/Toolbar';
 
 export class MaterialManager extends React.PureComponent {
   componentDidMount() {
@@ -46,7 +46,7 @@ export class MaterialManager extends React.PureComponent {
     };
     return (
       <div>
-        <Toolbar />
+        <Header />
         <div className="p4">
           <div className="container-narrower">
             {material && globalData.colors && <Form {...fProps} />}

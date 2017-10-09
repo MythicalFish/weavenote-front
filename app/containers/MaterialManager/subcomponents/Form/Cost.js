@@ -2,24 +2,23 @@ import React, { PropTypes } from 'react';
 
 export default class Cost extends React.PureComponent {
   render() {
-    const { currencies, F } = this.props;
+    const { currencies, unitTypes, F } = this.props;
 
     return (
       <div className="row">
         <div className="col-xs-6">
-          <F name="cost_base" label="Base cost" />
+          <F
+            name="currency"
+            type="select"
+            placeholder="Currency"
+            data={currencies}
+          />
         </div>
         <div className="col-xs-6">
-          <F name="currency" type="select" label="Currency" data={currencies} />
+          <F name="cost_base" placeholder="Eg. 3.50" />
         </div>
-        <div className="col-xs-4">
-          <F name="cost_delivery" label="Delivery cost" />
-        </div>
-        <div className="col-xs-4">
-          <F name="cost_extra1" label="Extra cost 1" />
-        </div>
-        <div className="col-xs-4">
-          <F name="cost_extra2" label="Extra cost 2" />
+        <div className="col-xs-12">
+          <F name="unit_type_id" type="select" data={unitTypes} />
         </div>
       </div>
     );
@@ -27,6 +26,7 @@ export default class Cost extends React.PureComponent {
 }
 
 Cost.propTypes = {
+  unitTypes: PropTypes.object,
   currencies: PropTypes.object,
   F: PropTypes.func,
 };

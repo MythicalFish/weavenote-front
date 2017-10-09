@@ -88,7 +88,7 @@ class Form extends React.Component {
               </div>
             )}
             <div className="box">
-              <h3>Cost</h3>
+              <h3>Base cost</h3>
               <Cost {...props} />
             </div>
           </div>

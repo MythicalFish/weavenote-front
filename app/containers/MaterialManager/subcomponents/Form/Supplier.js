@@ -16,7 +16,7 @@ export default class Supplier extends React.PureComponent {
   );
 
   render() {
-    const { selectedType, restricted, F } = this.props;
+    const { selectedType, F } = this.props;
 
     const selectorProps = {
       name: 'supplier',
@@ -39,6 +39,12 @@ export default class Supplier extends React.PureComponent {
           <div className="col-xs-4">
             <F name="supplier.ref" label="Ref." />
           </div>
+          <div className="col-xs-12">
+            <F name="supplier.email" label="Email" />
+          </div>
+          <div className="col-xs-12">
+            <F name="supplier.country_of_origin" label="Country of origin" />
+          </div>
         </div>
         {['Fabric'].includes(selectedType) && (
           <F name="supplier.agent" label="Agent" />
@@ -54,12 +60,8 @@ export default class Supplier extends React.PureComponent {
 }
 
 Supplier.propTypes = {
-  handleSubmit: PropTypes.func,
+  F: PropTypes.func,
   newSupplier: PropTypes.func,
-  pristine: PropTypes.bool,
-  submitting: PropTypes.bool,
-  restricted: PropTypes.bool,
-  reset: PropTypes.func,
   suppliers: PropTypes.object,
   selectedType: PropTypes.string,
 };
