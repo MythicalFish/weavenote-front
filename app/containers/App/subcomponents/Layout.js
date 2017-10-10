@@ -11,6 +11,5 @@ export default function Layout(props) {
 }
 
 Layout.propTypes = {
-  location: PropTypes.object,
   children: PropTypes.node,
 };

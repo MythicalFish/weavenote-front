@@ -3,6 +3,7 @@ import Dot from 'components/Dot';
 import Icon from 'components/Icon';
 import PriceSymbol from 'components/PriceSymbol';
 import TetherComponent from 'react-tether';
+import sizeMe from 'react-sizeme';
 import Focusable from 'utils/Focusable';
 
 class Dropdown extends React.PureComponent {
@@ -72,17 +73,23 @@ class Dropdown extends React.PureComponent {
   };
 
   items = () => {
-    const { value, data, children, align, tail, focusClass } = this.props;
-    const alignment = align || 'left';
-    const itemsClass = `dropdown-options ${alignment}-align ${focusClass}`;
-    if (children) {
-      return (
-        <div className={itemsClass}>
-          {children}
-          {tail && tail()}
-        </div>
-      );
-    }
+    const {
+      value,
+      data,
+      children,
+      align,
+      tail,
+      focusClass,
+      matchWidth,
+      size,
+    } = this.props;
+    const iProps = {
+      className: `dropdown-options ${focusClass}`,
+      style: {
+        textAlign: align || 'left',
+        width: matchWidth ? size.width : 'auto',
+      },
+    };
     let items;
     if (data) {
       items = [];
@@ -102,8 +109,8 @@ class Dropdown extends React.PureComponent {
       });
     }
     return (
-      <div className={itemsClass}>
-        {items}
+      <div {...iProps}>
+        {items || children}
         {tail && tail()}
       </div>
     );
@@ -162,4 +169,4 @@ Dropdown.propTypes = {
   focusClass: PropTypes.string,
 };
 
-export default Focusable(Dropdown);
+export default sizeMe()(Focusable(Dropdown));

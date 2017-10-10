@@ -56,16 +56,12 @@ export default class Input extends React.PureComponent {
 
     switch (type) {
       case 'display':
-        field = (
-          <div className="readonly">
-            {p.value}
-          </div>
-        );
+        field = <div className="readonly">{p.value}</div>;
         break;
       case 'select':
         if (!fProps.data && p.data) fProps.data = p.data;
         if (p.align) fProps.align = p.align;
-        field = <Dropdown {...fProps} />;
+        field = <Dropdown {...fProps} matchWidth />;
         break;
       case 'textarea':
         field = <textarea {...fProps} onKeyPress={this.handleKeyPress} />;
@@ -82,11 +78,7 @@ export default class Input extends React.PureComponent {
     return (
       <div className={`input ${className}`}>
         {field}
-        {touched &&
-          error &&
-          <span className="error">
-            {error}
-          </span>}
+        {touched && error && <span className="error">{error}</span>}
       </div>
     );
   }
