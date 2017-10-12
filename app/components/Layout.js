@@ -74,7 +74,7 @@ Layout.propTypes = {
   Header: PropTypes.func,
   modalImage: PropTypes.string,
   focus: PropTypes.string,
-  modalID: PropTypes.number,
+  modalID: PropTypes.string,
 };
 
 export default Layout;

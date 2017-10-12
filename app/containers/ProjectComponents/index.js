@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
+import MaterialList from 'containers/MaterialList';
+import MaterialManager from 'containers/MaterialManager';
+
+import Button from 'components/Button';
+import Modal from 'components/Modal';
 import PlusButton from 'components/PlusButton';
 import Accordion from 'components/Accordion';
 import SelectMaterial from './subcomponents/SelectMaterial';
@@ -36,6 +41,21 @@ class Components extends React.Component {
 
   render() {
     const { toggleCreate } = this;
+    return (
+      <div>
+        <Button
+          onClick={() => this.props.openModal('materials')}
+          label="modal"
+        />
+        <Accordion
+          {...{ ...this.props, RowHeader, Form }}
+          footer={<MaterialCost {...this.props} />}
+        />
+        <Modal id="materials">
+          <MaterialList {...this.props} />
+        </Modal>
+      </div>
+    );
     return (
       <div>
         {this.state.creating ? (

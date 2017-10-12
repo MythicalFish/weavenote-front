@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { openModal } from 'containers/App/actions';
 import ScrollArea from 'components/ScrollArea';
 import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
@@ -120,7 +119,7 @@ ProjectManager.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchProject, updateProject, openModal, exportPDF },
+    { fetchProject, updateProject, exportPDF },
     dispatch
   );
 }
