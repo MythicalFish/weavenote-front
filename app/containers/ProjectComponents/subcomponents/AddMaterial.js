@@ -10,6 +10,7 @@ import { VIEW } from '../constants';
 export default class AddMaterial extends React.PureComponent {
   state = { view: VIEW.list };
   setView = (view) => this.setState({ view });
+  materialListHeight = this.props.materials.size * 50 + 100;
   render() {
     const { selectMaterial, createComponents, selectedMaterials } = this.props;
     const { view } = this.state;
@@ -18,29 +19,36 @@ export default class AddMaterial extends React.PureComponent {
         <div className="p4">
           <Toolbar currentView={view} changeView={this.setView} />
         </div>
-        <div className="vh-y50">
-          <ScrollArea className="px4">
-            {view === VIEW.list && (
-              <MaterialList
-                selectable
-                onSelect={selectMaterial}
-                selectedMaterials={selectedMaterials}
+        {view === VIEW.list && (
+          <div>
+            <div
+              className="vh-ymax50"
+              style={{ height: this.materialListHeight }}
+            >
+              <ScrollArea className="px4">
+                <MaterialList
+                  selectable
+                  onSelect={selectMaterial}
+                  selectedMaterials={selectedMaterials}
+                />
+              </ScrollArea>
+            </div>
+            <div className="px4 pb4 right-align flex-none">
+              <Button
+                onClick={createComponents}
+                label="Add to project"
+                disabled={selectedMaterials.size === 0}
               />
-            )}
-            {view === VIEW.create && (
+            </div>
+          </div>
+        )}
+        {view === VIEW.create && (
+          <div className="vh-y50">
+            <ScrollArea className="px4">
               <div className="pb4">
                 <MaterialManager id="new" {...this.props} />
               </div>
-            )}
-          </ScrollArea>
-        </div>
-        {view === VIEW.list && (
-          <div className="px4 pb4 right-align flex-none">
-            <Button
-              onClick={createComponents}
-              label="Add"
-              disabled={selectedMaterials.size === 0}
-            />
+            </ScrollArea>
           </div>
         )}
       </Modal>
@@ -52,4 +60,5 @@ AddMaterial.propTypes = {
   selectMaterial: PropTypes.func,
   createComponents: PropTypes.func,
   selectedMaterials: PropTypes.object,
+  materials: PropTypes.object,
 };
