@@ -19,7 +19,7 @@ export const selectOrganizations = () =>
   createSelector(selectUser(), (s) => s.get('organizations'));
 
 export const selectAbilities = () =>
-  createSelector(selectUser(), (s) => s.get('abilities').toJS());
+  createSelector(selectUser(), (s) => s.get('abilities'));
 
 // Invite
 

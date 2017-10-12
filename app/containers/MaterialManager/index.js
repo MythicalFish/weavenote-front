@@ -41,7 +41,7 @@ export class MaterialManager extends React.PureComponent {
     const { onSubmit } = this;
     const fProps = {
       initialValues: material,
-      abilities: abilities.Material,
+      abilities: abilities.get('Material'),
       onSubmit,
       addLabel: this.props.addCareLabel,
       removeLabel: this.props.removeCareLabel,
@@ -58,9 +58,6 @@ export class MaterialManager extends React.PureComponent {
 
 const mapState = createStructuredSelector({
   material: selectMaterial(),
-  globalData: selectGlobalData(),
-  abilities: selectAbilities(),
-  user: selectUser(),
 });
 
 const mapDispatch = (dispatch) =>

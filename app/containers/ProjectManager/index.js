@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectFocus, selectUser } from 'containers/App/selectors';
 import { openModal } from 'containers/App/actions';
 import ScrollArea from 'components/ScrollArea';
 import ProjectInstructions from 'containers/ProjectInstructions';
@@ -114,7 +113,6 @@ class ProjectManager extends React.PureComponent {
 ProjectManager.propTypes = {
   project: React.PropTypes.object,
   PDFexport: React.PropTypes.object,
-  changeSection: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
   updateProject: React.PropTypes.func,
   params: React.PropTypes.object,
@@ -133,8 +131,6 @@ const mapState = createStructuredSelector({
   PDFexport: selectors.selectPDFexport(),
   abilities: selectors.selectAbilities(),
   userRole: selectors.selectUserRole(),
-  user: selectUser(),
-  focus: selectFocus(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

@@ -22,7 +22,7 @@ class Manage extends React.PureComponent {
           </div>
         </div>
 
-        {abilities.Organization.update && (
+        {abilities.getIn(['Organization', 'update']) && (
           <div>
             <div className="bg-white p2 mt2">
               <h4>General</h4>

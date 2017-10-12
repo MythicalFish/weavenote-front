@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectAbilities, selectUser } from 'containers/App/selectors';
 import Layout from 'components/Layout';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
@@ -78,8 +77,6 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   projects: selectProjects(),
-  abilities: selectAbilities(),
-  user: selectUser(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectList);

@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import DefaultHeader from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import ScrollArea from 'components/ScrollArea';
+import Notification from 'containers/Notification';
+import ModalImage from 'containers/ImageForm/ModalImage';
 
 const ScrollContainer = ({ scrollable, children }) => {
   const sProps = { children };
@@ -50,20 +52,29 @@ InnerLayout.propTypes = {
 };
 
 const Layout = (props) => {
-  const { Header } = props;
+  const { Header, modalImage, modalID, focus } = props;
+  const showBlur = focus || modalID;
   return (
-    <div id="app-container" className="flex flex-column">
-      {Header ? <Header /> : <DefaultHeader />}
-      <div id="app-content" className="flex-auto flex">
-        <Sidebar {...props} />
-        <InnerLayout {...props} />
+    <div>
+      <div id="app-container" className="flex flex-column">
+        {Header ? <Header /> : <DefaultHeader />}
+        <div id="app-content" className="flex-auto flex">
+          <Sidebar {...props} />
+          <InnerLayout {...props} />
+        </div>
       </div>
+      {showBlur && <div className="overlay" />}
+      <Notification />
+      <ModalImage image={modalImage} />
     </div>
   );
 };
 
 Layout.propTypes = {
   Header: PropTypes.func,
+  modalImage: PropTypes.string,
+  focus: PropTypes.string,
+  modalID: PropTypes.number,
 };
 
 export default Layout;

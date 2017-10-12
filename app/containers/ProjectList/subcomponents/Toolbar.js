@@ -10,7 +10,7 @@ export default function Toolbar(props) {
     currentView,
     abilities,
   } = props;
-  const canCreate = abilities.Project.create;
+  const canCreate = abilities.getIn(['Project', 'create']);
   const Nav = ({ name, params }) => (
     <NavItem
       label={name}
