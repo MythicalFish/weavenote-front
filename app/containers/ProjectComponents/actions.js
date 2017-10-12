@@ -16,12 +16,12 @@ export function updateComponentSuccess(response) {
   return { type: types.UPDATE_COMPONENT_SUCCESS, response };
 }
 
-export function createComponent(payload) {
-  return { type: types.CREATE_COMPONENT, payload };
+export function createComponents() {
+  return { type: types.CREATE_COMPONENTS };
 }
 
-export function createComponentSuccess(response) {
-  return { type: types.CREATE_COMPONENT_SUCCESS, response };
+export function createComponentsSuccess(response) {
+  return { type: types.CREATE_COMPONENTS_SUCCESS, response };
 }
 
 export function deleteComponent(payload) {

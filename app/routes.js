@@ -95,18 +95,12 @@ export default function createRoutes(store) {
       name: 'MaterialManager',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/MaterialManager/reducer'),
-          import('containers/MaterialManager/formReducer'),
-          import('containers/MaterialManager/sagas'),
           import('containers/MaterialManager'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, formReducer, sagas, component]) => {
-          injectReducer('MaterialManager', reducer.default);
-          injectReducer('form', formReducer.default);
-          injectSagas(sagas.default);
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 
@@ -150,12 +144,13 @@ export default function createRoutes(store) {
         import('containers/ImageForm/sagas'),
         import('containers/Comments/sagas'),
         import('containers/MaterialList/sagas'),
+        import('containers/MaterialManager/sagas'),
         import('containers/App'),
       ]);
 
       const renderRoute = loadModule(cb);
 
-      importModules.then(([a, b, c, d, e, f, g, component]) => {
+      importModules.then(([a, b, c, d, e, f, g, h, component]) => {
         injectSagas(a.default);
         injectSagas(b.default);
         injectSagas(c.default);
@@ -163,6 +158,7 @@ export default function createRoutes(store) {
         injectSagas(e.default);
         injectSagas(f.default);
         injectSagas(g.default);
+        injectSagas(h.default);
         renderRoute(component);
       });
 

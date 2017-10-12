@@ -6,17 +6,16 @@ import { createStructuredSelector } from 'reselect';
 import Button from 'components/Button';
 import PlusButton from 'components/PlusButton';
 import Accordion from 'components/Accordion';
-import SelectMaterial from './subcomponents/SelectMaterial';
 import RowHeader from './subcomponents/ListItem';
 import Form from './subcomponents/Form';
 import MaterialCost from './subcomponents/MaterialCost';
-import ModalMaterialManager from './subcomponents/ModalMaterialManager';
+import AddMaterial from './subcomponents/AddMaterial';
 
 import { fetchMaterials } from '../MaterialList/actions';
 import { selectMaterials } from '../MaterialList/selectors';
 import {
   fetchComponents,
-  createComponent,
+  createComponents,
   updateComponent,
   deleteComponent,
   selectMaterial,
@@ -25,20 +24,13 @@ import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
 class Components extends React.Component {
-  state = { creating: false };
-
   componentDidMount() {
     const { project } = this.props;
     this.props.fetchComponents(project.get('id'));
     this.props.fetchMaterials();
   }
 
-  toggleCreate = () => {
-    this.setState({ creating: !this.state.creating });
-  };
-
   render() {
-    const { toggleCreate } = this;
     return (
       <div>
         <Button
@@ -49,22 +41,7 @@ class Components extends React.Component {
           {...{ ...this.props, RowHeader, Form }}
           footer={<MaterialCost {...this.props} />}
         />
-        <ModalMaterialManager {...this.props} />
-      </div>
-    );
-    return (
-      <div>
-        {this.state.creating ? (
-          <SelectMaterial {...{ ...this.props, toggleCreate }} />
-        ) : (
-          <div>
-            <PlusButton onClick={toggleCreate} />
-            <Accordion
-              {...{ ...this.props, RowHeader, Form }}
-              footer={<MaterialCost {...this.props} />}
-            />
-          </div>
-        )}
+        <AddMaterial {...this.props} />
       </div>
     );
   }
@@ -73,7 +50,7 @@ class Components extends React.Component {
 Components.propTypes = {
   project: PropTypes.object,
   fetchComponents: PropTypes.func,
-  updateComponent: PropTypes.func,
+  openModal: PropTypes.func,
   fetchMaterials: PropTypes.func,
 };
 
@@ -83,7 +60,7 @@ export function mapDispatch(dispatch) {
       updateItem: updateComponent,
       deleteComponent,
       fetchComponents,
-      createComponent,
+      createComponents,
       fetchMaterials,
       selectMaterial,
     },

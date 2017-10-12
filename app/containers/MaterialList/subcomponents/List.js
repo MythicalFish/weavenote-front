@@ -27,31 +27,29 @@ class List extends React.PureComponent {
             fetch={this.props.fetchMaterials}
           />
         )}
-        <div className="container-narrow px2 py4">
-          <table>
-            <thead>
-              <tr>
-                {selectable && <th />}
-                <th>Type</th>
-                <th>Ref.</th>
-                <th>Name</th>
-                <th>Color</th>
-                <th>Factory</th>
-                <th>Price</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {materials.map((material) => (
-                <ListItem
-                  key={`material-${material.get('id')}`}
-                  material={material}
-                  {...this.props}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              {selectable && <th />}
+              <th>Type</th>
+              <th>Ref.</th>
+              <th>Name</th>
+              <th>Color</th>
+              <th>Factory</th>
+              <th>Price</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {materials.map((material) => (
+              <ListItem
+                key={`material-${material.get('id')}`}
+                material={material}
+                {...this.props}
+              />
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }

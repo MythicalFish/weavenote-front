@@ -1,14 +1,17 @@
 import React, { PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
-import { toggleState } from 'utils/misc';
 import Price from 'components/Price';
 import Dot from 'components/Dot';
 import Dropdown from 'components/Dropdown';
 import confirm from 'utils/confirm';
 
 class ListItem extends React.PureComponent {
-  state = { checked: false };
-  Checkbox = () => <div>{this.state.checked ? 'x' : 'o'}</div>;
+  isSelected = () => {
+    const { selectedMaterials, material } = this.props;
+    const i = selectedMaterials.findKey((id) => material.get('id') === id);
+    return i !== undefined;
+  };
+  Checkbox = () => <div>{this.isSelected() ? 'x' : 'o'}</div>;
   render() {
     const { material, deleteMaterial, selectable, onSelect } = this.props;
     const { Checkbox } = this;
@@ -16,7 +19,6 @@ class ListItem extends React.PureComponent {
     const onClick = () => {
       if (selectable && onSelect) {
         onSelect(material);
-        toggleState(this, 'checked');
       } else {
         browserHistory.push(url);
       }
@@ -72,6 +74,7 @@ ListItem.propTypes = {
   deleteMaterial: PropTypes.func,
   selectable: PropTypes.bool,
   onSelect: PropTypes.func,
+  selectedMaterials: PropTypes.object,
 };
 
 export default ListItem;

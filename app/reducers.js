@@ -17,6 +17,7 @@ import collaboratorsReducer from 'containers/Collaborators/reducer';
 import commentsReducer from 'containers/Comments/reducer';
 import uploadReducer from 'containers/ImageUploader/reducer';
 import materialListReducer from 'containers/MaterialList/reducer';
+import materialManagerReducer from 'containers/MaterialManager/reducer';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
 import { reducer as notificationReducer } from 'react-notification-system-redux';
 
@@ -62,6 +63,7 @@ export default function createReducer(asyncReducers) {
     Comments: commentsReducer,
     ImageUploader: uploadReducer,
     MaterialList: materialListReducer,
+    MaterialManager: materialManagerReducer,
     ...asyncReducers,
   });
 }

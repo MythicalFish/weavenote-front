@@ -4,7 +4,9 @@ import { getFormValues, isDirty } from 'redux-form/immutable';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
+import * as selectors from './selectors';
 import { fetchMaterialCost } from '../ProjectManager/actions';
+import { selectProjectID } from '../ProjectManager/selectors';
 
 const componentsURL = (payload, addition = null) => {
   let end = '';
@@ -18,7 +20,7 @@ export function* ProjectComponentsWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_COMPONENTS, fetchComponents),
     yield takeLatest(types.UPDATE_COMPONENT, updateComponent),
-    yield takeLatest(types.CREATE_COMPONENT, createComponent),
+    yield takeLatest(types.CREATE_COMPONENTS, createComponents),
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
   ];
   yield take(LOCATION_CHANGE);
@@ -41,11 +43,13 @@ function* updateComponent() {
   yield put(fetchMaterialCost(component.get('project_id')));
 }
 
-function* createComponent({ payload: component }) {
+function* createComponents() {
+  const projectID = yield select(selectProjectID());
+  const materialIDs = yield select(selectors.selectSelectedMaterials());
   yield sagas.post(
-    componentsURL(component),
-    { component },
-    actions.createComponentSuccess
+    `projects/${projectID}/components`,
+    { ids: materialIDs },
+    actions.createComponentsSuccess
   );
 }
 

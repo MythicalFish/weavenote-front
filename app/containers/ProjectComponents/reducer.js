@@ -1,5 +1,4 @@
 import { fromJS } from 'immutable';
-import { idToIndex } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({
@@ -11,13 +10,13 @@ const initialState = fromJS({
 function ProjectComponentsReducer(state = initialState, action) {
   const { response, payload } = action;
   const selectedMaterials = () => {
-    const s = state.get('selectedMaterials');
-    const i = idToIndex(payload, s);
-    if (i) {
-      return state.set('selectedMaterials', s.delete(i));
-    } else {
-      return state.setIn(['selectedMaterials', s.size], payload);
+    const newID = payload.get('id');
+    const list = state.get('selectedMaterials');
+    const index = list.findKey((id) => id === newID);
+    if (index !== undefined) {
+      return state.set('selectedMaterials', list.delete(index));
     }
+    return state.setIn(['selectedMaterials', list.size], newID);
   };
   switch (action.type) {
     case types.FETCH_COMPONENTS_SUCCESS:
@@ -26,14 +25,14 @@ function ProjectComponentsReducer(state = initialState, action) {
     case types.UPDATE_COMPONENT_SUCCESS:
       return state.set('components', fromJS(response));
 
-    case types.CREATE_COMPONENT_SUCCESS:
+    case types.CREATE_COMPONENTS_SUCCESS:
       return state.set('components', fromJS(response));
 
     case types.DELETE_COMPONENT_SUCCESS:
       return state.set('components', fromJS(response));
 
     case types.SELECT_MATERIAL:
-      return state.set('selectedMaterials', selectedMaterials());
+      return selectedMaterials();
 
     default:
       return state;

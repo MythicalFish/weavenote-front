@@ -10,6 +10,8 @@ import Icon from 'components/Icon';
 const ModalContent = (props) => {
   const p = props;
   const style = {};
+  if (p.width) style.width = p.width;
+  if (p.height) style.height = p.height;
   if (p.minWidth) style.minWidth = p.minWidth;
   if (p.maxWidth) style.maxWidth = p.maxWidth;
   if (p.minHeight) style.minHeight = p.minHeight;

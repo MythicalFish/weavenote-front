@@ -15,14 +15,14 @@ import {
 import FormLayout from './FormLayout';
 
 export class MaterialManager extends React.PureComponent {
-  componentDidMount() {
-    const { params } = this.props;
-    this.props.fetchMaterial(params.id);
+  componentWillMount() {
+    const { params, id } = this.props;
+    this.props.fetchMaterial(id || params.id);
   }
 
   onSubmit = (values) => {
-    const { params } = this.props;
-    if (params.id === 'new') {
+    const { params, id } = this.props;
+    if ((id || params.id) === 'new') {
       this.props.createMaterial(values);
     } else {
       this.props.updateMaterial(values);

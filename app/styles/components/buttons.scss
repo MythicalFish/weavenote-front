@@ -20,6 +20,9 @@ button {
   cursor: pointer;
   background: transparent;
   border: none;
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 .btn,
 .btn:focus {
