@@ -42,7 +42,7 @@ export class Organization extends React.PureComponent {
 
   render() {
     return (
-      <Layout type="narrow" {...this.props}>
+      <Layout type="boxed" {...this.props}>
         {this.currentView()}
       </Layout>
     );

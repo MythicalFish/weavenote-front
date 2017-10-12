@@ -1,34 +1,69 @@
 import React, { PropTypes } from 'react';
 import DefaultHeader from 'components/Header';
 import Sidebar from 'components/Sidebar';
+import ScrollArea from 'components/ScrollArea';
 
-export default function Layout(props) {
-  const { Header, type } = props;
-  const InnerContainer = ({ children }) => {
-    if (type === 'narrow') {
+const ScrollContainer = ({ scrollable, children }) => {
+  const sProps = { children };
+  return (
+    <div className="flex-auto">
+      {scrollable ? <ScrollArea {...sProps} /> : children}
+    </div>
+  );
+};
+
+ScrollContainer.propTypes = {
+  children: PropTypes.node,
+  scrollable: PropTypes.bool,
+};
+
+const InnerLayout = (props) => {
+  const { type, children, scrollable } = props;
+  switch (type) {
+    case 'boxed':
       return (
-        <div className="flex-auto p3 md-p4">
-          <div className="container-narrowest">
-            <div className="box b1 py4">{children}</div>
+        <ScrollContainer scrollable={scrollable}>
+          <div className="p4">
+            <div className="container-narrowest">
+              <div className="box b1 py4">{children}</div>
+            </div>
           </div>
-        </div>
+        </ScrollContainer>
       );
-    }
-    return <div className="flex-auto">{children}</div>;
-  };
+    case 'narrow':
+      return (
+        <ScrollContainer scrollable={scrollable}>
+          <div className="p4">
+            <div className="container-narrower">{children}</div>
+          </div>
+        </ScrollContainer>
+      );
+    default:
+      return <ScrollContainer {...props} />;
+  }
+};
+
+InnerLayout.propTypes = {
+  children: PropTypes.node,
+  type: PropTypes.string,
+  scrollable: PropTypes.bool,
+};
+
+const Layout = (props) => {
+  const { Header } = props;
   return (
     <div id="app-container" className="flex flex-column">
       {Header ? <Header /> : <DefaultHeader />}
-      <div className="flex-auto flex">
+      <div id="app-content" className="flex-auto flex">
         <Sidebar {...props} />
-        <InnerContainer>{props.children}</InnerContainer>
+        <InnerLayout {...props} />
       </div>
     </div>
   );
-}
+};
 
 Layout.propTypes = {
   Header: PropTypes.func,
-  children: PropTypes.node,
-  type: PropTypes.string,
 };
+
+export default Layout;

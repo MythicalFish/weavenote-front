@@ -13,7 +13,7 @@ class App extends React.PureComponent {
     return (
       <Gateway {...{ location }}>
         {this.props.children}
-        {showBlur && <div className="overlay" />}
+        <div>{showBlur && <div className="overlay" />}</div>
         <Notification />
         <ModalImage image={modalImage} />
       </Gateway>

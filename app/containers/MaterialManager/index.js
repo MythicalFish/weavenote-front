@@ -49,7 +49,7 @@ export class MaterialManager extends React.PureComponent {
       ...globalData,
     };
     return (
-      <Layout {...this.props} type="narrow2" scrollable>
+      <Layout {...this.props} type="narrow" scrollable>
         {material && globalData.colors && <Form {...fProps} />}
       </Layout>
     );

@@ -9,7 +9,7 @@ import Form from './subcomponents/Form';
 class Profile extends React.PureComponent {
   render() {
     return (
-      <Layout type="narrow" {...this.props}>
+      <Layout type="boxed" {...this.props}>
         <Form {...this.props} />
       </Layout>
     );
