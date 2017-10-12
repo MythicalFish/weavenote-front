@@ -31,3 +31,7 @@ export function deleteComponent(payload) {
 export function deleteComponentSuccess(response) {
   return { type: types.DELETE_COMPONENT_SUCCESS, response };
 }
+
+export function selectMaterial(payload) {
+  return { type: types.SELECT_MATERIAL, payload };
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -71,7 +71,7 @@ class ProjectManager extends React.PureComponent {
           />
         )}
       >
-        <div className="container-wide p4 y-fill">
+        <div className="container-wide px4 pt4 y-fill">
           <div className="row y-fill">
             <div className="col-xs-12 col-md-3 y-fill">
               <ScrollArea className="pr2">
@@ -79,7 +79,7 @@ class ProjectManager extends React.PureComponent {
               </ScrollArea>
             </div>
             <div className="col-xs-6 col-md-6 y-fill">
-              <ScrollArea>
+              <ScrollArea className="pb4">
                 <ProjectImages {...{ project, currentView }} />
               </ScrollArea>
             </div>
@@ -91,7 +91,9 @@ class ProjectManager extends React.PureComponent {
           </div>
         </div>
         <Modal id="collaborators" minWidth="600px">
-          <header>{`Collaborators for ${project.get('name')}`}</header>
+          <header className="modal-header">{`Collaborators for ${project.get(
+            'name'
+          )}`}</header>
           <Collaborators invitable={{ type: 'Project', id }} />
         </Modal>
         <Modal id="export">
@@ -110,11 +112,11 @@ class ProjectManager extends React.PureComponent {
 }
 
 ProjectManager.propTypes = {
-  project: React.PropTypes.object,
-  PDFexport: React.PropTypes.object,
-  fetchProject: React.PropTypes.func,
-  updateProject: React.PropTypes.func,
-  params: React.PropTypes.object,
+  project: PropTypes.object,
+  PDFexport: PropTypes.object,
+  fetchProject: PropTypes.func,
+  updateProject: PropTypes.func,
+  params: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {

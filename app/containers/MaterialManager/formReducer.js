@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import { reducer as formReducer } from 'redux-form/immutable';
-import * as types from '../../constants';
+import * as types from './constants';
 
 const supplierAttributes = (state) => {
   const attributes = {};

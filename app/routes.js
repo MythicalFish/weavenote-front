@@ -96,7 +96,7 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/MaterialManager/reducer'),
-          import('containers/MaterialManager/subcomponents/Form/reducer'),
+          import('containers/MaterialManager/formReducer'),
           import('containers/MaterialManager/sagas'),
           import('containers/MaterialManager'),
         ]);
@@ -142,8 +142,8 @@ export default function createRoutes(store) {
   return {
     getComponent(nextState, cb) {
       const importModules = Promise.all([
-        // global Sagas
-        import('containers/App/sagas'),
+        import(// global Sagas
+        'containers/App/sagas'),
         import('containers/Collaborators/sagas'),
         import('containers/Organization/sagas'),
         import('containers/ImageUploader/sagas'),

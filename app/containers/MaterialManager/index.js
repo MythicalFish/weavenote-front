@@ -1,76 +1,14 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import {
-  selectAbilities,
-  selectGlobalData,
-  selectUser,
-} from 'containers/App/selectors';
 import Layout from 'components/Layout';
-import { selectMaterial } from './selectors';
-import {
-  fetchMaterial,
-  updateMaterial,
-  createMaterial,
-  newSupplier,
-  addCareLabel,
-  removeCareLabel,
-} from './actions';
 import Form from './subcomponents/Form';
 
-export class MaterialManager extends React.PureComponent {
-  componentDidMount() {
-    const { params } = this.props;
-    this.props.fetchMaterial(params.id);
-  }
+// Actions, selectors, etc. are in List because it
+// all needs to be able to work in a modal window.
 
-  onSubmit = (values) => {
-    const { params } = this.props;
-    if (params.id === 'new') {
-      this.props.createMaterial(values);
-    } else {
-      this.props.updateMaterial(values);
-    }
-  };
+const MaterialManager = (props) => (
+  <Layout {...props} type="narrow" scrollable>
+    <Form {...props} />
+  </Layout>
+);
 
-  render() {
-    const { abilities, material, globalData } = this.props;
-    if (!globalData) return null;
-    const { onSubmit } = this;
-    const fProps = {
-      initialValues: material,
-      abilities: abilities.get('Material'),
-      onSubmit,
-      addLabel: this.props.addCareLabel,
-      removeLabel: this.props.removeCareLabel,
-      isNew: this.props.params.id === 'new',
-      ...globalData,
-    };
-    return (
-      <Layout {...this.props} type="narrow" scrollable>
-        {material && globalData.colors && <Form {...fProps} />}
-      </Layout>
-    );
-  }
-}
-
-const mapState = createStructuredSelector({
-  material: selectMaterial(),
-});
-
-const mapDispatch = (dispatch) =>
-  bindActionCreators(
-    {
-      fetchMaterial,
-      updateMaterial,
-      createMaterial,
-      newSupplier,
-      addCareLabel,
-      removeCareLabel,
-    },
-    dispatch
-  );
-
-export default connect(mapState, mapDispatch)(MaterialManager);
+export default MaterialManager;

@@ -1,76 +1,14 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { selectUser } from 'containers/App/selectors';
+import React from 'react';
 import Layout from 'components/Layout';
-import { fetchMaterials, deleteMaterial } from './actions';
-import Toolbar from './subcomponents/Toolbar';
-import ListItem from './subcomponents/ListItem';
-import { selectMaterials } from './selectors';
+import List from './subcomponents/List';
 
-export class MaterialList extends React.PureComponent {
-  state = { view: 'Materials' };
-  componentDidMount() {
-    this.props.fetchMaterials();
-  }
-  changeView = (view) => {
-    this.setState({ view });
-  };
-  render() {
-    const { materials } = this.props;
-    return (
-      <Layout {...this.props}>
-        <Toolbar
-          changeView={this.changeView}
-          currentView={this.state.view}
-          fetch={this.props.fetchMaterials}
-        />
-        <div className="container-narrow px2 py4">
-          <table>
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Ref.</th>
-                <th>Name</th>
-                <th>Color</th>
-                <th>Factory</th>
-                <th>Price</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {materials &&
-                materials
-                  .toArray()
-                  .map((material) => (
-                    <ListItem
-                      material={material}
-                      key={`material-${material.get('id')}`}
-                      deleteMaterial={this.props.deleteMaterial}
-                    />
-                  ))}
-            </tbody>
-          </table>
-        </div>
-      </Layout>
-    );
-  }
-}
+// Actions, selectors, etc. are in List because it
+// all needs to be able to work in a modal window.
 
-MaterialList.propTypes = {
-  fetchMaterials: PropTypes.func.isRequired,
-  deleteMaterial: PropTypes.func,
-  materials: PropTypes.object,
-};
+const MaterialList = (props) => (
+  <Layout {...props}>
+    <List {...props} showToolbar />
+  </Layout>
+);
 
-const mapState = createStructuredSelector({
-  materials: selectMaterials(),
-  user: selectUser(),
-});
-
-function mapDispatch(dispatch) {
-  return bindActionCreators({ fetchMaterials, deleteMaterial }, dispatch);
-}
-
-export default connect(mapState, mapDispatch)(MaterialList);
+export default MaterialList;

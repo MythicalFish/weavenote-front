@@ -3,17 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import MaterialList from 'containers/MaterialList';
-import MaterialManager from 'containers/MaterialManager';
-
 import Button from 'components/Button';
-import Modal from 'components/Modal';
 import PlusButton from 'components/PlusButton';
 import Accordion from 'components/Accordion';
 import SelectMaterial from './subcomponents/SelectMaterial';
 import RowHeader from './subcomponents/ListItem';
 import Form from './subcomponents/Form';
 import MaterialCost from './subcomponents/MaterialCost';
+import ModalMaterialManager from './subcomponents/ModalMaterialManager';
 
 import { fetchMaterials } from '../MaterialList/actions';
 import { selectMaterials } from '../MaterialList/selectors';
@@ -22,6 +19,7 @@ import {
   createComponent,
   updateComponent,
   deleteComponent,
+  selectMaterial,
 } from './actions';
 import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
@@ -51,9 +49,7 @@ class Components extends React.Component {
           {...{ ...this.props, RowHeader, Form }}
           footer={<MaterialCost {...this.props} />}
         />
-        <Modal id="materials">
-          <MaterialList {...this.props} />
-        </Modal>
+        <ModalMaterialManager {...this.props} />
       </div>
     );
     return (
@@ -89,6 +85,7 @@ export function mapDispatch(dispatch) {
       fetchComponents,
       createComponent,
       fetchMaterials,
+      selectMaterial,
     },
     dispatch
   );
@@ -96,6 +93,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   items: selectors.selectComponents(),
+  selectedMaterials: selectors.selectSelectedMaterials(),
   materials: selectMaterials(),
   materialCost: selectMaterialCost(),
 });

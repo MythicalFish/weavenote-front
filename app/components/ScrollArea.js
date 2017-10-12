@@ -1,17 +1,23 @@
 import React, { PropTypes } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-class ScrollArea extends React.PureComponent {
-  handleUpdate = (e) => {
-    // console.log(e);
+const ScrollArea = (props) => {
+  const sProps = {
+    autoHide: true,
+    onUpdate: props.onUpdate || null,
   };
-  render() {
-    return <Scrollbars autoHide onUpdate={this.handleUpdate} {...this.props} />;
-  }
-}
+  const dProps = { ...props };
+  delete dProps.autoHide;
+  delete dProps.onUpdate;
+  return (
+    <Scrollbars {...sProps}>
+      <div {...dProps} />
+    </Scrollbars>
+  );
+};
 
 ScrollArea.propTypes = {
-  children: PropTypes.node,
+  onUpdate: PropTypes.func,
 };
 
 export default ScrollArea;

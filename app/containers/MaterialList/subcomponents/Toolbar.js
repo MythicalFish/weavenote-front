@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import NavItem from 'components/NavItem';
 import Button from 'components/Button';
 
@@ -39,7 +39,7 @@ export default function Toolbar(props) {
 }
 
 Toolbar.propTypes = {
-  fetch: React.PropTypes.func,
-  changeView: React.PropTypes.func,
-  currentView: React.PropTypes.string,
+  fetch: PropTypes.func,
+  changeView: PropTypes.func,
+  currentView: PropTypes.string,
 };

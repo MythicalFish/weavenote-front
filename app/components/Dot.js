@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 export default function Dot({ className, color, size }) {
   const dProps = {
@@ -13,7 +13,7 @@ export default function Dot({ className, color, size }) {
 }
 
 Dot.propTypes = {
-  size: React.PropTypes.number,
-  color: React.PropTypes.string,
-  className: React.PropTypes.string,
+  size: PropTypes.number,
+  color: PropTypes.string,
+  className: PropTypes.string,
 };

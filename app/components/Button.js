@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Icon from 'components/Icon';
 import InlineIcon from 'components/InlineIcon';
@@ -42,32 +42,28 @@ const ButtonWrapper = (props) => {
     bProps.disabled = !!props.disabled;
     bProps.onClick = props.onClick;
     bProps.type = props.type || 'button';
-    return (
-      <button {...bProps}>
-        {props.children}
-      </button>
-    );
+    return <button {...bProps}>{props.children}</button>;
   }
 };
 
 Button.propTypes = {
-  icon: React.PropTypes.string,
-  inlineIcon: React.PropTypes.string,
-  label: React.PropTypes.string,
+  icon: PropTypes.string,
+  inlineIcon: PropTypes.string,
+  label: PropTypes.string,
 };
 
 ButtonWrapper.propTypes = {
-  className: React.PropTypes.string,
-  type: React.PropTypes.string,
-  to: React.PropTypes.string,
-  small: React.PropTypes.bool,
-  download: React.PropTypes.string,
-  newTab: React.PropTypes.string,
-  shy: React.PropTypes.bool,
-  large: React.PropTypes.bool,
-  secondary: React.PropTypes.bool,
-  inline: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
-  children: React.PropTypes.node,
+  className: PropTypes.string,
+  type: PropTypes.string,
+  to: PropTypes.string,
+  small: PropTypes.bool,
+  download: PropTypes.string,
+  newTab: PropTypes.string,
+  shy: PropTypes.bool,
+  large: PropTypes.bool,
+  secondary: PropTypes.bool,
+  inline: PropTypes.bool,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  children: PropTypes.node,
 };

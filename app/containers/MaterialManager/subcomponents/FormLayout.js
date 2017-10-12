@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import FocusableField, { FormField } from 'components/FormField';
 import Button from 'components/Button';
-import Basics from './Basics';
-import CareLabels from './CareLabels';
-import Supplier from './Supplier';
-import Cost from './Cost';
-import Image from './Image';
+import Basics from './FormBasics';
+import CareLabels from './FormCareLabels';
+import Supplier from './FormSupplier';
+import Cost from './FormCost';
+import Image from './FormImage';
 
-class Form extends React.Component {
+class FormLayout extends React.Component {
   state = { type: null };
 
   componentWillMount = () => {
@@ -108,7 +108,7 @@ class Form extends React.Component {
   }
 }
 
-Form.propTypes = {
+FormLayout.propTypes = {
   submitting: PropTypes.bool,
   isNew: PropTypes.bool,
   handleSubmit: PropTypes.func,
@@ -119,4 +119,4 @@ Form.propTypes = {
 
 export default reduxForm({
   form: 'Material',
-})(Form);
+})(FormLayout);

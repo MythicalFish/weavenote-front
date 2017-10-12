@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
 import Dropdown from 'components/Dropdown';
 import Thumbnail from 'components/Thumbnail';
@@ -52,7 +52,7 @@ export default function ListItem(props) {
 }
 
 ListItem.propTypes = {
-  project: React.PropTypes.object.isRequired,
-  fileProject: React.PropTypes.func,
-  deleteProject: React.PropTypes.func,
+  project: PropTypes.object.isRequired,
+  fileProject: PropTypes.func,
+  deleteProject: PropTypes.func,
 };

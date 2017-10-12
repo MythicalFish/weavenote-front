@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { PLACEHOLDER } from 'containers/ProjectImages/constants';
 
 const Thumbnail = (props) => {
@@ -12,8 +12,8 @@ const Thumbnail = (props) => {
 };
 
 Thumbnail.propTypes = {
-  url: React.PropTypes.string,
-  size: React.PropTypes.string,
+  url: PropTypes.string,
+  size: PropTypes.string,
 };
 
 export default Thumbnail;

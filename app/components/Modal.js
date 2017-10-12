@@ -7,13 +7,12 @@ import { closeModal } from 'containers/App/actions';
 import { selectModalID } from 'containers/App/selectors';
 import Icon from 'components/Icon';
 
-const ModalMarkup = (props) => {
+const ModalContent = (props) => {
   const p = props;
   const style = {};
   if (p.minWidth) style.minWidth = p.minWidth;
   if (p.maxWidth) style.maxWidth = p.maxWidth;
-  const modalClass = p.isOpen ? 'visible' : p.modalClass;
-  const modalBGClass = p.isOpen ? 'overlay' : '';
+  if (p.minHeight) style.minHeight = p.minHeight;
   const doClose = () => {
     if (p.closeFunc) {
       p.closeFunc();
@@ -22,6 +21,23 @@ const ModalMarkup = (props) => {
     }
   };
   return (
+    <div className="modal-content" style={style}>
+      <div className="modal-body">
+        {!props.hideCloseButton && (
+          <Icon name="X" className="modal-close" onClick={doClose} />
+        )}
+        {p.children}
+      </div>
+      {p.footer && p.footer}
+    </div>
+  );
+};
+
+const ModalMarkup = (props) => {
+  const p = props;
+  const modalClass = p.isOpen ? 'visible' : p.modalClass;
+  const modalBGClass = p.isOpen ? 'overlay' : '';
+  return (
     <div className={`modal ${modalClass}`}>
       <div
         className={`modal-bg ${modalBGClass}`}
@@ -29,15 +45,7 @@ const ModalMarkup = (props) => {
           if (!p.noCloseOutside) doClose();
         }}
       />
-      <div className="modal-content">
-        <div className="modal-body" style={style}>
-          {!props.hideCloseButton && (
-            <Icon name="X" className="modal-close" onClick={doClose} />
-          )}
-          {p.children}
-        </div>
-        {p.footer && p.footer}
-      </div>
+      <ModalContent {...props} />
     </div>
   );
 };

@@ -25,8 +25,8 @@ function buttonClass(path, currentPath) {
 }
 
 Button.propTypes = {
-  label: React.PropTypes.string.isRequired,
-  path: React.PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 const exposeTo = (role) => !['None', 'Guest'].includes(role);

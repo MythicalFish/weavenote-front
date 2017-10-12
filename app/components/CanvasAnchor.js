@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Circle } from 'react-konva';
 
 const themes = {
@@ -57,16 +57,16 @@ const Anchor = (props) => {
 };
 
 Anchor.propTypes = {
-  type: React.PropTypes.string,
-  isNew: React.PropTypes.bool,
-  isDraggable: React.PropTypes.bool,
-  isActive: React.PropTypes.bool,
-  position: React.PropTypes.object,
-  handleDragEnd: React.PropTypes.func,
-  handleDragStart: React.PropTypes.func,
-  handleMouseUp: React.PropTypes.func,
-  handleMouseOver: React.PropTypes.func,
-  handleMouseOut: React.PropTypes.func,
+  type: PropTypes.string,
+  isNew: PropTypes.bool,
+  isDraggable: PropTypes.bool,
+  isActive: PropTypes.bool,
+  position: PropTypes.object,
+  handleDragEnd: PropTypes.func,
+  handleDragStart: PropTypes.func,
+  handleMouseUp: PropTypes.func,
+  handleMouseOver: PropTypes.func,
+  handleMouseOut: PropTypes.func,
 };
 
 export default Anchor;

@@ -11,6 +11,7 @@
   @extend .flex;
   @extend .items-center;
   @extend .justify-center;
+  padding: $space-3;
   &.visible {
     opacity: 1;
   }
@@ -23,7 +24,6 @@
   }
   .modal-content {
     @extend .flex-none;
-    max-width: 600px;
     z-index: 3;
     .modal-body {
       background: $white;
@@ -35,7 +35,7 @@
       > img {
         @include borderRadius();
       }
-      header {
+      .modal-header {
         padding: $space-3;
         font-weight: bold;
         @extend .bb1;
