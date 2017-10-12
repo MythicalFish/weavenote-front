@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectAbilities } from 'containers/App/selectors';
-import Header from 'components/Header';
+import { selectAbilities, selectUser } from 'containers/App/selectors';
+import Layout from 'components/Layout';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
 import {
@@ -25,8 +25,7 @@ export class ProjectList extends React.PureComponent {
   render() {
     const { projects } = this.props;
     return (
-      <div>
-        <Header />
+      <Layout {...this.props}>
         <Toolbar
           {...this.props}
           currentView={this.state.view}
@@ -58,7 +57,7 @@ export class ProjectList extends React.PureComponent {
             </tbody>
           </table>
         </div>
-      </div>
+      </Layout>
     );
   }
 }
@@ -80,6 +79,7 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   projects: selectProjects(),
   abilities: selectAbilities(),
+  user: selectUser(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectList);

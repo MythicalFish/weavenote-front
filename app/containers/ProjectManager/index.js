@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectFocus } from 'containers/App/selectors';
+import { selectFocus, selectUser } from 'containers/App/selectors';
 import { openModal } from 'containers/App/actions';
 import ScrollArea from 'components/ScrollArea';
 import ProjectInstructions from 'containers/ProjectInstructions';
@@ -10,11 +10,12 @@ import ProjectImages from 'containers/ProjectImages';
 import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
 import ProjectComments from 'containers/ProjectComments';
+import Layout from 'components/Layout';
 import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
 import Button from 'components/Button';
 import Collaborators from 'containers/Collaborators';
-import Toolbar from './subcomponents/Toolbar';
+import Header from './subcomponents/Header';
 import ProjectBasics from './subcomponents/ProjectBasics';
 import * as selectors from './selectors';
 import { fetchProject, updateProject, exportPDF } from './actions';
@@ -62,12 +63,16 @@ class ProjectManager extends React.PureComponent {
     };
 
     return (
-      <div className="y-fill">
-        <Toolbar
-          {...this.props}
-          {...{ currentView }}
-          changeView={this.changeView}
-        />
+      <Layout
+        {...this.props}
+        Header={() => (
+          <Header
+            {...this.props}
+            {...{ currentView }}
+            changeView={this.changeView}
+          />
+        )}
+      >
         <div className="container-wide p4 y-fill">
           <div className="row y-fill">
             <div className="col-xs-12 col-md-3 y-fill">
@@ -101,7 +106,7 @@ class ProjectManager extends React.PureComponent {
             />
           )}
         </Modal>
-      </div>
+      </Layout>
     );
   }
 }
@@ -128,6 +133,7 @@ const mapState = createStructuredSelector({
   PDFexport: selectors.selectPDFexport(),
   abilities: selectors.selectAbilities(),
   userRole: selectors.selectUserRole(),
+  user: selectUser(),
   focus: selectFocus(),
 });
 

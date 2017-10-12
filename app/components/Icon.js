@@ -14,8 +14,8 @@ const Icon = (props) => {
   if (props.onClick) {
     return (
       <button {...bProps} onClick={props.onClick} type="button">
-        {tooltip && <div className="tooltip">{tooltip}</div>}
         <FeatherIcon />
+        {tooltip && <div className="tooltip">{tooltip}</div>}
       </button>
     );
   } else if (props.to) {

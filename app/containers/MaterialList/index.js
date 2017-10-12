@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import Header from 'components/Header';
+import { selectUser } from 'containers/App/selectors';
+import Layout from 'components/Layout';
 import { fetchMaterials, deleteMaterial } from './actions';
 import Toolbar from './subcomponents/Toolbar';
 import ListItem from './subcomponents/ListItem';
@@ -19,8 +20,7 @@ export class MaterialList extends React.PureComponent {
   render() {
     const { materials } = this.props;
     return (
-      <div>
-        <Header />
+      <Layout {...this.props}>
         <Toolbar
           changeView={this.changeView}
           currentView={this.state.view}
@@ -53,7 +53,7 @@ export class MaterialList extends React.PureComponent {
             </tbody>
           </table>
         </div>
-      </div>
+      </Layout>
     );
   }
 }
@@ -66,6 +66,7 @@ MaterialList.propTypes = {
 
 const mapState = createStructuredSelector({
   materials: selectMaterials(),
+  user: selectUser(),
 });
 
 function mapDispatch(dispatch) {

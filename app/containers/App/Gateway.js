@@ -6,14 +6,13 @@ import { browserHistory } from 'react-router';
 import LoginForm from 'components/LoginForm';
 import { fetchUser } from 'containers/User/actions';
 import { loggedIn } from 'utils/authUtils';
-import Layout from './Layout';
 import {
   fetchInvite,
   handleInvite,
   setInviteKey,
   fetchGlobalData,
-} from '../actions';
-import * as selectors from '../selectors';
+} from './actions';
+import * as selectors from './selectors';
 
 class Gateway extends React.PureComponent {
   componentDidMount() {
@@ -130,7 +129,7 @@ class Gateway extends React.PureComponent {
       return null;
     }
 
-    return <Layout {...{ location, user }}>{this.props.children}</Layout>;
+    return <div>{this.props.children}</div>;
   }
 }
 

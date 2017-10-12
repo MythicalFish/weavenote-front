@@ -27,12 +27,12 @@ function buttonClass(path, currentPath) {
 Button.propTypes = {
   label: React.PropTypes.string.isRequired,
   path: React.PropTypes.string.isRequired,
-  currentPath: React.PropTypes.string,
 };
 
 const exposeTo = (role) => !['None', 'Guest'].includes(role);
 
 const Sidebar = (props) => {
+  if (!props.location) return null;
   if (isProjectPage(props.location.pathname)) return null;
   const role = props.user.get('role');
   if (!role) return null;

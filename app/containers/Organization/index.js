@@ -41,14 +41,16 @@ export class Organization extends React.PureComponent {
   };
 
   render() {
-    return <Layout>{this.currentView()}</Layout>;
+    return (
+      <Layout type="narrow" {...this.props}>
+        {this.currentView()}
+      </Layout>
+    );
   }
 }
 
 Organization.propTypes = {
-  user: PropTypes.object,
   organization: PropTypes.object,
-  organizations: PropTypes.object,
   createOrganization: PropTypes.func,
 };
 

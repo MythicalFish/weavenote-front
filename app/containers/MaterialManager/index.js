@@ -3,8 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectAbilities, selectGlobalData } from 'containers/App/selectors';
-import Header from 'components/Header';
+import {
+  selectAbilities,
+  selectGlobalData,
+  selectUser,
+} from 'containers/App/selectors';
+import Layout from 'components/Layout';
 import { selectMaterial } from './selectors';
 import {
   fetchMaterial,
@@ -45,14 +49,9 @@ export class MaterialManager extends React.PureComponent {
       ...globalData,
     };
     return (
-      <div>
-        <Header />
-        <div className="p4">
-          <div className="container-narrower">
-            {material && globalData.colors && <Form {...fProps} />}
-          </div>
-        </div>
-      </div>
+      <Layout {...this.props} type="narrow2" scrollable>
+        {material && globalData.colors && <Form {...fProps} />}
+      </Layout>
     );
   }
 }
@@ -61,6 +60,7 @@ const mapState = createStructuredSelector({
   material: selectMaterial(),
   globalData: selectGlobalData(),
   abilities: selectAbilities(),
+  user: selectUser(),
 });
 
 const mapDispatch = (dispatch) =>
