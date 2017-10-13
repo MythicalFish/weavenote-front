@@ -20,12 +20,12 @@ export class MaterialManager extends React.PureComponent {
     this.props.fetchMaterial(id || params.id);
   }
 
-  onSubmit = (values) => {
+  onSubmit = () => {
     const { params, id } = this.props;
     if ((id || params.id) === 'new') {
-      this.props.createMaterial(values);
+      this.props.createMaterial();
     } else {
-      this.props.updateMaterial(values);
+      this.props.updateMaterial();
     }
   };
 

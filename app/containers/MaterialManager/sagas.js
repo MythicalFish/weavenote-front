@@ -45,8 +45,8 @@ function* resetForm() {
   yield put(initialize('Material', material));
 }
 
-function* createMaterial(action) {
-  const material = action.material.toJS();
+function* createMaterial() {
+  const material = yield select(getFormValues('Material'));
   yield sagas.post('materials', { material }, actions.createMaterialSuccess);
 }
 

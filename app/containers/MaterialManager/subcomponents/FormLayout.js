@@ -72,7 +72,6 @@ class FormLayout extends React.Component {
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <div className="box">
-              <h3>Material</h3>
               <Basics {...props} />
             </div>
             <div className="box">
@@ -83,7 +82,9 @@ class FormLayout extends React.Component {
           <div className="col-xs-12 col-md-6">
             {material.get('id') && (
               <div className="box">
-                <h3>Image</h3>
+                <div className="field">
+                  <label>Reference picture</label>
+                </div>
                 <Image {...{ material }} />
               </div>
             )}

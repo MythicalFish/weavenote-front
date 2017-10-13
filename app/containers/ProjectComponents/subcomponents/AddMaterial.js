@@ -15,11 +15,16 @@ export default class AddMaterial extends React.PureComponent {
     this.setState({ id: material.get('id'), view: VIEW.edit });
   };
   render() {
-    const { selectMaterial, createComponents, selectedMaterials } = this.props;
+    const {
+      selectMaterial,
+      createComponents,
+      selectedMaterials,
+      createMaterial,
+    } = this.props;
     const { view } = this.state;
     return (
       <Modal id="materials" width="100%" maxWidth="1000px">
-        <div className="p4">
+        <div className="pb3 px4 pt4">
           <Toolbar currentView={view} changeView={this.setView} />
         </div>
         {view === VIEW.list && (
@@ -37,13 +42,13 @@ export default class AddMaterial extends React.PureComponent {
                 />
               </ScrollArea>
             </div>
-            <div className="px4 pb4 right-align flex-none">
+            <Footer>
               <Button
                 onClick={createComponents}
                 label="Add to project"
                 disabled={selectedMaterials.size === 0}
               />
-            </div>
+            </Footer>
           </div>
         )}
         {[VIEW.create, VIEW.edit].includes(view) && (
@@ -55,13 +60,27 @@ export default class AddMaterial extends React.PureComponent {
             </ScrollArea>
           </div>
         )}
+        {view === VIEW.create && (
+          <Footer>
+            <Button onClick={createMaterial} label="Create" />
+          </Footer>
+        )}
       </Modal>
     );
   }
 }
 
+const Footer = ({ children }) => (
+  <div className="px4 pb4 pt3 right-align flex-none">{children}</div>
+);
+
+Footer.propTypes = {
+  children: PropTypes.node,
+};
+
 AddMaterial.propTypes = {
   selectMaterial: PropTypes.func,
+  createMaterial: PropTypes.func,
   createComponents: PropTypes.func,
   selectedMaterials: PropTypes.object,
   materials: PropTypes.object,

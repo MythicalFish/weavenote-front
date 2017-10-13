@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import Button from 'components/Button';
-import PlusButton from 'components/PlusButton';
 import Accordion from 'components/Accordion';
 import RowHeader from './subcomponents/ListItem';
 import Form from './subcomponents/Form';
@@ -20,6 +19,7 @@ import {
   deleteComponent,
   selectMaterial,
 } from './actions';
+import { createMaterial } from '../MaterialManager/actions';
 import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
@@ -64,6 +64,7 @@ export function mapDispatch(dispatch) {
       createComponents,
       fetchMaterials,
       selectMaterial,
+      createMaterial,
     },
     dispatch
   );

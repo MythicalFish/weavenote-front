@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import NavItem from 'components/NavItem';
+import Icon from 'components/Icon';
 import { VIEW } from '../constants';
 
 export default function AddMaterialToolbar(props) {
@@ -17,8 +18,18 @@ export default function AddMaterialToolbar(props) {
     name: PropTypes.string,
   };
   return (
-    <header className="toolbar toolbar-compact flex justify-center">
-      <nav className="">
+    <header className="toolbar toolbar-compact flex justify-between">
+      <div>
+        {currentView === VIEW.edit && (
+          <Icon
+            onClick={() => changeView(VIEW.list)}
+            color="gray"
+            name="ArrowLeft"
+            size={26}
+          />
+        )}
+      </div>
+      <nav>
         <ul>
           {currentView === VIEW.edit ? (
             <Nav name={VIEW.edit} />
@@ -30,6 +41,7 @@ export default function AddMaterialToolbar(props) {
           )}
         </ul>
       </nav>
+      <div />
     </header>
   );
 }

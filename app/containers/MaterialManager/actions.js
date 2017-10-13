@@ -14,8 +14,8 @@ export function updateMaterial() {
 export function updateMaterialSuccess(response) {
   return { type: types.UPDATE_MATERIAL_SUCCESS, response };
 }
-export function createMaterial(material) {
-  return { type: types.CREATE_MATERIAL, material };
+export function createMaterial() {
+  return { type: types.CREATE_MATERIAL };
 }
 export function createMaterialSuccess(response) {
   return { type: types.CREATE_MATERIAL_SUCCESS, response };
