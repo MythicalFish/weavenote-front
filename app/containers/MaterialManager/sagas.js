@@ -1,16 +1,18 @@
-import { take, cancel, takeLatest, select } from 'redux-saga/effects';
-import { getFormValues, isDirty } from 'redux-form/immutable';
+import { take, cancel, takeLatest, select, put } from 'redux-saga/effects';
+import { getFormValues, isDirty, initialize } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
+import * as selectors from './selectors';
 export default [materialManagerWatcher];
 
 export function* materialManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
+    yield takeLatest(types.UPDATE_MATERIAL_SUCCESS, resetForm),
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
     yield takeLatest(types.CREATE_MATERIAL_SUCCESS, showMaterial),
     yield takeLatest(types.FETCH_SUPPLIERS, fetchSuppliers),
@@ -19,15 +21,15 @@ export function* materialManagerWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-export function* fetchSuppliers() {
+function* fetchSuppliers() {
   yield sagas.get('suppliers', null, actions.fetchSuppliersSuccess);
 }
 
-export function* fetchMaterial(action) {
+function* fetchMaterial(action) {
   yield sagas.get(`materials/${action.id}`, null, actions.fetchMaterialSuccess);
 }
 
-export function* updateMaterial() {
+function* updateMaterial() {
   const dirty = yield select(isDirty('Material'));
   if (!dirty) return;
   const material = yield select(getFormValues('Material'));
@@ -38,11 +40,16 @@ export function* updateMaterial() {
   );
 }
 
-export function* createMaterial(action) {
+function* resetForm() {
+  const material = yield select(selectors.selectMaterial());
+  yield put(initialize('Material', material));
+}
+
+function* createMaterial(action) {
   const material = action.material.toJS();
   yield sagas.post('materials', { material }, actions.createMaterialSuccess);
 }
 
-export function* showMaterial() {
+function* showMaterial() {
   browserHistory.push('/materials');
 }

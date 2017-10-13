@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
 
 export default class Input extends React.PureComponent {
+  static propTypes = {
+    focus: PropTypes.bool,
+    onEnterKey: PropTypes.func,
+  };
   componentDidMount() {
     if (this.props.focus) {
       this.nameInput.focus();

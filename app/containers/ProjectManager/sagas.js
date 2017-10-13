@@ -1,6 +1,6 @@
-import { take, cancel, takeLatest, select } from 'redux-saga/effects';
+import { take, cancel, takeLatest, select, put } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { getFormValues, isDirty } from 'redux-form/immutable';
+import { getFormValues, isDirty, initialize } from 'redux-form/immutable';
 import * as sagas from 'utils/genericSagas';
 import { materialListWatcher } from '../MaterialList/sagas';
 import { ProjectInstructionsWatcher } from '../ProjectInstructions/sagas';
@@ -53,6 +53,7 @@ function* updateProject() {
     { project },
     actions.updateProjectSuccess
   );
+  yield put(initialize('ProjectForm', project));
 }
 
 function* exportPDF({ id }) {
