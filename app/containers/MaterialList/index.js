@@ -6,7 +6,7 @@ import List from './subcomponents/List';
 // all needs to be able to work in a modal window.
 
 const MaterialList = (props) => (
-  <Layout {...props} type="narrow">
+  <Layout {...props} type="narrow" scrollable>
     <List {...props} showToolbar />
   </Layout>
 );

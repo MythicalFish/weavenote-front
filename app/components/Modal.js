@@ -18,7 +18,7 @@ const ModalContent = (props) => {
   const doClose = () => {
     if (p.closeFunc) {
       p.closeFunc();
-    } else if (p.closeModal) {
+    } else {
       p.closeModal();
     }
   };
@@ -44,7 +44,7 @@ const ModalMarkup = (props) => {
       <div
         className={`modal-bg ${modalBGClass}`}
         onClick={() => {
-          if (!p.noCloseOutside) doClose();
+          if (!p.noCloseOutside) p.closeModal();
         }}
       />
       <ModalContent {...props} />

@@ -5,7 +5,7 @@ import * as types from './constants';
 import * as actions from './actions';
 export default [materialListWatcher];
 
-export function* materialListWatcher() {
+function* materialListWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIALS, fetchMaterials),
     yield takeLatest(types.DELETE_MATERIAL, deleteMaterial),
@@ -24,5 +24,6 @@ export function* deleteMaterial({ id }) {
 }
 
 export function* duplicateMaterial({ id }) {
+  console.log('asdasdasd');
   yield sagas.post(`materials/${id}`, null, actions.duplicateMaterialSuccess);
 }

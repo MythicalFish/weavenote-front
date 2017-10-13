@@ -135,9 +135,9 @@ export default function createRoutes(store) {
 
   return {
     getComponent(nextState, cb) {
+      // global Sagas
       const importModules = Promise.all([
-        import(// global Sagas
-        'containers/App/sagas'),
+        import('containers/App/sagas'),
         import('containers/Collaborators/sagas'),
         import('containers/Organization/sagas'),
         import('containers/ImageUploader/sagas'),
