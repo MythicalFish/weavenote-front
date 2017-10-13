@@ -25,8 +25,8 @@ const ModalContent = (props) => {
   return (
     <div className="modal-content" style={style}>
       <div className="modal-body">
-        {!props.hideCloseButton && (
-          <Icon name="X" className="modal-close" onClick={doClose} />
+        {!p.hideCloseButton && (
+          <Icon name="X" className="modal-close" onClick={doClose} size={20} />
         )}
         {p.children}
       </div>

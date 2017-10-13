@@ -6,25 +6,40 @@ import Dropdown from 'components/Dropdown';
 import confirm from 'utils/confirm';
 
 class ListItem extends React.PureComponent {
+  url = `/materials/${this.props.material.get('id')}`;
   isSelected = () => {
     const { selectedMaterials, material } = this.props;
     const i = selectedMaterials.findKey((id) => material.get('id') === id);
     return i !== undefined;
   };
+  handleDelete = () => {
+    const { deleteMaterial, material } = this.props;
+    confirm('Are you sure you want to delete this material?').then(() => {
+      deleteMaterial(material.get('id'));
+    });
+  };
+  handleEdit = () => {
+    const { onEdit, material } = this.props;
+    if (onEdit) {
+      onEdit(material);
+    } else {
+      browserHistory.push(this.url);
+    }
+  };
+  handleClick = () => {
+    const { selectable, onSelect, material } = this.props;
+    if (selectable && onSelect) {
+      onSelect(material);
+    } else {
+      browserHistory.push(this.url);
+    }
+  };
   Checkbox = () => <div>{this.isSelected() ? 'x' : 'o'}</div>;
   render() {
-    const { material, deleteMaterial, selectable, onSelect } = this.props;
+    const { material, selectable } = this.props;
     const { Checkbox } = this;
-    const url = `/materials/${material.get('id')}`;
-    const onClick = () => {
-      if (selectable && onSelect) {
-        onSelect(material);
-      } else {
-        browserHistory.push(url);
-      }
-    };
     const linked = {
-      onClick,
+      onClick: this.handleClick,
       className: 'cursor-pointer',
     };
     return (
@@ -50,18 +65,8 @@ class ListItem extends React.PureComponent {
         </td>
         <td className="right-align">
           <Dropdown icon="more">
-            <Link to={url}>Manage</Link>
-            <button
-              onClick={() => {
-                confirm(
-                  'Are you sure you want to delete this material?'
-                ).then(() => {
-                  deleteMaterial(material.get('id'));
-                });
-              }}
-            >
-              Delete
-            </button>
+            <button onClick={this.handleEdit}>Edit</button>
+            <button onClick={this.handleDelete}>Delete</button>
           </Dropdown>
         </td>
       </tr>
@@ -74,6 +79,7 @@ ListItem.propTypes = {
   deleteMaterial: PropTypes.func,
   selectable: PropTypes.bool,
   onSelect: PropTypes.func,
+  onEdit: PropTypes.func,
   selectedMaterials: PropTypes.object,
 };
 

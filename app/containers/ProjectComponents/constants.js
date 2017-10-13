@@ -12,4 +12,8 @@ export const DELETE_COMPONENT_SUCCESS = '@@app/DELETE_COMPONENT_SUCCESS';
 
 export const SELECT_MATERIAL = '@@app/SELECT_MATERIAL';
 
-export const VIEW = { list: 'Materials', create: 'Create new material' };
+export const VIEW = {
+  list: 'Materials',
+  create: 'Create new material',
+  edit: 'Editing material',
+};

@@ -35,7 +35,8 @@ class Components extends React.Component {
       <div>
         <Button
           onClick={() => this.props.openModal('materials')}
-          label="modal"
+          label="Add material"
+          small
         />
         <Accordion
           {...{ ...this.props, RowHeader, Form }}

@@ -5,11 +5,13 @@ import { VIEW } from '../constants';
 export default function AddMaterialToolbar(props) {
   const { changeView, currentView } = props;
   const Nav = ({ name }) => (
-    <NavItem
-      label={name}
-      isActive={currentView === name}
-      handleClick={() => changeView(name)}
-    />
+    <li>
+      <NavItem
+        label={name}
+        isActive={currentView === name}
+        handleClick={() => changeView(name)}
+      />
+    </li>
   );
   Nav.propTypes = {
     name: PropTypes.string,
@@ -18,12 +20,14 @@ export default function AddMaterialToolbar(props) {
     <header className="toolbar toolbar-compact flex justify-center">
       <nav className="">
         <ul>
-          <li>
-            <Nav name={VIEW.list} />
-          </li>
-          <li>
-            <Nav name={VIEW.create} />
-          </li>
+          {currentView === VIEW.edit ? (
+            <Nav name={VIEW.edit} />
+          ) : (
+            [
+              <Nav name={VIEW.list} key="list" />,
+              <Nav name={VIEW.create} key="create" />,
+            ]
+          )}
         </ul>
       </nav>
     </header>

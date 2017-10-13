@@ -8,9 +8,12 @@ import Toolbar from './AddMaterialToolbar';
 import { VIEW } from '../constants';
 
 export default class AddMaterial extends React.PureComponent {
-  state = { view: VIEW.list };
+  state = { view: VIEW.list, id: null };
   setView = (view) => this.setState({ view });
   materialListHeight = this.props.materials.size * 50 + 100;
+  editMaterial = (material) => {
+    this.setState({ id: material.get('id'), view: VIEW.edit });
+  };
   render() {
     const { selectMaterial, createComponents, selectedMaterials } = this.props;
     const { view } = this.state;
@@ -29,6 +32,7 @@ export default class AddMaterial extends React.PureComponent {
                 <MaterialList
                   selectable
                   onSelect={selectMaterial}
+                  onEdit={this.editMaterial}
                   selectedMaterials={selectedMaterials}
                 />
               </ScrollArea>
@@ -42,11 +46,11 @@ export default class AddMaterial extends React.PureComponent {
             </div>
           </div>
         )}
-        {view === VIEW.create && (
-          <div className="vh-y50">
+        {[VIEW.create, VIEW.edit].includes(view) && (
+          <div className="vh-y60">
             <ScrollArea className="px4">
               <div className="pb4">
-                <MaterialManager id="new" {...this.props} />
+                <MaterialManager id={this.state.id || 'new'} {...this.props} />
               </div>
             </ScrollArea>
           </div>
