@@ -8,15 +8,10 @@ function projectsReducer(state = initialState, action) {
 
   switch (type) {
     case types.FETCH_PROJECTS_SUCCESS:
-      return fromJS(response);
-
     case types.CREATE_PROJECT_SUCCESS:
-      return fromJS(response);
-
     case types.DELETE_PROJECT_SUCCESS:
-      return fromJS(response);
-
     case types.FILE_PROJECT_SUCCESS:
+    case types.DUPLICATE_PROJECT_SUCCESS:
       return fromJS(response);
 
     default:

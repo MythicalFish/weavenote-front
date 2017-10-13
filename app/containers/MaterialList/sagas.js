@@ -9,6 +9,7 @@ export function* materialListWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIALS, fetchMaterials),
     yield takeLatest(types.DELETE_MATERIAL, deleteMaterial),
+    yield takeLatest(types.DUPLICATE_MATERIAL, duplicateMaterial),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -20,4 +21,8 @@ export function* fetchMaterials() {
 
 export function* deleteMaterial({ id }) {
   yield sagas.destroy(`materials/${id}`, null, actions.deleteMaterialSuccess);
+}
+
+export function* duplicateMaterial({ id }) {
+  yield sagas.post(`materials/${id}`, null, actions.duplicateMaterialSuccess);
 }

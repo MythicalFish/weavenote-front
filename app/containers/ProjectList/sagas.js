@@ -14,6 +14,7 @@ export function* projectListWatcher() {
     yield takeLatest(types.DELETE_PROJECT, deleteProject),
     yield takeLatest(types.FILE_PROJECT, fileProject),
     yield takeLatest(types.FETCH_PROJECTS, fetchProjects),
+    yield takeLatest(types.DUPLICATE_PROJECT, duplicateProject),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -43,4 +44,8 @@ function* fetchProjects(action) {
 
 function* showProject({ response }) {
   browserHistory.push(`/projects/${response[0].id}`);
+}
+
+function* duplicateProject({ id }) {
+  yield sagas.post(`projects/${id}`, null, actions.duplicateProjectSuccess);
 }

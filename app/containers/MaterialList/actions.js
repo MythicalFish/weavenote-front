@@ -34,3 +34,11 @@ export function deleteMaterial(id) {
 export function deleteMaterialSuccess(response) {
   return { type: types.DELETE_MATERIAL_SUCCESS, response };
 }
+
+export function duplicateMaterial(id) {
+  return { type: types.DUPLICATE_MATERIAL, id };
+}
+
+export function duplicateMaterialSuccess(response) {
+  return { type: types.DUPLICATE_MATERIAL_SUCCESS, response };
+}

@@ -10,6 +10,7 @@ import {
   createProject,
   fileProject,
   deleteProject,
+  duplicateProject,
 } from './actions';
 import { selectProjects } from './selectors';
 
@@ -49,8 +50,7 @@ export class ProjectList extends React.PureComponent {
                   <ListItem
                     key={`project-${index}`}
                     project={project}
-                    fileProject={this.props.fileProject}
-                    deleteProject={this.props.deleteProject}
+                    {...this.props}
                   />
                 ))}
             </tbody>
@@ -64,13 +64,17 @@ export class ProjectList extends React.PureComponent {
 ProjectList.propTypes = {
   projects: PropTypes.object,
   fetchProjects: PropTypes.func,
-  fileProject: PropTypes.func,
-  deleteProject: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchProjects, createProject, deleteProject, fileProject },
+    {
+      fetchProjects,
+      createProject,
+      deleteProject,
+      fileProject,
+      duplicateProject,
+    },
     dispatch
   );
 }

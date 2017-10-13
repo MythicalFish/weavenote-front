@@ -12,11 +12,13 @@ class ListItem extends React.PureComponent {
     const i = selectedMaterials.findKey((id) => material.get('id') === id);
     return i !== undefined;
   };
-  handleDelete = () => {
-    const { deleteMaterial, material } = this.props;
-    confirm('Are you sure you want to delete this material?').then(() => {
-      deleteMaterial(material.get('id'));
-    });
+  handleSelect = () => {
+    const { selectable, onSelect, material } = this.props;
+    if (selectable && onSelect) {
+      onSelect(material);
+    } else {
+      browserHistory.push(this.url);
+    }
   };
   handleEdit = () => {
     const { onEdit, material } = this.props;
@@ -26,20 +28,22 @@ class ListItem extends React.PureComponent {
       browserHistory.push(this.url);
     }
   };
-  handleClick = () => {
-    const { selectable, onSelect, material } = this.props;
-    if (selectable && onSelect) {
-      onSelect(material);
-    } else {
-      browserHistory.push(this.url);
-    }
+  handleDelete = () => {
+    const { deleteMaterial, material } = this.props;
+    confirm('Are you sure you want to delete this material?').then(() => {
+      deleteMaterial(material.get('id'));
+    });
+  };
+  handleDuplicate = () => {
+    const { duplicateMaterial, material } = this.props;
+    duplicateMaterial(material.get('id'));
   };
   Checkbox = () => <div>{this.isSelected() ? 'x' : 'o'}</div>;
   render() {
     const { material, selectable } = this.props;
     const { Checkbox } = this;
     const linked = {
-      onClick: this.handleClick,
+      onClick: this.handleSelect,
       className: 'cursor-pointer',
     };
     return (
@@ -67,6 +71,7 @@ class ListItem extends React.PureComponent {
           <Dropdown icon="more">
             <button onClick={this.handleEdit}>Edit</button>
             <button onClick={this.handleDelete}>Delete</button>
+            <button onClick={this.handleDuplicate}>Duplicate</button>
           </Dropdown>
         </td>
       </tr>
@@ -80,6 +85,7 @@ ListItem.propTypes = {
   selectable: PropTypes.bool,
   onSelect: PropTypes.func,
   onEdit: PropTypes.func,
+  duplicateMaterial: PropTypes.func,
   selectedMaterials: PropTypes.object,
 };
 

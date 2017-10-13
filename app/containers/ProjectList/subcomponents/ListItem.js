@@ -14,6 +14,15 @@ export default function ListItem(props) {
     onClick: () => browserHistory.push(url),
     className: 'cursor-pointer',
   };
+  const handleDelete = () => {
+    confirm('Are you sure you want to delete this project?').then(() => {
+      deleteProject(id);
+    });
+  };
+  const handleDuplicate = () => {
+    const { duplicateProject } = props;
+    duplicateProject(props.project.get('id'));
+  };
   return (
     <tr>
       <td {...linked} className="cell-fit">
@@ -33,17 +42,8 @@ export default function ListItem(props) {
             <button onClick={() => fileProject({ id, archived: !archived })}>
               {archived ? 'Restore' : 'Archive'}
             </button>
-            <button
-              onClick={() => {
-                confirm(
-                  'Are you sure you want to delete this project?'
-                ).then(() => {
-                  deleteProject(id);
-                });
-              }}
-            >
-              Delete
-            </button>
+            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDuplicate}>Duplicate</button>
           </Dropdown>
         </div>
       </td>
@@ -55,4 +55,5 @@ ListItem.propTypes = {
   project: PropTypes.object.isRequired,
   fileProject: PropTypes.func,
   deleteProject: PropTypes.func,
+  duplicateProject: PropTypes.func,
 };

@@ -13,6 +13,9 @@ function materialsReducer(state = initialState, action) {
     case types.DELETE_MATERIAL_SUCCESS:
       return fromJS(response);
 
+    case types.DUPLICATE_MATERIAL_SUCCESS:
+      return fromJS(response);
+
     default:
       return state;
   }

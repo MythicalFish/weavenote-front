@@ -36,7 +36,7 @@ const InnerLayout = (props) => {
       return (
         <ScrollContainer scrollable={scrollable}>
           <div className="p4">
-            <div className="container-narrower">{children}</div>
+            <div className="container-narrow">{children}</div>
           </div>
         </ScrollContainer>
       );

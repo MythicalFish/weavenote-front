@@ -35,3 +35,11 @@ export function fileProject(payload) {
 export function fileProjectSuccess(response) {
   return { type: types.FILE_PROJECT_SUCCESS, response };
 }
+
+export function duplicateProject(id) {
+  return { type: types.DUPLICATE_PROJECT, id };
+}
+
+export function duplicateProjectSuccess(response) {
+  return { type: types.DUPLICATE_PROJECT_SUCCESS, response };
+}
