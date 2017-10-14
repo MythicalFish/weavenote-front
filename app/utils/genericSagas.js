@@ -55,13 +55,12 @@ function* handleError({ error }) {
     yield put(notifyWarning(message));
   } else if (error.type === 'bug') {
     yield put(notifyError(message));
+  } else if (error.type === 'auth') {
+    doLogout();
   } else {
     // Don't know what's happening, so logout
     if (process.env.production) {
-      logout();
-      setTimeout(() => {
-        window.location.replace('/');
-      }, 100);
+      doLogout();
     }
   }
 }
@@ -82,3 +81,10 @@ function* handleResponse(callback, response) {
     yield put(notifyWarning('No response was given by the API'));
   }
 }
+
+const doLogout = () => {
+  logout();
+  setTimeout(() => {
+    window.location.replace('/');
+  }, 100);
+};
