@@ -44,11 +44,11 @@ function materialReducer(state = initialState, action) {
 
     case CREATE_IMAGE_SUCCESS:
       if (!isMaterialImage()) return state;
-      return state.setIn(['material', 'images'], fromJS(response.images));
+      return state.setIn(['material', 'image'], fromJS(response.image));
 
     case DELETE_IMAGE_SUCCESS:
       if (!isMaterialImage()) return state;
-      return state.setIn(['material', 'images'], fromJS([]));
+      return state.setIn(['material', 'image'], fromJS([]));
 
     // Care Labels
 

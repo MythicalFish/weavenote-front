@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import ImageUploader from 'containers/ImageUploader';
-import ImageThumbnails from 'components/ImageThumbnails';
+import Image from 'components/Image';
 
-export default function Image({ material }) {
+export default function FormImage({ material }) {
   const iProps = {
     maxImages: 1,
     imageable: {
@@ -10,14 +10,13 @@ export default function Image({ material }) {
       id: material.get('id'),
     },
   };
-  const images = material.get('images');
-  if (!images) return null;
-  const uploadLabel = images.size > 0 ? 'Replace image' : 'Upload image';
+  const image = material.get('image');
+  const uploadLabel = image ? 'Replace image' : 'Upload image';
   return (
     <div>
-      {images.size > 0 && (
+      {image && (
         <div className="mb2">
-          <ImageThumbnails {...iProps} images={images} size="small" />
+          <Image src={image.getIn(['urls', 'small'])} />
         </div>
       )}
       <ImageUploader
@@ -30,6 +29,6 @@ export default function Image({ material }) {
   );
 }
 
-Image.propTypes = {
+FormImage.propTypes = {
   material: PropTypes.object,
 };

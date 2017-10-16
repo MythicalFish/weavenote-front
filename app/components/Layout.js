@@ -72,7 +72,7 @@ const Layout = (props) => {
 
 Layout.propTypes = {
   Header: PropTypes.func,
-  modalImage: PropTypes.string,
+  modalImage: PropTypes.object,
   focus: PropTypes.string,
   modalID: PropTypes.string,
 };
