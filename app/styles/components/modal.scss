@@ -1,6 +1,5 @@
 .modal {
   z-index: 4;
-  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,17 +11,16 @@
   @extend .items-center;
   @extend .justify-center;
   padding: $space-3;
+  opacity: 0;
   &.visible {
     opacity: 1;
   }
-  .modal-bg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
   .modal-content {
+    opacity: 0;
+    &.visible {
+      opacity: 1;
+    }
+    transition: all 0.5s;
     @extend .flex-none;
     z-index: 3;
     .modal-body {
