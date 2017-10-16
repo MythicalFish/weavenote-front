@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form/immutable';
-import FocusableField, { FormField } from 'components/FormField';
+import { reduxForm } from 'redux-form/immutable';
 import Button from 'components/Button';
 import Basics from './FormBasics';
 import CareLabels from './FormCareLabels';
-import Supplier from './FormSupplier';
 import Cost from './FormCost';
 import Image from './FormImage';
+import fieldConstructor from './fieldConstructor';
 
-class FormLayout extends React.Component {
+class Form extends React.PureComponent {
   state = { type: null };
 
   componentWillMount = () => {
@@ -21,28 +20,10 @@ class FormLayout extends React.Component {
     this.setState({ type: type.get('name') });
   };
 
-  is = (type) => {
+  typeIs = (type) => {
     let t = type;
     if (!Array.isArray(t)) t = [t];
     return t.includes(this.state.type);
-  };
-
-  showFor = (type) => {
-    if (!this.is(type)) return 'conceal';
-    return '';
-  };
-
-  Field = (props) => {
-    const p = { ...props };
-    p.component = p.type === 'select' ? FormField : FocusableField;
-    p.theme = 'alt1';
-    p.className = p.c;
-    delete p.c;
-    const restricted = !this.props.abilities.update;
-    if (!this.props.isNew) {
-      p.onBlur = this.props.onSubmit;
-    }
-    return <Field {...{ ...p, restricted }} />;
   };
 
   render() {
@@ -53,15 +34,15 @@ class FormLayout extends React.Component {
       isNew,
     } = this.props;
     const { type } = this.state;
-    const { showFor, switchType, Field: F } = this;
+    const { switchType, typeIs } = this;
 
-    const restricted = !this.props.abilities.update;
+    const isRestricted = !this.props.abilities.update;
 
     const props = {
-      showFor,
       switchType,
-      F,
       type,
+      typeIs,
+      Field: fieldConstructor({ isNew, isRestricted, handleSubmit }),
       ...this.props,
     };
 
@@ -75,7 +56,6 @@ class FormLayout extends React.Component {
               <Basics {...props} />
             </div>
             <div className="box">
-              <h3>Care labels</h3>
               <CareLabels {...props} />
             </div>
           </div>
@@ -94,7 +74,7 @@ class FormLayout extends React.Component {
             </div>
           </div>
         </div>
-        {!restricted && (
+        {!isRestricted && (
           <footer className="p2 center">
             <Button
               type="submit"
@@ -109,7 +89,7 @@ class FormLayout extends React.Component {
   }
 }
 
-FormLayout.propTypes = {
+Form.propTypes = {
   submitting: PropTypes.bool,
   isNew: PropTypes.bool,
   handleSubmit: PropTypes.func,
@@ -120,4 +100,4 @@ FormLayout.propTypes = {
 
 export default reduxForm({
   form: 'Material',
-})(FormLayout);
+})(Form);

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import MaterialList from 'containers/MaterialList/subcomponents/List';
-import MaterialManager from 'containers/MaterialManager/subcomponents/Form';
+import MaterialManager from 'containers/MaterialManager/Form';
 import Modal from 'components/Modal';
 import Button from 'components/Button';
 import ScrollArea from 'components/ScrollArea';
@@ -52,7 +52,7 @@ export default class AddMaterial extends React.PureComponent {
           </div>
         )}
         {[VIEW.create, VIEW.edit].includes(view) && (
-          <div className="vh-y60">
+          <div className="vh-y50">
             <ScrollArea className="px4">
               <div className="pb4">
                 <MaterialManager id={this.state.id || 'new'} {...this.props} />

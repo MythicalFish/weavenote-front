@@ -53,11 +53,14 @@ function materialReducer(state = initialState, action) {
     // Care Labels
 
     case types.ADD_CARE_LABEL: // deletes here, adds in form state
-      return state.deleteIn(['care_labels', labelIndex(state, action.label)]);
+      return state.deleteIn([
+        'care_label_ids',
+        labelIndex(state, action.label),
+      ]);
 
     case types.REMOVE_CARE_LABEL: // adds here, deletes in form state
       return state.setIn(
-        ['care_labels', labelCount(state)],
+        ['care_label_ids', labelCount(state)],
         action.payload.label
       );
 

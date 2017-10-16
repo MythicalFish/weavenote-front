@@ -12,7 +12,7 @@ import {
   addCareLabel,
   removeCareLabel,
 } from '../actions';
-import FormLayout from './FormLayout';
+import Form from './Form';
 
 export class MaterialManager extends React.PureComponent {
   componentWillMount() {
@@ -30,25 +30,24 @@ export class MaterialManager extends React.PureComponent {
   };
 
   render() {
-    const { abilities, material, globalData } = this.props;
-    if (!globalData) return null;
+    const { abilities, initialValues, globalData } = this.props;
+    if (!globalData || !initialValues) return null;
     const { onSubmit } = this;
     const fProps = {
-      initialValues: material,
-      abilities: abilities.get('Material'),
+      initialValues,
       onSubmit,
+      abilities: abilities.get('Material'),
       addLabel: this.props.addCareLabel,
       removeLabel: this.props.removeCareLabel,
       isNew: this.props.params.id === 'new',
       ...globalData,
     };
-    if (material && globalData.colors) return <FormLayout {...fProps} />;
-    return null;
+    return <Form {...fProps} />;
   }
 }
 
 const mapState = createStructuredSelector({
-  material: selectMaterial(),
+  initialValues: selectMaterial(),
 });
 
 const mapDispatch = (dispatch) =>

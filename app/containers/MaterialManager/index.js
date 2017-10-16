@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout';
-import Form from './subcomponents/Form';
+import Form from './Form';
 
 // Actions, selectors, etc. are in List because it
 // all needs to be able to work in a modal window.
