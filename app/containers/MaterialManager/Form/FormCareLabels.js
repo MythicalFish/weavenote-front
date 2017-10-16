@@ -1,50 +1,31 @@
 import React, { PropTypes } from 'react';
-import { FieldArray } from 'redux-form/immutable';
-import { FormField } from 'components/FormField';
-import Icon from 'components/Icon';
 
-export default class CareLabels extends React.PureComponent {
-  renderCareLabels = ({ fields, removeLabel }) => {
-    const { careLabels } = this.props;
-    const l = fields.getAll();
-    if (!l) return null;
-    return (
-      //
-      <div>
-        {careLabels.map((label) => (
-          //
-          <div>{label.get('name')}</div>
-        ))}
-      </div>
-    );
+class CareLabels extends React.PureComponent {
+  isAdded = (label) => {
+    const { initialValues: v } = this.props;
+    return v
+      .get('care_label_ids')
+      .toJS()
+      .includes(label.get('id'));
+  };
+  render() {
+    const { globalData } = this.props;
     return (
       <div>
-        {l.map((label, index) => (
-          <div key={label} className="tag">
-            <div>{label.get('name')}</div>
-            <Icon
-              onClick={() => removeLabel({ label, index })}
-              size={15}
-              name="X"
-              className="p0"
-            />
+        {globalData.careLabels.map((label, index) => (
+          <div key={index} onClick={() => this.props.toggleCareLabel(label)}>
+            {label.get('name')}
+            {this.isAdded(label) && <span>x</span>}
           </div>
         ))}
       </div>
-    );
-  };
-  render() {
-    return (
-      <FieldArray
-        name="care_label_ids"
-        component={this.renderCareLabels}
-        removeLabel={this.removeLabel}
-      />
     );
   }
 }
 
 CareLabels.propTypes = {
-  removeLabel: PropTypes.func,
+  toggleCareLabel: PropTypes.func,
   careLabels: PropTypes.object,
 };
+
+export default CareLabels;

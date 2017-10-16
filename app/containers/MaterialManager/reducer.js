@@ -1,29 +1,26 @@
 import { fromJS } from 'immutable';
+import { idToIndex } from 'utils/reducerHelpers';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
 import { DELETE_IMAGE_SUCCESS } from 'containers/ImageForm/constants';
 import * as types from './constants';
 
 const initialState = fromJS({
-  material: {
-    supplier: {},
-  },
-  suppliers: null,
-  care_labels: [],
+  material: null,
 });
 
-const labels = (state) => state.get('care_labels');
-
-const labelIndex = (state, label) =>
-  labels(state).findKey((obj) => obj.get('id') === label.get('id'));
-
-const labelCount = (state) => labels(state).size;
-
 function materialReducer(state = initialState, action) {
-  const { type, response } = action;
+  const { type, response, payload } = action;
 
   const setMaterial = () => state.set('material', fromJS(response));
 
   const isMaterialImage = () => response.imageable.type === 'Material';
+
+  const labelIDs = () => state.getIn(['material', 'care_label_ids']);
+  const labelIndex = (label) => {
+    const id = label.get('id');
+    return idToIndex(id, labelIDs());
+  };
+  const labelIsAdded = (label) => !!labelIndex(label);
 
   switch (type) {
     // Material
@@ -50,19 +47,15 @@ function materialReducer(state = initialState, action) {
       if (!isMaterialImage()) return state;
       return state.setIn(['material', 'image'], fromJS([]));
 
-    // Care Labels
-
-    case types.ADD_CARE_LABEL: // deletes here, adds in form state
-      return state.deleteIn([
-        'care_label_ids',
-        labelIndex(state, action.label),
-      ]);
-
-    case types.REMOVE_CARE_LABEL: // adds here, deletes in form state
-      return state.setIn(
-        ['care_label_ids', labelCount(state)],
-        action.payload.label
-      );
+    case types.TOGGLE_CARE_LABEL:
+      if (labelIsAdded(payload)) {
+        return state.removeIn(['care_label_ids', labelIndex(payload)]);
+      } else {
+        return state.setIn(
+          ['care_label_ids', labelIDs().size],
+          payload.get('id')
+        );
+      }
 
     default:
       return state;

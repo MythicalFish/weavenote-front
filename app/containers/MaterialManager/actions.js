@@ -23,12 +23,8 @@ export function createMaterialSuccess(response) {
 
 // Care labels
 
-export function addCareLabel(label) {
-  return { type: types.ADD_CARE_LABEL, label };
-}
-
-export function removeCareLabel(payload) {
-  return { type: types.REMOVE_CARE_LABEL, payload };
+export function toggleCareLabel(payload) {
+  return { type: types.TOGGLE_CARE_LABEL, payload };
 }
 
 // Suppliers

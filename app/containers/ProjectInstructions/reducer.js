@@ -59,10 +59,7 @@ const formReducer = fReducer.plugin({
     switch (type) {
       case CREATE_IMAGE_SUCCESS:
         if (response.imageable.id) return state;
-        return state.setIn(
-          ['values', 'image_ids', images().size],
-          response.images[0].id
-        );
+        return state.setIn(['values', 'image_ids', images().size], response.id);
       default:
         return state;
     }

@@ -13,8 +13,8 @@ function ProjectImagesReducer(state = initialState, action) {
 
   const setImages = () => {
     const { type } = response.imageable;
-    if (type && type !== 'Project') return state;
-    return fromJS(response.images);
+    if (type && type === 'Project') return fromJS(response.images);
+    return state;
   };
 
   switch (action.type) {

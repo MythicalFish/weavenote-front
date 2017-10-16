@@ -11,8 +11,7 @@ export const CREATE_MATERIAL_SUCCESS = '@@app/CREATE_MATERIAL_SUCCESS';
 
 // Care Labels
 
-export const ADD_CARE_LABEL = '@@app/ADD_CARE_LABEL';
-export const REMOVE_CARE_LABEL = '@@app/REMOVE_CARE_LABEL';
+export const TOGGLE_CARE_LABEL = '@@app/TOGGLE_CARE_LABEL';
 
 // Suppliers
 
