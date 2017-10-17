@@ -17,7 +17,6 @@ export function* materialManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
-    // yield takeLatest(types.UPDATE_MATERIAL_SUCCESS, resetForm),
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
     yield takeLatest(types.CREATE_MATERIAL_SUCCESS, showMaterial),
     yield takeLatest(types.FETCH_SUPPLIERS, fetchSuppliers),
@@ -32,6 +31,7 @@ function* fetchSuppliers() {
 
 function* fetchMaterial(action) {
   yield sagas.get(`materials/${action.id}`, null, actions.fetchMaterialSuccess);
+  yield resetForm();
 }
 
 function* updateMaterial() {

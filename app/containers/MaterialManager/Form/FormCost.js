@@ -20,7 +20,7 @@ export default class Cost extends React.PureComponent {
           c="col-xs-4 mb2"
         />
         <Field
-          name="unit_type_id"
+          name="unit_type"
           type="select"
           data={globalData.unitTypes}
           label="Unit type"

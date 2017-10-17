@@ -58,9 +58,9 @@ class ListItem extends React.PureComponent {
         <td {...linked}>{material.get('name')}</td>
         <td {...linked}>
           <Dot color={material.getIn(['color', 'hex_code'])} className="mr1" />
-          {material.getIn(['color', 'name'])}
+          {material.get('color')}
         </td>
-        <td />
+        <td>{material.get('supplier_name')}</td>
         <td {...linked}>
           <Price
             value={material.get('cost_total')}

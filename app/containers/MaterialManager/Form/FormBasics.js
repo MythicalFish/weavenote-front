@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 export default class Basics extends React.PureComponent {
   render() {
-    const { materialTypes, typeIs, switchType, Field } = this.props;
+    const { globalData, typeIs, switchType, Field } = this.props;
 
     return (
       <div className="row">
@@ -10,7 +10,7 @@ export default class Basics extends React.PureComponent {
           name="type"
           type="select"
           label="Type"
-          data={materialTypes}
+          data={globalData.materialTypes}
           onChanged={switchType}
           c="col-xs-12 mb3"
         />
@@ -49,5 +49,5 @@ export default class Basics extends React.PureComponent {
 Basics.propTypes = {
   typeIs: PropTypes.func,
   switchType: PropTypes.func,
-  materialTypes: PropTypes.object,
+  globalData: PropTypes.object,
 };

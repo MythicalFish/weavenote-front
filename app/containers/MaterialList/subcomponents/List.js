@@ -34,8 +34,8 @@ class List extends React.PureComponent {
               <th>Type</th>
               <th>Ref.</th>
               <th>Name</th>
-              <th>Color</th>
-              <th>Factory</th>
+              <th>Colour</th>
+              <th>Supplier</th>
               <th>Price</th>
               <th />
             </tr>

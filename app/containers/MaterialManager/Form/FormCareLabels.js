@@ -11,13 +11,13 @@ class CareLabels extends React.PureComponent {
   };
   isAdded = (label) => this.labelKey(label) !== undefined;
   handleClick = (label) => () => {
-    const { fields, updateMaterial } = this.props;
+    const { fields, updateMaterial, isNew } = this.props;
     if (this.isAdded(label)) {
       fields.remove(this.labelKey(label));
     } else {
       fields.push(label.get('id'));
     }
-    updateMaterial();
+    if (!isNew) updateMaterial();
   };
   render() {
     const { globalData } = this.props;
@@ -49,7 +49,7 @@ const C = (props) => (
 
 CareLabels.propTypes = {
   globalData: PropTypes.object,
-  initialValues: PropTypes.object,
+  isNew: PropTypes.bool,
   fields: PropTypes.object,
   updateMaterial: PropTypes.func,
 };
