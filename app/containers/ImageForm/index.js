@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form/immutable';
-import FocusableField from 'components/FormField';
+import { reduxForm } from 'redux-form/immutable';
+import Input from 'components/FormField';
 import Button from 'components/Button';
 import { updateImage } from './actions';
 import DeleteButton from './DeleteButton';
@@ -16,10 +16,9 @@ const ImageForm = (props) => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Field
+      <Input
         name="name"
         type="text"
-        component={FocusableField}
         label={!altTheme ? 'Name' : null}
         placeholder="Untitled image"
         fieldClass="center"

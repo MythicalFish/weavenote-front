@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import Button from 'components/Button';
 import UserInfo from './UserInfo';
 import { requestPassword } from '../../actions';
-import Button from 'components/Button';
 
 class Form extends React.PureComponent {
   requestPassword;

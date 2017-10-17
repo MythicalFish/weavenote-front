@@ -1,15 +1,13 @@
 import React, { PropTypes } from 'react';
 import FormField from 'components/FormField';
-import { Field } from 'redux-form/immutable';
 
 const fieldConstructor = (fProps) => (props) => {
   const field = (
-    <Field
+    <FormField
       {...{
         ...props,
         ...fProps,
         theme: 'alt1',
-        component: FormField,
       }}
     />
   );

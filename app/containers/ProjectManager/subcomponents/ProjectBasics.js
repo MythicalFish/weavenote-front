@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form/immutable';
-import FormField from 'components/FormField';
+import { reduxForm } from 'redux-form/immutable';
+import Field from 'components/FormField';
 
 const ProjectForm = (props) => {
-  const { onSubmit, handleSubmit, submitting, stages } = props;
+  const { onSubmit, handleSubmit, submitting } = props;
   const f = {
-    component: FormField,
-    onBlur: onSubmit,
+    onChange: onSubmit,
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -22,7 +21,6 @@ const ProjectForm = (props) => {
 };
 
 ProjectForm.propTypes = {
-  stages: PropTypes.object,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,

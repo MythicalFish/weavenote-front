@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { reduxForm, Field } from 'redux-form/immutable';
-import InputRow from 'components/FormField';
+import { reduxForm } from 'redux-form/immutable';
+import Field from 'components/FormField';
 import Button from 'components/Button';
 
 const Create = (props) => {
@@ -10,13 +10,7 @@ const Create = (props) => {
     <form onSubmit={handleSubmit}>
       <h1>Your Weavenote Organization</h1>
       <div className="data-rows">
-        <Field
-          name="name"
-          type="text"
-          component={InputRow}
-          label="Name your organization"
-          focus
-        />
+        <Field name="name" type="text" label="Name your organization" focus />
         <footer className="p2 center">
           <Button
             type="submit"

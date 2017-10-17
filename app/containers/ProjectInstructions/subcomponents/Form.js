@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
-import { reduxForm, Field } from 'redux-form/immutable';
+import { reduxForm } from 'redux-form/immutable';
 import { fromJS } from 'immutable';
-import InputRow from 'components/FormField';
+import Field from 'components/FormField';
 import Button from 'components/Button';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 
 const Form = (props) => {
-  const { handleSubmit, submitting, initialValues: instruction, label } = props;
+  const { handleSubmit, submitting, initialValues: instruction } = props;
   const iProps = {
     maxImages: 3,
     imageable: {
@@ -15,7 +15,7 @@ const Form = (props) => {
       id: instruction.get('id'),
     },
   };
-  const onBlur = props.disableSaveOnBlur ? null : props.onSubmit;
+  const onChange = props.disableAutosave ? null : props.onSubmit;
   const images = instruction.get('images') || fromJS([]);
   return (
     <form onSubmit={handleSubmit}>
@@ -23,18 +23,16 @@ const Form = (props) => {
         <Field
           name="title"
           type="text"
-          component={InputRow}
           label="Title"
           placeholder="Eg. Ironing"
           focus
-          onBlur={onBlur}
+          onChange={onChange}
         />
         <Field
           name="description"
           type="textarea"
-          component={InputRow}
           label="Description"
-          onBlur={onBlur}
+          onChange={onChange}
         />
         <ImageThumbnails images={images} {...iProps} />
         {images.size < iProps.maxImages && (
@@ -45,10 +43,10 @@ const Form = (props) => {
             inlineIcon="file-image-o"
           />
         )}
-        {!props.disableSaveOnBlur && (
+        {!props.disableAutosave && (
           <button type="submit" disabled={submitting} className="conceal" />
         )}
-        {props.disableSaveOnBlur && (
+        {props.disableAutosave && (
           <div className="right-align">
             <span className="mr2">
               <Button
@@ -71,7 +69,7 @@ Form.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
-  disableSaveOnBlur: PropTypes.bool,
+  disableAutosave: PropTypes.bool,
   label: PropTypes.string,
 };
 

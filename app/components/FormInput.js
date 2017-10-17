@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
+import { Field } from 'redux-form/immutable';
+import { debounce } from 'utils/misc';
 
-export default class Input extends React.PureComponent {
+class Input extends React.PureComponent {
   static propTypes = {
     focus: PropTypes.bool,
     onEnterKey: PropTypes.func,
-    input: PropTypes.object,
   };
   componentDidMount() {
     if (this.props.focus) {
@@ -88,3 +89,17 @@ export default class Input extends React.PureComponent {
     );
   }
 }
+
+const fieldConstructor = (props) => {
+  const fProps = { ...props };
+  if (props.onChange) {
+    fProps.onChange = debounce(() => props.onChange(), 1000);
+  }
+  return <Field component={Input} {...fProps} />;
+};
+
+fieldConstructor.propTypes = {
+  onChange: PropTypes.func,
+};
+
+export default fieldConstructor;

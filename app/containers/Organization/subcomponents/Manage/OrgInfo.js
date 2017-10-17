@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form/immutable';
-import InputRow from 'components/FormField';
+import { reduxForm } from 'redux-form/immutable';
+import Field from 'components/FormField';
 
 const OrgInfo = (props) => {
   const { handleSubmit, onSubmit, submitting } = props;
@@ -9,10 +9,9 @@ const OrgInfo = (props) => {
       <Field
         name="name"
         type="text"
-        component={InputRow}
         label="Name"
         theme="alt1"
-        onBlur={onSubmit}
+        onChange={onSubmit}
       />
       <button type="submit" disabled={submitting} className="conceal" />
     </form>

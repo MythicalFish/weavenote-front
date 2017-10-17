@@ -39,7 +39,7 @@ class ProjectInstructions extends React.Component {
             onSubmit={this.createInstruction}
             label="Add instruction"
             initialValues={{ image_ids: [] }}
-            disableSaveOnBlur
+            disableAutosave
             toggleCreate={this.toggleCreate}
           />
         ) : (

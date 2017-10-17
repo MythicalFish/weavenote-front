@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form/immutable';
+import { reduxForm } from 'redux-form/immutable';
 import Input from 'components/FormInput';
 import Button from 'components/Button';
 import { sendInvite } from '../actions';
@@ -12,48 +12,33 @@ const InviteForm = (props) => {
     <form onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-xs-12 col-sm-6">
-          <Field
-            type="email"
-            name="email"
-            component={Input}
-            required
-            sm
-            placeholder="Email"
-          />
+          <Input type="email" name="email" required sm placeholder="Email" />
         </div>
         <div className="col-xs-12 col-sm-6">
-          <Field
-            type="text"
-            name="name"
-            component={Input}
-            sm
-            placeholder="Name (optional)"
-          />
+          <Input type="text" name="name" sm placeholder="Name (optional)" />
         </div>
       </div>
       <footer className="flex justify-between pt2">
         <div className="flex-auto">
-          <Field type="checkbox" name="as_guest" component={Input} />
+          <Input type="checkbox" name="as_guest" />
           <label className="ml1">Invite as guest?</label>
           <div className="subtle mt3">
             <div className="mb1 bold">Information regarding roles:</div>
             <ul>
-              <li>
-                {"Guests can't see anything related to pricing"}
-              </li>
-              <li>
-                {"Guests can't modify or add anything except comments"}
-              </li>
-              {type === 'Project' &&
+              <li>{"Guests can't see anything related to pricing"}</li>
+              <li>{"Guests can't modify or add anything except comments"}</li>
+              {type === 'Project' && (
                 <li>
                   {
                     "Users invited only to this project can't see other projects"
                   }
-                </li>}
-              {type === 'Organization' &&
+                </li>
+              )}
+              {type === 'Organization' && (
                 <li>
                   {'Users invited to this organization can see all projects'}
-                </li>}
+                </li>
+              )}
             </ul>
           </div>
         </div>
