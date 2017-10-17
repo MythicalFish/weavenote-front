@@ -8,14 +8,3 @@ export const CREATE_MATERIAL = '@@app/CREATE_MATERIAL';
 export const FETCH_MATERIAL_SUCCESS = '@@app/FETCH_MATERIAL_SUCCESS';
 export const UPDATE_MATERIAL_SUCCESS = '@@app/UPDATE_MATERIAL_SUCCESS';
 export const CREATE_MATERIAL_SUCCESS = '@@app/CREATE_MATERIAL_SUCCESS';
-
-// Care Labels
-
-export const TOGGLE_CARE_LABEL = '@@app/TOGGLE_CARE_LABEL';
-
-// Suppliers
-
-export const FETCH_SUPPLIERS = '@@app/FETCH_SUPPLIERS';
-export const FETCH_SUPPLIERS_SUCCESS = '@@app/FETCH_SUPPLIERS_SUCCESS';
-export const NEW_SUPPLIER = '@@app/NEW_SUPPLIER';
-export const SWITCH_SUPPLIER = '@@app/SWITCH_SUPPLIER';

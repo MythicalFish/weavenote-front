@@ -39,6 +39,7 @@ class Input extends React.PureComponent {
       if (p.required) fProps.required = p.required;
       if (p.placeholder) fProps.placeholder = p.placeholder;
       if (p.onFocus) fProps.onFocus = p.onFocus;
+      if (p.onChanged) fProps.onChanged = p.onChanged;
     } else {
       fProps = p;
     }

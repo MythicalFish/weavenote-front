@@ -45,11 +45,3 @@ export function closeModal() {
 export function openImage(image) {
   return { type: types.OPEN_IMAGE, image };
 }
-
-export function bringFocus(id) {
-  return { type: types.BRING_FOCUS, id };
-}
-
-export function hideFocus() {
-  return { type: types.HIDE_FOCUS };
-}

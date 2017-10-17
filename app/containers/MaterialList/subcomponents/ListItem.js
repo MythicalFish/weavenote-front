@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import Price from 'components/Price';
-import Dot from 'components/Dot';
 import Dropdown from 'components/Dropdown';
 import confirm from 'utils/confirm';
 
@@ -56,10 +55,7 @@ class ListItem extends React.PureComponent {
         <td {...linked}>{material.getIn(['type', 'name'])}</td>
         <td {...linked}>{material.get('identifier')}</td>
         <td {...linked}>{material.get('name')}</td>
-        <td {...linked}>
-          <Dot color={material.getIn(['color', 'hex_code'])} className="mr1" />
-          {material.get('color')}
-        </td>
+        <td {...linked}>{material.get('color')}</td>
         <td>{material.get('supplier_name')}</td>
         <td {...linked}>
           <Price

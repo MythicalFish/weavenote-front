@@ -5,12 +5,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import fieldConstructor from './field';
 import { selectMaterial } from '../selectors';
-import {
-  fetchMaterial,
-  updateMaterial,
-  createMaterial,
-  toggleCareLabel,
-} from '../actions';
+import { fetchMaterial, updateMaterial, createMaterial } from '../actions';
 import Form from './Form';
 
 export class MaterialManager extends React.PureComponent {
@@ -48,7 +43,7 @@ export class MaterialManager extends React.PureComponent {
     return t.includes(this.state.type);
   };
 
-  isNew = this.props.params.id === 'new';
+  isNew = !(this.props.values && this.props.values.get('id'));
   abilities = this.props.abilities.get('Material');
   isRestricted = !this.abilities.update;
   Field = fieldConstructor({
@@ -58,6 +53,7 @@ export class MaterialManager extends React.PureComponent {
     },
   });
   render() {
+    console.log(this.props);
     const { initialValues, globalData } = this.props;
     if (!globalData || !initialValues) return null;
     const { onSubmit, typeIs, switchType, Field } = this;
@@ -88,7 +84,6 @@ const mapDispatch = (dispatch) =>
       fetchMaterial,
       updateMaterial,
       createMaterial,
-      toggleCareLabel,
     },
     dispatch
   );

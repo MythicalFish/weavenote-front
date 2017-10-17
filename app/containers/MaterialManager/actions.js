@@ -20,27 +20,3 @@ export function createMaterial() {
 export function createMaterialSuccess(response) {
   return { type: types.CREATE_MATERIAL_SUCCESS, response };
 }
-
-// Care labels
-
-export function toggleCareLabel(payload) {
-  return { type: types.TOGGLE_CARE_LABEL, payload };
-}
-
-// Suppliers
-
-export function fetchSuppliers() {
-  return { type: types.FETCH_SUPPLIERS };
-}
-
-export function fetchSuppliersSuccess(suppliers) {
-  return { type: types.FETCH_SUPPLIERS_SUCCESS, suppliers };
-}
-
-export function newSupplier() {
-  return { type: types.NEW_SUPPLIER };
-}
-
-export function switchSupplier(supplier) {
-  return { type: types.SWITCH_SUPPLIER, supplier };
-}

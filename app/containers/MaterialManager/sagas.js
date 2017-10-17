@@ -1,12 +1,9 @@
 import { take, cancel, takeLatest, select, put } from 'redux-saga/effects';
-import {
-  getFormValues,
-  isDirty,
-  initialize,
-  change,
-} from 'redux-form/immutable';
+import { getFormValues, isDirty, initialize } from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
+import { selectModalID } from 'containers/App/selectors';
+import { closeModal } from 'containers/App/actions';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
@@ -16,17 +13,13 @@ export default [materialManagerWatcher];
 export function* materialManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
+    yield takeLatest(types.FETCH_MATERIAL_SUCCESS, resetForm),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
     yield takeLatest(types.CREATE_MATERIAL_SUCCESS, showMaterial),
-    yield takeLatest(types.FETCH_SUPPLIERS, fetchSuppliers),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
-}
-
-function* fetchSuppliers() {
-  yield sagas.get('suppliers', null, actions.fetchSuppliersSuccess);
 }
 
 function* fetchMaterial(action) {
@@ -56,5 +49,10 @@ function* createMaterial() {
 }
 
 function* showMaterial() {
-  browserHistory.push('/materials');
+  const modalID = yield select(selectModalID());
+  if (modalID === 'materials') {
+    yield put(closeModal());
+  } else {
+    browserHistory.push('/materials');
+  }
 }

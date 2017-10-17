@@ -34,9 +34,6 @@ export const selectModalID = () =>
 export const selectModalImage = () =>
   createSelector(selectMisc(), (s) => s.get('modalImage'));
 
-export const selectFocus = () =>
-  createSelector(selectMisc(), (s) => s.get('focus'));
-
 export const selectGlobalData = () =>
   createSelector(selectMisc(), (s) => s.get('globalData'));
 

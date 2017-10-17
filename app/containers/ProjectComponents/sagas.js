@@ -7,6 +7,7 @@ import * as actions from './actions';
 import * as selectors from './selectors';
 import { fetchMaterialCost } from '../ProjectManager/actions';
 import { selectProjectID } from '../ProjectManager/selectors';
+import { CREATE_MATERIAL_SUCCESS } from '../MaterialManager/constants';
 
 const componentsURL = (payload, addition = null) => {
   let end = '';
@@ -22,6 +23,7 @@ export function* ProjectComponentsWatcher() {
     yield takeLatest(types.UPDATE_COMPONENT, updateComponent),
     yield takeLatest(types.CREATE_COMPONENTS, createComponents),
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
+    yield takeLatest(CREATE_MATERIAL_SUCCESS, addMaterial),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -60,4 +62,8 @@ function* deleteComponent({ payload }) {
     actions.deleteComponentSuccess
   );
   yield put(fetchMaterialCost(payload.project_id));
+}
+
+function* addMaterial() {
+  console.log('asdasdasdasdasdasdasdasdasdasd123');
 }

@@ -9,13 +9,14 @@ export default class Basics extends React.PureComponent {
         <Field
           name="type"
           type="select"
+          required
           label="Type"
           data={globalData.materialTypes}
           onChanged={switchType}
           c="col-xs-12 mb3"
         />
-        <Field name="name" label="Material Name" c="col-xs-7 mb3" />
-        <Field name="identifier" label="Reference" c="col-xs-5 mb3" />
+        <Field name="name" label="Material Name" required c="col-xs-7 mb3" />
+        <Field name="reference" label="Reference" c="col-xs-5 mb3" />
         <Field name="color" label="Color" c="col-xs-8 mb3" />
         {typeIs(['Button', 'Zip']) && (
           <Field name="size" label="Size" c="col-xs-4 mb3" />

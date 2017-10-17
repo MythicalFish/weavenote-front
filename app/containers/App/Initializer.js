@@ -178,7 +178,6 @@ const Initializer = (Component) => {
     globalData: selectors.selectGlobalData(),
     modalID: selectors.selectModalID(),
     modalImage: selectors.selectModalImage(),
-    focus: selectors.selectFocus(),
   });
   return connect(mapState, mapDispatch)(Init);
 };
