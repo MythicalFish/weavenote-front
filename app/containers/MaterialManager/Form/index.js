@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { debounce } from 'utils/misc';
 import fieldConstructor from './field';
 import { selectMaterial } from '../selectors';
 import {
@@ -52,9 +53,10 @@ export class MaterialManager extends React.PureComponent {
   abilities = this.props.abilities.get('Material');
   isRestricted = !this.abilities.update;
   Field = fieldConstructor({
-    isNew: this.isNew,
     isRestricted: this.isRestricted,
-    onSubmit: this.onSubmit,
+    onChange: debounce(() => {
+      if (!this.isNew) this.props.updateMaterial();
+    }, 1000),
   });
   render() {
     const { initialValues, globalData } = this.props;

@@ -5,6 +5,7 @@ export default class Input extends React.PureComponent {
   static propTypes = {
     focus: PropTypes.bool,
     onEnterKey: PropTypes.func,
+    input: PropTypes.object,
   };
   componentDidMount() {
     if (this.props.focus) {
@@ -20,6 +21,7 @@ export default class Input extends React.PureComponent {
   };
   render() {
     const p = this.props;
+
     let field = null;
     let touched = false;
     let error = false;
@@ -32,7 +34,6 @@ export default class Input extends React.PureComponent {
 
     if (p.input) {
       fProps = p.input;
-      if (p.onChanged) fProps.onChanged = p.onChanged; // onChange in use by redux-form
       if (p.tail) fProps.tail = p.tail;
       if (p.required) fProps.required = p.required;
       if (p.placeholder) fProps.placeholder = p.placeholder;
@@ -47,7 +48,7 @@ export default class Input extends React.PureComponent {
       };
     }
 
-    if (p.restricted) {
+    if (p.isRestricted) {
       fProps.readOnly = true;
     }
 

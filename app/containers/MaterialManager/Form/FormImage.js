@@ -13,7 +13,8 @@ export default function FormImage({ material }) {
   const image = material.get('image');
   const uploadLabel = image ? 'Replace image' : 'Upload image';
   return (
-    <div>
+    <div className="field">
+      <label>Reference image</label>
       {image && (
         <div className="mb2">
           <Image src={image.getIn(['urls', 'small'])} />

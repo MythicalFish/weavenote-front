@@ -30,7 +30,7 @@ class CareLabels extends React.PureComponent {
               <div>{label.get('name')}</div>
               <div>
                 {this.isAdded(label) ? (
-                  <Icon name="CheckSquare" size={20} />
+                  <Icon name="CheckSquare" size={20} color="dark4" />
                 ) : (
                   <Icon name="Square" size={20} color="dark3" />
                 )}

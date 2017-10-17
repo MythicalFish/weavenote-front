@@ -5,6 +5,7 @@ import Basics from './FormBasics';
 import CareLabels from './FormCareLabels';
 import Cost from './FormCost';
 import Image from './FormImage';
+import Supplier from './FormSupplier';
 
 const Form = (props) => {
   const {
@@ -28,12 +29,12 @@ const Form = (props) => {
         <div className="col-xs-12 col-md-6">
           {material.get('id') && (
             <div className="box">
-              <div className="field">
-                <label>Reference picture</label>
-              </div>
               <Image {...{ material }} />
             </div>
           )}
+          <div className="box">
+            <Supplier {...props} />
+          </div>
           <div className="box">
             <Cost {...props} />
           </div>

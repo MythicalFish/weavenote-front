@@ -9,14 +9,21 @@ export default class Cost extends React.PureComponent {
         <Field
           name="currency"
           type="select"
-          placeholder="Currency"
+          label="Currency"
           data={globalData.currencies}
+          c="col-xs-8 mb2"
         />
-        <Field name="cost_base" placeholder="Eg. 3.50" c="col-xs-6" />
+        <Field
+          name="cost_base"
+          label="Base cost"
+          placeholder="Eg. 3.50"
+          c="col-xs-4 mb2"
+        />
         <Field
           name="unit_type_id"
           type="select"
           data={globalData.unitTypes}
+          label="Unit type"
           c="col-xs-12"
         />
       </div>
