@@ -1,5 +1,10 @@
 import { take, cancel, takeLatest, select, put } from 'redux-saga/effects';
-import { getFormValues, isDirty, initialize } from 'redux-form/immutable';
+import {
+  getFormValues,
+  isDirty,
+  initialize,
+  change,
+} from 'redux-form/immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
@@ -12,7 +17,7 @@ export function* materialManagerWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIAL, fetchMaterial),
     yield takeLatest(types.UPDATE_MATERIAL, updateMaterial),
-    yield takeLatest(types.UPDATE_MATERIAL_SUCCESS, resetForm),
+    // yield takeLatest(types.UPDATE_MATERIAL_SUCCESS, resetForm),
     yield takeLatest(types.CREATE_MATERIAL, createMaterial),
     yield takeLatest(types.CREATE_MATERIAL_SUCCESS, showMaterial),
     yield takeLatest(types.FETCH_SUPPLIERS, fetchSuppliers),

@@ -63,7 +63,7 @@ export default function createReducer(asyncReducers) {
     Comments: commentsReducer,
     ImageUploader: uploadReducer,
     MaterialList: materialListReducer,
-    MaterialManager: materialManagerReducer,
+    Material: materialManagerReducer,
     ...asyncReducers,
   });
 }

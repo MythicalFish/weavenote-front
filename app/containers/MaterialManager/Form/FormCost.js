@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 export default class Cost extends React.PureComponent {
   render() {
-    const { currencies, unitTypes, Field } = this.props;
+    const { globalData, Field } = this.props;
 
     return (
       <div className="row">
@@ -10,13 +10,13 @@ export default class Cost extends React.PureComponent {
           name="currency"
           type="select"
           placeholder="Currency"
-          data={currencies}
+          data={globalData.currencies}
         />
         <Field name="cost_base" placeholder="Eg. 3.50" c="col-xs-6" />
         <Field
           name="unit_type_id"
           type="select"
-          data={unitTypes}
+          data={globalData.unitTypes}
           c="col-xs-12"
         />
       </div>
@@ -25,6 +25,6 @@ export default class Cost extends React.PureComponent {
 }
 
 Cost.propTypes = {
-  unitTypes: PropTypes.object,
-  currencies: PropTypes.object,
+  globalData: PropTypes.object,
+  Field: PropTypes.func,
 };

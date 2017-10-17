@@ -9,7 +9,6 @@ import {
   fetchMaterial,
   updateMaterial,
   createMaterial,
-  newSupplier,
   toggleCareLabel,
 } from '../actions';
 import Form from './Form';
@@ -49,13 +48,19 @@ export class MaterialManager extends React.PureComponent {
     return t.includes(this.state.type);
   };
 
+  isNew = this.props.params.id === 'new';
+  abilities = this.props.abilities.get('Material');
+  isRestricted = !this.abilities.update;
+  Field = fieldConstructor({
+    isNew: this.isNew,
+    isRestricted: this.isRestricted,
+    onSubmit: this.onSubmit,
+  });
   render() {
     const { initialValues, globalData } = this.props;
-    const abilities = this.props.abilities.get('Material');
-    const isRestricted = !abilities.update;
-    const isNew = this.props.params.id === 'new';
     if (!globalData || !initialValues) return null;
-    const { onSubmit, typeIs, switchType } = this;
+    const { onSubmit, typeIs, switchType, Field } = this;
+    const { isNew, abilities, isRestricted } = this;
     const { type } = this.state;
     const fProps = {
       ...this.props,
@@ -66,7 +71,7 @@ export class MaterialManager extends React.PureComponent {
       abilities,
       isRestricted,
       isNew,
-      Field: fieldConstructor({ isNew, isRestricted, onSubmit }),
+      Field,
     };
     return <Form {...fProps} />;
   }

@@ -5,8 +5,8 @@ import * as types from './constants';
 export function fetchMaterial(id) {
   return { type: types.FETCH_MATERIAL, id };
 }
-export function fetchMaterialSuccess(material) {
-  return { type: types.FETCH_MATERIAL_SUCCESS, material };
+export function fetchMaterialSuccess(response) {
+  return { type: types.FETCH_MATERIAL_SUCCESS, response };
 }
 export function updateMaterial() {
   return { type: types.UPDATE_MATERIAL };

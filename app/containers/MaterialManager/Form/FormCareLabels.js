@@ -1,19 +1,29 @@
 import React, { PropTypes } from 'react';
+import { FieldArray } from 'redux-form/immutable';
 
 class CareLabels extends React.PureComponent {
-  isAdded = (label) => {
-    const { initialValues: v } = this.props;
-    return v
-      .get('care_label_ids')
-      .toJS()
-      .includes(label.get('id'));
+  labelKey = (label) => {
+    const { fields } = this.props;
+    const labelID = label.get('id');
+    const values = fields.getAll();
+    return values.findKey((id) => id === labelID);
+  };
+  isAdded = (label) => this.labelKey(label) !== undefined;
+  handleClick = (label) => () => {
+    const { fields, updateMaterial } = this.props;
+    if (this.isAdded(label)) {
+      fields.remove(this.labelKey(label));
+    } else {
+      fields.push(label.get('id'));
+    }
+    updateMaterial();
   };
   render() {
     const { globalData } = this.props;
     return (
       <div>
         {globalData.careLabels.map((label, index) => (
-          <div key={index} onClick={() => this.props.toggleCareLabel(label)}>
+          <div key={index} onClick={this.handleClick(label)}>
             {label.get('name')}
             {this.isAdded(label) && <span>x</span>}
           </div>
@@ -23,9 +33,15 @@ class CareLabels extends React.PureComponent {
   }
 }
 
+const C = (props) => (
+  <FieldArray name="care_label_ids" component={CareLabels} {...props} />
+);
+
 CareLabels.propTypes = {
-  toggleCareLabel: PropTypes.func,
-  careLabels: PropTypes.object,
+  globalData: PropTypes.object,
+  initialValues: PropTypes.object,
+  fields: PropTypes.object,
+  updateMaterial: PropTypes.func,
 };
 
-export default CareLabels;
+export default C;
