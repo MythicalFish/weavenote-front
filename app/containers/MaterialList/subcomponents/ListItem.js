@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router';
 import Price from 'components/Price';
 import Dropdown from 'components/Dropdown';
 import confirm from 'utils/confirm';
+import Icon from 'components/Icon';
 
 class ListItem extends React.PureComponent {
   url = `/materials/${this.props.material.get('id')}`;
@@ -37,7 +38,15 @@ class ListItem extends React.PureComponent {
     const { duplicateMaterial, material } = this.props;
     duplicateMaterial(material.get('id'));
   };
-  Checkbox = () => <div>{this.isSelected() ? 'x' : 'o'}</div>;
+  Checkbox = () => (
+    <div>
+      {this.isSelected() ? (
+        <Icon name="CheckSquare" size={20} color="poiple" />
+      ) : (
+        <Icon name="Square" size={20} color="dark3" />
+      )}
+    </div>
+  );
   render() {
     const { material, selectable } = this.props;
     const { Checkbox } = this;
