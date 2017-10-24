@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import MeasurementGroup from './MeasurementGroup';
+import { COLUMNS_OFFSET } from '../constants';
 
 const SortableMeasurementGroups = SortableContainer((props) => {
   const { measurements, updateMeasurements } = props;
   return (
-    <div className="flex">
+    <div className="flex cut" {...COLUMNS_OFFSET}>
       {measurements.groups.map((group, index) => (
         <MeasurementGroup
           {...{

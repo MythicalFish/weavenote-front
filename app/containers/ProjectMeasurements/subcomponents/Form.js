@@ -13,7 +13,7 @@ const Form = (props) => {
         <div className="flex-none mr1">
           <MeasurementNameColumn {...props} />
         </div>
-        <div className="flex-auto">
+        <div className="flex-none mr1">
           <MeasurementGroups {...props} />
         </div>
         <div className="flex-none">

@@ -21,9 +21,7 @@ export const DELETE_MEASUREMENT_GROUP_SUCCESS =
 
 export const REORDER_MEASUREMENTS = '@@app/REORDER_MEASUREMENTS';
 
-// For displaying column handles & delete buttons when
-// the overflow is hidden by horizontal scrolling behaviour.
-export const CONTAINER_OFFSET = {
-  style: { position: 'relative', top: '-45px' },
+// For displaying column handles & delete buttons when overflow is hidden.
+export const COLUMNS_OFFSET = {
+  style: { marginTop: '-45px', paddingTop: '45px' },
 };
-export const COLUMN_OFFSET = { style: { position: 'relative', top: '45px' } };
