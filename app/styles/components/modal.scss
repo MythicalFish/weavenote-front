@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  background: $dark3;
   overflow-y: auto;
   transition: all 0.5s;
   @extend .flex;
@@ -17,12 +18,12 @@
   }
   .modal-content {
     opacity: 0;
-    &.visible {
-      opacity: 1;
-    }
     transition: all 0.5s;
     @extend .flex-none;
     z-index: 3;
+    &.visible {
+      opacity: 1;
+    }
     .modal-body {
       height: 100%;
       background: $white;
@@ -48,13 +49,4 @@
       }
     }
   }
-}
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  background: rgba(0, 0, 0, 0.3);
 }

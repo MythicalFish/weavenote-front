@@ -52,8 +52,7 @@ InnerLayout.propTypes = {
 };
 
 const Layout = (props) => {
-  const { Header, modalImage, modalID, focus } = props;
-  const showBlur = focus || modalID;
+  const { Header, modalImage } = props;
   return (
     <div>
       <div id="app-container" className="flex flex-column">
@@ -63,7 +62,6 @@ const Layout = (props) => {
           <InnerLayout {...props} />
         </div>
       </div>
-      {showBlur && <div className="overlay" />}
       <Notification />
       <ModalImage image={modalImage} />
     </div>
@@ -73,8 +71,6 @@ const Layout = (props) => {
 Layout.propTypes = {
   Header: PropTypes.func,
   modalImage: PropTypes.object,
-  focus: PropTypes.string,
-  modalID: PropTypes.string,
 };
 
 export default Layout;

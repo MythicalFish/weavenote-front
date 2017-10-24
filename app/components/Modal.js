@@ -5,51 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import Portal from 'react-portal';
 import { closeModal } from 'containers/App/actions';
 import { selectModalID } from 'containers/App/selectors';
-import Icon from 'components/Icon';
-
-const ModalContent = (props) => {
-  const p = props;
-  const style = {};
-  if (p.width) style.width = p.width;
-  if (p.height) style.height = p.height;
-  if (p.minWidth) style.minWidth = p.minWidth;
-  if (p.maxWidth) style.maxWidth = p.maxWidth;
-  if (p.minHeight) style.minHeight = p.minHeight;
-  const doClose = () => {
-    if (p.closeFunc) {
-      p.closeFunc();
-    } else {
-      p.closeModal();
-    }
-  };
-  return (
-    <div className={`modal-content ${p.modalClass}`} style={style}>
-      <div className="modal-body">
-        {!p.hideCloseButton && (
-          <Icon name="X" className="modal-close" onClick={doClose} size={20} />
-        )}
-        {p.children}
-      </div>
-      {p.footer && p.footer}
-    </div>
-  );
-};
-
-const ModalMarkup = (props) => {
-  const p = { ...props };
-  if (p.modalClass === undefined) p.modalClass = 'visible';
-  return (
-    <div className={`modal ${p.modalClass}`}>
-      <div
-        className="overlay"
-        onClick={() => {
-          if (!p.noCloseOutside) p.closeModal();
-        }}
-      />
-      <ModalContent {...p} />
-    </div>
-  );
-};
+import ModalLayout from './ModalLayout';
 
 class Modal extends React.PureComponent {
   state = { modalClass: '' };
@@ -60,30 +16,21 @@ class Modal extends React.PureComponent {
     }, 50);
   };
 
-  beforeClose = (node, close) => this.closeModal(close);
+  beforeClose = (node, closePortal) => this.handleClose(closePortal);
 
-  closeModal = (cb) => {
+  handleClose = (closePortal) => {
     this.setState({ modalClass: '' });
     setTimeout(() => {
       this.props.closeModal();
-      if (cb) cb();
+      if (closePortal) closePortal();
     }, 550);
   };
 
-  Markup = ({ children }) => {
-    const mProps = {
-      ...this.props,
-      modalClass: this.state.modalClass,
-      closeModal: this.closeModal,
-    };
-    return <ModalMarkup {...mProps}>{children}</ModalMarkup>;
-  };
-
   render() {
-    const { modalID, id, withoutPortal } = this.props;
+    const { modalID, id } = this.props;
+    const { modalClass } = this.state;
+    const { handleClose } = this;
     const isOpened = modalID === id;
-    const { Markup } = this;
-    if (withoutPortal) return <Markup>{this.props.children}</Markup>;
     return (
       <Portal
         isOpened={isOpened}
@@ -91,7 +38,15 @@ class Modal extends React.PureComponent {
         beforeClose={this.beforeClose}
         closeOnEsc
       >
-        <Markup>{this.props.children}</Markup>
+        <ModalLayout
+          {...{
+            ...this.props,
+            modalClass,
+            handleClose,
+          }}
+        >
+          {this.props.children}
+        </ModalLayout>
       </Portal>
     );
   }
@@ -102,7 +57,6 @@ Modal.propTypes = {
   modalID: PropTypes.string,
   id: PropTypes.string,
   closeModal: PropTypes.func,
-  withoutPortal: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {
@@ -114,4 +68,3 @@ const mapState = createStructuredSelector({
 });
 
 export default connect(mapState, mapDispatch)(Modal);
-export { ModalMarkup };

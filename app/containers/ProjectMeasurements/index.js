@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { ModalMarkup } from 'components/Modal';
-import Button from 'components/Button';
+import Modal from 'components/ModalLayout';
 import * as selectors from './selectors';
 import {
   fetchMeasurements,
@@ -26,14 +25,14 @@ class ProjectMeasurements extends React.PureComponent {
     const { isModal } = this.state;
     if (!isModal) return children;
     return (
-      <ModalMarkup
+      <Modal
         isOpen
         noCloseOutside
         width="600px"
-        closeFunc={() => this.setState({ isModal: false })}
+        handleClose={() => this.setState({ isModal: false })}
       >
         <div className="p4">{children}</div>
-      </ModalMarkup>
+      </Modal>
     );
   };
   render() {
