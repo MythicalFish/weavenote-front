@@ -18,11 +18,13 @@
   }
   .modal-content {
     opacity: 0;
+    transform: translateY(-20px);
     transition: all 0.5s;
     @extend .flex-none;
     z-index: 3;
     &.visible {
       opacity: 1;
+      transform: translateY(0px);
     }
     .modal-body {
       height: 100%;

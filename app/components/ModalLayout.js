@@ -7,10 +7,10 @@ class Content extends React.PureComponent {
     handleClose: PropTypes.func.isRequired,
     noClickOutside: PropTypes.bool,
   };
-  state = { modalClass: '' };
+  state = { klass: '' };
   componentDidMount() {
     setTimeout(() => {
-      this.setState({ modalClass: 'visible' });
+      this.setState({ klass: 'visible' });
     }, 100);
   }
   handleClickOutside = () => {
@@ -20,7 +20,7 @@ class Content extends React.PureComponent {
   };
   handleClose = () => {
     const { handleClose } = this.props;
-    this.setState({ modalClass: '' });
+    this.setState({ klass: '' });
     setTimeout(() => {
       handleClose();
     }, 550);
@@ -33,9 +33,9 @@ class Content extends React.PureComponent {
     if (p.minWidth) style.minWidth = p.minWidth;
     if (p.maxWidth) style.maxWidth = p.maxWidth;
     if (p.minHeight) style.minHeight = p.minHeight;
-    const { modalClass } = this.state;
+    const { klass } = this.state;
     return (
-      <div className={`modal-content ${modalClass}`} style={style}>
+      <div className={`modal-content ${klass}`} style={style}>
         <div className="modal-body">
           {!p.hideCloseButton && (
             <Icon
@@ -55,12 +55,30 @@ class Content extends React.PureComponent {
 
 const ModalContent = onClickOutside(Content);
 
-export default function ModalLayout(props) {
-  const p = { ...props };
-  if (p.modalClass === undefined) p.modalClass = 'visible';
-  return (
-    <div className={`modal ${p.modalClass}`}>
-      <ModalContent {...props} />
-    </div>
-  );
+class ModalLayout extends React.PureComponent {
+  state = { klass: '' };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ klass: 'visible' });
+    }, 10);
+  }
+  handleClose = () => {
+    const p = this.props;
+    this.setState({ klass: '' });
+    setTimeout(() => {
+      p.handleClose();
+    }, 550);
+  };
+  render() {
+    const { klass } = this.state;
+    const p = { ...this.props };
+    p.handleClose = this.handleClose;
+    return (
+      <div className={`modal ${klass}`}>
+        <ModalContent {...p} />
+      </div>
+    );
+  }
 }
+
+export default ModalLayout;
