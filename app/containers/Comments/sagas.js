@@ -55,8 +55,8 @@ function* deleteComment({ payload }) {
     payload,
     actions.deleteCommentSuccess
   );
-  const projectID = yield select(selectProjectID());
-  yield put(fetchProject(projectID));
+  // const projectID = yield select(selectProjectID());
+  // yield put(fetchProject(projectID));
 }
 
 const commentURL = (payload) => `comments/${payload.comment.get('id')}`;

@@ -16,9 +16,21 @@ export function annotationComment(payload) {
 export function setImages(state, { response }) {
   const { type, id } = response.imageable;
   if (type !== 'Comment') return state;
-  // state.get('data')
-  const keyPath = commentImageKeyPath(state, id);
-  if (keyPath) return state.setIn(keyPath, fromJS(response.images));
+  let keyPath;
+  let commentable;
+  state.get('data').forEach((list, c) => {
+    const kp = commentImageKeyPath(list, id);
+    if (kp) {
+      keyPath = kp;
+      commentable = c;
+    }
+  });
+  if (keyPath) {
+    return state.setIn(
+      ['data', commentable].concat(keyPath),
+      fromJS(response.images)
+    );
+  }
   return state;
 }
 
