@@ -14,6 +14,7 @@ const Form = (props) => {
     initialValues: material,
     submitting,
     isRestricted,
+    project,
   } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -40,16 +41,17 @@ const Form = (props) => {
           </div>
         </div>
       </div>
-      {!isRestricted && (
-        <footer className="p2 center">
-          <Button
-            type="submit"
-            disabled={submitting}
-            label="Create material"
-            className={`btn ${isNew ? '' : 'conceal'}`}
-          />
-        </footer>
-      )}
+      {!isRestricted &&
+        !project && (
+          <footer className="p2 center">
+            <Button
+              type="submit"
+              disabled={submitting}
+              label="Create material"
+              className={`btn ${isNew ? '' : 'conceal'}`}
+            />
+          </footer>
+        )}
     </form>
   );
 };

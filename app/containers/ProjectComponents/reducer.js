@@ -3,7 +3,6 @@ import * as types from './constants';
 
 const initialState = fromJS({
   components: [],
-  materialCost: 0,
   selectedMaterials: [],
 });
 
@@ -26,7 +25,7 @@ function ProjectComponentsReducer(state = initialState, action) {
       return state.set('components', fromJS(response));
 
     case types.CREATE_COMPONENTS_SUCCESS:
-      return state.set('components', fromJS(response));
+      return initialState.set('components', fromJS(response));
 
     case types.DELETE_COMPONENT_SUCCESS:
       return state.set('components', fromJS(response));

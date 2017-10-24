@@ -62,7 +62,11 @@ export default class AddMaterial extends React.PureComponent {
         )}
         {view === VIEW.create && (
           <Footer>
-            <Button onClick={createMaterial} label="Create" />
+            <Button
+              onClick={createMaterial}
+              label="Create & Add Material"
+              icon="Plus"
+            />
           </Footer>
         )}
       </Modal>
