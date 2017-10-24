@@ -20,7 +20,10 @@ class Content extends React.PureComponent {
   };
   handleClose = () => {
     const { handleClose } = this.props;
-    handleClose();
+    this.setState({ modalClass: '' });
+    setTimeout(() => {
+      handleClose();
+    }, 550);
   };
   render() {
     const p = this.props;

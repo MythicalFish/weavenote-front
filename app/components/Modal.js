@@ -8,27 +8,15 @@ import { selectModalID } from 'containers/App/selectors';
 import ModalLayout from './ModalLayout';
 
 class Modal extends React.PureComponent {
-  state = { modalClass: '' };
-
-  onOpen = () => {
-    setTimeout(() => {
-      this.setState({ modalClass: 'visible' });
-    }, 50);
-  };
-
   beforeClose = (node, closePortal) => this.handleClose(closePortal);
 
   handleClose = (closePortal) => {
-    this.setState({ modalClass: '' });
-    setTimeout(() => {
-      this.props.closeModal();
-      if (closePortal) closePortal();
-    }, 550);
+    this.props.closeModal();
+    if (closePortal) closePortal();
   };
 
   render() {
     const { modalID, id } = this.props;
-    const { modalClass } = this.state;
     const { handleClose } = this;
     const isOpened = modalID === id;
     return (
@@ -41,7 +29,6 @@ class Modal extends React.PureComponent {
         <ModalLayout
           {...{
             ...this.props,
-            modalClass,
             handleClose,
           }}
         >
