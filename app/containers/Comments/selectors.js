@@ -2,6 +2,9 @@ import { createSelector } from 'reselect';
 
 export const selectDomain = () => (state) => state.get('Comments');
 
+export const selectData = () =>
+  createSelector(selectDomain(), (s) => s.get('data'));
+
 export const isCreating = () =>
   createSelector(selectDomain(), (s) => s.get('isCreating'));
 

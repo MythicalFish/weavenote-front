@@ -7,7 +7,8 @@ import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
 import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
-import ProjectComments from 'containers/ProjectComments';
+import { buildAnnotation } from 'containers/ProjectAnnotations/actions';
+import Comments from 'containers/Comments';
 import Layout from 'components/Layout';
 import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
@@ -75,7 +76,10 @@ class ProjectManager extends React.PureComponent {
           <div className="row y-fill">
             <div className="col-xs-12 col-md-3 y-fill">
               <ScrollArea className="pr2">
-                <ProjectComments project={project} />
+                <Comments
+                  {...this.props}
+                  commentable={{ type: 'Project', id }}
+                />
               </ScrollArea>
             </div>
             <div className="col-xs-6 col-md-6 y-fill">
@@ -121,7 +125,7 @@ ProjectManager.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchProject, updateProject, exportPDF },
+    { fetchProject, updateProject, exportPDF, buildAnnotation },
     dispatch
   );
 }

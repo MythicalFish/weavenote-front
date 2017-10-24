@@ -1,3 +1,6 @@
+export const FETCH_COMMENTS = '@@app/FETCH_COMMENTS';
+export const FETCH_COMMENTS_SUCCESS = '@@app/FETCH_COMMENTS_SUCCESS';
+
 export const FOCUS_COMMENT = '@@app/FOCUS_COMMENT';
 export const CANCEL_COMMENT_ACTION = '@@app/CANCEL_COMMENT_ACTION';
 

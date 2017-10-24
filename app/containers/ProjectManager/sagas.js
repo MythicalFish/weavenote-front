@@ -6,7 +6,6 @@ import { ProjectInstructionsWatcher } from '../ProjectInstructions/sagas';
 import { ProjectMeasurementsWatcher } from '../ProjectMeasurements/sagas';
 import { ProjectComponentsWatcher } from '../ProjectComponents/sagas';
 import { ProjectAnnotationsWatcher } from '../ProjectAnnotations/sagas';
-import { ProjectCommentsWatcher } from '../ProjectComments/sagas';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -16,7 +15,6 @@ export default [
   ProjectMeasurementsWatcher,
   ProjectComponentsWatcher,
   ProjectAnnotationsWatcher,
-  ProjectCommentsWatcher,
 ];
 
 function* ProjectManagerWatcher() {

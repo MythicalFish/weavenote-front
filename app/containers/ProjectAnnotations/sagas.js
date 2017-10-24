@@ -4,9 +4,8 @@ import * as sagas from 'utils/genericSagas';
 import { selectNewAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
-import { writeComment } from '../Comments/actions';
+import { fetchComments, writeComment } from '../Comments/actions';
 import { selectProjectID } from '../ProjectManager/selectors';
-import { fetchComments } from '../ProjectComments/actions';
 
 export function* ProjectAnnotationsWatcher() {
   const watcher = [

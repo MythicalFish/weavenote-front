@@ -17,6 +17,7 @@ export default [commentsWatcher];
 
 function* commentsWatcher() {
   const watcher = [
+    yield takeLatest(types.FETCH_COMMENTS, fetchComments),
     yield takeLatest(types.EDIT_COMMENT, initializeForm),
     yield takeLatest(types.CREATE_COMMENT, createComment),
     yield takeLatest(types.UPDATE_COMMENT, updateComment),
@@ -24,6 +25,10 @@ function* commentsWatcher() {
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
+}
+
+function* fetchComments({ payload }) {
+  yield sagas.get('comments', payload, actions.fetchCommentsSuccess);
 }
 
 function* createComment({ payload }) {

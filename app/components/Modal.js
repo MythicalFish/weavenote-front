@@ -7,6 +7,50 @@ import { closeModal } from 'containers/App/actions';
 import { selectModalID } from 'containers/App/selectors';
 import Icon from 'components/Icon';
 
+const ModalContent = (props) => {
+  const p = props;
+  const style = {};
+  if (p.width) style.width = p.width;
+  if (p.height) style.height = p.height;
+  if (p.minWidth) style.minWidth = p.minWidth;
+  if (p.maxWidth) style.maxWidth = p.maxWidth;
+  if (p.minHeight) style.minHeight = p.minHeight;
+  const doClose = () => {
+    if (p.closeFunc) {
+      p.closeFunc();
+    } else {
+      p.closeModal();
+    }
+  };
+  return (
+    <div className={`modal-content ${p.modalClass}`} style={style}>
+      <div className="modal-body">
+        {!p.hideCloseButton && (
+          <Icon name="X" className="modal-close" onClick={doClose} size={20} />
+        )}
+        {p.children}
+      </div>
+      {p.footer && p.footer}
+    </div>
+  );
+};
+
+const ModalMarkup = (props) => {
+  const p = { ...props };
+  if (p.modalClass === undefined) p.modalClass = 'visible';
+  return (
+    <div className={`modal ${p.modalClass}`}>
+      <div
+        className="overlay"
+        onClick={() => {
+          if (!p.noCloseOutside) p.closeModal();
+        }}
+      />
+      <ModalContent {...p} />
+    </div>
+  );
+};
+
 class Modal extends React.PureComponent {
   state = { modalClass: '' };
 
@@ -26,60 +70,20 @@ class Modal extends React.PureComponent {
     }, 550);
   };
 
-  ModalMarkup = () => {
-    const p = this.props;
-    const { ModalContent } = this;
-    return (
-      <div className={`modal ${this.state.modalClass}`}>
-        <div
-          className="overlay"
-          onClick={() => {
-            if (!p.noCloseOutside) this.closeModal();
-          }}
-        />
-        <ModalContent />
-      </div>
-    );
-  };
-
-  ModalContent = () => {
-    const p = this.props;
-    const style = {};
-    if (p.width) style.width = p.width;
-    if (p.height) style.height = p.height;
-    if (p.minWidth) style.minWidth = p.minWidth;
-    if (p.maxWidth) style.maxWidth = p.maxWidth;
-    if (p.minHeight) style.minHeight = p.minHeight;
-    const doClose = () => {
-      if (p.closeFunc) {
-        p.closeFunc();
-      } else {
-        this.closeModal();
-      }
+  Markup = ({ children }) => {
+    const mProps = {
+      ...this.props,
+      modalClass: this.state.modalClass,
+      closeModal: this.closeModal,
     };
-    return (
-      <div className={`modal-content ${this.state.modalClass}`} style={style}>
-        <div className="modal-body">
-          {!p.hideCloseButton && (
-            <Icon
-              name="X"
-              className="modal-close"
-              onClick={doClose}
-              size={20}
-            />
-          )}
-          {p.children}
-        </div>
-        {p.footer && p.footer}
-      </div>
-    );
+    return <ModalMarkup {...mProps}>{children}</ModalMarkup>;
   };
 
   render() {
     const { modalID, id, withoutPortal } = this.props;
     const isOpened = modalID === id;
-    const { ModalMarkup } = this;
-    if (withoutPortal) return <ModalMarkup>{this.props.children}</ModalMarkup>;
+    const { Markup } = this;
+    if (withoutPortal) return <Markup>{this.props.children}</Markup>;
     return (
       <Portal
         isOpened={isOpened}
@@ -87,7 +91,7 @@ class Modal extends React.PureComponent {
         beforeClose={this.beforeClose}
         closeOnEsc
       >
-        <ModalMarkup>{this.props.children}</ModalMarkup>
+        <Markup>{this.props.children}</Markup>
       </Portal>
     );
   }

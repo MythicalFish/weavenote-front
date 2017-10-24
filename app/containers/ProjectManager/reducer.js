@@ -1,7 +1,6 @@
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import ProjectImagesReducer from 'containers/ProjectImages/reducer';
-import ProjectCommentsReducer from 'containers/ProjectComments/reducer';
 import ProjectComponentsReducer from 'containers/ProjectComponents/reducer';
 import ProjectInstructionsReducer, {
   formReducer as instructionFormReducer,
@@ -54,7 +53,6 @@ export default combineReducers({
   Manager: ProjectManagerReducer,
   Images: ProjectImagesReducer,
   Annotations: ProjectAnnotationsReducer,
-  Comments: ProjectCommentsReducer,
   Components: ProjectComponentsReducer,
   Instructions: ProjectInstructionsReducer,
   Measurements: ProjectMeasurementsReducer,

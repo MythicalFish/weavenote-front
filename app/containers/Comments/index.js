@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import onClickOutside from 'react-onclickoutside';
-import { selectUser } from 'containers/App/selectors';
 import NewComment from './subcomponents/NewComment';
 import Thread from './subcomponents/Thread';
 import {
@@ -26,9 +25,11 @@ class Comments extends React.PureComponent {
     }
   };
   render() {
-    const { comments } = this.props;
+    const { data, commentable } = this.props;
+    const comments = data.get(commentable.type);
+    if (!comments) return null;
     const cProps = { ...this.props, maxImages: 3 };
-    delete cProps.comments;
+    delete cProps.data;
     return (
       <div>
         <div className="mb2">
@@ -50,7 +51,8 @@ class Comments extends React.PureComponent {
 }
 
 Comments.propTypes = {
-  comments: PropTypes.object,
+  data: PropTypes.object,
+  commentable: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
@@ -70,7 +72,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  user: selectUser(),
+  data: selectors.selectData(),
   isCreating: selectors.isCreating(),
   isEditing: selectors.isEditing(),
   isReplying: selectors.isReplying(),
