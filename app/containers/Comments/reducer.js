@@ -27,8 +27,6 @@ function commentsReducer(state = initialState, action) {
 
   switch (type) {
     // Init
-    case '@@app/FETCH_PROJECT_SUCCESS':
-      return state.setIn(['data', 'Project'], fromJS(response.comments));
 
     case types.FETCH_COMMENTS_SUCCESS:
       return setComments();

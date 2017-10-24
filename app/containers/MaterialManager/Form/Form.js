@@ -42,7 +42,8 @@ const Form = (props) => {
         </div>
       </div>
       {!isRestricted &&
-        !project && (
+        !project &&
+        isNew && (
           <footer className="p2 center">
             <Button
               type="submit"
@@ -62,6 +63,7 @@ Form.propTypes = {
   isNew: PropTypes.bool,
   handleSubmit: PropTypes.func,
   initialValues: PropTypes.object,
+  project: PropTypes.object,
 };
 
 export default reduxForm({

@@ -10,8 +10,6 @@ import {
 } from 'containers/ProjectAnnotations/actions';
 import * as types from './constants';
 import * as actions from './actions';
-import { selectProjectID } from '../ProjectManager/selectors';
-import { fetchProject } from '../ProjectManager/actions';
 
 export default [commentsWatcher];
 
@@ -32,16 +30,18 @@ function* fetchComments({ payload }) {
 }
 
 function* createComment({ payload }) {
-  const response = yield sagas.post(
+  let response = yield sagas.post(
     'comments',
     payload,
     actions.createCommentSuccess
   );
+  response = response.payload;
+  if (response.commentable.type !== 'Project') return;
   const annotation = yield select(selectNewAnnotation());
   if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
     // Set comment ID in new annotation if present, then create the annotation
     yield put(
-      buildAnnotation({ annotatable: { id: response.payload.comments[0].id } })
+      buildAnnotation({ annotatable: { id: response.comments[0].id } })
     );
     yield put(createAnnotation());
   }
@@ -57,8 +57,6 @@ function* deleteComment({ payload }) {
     payload,
     actions.deleteCommentSuccess
   );
-  // const projectID = yield select(selectProjectID());
-  // yield put(fetchProject(projectID));
 }
 
 const commentURL = (payload) => `comments/${payload.comment.get('id')}`;

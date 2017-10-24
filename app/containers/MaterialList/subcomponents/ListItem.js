@@ -57,7 +57,7 @@ class ListItem extends React.PureComponent {
     return (
       <tr>
         {selectable && (
-          <td>
+          <td {...linked}>
             <Checkbox />
           </td>
         )}

@@ -6,6 +6,7 @@ import onClickOutside from 'react-onclickoutside';
 import NewComment from './subcomponents/NewComment';
 import Thread from './subcomponents/Thread';
 import {
+  fetchComments,
   createComment,
   updateComment,
   deleteComment,
@@ -18,6 +19,10 @@ import {
 import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
+  componentDidMount() {
+    const { commentable, fetchComments } = this.props;
+    fetchComments({ commentable });
+  }
   handleClickOutside = () => {
     const p = this.props;
     if (p.isCreating || p.isReplying || p.isEditing || p.currentComment) {
@@ -51,6 +56,7 @@ class Comments extends React.PureComponent {
 }
 
 Comments.propTypes = {
+  fetchComments: PropTypes.func,
   data: PropTypes.object,
   commentable: PropTypes.object,
 };
@@ -58,6 +64,7 @@ Comments.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
+      fetchComments,
       writeComment,
       editComment,
       writeReply,

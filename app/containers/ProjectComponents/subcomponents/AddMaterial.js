@@ -75,7 +75,7 @@ export default class AddMaterial extends React.PureComponent {
 }
 
 const Footer = ({ children }) => (
-  <div className="px4 pb4 pt3 right-align flex-none">{children}</div>
+  <div className="px4 pb4 pt3 right-align flex-none bt1">{children}</div>
 );
 
 Footer.propTypes = {
