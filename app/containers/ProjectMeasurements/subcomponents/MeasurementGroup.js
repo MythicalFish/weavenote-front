@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 import DeleteButton from './DeleteButton';
 import Input from './Input';
-import { COLUMN_OFFSET } from '../constants';
 
 class MeasurementGroup extends React.PureComponent {
   handleValueChange = (v) => (value) => {
@@ -20,7 +19,7 @@ class MeasurementGroup extends React.PureComponent {
     //
     const { measurements, group, fieldName, doDelete } = this.props;
     return (
-      <div className="column hoverable center" {...COLUMN_OFFSET}>
+      <div className="column hoverable center">
         <div className="column-header relative">
           <div className="handle-above" />
           <DeleteButton
@@ -37,8 +36,8 @@ class MeasurementGroup extends React.PureComponent {
         </div>
         {measurements.values
           .filter((value) => value.measurement_group_id === group.id)
-          .map((value, i) => (
-            <div className="column-cell" key={`${fieldName}[${i}]`}>
+          .map((value) => (
+            <div className="column-cell" key={`${fieldName}[${value.id}]`}>
               <Input
                 maxLength={16}
                 placeholder="0"

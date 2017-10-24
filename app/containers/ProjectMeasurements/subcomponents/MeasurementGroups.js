@@ -1,27 +1,24 @@
 import React, { PropTypes } from 'react';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
-import ScrollArea from 'components/ScrollArea';
 import MeasurementGroup from './MeasurementGroup';
 
 const SortableMeasurementGroups = SortableContainer((props) => {
   const { measurements, updateMeasurements } = props;
   return (
-    <ScrollArea>
-      <div className="flex">
-        {measurements.groups.map((group, index) => (
-          <MeasurementGroup
-            {...{
-              index,
-              key: `groups[${group.id}].name`,
-              group,
-              measurements,
-              doDelete: props.deleteGroup,
-              updateMeasurements,
-            }}
-          />
-        ))}
-      </div>
-    </ScrollArea>
+    <div className="flex">
+      {measurements.groups.map((group, index) => (
+        <MeasurementGroup
+          {...{
+            index,
+            key: `groups[${group.id}].name`,
+            group,
+            measurements,
+            doDelete: props.deleteGroup,
+            updateMeasurements,
+          }}
+        />
+      ))}
+    </div>
   );
 });
 

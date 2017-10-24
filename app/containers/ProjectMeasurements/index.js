@@ -18,8 +18,7 @@ import Form from './subcomponents/Form';
 class ProjectMeasurements extends React.PureComponent {
   state = { isModal: false };
   componentDidMount() {
-    const { project } = this.props;
-    this.props.fetchMeasurements(project.get('id'));
+    this.props.fetchMeasurements();
   }
   Wrapper = ({ children }) => {
     const { isModal } = this.state;
@@ -57,7 +56,6 @@ class ProjectMeasurements extends React.PureComponent {
 }
 
 ProjectMeasurements.propTypes = {
-  project: PropTypes.object,
   measurements: PropTypes.object,
   fetchMeasurements: PropTypes.func,
 };

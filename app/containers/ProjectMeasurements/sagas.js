@@ -1,4 +1,4 @@
-import { take, cancel, takeLatest, select } from 'redux-saga/effects';
+import { take, cancel, takeLatest, select, put } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
@@ -23,8 +23,13 @@ const url = (id) => `projects/${id}/measurements`;
 const groupUrl = (id) => `projects/${id}/measurement_groups`;
 const nameUrl = (id) => `projects/${id}/measurement_names`;
 
-function* fetchMeasurements({ projectID }) {
-  yield sagas.get(url(projectID), null, actions.fetchMeasurementsSuccess);
+function* fetchMeasurements() {
+  const project = yield select(selectProject());
+  yield sagas.get(
+    url(project.get('id')),
+    null,
+    actions.fetchMeasurementsSuccess
+  );
 }
 
 function* createMeasurementGroup({ projectID }) {

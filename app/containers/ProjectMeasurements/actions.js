@@ -1,7 +1,7 @@
 import * as types from './constants';
 
-export function fetchMeasurements(projectID) {
-  return { type: types.FETCH_MEASUREMENTS, projectID };
+export function fetchMeasurements() {
+  return { type: types.FETCH_MEASUREMENTS };
 }
 
 export function fetchMeasurementsSuccess(response) {

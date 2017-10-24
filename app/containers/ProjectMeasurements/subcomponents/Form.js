@@ -3,7 +3,6 @@ import Button from 'components/Button';
 import PlusButton from 'components/PlusButton';
 import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroups from './MeasurementGroups';
-import { CONTAINER_OFFSET } from '../constants';
 
 const Form = (props) => {
   const { project, showInModal, isModal } = props;
@@ -14,7 +13,7 @@ const Form = (props) => {
         <div className="flex-none mr1">
           <MeasurementNameColumn {...props} />
         </div>
-        <div className="flex-auto" {...CONTAINER_OFFSET}>
+        <div className="flex-auto">
           <MeasurementGroups {...props} />
         </div>
         <div className="flex-none">
