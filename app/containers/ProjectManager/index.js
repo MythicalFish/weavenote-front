@@ -56,6 +56,11 @@ class ProjectManager extends React.PureComponent {
         break;
     }
 
+    const ViewWrapper = ({ children }) => {
+      if (currentView === 'Measurements') return children;
+      return <ScrollArea>{children}</ScrollArea>;
+    };
+
     return (
       <Layout
         {...this.props}
@@ -83,9 +88,9 @@ class ProjectManager extends React.PureComponent {
               </ScrollArea>
             </div>
             <div className="col-xs-6 col-md-3 y-fill">
-              <ScrollArea>
+              <ViewWrapper>
                 <View {...viewProps} />
-              </ScrollArea>
+              </ViewWrapper>
             </div>
           </div>
         </div>
