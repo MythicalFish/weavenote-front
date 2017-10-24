@@ -17,20 +17,20 @@ import {
 import Form from './subcomponents/Form';
 
 class ProjectMeasurements extends React.PureComponent {
-  state = { modal: false };
+  state = { isModal: false };
   componentDidMount() {
     const { project } = this.props;
     this.props.fetchMeasurements(project.get('id'));
   }
   Wrapper = ({ children }) => {
-    const { modal } = this.state;
-    if (!modal) return children;
+    const { isModal } = this.state;
+    if (!isModal) return children;
     return (
       <ModalMarkup
         isOpen
         noCloseOutside
-        maxWidth="100%"
-        closeFunc={() => this.setState({ modal: false })}
+        width="600px"
+        closeFunc={() => this.setState({ isModal: false })}
       >
         <div className="p4">{children}</div>
       </ModalMarkup>
@@ -39,6 +39,7 @@ class ProjectMeasurements extends React.PureComponent {
   render() {
     const { Wrapper } = this;
     const { measurements: m } = this.props;
+    const { isModal } = this.state;
     if (!m) return null;
     return (
       <Wrapper>
@@ -47,7 +48,8 @@ class ProjectMeasurements extends React.PureComponent {
             ...this.props,
             lastUpdated: m.timestamp,
             enableReinitialize: true,
-            showInModal: () => this.setState({ modal: true }),
+            showInModal: () => this.setState({ isModal: true }),
+            isModal,
           }}
         />
       </Wrapper>

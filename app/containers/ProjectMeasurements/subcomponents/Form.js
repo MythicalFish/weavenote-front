@@ -6,11 +6,11 @@ import MeasurementGroups from './MeasurementGroups';
 import { CONTAINER_OFFSET } from '../constants';
 
 const Form = (props) => {
-  const { project, showInModal } = props;
+  const { project, showInModal, isModal } = props;
   const id = project.get('id');
   return (
     <div className="y-fill flex flex-column">
-      <div className="flex-auto flex" id="measurements">
+      <div className="flex" id="measurements">
         <div className="flex-none mr1">
           <MeasurementNameColumn {...props} />
         </div>
@@ -31,7 +31,16 @@ const Form = (props) => {
           onClick={() => props.createName(id)}
           className="p0"
         />
-        <Button label="View in modal" secondary small onClick={showInModal} />
+        {!isModal && (
+          <div className="ml1">
+            <Button
+              label="View in modal"
+              secondary
+              small
+              onClick={showInModal}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -41,6 +50,7 @@ Form.propTypes = {
   project: PropTypes.object,
   createName: PropTypes.func,
   showInModal: PropTypes.func,
+  isModal: PropTypes.bool,
 };
 
 export default Form;
