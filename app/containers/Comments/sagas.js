@@ -40,7 +40,9 @@ function* createComment({ payload }) {
   const annotation = yield select(selectNewAnnotation());
   if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
     // Set comment ID in new annotation if present, then create the annotation
-    yield put(buildAnnotation({ annotatable: { id: response.payload[0].id } }));
+    yield put(
+      buildAnnotation({ annotatable: { id: response.payload.comments[0].id } })
+    );
     yield put(createAnnotation());
   }
 }
