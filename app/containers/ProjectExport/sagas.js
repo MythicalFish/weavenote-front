@@ -15,11 +15,10 @@ export function* ProjectExportWatcher() {
 function* exportPDF() {
   const project = yield select(selectProject());
   const pdfExport = yield select(selectExport());
-  console.log(project);
-  console.log(pdfExport);
+  const options = pdfExport.get('options').toJS();
   yield sagas.get(
     `projects/${project.get('id')}/export`,
-    pdfExport.get('options').toJS(),
+    { options },
     actions.exportPDFsuccess
   );
 }
