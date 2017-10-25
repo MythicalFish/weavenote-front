@@ -76,7 +76,7 @@ class ModalLayout extends React.PureComponent {
     p.handleClose = this.handleClose;
     return (
       <div className={`modal ${klass}`}>
-        <ModalContent {...p} />
+        <ModalContent {...p} outsideClickIgnoreClass="tether-element" />
       </div>
     );
   }

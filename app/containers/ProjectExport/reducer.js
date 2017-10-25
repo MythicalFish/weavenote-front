@@ -7,11 +7,11 @@ const initialState = fromJS({
     inProgress: false,
   },
   options: {
-    basics: true,
     measurements: true,
     instructions: true,
     materials: true,
-    comments: true,
+    comments: types.COMMENT_OPTIONS[0],
+    secondary_images: false,
   },
 });
 

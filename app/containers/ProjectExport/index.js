@@ -6,8 +6,10 @@ import Modal from 'components/Modal';
 import Button from 'components/Button';
 import Spinner from 'components/Spinner';
 import Checkbox from 'components/Checkbox';
+import Dropdown from 'components/Dropdown';
 import * as selectors from './selectors';
 import { configure, doExport, resetExport } from './actions';
+import { COMMENT_OPTIONS } from './constants';
 
 class ProjectExport extends React.PureComponent {
   toggleOption = (name) => () => {
@@ -27,11 +29,6 @@ class ProjectExport extends React.PureComponent {
           <div>
             <div className="modal-body">
               <Checkbox
-                checked={options.get('basics')}
-                onClick={this.toggleOption('basics')}
-                label="Basic information"
-              />
-              <Checkbox
                 checked={options.get('materials')}
                 onClick={this.toggleOption('materials')}
                 label="Materials"
@@ -46,10 +43,25 @@ class ProjectExport extends React.PureComponent {
                 onClick={this.toggleOption('instructions')}
                 label="Instructions"
               />
+              <div className="field field-theme-alt1">
+                <div className="input">
+                  <Dropdown value={{ name: options.get('comments') }}>
+                    {COMMENT_OPTIONS.map((opt, i) => (
+                      <button
+                        type="button"
+                        onClick={() => this.props.configure({ comments: opt })}
+                        key={i}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </Dropdown>
+                </div>
+              </div>
               <Checkbox
-                checked={options.get('comments')}
-                onClick={this.toggleOption('comments')}
-                label="Comments"
+                checked={options.get('secondary_images')}
+                onClick={this.toggleOption('secondary_images')}
+                label="Secondary images"
               />
             </div>
             <footer className="modal-footer right-align">
@@ -58,11 +70,15 @@ class ProjectExport extends React.PureComponent {
             </footer>
           </div>
         )}
-        {inProgress && <Spinner />}
+        {inProgress && (
+          <div className="modal-body">
+            <Spinner />
+          </div>
+        )}
         {finished && (
           <div>
             <div className="modal-body">...</div>
-            <footer className="modal-footer">
+            <footer className="modal-footer right-align">
               <Button
                 label="Export again"
                 secondary
