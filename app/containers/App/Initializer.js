@@ -12,6 +12,7 @@ import {
   setInviteKey,
   fetchGlobalData,
   openModal,
+  closeModal,
 } from './actions';
 import * as selectors from './selectors';
 
@@ -166,6 +167,7 @@ const Initializer = (Component) => {
         handleInvite,
         setInviteKey,
         openModal,
+        closeModal,
       },
       dispatch
     );

@@ -1,36 +1,40 @@
-@mixin borders($namespace) {
-  $b1: 1px solid $dark2;
-  .#{$namespace}b1 {
-    border: $b1;
+@mixin borders($breakpoint, $namespace, $style) {
+  .#{$breakpoint}b#{$namespace} {
+    border: $style;
   }
-  .#{$namespace}bt1 {
-    border-top: $b1;
+  .#{$breakpoint}bt#{$namespace} {
+    border-top: $style;
   }
-  .#{$namespace}br1 {
-    border-right: $b1;
+  .#{$breakpoint}br#{$namespace} {
+    border-right: $style;
   }
-  .#{$namespace}bb1 {
-    border-bottom: $b1;
+  .#{$breakpoint}bb#{$namespace} {
+    border-bottom: $style;
   }
-  .#{$namespace}bl1 {
-    border-left: $b1;
+  .#{$breakpoint}bl#{$namespace} {
+    border-left: $style;
   }
-  .#{$namespace}bx1 {
-    border-left: $b1;
-    border-right: $b1;
+  .#{$breakpoint}bx#{$namespace} {
+    border-left: $style;
+    border-right: $style;
   }
 }
 
-@include borders('');
+@mixin buildBorders($namespace,$style) {
+  @include borders('', $namespace, $style);
 
-@media #{$breakpoint-sm} {
-  @include borders('sm-');
+  @media #{$breakpoint-sm} {
+    @include borders('sm-', $namespace, $style);
+  }
+
+  @media #{$breakpoint-md} {
+    @include borders('md-', $namespace, $style);
+  }
+
+  @media #{$breakpoint-lg} {
+    @include borders('lg-', $namespace, $style);
+  }
 }
 
-@media #{$breakpoint-md} {
-  @include borders('md-');
-}
-
-@media #{$breakpoint-lg} {
-  @include borders('lg-');
-}
+@include buildBorders(1,1px solid $dark2);
+@include buildBorders(2,1px solid $dark1);

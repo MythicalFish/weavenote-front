@@ -6,13 +6,11 @@ import Button from './Button';
 const ModalConfirm = (props) => {
   const { show, proceed, cancel, confirmation, options } = props;
   return (
-    <Modal isOpen={show} hideCloseButton onClose={cancel}>
+    <Modal isOpen={show} hideCloseButton handleClose={cancel}>
       <div className="modal-body">{confirmation}</div>
       <footer className="modal-footer right-align">
-        <span className="mr2">
-          <Button label="Cancel" secondary onClick={() => cancel()} />
-        </span>
-        <Button label="Proceed" onClick={() => proceed()} />
+        <Button label="Cancel" secondary inline onClick={cancel} />
+        <Button label="Proceed" onClick={proceed} />
       </footer>
     </Modal>
   );

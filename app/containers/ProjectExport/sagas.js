@@ -3,7 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
-import { selectExport } from './selectors';
+import { selectOptions } from './selectors';
 import { selectProject } from '../ProjectManager/selectors';
 
 export function* ProjectExportWatcher() {
@@ -14,11 +14,10 @@ export function* ProjectExportWatcher() {
 
 function* exportPDF() {
   const project = yield select(selectProject());
-  const pdfExport = yield select(selectExport());
-  const options = pdfExport.get('options').toJS();
+  const options = yield select(selectOptions());
   yield sagas.get(
     `projects/${project.get('id')}/export`,
-    { options },
-    actions.exportPDFsuccess
+    options.toJS(),
+    actions.doExportSuccess
   );
 }

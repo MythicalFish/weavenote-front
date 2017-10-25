@@ -30,17 +30,17 @@ class Collaborators extends React.Component {
     return (
       <div>
         {roles.size > 0 && (
-          <div className="p2">
+          <div className="pb3 bb1 mb3">
             <RoleList {...rProps} />
           </div>
         )}
         {invites.size > 0 && (
-          <div className="bt1 p2">
+          <div className="pb3 bb1 mb3">
             Pending invitations
             <InviteList {...rProps} />
           </div>
         )}
-        <footer className="bt1 p2">
+        <footer>
           <InviteForm
             initialValues={{
               invitable,

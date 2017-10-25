@@ -33,7 +33,8 @@ class Content extends React.PureComponent {
     if (p.minWidth) style.minWidth = p.minWidth;
     if (p.maxWidth) style.maxWidth = p.maxWidth;
     if (p.minHeight) style.minHeight = p.minHeight;
-    const { klass } = this.state;
+    let { klass } = this.state;
+    if (p.cosy) klass += ' cosy';
     return (
       <div className={`modal-container ${klass}`} style={style}>
         <div className="modal-content">

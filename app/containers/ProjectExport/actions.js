@@ -4,9 +4,12 @@ export function configure(payload) {
   return { type: types.CONFIGURE_EXPORT_PDF, payload };
 }
 
-export function exportPDF() {
+export function doExport() {
   return { type: types.EXPORT_PDF };
 }
-export function exportPDFsuccess(response) {
+export function doExportSuccess(response) {
   return { type: types.EXPORT_PDF_SUCCESS, response };
+}
+export function resetExport() {
+  return { type: types.RESET_EXPORT_PDF };
 }

@@ -27,6 +27,13 @@ class ProjectManager extends React.PureComponent {
   changeView = (view) => {
     this.setState({ view });
   };
+  Header = () => (
+    <Header
+      {...this.props}
+      currentView={this.state.view}
+      changeView={this.changeView}
+    />
+  );
   render() {
     const { project } = this.props;
     if (!project) return null;
@@ -61,16 +68,7 @@ class ProjectManager extends React.PureComponent {
     };
 
     return (
-      <Layout
-        {...this.props}
-        Header={() => (
-          <Header
-            {...this.props}
-            {...{ currentView }}
-            changeView={this.changeView}
-          />
-        )}
-      >
+      <Layout {...this.props} Header={this.Header}>
         <div className="container-wide px4 pt4 y-fill">
           <div className="row y-fill">
             <div className="col-xs-12 col-md-3 y-fill">
@@ -93,13 +91,15 @@ class ProjectManager extends React.PureComponent {
             </div>
           </div>
         </div>
-        <Modal id="collaborators" minWidth="600px">
+        <Modal id="collaborators" width="700px" cosy>
           <header className="modal-header">{`Collaborators for ${project.get(
             'name'
           )}`}</header>
-          <Collaborators invitable={{ type: 'Project', id }} />
+          <div className="modal-body">
+            <Collaborators invitable={{ type: 'Project', id }} />
+          </div>
         </Modal>
-        <ProjectExport />
+        <ProjectExport {...this.props} />
       </Layout>
     );
   }

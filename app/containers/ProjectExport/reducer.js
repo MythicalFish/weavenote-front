@@ -1,11 +1,17 @@
 import { fromJS } from 'immutable';
 import * as types from './constants';
 const initialState = fromJS({
-  finished: false,
-  inProgress: false,
   url: null,
+  state: {
+    finished: false,
+    inProgress: false,
+  },
   options: {
-    comments: false,
+    basics: true,
+    measurements: true,
+    instructions: true,
+    materials: true,
+    comments: true,
   },
 });
 
@@ -20,10 +26,15 @@ function reducer(state = initialState, action) {
       );
 
     case types.EXPORT_PDF:
-      return state.set('inProgress', true).set('url', null);
+      return state.setIn(['state', 'inProgress'], true).set('url', null);
 
     case types.EXPORT_PDF_SUCCESS:
-      return initialState.set('finished', true).set('url', response.url);
+      return initialState
+        .setIn(['state', 'finished'], true)
+        .set('url', response.url);
+
+    case types.RESET_EXPORT_PDF:
+      return initialState;
 
     default:
       return state;
