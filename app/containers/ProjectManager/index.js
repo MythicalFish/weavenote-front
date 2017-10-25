@@ -7,17 +7,16 @@ import ProjectInstructions from 'containers/ProjectInstructions';
 import ProjectImages from 'containers/ProjectImages';
 import ProjectComponents from 'containers/ProjectComponents';
 import ProjectMeasurements from 'containers/ProjectMeasurements';
+import ProjectExport from 'containers/ProjectExport';
 import { buildAnnotation } from 'containers/ProjectAnnotations/actions';
 import Comments from 'containers/Comments';
 import Layout from 'components/Layout';
 import Modal from 'components/Modal';
-import Spinner from 'components/Spinner';
-import Button from 'components/Button';
 import Collaborators from 'containers/Collaborators';
 import Header from './subcomponents/Header';
 import ProjectBasics from './subcomponents/ProjectBasics';
 import * as selectors from './selectors';
-import { fetchProject, updateProject, exportPDF } from './actions';
+import { fetchProject, updateProject } from './actions';
 
 class ProjectManager extends React.PureComponent {
   state = { view: 'Basics' };
@@ -29,7 +28,7 @@ class ProjectManager extends React.PureComponent {
     this.setState({ view });
   };
   render() {
-    const { project, PDFexport } = this.props;
+    const { project } = this.props;
     if (!project) return null;
     const id = project.get('id');
     let View;
@@ -100,16 +99,7 @@ class ProjectManager extends React.PureComponent {
           )}`}</header>
           <Collaborators invitable={{ type: 'Project', id }} />
         </Modal>
-        <Modal id="export">
-          {PDFexport.get('isExporting') && <Spinner />}
-          {PDFexport.get('downloadURL') && (
-            <Button
-              newTab={PDFexport.get('downloadURL')}
-              label="Download"
-              icon="DownloadCloud"
-            />
-          )}
-        </Modal>
+        <ProjectExport />
       </Layout>
     );
   }
@@ -117,7 +107,6 @@ class ProjectManager extends React.PureComponent {
 
 ProjectManager.propTypes = {
   project: PropTypes.object,
-  PDFexport: PropTypes.object,
   fetchProject: PropTypes.func,
   updateProject: PropTypes.func,
   params: PropTypes.object,
@@ -125,7 +114,7 @@ ProjectManager.propTypes = {
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchProject, updateProject, exportPDF, buildAnnotation },
+    { fetchProject, updateProject, buildAnnotation },
     dispatch
   );
 }
@@ -133,7 +122,6 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   project: selectors.selectProject(),
   avatarList: selectors.selectAvatarList(),
-  PDFexport: selectors.selectPDFexport(),
   abilities: selectors.selectAbilities(),
   userRole: selectors.selectUserRole(),
 });

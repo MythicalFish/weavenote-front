@@ -1,4 +1,4 @@
-import { take, cancel, takeLatest, select, put } from 'redux-saga/effects';
+import { take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';

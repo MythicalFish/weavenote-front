@@ -35,8 +35,8 @@ class Content extends React.PureComponent {
     if (p.minHeight) style.minHeight = p.minHeight;
     const { klass } = this.state;
     return (
-      <div className={`modal-content ${klass}`} style={style}>
-        <div className="modal-body">
+      <div className={`modal-container ${klass}`} style={style}>
+        <div className="modal-content">
           {!p.hideCloseButton && (
             <Icon
               name="X"

@@ -6,6 +6,7 @@ import { ProjectInstructionsWatcher } from '../ProjectInstructions/sagas';
 import { ProjectMeasurementsWatcher } from '../ProjectMeasurements/sagas';
 import { ProjectComponentsWatcher } from '../ProjectComponents/sagas';
 import { ProjectAnnotationsWatcher } from '../ProjectAnnotations/sagas';
+import { ProjectExportWatcher } from '../ProjectExport/sagas';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -15,6 +16,7 @@ export default [
   ProjectMeasurementsWatcher,
   ProjectComponentsWatcher,
   ProjectAnnotationsWatcher,
+  ProjectExportWatcher,
 ];
 
 function* ProjectManagerWatcher() {
@@ -22,7 +24,6 @@ function* ProjectManagerWatcher() {
     yield takeLatest(types.FETCH_PROJECT, fetchProject),
     yield takeLatest(types.UPDATE_PROJECT, updateProject),
     yield takeLatest(types.FETCH_MATERIAL_COST, fetchMaterialCost),
-    yield takeLatest(types.EXPORT_PDF, exportPDF),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -50,8 +51,4 @@ function* updateProject() {
     actions.updateProjectSuccess
   );
   yield put(initialize('ProjectForm', project));
-}
-
-function* exportPDF({ id }) {
-  yield sagas.get(`projects/${id}/export`, null, actions.exportPDFsuccess);
 }

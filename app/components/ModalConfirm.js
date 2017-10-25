@@ -7,8 +7,8 @@ const ModalConfirm = (props) => {
   const { show, proceed, cancel, confirmation, options } = props;
   return (
     <Modal isOpen={show} hideCloseButton onClose={cancel}>
-      <div className="p3">{confirmation}</div>
-      <footer className="bt1 p2 right-align">
+      <div className="modal-body">{confirmation}</div>
+      <footer className="modal-footer right-align">
         <span className="mr2">
           <Button label="Cancel" secondary onClick={() => cancel()} />
         </span>

@@ -24,7 +24,7 @@ export default class AddMaterial extends React.PureComponent {
     const { view } = this.state;
     return (
       <Modal id="materials" width="100%" maxWidth="1000px">
-        <div className="pb3 px4 pt4">
+        <div className="py3 px4">
           <Toolbar currentView={view} changeView={this.setView} />
         </div>
         {view === VIEW.list && (
@@ -75,7 +75,7 @@ export default class AddMaterial extends React.PureComponent {
 }
 
 const Footer = ({ children }) => (
-  <div className="px4 pb4 pt3 right-align flex-none bt1">{children}</div>
+  <div className="modal-footer right-align flex-none">{children}</div>
 );
 
 Footer.propTypes = {

@@ -1,9 +1,15 @@
 import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 
-const Checkbox = ({ checked }) => {
-  if (checked) return <Icon name="CheckSquare" size={20} color="poiple" />;
-  return <Icon name="Square" size={20} color="dark3" />;
+const Checkbox = ({ checked, onClick }) => {
+  const opts = {
+    name: 'Square',
+    size: 20,
+    color: 'dark3',
+  };
+  if (checked) Object.assign(opts, { color: 'poiple', name: 'CheckSquare' });
+  if (onClick) opts.onClick = onClick;
+  return <Icon {...opts} />;
 };
 
 Checkbox.propTypes = {

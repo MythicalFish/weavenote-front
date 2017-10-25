@@ -16,9 +16,6 @@ export const selectMaterialCost = () =>
 export const selectAvatarList = () =>
   createSelector(selectDomain(), (s) => s.get('avatarList'));
 
-export const selectPDFexport = () =>
-  createSelector(selectDomain(), (s) => s.get('PDFexport'));
-
 export const selectUserRole = () =>
   createSelector(selectDomain(), (s) => s.get('userRole'));
 

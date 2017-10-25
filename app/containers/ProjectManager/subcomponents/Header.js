@@ -33,13 +33,7 @@ export default function Toolbar(props) {
             <Nav name="Instructions" />
           </li>
           <li>
-            <NavItem
-              label="Export"
-              handleClick={() => {
-                exportPDF(project.get('id'));
-                openModal('export');
-              }}
-            />
+            <NavItem label="Export" handleClick={() => openModal('export')} />
           </li>
           <li>
             <AvatarList
@@ -56,7 +50,6 @@ export default function Toolbar(props) {
 }
 
 Toolbar.propTypes = {
-  exportPDF: PropTypes.func,
   changeView: PropTypes.func,
   currentView: PropTypes.string,
   avatarList: PropTypes.object,
