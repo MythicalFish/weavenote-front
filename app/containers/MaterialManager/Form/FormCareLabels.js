@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { FieldArray } from 'redux-form/immutable';
-import Icon from 'components/Icon';
+import Checkbox from 'components/Checkbox';
 
 class CareLabels extends React.PureComponent {
   labelKey = (label) => {
@@ -28,13 +28,7 @@ class CareLabels extends React.PureComponent {
           {globalData.careLabels.map((label, index) => (
             <div key={index} onClick={this.handleClick(label)}>
               <div>{label.get('name')}</div>
-              <div>
-                {this.isAdded(label) ? (
-                  <Icon name="CheckSquare" size={20} color="dark4" />
-                ) : (
-                  <Icon name="Square" size={20} color="dark3" />
-                )}
-              </div>
+              <Checkbox checked={this.isAdded(label)} />
             </div>
           ))}
         </div>
