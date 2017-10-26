@@ -28,7 +28,7 @@ class Thread extends React.PureComponent {
           <Comment {...cProps} />
           <Replies {...cProps} />
         </div>
-        <NewReply {...cProps} />
+        {isSelected && <NewReply {...cProps} />}
       </div>
     );
   }

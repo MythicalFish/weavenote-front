@@ -20,8 +20,10 @@ import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
   componentDidMount() {
-    const { commentable, fetchComments } = this.props;
-    fetchComments({ commentable });
+    const { commentable } = this.props;
+    const fetch = () => this.props.fetchComments({ commentable });
+    fetch();
+    setInterval(() => fetch(), 10000);
   }
   handleClickOutside = () => {
     const p = this.props;

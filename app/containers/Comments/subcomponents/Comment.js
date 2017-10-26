@@ -5,10 +5,17 @@ import Form from './Form';
 import Actions from './Actions';
 import Wrapper from './Wrapper';
 
-const Date = ({ value }) =>
+const Date = ({ value }) => (
   <span className="dark4 smaller1 ml2">
-    <FormattedDate value={value} day="numeric" month="short" />
-  </span>;
+    <FormattedDate
+      value={value}
+      day="numeric"
+      month="short"
+      hour="numeric"
+      minute="numeric"
+    />
+  </span>
+);
 
 class Comment extends React.PureComponent {
   isOwnComment = () => {
@@ -24,15 +31,14 @@ class Comment extends React.PureComponent {
       : comment.getIn(['user', 'name']);
     return (
       <Wrapper user={comment.get('user')}>
-        {isSelected &&
+        {isSelected && (
           <div className="smaller1">
-            <span className="bold">
-              {authorName}
-            </span>
+            <span className="bold">{authorName}</span>
             <Date value={comment.get('created_at')} />
-          </div>}
-        {this.isEditing()
-          ? <div className="comment-edit">
+          </div>
+        )}
+        {this.isEditing() ? (
+          <div className="comment-edit">
             <Form
               onSubmit={this.props.updateComment}
               initialValues={{ commentable, comment }}
@@ -42,14 +48,13 @@ class Comment extends React.PureComponent {
               {...this.props}
             />
           </div>
-          : <div className="comment-text">
-            {comment.get('text')}
-          </div>}
+        ) : (
+          <div className="comment-text">{comment.get('text')}</div>
+        )}
         {isSelected && <ImageThumbnails images={comment.get('images')} />}
         {isSelected &&
           this.isOwnComment() &&
-          !this.isEditing() &&
-          <Actions {...this.props} />}
+          !this.isEditing() && <Actions {...this.props} />}
       </Wrapper>
     );
   }
