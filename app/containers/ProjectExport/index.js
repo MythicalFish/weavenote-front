@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Document, Page } from 'react-pdf/build/entry.webpack';
 import Modal from 'components/Modal';
 import Button from 'components/Button';
 import Spinner from 'components/Spinner';
@@ -77,7 +78,11 @@ class ProjectExport extends React.PureComponent {
         )}
         {finished && (
           <div>
-            <div className="modal-body">...</div>
+            <div className="modal-body">
+              <Document file={url}>
+                <Page pageNumber={1} />
+              </Document>
+            </div>
             <footer className="modal-footer right-align">
               <Button
                 label="Export again"

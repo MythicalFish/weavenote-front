@@ -237,6 +237,7 @@
     "react-notification-system": "^0.2.14",
     "react-notification-system-redux": "^1.1.2",
     "react-onclickoutside": "^6.5.0",
+    "react-pdf": "^2.1.7",
     "react-portal": "^3.1.0",
     "react-redux": "4.4.6",
     "react-router": "3.0.0",
