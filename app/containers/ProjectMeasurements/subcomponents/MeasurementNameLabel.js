@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 import DeleteButton from './DeleteButton';
 import Input from './Input';
-import { toggleState } from 'utils/misc';
 
 const Handle = (props) => <div className="handle-left" {...props} />;
 
@@ -16,10 +15,7 @@ class MeasurementNameLabel extends React.PureComponent {
     return (
       <div className="column-cell hoverable relative">
         {this.state.active && <div className="row-highlight" />}
-        <Handle
-          onMouseDown={() => toggleState(this, 'active')}
-          onMouseUp={() => toggleState(this, 'active')}
-        />
+        <Handle />
         <DeleteButton
           resourceName="row"
           onClick={() => deleteName(name.id)}

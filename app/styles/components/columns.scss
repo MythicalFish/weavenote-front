@@ -48,28 +48,36 @@ $bStyle: 1px solid #ccc;
   input {
     width: 100%;
   }
-}
-.handle-left {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 10px;
-  border-right: 10px solid $gray-lightest;
-  border-left: 10px solid transparent;
-  cursor: move;
-  transform: translateX(-21px);
-  -webkit-transform: translateX(-21px);
-}
-.handle-above {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 10px;
-  border-bottom: 10px solid $gray-lightest;
-  border-top: 10px solid transparent;
-  cursor: move;
-  transform: translateY(-21px);
-  -webkit-transform: translateY(-21px);
+  .handle-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 10px;
+    border-right: 10px solid $gray-lightest;
+    border-left: 10px solid transparent;
+    cursor: move;
+    transform: translateX(-21px);
+    -webkit-transform: translateX(-21px);
+    opacity: 0;
+  }
+  .handle-above {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    border-bottom: 10px solid $gray-lightest;
+    border-top: 10px solid transparent;
+    cursor: move;
+    transform: translateY(-21px);
+    -webkit-transform: translateY(-21px);
+    opacity: 0;
+  }
+  &:hover {
+    .handle-left,
+    .handle-above {
+      opacity: 1;
+    }
+  }
 }
