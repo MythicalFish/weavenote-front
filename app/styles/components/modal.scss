@@ -6,7 +6,7 @@
   right: 0;
   bottom: 0;
   background: $dark3;
-  overflow-y: auto;
+  overflow: hidden;
   transition: all 0.5s;
   @extend .flex;
   @extend .items-center;
@@ -22,6 +22,8 @@
     transition: all 0.5s;
     @extend .flex-none;
     z-index: 3;
+    max-height: 95%;
+    overflow: hidden;
     &.visible {
       opacity: 1;
       transform: translateY(0px);

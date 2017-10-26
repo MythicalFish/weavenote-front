@@ -2,111 +2,49 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { Document, Page } from 'react-pdf/build/entry.webpack';
 import Modal from 'components/Modal';
-import Button from 'components/Button';
 import Spinner from 'components/Spinner';
-import Checkbox from 'components/Checkbox';
-import Dropdown from 'components/Dropdown';
+import Options from './subcomponents/Options';
+import Preview from './subcomponents/Preview';
 import * as selectors from './selectors';
 import { configure, doExport, resetExport } from './actions';
-import { COMMENT_OPTIONS } from './constants';
+import { DEFAULT_WIDTH } from './constants';
 
 class ProjectExport extends React.PureComponent {
-  toggleOption = (name) => () => {
-    const { options } = this.props;
-    const option = {};
-    option[name] = !options.get(name);
-    this.props.configure(option);
+  state = { width: DEFAULT_WIDTH };
+  componentDidMount = () => {
+    this.props.openModal('export');
+  };
+  defaultWidth = '700px';
+  resize = (val) => {
+    let width = DEFAULT_WIDTH;
+    if (val) width = val;
+    this.setState({ width });
   };
   render() {
-    const { options, url, state, closeModal } = this.props;
+    const { state } = this.props;
     const { finished, inProgress } = state.toJS();
     const isNewExport = !finished && !inProgress;
+    const { resize } = this;
+    const pProps = { ...this.props, resize };
     return (
-      <Modal id="export" cosy width="700px">
+      <Modal id="export" cosy width={this.state.width}>
         <header className="modal-header">Export to PDF</header>
-        {isNewExport && (
-          <div>
-            <div className="modal-body">
-              <Checkbox
-                checked={options.get('materials')}
-                onClick={this.toggleOption('materials')}
-                label="Materials"
-              />
-              <Checkbox
-                checked={options.get('measurements')}
-                onClick={this.toggleOption('measurements')}
-                label="Measurements"
-              />
-              <Checkbox
-                checked={options.get('instructions')}
-                onClick={this.toggleOption('instructions')}
-                label="Instructions"
-              />
-              <div className="field field-theme-alt1">
-                <div className="input">
-                  <Dropdown value={{ name: options.get('comments') }}>
-                    {COMMENT_OPTIONS.map((opt, i) => (
-                      <button
-                        type="button"
-                        onClick={() => this.props.configure({ comments: opt })}
-                        key={i}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </Dropdown>
-                </div>
-              </div>
-              <Checkbox
-                checked={options.get('secondary_images')}
-                onClick={this.toggleOption('secondary_images')}
-                label="Secondary images"
-              />
-            </div>
-            <footer className="modal-footer right-align">
-              <Button label="Cancel" secondary inline onClick={closeModal} />
-              <Button label="Export" onClick={this.props.doExport} />
-            </footer>
-          </div>
-        )}
+        {isNewExport && <Options {...pProps} />}
         {inProgress && (
           <div className="modal-body">
             <Spinner />
           </div>
         )}
-        {finished && (
-          <div>
-            <div className="modal-body">
-              <Document file={url}>
-                <Page pageNumber={1} />
-              </Document>
-            </div>
-            <footer className="modal-footer right-align">
-              <Button
-                label="Export again"
-                secondary
-                inline
-                onClick={this.props.resetExport}
-              />
-              <Button newTab={url} label="Download" icon="DownloadCloud" />
-            </footer>
-          </div>
-        )}
+        {finished && <Preview {...pProps} />}
       </Modal>
     );
   }
 }
 
 ProjectExport.propTypes = {
-  options: PropTypes.object,
   state: PropTypes.object,
-  url: PropTypes.string,
-  configure: PropTypes.func,
-  doExport: PropTypes.func,
-  resetExport: PropTypes.func,
-  closeModal: PropTypes.func,
+  openModal: PropTypes.func,
 };
 
 export function mapDispatch(dispatch) {

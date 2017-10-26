@@ -25,7 +25,7 @@ const ButtonWrapper = (props) => {
   const { download, newTab } = props;
   const realLink = download || newTab;
   if (download) bProps.download = true;
-  if (newTab) bProps.target = '_blank';
+  if (newTab || download) bProps.target = '_blank';
   if (props.to) {
     return (
       <Link {...bProps} to={props.to}>
@@ -34,7 +34,7 @@ const ButtonWrapper = (props) => {
     );
   } else if (realLink) {
     return (
-      <a {...bProps} href={realLink}>
+      <a {...bProps} href={props.to}>
         {props.children}
       </a>
     );
@@ -57,7 +57,7 @@ ButtonWrapper.propTypes = {
   type: PropTypes.string,
   to: PropTypes.string,
   small: PropTypes.bool,
-  download: PropTypes.string,
+  download: PropTypes.bool,
   newTab: PropTypes.string,
   shy: PropTypes.bool,
   large: PropTypes.bool,
