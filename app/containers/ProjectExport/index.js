@@ -12,10 +12,6 @@ import { DEFAULT_WIDTH } from './constants';
 
 class ProjectExport extends React.PureComponent {
   state = { width: DEFAULT_WIDTH };
-  componentDidMount = () => {
-    this.props.openModal('export');
-  };
-  defaultWidth = '700px';
   resize = (val) => {
     let width = DEFAULT_WIDTH;
     if (val) width = val;
