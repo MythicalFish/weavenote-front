@@ -36,7 +36,7 @@ function* createComment({ payload }) {
     actions.createCommentSuccess
   );
   response = response.payload;
-  if (response.commentable.type !== 'Project') return;
+  if (response.commentable !== 'Project') return;
   const annotation = yield select(selectNewAnnotation());
   if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
     // Set comment ID in new annotation if present, then create the annotation
