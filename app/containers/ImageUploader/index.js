@@ -46,7 +46,7 @@ class ImageUploader extends React.PureComponent {
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />
     );
-    const { label, inlineIcon, isUploading, btnClass } = this.props;
+    const { label, Icon, inlineIcon, isUploading, btnClass } = this.props;
     if (isUploading === this.props.imageable) {
       return <Spinner />;
     }
@@ -59,6 +59,9 @@ class ImageUploader extends React.PureComponent {
         </label>
       );
     }
+    if (Icon) {
+      return <Icon>{uploader}</Icon>;
+    }
     return (
       <PlusButton color="gray" size={25}>
         {uploader}
@@ -68,6 +71,7 @@ class ImageUploader extends React.PureComponent {
 }
 
 ImageUploader.propTypes = {
+  Icon: PropTypes.func,
   imageable: PropTypes.object,
   uploadImage: PropTypes.func,
   createImage: PropTypes.func,

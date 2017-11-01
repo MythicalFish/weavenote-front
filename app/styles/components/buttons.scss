@@ -128,7 +128,7 @@ label.btn,
   .btn {
     @extend .btn-shy;
     &:not(:last-child) {
-      margin-right: $space-2;
+      margin-right: $space-1;
     }
   }
 }

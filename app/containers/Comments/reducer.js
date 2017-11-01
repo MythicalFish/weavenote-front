@@ -21,7 +21,8 @@ const initialState = fromJS({
 function commentsReducer(state = initialState, action) {
   const { type, payload, response } = action;
 
-  const initialAction = () => state.set('actions', initialState.get('actions'));
+  const initialActions = () =>
+    state.set('actions', initialState.get('actions'));
   const setComments = () =>
     state.setIn(['data', response.commentable], fromJS(response.comments));
 
@@ -34,49 +35,45 @@ function commentsReducer(state = initialState, action) {
     // Actions
 
     case types.FOCUS_COMMENT:
-      return initialAction().set('currentComment', commentID(payload));
+      return initialActions().setIn(
+        ['actions', 'currentComment'],
+        commentID(payload)
+      );
 
     case types.WRITE_COMMENT:
-      return initialAction().set('isCreating', true);
+      return initialActions().setIn(['actions', 'isCreating'], true);
 
     case types.EDIT_COMMENT:
       return state
-        .set('isCreating', false)
-        .set('isEditing', commentID(payload))
-        .set('isReplying', null);
+        .setIn(['actions', 'isCreating'], false)
+        .setIn(['actions', 'isEditing'], commentID(payload))
+        .setIn(['actions', 'isReplying'], null);
 
     case types.WRITE_REPLY:
       return state
-        .set('currentComment', commentID(payload))
-        .set('isCreating', false)
-        .set('isEditing', null)
-        .set('isReplying', commentID(payload));
+        .setIn(['actions', 'currentComment'], commentID(payload))
+        .setIn(['actions', 'isCreating'], false)
+        .setIn(['actions', 'isEditing'], null)
+        .setIn(['actions', 'isReplying'], commentID(payload));
 
     case types.CREATE_COMMENT_SUCCESS:
-      return setComments()
-        .set('isCreating', false)
-        .set('isEditing', null)
-        .set('isReplying', null);
-
     case types.UPDATE_COMMENT_SUCCESS:
-      return setComments()
-        .set('isCreating', false)
-        .set('isEditing', null)
-        .set('isReplying', null);
-
     case types.DELETE_COMMENT_SUCCESS:
       return setComments()
-        .set('isCreating', false)
-        .set('isEditing', null)
-        .set('isReplying', null);
+        .setIn(['actions', 'isCreating'], false)
+        .setIn(['actions', 'isEditing'], null)
+        .setIn(['actions', 'isReplying'], null);
 
     case types.CANCEL_COMMENT_ACTION:
-      return initialAction();
+      return initialActions();
 
     // Annotation
 
     case FOCUS_ANNOTATION:
-      return initialAction().set('currentComment', annotationComment(payload));
+      return initialActions().setIn(
+        ['actions', 'currentComment'],
+        annotationComment(payload)
+      );
 
     // Images
 

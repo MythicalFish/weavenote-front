@@ -28,7 +28,7 @@ export default function Toolbar(props) {
           {canCreate && (
             <Button
               onClick={() => createProject()}
-              label="New Project"
+              label="New Style"
               icon="Plus"
             />
           )}
@@ -37,7 +37,7 @@ export default function Toolbar(props) {
           <nav>
             <ul>
               <li>
-                <Nav name="Active Projects" />
+                <Nav name="Active Styles" />
               </li>
               <li>
                 <Nav name="Archive" params={{ archived: true }} />

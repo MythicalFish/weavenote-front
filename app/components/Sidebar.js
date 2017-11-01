@@ -40,7 +40,7 @@ const Sidebar = (props) => {
     <aside id="sidebar" className="flex-none blurrable">
       <img src={`${process.env.ASSET_HOST}/logo.png`} role="presentation" />
       <nav className="mt2">
-        <Button {...props} path="/projects" label="Projects" />
+        <Button {...props} path="/projects" label="Styles" />
         {exposeTo(role) && (
           <Button {...props} path="/materials" label="Materials" />
         )}

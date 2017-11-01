@@ -5,32 +5,29 @@ import * as FeatherIcons from 'react-feather';
 const Icon = (props) => {
   let I = FeatherIcons[props.name];
   if (!I) I = FeatherIcons.Circle;
-  const { color, size, tooltip, className } = props;
+  const { color, size, tooltip, className, children } = props;
   const FeatherIcon = () => <I className={color || ''} size={size || 30} />;
   const bProps = { className: 'icon' };
   if (className) bProps.className += ` ${className}`;
   if (tooltip) bProps.className += ' tooltipped';
+  const content = [<FeatherIcon />];
+  if (children) content.push(children);
+  if (tooltip) content.push(<div className="tooltip">{tooltip}</div>);
 
   if (props.onClick) {
     return (
       <button {...bProps} onClick={props.onClick} type="button">
-        <FeatherIcon />
-        {tooltip && <div className="tooltip">{tooltip}</div>}
+        {content}
       </button>
     );
   } else if (props.to) {
     return (
       <Link {...bProps} to={props.to}>
-        <FeatherIcon />
+        {content}
       </Link>
     );
   }
-  return (
-    <div {...bProps}>
-      <FeatherIcon />
-      {props.children && props.children}
-    </div>
-  );
+  return <div {...bProps}>{content}</div>;
 };
 
 Icon.propTypes = {
