@@ -6,6 +6,7 @@ const ListItem = (props) => {
   const {
     component,
     material,
+    updateComponent,
     deleteComponent,
     openModal,
     editMaterial,
@@ -35,7 +36,8 @@ const ListItem = (props) => {
         <Input
           defaultValue={component.get('quantity')}
           disableReduxForm
-          onChange={(a, e) => console.log(a)}
+          onChange={(e) =>
+            updateComponent(component.set('quantity', e.target.value))}
         />
       </Col>
       <Col className="right-align">

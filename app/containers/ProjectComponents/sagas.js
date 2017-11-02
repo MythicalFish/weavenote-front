@@ -41,10 +41,7 @@ function* fetchComponents() {
   );
 }
 
-function* updateComponent() {
-  const dirty = yield select(isDirty('Component'));
-  if (!dirty) return;
-  const component = yield select(getFormValues('Component'));
+function* updateComponent({ component }) {
   yield sagas.patch(
     componentURL(component.toJS()),
     { component },
