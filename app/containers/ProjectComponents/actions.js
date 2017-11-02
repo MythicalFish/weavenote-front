@@ -1,7 +1,7 @@
 import * as types from './constants';
 
-export function fetchComponents(project_id) {
-  return { type: types.FETCH_COMPONENTS, payload: { project_id } };
+export function fetchComponents() {
+  return { type: types.FETCH_COMPONENTS };
 }
 
 export function fetchComponentsSuccess(response) {

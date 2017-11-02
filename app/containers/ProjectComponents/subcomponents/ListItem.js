@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Input from 'components/FormInput';
 import Dropdown from 'components/Dropdown';
 
 const ListItem = (props) => {
@@ -13,16 +14,38 @@ const ListItem = (props) => {
     editMaterial(material);
     openModal('materials');
   };
+  const Col = ({ children, onClick, className }) => {
+    const tdProps = { className: null };
+    if (onClick) {
+      tdProps.onClick = onClick;
+      tdProps.className = 'cursor-pointer';
+    }
+    if (className) tdProps.className += className;
+    return (
+      <td {...tdProps}>
+        <span className="py2 block">{children}</span>
+      </td>
+    );
+  };
   return (
-    <div className="flex justify-between x-fill bb1 p2" onClick={handleClick}>
-      <div className="flex-none pr1">{material.getIn(['type', 'name'])}</div>
-      <div className="flex-auto pr1">{material.get('name')}</div>
-      <Dropdown icon="more">
-        <button onClick={() => deleteComponent({ ...component.toJS() })}>
-          Delete
-        </button>
-      </Dropdown>
-    </div>
+    <tr>
+      <Col onClick={handleClick}>{material.getIn(['type', 'name'])}</Col>
+      <Col onClick={handleClick}>{material.get('name')}</Col>
+      <Col>
+        <Input
+          defaultValue={component.get('quantity')}
+          disableReduxForm
+          onChange={(a, e) => console.log(a)}
+        />
+      </Col>
+      <Col className="right-align">
+        <Dropdown icon="more">
+          <button onClick={() => deleteComponent({ ...component.toJS() })}>
+            Delete
+          </button>
+        </Dropdown>
+      </Col>
+    </tr>
   );
 };
 

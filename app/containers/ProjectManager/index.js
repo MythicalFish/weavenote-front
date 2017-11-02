@@ -34,6 +34,11 @@ class ProjectManager extends React.PureComponent {
       changeView={this.changeView}
     />
   );
+
+  ViewWrapper = ({ children }) => {
+    if (this.state.view === 'Measurements') return children;
+    return <ScrollArea className="pl4">{children}</ScrollArea>;
+  };
   render() {
     const { project } = this.props;
     if (!project) return null;
@@ -41,6 +46,7 @@ class ProjectManager extends React.PureComponent {
     let View;
     const viewProps = { ...this.props };
     const currentView = this.state.view;
+    const { ViewWrapper } = this;
 
     switch (currentView) {
       case 'Materials':
@@ -61,11 +67,6 @@ class ProjectManager extends React.PureComponent {
         viewProps.onSubmit = this.props.updateProject;
         break;
     }
-
-    const ViewWrapper = ({ children }) => {
-      if (currentView === 'Measurements') return children;
-      return <ScrollArea className="pl4">{children}</ScrollArea>;
-    };
 
     return (
       <Layout {...this.props} Header={this.Header}>

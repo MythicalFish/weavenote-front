@@ -27,7 +27,7 @@ export default class AddMaterial extends React.PureComponent {
         </div>
         {view === VIEW.list && (
           <div>
-            <div className="vh-ymax50" style={{ height: materialListHeight }}>
+            <div className="vh-ymax50" style={{ height: materialListHeight() }}>
               <ScrollArea className="px4">
                 <MaterialList
                   selectable
@@ -85,6 +85,6 @@ AddMaterial.propTypes = {
   editMaterial: PropTypes.func,
   setView: PropTypes.func,
   materialID: PropTypes.number,
-  materialListHeight: PropTypes.number,
+  materialListHeight: PropTypes.func,
   view: PropTypes.string,
 };

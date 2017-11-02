@@ -32,8 +32,13 @@ export function* ProjectComponentsWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-function* fetchComponents({ payload }) {
-  yield sagas.get(componentsURL(payload), null, actions.fetchComponentsSuccess);
+function* fetchComponents() {
+  const projectID = yield select(selectProjectID());
+  yield sagas.get(
+    `projects/${projectID}/components`,
+    null,
+    actions.fetchComponentsSuccess
+  );
 }
 
 function* updateComponent() {

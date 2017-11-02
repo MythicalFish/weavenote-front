@@ -25,12 +25,11 @@ import { selectMaterialCost } from '../ProjectManager/selectors';
 class Components extends React.Component {
   state = { view: VIEW.list, materialID: null };
   componentDidMount() {
-    const { project } = this.props;
-    this.props.fetchComponents(project.get('id'));
+    this.props.fetchComponents();
     this.props.fetchMaterials();
   }
   setView = (view) => this.setState({ view });
-  materialListHeight = this.props.materials.size * 50 + 100;
+  materialListHeight = () => this.props.materials.size * 50 + 100;
   editMaterial = (material) => {
     this.setState({ materialID: material.get('id'), view: VIEW.edit });
   };
@@ -53,7 +52,9 @@ class Components extends React.Component {
           label="Add material"
           small
         />
-        <List {...{ ...mProps }} />
+        <div className="mt3">
+          <List {...{ ...mProps }} />
+        </div>
         <MaterialCost {...mProps} />
         <AddMaterial {...mProps} />
       </div>

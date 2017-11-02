@@ -94,13 +94,19 @@ class Input extends React.PureComponent {
 const fieldConstructor = (props) => {
   const fProps = { ...props };
   if (props.onChange) {
-    fProps.onChange = debounce(() => props.onChange(), 1000);
+    fProps.onChange = debounce((p) => props.onChange(p), 1000);
   }
-  return <Field component={Input} {...fProps} />;
+  if (props.disableReduxForm) {
+    delete fProps.disableReduxForm;
+    return <Input {...fProps} />;
+  } else {
+    return <Field component={Input} {...fProps} />;
+  }
 };
 
 fieldConstructor.propTypes = {
   onChange: PropTypes.func,
+  disableReduxForm: PropTypes.bool,
 };
 
 export default fieldConstructor;
