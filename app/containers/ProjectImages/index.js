@@ -6,26 +6,22 @@ import { initialize } from 'redux-form';
 import Image from 'components/Image';
 import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
-import { selectImages } from './selectors';
+import { focusImage } from './actions';
+import { selectCurrentImage, selectImages } from './selectors';
 import { selectIsAnnotating } from '../ProjectAnnotations/selectors';
 import { startAnnotation } from '../ProjectAnnotations/actions';
 import ImageUI from './ImageUI';
 import { PLACEHOLDER } from './constants';
 
 class ProjectImages extends React.PureComponent {
-  state = { currentImage: null };
-  componentDidMount() {
-    this.selectImage(0);
-  }
   selectImage = (index) => {
     const { images } = this.props;
+    this.props.focusImage(index);
     const image = images.get(index);
-    this.setState({ currentImage: index });
     this.props.initialize('ImageForm', image, { form: 'ImageForm' });
   };
   render() {
-    const { project, images } = this.props;
-    const image = images.get(this.state.currentImage);
+    const { project, images, currentImage: image } = this.props;
     const imageable = { type: 'Project', id: project.get('id') };
     return (
       <div className="lh0 px2">
@@ -51,6 +47,8 @@ class ProjectImages extends React.PureComponent {
 }
 
 ProjectImages.propTypes = {
+  focusImage: PropTypes.func,
+  currentImage: PropTypes.object,
   images: PropTypes.object,
   project: PropTypes.object,
   initialize: PropTypes.func,
@@ -61,12 +59,14 @@ export function mapDispatch(dispatch) {
     {
       initialize,
       startAnnotation,
+      focusImage,
     },
     dispatch
   );
 }
 
 const mapState = createStructuredSelector({
+  currentImage: selectCurrentImage(),
   images: selectImages(),
   isAnnotating: selectIsAnnotating(),
 });

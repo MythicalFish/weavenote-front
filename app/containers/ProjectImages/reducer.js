@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import * as types from './constants';
 import { CREATE_IMAGE_SUCCESS } from 'containers/ImageUploader/constants';
 import {
   DELETE_IMAGE_SUCCESS,
@@ -6,29 +7,29 @@ import {
 } from 'containers/ImageForm/constants';
 import { FETCH_PROJECT_SUCCESS } from 'containers/ProjectManager/constants';
 
-const initialState = fromJS([]);
+const initialState = fromJS({
+  currentImage: 0,
+  imageList: [],
+});
 
 function ProjectImagesReducer(state = initialState, action) {
-  const { response } = action;
+  const { response, payload } = action;
 
-  const setImages = () => {
-    const { type } = response.imageable;
-    if (type && type === 'Project') return fromJS(response.images);
-    return state;
-  };
+  const imageableType = () => response.imageable.type;
 
   switch (action.type) {
+    case types.FOCUS_IMAGE:
+      return state.set('currentImage', payload);
     case FETCH_PROJECT_SUCCESS:
-      return fromJS(response.images);
+      return state.set('imageList', fromJS(response.images));
 
     case CREATE_IMAGE_SUCCESS:
-      return setImages();
-
     case DELETE_IMAGE_SUCCESS:
-      return setImages();
-
     case UPDATE_IMAGE_SUCCESS:
-      return setImages();
+      if (imageableType() === 'Project') {
+        return state.set('imageList', fromJS(response.images));
+      }
+      break;
 
     default:
       return state;

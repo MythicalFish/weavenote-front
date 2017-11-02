@@ -4,6 +4,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { initialize } from 'redux-form';
 import * as sagas from 'utils/genericSagas';
 import { selectNewAnnotation } from 'containers/ProjectAnnotations/selectors';
+import { selectCurrentImage } from 'containers/ProjectImages/selectors';
 import {
   fetchAnnotations,
   buildAnnotation,
@@ -67,9 +68,11 @@ function* initializeForm({ payload }) {
 
 function* associateAnnotation(annotatable) {
   const annotation = yield select(selectNewAnnotation());
+  const image = yield select(selectCurrentImage());
+  const imageID = image.get('id');
   if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
     // Set comment ID in new annotation if present
-    yield put(buildAnnotation({ annotatable }));
+    yield put(buildAnnotation({ annotatable, imageID }));
     // Create the annotation
     yield put(createAnnotation());
   }
