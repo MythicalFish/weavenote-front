@@ -4,9 +4,8 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import Button from 'components/Button';
-import Accordion from 'components/Accordion';
-import RowHeader from './subcomponents/ListItem';
-import Form from './subcomponents/Form';
+import { VIEW } from './constants';
+import List from './subcomponents/List';
 import MaterialCost from './subcomponents/MaterialCost';
 import AddMaterial from './subcomponents/AddMaterial';
 
@@ -24,13 +23,29 @@ import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
 class Components extends React.Component {
+  state = { view: VIEW.list, materialID: null };
   componentDidMount() {
     const { project } = this.props;
     this.props.fetchComponents(project.get('id'));
     this.props.fetchMaterials();
   }
+  setView = (view) => this.setState({ view });
+  materialListHeight = this.props.materials.size * 50 + 100;
+  editMaterial = (material) => {
+    this.setState({ materialID: material.get('id'), view: VIEW.edit });
+  };
 
   render() {
+    const { materialID, view } = this.state;
+    const { setView, materialListHeight, editMaterial } = this;
+    const mProps = {
+      ...this.props,
+      materialID,
+      view,
+      setView,
+      materialListHeight,
+      editMaterial,
+    };
     return (
       <div>
         <Button
@@ -38,11 +53,9 @@ class Components extends React.Component {
           label="Add material"
           small
         />
-        <Accordion
-          {...{ ...this.props, RowHeader, Form }}
-          footer={<MaterialCost {...this.props} />}
-        />
-        <AddMaterial {...this.props} />
+        <List {...{ ...mProps }} />
+        <MaterialCost {...mProps} />
+        <AddMaterial {...mProps} />
       </div>
     );
   }
@@ -53,12 +66,13 @@ Components.propTypes = {
   fetchComponents: PropTypes.func,
   openModal: PropTypes.func,
   fetchMaterials: PropTypes.func,
+  materials: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
-      updateItem: updateComponent,
+      updateComponent,
       deleteComponent,
       fetchComponents,
       createComponents,
@@ -71,7 +85,7 @@ export function mapDispatch(dispatch) {
 }
 
 const mapState = createStructuredSelector({
-  items: selectors.selectComponents(),
+  components: selectors.selectComponents(),
   selectedMaterials: selectors.selectSelectedMaterials(),
   materials: selectMaterials(),
   materialCost: selectMaterialCost(),

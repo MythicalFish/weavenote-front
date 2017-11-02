@@ -64,15 +64,15 @@ class ProjectManager extends React.PureComponent {
 
     const ViewWrapper = ({ children }) => {
       if (currentView === 'Measurements') return children;
-      return <ScrollArea>{children}</ScrollArea>;
+      return <ScrollArea className="pl4">{children}</ScrollArea>;
     };
 
     return (
       <Layout {...this.props} Header={this.Header}>
         <div className="container-wide px4 pt4 y-fill">
-          <div className="row y-fill">
+          <div className="row y-fill lg-mln4">
             <div className="col-xs-12 col-md-3 y-fill">
-              <ScrollArea className="pr2">
+              <ScrollArea className="pr4 lg-pl4">
                 <Comments
                   {...this.props}
                   commentable={{ type: 'Project', id }}

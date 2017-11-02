@@ -8,36 +8,31 @@ import Toolbar from './AddMaterialToolbar';
 import { VIEW } from '../constants';
 
 export default class AddMaterial extends React.PureComponent {
-  state = { view: VIEW.list, id: null };
-  setView = (view) => this.setState({ view });
-  materialListHeight = this.props.materials.size * 50 + 100;
-  editMaterial = (material) => {
-    this.setState({ id: material.get('id'), view: VIEW.edit });
-  };
   render() {
     const {
       selectMaterial,
       createComponents,
       selectedMaterials,
       createMaterial,
+      setView,
+      materialListHeight,
+      editMaterial,
+      materialID,
+      view,
     } = this.props;
-    const { view } = this.state;
     return (
       <Modal id="materials" width="100%" maxWidth="1000px">
         <div className="py3 px4">
-          <Toolbar currentView={view} changeView={this.setView} />
+          <Toolbar currentView={view} changeView={setView} />
         </div>
         {view === VIEW.list && (
           <div>
-            <div
-              className="vh-ymax50"
-              style={{ height: this.materialListHeight }}
-            >
+            <div className="vh-ymax50" style={{ height: materialListHeight }}>
               <ScrollArea className="px4">
                 <MaterialList
                   selectable
                   onSelect={selectMaterial}
-                  onEdit={this.editMaterial}
+                  onEdit={editMaterial}
                   selectedMaterials={selectedMaterials}
                 />
               </ScrollArea>
@@ -55,7 +50,7 @@ export default class AddMaterial extends React.PureComponent {
           <div className="vh-y50">
             <ScrollArea className="px4">
               <div className="pb4">
-                <MaterialManager id={this.state.id || 'new'} {...this.props} />
+                <MaterialManager id={materialID || 'new'} {...this.props} />
               </div>
             </ScrollArea>
           </div>
@@ -87,5 +82,9 @@ AddMaterial.propTypes = {
   createMaterial: PropTypes.func,
   createComponents: PropTypes.func,
   selectedMaterials: PropTypes.object,
-  materials: PropTypes.object,
+  editMaterial: PropTypes.func,
+  setView: PropTypes.func,
+  materialID: PropTypes.number,
+  materialListHeight: PropTypes.number,
+  view: PropTypes.string,
 };

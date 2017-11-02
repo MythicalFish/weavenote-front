@@ -1,17 +1,24 @@
 import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
-import ListItemLabel from './ListItemLabel';
 
-const ListItem = ({ item, Chevron, ToggleArea, deleteComponent }) => {
-  const material = item.get('material');
+const ListItem = (props) => {
+  const {
+    component,
+    material,
+    deleteComponent,
+    openModal,
+    editMaterial,
+  } = props;
+  const handleClick = () => {
+    editMaterial(material);
+    openModal('materials');
+  };
   return (
-    <div className="accordion-row-header">
-      <ToggleArea>
-        <ListItemLabel material={material} />
-        <Chevron />
-      </ToggleArea>
+    <div className="flex justify-between x-fill bb1 p2" onClick={handleClick}>
+      <div className="flex-none pr1">{material.getIn(['type', 'name'])}</div>
+      <div className="flex-auto pr1">{material.get('name')}</div>
       <Dropdown icon="more">
-        <button onClick={() => deleteComponent({ ...item.toJS() })}>
+        <button onClick={() => deleteComponent({ ...component.toJS() })}>
           Delete
         </button>
       </Dropdown>
@@ -20,10 +27,11 @@ const ListItem = ({ item, Chevron, ToggleArea, deleteComponent }) => {
 };
 
 ListItem.propTypes = {
-  item: PropTypes.object,
-  Chevron: PropTypes.func,
+  editMaterial: PropTypes.func,
+  openModal: PropTypes.func,
   deleteComponent: PropTypes.func,
-  ToggleArea: PropTypes.func,
+  component: PropTypes.object,
+  material: PropTypes.object,
 };
 
 export default ListItem;
