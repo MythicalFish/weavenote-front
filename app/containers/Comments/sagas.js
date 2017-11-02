@@ -36,19 +36,17 @@ function* createComment({ payload }) {
     payload,
     actions.createCommentSuccess
   );
-  if (response.commentable !== 'Project') return;
-  const annotation = yield select(selectNewAnnotation());
-  if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
-    // Set comment ID in new annotation if present, then create the annotation
-    yield put(
-      buildAnnotation({ annotatable: { id: response.comments[0].id } })
-    );
-    yield put(createAnnotation());
-  }
+  const { commentable, comments } = response;
+  if (commentable.type !== 'Project') return;
+  yield associateAnnotation({ id: comments[0].id });
+  // Refresh comments (needs new annotation ID)
+  yield delay(500);
+  yield put(actions.fetchComments({ commentable }));
 }
 
 function* updateComment({ payload }) {
   yield sagas.patch(commentURL(payload), payload, actions.updateCommentSuccess);
+  yield associateAnnotation();
 }
 
 function* deleteComment({ payload }) {
@@ -65,4 +63,14 @@ const commentURL = (payload) => `comments/${payload.comment.get('id')}`;
 function* initializeForm({ payload }) {
   yield delay(50);
   yield put(initialize('CommentForm', payload, { form: 'CommentForm' }));
+}
+
+function* associateAnnotation(annotatable) {
+  const annotation = yield select(selectNewAnnotation());
+  if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
+    // Set comment ID in new annotation if present
+    yield put(buildAnnotation({ annotatable }));
+    // Create the annotation
+    yield put(createAnnotation());
+  }
 }

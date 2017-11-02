@@ -31,12 +31,14 @@ const Actions = (props) => {
     });
     props.cancelCommentAction();
   };
+  const hasAnnotation = !!comment.get('annotation');
   return (
     <div>
       <div className="actions smaller1">
         <ActionIcon name="Edit" onClick={toggleEdit} tooltip="Edit" />
         <ActionIcon name="Trash" tooltip="Archive" onClick={handleDelete} />
         {startAnnotation &&
+          !hasAnnotation &&
           !isReply && (
             <ActionIcon
               name="Plus"

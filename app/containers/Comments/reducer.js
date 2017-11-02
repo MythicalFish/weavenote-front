@@ -24,7 +24,7 @@ function commentsReducer(state = initialState, action) {
   const initialActions = () =>
     state.set('actions', initialState.get('actions'));
   const setComments = () =>
-    state.setIn(['data', response.commentable], fromJS(response.comments));
+    state.setIn(['data', response.commentable.type], fromJS(response.comments));
 
   switch (type) {
     // Init

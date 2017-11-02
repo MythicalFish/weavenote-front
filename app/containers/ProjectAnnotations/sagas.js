@@ -77,7 +77,7 @@ function* handleSetAnchor() {
       }
       break;
     case 'dot':
-      yield put(writeComment());
+      if (!annotation.getIn(['annotatable', 'id'])) yield put(writeComment());
       break;
     default:
       break;

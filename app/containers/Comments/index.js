@@ -16,6 +16,7 @@ import {
   writeReply,
   cancelCommentAction,
 } from './actions';
+import { startAnnotation } from '../ProjectAnnotations/actions';
 import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
@@ -77,6 +78,7 @@ export function mapDispatch(dispatch) {
       deleteComment,
       focusComment,
       cancelCommentAction,
+      startAnnotation,
     },
     dispatch
   );
