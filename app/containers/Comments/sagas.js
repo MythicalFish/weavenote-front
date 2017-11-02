@@ -47,7 +47,6 @@ function* createComment({ payload }) {
 
 function* updateComment({ payload }) {
   yield sagas.patch(commentURL(payload), payload, actions.updateCommentSuccess);
-  yield associateAnnotation();
 }
 
 function* deleteComment({ payload }) {

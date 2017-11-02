@@ -12,7 +12,7 @@ const UploadIcon = (props) => (
 );
 
 const Actions = (props) => {
-  const { comment, commentable, startAnnotation } = props;
+  const { comment, commentable, startAnnotation, currentImage } = props;
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
   };
@@ -28,6 +28,7 @@ const Actions = (props) => {
       maxAnchors: 1,
       annotatable: actionable,
       type: 'dot',
+      imageID: currentImage.get('id'),
     });
     props.cancelCommentAction();
   };
@@ -59,6 +60,7 @@ Actions.propTypes = {
   cancelCommentAction: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
+  currentImage: PropTypes.object,
   maxImages: PropTypes.number,
 };
 

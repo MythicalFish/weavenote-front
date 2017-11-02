@@ -36,7 +36,7 @@ const AnnotationUI = (Component) => {
     };
     render() {
       return (
-        <div className="relative">
+        <div>
           {this.props.isAnnotating && (
             <div className="above lh1 smaller2 dark3 py2">
               Hit ESC to cancel

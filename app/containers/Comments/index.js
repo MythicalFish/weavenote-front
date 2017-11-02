@@ -17,6 +17,7 @@ import {
   cancelCommentAction,
 } from './actions';
 import { startAnnotation } from '../ProjectAnnotations/actions';
+import { selectCurrentImage } from '../ProjectImages/selectors';
 import * as selectors from './selectors';
 
 class Comments extends React.PureComponent {
@@ -90,6 +91,7 @@ const mapState = createStructuredSelector({
   isEditing: selectors.isEditing(),
   isReplying: selectors.isReplying(),
   currentComment: selectors.selectCurrentComment(),
+  currentImage: selectCurrentImage(),
 });
 
 export default connect(mapState, mapDispatch)(onClickOutside(Comments));
