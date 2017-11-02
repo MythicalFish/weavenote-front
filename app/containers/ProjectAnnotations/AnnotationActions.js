@@ -17,7 +17,7 @@ const AnnotationActions = (props) => {
     top: position.y,
   };
   const handleDelete = () => {
-    confirm('Are you sure you want to delete this annotation?').then(() => {
+    confirm('Are you sure you want to archive this annotation?').then(() => {
       deleteAnnotation({ id, image_id });
       hideMenu();
     });

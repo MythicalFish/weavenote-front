@@ -1,5 +1,12 @@
 import * as types from './constants';
 
+export function fetchAnnotations() {
+  return { type: types.FETCH_ANNOTATIONS };
+}
+export function fetchAnnotationsSuccess(response) {
+  return { type: types.FETCH_ANNOTATIONS_SUCCESS, response };
+}
+
 export function focusAnnotation(payload) {
   return { type: types.FOCUS_ANNOTATION, payload };
 }

@@ -33,6 +33,9 @@ function AnnotationsReducer(state = initialState, action) {
 
   switch (type) {
     //
+    case types.FETCH_ANNOTATIONS_SUCCESS:
+      return state.set('existing', fromJS(response));
+
     case FETCH_PROJECT_SUCCESS:
       return state.set('existing', fromJS(response.annotations));
 

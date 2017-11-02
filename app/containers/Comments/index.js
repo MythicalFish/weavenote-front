@@ -23,7 +23,9 @@ class Comments extends React.PureComponent {
     const { commentable } = this.props;
     const fetch = () => this.props.fetchComments({ commentable });
     fetch();
-    setInterval(() => fetch(), 10000);
+    if (process.env.NODE_ENV === 'production') {
+      setInterval(() => fetch(), 10000);
+    }
   }
   handleClickOutside = () => {
     const p = this.props;

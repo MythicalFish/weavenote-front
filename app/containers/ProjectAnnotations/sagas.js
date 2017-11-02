@@ -9,6 +9,7 @@ import { selectProjectID } from '../ProjectManager/selectors';
 
 export function* ProjectAnnotationsWatcher() {
   const watcher = [
+    yield takeLatest(types.FETCH_ANNOTATIONS, fetchAnnotations),
     yield takeLatest(types.CREATE_ANNOTATION, createAnnotation),
     yield takeLatest(types.UPDATE_ANNOTATION, updateAnnotation),
     yield takeLatest(types.DELETE_ANNOTATION, deleteAnnotation),
@@ -16,6 +17,15 @@ export function* ProjectAnnotationsWatcher() {
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
+}
+
+function* fetchAnnotations() {
+  const projectID = yield select(selectProjectID());
+  yield sagas.get(
+    'annotations',
+    { project_id: projectID },
+    actions.fetchAnnotationsSuccess
+  );
 }
 
 function* createAnnotation() {

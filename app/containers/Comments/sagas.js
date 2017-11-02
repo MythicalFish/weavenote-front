@@ -5,6 +5,7 @@ import { initialize } from 'redux-form';
 import * as sagas from 'utils/genericSagas';
 import { selectNewAnnotation } from 'containers/ProjectAnnotations/selectors';
 import {
+  fetchAnnotations,
   buildAnnotation,
   createAnnotation,
 } from 'containers/ProjectAnnotations/actions';
@@ -30,12 +31,11 @@ function* fetchComments({ payload }) {
 }
 
 function* createComment({ payload }) {
-  let response = yield sagas.post(
+  const response = yield sagas.post(
     'comments',
     payload,
     actions.createCommentSuccess
   );
-  response = response.payload;
   if (response.commentable !== 'Project') return;
   const annotation = yield select(selectNewAnnotation());
   if (annotation.getIn(['annotatable', 'type']) === 'Comment') {
@@ -57,6 +57,7 @@ function* deleteComment({ payload }) {
     payload,
     actions.deleteCommentSuccess
   );
+  yield put(fetchAnnotations());
 }
 
 const commentURL = (payload) => `comments/${payload.comment.get('id')}`;
