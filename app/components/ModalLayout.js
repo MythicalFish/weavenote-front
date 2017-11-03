@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import Icon from 'components/Icon';
+import ScrollArea from 'components/ScrollArea';
 
 class Content extends React.PureComponent {
   static propTypes = {
     handleClose: PropTypes.func.isRequired,
     noClickOutside: PropTypes.bool,
+    enableScroll: PropTypes.bool,
   };
   state = { klass: '' };
   componentDidMount() {
@@ -25,6 +27,14 @@ class Content extends React.PureComponent {
       handleClose();
     }, 550);
   };
+  ScrollContainer = ({ children }) => {
+    const { enableScroll } = this.props;
+    if (enableScroll) {
+      return <ScrollArea>{children}</ScrollArea>;
+    } else {
+      return <div>{children}</div>;
+    }
+  };
   render() {
     const p = this.props;
     const style = {};
@@ -35,18 +45,21 @@ class Content extends React.PureComponent {
     if (p.minHeight) style.minHeight = p.minHeight;
     let { klass } = this.state;
     if (p.cosy) klass += ' cosy';
+    const { ScrollContainer } = this;
     return (
       <div className={`modal-container ${klass}`} style={style}>
         <div className="modal-content">
-          {!p.hideCloseButton && (
-            <Icon
-              name="X"
-              className="modal-close"
-              onClick={this.handleClose}
-              size={20}
-            />
-          )}
-          {p.children}
+          <ScrollContainer>
+            {!p.hideCloseButton && (
+              <Icon
+                name="X"
+                className="modal-close"
+                onClick={this.handleClose}
+                size={20}
+              />
+            )}
+            {p.children}
+          </ScrollContainer>
         </div>
         {p.footer && p.footer}
       </div>
