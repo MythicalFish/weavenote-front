@@ -24,7 +24,7 @@ export function createCommentSuccess(response) {
 }
 
 export function updateComment(payload) {
-  return { type: types.UPDATE_COMMENT, payload: payload.toObject() };
+  return { type: types.UPDATE_COMMENT, payload };
 }
 
 export function updateCommentSuccess(response) {

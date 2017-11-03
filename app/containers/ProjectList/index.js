@@ -15,7 +15,7 @@ import {
 import { selectProjects } from './selectors';
 
 export class ProjectList extends React.PureComponent {
-  state = { view: 'Active Projects' };
+  state = { view: 'Active Styles' };
   componentDidMount() {
     this.props.fetchProjects();
   }

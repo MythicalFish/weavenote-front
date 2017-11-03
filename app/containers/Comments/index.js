@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import onClickOutside from 'react-onclickoutside';
 import NewComment from './subcomponents/NewComment';
 import Thread from './subcomponents/Thread';
+import Tabs from './subcomponents/Tabs';
 import {
   fetchComments,
   createComment,
@@ -19,16 +20,24 @@ import {
 import { startAnnotation } from '../ProjectAnnotations/actions';
 import { selectCurrentImage } from '../ProjectImages/selectors';
 import * as selectors from './selectors';
+import { VIEW } from './constants';
 
 class Comments extends React.PureComponent {
+  state = { view: VIEW.active };
   componentDidMount() {
-    const { commentable } = this.props;
-    const fetch = () => this.props.fetchComments({ commentable });
-    fetch();
+    this.fetchComments();
     if (process.env.NODE_ENV === 'production') {
-      setInterval(() => fetch(), 10000);
+      setInterval(() => this.fetchComments(), 10000);
     }
   }
+  changeView = (view) => {
+    this.setState({ view });
+  };
+  fetchComments = () => {
+    const { commentable } = this.props;
+    const archived = this.state.view !== VIEW.active;
+    this.props.fetchComments({ commentable, archived });
+  };
   handleClickOutside = () => {
     const p = this.props;
     if (p.isCreating || p.isReplying || p.isEditing || p.currentComment) {
@@ -43,9 +52,16 @@ class Comments extends React.PureComponent {
     delete cProps.data;
     return (
       <div>
-        <div className="mb2">
-          <NewComment {...cProps} />
-        </div>
+        <Tabs
+          currentView={this.state.view}
+          changeView={this.changeView}
+          fetchComments={this.fetchComments}
+        />
+        {this.state.view === VIEW.active && (
+          <div className="mb2">
+            <NewComment {...cProps} />
+          </div>
+        )}
         {comments.map((comment, index) => (
           <Thread
             key={`comment${comment.get('id')}`}

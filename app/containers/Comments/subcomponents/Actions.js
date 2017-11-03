@@ -12,16 +12,29 @@ const UploadIcon = (props) => (
 );
 
 const Actions = (props) => {
-  const { comment, commentable, startAnnotation, currentImage } = props;
+  const {
+    comment,
+    commentable,
+    startAnnotation,
+    currentImage,
+    updateComment,
+  } = props;
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
   };
   const { id, is_reply: isReply } = comment.toObject();
+  const label = isReply ? 'Reply' : 'Comment';
+  const deleteLabel = isReply ? 'Delete' : 'Archive';
   const actionable = { type: 'Comment', id };
   const handleDelete = () => {
-    confirm('Are you sure you want to archive this comment?').then(() => {
+    confirm(
+      `Are you sure you want to ${deleteLabel} this ${label}?`
+    ).then(() => {
       props.deleteComment({ comment, commentable });
     });
+  };
+  const handleRestore = () => {
+    updateComment({ archived: false });
   };
   const handleAnnotate = () => {
     startAnnotation({
@@ -35,22 +48,32 @@ const Actions = (props) => {
   const hasAnnotation = !!comment.get('annotation');
   return (
     <div>
-      <div className="actions smaller1">
-        <ActionIcon name="Edit" onClick={toggleEdit} tooltip="Edit" />
-        <ActionIcon name="Trash" tooltip="Archive" onClick={handleDelete} />
-        {startAnnotation &&
-          !hasAnnotation &&
-          !isReply && (
-            <ActionIcon
-              name="Plus"
-              tooltip="Annotate"
-              onClick={handleAnnotate}
-            />
+      {!comment.get('archived') ? (
+        <div className="actions smaller1">
+          <ActionIcon name="Edit" onClick={toggleEdit} tooltip="Edit" />
+          <ActionIcon
+            name="Folder"
+            tooltip={deleteLabel}
+            onClick={handleDelete}
+          />
+          {startAnnotation &&
+            !hasAnnotation &&
+            !isReply && (
+              <ActionIcon
+                name="Plus"
+                tooltip="Annotate"
+                onClick={handleAnnotate}
+              />
+            )}
+          {comment.get('images').size < props.maxImages && (
+            <ImageUploader imageable={actionable} Icon={UploadIcon} />
           )}
-        {comment.get('images').size < props.maxImages && (
-          <ImageUploader imageable={actionable} Icon={UploadIcon} />
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="actions smaller1">
+          <ActionIcon name="Share" tooltip="Restore" onClick={handleRestore} />
+        </div>
+      )}
     </div>
   );
 };

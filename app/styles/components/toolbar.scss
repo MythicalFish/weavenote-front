@@ -58,6 +58,23 @@
       }
     }
   }
+  &.toolbar-tiny {
+    height: auto;
+    nav {
+      ul {
+        li {
+          a,
+          button {
+            font-size: 0.8em;
+            padding: 5px;
+            &.active {
+              border-bottom-width: 1px;
+            }
+          }
+        }
+      }
+    }
+  }
   &.toolbar-flex {
     @extend .bg-white;
     @extend .flex;

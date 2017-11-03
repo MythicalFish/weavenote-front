@@ -24,7 +24,7 @@ class Comment extends React.PureComponent {
   };
   isEditing = () => this.props.isEditing === this.props.comment.get('id');
   render() {
-    const { comment, commentable, isSelected, className } = this.props;
+    const { comment, commentable, isSelected } = this.props;
     const id = comment.get('id');
     const authorName = this.isOwnComment()
       ? 'You'

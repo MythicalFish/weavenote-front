@@ -20,6 +20,9 @@
     .comment-body {
       @extend .flex-auto;
       @extend .pb2;
+      .comment-text {
+        padding-right: $space-2;
+      }
     }
   }
   &:not(:last-child) {
@@ -53,7 +56,7 @@
       }
     }
     .comment-text {
-      padding: $space-2 0;
+      padding: $space-2 $space-2 $space-2 0;
     }
   }
   .input {

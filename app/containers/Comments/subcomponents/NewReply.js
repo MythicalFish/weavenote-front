@@ -7,6 +7,7 @@ const NewReply = (props) => {
   const { createComment, comment, isReplying, writeReply } = props;
   const id = comment.get('id');
   const commentable = { type: 'Comment', id };
+  if (comment.get('archived')) return null;
   if (isReplying === id) {
     return (
       <div className="comment-newreply">
