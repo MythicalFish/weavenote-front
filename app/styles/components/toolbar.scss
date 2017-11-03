@@ -16,24 +16,27 @@
         @extend .flex-auto;
         @extend .flex-column;
         margin: 0 $space-2;
-        button:not(.avatar-list) {
-          padding: 0 $space-1;
-        }
-        button:not(.avatar-list),
-        a {
-          @extend .flex-auto;
-          background: transparent;
-          border: none;
-          display: block;
-          width: 100%;
-          height: 100%;
-          text-align: center;
-          color: $dark4;
-          font-size: 0.9em;
+        position: relative;
+        .nav-item {
+          &:not(.btn) {
+            padding: 0 $space-1;
+            @extend .flex-auto;
+            border: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 0.9em;
+            color: $dark4;
+            background: transparent;
+          }
           &.active {
             border-bottom: 2px solid $poiple;
             color: $poiple;
           }
+        }
+        > div {
+          height: 100%;
         }
         .avatar-list {
           @extend .flex-auto;
@@ -47,8 +50,7 @@
     nav {
       ul {
         li {
-          a,
-          button {
+          .nav-item {
             padding: $space-1;
           }
           &:not(:last-child) {
@@ -63,8 +65,7 @@
     nav {
       ul {
         li {
-          a,
-          button {
+          .nav-item {
             font-size: 0.8em;
             padding: 5px;
             &.active {

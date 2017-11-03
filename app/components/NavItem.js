@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 
 export default function NavItem(props) {
-  const { label, handleClick, isActive } = props;
-  let buttonClass;
-  if (isActive) {
-    buttonClass = 'active';
-  }
+  const { label, handleClick, isActive, className } = props;
+  let buttonClass = className || '';
+  if (isActive) buttonClass += ' active';
+  buttonClass += ' nav-item';
   return (
     <button className={buttonClass} onClick={handleClick}>
       {label}
@@ -17,4 +16,5 @@ NavItem.propTypes = {
   label: PropTypes.string.isRequired,
   handleClick: PropTypes.func,
   isActive: PropTypes.bool,
+  className: PropTypes.string,
 };

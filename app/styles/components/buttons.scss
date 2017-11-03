@@ -11,7 +11,9 @@ a {
     text-decoration: none;
   }
 }
-button {
+button,
+.btn,
+.btn:focus {
   font-weight: normal;
   font-size: inherit;
   font-family: inherit;
@@ -27,7 +29,6 @@ button {
 .btn,
 .btn:focus {
   padding: $space-2 $space-3;
-  @extend button;
   @include transition('all .2s');
   @include borderRadius();
   border: 1px solid $poiple;

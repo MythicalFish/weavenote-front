@@ -33,13 +33,26 @@ export default function Toolbar(props) {
             <Nav name="Instructions" />
           </li>
           <li>
-            <NavItem label="Export" handleClick={() => openModal('export')} />
+            <div className="flex items-center">
+              <div className="mr2">
+                <NavItem
+                  className="btn btn-sm"
+                  label="Download"
+                  handleClick={() => openModal('export')}
+                />
+              </div>
+              <NavItem
+                className="btn btn-sm btn-secondary"
+                label="Invite"
+                handleClick={() => openModal('collaborators')}
+              />
+            </div>
           </li>
           <li>
             <AvatarList
               avatars={props.avatarList}
               onClick={() => openModal('collaborators')}
-              showPlusButton
+              showPlusButton={false}
             />
           </li>
         </ul>
