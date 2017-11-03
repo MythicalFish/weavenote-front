@@ -82,7 +82,7 @@ class ProjectManager extends React.PureComponent {
             </div>
             <div className="col-xs-6 col-md-6 y-fill">
               <ScrollArea className="pb4">
-                <ProjectImages {...{ project, currentView }} />
+                <ProjectImages {...{ project, currentView, ...this.props }} />
               </ScrollArea>
             </div>
             <div className="col-xs-6 col-md-3 y-fill">

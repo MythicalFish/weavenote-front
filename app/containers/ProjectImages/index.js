@@ -21,14 +21,16 @@ class ProjectImages extends React.PureComponent {
     this.props.initialize('ImageForm', image, { form: 'ImageForm' });
   };
   render() {
-    const { project, images, currentImage: image } = this.props;
+    const { project, images, currentImage: image, abilities } = this.props;
     const imageable = { type: 'Project', id: project.get('id') };
+    const isRestricted = !abilities.getIn(['Image', 'update']);
+    const canCreate = abilities.getIn(['Image', 'create']);
     return (
       <div className="lh0 px2">
         {!image && <Image src={PLACEHOLDER} />}
         {image && (
           <div className="center">
-            <ImageUI {...{ image, ...this.props }} />
+            <ImageUI {...{ image, isRestricted, ...this.props }} />
           </div>
         )}
         <div className="pt3 flex justify-center blurrable">
@@ -37,9 +39,11 @@ class ProjectImages extends React.PureComponent {
             onSelect={this.selectImage}
             currentImage={image}
           />
-          <div className="ml1">
-            <ImageUploader {...{ imageable }} />
-          </div>
+          {canCreate && (
+            <div className="ml1">
+              <ImageUploader {...{ imageable }} />
+            </div>
+          )}
         </div>
       </div>
     );

@@ -3,7 +3,7 @@ import Icon from 'components/Icon';
 import ImageForm from 'containers/ImageForm';
 
 const Form = (props) => {
-  const { unfocusThis, doNothing, initialValues } = props;
+  const { unfocusThis, doNothing } = props;
   return (
     <div className="image-form flex items-center justify-center">
       <Icon
@@ -15,18 +15,13 @@ const Form = (props) => {
         }}
       />
       <div className="flex-none">
-        <ImageForm
-          initialValues={initialValues}
-          enableReinitialize
-          imgID={initialValues.get('id')} // This is only to cause a re-render
-        />
+        <ImageForm {...props} enableReinitialize />
       </div>
     </div>
   );
 };
 
 Form.propTypes = {
-  initialValues: PropTypes.object,
   unfocusThis: PropTypes.func,
   doNothing: PropTypes.func,
 };
