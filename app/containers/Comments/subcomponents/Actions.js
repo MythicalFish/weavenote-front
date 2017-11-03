@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 import ImageUploader from 'containers/ImageUploader';
 import confirm from 'utils/confirm';
+import { VIEW } from '../constants';
 
 const ActionIcon = (props) => (
   <Icon {...props} color="malibu" size={12} className="p0" />
@@ -18,6 +19,7 @@ const Actions = (props) => {
     startAnnotation,
     currentImage,
     updateComment,
+    changeView,
   } = props;
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
@@ -34,7 +36,8 @@ const Actions = (props) => {
     });
   };
   const handleRestore = () => {
-    updateComment({ archived: false });
+    updateComment({ commentable, comment: comment.set('archived', false) });
+    changeView(VIEW.active);
   };
   const handleAnnotate = () => {
     startAnnotation({
@@ -48,7 +51,7 @@ const Actions = (props) => {
   const hasAnnotation = !!comment.get('annotation');
   return (
     <div>
-      {!comment.get('archived') ? (
+      {!comment.get('archived') && (
         <div className="actions smaller1">
           <ActionIcon name="Edit" onClick={toggleEdit} tooltip="Edit" />
           <ActionIcon
@@ -69,11 +72,17 @@ const Actions = (props) => {
             <ImageUploader imageable={actionable} Icon={UploadIcon} />
           )}
         </div>
-      ) : (
-        <div className="actions smaller1">
-          <ActionIcon name="Share" tooltip="Restore" onClick={handleRestore} />
-        </div>
       )}
+      {comment.get('archived') &&
+        !isReply && (
+          <div className="actions smaller1">
+            <ActionIcon
+              name="Share"
+              tooltip="Restore"
+              onClick={handleRestore}
+            />
+          </div>
+        )}
     </div>
   );
 };
@@ -81,6 +90,8 @@ const Actions = (props) => {
 Actions.propTypes = {
   startAnnotation: PropTypes.func,
   cancelCommentAction: PropTypes.func,
+  updateComment: PropTypes.func,
+  changeView: PropTypes.func,
   comment: PropTypes.object,
   commentable: PropTypes.object,
   currentImage: PropTypes.object,

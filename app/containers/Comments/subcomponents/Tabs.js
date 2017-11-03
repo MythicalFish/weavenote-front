@@ -3,16 +3,13 @@ import NavItem from 'components/NavItem';
 import { VIEW } from '../constants';
 
 const Tabs = (props) => {
-  const { currentView, changeView, fetchComments } = props;
+  const { currentView, changeView } = props;
   const Nav = ({ name }) => (
     <NavItem
       label={name}
       isActive={currentView === name}
       handleClick={() => {
         changeView(name);
-        setTimeout(() => {
-          fetchComments();
-        }, 50);
       }}
     />
   );
@@ -35,8 +32,6 @@ const Tabs = (props) => {
 Tabs.propTypes = {
   currentView: PropTypes.string,
   changeView: PropTypes.func,
-  commentable: PropTypes.object,
-  fetchComments: PropTypes.func,
 };
 
 export default Tabs;

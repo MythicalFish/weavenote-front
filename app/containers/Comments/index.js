@@ -32,6 +32,9 @@ class Comments extends React.PureComponent {
   }
   changeView = (view) => {
     this.setState({ view });
+    setTimeout(() => {
+      this.fetchComments();
+    }, 50);
   };
   fetchComments = () => {
     const { commentable } = this.props;
@@ -50,13 +53,11 @@ class Comments extends React.PureComponent {
     if (!comments) return null;
     const cProps = { ...this.props, maxImages: 3 };
     delete cProps.data;
+    cProps.currentView = this.state.view;
+    cProps.changeView = this.changeView;
     return (
       <div>
-        <Tabs
-          currentView={this.state.view}
-          changeView={this.changeView}
-          fetchComments={this.fetchComments}
-        />
+        <Tabs {...cProps} />
         {this.state.view === VIEW.active && (
           <div className="mb2">
             <NewComment {...cProps} />
