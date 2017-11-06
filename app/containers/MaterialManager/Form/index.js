@@ -43,7 +43,7 @@ export class MaterialManager extends React.PureComponent {
     return t.includes(this.state.type);
   };
 
-  abilities = this.props.abilities.get('Material');
+  abilities = this.props.abilities.get('Material').toJS();
   isRestricted = !this.abilities.update;
   Field = fieldConstructor({
     isRestricted: this.isRestricted,

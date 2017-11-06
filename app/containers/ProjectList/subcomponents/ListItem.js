@@ -6,7 +6,7 @@ import AvatarList from 'components/AvatarList';
 import confirm from 'utils/confirm';
 
 export default function ListItem(props) {
-  const { project, fileProject, deleteProject } = props;
+  const { project, fileProject, deleteProject, abilities } = props;
   const id = project.get('id');
   const archived = project.get('archived');
   const url = `/projects/${id}`;
@@ -37,14 +37,16 @@ export default function ListItem(props) {
       </td>
       <td className="pl0 cell-fit">
         <div className="flex items-end">
-          <Dropdown icon="more">
-            <Link to={url}>Manage</Link>
-            <button onClick={() => fileProject({ id, archived: !archived })}>
-              {archived ? 'Restore' : 'Archive'}
-            </button>
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleDuplicate}>Duplicate</button>
-          </Dropdown>
+          {abilities.get('update') && (
+            <Dropdown icon="more">
+              <Link to={url}>Manage</Link>
+              <button onClick={() => fileProject({ id, archived: !archived })}>
+                {archived ? 'Restore' : 'Archive'}
+              </button>
+              <button onClick={handleDelete}>Delete</button>
+              <button onClick={handleDuplicate}>Duplicate</button>
+            </Dropdown>
+          )}
         </div>
       </td>
     </tr>
@@ -56,4 +58,5 @@ ListItem.propTypes = {
   fileProject: PropTypes.func,
   deleteProject: PropTypes.func,
   duplicateProject: PropTypes.func,
+  abilities: PropTypes.object,
 };

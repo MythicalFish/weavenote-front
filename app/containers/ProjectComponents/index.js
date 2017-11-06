@@ -45,15 +45,18 @@ class Components extends React.Component {
       materialListHeight,
       editMaterial,
     };
+    const abilities = this.props.abilities.get('Material').toJS();
     return (
       <div>
-        <Button
-          onClick={() => this.props.openModal('materials')}
-          label="Add material"
-          small
-        />
+        {abilities.create && (
+          <Button
+            onClick={() => this.props.openModal('materials')}
+            label="Add material"
+            small
+          />
+        )}
         <div className="mt3">
-          <List {...{ ...mProps }} />
+          <List {...{ ...mProps, abilities }} />
         </div>
         <MaterialCost {...mProps} />
         <AddMaterial {...mProps} />
@@ -63,11 +66,11 @@ class Components extends React.Component {
 }
 
 Components.propTypes = {
-  project: PropTypes.object,
   fetchComponents: PropTypes.func,
   openModal: PropTypes.func,
   fetchMaterials: PropTypes.func,
   materials: PropTypes.object,
+  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {

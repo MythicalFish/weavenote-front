@@ -14,17 +14,21 @@ export default class AddMaterial extends React.PureComponent {
       createComponents,
       selectedMaterials,
       createMaterial,
-      setView,
       materialListHeight,
       editMaterial,
       materialID,
       view,
+      abilities,
     } = this.props;
     return (
       <Modal id="materials" width="100%" maxWidth="1000px">
-        <div className="py3 px4">
-          <Toolbar currentView={view} changeView={setView} />
-        </div>
+        {abilities.getIn(['Material', 'update']) ? (
+          <div className="py3 px4">
+            <Toolbar {...this.props} />
+          </div>
+        ) : (
+          <div className="pt3" />
+        )}
         {view === VIEW.list && (
           <div>
             <div className="vh-ymax50" style={{ height: materialListHeight() }}>
@@ -83,8 +87,8 @@ AddMaterial.propTypes = {
   createComponents: PropTypes.func,
   selectedMaterials: PropTypes.object,
   editMaterial: PropTypes.func,
-  setView: PropTypes.func,
   materialID: PropTypes.number,
   materialListHeight: PropTypes.func,
   view: PropTypes.string,
+  abilities: PropTypes.object,
 };

@@ -20,6 +20,8 @@ const Actions = (props) => {
     currentImage,
     updateComment,
     changeView,
+    isOwnComment,
+    abilities,
   } = props;
   const toggleEdit = () => {
     props.editComment({ comment, commentable });
@@ -53,13 +55,17 @@ const Actions = (props) => {
     <div>
       {!comment.get('archived') && (
         <div className="actions smaller1">
-          <ActionIcon name="Edit" onClick={toggleEdit} tooltip="Edit" />
-          <ActionIcon
-            name="Folder"
-            tooltip={deleteLabel}
-            onClick={handleDelete}
-          />
-          {startAnnotation &&
+          {isOwnComment && (
+            <ActionIcon name="Edit" onClick={toggleEdit} tooltip="Edit" />
+          )}
+          {(isOwnComment || abilities.destroy) && (
+            <ActionIcon
+              name="Trash"
+              tooltip={deleteLabel}
+              onClick={handleDelete}
+            />
+          )}
+          {isOwnComment &&
             !hasAnnotation &&
             !isReply && (
               <ActionIcon
@@ -68,9 +74,10 @@ const Actions = (props) => {
                 onClick={handleAnnotate}
               />
             )}
-          {comment.get('images').size < props.maxImages && (
-            <ImageUploader imageable={actionable} Icon={UploadIcon} />
-          )}
+          {isOwnComment &&
+            comment.get('images').size < props.maxImages && (
+              <ImageUploader imageable={actionable} Icon={UploadIcon} />
+            )}
         </div>
       )}
       {comment.get('archived') &&
@@ -96,6 +103,8 @@ Actions.propTypes = {
   commentable: PropTypes.object,
   currentImage: PropTypes.object,
   maxImages: PropTypes.number,
+  abilities: PropTypes.object,
+  isOwnComment: PropTypes.bool,
 };
 
 export default Actions;

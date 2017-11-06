@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import ImageUploader from 'containers/ImageUploader';
 import Image from 'components/Image';
 
-export default function FormImage({ material }) {
+export default function FormImage({ initialValues: material, isRestricted }) {
+  if (!material) return null;
   const iProps = {
     maxImages: 1,
     imageable: {
@@ -20,16 +21,19 @@ export default function FormImage({ material }) {
           <Image src={image.getIn(['urls', 'small'])} />
         </div>
       )}
-      <ImageUploader
-        {...iProps}
-        label={uploadLabel}
-        btnClass="btn-secondary btn-sm"
-        inlineIcon="file-image-o"
-      />
+      {!isRestricted && (
+        <ImageUploader
+          {...iProps}
+          label={uploadLabel}
+          btnClass="btn-secondary btn-sm"
+          inlineIcon="file-image-o"
+        />
+      )}
     </div>
   );
 }
 
 FormImage.propTypes = {
-  material: PropTypes.object,
+  initialValues: PropTypes.object,
+  isRestricted: PropTypes.bool,
 };

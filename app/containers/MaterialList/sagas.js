@@ -24,6 +24,5 @@ export function* deleteMaterial({ id }) {
 }
 
 export function* duplicateMaterial({ id }) {
-  console.log('asdasdasd');
   yield sagas.post(`materials/${id}`, null, actions.duplicateMaterialSuccess);
 }

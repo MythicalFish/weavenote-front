@@ -55,6 +55,7 @@ class Comments extends React.PureComponent {
     delete cProps.data;
     cProps.currentView = this.state.view;
     cProps.changeView = this.changeView;
+    cProps.abilities = this.props.abilities.get('Comment').toJS();
     return (
       <div>
         <Tabs {...cProps} />
@@ -81,6 +82,7 @@ class Comments extends React.PureComponent {
 Comments.propTypes = {
   fetchComments: PropTypes.func,
   data: PropTypes.object,
+  abilities: PropTypes.object,
   commentable: PropTypes.object,
 };
 

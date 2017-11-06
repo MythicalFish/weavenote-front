@@ -29,8 +29,7 @@ function ProjectImagesReducer(state = initialState, action) {
       if (imageableType() === 'Project') {
         return state.set('imageList', fromJS(response.images));
       }
-      break;
-
+      return state;
     default:
       return state;
   }

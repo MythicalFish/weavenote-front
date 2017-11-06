@@ -10,6 +10,7 @@ const ListItem = (props) => {
     deleteComponent,
     openModal,
     editMaterial,
+    abilities,
   } = props;
   const handleClick = () => {
     editMaterial(material);
@@ -33,19 +34,25 @@ const ListItem = (props) => {
       <Col onClick={handleClick}>{material.getIn(['type', 'name'])}</Col>
       <Col onClick={handleClick}>{material.get('name')}</Col>
       <Col>
-        <Input
-          defaultValue={component.get('quantity')}
-          disableReduxForm
-          onChange={(e) =>
-            updateComponent(component.set('quantity', e.target.value))}
-        />
+        {abilities.update ? (
+          <Input
+            defaultValue={component.get('quantity')}
+            disableReduxForm
+            onChange={(e) =>
+              updateComponent(component.set('quantity', e.target.value))}
+          />
+        ) : (
+          <span>{component.get('quantity')}</span>
+        )}
       </Col>
       <Col className="right-align">
-        <Dropdown icon="more">
-          <button onClick={() => deleteComponent({ ...component.toJS() })}>
-            Delete
-          </button>
-        </Dropdown>
+        {abilities.destroy && (
+          <Dropdown icon="more">
+            <button onClick={() => deleteComponent({ ...component.toJS() })}>
+              Delete
+            </button>
+          </Dropdown>
+        )}
       </Col>
     </tr>
   );
@@ -55,8 +62,10 @@ ListItem.propTypes = {
   editMaterial: PropTypes.func,
   openModal: PropTypes.func,
   deleteComponent: PropTypes.func,
+  updateComponent: PropTypes.func,
   component: PropTypes.object,
   material: PropTypes.object,
+  abilities: PropTypes.object,
 };
 
 export default ListItem;

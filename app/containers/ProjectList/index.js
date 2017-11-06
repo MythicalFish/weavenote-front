@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Layout from 'components/Layout';
 import Toolbar from './subcomponents/Toolbar';
-import ListItem from './subcomponents/ListItem';
+import List from './subcomponents/List';
 import {
   fetchProjects,
   createProject,
@@ -23,47 +23,24 @@ export class ProjectList extends React.PureComponent {
     this.setState({ view });
   };
   render() {
-    const { projects } = this.props;
+    const pProps = {
+      ...this.props,
+      abilities: this.props.abilities.get('Project'),
+      changeView: this.changeView,
+      currentView: this.state.view,
+    };
     return (
-      <Layout {...this.props}>
-        <Toolbar
-          {...this.props}
-          currentView={this.state.view}
-          changeView={this.changeView}
-        />
-        <div className="container-narrow px2 py4">
-          <table>
-            <thead>
-              <tr>
-                <th />
-                <th>Name</th>
-                <th>Style number</th>
-                <th>Collection</th>
-                <th>Notifications</th>
-                <th>Team</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {projects &&
-                projects.map((project, index) => (
-                  <ListItem
-                    key={`project-${index}`}
-                    project={project}
-                    {...this.props}
-                  />
-                ))}
-            </tbody>
-          </table>
-        </div>
+      <Layout {...pProps}>
+        <Toolbar {...pProps} />
+        <List {...pProps} />
       </Layout>
     );
   }
 }
 
 ProjectList.propTypes = {
-  projects: PropTypes.object,
   fetchProjects: PropTypes.func,
+  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {

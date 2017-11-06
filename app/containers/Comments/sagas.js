@@ -48,7 +48,6 @@ function* createComment({ payload }) {
 function* updateComment({ payload }) {
   let p = payload;
   if (p.toObject) p = p.toObject();
-  console.log(p.comment.toJS());
   yield sagas.patch(commentURL(p), p, actions.updateCommentSuccess);
 }
 

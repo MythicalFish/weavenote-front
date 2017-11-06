@@ -8,14 +8,7 @@ import Image from './FormImage';
 import Supplier from './FormSupplier';
 
 const Form = (props) => {
-  const {
-    isNew,
-    handleSubmit,
-    initialValues: material,
-    submitting,
-    isRestricted,
-    project,
-  } = props;
+  const { isNew, handleSubmit, submitting, isRestricted, project } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -28,11 +21,9 @@ const Form = (props) => {
           </div>
         </div>
         <div className="col-xs-12 col-md-6">
-          {material.get('id') && (
-            <div className="box">
-              <Image {...{ material }} />
-            </div>
-          )}
+          <div className="box">
+            <Image {...props} />
+          </div>
           <div className="box">
             <Supplier {...props} />
           </div>
@@ -62,7 +53,6 @@ Form.propTypes = {
   isRestricted: PropTypes.bool,
   isNew: PropTypes.bool,
   handleSubmit: PropTypes.func,
-  initialValues: PropTypes.object,
   project: PropTypes.object,
 };
 

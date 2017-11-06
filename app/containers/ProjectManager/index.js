@@ -37,7 +37,7 @@ class ProjectManager extends React.PureComponent {
 
   ViewWrapper = ({ children }) => {
     if (this.state.view === 'Measurements') return children;
-    return <ScrollArea className="pl4">{children}</ScrollArea>;
+    return <ScrollArea className="lg-pl4">{children}</ScrollArea>;
   };
   render() {
     const { project } = this.props;
@@ -70,10 +70,10 @@ class ProjectManager extends React.PureComponent {
 
     return (
       <Layout {...this.props} Header={this.Header}>
-        <div className="container-wide px4 pt4 y-fill">
+        <div className="container-wide px3 lg-px4 pt3 lg-pt4 y-fill">
           <div className="row y-fill lg-mln4">
             <div className="col-xs-12 col-md-3 y-fill">
-              <ScrollArea className="pr4 lg-pl4">
+              <ScrollArea className="lg-pr4 lg-pl4">
                 <Comments
                   {...this.props}
                   commentable={{ type: 'Project', id }}
@@ -81,7 +81,7 @@ class ProjectManager extends React.PureComponent {
               </ScrollArea>
             </div>
             <div className="col-xs-6 col-md-6 y-fill">
-              <ScrollArea className="pb4">
+              <ScrollArea className="pb3 lg-pb4">
                 <ProjectImages {...{ project, currentView, ...this.props }} />
               </ScrollArea>
             </div>
@@ -123,7 +123,7 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   project: selectors.selectProject(),
   avatarList: selectors.selectAvatarList(),
-  abilities: selectors.selectAbilities(),
+  projectAbilities: selectors.selectAbilities(),
   userRole: selectors.selectUserRole(),
 });
 

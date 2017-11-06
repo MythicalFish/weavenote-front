@@ -25,7 +25,7 @@ class Dropdown extends React.PureComponent {
   };
 
   label = () => {
-    const { value, label, icon } = this.props;
+    const { value, label, icon, readOnly } = this.props;
     const bProps = { onClick: this.toggleState(), type: 'button' };
 
     if (label || icon) {
@@ -64,9 +64,11 @@ class Dropdown extends React.PureComponent {
             )}
             {val.hex_code && <Dot className="ml1" color={val.hex_code} />}
           </div>
-          <div className="flex-none">
-            <i className="fa fa-chevron-down smaller3 opa4" />
-          </div>
+          {!readOnly && (
+            <div className="flex-none">
+              <i className="fa fa-chevron-down smaller3 opa4" />
+            </div>
+          )}
         </div>
       </button>
     );

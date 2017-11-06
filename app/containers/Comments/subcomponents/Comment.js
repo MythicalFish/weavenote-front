@@ -18,17 +18,12 @@ const Date = ({ value }) => (
 );
 
 class Comment extends React.PureComponent {
-  isOwnComment = () => {
-    const { user, comment } = this.props;
-    return user.get('email') === comment.getIn(['user', 'email']);
-  };
-  isEditing = () => this.props.isEditing === this.props.comment.get('id');
   render() {
-    const { comment, commentable, isSelected } = this.props;
+    const { comment, commentable, isSelected, user } = this.props;
     const id = comment.get('id');
-    const authorName = this.isOwnComment()
-      ? 'You'
-      : comment.getIn(['user', 'name']);
+    const isEditing = this.props.isEditing === comment.get('id');
+    const isOwnComment = user.get('email') === comment.getIn(['user', 'email']);
+    const authorName = isOwnComment ? 'You' : comment.getIn(['user', 'name']);
     return (
       <Wrapper user={comment.get('user')}>
         {isSelected && (
@@ -37,14 +32,14 @@ class Comment extends React.PureComponent {
             <Date value={comment.get('created_at')} />
           </div>
         )}
-        {this.isEditing() ? (
+        {isEditing ? (
           <div className="comment-edit">
             <Form
               onSubmit={this.props.updateComment}
               initialValues={{ commentable, comment }}
               imageable={{ type: 'Comment', id }}
               maxImages={this.props.maxImages}
-              deletable={this.isOwnComment()}
+              deletable={isOwnComment}
               {...this.props}
             />
           </div>
@@ -53,8 +48,7 @@ class Comment extends React.PureComponent {
         )}
         {isSelected && <ImageThumbnails images={comment.get('images')} />}
         {isSelected &&
-          this.isOwnComment() &&
-          !this.isEditing() && <Actions {...this.props} />}
+          !isEditing && <Actions {...this.props} isOwnComment={isOwnComment} />}
       </Wrapper>
     );
   }

@@ -4,12 +4,12 @@ import Icon from 'components/Icon';
 import { VIEW } from '../constants';
 
 export default function AddMaterialToolbar(props) {
-  const { changeView, currentView } = props;
+  const { changeView, view } = props;
   const Nav = ({ name }) => (
     <li>
       <NavItem
         label={name}
-        isActive={currentView === name}
+        isActive={view === name}
         handleClick={() => changeView(name)}
       />
     </li>
@@ -20,7 +20,7 @@ export default function AddMaterialToolbar(props) {
   return (
     <header className="toolbar toolbar-compact flex justify-between">
       <div>
-        {currentView === VIEW.edit && (
+        {view === VIEW.edit && (
           <Icon
             onClick={() => changeView(VIEW.list)}
             color="gray"
@@ -31,7 +31,7 @@ export default function AddMaterialToolbar(props) {
       </div>
       <nav>
         <ul>
-          {currentView === VIEW.edit ? (
+          {view === VIEW.edit ? (
             <Nav name={VIEW.edit} />
           ) : (
             [
@@ -48,5 +48,5 @@ export default function AddMaterialToolbar(props) {
 
 AddMaterialToolbar.propTypes = {
   changeView: PropTypes.func,
-  currentView: PropTypes.string,
+  view: PropTypes.string,
 };
