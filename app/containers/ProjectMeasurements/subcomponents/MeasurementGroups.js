@@ -4,7 +4,7 @@ import MeasurementGroup from './MeasurementGroup';
 import { COLUMNS_OFFSET } from '../constants';
 
 const SortableMeasurementGroups = SortableContainer((props) => {
-  const { measurements, updateMeasurements } = props;
+  const { measurements, updateMeasurements, readOnly } = props;
   return (
     <div className="flex cut" {...COLUMNS_OFFSET}>
       {measurements.groups.map((group, index) => (
@@ -16,6 +16,7 @@ const SortableMeasurementGroups = SortableContainer((props) => {
             measurements,
             doDelete: props.deleteGroup,
             updateMeasurements,
+            readOnly,
           }}
         />
       ))}
@@ -41,6 +42,7 @@ const MeasurementGroups = (props) => (
 MeasurementGroups.propTypes = {
   measurements: PropTypes.object,
   reorder: PropTypes.func,
+  readOnly: PropTypes.bool,
 };
 
 export default MeasurementGroups;

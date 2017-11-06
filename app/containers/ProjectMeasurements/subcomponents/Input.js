@@ -12,17 +12,19 @@ class Input extends React.PureComponent {
   }, 1000);
   minSize = 3;
   scaleInput = () => {
-    const { element: e, minSize: min } = this;
-    let length = e.value.length;
+    const { element: e, minSize: min, defaultValue } = this;
+    let length = defaultValue;
+    if (e) length = e.value.length;
     length = length <= min ? min : length;
     length += 1;
     e.size = length;
   };
   render() {
-    const { defaultValue, maxLength, placeholder } = this.props;
+    const { defaultValue, maxLength, placeholder, readOnly } = this.props;
     const fProps = {
       placeholder,
       defaultValue,
+      readOnly: !!readOnly,
       maxLength: maxLength || 12,
       ref: (f) => (this.element = f),
       onFocus: () => this.element.select(),
@@ -36,6 +38,7 @@ class Input extends React.PureComponent {
 }
 
 Input.propTypes = {
+  readOnly: PropTypes.bool,
   focus: PropTypes.bool,
   placeholder: PropTypes.string,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

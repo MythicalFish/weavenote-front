@@ -31,6 +31,7 @@ $bStyle: 1px solid #ccc;
     font-weight: bold;
     width: auto;
   }
+  span,
   input,
   label {
     border: none;
@@ -44,6 +45,9 @@ $bStyle: 1px solid #ccc;
     border-radius: 0;
     -webkit-border-radius: 0;
     background: transparent;
+  }
+  span.placeholder {
+    color: $dark3;
   }
   input {
     width: 100%;

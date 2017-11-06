@@ -36,7 +36,7 @@ class ProjectMeasurements extends React.PureComponent {
   };
   render() {
     const { Wrapper } = this;
-    const { measurements: m } = this.props;
+    const { measurements: m, abilities } = this.props;
     const { isModal } = this.state;
     if (!m) return null;
     return (
@@ -47,6 +47,7 @@ class ProjectMeasurements extends React.PureComponent {
             lastUpdated: m.timestamp,
             enableReinitialize: true,
             showInModal: () => this.setState({ isModal: true }),
+            readOnly: !abilities.getIn(['Measurement', 'update']),
             isModal,
           }}
         />
@@ -58,6 +59,7 @@ class ProjectMeasurements extends React.PureComponent {
 ProjectMeasurements.propTypes = {
   measurements: PropTypes.object,
   fetchMeasurements: PropTypes.func,
+  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {

@@ -8,19 +8,21 @@ const Handle = (props) => <div className="handle-left" {...props} />;
 class MeasurementNameLabel extends React.PureComponent {
   state = { active: false };
   render() {
-    const { name, updateMeasurements, deleteName } = this.props;
+    const { name, updateMeasurements, deleteName, readOnly } = this.props;
     const handleChange = (value) => {
       updateMeasurements({ names: [Object.assign(name, { value })] });
     };
     return (
       <div className="column-cell hoverable relative">
         {this.state.active && <div className="row-highlight" />}
-        <Handle />
-        <DeleteButton
-          resourceName="row"
-          onClick={() => deleteName(name.id)}
-          className="left-of"
-        />
+        {!readOnly && <Handle />}
+        {!readOnly && (
+          <DeleteButton
+            resourceName="row"
+            onClick={() => deleteName(name.id)}
+            className="left-of"
+          />
+        )}
         <div className="flex">
           <label className="identifier flex-none">{name.identifier}</label>
           <Input
@@ -28,6 +30,7 @@ class MeasurementNameLabel extends React.PureComponent {
             defaultValue={name.value}
             maxLength={25}
             placeholder="Untitled"
+            readOnly={readOnly}
           />
         </div>
       </div>
@@ -36,6 +39,7 @@ class MeasurementNameLabel extends React.PureComponent {
 }
 
 MeasurementNameLabel.propTypes = {
+  readOnly: PropTypes.bool,
   name: PropTypes.object,
   updateMeasurements: PropTypes.func,
   deleteName: PropTypes.func,

@@ -5,7 +5,7 @@ import MeasurementNameColumn from './MeasurementNameColumn';
 import MeasurementGroups from './MeasurementGroups';
 
 const Form = (props) => {
-  const { project, showInModal, isModal } = props;
+  const { project, showInModal, isModal, readOnly } = props;
   const id = project.get('id');
   return (
     <div className="y-fill flex flex-column">
@@ -17,19 +17,23 @@ const Form = (props) => {
           <MeasurementGroups {...props} />
         </div>
         <div className="flex-none">
-          <PlusButton
-            size={25}
-            onClick={() => props.createGroup(id)}
-            className="p0"
-          />
+          {!readOnly && (
+            <PlusButton
+              size={25}
+              onClick={() => props.createGroup(id)}
+              className="p0"
+            />
+          )}
         </div>
       </div>
       <div className="pt1 flex">
-        <PlusButton
-          size={25}
-          onClick={() => props.createName(id)}
-          className="p0"
-        />
+        {!readOnly && (
+          <PlusButton
+            size={25}
+            onClick={() => props.createName(id)}
+            className="p0"
+          />
+        )}
         {!isModal && (
           <div className="ml1">
             <Button
@@ -46,6 +50,7 @@ const Form = (props) => {
 };
 
 Form.propTypes = {
+  readOnly: PropTypes.bool,
   project: PropTypes.object,
   createName: PropTypes.func,
   showInModal: PropTypes.func,

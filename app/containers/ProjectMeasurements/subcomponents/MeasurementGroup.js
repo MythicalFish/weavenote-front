@@ -17,21 +17,24 @@ class MeasurementGroup extends React.PureComponent {
   };
   render() {
     //
-    const { measurements, group, fieldName, doDelete } = this.props;
+    const { measurements, group, fieldName, doDelete, readOnly } = this.props;
     return (
       <div className="column hoverable center">
         <div className="column-header relative">
-          <div className="handle-above" />
-          <DeleteButton
-            resourceName="column"
-            onClick={() => doDelete(group.id)}
-            className="above"
-          />
+          {!readOnly && <div className="handle-above" />}
+          {!readOnly && (
+            <DeleteButton
+              resourceName="column"
+              onClick={() => doDelete(group.id)}
+              className="above"
+            />
+          )}
           <Input
             maxLength={3}
             placeholder="x"
             defaultValue={group.name}
             handleChange={this.handleGroupChange}
+            readOnly={readOnly}
           />
         </div>
         {measurements.values
@@ -46,6 +49,7 @@ class MeasurementGroup extends React.PureComponent {
                 placeholder="0"
                 defaultValue={value.value}
                 handleChange={this.handleValueChange(value)}
+                readOnly={readOnly}
               />
             </div>
           ))}
@@ -55,10 +59,10 @@ class MeasurementGroup extends React.PureComponent {
 }
 
 MeasurementGroup.propTypes = {
+  readOnly: PropTypes.bool,
   measurements: PropTypes.object,
   group: PropTypes.object,
   fieldName: PropTypes.string,
-  submitForm: PropTypes.func,
   doDelete: PropTypes.func,
   updateMeasurements: PropTypes.func,
 };
