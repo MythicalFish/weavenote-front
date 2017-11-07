@@ -8,7 +8,7 @@ import Image from './FormImage';
 import Supplier from './FormSupplier';
 
 const Form = (props) => {
-  const { isNew, handleSubmit, submitting, isRestricted, project } = props;
+  const { isNew, handleSubmit, submitting, readOnly, project } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -32,7 +32,7 @@ const Form = (props) => {
           </div>
         </div>
       </div>
-      {!isRestricted &&
+      {!readOnly &&
         !project &&
         isNew && (
           <footer className="p2 center">
@@ -50,7 +50,7 @@ const Form = (props) => {
 
 Form.propTypes = {
   submitting: PropTypes.bool,
-  isRestricted: PropTypes.bool,
+  readOnly: PropTypes.bool,
   isNew: PropTypes.bool,
   handleSubmit: PropTypes.func,
   project: PropTypes.object,

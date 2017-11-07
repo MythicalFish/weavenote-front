@@ -8,7 +8,7 @@ import { updateImage } from './actions';
 import DeleteButton from './DeleteButton';
 
 const ImageForm = (props) => {
-  const { handleSubmit, initialValues, altTheme, isRestricted } = props;
+  const { handleSubmit, initialValues, altTheme, readOnly } = props;
   const imageable = initialValues.get('imageable_info').toJS();
   const id = initialValues.get('id');
   const onSubmit = (image) => {
@@ -23,14 +23,14 @@ const ImageForm = (props) => {
         placeholder="Untitled image"
         fieldClass="center"
         focus
-        isRestricted={isRestricted}
+        readOnly={readOnly}
         onBlur={(d, name) => {
           const image = { id, name };
           props.updateImage({ imageable, image });
         }}
       />
       {!altTheme &&
-        !isRestricted && (
+        !readOnly && (
           <div className="image-form-actions center mt3">
             <DeleteButton
               image={initialValues}
@@ -62,7 +62,7 @@ ImageForm.propTypes = {
   initialValues: PropTypes.object,
   updateImage: PropTypes.func,
   altTheme: PropTypes.bool,
-  isRestricted: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 export function mapDispatch(dispatch) {

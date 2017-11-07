@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
 
 const ImageActions = (props) => {
-  const { currentView, focusThis, startAnnotation, isRestricted } = props;
+  const { currentView, focusThis, startAnnotation, readOnly } = props;
   const imageID = props.image.get('id');
   return (
     <div className="on-hover image-actions">
@@ -21,7 +21,7 @@ const ImageActions = (props) => {
         />
       )}
       {currentView === 'Measurements' &&
-        !isRestricted && (
+        !readOnly && (
           <Icon
             onClick={() =>
               startAnnotation({ imageID, type: 'line', maxAnchors: 2 })}
@@ -31,7 +31,7 @@ const ImageActions = (props) => {
           />
         )}
       {currentView === 'Measurements' &&
-        !isRestricted && (
+        !readOnly && (
           <Icon
             onClick={() =>
               startAnnotation({ imageID, type: 'arrow', maxAnchors: 2 })}
@@ -40,7 +40,7 @@ const ImageActions = (props) => {
             tooltip="Add arrow"
           />
         )}
-      {!isRestricted && (
+      {!readOnly && (
         <Icon onClick={focusThis} name="Edit" size={20} tooltip="Edit" />
       )}
     </div>
@@ -49,7 +49,7 @@ const ImageActions = (props) => {
 
 ImageActions.propTypes = {
   focusThis: PropTypes.func,
-  isRestricted: PropTypes.bool,
+  readOnly: PropTypes.bool,
   startAnnotation: PropTypes.func,
   currentView: PropTypes.string,
   image: PropTypes.object,

@@ -3,9 +3,9 @@ import Input from 'components/FormInput';
 import Focusable from 'utils/Focusable';
 
 const FormField = (props) => {
-  const { label, className, focusClass, isRestricted } = props;
+  const { label, className, focusClass, readOnly } = props;
   let theme = props.theme || 'default';
-  if (isRestricted) theme = 'default';
+  if (readOnly) theme = 'default';
   let klass = 'field';
   klass += className ? ` ${className}` : '';
   klass += focusClass ? ` ${focusClass}` : '';
@@ -19,7 +19,7 @@ const FormField = (props) => {
 };
 
 FormField.propTypes = {
-  isRestricted: PropTypes.bool,
+  readOnly: PropTypes.bool,
   label: PropTypes.string,
   focusThis: PropTypes.func,
   className: PropTypes.string,

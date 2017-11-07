@@ -11,8 +11,8 @@ class CareLabels extends React.PureComponent {
   };
   isAdded = (label) => this.labelKey(label) !== undefined;
   handleClick = (label) => () => {
-    const { fields, updateMaterial, isNew, isRestricted } = this.props;
-    if (isRestricted) return false;
+    const { fields, updateMaterial, isNew, readOnly } = this.props;
+    if (readOnly) return false;
     if (this.isAdded(label)) {
       fields.remove(this.labelKey(label));
     } else {
@@ -21,9 +21,9 @@ class CareLabels extends React.PureComponent {
     if (!isNew) updateMaterial();
   };
   render() {
-    const { globalData, isRestricted } = this.props;
+    const { globalData, readOnly } = this.props;
     let klass = '';
-    if (isRestricted) klass = 'cursor-default';
+    if (readOnly) klass = 'cursor-default';
     return (
       <div className="field">
         <label>Care labels</label>
@@ -35,7 +35,7 @@ class CareLabels extends React.PureComponent {
               className={klass}
             >
               <div>{label.get('name')}</div>
-              <Checkbox checked={this.isAdded(label)} readOnly={isRestricted} />
+              <Checkbox checked={this.isAdded(label)} readOnly={readOnly} />
             </div>
           ))}
         </div>
@@ -49,7 +49,7 @@ const C = (props) => (
 );
 
 CareLabels.propTypes = {
-  isRestricted: PropTypes.bool,
+  readOnly: PropTypes.bool,
   globalData: PropTypes.object,
   isNew: PropTypes.bool,
   fields: PropTypes.object,

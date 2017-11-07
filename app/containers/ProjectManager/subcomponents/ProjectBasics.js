@@ -11,7 +11,7 @@ const ProjectForm = (props) => {
   } = props;
   const f = {
     onChange: onSubmit,
-    isRestricted: !abilities.getIn(['Project', 'update']),
+    readOnly: !abilities.getIn(['Project', 'update']),
   };
   return (
     <form onSubmit={handleSubmit}>

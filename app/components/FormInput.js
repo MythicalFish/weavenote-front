@@ -6,12 +6,12 @@ import { debounce } from 'utils/misc';
 class Input extends React.PureComponent {
   static propTypes = {
     focus: PropTypes.bool,
-    isRestricted: PropTypes.bool,
+    readOnly: PropTypes.bool,
     onEnterKey: PropTypes.func,
   };
   componentDidMount() {
-    const { focus, isRestricted } = this.props;
-    if (focus && !isRestricted) {
+    const { focus, readOnly } = this.props;
+    if (focus && !readOnly) {
       this.nameInput.focus();
     }
   }
@@ -52,7 +52,7 @@ class Input extends React.PureComponent {
       };
     }
 
-    if (p.isRestricted) {
+    if (p.readOnly) {
       fProps.readOnly = true;
       fProps.onFocus = null;
     }

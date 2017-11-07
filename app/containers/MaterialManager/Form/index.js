@@ -44,9 +44,9 @@ export class MaterialManager extends React.PureComponent {
   };
 
   abilities = this.props.abilities.get('Material').toJS();
-  isRestricted = !this.abilities.update;
+  readOnly = !this.abilities.update;
   Field = fieldConstructor({
-    isRestricted: this.isRestricted,
+    readOnly: this.readOnly,
     onChange: () => {
       if (!this.isNew) this.props.updateMaterial();
     },
@@ -55,7 +55,7 @@ export class MaterialManager extends React.PureComponent {
     const { initialValues, globalData } = this.props;
     if (!globalData || !initialValues) return null;
     const { onSubmit, typeIs, switchType, Field } = this;
-    const { abilities, isRestricted } = this;
+    const { abilities, readOnly } = this;
     const { type } = this.state;
     const fProps = {
       ...this.props,
@@ -64,7 +64,7 @@ export class MaterialManager extends React.PureComponent {
       type,
       switchType,
       abilities,
-      isRestricted,
+      readOnly,
       isNew: !initialValues.get('id'),
       Field,
     };

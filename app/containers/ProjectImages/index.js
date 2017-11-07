@@ -23,14 +23,14 @@ class ProjectImages extends React.PureComponent {
   render() {
     const { project, images, currentImage: image, abilities } = this.props;
     const imageable = { type: 'Project', id: project.get('id') };
-    const isRestricted = !abilities.getIn(['Image', 'update']);
+    const readOnly = !abilities.getIn(['Image', 'update']);
     const canCreate = abilities.getIn(['Image', 'create']);
     return (
       <div className="lh0 px2">
         {!image && <Image src={PLACEHOLDER} />}
         {image && (
           <div className="center">
-            <ImageUI {...{ image, isRestricted, ...this.props }} />
+            <ImageUI {...{ image, readOnly, ...this.props }} />
           </div>
         )}
         <div className="pt3 flex justify-center blurrable">
