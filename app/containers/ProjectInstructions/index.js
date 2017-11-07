@@ -32,6 +32,7 @@ class ProjectInstructions extends React.Component {
   };
 
   render() {
+    const abilities = this.props.abilities.get('Instruction').toJS();
     return (
       <div>
         {this.state.creating ? (
@@ -44,11 +45,13 @@ class ProjectInstructions extends React.Component {
           />
         ) : (
           <div>
-            <Button
-              onClick={this.toggleCreate}
-              label="Add Instruction"
-              icon="Plus"
-            />
+            {abilities.create && (
+              <Button
+                onClick={this.toggleCreate}
+                label="Add Instruction"
+                small
+              />
+            )}
             <Accordion
               items={this.props.instructions}
               updateItem={this.props.updateInstruction}
@@ -56,6 +59,7 @@ class ProjectInstructions extends React.Component {
               RowHeader={RowHeader}
               Form={Form}
               deleteInstruction={this.props.deleteInstruction}
+              readOnly={!abilities.update}
             />
           </div>
         )}
@@ -71,6 +75,8 @@ ProjectInstructions.propTypes = {
   fetchInstructions: PropTypes.func,
   updateInstruction: PropTypes.func,
   createInstruction: PropTypes.func,
+  deleteInstruction: PropTypes.func,
+  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {

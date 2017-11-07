@@ -7,7 +7,12 @@ import ImageThumbnails from 'components/ImageThumbnails';
 import ImageUploader from 'containers/ImageUploader';
 
 const Form = (props) => {
-  const { handleSubmit, submitting, initialValues: instruction } = props;
+  const {
+    handleSubmit,
+    submitting,
+    initialValues: instruction,
+    readOnly,
+  } = props;
   const iProps = {
     maxImages: 3,
     imageable: {
@@ -27,22 +32,25 @@ const Form = (props) => {
           placeholder="Eg. Ironing"
           focus
           onChange={onChange}
+          readOnly={!!readOnly}
         />
         <Field
           name="description"
           type="textarea"
           label="Description"
           onChange={onChange}
+          readOnly={!!readOnly}
         />
         <ImageThumbnails images={images} {...iProps} />
-        {images.size < iProps.maxImages && (
-          <ImageUploader
-            {...iProps}
-            label="Upload image"
-            btnClass="btn-secondary btn-sm"
-            inlineIcon="file-image-o"
-          />
-        )}
+        {!readOnly &&
+          images.size < iProps.maxImages && (
+            <ImageUploader
+              {...iProps}
+              label="Upload image"
+              btnClass="btn-secondary btn-sm"
+              inlineIcon="file-image-o"
+            />
+          )}
         {!props.disableAutosave && (
           <button type="submit" disabled={submitting} className="conceal" />
         )}
@@ -70,7 +78,7 @@ Form.propTypes = {
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
   disableAutosave: PropTypes.bool,
-  label: PropTypes.string,
+  readOnly: PropTypes.bool,
 };
 
 export default reduxForm({

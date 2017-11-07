@@ -11,6 +11,7 @@ const AccordionRow = (props) => {
     toggleThis,
     Form,
     userRole,
+    readOnly,
   } = props;
   const chevronClass = isFocused ? 'ChevronUp' : 'ChevronDown';
   const Chevron = () => <Icon name={chevronClass} color="dark3" size={20} />;
@@ -29,6 +30,7 @@ const AccordionRow = (props) => {
             onSubmit={updateItem}
             initialValues={item}
             userRole={userRole}
+            readOnly={readOnly}
           />
         </div>
       )}
@@ -37,6 +39,7 @@ const AccordionRow = (props) => {
 };
 
 AccordionRow.propTypes = {
+  readOnly: PropTypes.bool,
   item: PropTypes.object,
   updateItem: PropTypes.func,
   toggleThis: PropTypes.func,

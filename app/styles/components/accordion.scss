@@ -1,6 +1,4 @@
 .accordion {
-  @extend .b1;
-  @include borderRadius();
   min-width: 300px;
   .accordion-row {
     @extend .bb1;
@@ -14,7 +12,7 @@
         text-align: left;
         @extend .flex;
         @extend .items-center;
-        padding: $space-2;
+        padding: $space-3 $space-2;
       }
     }
     .accordion-row-content {
