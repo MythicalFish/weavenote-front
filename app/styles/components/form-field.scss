@@ -12,7 +12,8 @@
         border-top: none;
         border-left: none;
         border-right: none;
-        padding: $space-1 0 $space-1 0;
+        padding: $space-1 0 0 0;
+        @include borderRadius(0);
       }
       &:after {
         content: ' ';

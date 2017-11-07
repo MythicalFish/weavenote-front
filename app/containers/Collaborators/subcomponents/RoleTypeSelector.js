@@ -3,12 +3,13 @@ import Dropdown from 'components/Dropdown';
 
 class RoleTypeSelector extends React.PureComponent {
   handleChange = (roleType) => {
-    const { target } = this.props;
-    this.props.handleChange(roleType, target);
+    const { current } = this.props;
+    this.props.handleChange(roleType, current);
   };
   render() {
-    const { roleTypes, target } = this.props;
-    const selected = this.props.selectedRoleType(roleTypes, target);
+    const { roleTypes, current, isOwnRole } = this.props;
+    if (isOwnRole) return <span>{current.get('role_type_name')}</span>;
+    const selected = this.props.selectedRoleType(roleTypes, current);
     return (
       <div>
         {selected && (
@@ -24,10 +25,11 @@ class RoleTypeSelector extends React.PureComponent {
 }
 
 RoleTypeSelector.propTypes = {
+  isOwnRole: PropTypes.bool,
   selectedRoleType: PropTypes.func,
   handleChange: PropTypes.func,
   roleTypes: PropTypes.object,
-  target: PropTypes.object,
+  current: PropTypes.object,
 };
 
 export default RoleTypeSelector;

@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { selectGlobalData } from 'containers/App/selectors';
 import InviteForm from './subcomponents/InviteForm';
 import InviteList from './subcomponents/InviteList';
 import RoleList from './subcomponents/RoleList';
@@ -22,38 +21,33 @@ class Collaborators extends React.Component {
     p.fetchInvites(p.invitable);
     p.fetchRoles(p.invitable);
   }
-
   render() {
-    if (!this.props.globalData) return null;
-    const { invitable, invites, roles, globalData: { roleTypes } } = this.props;
-    const rProps = { ...this.props, roleTypes };
+    const { invitable, invites, roles } = this.props;
     return (
       <div>
         {roles.size > 0 && (
           <div className="pb3 bb1 mb3">
-            <RoleList {...rProps} />
+            <RoleList {...this.props} />
           </div>
         )}
         {invites.size > 0 && (
           <div className="pb3 bb1 mb3">
             Pending invitations
-            <InviteList {...rProps} />
+            <InviteList {...this.props} />
           </div>
         )}
-        <footer>
-          <InviteForm
-            initialValues={{
-              invitable,
-            }}
-          />
-        </footer>
+        <InviteForm
+          initialValues={{
+            invitable,
+          }}
+          {...this.props}
+        />
       </div>
     );
   }
 }
 
 Collaborators.propTypes = {
-  globalData: PropTypes.object,
   invites: PropTypes.object,
   invitable: PropTypes.object,
   roles: PropTypes.object,
@@ -76,7 +70,6 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   invites: selectInvites(),
   roles: selectRoles(),
-  globalData: selectGlobalData(),
 });
 
 export default connect(mapState, mapDispatch)(Collaborators);

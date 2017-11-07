@@ -5,7 +5,9 @@ import sizeMe from 'react-sizeme';
 
 const avatarWidth = 33;
 
-const AvatarList = ({ avatars, size, onClick, showPlusButton }) => {
+const AvatarList = (props) => {
+  const { avatars, size, showPlusButton, readOnly } = props;
+  const onClick = readOnly ? null : props.onClick;
   const maxWidth = size.width - avatarWidth;
   let usedWidth = 0;
   let hiddenCount = 0;
@@ -28,13 +30,15 @@ const AvatarList = ({ avatars, size, onClick, showPlusButton }) => {
   return (
     <button className="avatar-list" type="button" onClick={onClick}>
       {visibleAvatars}
-      {hiddenCount > 0 &&
+      {hiddenCount > 0 && (
         <div className="hidden-count flex items-center justify-center">
           +{hiddenCount}
-        </div>}
+        </div>
+      )}
       {hiddenCount === 0 &&
-        showPlusButton &&
-        <Icon name="UserPlus" size={20} className="ml1" color="dark5" />}
+        showPlusButton && (
+          <Icon name="UserPlus" size={20} className="ml1" color="dark5" />
+        )}
     </button>
   );
 };
@@ -44,6 +48,7 @@ AvatarList.propTypes = {
   size: PropTypes.object,
   onClick: PropTypes.func,
   showPlusButton: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 export default sizeMe()(AvatarList);

@@ -36,6 +36,8 @@ class Manage extends React.PureComponent {
               <h4>Collaborators</h4>
               <Collaborators
                 invitable={{ type: 'Organization', id: organization.get('id') }}
+                roleTypes={organization.get('role_types')}
+                {...this.props}
               />
             </div>
           </div>

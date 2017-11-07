@@ -67,7 +67,6 @@ class ProjectManager extends React.PureComponent {
         viewProps.onSubmit = this.props.updateProject;
         break;
     }
-
     return (
       <Layout {...this.props} Header={this.Header}>
         <div className="container-wide px3 lg-px4 pt3 lg-pt4 y-fill">
@@ -97,7 +96,11 @@ class ProjectManager extends React.PureComponent {
             'name'
           )}`}</header>
           <div className="modal-body">
-            <Collaborators invitable={{ type: 'Project', id }} />
+            <Collaborators
+              invitable={{ type: 'Project', id }}
+              roleTypes={project.get('role_types')}
+              {...this.props}
+            />
           </div>
         </Modal>
         <ProjectExport {...this.props} />

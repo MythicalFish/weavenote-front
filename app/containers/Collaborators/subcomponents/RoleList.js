@@ -22,7 +22,7 @@ class RolesList extends React.PureComponent {
   };
 
   render() {
-    const { roles } = this.props;
+    const { roles, user } = this.props;
     return (
       <div className="y-max8 y-scroll b1 mt1">
         {roles &&
@@ -31,10 +31,11 @@ class RolesList extends React.PureComponent {
               <div>{role.getIn(['user', 'email'])}</div>
               <div>
                 <RoleTypeSelector
-                  target={role}
+                  current={role}
                   roleTypes={this.props.roleTypes}
                   handleChange={this.updateRole}
                   selectedRoleType={this.selectedRoleType}
+                  isOwnRole={user.get('id') === role.getIn(['user', 'id'])}
                 />
               </div>
               <div className="list-item-controls">
