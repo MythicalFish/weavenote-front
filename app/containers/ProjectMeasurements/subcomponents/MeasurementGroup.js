@@ -30,7 +30,7 @@ class MeasurementGroup extends React.PureComponent {
             />
           )}
           <Input
-            maxLength={3}
+            maxLength={16}
             placeholder="x"
             defaultValue={group.name}
             handleChange={this.handleGroupChange}

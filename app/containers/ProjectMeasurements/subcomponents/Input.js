@@ -30,6 +30,7 @@ class Input extends React.PureComponent {
       onFocus: () => this.element.select(),
       onChange: (event) => {
         this.setState({ value: event.target.value });
+        this.scaleInput();
         this.doUpdate();
       },
     };
