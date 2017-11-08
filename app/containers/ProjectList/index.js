@@ -25,7 +25,7 @@ export class ProjectList extends React.PureComponent {
   render() {
     const pProps = {
       ...this.props,
-      abilities: this.props.abilities.get('Project'),
+      abilities: this.props.abilities.get('Project').toJS(),
       changeView: this.changeView,
       currentView: this.state.view,
     };

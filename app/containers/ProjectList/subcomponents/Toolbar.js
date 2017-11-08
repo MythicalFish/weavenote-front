@@ -10,7 +10,6 @@ export default function Toolbar(props) {
     currentView,
     abilities,
   } = props;
-  const canCreate = abilities.getIn(['Project', 'create']);
   const Nav = ({ name, params }) => (
     <NavItem
       label={name}
@@ -25,7 +24,7 @@ export default function Toolbar(props) {
     <header className="toolbar toolbar-compact container-narrow px2">
       <div className="row">
         <div className="col-xs-2">
-          {canCreate && (
+          {abilities.create && (
             <Button
               onClick={() => createProject()}
               label="New Style"

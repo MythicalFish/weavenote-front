@@ -10,8 +10,8 @@ import { focusImage } from './actions';
 import { selectCurrentImage, selectImages } from './selectors';
 import { selectIsAnnotating } from '../ProjectAnnotations/selectors';
 import { startAnnotation } from '../ProjectAnnotations/actions';
-import ImageUI from './ImageUI';
-import { PLACEHOLDER } from './constants';
+import ImageUI from './subcomponents/ImageUI';
+import EmptyState from './subcomponents/EmptyState';
 
 class ProjectImages extends React.PureComponent {
   selectImage = (index) => {
@@ -27,7 +27,7 @@ class ProjectImages extends React.PureComponent {
     const canCreate = abilities.getIn(['Image', 'create']);
     return (
       <div className="lh0 px2">
-        {!image && <Image src={PLACEHOLDER} />}
+        {!image && <EmptyState {...{ imageable }} />}
         {image && (
           <div className="center">
             <ImageUI {...{ image, readOnly, ...this.props }} />
@@ -39,11 +39,12 @@ class ProjectImages extends React.PureComponent {
             onSelect={this.selectImage}
             currentImage={image}
           />
-          {canCreate && (
-            <div className="ml1">
-              <ImageUploader {...{ imageable }} />
-            </div>
-          )}
+          {canCreate &&
+            image && (
+              <div className="ml1">
+                <ImageUploader {...{ imageable }} />
+              </div>
+            )}
         </div>
       </div>
     );
@@ -56,6 +57,7 @@ ProjectImages.propTypes = {
   images: PropTypes.object,
   project: PropTypes.object,
   initialize: PropTypes.func,
+  abilities: PropTypes.object,
 };
 
 export function mapDispatch(dispatch) {

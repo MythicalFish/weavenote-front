@@ -38,3 +38,7 @@
 
 @include buildBorders(1,1px solid $dark2);
 @include buildBorders(2,1px solid $dark1);
+
+.border-dashed {
+  border: 2px dashed $gray-lighter;
+}

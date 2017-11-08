@@ -37,7 +37,7 @@ export default function ListItem(props) {
       </td>
       <td className="pl0 cell-fit">
         <div className="flex items-end">
-          {abilities.get('update') && (
+          {abilities.update && (
             <Dropdown icon="more">
               <Link to={url}>Manage</Link>
               <button onClick={() => fileProject({ id, archived: !archived })}>
