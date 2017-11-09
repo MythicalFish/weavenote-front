@@ -125,7 +125,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   project: selectors.selectProject(),
-  avatarList: selectors.selectAvatarList(),
+  collaborators: selectors.selectCollaborators(),
   projectAbilities: selectors.selectAbilities(),
   userRole: selectors.selectUserRole(),
 });

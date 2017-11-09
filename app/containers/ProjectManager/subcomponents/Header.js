@@ -53,10 +53,10 @@ export default function Toolbar(props) {
           </li>
           <li>
             <AvatarList
-              avatars={props.avatarList}
               onClick={() => openModal('collaborators')}
               showPlusButton={false}
               readOnly={!abilities.update}
+              {...props}
             />
           </li>
         </ul>
@@ -69,7 +69,6 @@ export default function Toolbar(props) {
 Toolbar.propTypes = {
   changeView: PropTypes.func,
   currentView: PropTypes.string,
-  avatarList: PropTypes.object,
   openModal: PropTypes.func,
   abilities: PropTypes.object,
 };

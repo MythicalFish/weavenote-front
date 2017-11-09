@@ -13,8 +13,8 @@ export const selectMaterialCost = () =>
     substate.getIn(['project', 'material_cost'])
   );
 
-export const selectAvatarList = () =>
-  createSelector(selectDomain(), (s) => s.get('avatarList'));
+export const selectCollaborators = () =>
+  createSelector(selectDomain(), (s) => s.get('collaborators'));
 
 export const selectUserRole = () =>
   createSelector(selectDomain(), (s) => s.get('userRole'));

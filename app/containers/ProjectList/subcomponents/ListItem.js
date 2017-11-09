@@ -33,7 +33,7 @@ export default function ListItem(props) {
       <td {...linked}>{project.get('collection')}</td>
       <td {...linked} />
       <td>
-        <AvatarList avatars={project.get('avatar_list')} />
+        <AvatarList collaborators={project.get('collaborators')} {...props} />
       </td>
       <td className="pl0 cell-fit">
         <div className="flex items-end">

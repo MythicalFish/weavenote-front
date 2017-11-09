@@ -6,13 +6,21 @@ import sizeMe from 'react-sizeme';
 const avatarWidth = 33;
 
 const AvatarList = (props) => {
-  const { avatars, size, showPlusButton, readOnly } = props;
+  const {
+    user,
+    collaborators,
+    size,
+    showPlusButton,
+    readOnly,
+    showSelf,
+  } = props;
   const onClick = readOnly ? null : props.onClick;
   const maxWidth = size.width - avatarWidth;
   let usedWidth = 0;
   let hiddenCount = 0;
   const visibleAvatars = [];
-  avatars.forEach((avatar, index) => {
+  collaborators.forEach((collaborator, index) => {
+    if (!showSelf && collaborator.get('id') === user.get('id')) return;
     usedWidth += avatarWidth;
     if (usedWidth > maxWidth) {
       hiddenCount += 1;
@@ -20,8 +28,8 @@ const AvatarList = (props) => {
       visibleAvatars.push(
         <Avatar
           key={`avatar${index}`}
-          src={avatar.get('url')}
-          label={avatar.get('user_name')}
+          src={collaborator.get('avatar_src')}
+          label={collaborator.get('name')}
           small
         />
       );
@@ -43,8 +51,14 @@ const AvatarList = (props) => {
   );
 };
 
+AvatarList.defaultProps = {
+  showSelf: false,
+};
+
 AvatarList.propTypes = {
-  avatars: PropTypes.object,
+  user: PropTypes.object,
+  collaborators: PropTypes.object,
+  showSelf: PropTypes.bool,
   size: PropTypes.object,
   onClick: PropTypes.func,
   showPlusButton: PropTypes.bool,
