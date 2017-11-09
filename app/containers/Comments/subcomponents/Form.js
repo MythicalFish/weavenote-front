@@ -3,7 +3,7 @@ import Button from 'components/Button';
 import { MentionsInput, Mention } from 'react-mentions';
 
 class Form extends React.PureComponent {
-  state = { value: '' };
+  state = { value: '', mentioned: [] };
   componentDidMount() {
     const { comment } = this.props;
     if (comment) this.setValue(comment.get('text'));
@@ -20,6 +20,7 @@ class Form extends React.PureComponent {
   };
   handleSubmit = (e) => {
     const { commentable } = this.props;
+    const { mentioned } = this.state;
     let { comment } = this.props;
     if (comment) {
       comment = comment.toJS();
@@ -31,15 +32,28 @@ class Form extends React.PureComponent {
     this.props.onSubmit({
       comment,
       commentable,
+      mentioned,
     });
   };
+  handleAdd = (id) => {
+    const { mentioned } = this.state;
+    if (!mentioned.includes(id)) mentioned.push(id);
+    this.setState({ mentioned });
+  };
+  handleDisplay = (id, display) => `@${display}`;
   Textarea = () => (
     <MentionsInput
       value={this.state.value}
       onChange={this.handleChange}
       ref={this.handleRef}
+      displayTransform={this.handleDisplay}
     >
-      <Mention trigger="@" data={this.props.collaborators.toJS()} />
+      <Mention
+        trigger="@"
+        data={this.props.collaborators.toJS()}
+        onAdd={this.handleAdd}
+        appendSpaceOnAdd
+      />
     </MentionsInput>
   );
   Actions = () => (
