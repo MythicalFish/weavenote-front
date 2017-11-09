@@ -8,11 +8,7 @@ const NewComment = (props) => {
     return (
       <div className="comment-thread selected">
         <Wrapper {...props}>
-          <Form
-            onSubmit={props.createComment}
-            initialValues={{ commentable }}
-            {...props}
-          />
+          <Form onSubmit={props.createComment} {...props} />
         </Wrapper>
       </div>
     );

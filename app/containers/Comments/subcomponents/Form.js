@@ -1,38 +1,63 @@
 import React, { PropTypes } from 'react';
-import { reduxForm } from 'redux-form/immutable';
-import Input from 'components/FormInput';
 import Button from 'components/Button';
+import { MentionsInput, Mention } from 'react-mentions';
 
-const Form = (props) => (
-  <div>
-    <form onSubmit={props.handleSubmit}>
-      <Textarea {...props} />
-      <Actions {...props} />
-    </form>
-  </div>
-);
+class Form extends React.PureComponent {
+  state = { value: '' };
+  componentDidMount() {
+    const { comment } = this.props;
+    if (comment) this.setValue(comment.get('text'));
+    this.inputRef.focus();
+  }
+  setValue = (value) => {
+    this.setState({ value });
+  };
+  handleChange = (e) => {
+    this.setValue(e.target.value);
+  };
+  handleRef = (ref) => {
+    this.inputRef = ref.wrappedInstance.refs.input;
+  };
+  Textarea = () => {
+    const { collaborators } = this.props;
+    return (
+      <MentionsInput
+        value={this.state.value}
+        onChange={this.handleChange}
+        ref={this.handleRef}
+      >
+        <Mention trigger="@" data={collaborators.toJS()} />
+      </MentionsInput>
+    );
+  };
+  Actions = () => {
+    const { cancelCommentAction } = this.props;
+    return (
+      <div className="comment-form-actions">
+        <Button onClick={cancelCommentAction} label="Cancel" shy />
+        <Button type="submit" label="Submit" small />
+      </div>
+    );
+  };
+  render() {
+    const { handleSubmit } = this.props;
+    const { Textarea, Actions } = this;
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <Textarea />
+          <Actions />
+        </form>
+      </div>
+    );
+  }
+}
 
-const Textarea = ({ handleSubmit }) => (
-  <Input name="comment[text]" type="textarea" onEnterKey={handleSubmit} focus />
-);
-
-const Actions = ({ cancelCommentAction }) => (
-  <div className="comment-form-actions">
-    <Button onClick={cancelCommentAction} label="Cancel" shy />
-    <Button type="submit" label="Submit" small />
-  </div>
-);
-
-Textarea.propTypes = {
+Form.propTypes = {
+  collaborators: PropTypes.object,
+  comment: PropTypes.object,
   handleSubmit: PropTypes.func,
-};
-Actions.propTypes = {
   cancelCommentAction: PropTypes.func,
 };
-Form.propTypes = {
-  handleSubmit: PropTypes.func,
-};
 
-export default reduxForm({
-  form: 'CommentForm',
-})(Form);
+export default Form;

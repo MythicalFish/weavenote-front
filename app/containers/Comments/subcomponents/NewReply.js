@@ -12,11 +12,7 @@ const NewReply = (props) => {
     return (
       <div className="comment-newreply">
         <Wrapper {...props}>
-          <Form
-            onSubmit={createComment}
-            initialValues={{ commentable }}
-            {...props}
-          />
+          <Form onSubmit={createComment} {...{ ...props, commentable }} />
         </Wrapper>
       </div>
     );

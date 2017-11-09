@@ -36,7 +36,6 @@ class Comment extends React.PureComponent {
           <div className="comment-edit">
             <Form
               onSubmit={this.props.updateComment}
-              initialValues={{ commentable, comment }}
               imageable={{ type: 'Comment', id }}
               maxImages={this.props.maxImages}
               deletable={isOwnComment}

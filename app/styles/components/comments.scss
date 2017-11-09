@@ -59,16 +59,11 @@
       padding: $space-2 $space-2 $space-2 0;
     }
   }
-  .input {
-    textarea {
-      background: transparent;
-      border: none;
-      padding: 0;
-      resize: none;
-      min-height: 80px;
-      padding-right: $space-2;
-      color: $dark7;
-    }
+  textarea {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: $dark7;
   }
   .comment-edit {
     padding-top: $space-2;
