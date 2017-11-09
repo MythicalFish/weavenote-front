@@ -7,7 +7,7 @@ class Form extends React.PureComponent {
   componentDidMount() {
     const { comment } = this.props;
     if (comment) this.setValue(comment.get('text'));
-    this.inputRef.focus();
+    if (this.inputRef) this.inputRef.focus();
   }
   setValue = (value) => {
     this.setState({ value });
@@ -16,39 +16,45 @@ class Form extends React.PureComponent {
     this.setValue(e.target.value);
   };
   handleRef = (ref) => {
-    this.inputRef = ref.wrappedInstance.refs.input;
+    if (ref) this.inputRef = ref.wrappedInstance.refs.input;
   };
-  Textarea = () => {
-    const { collaborators } = this.props;
-    return (
-      <MentionsInput
-        value={this.state.value}
-        onChange={this.handleChange}
-        ref={this.handleRef}
-      >
-        <Mention trigger="@" data={collaborators.toJS()} />
-      </MentionsInput>
-    );
+  handleSubmit = (e) => {
+    const { commentable } = this.props;
+    let { comment } = this.props;
+    if (comment) {
+      comment = comment.toJS();
+    } else {
+      comment = {};
+    }
+    comment.text = this.state.value;
+    e.preventDefault();
+    this.props.onSubmit({
+      comment,
+      commentable,
+    });
   };
-  Actions = () => {
-    const { cancelCommentAction } = this.props;
-    return (
-      <div className="comment-form-actions">
-        <Button onClick={cancelCommentAction} label="Cancel" shy />
-        <Button type="submit" label="Submit" small />
-      </div>
-    );
-  };
+  Textarea = () => (
+    <MentionsInput
+      value={this.state.value}
+      onChange={this.handleChange}
+      ref={this.handleRef}
+    >
+      <Mention trigger="@" data={this.props.collaborators.toJS()} />
+    </MentionsInput>
+  );
+  Actions = () => (
+    <div className="comment-form-actions">
+      <Button onClick={this.props.cancelCommentAction} label="Cancel" shy />
+      <Button type="submit" label="Submit" small />
+    </div>
+  );
   render() {
-    const { handleSubmit } = this.props;
     const { Textarea, Actions } = this;
     return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <Textarea />
-          <Actions />
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <Textarea />
+        <Actions />
+      </form>
     );
   }
 }
@@ -56,8 +62,9 @@ class Form extends React.PureComponent {
 Form.propTypes = {
   collaborators: PropTypes.object,
   comment: PropTypes.object,
-  handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   cancelCommentAction: PropTypes.func,
+  commentable: PropTypes.object,
 };
 
 export default Form;

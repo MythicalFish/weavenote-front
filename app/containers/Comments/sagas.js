@@ -60,7 +60,7 @@ function* deleteComment({ payload }) {
   yield put(fetchAnnotations());
 }
 
-const commentURL = (payload) => `comments/${payload.comment.get('id')}`;
+const commentURL = (payload) => `comments/${payload.comment.id}`;
 
 function* initializeForm({ payload }) {
   yield delay(50);

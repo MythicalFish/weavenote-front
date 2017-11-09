@@ -18,9 +18,11 @@ const Date = ({ value }) => (
 );
 
 class Comment extends React.PureComponent {
+  handleSubmitEdit = (payload) => {
+    this.props.updateComment(payload);
+  };
   render() {
-    const { comment, commentable, isSelected, user } = this.props;
-    const id = comment.get('id');
+    const { comment, isSelected, user } = this.props;
     const isEditing = this.props.isEditing === comment.get('id');
     const isOwnComment = user.get('email') === comment.getIn(['user', 'email']);
     const authorName = isOwnComment ? 'You' : comment.getIn(['user', 'name']);
@@ -34,13 +36,7 @@ class Comment extends React.PureComponent {
         )}
         {isEditing ? (
           <div className="comment-edit">
-            <Form
-              onSubmit={this.props.updateComment}
-              imageable={{ type: 'Comment', id }}
-              maxImages={this.props.maxImages}
-              deletable={isOwnComment}
-              {...this.props}
-            />
+            <Form onSubmit={this.handleSubmitEdit} {...this.props} />
           </div>
         ) : (
           <div className="comment-text">{comment.get('text')}</div>

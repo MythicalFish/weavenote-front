@@ -20,6 +20,7 @@
     .comment-body {
       @extend .flex-auto;
       @extend .pb2;
+      font-size: 14px;
       .comment-text {
         padding-right: $space-2;
       }
@@ -63,7 +64,9 @@
     background: transparent;
     border: none;
     padding: 0;
-    color: $dark7;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
   }
   .comment-edit {
     padding-top: $space-2;
@@ -99,6 +102,7 @@ button.comment-newreply {
 }
 .comment-form-actions {
   text-align: right;
+  padding-top: $space-2;
   padding-right: $space-2;
   .btn-shy {
     color: $dark4;

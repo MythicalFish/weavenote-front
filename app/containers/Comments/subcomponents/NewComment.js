@@ -2,27 +2,32 @@ import React, { PropTypes } from 'react';
 import Form from './Form';
 import Wrapper from './Wrapper';
 
-const NewComment = (props) => {
-  const { commentable, isCreating, writeComment } = props;
-  if (isCreating) {
+class NewComment extends React.PureComponent {
+  handleSubmitNew = (payload) => {
+    this.props.createComment(payload);
+  };
+  render() {
+    const { commentable, isCreating, writeComment } = this.props;
+    if (isCreating) {
+      return (
+        <div className="comment-thread selected">
+          <Wrapper {...this.props}>
+            <Form onSubmit={this.handleSubmitNew} {...this.props} />
+          </Wrapper>
+        </div>
+      );
+    }
     return (
-      <div className="comment-thread selected">
-        <Wrapper {...props}>
-          <Form onSubmit={props.createComment} {...props} />
-        </Wrapper>
-      </div>
+      <button
+        className="comment-thread selected"
+        type="button"
+        onClick={() => writeComment({ commentable })}
+      >
+        <Wrapper {...this.props}>Leave a comment</Wrapper>
+      </button>
     );
   }
-  return (
-    <button
-      className="comment-thread selected"
-      type="button"
-      onClick={() => writeComment({ commentable })}
-    >
-      <Wrapper {...props}>Leave a comment</Wrapper>
-    </button>
-  );
-};
+}
 
 NewComment.propTypes = {
   isCreating: PropTypes.bool,
