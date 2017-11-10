@@ -39,7 +39,10 @@ class Comment extends React.PureComponent {
             <Form onSubmit={this.handleSubmitEdit} {...this.props} />
           </div>
         ) : (
-          <div className="comment-text">{comment.get('text')}</div>
+          <div
+            className="comment-text"
+            dangerouslySetInnerHTML={{ __html: comment.get('text') }}
+          />
         )}
         {isSelected && <ImageThumbnails images={comment.get('images')} />}
         {isSelected &&

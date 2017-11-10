@@ -47,12 +47,14 @@ class Form extends React.PureComponent {
       onChange={this.handleChange}
       ref={this.handleRef}
       displayTransform={this.handleDisplay}
+      markup="<b>@__id__</b>"
     >
       <Mention
         trigger="@"
         data={this.props.collaborators.toJS()}
         onAdd={this.handleAdd}
         appendSpaceOnAdd
+        style={{ color: '#222' }}
       />
     </MentionsInput>
   );
