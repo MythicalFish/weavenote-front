@@ -26,9 +26,9 @@ class Comments extends React.PureComponent {
   state = { view: VIEW.active };
   componentDidMount() {
     this.fetchComments();
-    if (process.env.NODE_ENV === 'production') {
-      setInterval(() => this.fetchComments(), 10000);
-    }
+    // if (process.env.NODE_ENV === 'production') {
+    // setInterval(() => this.fetchComments(), 10000);
+    // }
   }
   changeView = (view) => {
     this.setState({ view });

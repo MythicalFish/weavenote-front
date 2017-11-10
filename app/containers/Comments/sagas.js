@@ -1,7 +1,6 @@
 import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { initialize } from 'redux-form';
 import * as sagas from 'utils/genericSagas';
 import { selectNewAnnotation } from 'containers/ProjectAnnotations/selectors';
 import { selectCurrentImage } from 'containers/ProjectImages/selectors';
@@ -18,7 +17,6 @@ export default [commentsWatcher];
 function* commentsWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_COMMENTS, fetchComments),
-    yield takeLatest(types.EDIT_COMMENT, initializeForm),
     yield takeLatest(types.CREATE_COMMENT, createComment),
     yield takeLatest(types.UPDATE_COMMENT, updateComment),
     yield takeLatest(types.DELETE_COMMENT, deleteComment),
@@ -60,11 +58,6 @@ function* deleteComment({ payload }) {
 }
 
 const commentURL = (payload) => `comments/${payload.comment.id}`;
-
-function* initializeForm({ payload }) {
-  yield delay(50);
-  yield put(initialize('CommentForm', payload, { form: 'CommentForm' }));
-}
 
 function* associateAnnotation(annotatable) {
   const annotation = yield select(selectNewAnnotation());
