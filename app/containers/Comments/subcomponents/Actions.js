@@ -34,7 +34,7 @@ const Actions = (props) => {
     confirm(
       `Are you sure you want to ${deleteLabel} this ${label}?`
     ).then(() => {
-      props.deleteComment({ comment, commentable });
+      props.deleteComment({ id, commentable });
     });
   };
   const handleRestore = () => {

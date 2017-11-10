@@ -50,7 +50,7 @@ function* updateComment({ payload }) {
 
 function* deleteComment({ payload }) {
   yield sagas.destroy(
-    commentURL(payload),
+    `comments/${payload.id}`,
     payload,
     actions.deleteCommentSuccess
   );
