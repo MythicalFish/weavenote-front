@@ -26,6 +26,7 @@ function* commentsWatcher() {
 }
 
 function* fetchComments({ payload }) {
+  yield delay(100);
   const doFetch = () =>
     sagas.get('comments', payload, actions.fetchCommentsSuccess);
   yield doFetch();
