@@ -28,6 +28,7 @@ export class ProjectList extends React.PureComponent {
       abilities: this.props.abilities.get('Project').toJS(),
       changeView: this.changeView,
       currentView: this.state.view,
+      scrollable: true,
     };
     return (
       <Layout {...pProps}>
