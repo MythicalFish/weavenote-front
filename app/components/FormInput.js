@@ -23,7 +23,7 @@ class Input extends React.PureComponent {
     }
   };
   render() {
-    const p = this.props;
+    const p = { ...this.props };
 
     let field = null;
     let touched = false;
@@ -31,7 +31,8 @@ class Input extends React.PureComponent {
     let fProps;
     let className = p.fieldClass || '';
 
-    if (p.sm) {
+    if (p.small) {
+      delete p.small;
       className += 'input-sm';
     }
 
@@ -99,7 +100,14 @@ const fieldConstructor = (props) => {
   if (props.onChange) {
     fProps.onChange = (e) => {
       if (e.persist) e.persist();
-      debounce((...args) => props.onChange(...args), 1000, e)();
+      debounce(
+        (...args) => {
+          console.log('onChange called');
+          props.onChange(...args);
+        },
+        1000,
+        e
+      )();
     };
   }
   if (props.disableReduxForm) {

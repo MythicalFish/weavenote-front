@@ -5,6 +5,12 @@ const List = (props) => {
   const { components } = props;
   return (
     <table className="table-condensed">
+      <colgroup>
+        <col width="35%" />
+        <col width="35%" />
+        <col width="15%" />
+        <col width="15%" />
+      </colgroup>
       <thead>
         <tr>
           <th>Type</th>

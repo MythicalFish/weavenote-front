@@ -12,7 +12,7 @@
     height: auto;
     width: 100%;
     border: none;
-    border: 1px solid $dark2;
+    border: 1px solid $dark1;
     background: transparent;
     font-size: inherit;
     color: inherit;
@@ -30,7 +30,9 @@
     textarea,
     .dropdown > button,
     .readonly {
-      padding: $space-2 $space-3;
+      padding: $space-1;
+      height: 32px;
+      font-size: 0.9em;
     }
   }
   &.input-inline {

@@ -17,7 +17,7 @@ const ListItem = (props) => {
     openModal('materials');
   };
   const Col = ({ children, onClick, className }) => {
-    const tdProps = { className: null };
+    const tdProps = { className: '' };
     if (onClick) {
       tdProps.onClick = onClick;
       tdProps.className = 'cursor-pointer';
@@ -33,11 +33,12 @@ const ListItem = (props) => {
     <tr>
       <Col onClick={handleClick}>{material.getIn(['type', 'name'])}</Col>
       <Col onClick={handleClick}>{material.get('name')}</Col>
-      <Col>
+      <Col className="center">
         {abilities.update ? (
           <Input
             defaultValue={component.get('quantity')}
             disableReduxForm
+            small
             onChange={(e) =>
               updateComponent(component.set('quantity', e.target.value))}
           />
