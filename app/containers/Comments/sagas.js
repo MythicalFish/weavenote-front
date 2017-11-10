@@ -16,17 +16,24 @@ export default [commentsWatcher];
 
 function* commentsWatcher() {
   const watcher = [
-    yield takeLatest(types.FETCH_COMMENTS, fetchComments),
     yield takeLatest(types.CREATE_COMMENT, createComment),
     yield takeLatest(types.UPDATE_COMMENT, updateComment),
     yield takeLatest(types.DELETE_COMMENT, deleteComment),
+    yield takeLatest(types.FETCH_COMMENTS, fetchComments),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
 
 function* fetchComments({ payload }) {
-  yield sagas.get('comments', payload, actions.fetchCommentsSuccess);
+  const doFetch = () =>
+    sagas.get('comments', payload, actions.fetchCommentsSuccess);
+  yield doFetch();
+  if (process.env.NODE_ENV !== 'production') return;
+  while (true) {
+    yield delay(5000);
+    yield doFetch();
+  }
 }
 
 function* createComment({ payload }) {
