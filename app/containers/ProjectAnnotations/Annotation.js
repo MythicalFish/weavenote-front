@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import CanvasAnnotation from 'components/CanvasAnnotation';
-import { getPosition, anchorPoints } from 'utils/canvasPosition';
+import { getPosition } from 'utils/canvasPosition';
 import { idToIndex } from 'utils/reducerHelpers';
 
 const Annotation = (props) => {
@@ -24,7 +24,7 @@ const Annotation = (props) => {
   const isFocused = focusedAnnotation.get('id') === id;
   const isDraggable = (isFocused && isOwnAnnotation) || isNew;
   let isVisible = false;
-  if (['line', 'arrow'].includes(type)) {
+  if (['line'].includes(type)) {
     if (view === 'Measurements') isVisible = true;
   } else if (view !== 'Measurements') {
     isVisible = true;

@@ -69,21 +69,20 @@ function* deleteAnnotation({ payload }) {
 
 function* handleSetAnchor() {
   const annotation = yield select(selectNewAnnotation());
-  switch (annotation.get('type')) {
-    case 'line':
-    case 'arrow':
-      if (annotation.get('anchors').size > 1) {
-        yield put(actions.createAnnotation());
-      }
-      break;
-    case 'dot':
-      if (annotation.getIn(['annotatable', 'id'])) {
+  const annotatable = annotation.get('annotatable');
+  // if done annotating
+  if (annotation.get('maxAnchors') === annotation.get('anchors').size) {
+    // if is commentable
+    if (annotatable.get('type') === 'Comment') {
+      // if comment created
+      if (annotatable.get('id')) {
         yield put(actions.createAnnotation());
       } else {
+        // if no comment created
         yield put(writeComment());
       }
-      break;
-    default:
-      break;
+    } else {
+      yield put(actions.createAnnotation());
+    }
   }
 }

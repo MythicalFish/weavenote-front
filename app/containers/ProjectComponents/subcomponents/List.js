@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 const List = (props) => {
   const { components } = props;
   return (
-    <table className="table-condensed">
+    <table className="table-condensed smaller1">
       <colgroup>
         <col width="35%" />
         <col width="35%" />

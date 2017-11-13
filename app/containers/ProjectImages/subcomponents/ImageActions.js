@@ -20,6 +20,20 @@ const ImageActions = (props) => {
           tooltip="Annotate"
         />
       )}
+      {!readOnly && (
+        <Icon
+          onClick={() =>
+            startAnnotation({
+              imageID,
+              type: 'arrow',
+              maxAnchors: 2,
+              annotatable: { type: 'Comment', id: null },
+            })}
+          name="ArrowDownRight"
+          size={20}
+          tooltip="Add arrow"
+        />
+      )}
       {currentView === 'Measurements' &&
         !readOnly && (
           <Icon
@@ -28,16 +42,6 @@ const ImageActions = (props) => {
             name="MoreHorizontal"
             size={20}
             tooltip="Add line"
-          />
-        )}
-      {currentView === 'Measurements' &&
-        !readOnly && (
-          <Icon
-            onClick={() =>
-              startAnnotation({ imageID, type: 'arrow', maxAnchors: 2 })}
-            name="ArrowDownRight"
-            size={20}
-            tooltip="Add arrow"
           />
         )}
       {!readOnly && (
