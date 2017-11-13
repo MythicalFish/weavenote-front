@@ -1,34 +1,35 @@
 import React, { PropTypes } from 'react';
 import ColumnValue from './ColumnValue';
 
-const ColumnValues = (props) => {
-  const { measurements, updateMeasurements, readOnly } = props;
-  return (
-    <div className="flex-auto scroll-y">
-      <div className="flex flex-auto y-fill">
-        {measurements.groups.map((group, index) => (
-          <ColumnValue
-            {...{
-              index,
-              key: `groups[${group.id}].name`,
-              group,
-              measurements,
-              doDelete: props.deleteGroup,
-              updateMeasurements,
-              readOnly,
-            }}
-          />
-        ))}
+class ColumnValues extends React.PureComponent {
+  componentDidMount() {
+    this.ref.addEventListener('scroll', (e) =>
+      this.props.doScroll(e.target.scrollTop)
+    );
+  }
+  render() {
+    const { measurements } = this.props;
+    return (
+      <div className="flex-auto scroll-y" ref={(ref) => (this.ref = ref)}>
+        <div className="flex y-fill">
+          {measurements.groups.map((group) => (
+            <ColumnValue
+              {...{
+                key: `groups[${group.id}].name`,
+                group,
+                ...this.props,
+              }}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 ColumnValues.propTypes = {
   measurements: PropTypes.object,
-  deleteGroup: PropTypes.func,
-  updateMeasurements: PropTypes.func,
-  readOnly: PropTypes.bool,
+  doScroll: PropTypes.func,
 };
 
 export default ColumnValues;

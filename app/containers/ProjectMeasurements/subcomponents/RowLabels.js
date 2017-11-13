@@ -7,7 +7,7 @@ const SortableList = SortableContainer((props) => {
   const lProps = { ...props };
   delete lProps.measurements;
   return (
-    <div className="column-body">
+    <div className="column-body relative">
       {measurements.names.map((name, index) => (
         <RowLabel
           {...{
@@ -23,10 +23,7 @@ const SortableList = SortableContainer((props) => {
 });
 
 const RowLabels = (props) => (
-  <div className="column left-align">
-    <div className="column-header px1">
-      <label className="opa5">Description</label>
-    </div>
+  <div className="column cut">
     <SortableList
       {...props}
       lockToContainerEdges
