@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
-import Label from './MeasurementNameLabel';
+import RowLabel from './RowLabel';
 
 const SortableList = SortableContainer((props) => {
   const { measurements } = props;
@@ -9,7 +9,7 @@ const SortableList = SortableContainer((props) => {
   return (
     <div className="column-body">
       {measurements.names.map((name, index) => (
-        <Label
+        <RowLabel
           {...{
             name,
             index,
@@ -22,7 +22,7 @@ const SortableList = SortableContainer((props) => {
   );
 });
 
-const MeasurementNameColumn = (props) => (
+const RowLabels = (props) => (
   <div className="column left-align">
     <div className="column-header px1">
       <label className="opa5">Description</label>
@@ -41,9 +41,9 @@ const MeasurementNameColumn = (props) => (
   </div>
 );
 
-MeasurementNameColumn.propTypes = {
+RowLabels.propTypes = {
   measurements: PropTypes.object,
   reorder: PropTypes.func,
 };
 
-export default MeasurementNameColumn;
+export default RowLabels;

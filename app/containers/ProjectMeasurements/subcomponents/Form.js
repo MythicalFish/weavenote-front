@@ -1,32 +1,38 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
 import PlusButton from 'components/PlusButton';
-import MeasurementNameColumn from './MeasurementNameColumn';
-import MeasurementGroups from './MeasurementGroups';
+import RowLabels from './RowLabels';
+import ColumnLabels from './ColumnLabels';
+import ColumnValues from './ColumnValues';
 
 const Form = (props) => {
   const { project, showInModal, isModal, readOnly } = props;
   const id = project.get('id');
   return (
-    <div className="y-fill flex flex-column">
-      <div className="flex" id="measurements">
+    <div id="measurements" className="y-fill">
+      <div className="flex y-fill">
         <div className="flex-none mr1">
-          <MeasurementNameColumn {...props} />
+          <RowLabels {...props} />
         </div>
-        <div className="flex-none mr1">
-          <MeasurementGroups {...props} />
-        </div>
-        <div className="flex-none">
-          {!readOnly && (
-            <PlusButton
-              size={25}
-              onClick={() => props.createGroup(id)}
-              className="p0"
-            />
-          )}
+        <div className="flex-auto">
+          <div className="flex scroll-x y-fill">
+            <div className="flex-none flex flex-column center mr1">
+              <ColumnLabels {...props} />
+              <ColumnValues {...props} />
+            </div>
+            {!readOnly && (
+              <div className="flex-none">
+                <PlusButton
+                  size={25}
+                  onClick={() => props.createGroup(id)}
+                  className="p0"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <div className="pt1 flex">
+      <div className="pt1">
         {!readOnly && (
           <PlusButton
             size={25}

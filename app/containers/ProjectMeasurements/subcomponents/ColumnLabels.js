@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
-import MeasurementGroup from './MeasurementGroup';
-import { COLUMNS_OFFSET } from '../constants';
+import ColumnLabel from './ColumnLabel';
 
-const SortableMeasurementGroups = SortableContainer((props) => {
+const SortableColumnLabels = SortableContainer((props) => {
   const { measurements, updateMeasurements, readOnly } = props;
   return (
-    <div className="flex cut" {...COLUMNS_OFFSET}>
+    <div className="flex flex-none">
       {measurements.groups.map((group, index) => (
-        <MeasurementGroup
+        <ColumnLabel
           {...{
             index,
             key: `groups[${group.id}].name`,
@@ -24,8 +23,8 @@ const SortableMeasurementGroups = SortableContainer((props) => {
   );
 });
 
-const MeasurementGroups = (props) => (
-  <SortableMeasurementGroups
+const ColumnLabels = (props) => (
+  <SortableColumnLabels
     {...props}
     lockToContainerEdges
     distance={10}
@@ -39,10 +38,9 @@ const MeasurementGroups = (props) => (
   />
 );
 
-MeasurementGroups.propTypes = {
+ColumnLabels.propTypes = {
   measurements: PropTypes.object,
   reorder: PropTypes.func,
-  readOnly: PropTypes.bool,
 };
 
-export default MeasurementGroups;
+export default ColumnLabels;

@@ -5,7 +5,7 @@ import Input from './Input';
 
 const Handle = (props) => <div className="handle-left" {...props} />;
 
-class MeasurementNameLabel extends React.PureComponent {
+class RowLabel extends React.PureComponent {
   state = { active: false };
   render() {
     const { name, updateMeasurements, deleteName, readOnly } = this.props;
@@ -38,11 +38,11 @@ class MeasurementNameLabel extends React.PureComponent {
   }
 }
 
-MeasurementNameLabel.propTypes = {
+RowLabel.propTypes = {
   readOnly: PropTypes.bool,
   name: PropTypes.object,
   updateMeasurements: PropTypes.func,
   deleteName: PropTypes.func,
 };
 
-export default SortableElement(MeasurementNameLabel);
+export default SortableElement(RowLabel);
