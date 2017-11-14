@@ -1,24 +1,28 @@
 $bStyle: 1px solid #ccc;
 .column {
   border: $bStyle;
+  border-top: none;
   flex: none;
   max-width: 240px;
   margin-right: $space-1;
   .column-header,
   .column-cell {
-    border-top: none;
     border-left: none;
     border-right: none;
-  }
-  .column-cell:last-child {
     border-bottom: none;
+  }
+  .column-cell:first-child {
+    border-top: none;
   }
 }
 .column-header {
   margin-right: $space-1;
+  border-bottom-width: 2px !important;
 }
 .column-header,
 .column-cell {
+  line-height: 1.2;
+  font-size: 0.9em;
   color: $dark7;
   border: $bStyle;
   background: $white;

@@ -6,17 +6,26 @@ import ColumnLabels from './ColumnLabels';
 import ColumnValues from './ColumnValues';
 
 class Form extends React.PureComponent {
-  state = { scrollTop: 0 };
+  state = { scrollTop: 0, maxHeight: 0 };
   componentDidMount() {
     this.ref.addEventListener('scroll', (e) => this.doScroll(e.target.scrollTop));
   }
+  setHeight = (maxHeight) => this.setState({ maxHeight });
   doScroll = (scrollTop) => this.setState({ scrollTop });
+  heightStyle = () => {
+    const { maxHeight } = this.state;
+    if (maxHeight > 0) {
+      return {
+        maxHeight,
+      };
+    }
+  };
   render() {
     const { project, showInModal, isModal, readOnly } = this.props;
     const id = project.get('id');
     return (
       <div id="measurements" className="y-fill flex flex-column">
-        <div className="flex flex-auto">
+        <div className="flex flex-auto" style={this.heightStyle()}>
           <div className="flex-none">
             <div className="flex flex-column y-fill">
               <div className="flex-none">
@@ -43,7 +52,11 @@ class Form extends React.PureComponent {
                   className="flex-auto scroll-y"
                   ref={(ref) => (this.ref = ref)}
                 >
-                  <ColumnValues {...this.props} doScroll={this.doScroll} />
+                  <ColumnValues
+                    {...this.props}
+                    setHeight={this.setHeight}
+                    currentHeight={this.state.maxHeight}
+                  />
                 </div>
               </div>
             </div>
@@ -58,7 +71,7 @@ class Form extends React.PureComponent {
             </div>
           )}
         </div>
-        <div className="py2 flex-none flex">
+        <div className="py2 flex-none flex justify-between">
           {!readOnly && (
             <PlusButton
               size={25}
