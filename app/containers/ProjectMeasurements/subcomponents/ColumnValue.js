@@ -4,8 +4,8 @@ import Input from './Input';
 
 class ColumnValue extends React.PureComponent {
   componentDidUpdate() {
-    const { setHeight, size: { height }, currentHeight } = this.props;
-    if (height > 0 && height !== currentHeight) setHeight(height);
+    const { setHeight, size: { height }, maxHeight } = this.props;
+    if (height > 0 && height !== maxHeight) setHeight(height);
   }
   handleChange = (v) => (value) => {
     this.props.updateMeasurements({
@@ -13,7 +13,7 @@ class ColumnValue extends React.PureComponent {
     });
   };
   render() {
-    const { measurements, group, fieldName, readOnly } = this.props;
+    const { measurements, group, fieldName } = this.props;
     return (
       <div className="column center">
         {measurements.values
@@ -28,7 +28,7 @@ class ColumnValue extends React.PureComponent {
                 placeholder="0"
                 defaultValue={value.value}
                 handleChange={this.handleChange(value)}
-                readOnly={readOnly}
+                {...this.props}
               />
             </div>
           ))}
@@ -38,10 +38,9 @@ class ColumnValue extends React.PureComponent {
 }
 
 ColumnValue.propTypes = {
-  currentHeight: PropTypes.number,
+  maxHeight: PropTypes.number,
   size: PropTypes.object,
   setHeight: PropTypes.func,
-  readOnly: PropTypes.bool,
   measurements: PropTypes.object,
   group: PropTypes.object,
   fieldName: PropTypes.string,

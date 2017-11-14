@@ -8,13 +8,15 @@ class ColumnValues extends React.PureComponent {
     );
   }
   render() {
-    const { measurements } = this.props;
+    const { measurements, colWidths } = this.props;
     return (
       <div className="flex-auto scroll-y" ref={(ref) => (this.ref = ref)}>
         <div className="flex y-fill">
-          {measurements.groups.map((group) => (
+          {measurements.groups.map((group, colKey) => (
             <ColumnValue
               {...{
+                colKey,
+                colWidth: colWidths[colKey],
                 key: `groups[${group.id}].name`,
                 group,
                 ...this.props,
@@ -28,6 +30,7 @@ class ColumnValues extends React.PureComponent {
 }
 
 ColumnValues.propTypes = {
+  colWidths: PropTypes.object,
   measurements: PropTypes.object,
   doScroll: PropTypes.func,
 };

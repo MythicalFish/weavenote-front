@@ -6,23 +6,40 @@ import ColumnLabels from './ColumnLabels';
 import ColumnValues from './ColumnValues';
 
 class Form extends React.PureComponent {
-  state = { scrollTop: 0, maxHeight: 0 };
+  state = { scrollTop: 0, maxHeight: 0, colWidths: {} };
   componentDidMount() {
     this.ref.addEventListener('scroll', (e) => this.doScroll(e.target.scrollTop));
   }
   setHeight = (maxHeight) => this.setState({ maxHeight });
+  setColWidth = (colKey, length) => {
+    const promise = new Promise((resolve) => {
+      const colWidths = { ...this.state.colWidths };
+      if (length > (colWidths[colKey] || 0)) {
+        colWidths[colKey] = length;
+        this.setState({ colWidths });
+      }
+      resolve(colWidths[colKey]);
+    });
+    return promise;
+  };
   doScroll = (scrollTop) => this.setState({ scrollTop });
   heightStyle = () => {
     const { maxHeight } = this.state;
-    if (maxHeight > 0) {
-      return {
-        maxHeight,
-      };
-    }
+    if (maxHeight === 0) return {};
+    return { maxHeight };
   };
   render() {
     const { project, showInModal, isModal, readOnly } = this.props;
     const id = project.get('id');
+    const { maxHeight, colWidths } = this.state;
+    const { setHeight, setColWidth } = this;
+    const cProps = {
+      ...this.props,
+      setHeight,
+      maxHeight,
+      colWidths,
+      setColWidth,
+    };
     return (
       <div id="measurements" className="y-fill flex flex-column">
         <div className="flex flex-auto" style={this.heightStyle()}>
@@ -39,7 +56,7 @@ class Form extends React.PureComponent {
                     transform: `translateY(-${this.state.scrollTop}px)`,
                   }}
                 >
-                  <RowLabels {...this.props} />
+                  <RowLabels {...cProps} />
                 </div>
               </div>
             </div>
@@ -47,16 +64,12 @@ class Form extends React.PureComponent {
           <div className="flex-auto">
             <div className="flex scroll-x y-fill">
               <div className="flex-none flex flex-column center">
-                <ColumnLabels {...this.props} />
+                <ColumnLabels {...cProps} />
                 <div
                   className="flex-auto scroll-y"
                   ref={(ref) => (this.ref = ref)}
                 >
-                  <ColumnValues
-                    {...this.props}
-                    setHeight={this.setHeight}
-                    currentHeight={this.state.maxHeight}
-                  />
+                  <ColumnValues {...cProps} />
                 </div>
               </div>
             </div>

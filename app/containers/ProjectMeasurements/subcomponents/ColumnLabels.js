@@ -2,26 +2,22 @@ import React, { PropTypes } from 'react';
 import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import ColumnLabel from './ColumnLabel';
 
-const SortableColumnLabels = SortableContainer((props) => {
-  const { measurements, updateMeasurements, readOnly } = props;
-  return (
-    <div className="flex flex-none">
-      {measurements.groups.map((group, index) => (
-        <ColumnLabel
-          {...{
-            index,
-            key: `groups[${group.id}].name`,
-            group,
-            measurements,
-            doDelete: props.deleteGroup,
-            updateMeasurements,
-            readOnly,
-          }}
-        />
-      ))}
-    </div>
-  );
-});
+const SortableColumnLabels = SortableContainer((props) => (
+  <div className="flex flex-none">
+    {props.measurements.groups.map((group, colKey) => (
+      <ColumnLabel
+        {...{
+          colWidth: props.colWidths[colKey],
+          colKey,
+          index: colKey,
+          key: `groups[${group.id}].name`,
+          group,
+          ...props,
+        }}
+      />
+    ))}
+  </div>
+));
 
 const ColumnLabels = (props) => (
   <SortableColumnLabels

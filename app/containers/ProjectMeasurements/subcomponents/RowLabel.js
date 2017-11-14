@@ -30,7 +30,7 @@ class RowLabel extends React.PureComponent {
             defaultValue={name.value}
             maxLength={25}
             placeholder="Untitled"
-            readOnly={readOnly}
+            {...this.props}
           />
         </div>
       </div>
