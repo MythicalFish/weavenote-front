@@ -12,15 +12,11 @@ class Form extends React.PureComponent {
   }
   setHeight = (maxHeight) => this.setState({ maxHeight });
   setColWidth = (colKey, length) => {
-    const promise = new Promise((resolve) => {
-      const colWidths = { ...this.state.colWidths };
-      if (length > (colWidths[colKey] || 0)) {
-        colWidths[colKey] = length;
-        this.setState({ colWidths });
-      }
-      resolve(colWidths[colKey]);
-    });
-    return promise;
+    const colWidths = { ...this.state.colWidths };
+    if (length > (colWidths[colKey] || 0)) {
+      colWidths[colKey] = length;
+      this.setState({ colWidths });
+    }
   };
   doScroll = (scrollTop) => this.setState({ scrollTop });
   heightStyle = () => {

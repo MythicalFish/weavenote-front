@@ -6,7 +6,9 @@ class Input extends React.PureComponent {
     if (this.props.focus) this.element.focus();
     this.setColWidth();
   }
-  componentDidUpdate = () => this.setColWidth();
+  componentDidUpdate = () => {
+    this.setInputWidth();
+  };
   setColWidth = () => {
     const { colKey } = this.props;
     const { element: e, minSize: min, defaultValue } = this;
@@ -20,8 +22,11 @@ class Input extends React.PureComponent {
   setInputWidth = () => {
     const { colWidth } = this.props;
     const { element: e } = this;
-    if (colWidth > this.minSize && colWidth !== e.size) e.size = colWidth;
+    if (this.shouldChange()) e.size = colWidth;
   };
+  shouldChange = () =>
+    this.props.colWidth > this.minSize &&
+    this.props.colWidth !== this.element.size;
   minSize = 3;
   doUpdate = debounce(() => {
     const { handleChange } = this.props;
