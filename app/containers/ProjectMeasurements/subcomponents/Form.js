@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
+import ScrollArea from 'components/ScrollArea';
 import PlusButton from 'components/PlusButton';
 import RowLabels from './RowLabels';
 import ColumnLabels from './ColumnLabels';
@@ -7,9 +8,6 @@ import ColumnValues from './ColumnValues';
 
 class Form extends React.PureComponent {
   state = { scrollTop: 0, maxHeight: 0, colWidths: {} };
-  componentDidMount() {
-    this.ref.addEventListener('scroll', (e) => this.doScroll(e.target.scrollTop));
-  }
   setHeight = (maxHeight) => this.setState({ maxHeight });
   setColWidth = (colKey, length) => {
     const colWidths = { ...this.state.colWidths };
@@ -18,7 +16,7 @@ class Form extends React.PureComponent {
       this.setState({ colWidths });
     }
   };
-  doScroll = (scrollTop) => this.setState({ scrollTop });
+  doScroll = ({ scrollTop }) => this.setState({ scrollTop });
   heightStyle = () => {
     const { maxHeight } = this.state;
     if (maxHeight === 0) return {};
@@ -61,12 +59,9 @@ class Form extends React.PureComponent {
             <div className="flex scroll-x y-fill">
               <div className="flex-none flex flex-column center">
                 <ColumnLabels {...cProps} />
-                <div
-                  className="flex-auto scroll-y"
-                  ref={(ref) => (this.ref = ref)}
-                >
+                <ScrollArea className="flex-auto" onScrollFrame={this.doScroll}>
                   <ColumnValues {...cProps} />
-                </div>
+                </ScrollArea>
               </div>
             </div>
           </div>

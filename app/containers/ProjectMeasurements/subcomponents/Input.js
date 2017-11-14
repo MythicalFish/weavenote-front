@@ -7,7 +7,7 @@ class Input extends React.PureComponent {
     this.setColWidth();
   }
   componentDidUpdate = () => {
-    this.setInputWidth();
+    this.setColWidth();
   };
   setColWidth = () => {
     const { colKey } = this.props;

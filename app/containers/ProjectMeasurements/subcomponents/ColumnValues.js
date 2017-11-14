@@ -2,11 +2,6 @@ import React, { PropTypes } from 'react';
 import ColumnValue from './ColumnValue';
 
 class ColumnValues extends React.PureComponent {
-  componentDidMount() {
-    this.ref.addEventListener('scroll', (e) =>
-      this.props.doScroll(e.target.scrollTop)
-    );
-  }
   render() {
     const { measurements, colWidths } = this.props;
     return (
@@ -30,7 +25,6 @@ class ColumnValues extends React.PureComponent {
 ColumnValues.propTypes = {
   colWidths: PropTypes.object,
   measurements: PropTypes.object,
-  doScroll: PropTypes.func,
 };
 
 export default ColumnValues;
