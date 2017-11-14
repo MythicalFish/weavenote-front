@@ -14,24 +14,22 @@ class ColumnLabel extends React.PureComponent {
     //
     const { group, doDelete, readOnly } = this.props;
     return (
-      <div className="column">
-        <div className="column-header relative">
-          {!readOnly && <div className="handle-above" />}
-          {!readOnly && (
-            <DeleteButton
-              resourceName="column"
-              onClick={() => doDelete(group.id)}
-              className="above"
-            />
-          )}
-          <Input
-            maxLength={16}
-            placeholder="x"
-            defaultValue={group.name}
-            handleChange={this.handleChange}
-            readOnly={readOnly}
+      <div className="column-header relative">
+        {!readOnly && <div className="handle-above" />}
+        {!readOnly && (
+          <DeleteButton
+            resourceName="column"
+            onClick={() => doDelete(group.id)}
+            className="above"
           />
-        </div>
+        )}
+        <Input
+          maxLength={16}
+          placeholder="x"
+          defaultValue={group.name}
+          handleChange={this.handleChange}
+          readOnly={readOnly}
+        />
       </div>
     );
   }

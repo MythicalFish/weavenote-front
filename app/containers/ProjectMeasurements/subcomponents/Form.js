@@ -7,15 +7,18 @@ import ColumnValues from './ColumnValues';
 
 class Form extends React.PureComponent {
   state = { scrollTop: 0 };
+  componentDidMount() {
+    this.ref.addEventListener('scroll', (e) => this.doScroll(e.target.scrollTop));
+  }
   doScroll = (scrollTop) => this.setState({ scrollTop });
   render() {
     const { project, showInModal, isModal, readOnly } = this.props;
     const id = project.get('id');
     return (
-      <div id="measurements" className="y-fill">
-        <div className="flex y-fill">
-          <div className="flex-none mr1">
-            <div className="flex flex-column">
+      <div id="measurements" className="y-fill flex flex-column">
+        <div className="flex flex-auto">
+          <div className="flex-none">
+            <div className="flex flex-column y-fill">
               <div className="flex-none">
                 <div className="column-header px1">
                   <label className="opa5">Description</label>
@@ -34,23 +37,28 @@ class Form extends React.PureComponent {
           </div>
           <div className="flex-auto">
             <div className="flex scroll-x y-fill">
-              <div className="flex-none flex flex-column center mr1">
+              <div className="flex-none flex flex-column center">
                 <ColumnLabels {...this.props} />
-                <ColumnValues {...this.props} doScroll={this.doScroll} />
-              </div>
-              {!readOnly && (
-                <div className="flex-none">
-                  <PlusButton
-                    size={25}
-                    onClick={() => this.props.createGroup(id)}
-                    className="p0"
-                  />
+                <div
+                  className="flex-auto scroll-y"
+                  ref={(ref) => (this.ref = ref)}
+                >
+                  <ColumnValues {...this.props} doScroll={this.doScroll} />
                 </div>
-              )}
+              </div>
             </div>
           </div>
+          {!readOnly && (
+            <div className="flex-none pl2">
+              <PlusButton
+                size={25}
+                onClick={() => this.props.createGroup(id)}
+                className="p0"
+              />
+            </div>
+          )}
         </div>
-        <div className="pt1">
+        <div className="py2 flex-none flex">
           {!readOnly && (
             <PlusButton
               size={25}

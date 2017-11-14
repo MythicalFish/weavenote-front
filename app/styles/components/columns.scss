@@ -1,12 +1,9 @@
 $bStyle: 1px solid #ccc;
 .column {
-  color: $dark7;
   border: $bStyle;
   flex: none;
   max-width: 240px;
-  &:not(:last-child) {
-    margin-right: $space-1;
-  }
+  margin-right: $space-1;
   .column-header,
   .column-cell {
     border-top: none;
@@ -17,8 +14,12 @@ $bStyle: 1px solid #ccc;
     border-bottom: none;
   }
 }
+.column-header {
+  margin-right: $space-1;
+}
 .column-header,
 .column-cell {
+  color: $dark7;
   border: $bStyle;
   background: $white;
   position: relative;
