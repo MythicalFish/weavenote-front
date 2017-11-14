@@ -43,7 +43,7 @@ class Form extends React.PureComponent {
   handleDisplay = (id, display) => `@${display}`;
   Textarea = () => (
     <MentionsInput
-      value={this.state.value}
+      value={stripTags(this.state.value)}
       onChange={this.handleChange}
       ref={this.handleRef}
       displayTransform={this.handleDisplay}
@@ -104,3 +104,7 @@ const mentionStyle = {
     },
   },
 };
+
+const rA = (str, find, replace) => str.replace(new RegExp(find, 'g'), replace);
+
+const stripTags = (text) => rA(rA(rA(text, '<p>', ''), '</p>', ''), '<br />', '');
