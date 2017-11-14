@@ -48,6 +48,7 @@ class Form extends React.PureComponent {
       ref={this.handleRef}
       displayTransform={this.handleDisplay}
       markup="<b>@__id__</b>"
+      style={mentionStyle}
     >
       <Mention
         trigger="@"
@@ -84,3 +85,22 @@ Form.propTypes = {
 };
 
 export default Form;
+
+const mentionStyle = {
+  suggestions: {
+    list: {
+      backgroundColor: 'white',
+      border: '1px solid rgba(0,0,0,0.15)',
+      fontSize: 11,
+      borderRadius: '2px',
+      overflow: 'hidden',
+    },
+    item: {
+      padding: '6px 8px',
+      borderBottom: '1px solid rgba(0,0,0,0.15)',
+      '&focused': {
+        backgroundColor: '#EEE',
+      },
+    },
+  },
+};
