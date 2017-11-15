@@ -3,7 +3,7 @@ import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import ColumnLabel from './ColumnLabel';
 
 const SortableColumnLabels = SortableContainer((props) => (
-  <div className="flex flex-none">
+  <div className="flex">
     {props.measurements.groups.map((group, colKey) => (
       <ColumnLabel
         {...{

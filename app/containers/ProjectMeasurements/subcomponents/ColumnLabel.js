@@ -14,7 +14,7 @@ class ColumnLabel extends React.PureComponent {
     //
     const { group, deleteGroup, readOnly } = this.props;
     return (
-      <div className="column-header relative">
+      <div className="column-header relative hoverable">
         {!readOnly && <div className="handle-above" />}
         {!readOnly && (
           <DeleteButton

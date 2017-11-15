@@ -8,7 +8,7 @@ import ColumnValues from './ColumnValues';
 import { COLUMNS_OFFSET } from '../constants';
 
 class Form extends React.PureComponent {
-  state = { scrollTop: 0, maxHeight: 0, colWidths: {} };
+  state = { scrollTop: 0, scrollLeft: 0, maxHeight: 0, colWidths: {} };
   setHeight = (maxHeight) => this.setState({ maxHeight });
   setColWidth = (colKey, length) => {
     const colWidths = { ...this.state.colWidths };
@@ -17,12 +17,24 @@ class Form extends React.PureComponent {
       this.setState({ colWidths });
     }
   };
-  doScroll = ({ scrollTop }) => this.setState({ scrollTop });
+  doScroll = ({ scrollTop, scrollLeft }) =>
+    this.setState({ scrollTop, scrollLeft });
   heightStyle = () => {
     const { maxHeight } = this.state;
     if (maxHeight === 0) return {};
     return { maxHeight };
   };
+  offsetY = () => ({
+    style: {
+      transform: `translateY(-${this.state.scrollTop}px)`,
+    },
+  });
+  offsetX = () => ({
+    style: {
+      transform: `translateX(-${this.state.scrollLeft}px)`,
+      paddingTop: '45px',
+    },
+  });
   render() {
     const { project, showInModal, isModal, readOnly } = this.props;
     const id = project.get('id');
@@ -46,24 +58,33 @@ class Form extends React.PureComponent {
                 </div>
               </div>
               <div className="flex-auto cut">
-                <div
-                  style={{
-                    transform: `translateY(-${this.state.scrollTop}px)`,
-                  }}
-                >
+                <div {...this.offsetY()}>
                   <RowLabels {...cProps} />
                 </div>
               </div>
             </div>
           </div>
           <div className="flex-auto">
-            <div className="flex scroll-x y-fill">
-              <div className="flex-none flex flex-column center">
-                <ColumnLabels {...cProps} />
-                <ScrollArea className="flex-auto" onScrollFrame={this.doScroll}>
-                  <ColumnValues {...cProps} />
-                </ScrollArea>
+            <div className="y-fill flex flex-column center">
+              <div className="flex-none relative" style={{ height: '41px' }}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '-45px',
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    overflow: 'hidden',
+                  }}
+                >
+                  <div {...this.offsetX()}>
+                    <ColumnLabels {...cProps} />
+                  </div>
+                </div>
               </div>
+              <ScrollArea className="flex-auto" onScrollFrame={this.doScroll}>
+                <ColumnValues {...cProps} />
+              </ScrollArea>
             </div>
           </div>
           {!readOnly && (
