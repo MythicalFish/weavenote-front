@@ -18,6 +18,7 @@ $bStyle: 1px solid #ccc;
 .column-header {
   margin-right: $space-1;
   border-bottom-width: 2px !important;
+  flex: none;
 }
 .column-header,
 .column-cell {

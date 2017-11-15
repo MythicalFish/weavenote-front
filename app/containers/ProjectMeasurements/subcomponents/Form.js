@@ -5,6 +5,7 @@ import PlusButton from 'components/PlusButton';
 import RowLabels from './RowLabels';
 import ColumnLabels from './ColumnLabels';
 import ColumnValues from './ColumnValues';
+import { COLUMNS_OFFSET } from '../constants';
 
 class Form extends React.PureComponent {
   state = { scrollTop: 0, maxHeight: 0, colWidths: {} };

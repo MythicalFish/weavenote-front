@@ -3,7 +3,7 @@ import { arrayMove, SortableContainer } from 'react-sortable-hoc';
 import RowLabel from './RowLabel';
 
 const SortableList = SortableContainer((props) => {
-  const { measurements } = props;
+  const { measurements, colWidths } = props;
   const lProps = { ...props };
   delete lProps.measurements;
   return (
@@ -13,6 +13,8 @@ const SortableList = SortableContainer((props) => {
           {...{
             name,
             index,
+            colKey: `l${index}`,
+            colWidth: colWidths[`l${index}`],
             ...lProps,
             key: `names[${name.id}].value`,
           }}

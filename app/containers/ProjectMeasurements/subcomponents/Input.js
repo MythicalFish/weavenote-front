@@ -10,23 +10,21 @@ class Input extends React.PureComponent {
     this.setColWidth();
   };
   setColWidth = () => {
-    const { colKey } = this.props;
-    const { element: e, minSize: min, defaultValue } = this;
+    const { element, minSize } = this;
+    const { colKey, defaultValue, colWidth } = this.props;
     let length = defaultValue;
-    if (e) length = e.value.length;
-    length = length <= min ? min : length;
+    if (element) length = element.value.length;
+    length = minSize > length ? minSize : length;
     length += 1;
+    if (colWidth === length) return;
     this.props.setColWidth(colKey, length);
     this.setInputWidth();
   };
   setInputWidth = () => {
-    const { colWidth } = this.props;
-    const { element: e } = this;
-    if (this.shouldChange()) e.size = colWidth;
+    if (this.props.colWidth > this.minSize) {
+      this.element.size = this.props.colWidth;
+    }
   };
-  shouldChange = () =>
-    this.props.colWidth > this.minSize &&
-    this.props.colWidth !== this.element.size;
   minSize = 3;
   doUpdate = debounce(() => {
     const { handleChange } = this.props;
@@ -60,7 +58,7 @@ Input.propTypes = {
   handleChange: PropTypes.func,
   setColWidth: PropTypes.func,
   maxLength: PropTypes.number,
-  colKey: PropTypes.number,
+  colKey: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   colWidth: PropTypes.number,
 };
 
