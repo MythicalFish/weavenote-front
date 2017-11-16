@@ -17,7 +17,10 @@ export default function Toolbar(props) {
   );
 
   return (
-    <header id="app-header" className="toolbar toolbar-flex blurrable bb1">
+    <header
+      id="app-header"
+      className="justify-between toolbar toolbar-flex bb1"
+    >
       <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
       <nav>
         <ul>

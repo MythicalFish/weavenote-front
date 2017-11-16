@@ -10,6 +10,13 @@ const UserInfo = (props) => {
   return (
     <form className="data-rows" onSubmit={handleSubmit}>
       <Field
+        name="username"
+        type="text"
+        label="Username"
+        onChange={onSubmit}
+        theme="alt1"
+      />
+      <Field
         name="name"
         type="text"
         label="Name"

@@ -3,12 +3,8 @@ import ListItem from './ListItem';
 
 export default function List(props) {
   const { projects } = props;
-  const search = (e) => {
-    props.filterProjects(e.target.value);
-  };
   return (
     <div className="container-narrow px2 py4">
-      <input type="text" placeholder="Search" onChange={search} />
       <table>
         <thead>
           <tr>

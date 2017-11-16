@@ -29,6 +29,7 @@
             font-size: 0.9em;
             color: $dark4;
             background: transparent;
+            @include borderRadius(0px);
           }
           &.active {
             border-bottom: 2px solid $poiple;

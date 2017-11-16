@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Layout from 'components/Layout';
+import Header from './subcomponents/Header';
 import Toolbar from './subcomponents/Toolbar';
 import List from './subcomponents/List';
 import {
@@ -23,6 +24,7 @@ export class ProjectList extends React.PureComponent {
   changeView = (view) => {
     this.setState({ view });
   };
+  Header = () => <Header {...this.props} />;
   render() {
     const pProps = {
       ...this.props,
@@ -32,7 +34,7 @@ export class ProjectList extends React.PureComponent {
       scrollable: true,
     };
     return (
-      <Layout {...pProps}>
+      <Layout {...pProps} Header={this.Header}>
         <Toolbar {...pProps} />
         <List {...pProps} />
       </Layout>
