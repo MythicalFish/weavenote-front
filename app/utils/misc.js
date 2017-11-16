@@ -4,12 +4,10 @@ export function toggleState(component, attr) {
   component.setState(a);
 }
 
-export function debounce(fn, delay, ...args) {
-  let timer = null;
+export function debounce(fn, delay, context, ...args) {
   return () => {
-    const context = this;
-    clearTimeout(timer);
-    timer = setTimeout(() => {
+    clearTimeout(context.timer);
+    context.timer = setTimeout(() => {
       fn.apply(context, args);
     }, delay);
   };

@@ -101,12 +101,11 @@ const fieldConstructor = (props) => {
     fProps.onChange = (e) => {
       if (e.persist) e.persist();
       debounce(
-        (...args) => {
-          console.log('onChange called');
-          props.onChange(...args);
+        () => {
+          props.onChange(e);
         },
-        1000,
-        e
+        500,
+        this
       )();
     };
   }
