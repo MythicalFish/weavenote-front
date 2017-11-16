@@ -43,3 +43,7 @@ export function duplicateProject(id) {
 export function duplicateProjectSuccess(response) {
   return { type: types.DUPLICATE_PROJECT_SUCCESS, response };
 }
+
+export function filterProjects(text) {
+  return { type: types.FILTER_PROJECTS, text };
+}

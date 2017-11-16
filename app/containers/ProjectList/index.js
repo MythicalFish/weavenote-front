@@ -6,6 +6,7 @@ import Layout from 'components/Layout';
 import Toolbar from './subcomponents/Toolbar';
 import List from './subcomponents/List';
 import {
+  filterProjects,
   fetchProjects,
   createProject,
   fileProject,
@@ -47,6 +48,7 @@ ProjectList.propTypes = {
 export function mapDispatch(dispatch) {
   return bindActionCreators(
     {
+      filterProjects,
       fetchProjects,
       createProject,
       deleteProject,
