@@ -3,18 +3,20 @@ import * as types from './constants';
 
 const initialState = fromJS({ all: [], filtered: [] });
 
-const filtered = (state, text) => {
-  if (text.length === 0) return [];
+const filtered = (list, text = '') => {
+  // Returns array of keys of a filtered list
   const f = [];
-  state.get('all').forEach((project, key) => {
-    if (
-      !project
-        .get('name')
-        .toLowerCase()
-        .includes(text.toLowerCase())
-    ) {
-      f.push(key);
-    }
+  const t = text.toLowerCase();
+  list.toJS().forEach((p, key) => {
+    const a = [p.name, p.ref_number, p.collection];
+    a.forEach((v) => {
+      if (t.length === 0) f.push(key);
+      if (v && v.toLowerCase().includes(t)) {
+        f.push(key);
+        return null;
+      }
+      return null;
+    });
   });
   return f;
 };
@@ -28,10 +30,12 @@ function projectsReducer(state = initialState, action) {
     case types.DELETE_PROJECT_SUCCESS:
     case types.FILE_PROJECT_SUCCESS:
     case types.DUPLICATE_PROJECT_SUCCESS:
-      return state.set('all', fromJS(response));
+      return state
+        .set('all', fromJS(response))
+        .set('filtered', filtered(fromJS(response)));
 
     case types.FILTER_PROJECTS:
-      return state.set('filtered', filtered(state, action.text));
+      return state.set('filtered', filtered(state.get('all'), action.text));
 
     default:
       return state;
