@@ -13,17 +13,17 @@ class ListItem extends React.PureComponent {
     return i !== undefined;
   };
   handleSelect = () => {
-    const { selectable, onSelect, material } = this.props;
-    if (selectable && onSelect) {
-      onSelect(material);
+    const { selectable, selectMaterial, material } = this.props;
+    if (selectable && selectMaterial) {
+      selectMaterial(material);
     } else {
       browserHistory.push(this.url);
     }
   };
   handleEdit = () => {
-    const { onEdit, material } = this.props;
-    if (onEdit) {
-      onEdit(material);
+    const { editMaterial, material } = this.props;
+    if (editMaterial) {
+      editMaterial(material);
     } else {
       browserHistory.push(this.url);
     }
@@ -47,7 +47,10 @@ class ListItem extends React.PureComponent {
     return (
       <tr>
         {selectable && (
-          <td {...linked}>
+          <td
+            onClick={this.handleSelect}
+            className="cursor-pointer flex items-center"
+          >
             <Checkbox checked={this.isSelected()} />
           </td>
         )}
@@ -55,7 +58,7 @@ class ListItem extends React.PureComponent {
         <td {...linked}>{material.get('identifier')}</td>
         <td {...linked}>{material.get('name')}</td>
         <td {...linked}>{material.get('color')}</td>
-        <td>{material.get('supplier_name')}</td>
+        <td {...linked}>{material.get('supplier_name')}</td>
         <td {...linked}>
           <Price
             value={material.get('cost_total')}
@@ -78,8 +81,8 @@ ListItem.propTypes = {
   material: PropTypes.object.isRequired,
   deleteMaterial: PropTypes.func,
   selectable: PropTypes.bool,
-  onSelect: PropTypes.func,
-  onEdit: PropTypes.func,
+  selectMaterial: PropTypes.func,
+  editMaterial: PropTypes.func,
   duplicateMaterial: PropTypes.func,
   selectedMaterials: PropTypes.object,
 };

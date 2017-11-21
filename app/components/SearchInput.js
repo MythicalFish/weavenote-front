@@ -13,6 +13,7 @@ function SearchInput(props) {
       onChange={handleSearch}
       disableReduxForm
       style={{ width: '400px' }}
+      icon={{ name: 'Search', size: 15 }}
     />
   );
 }

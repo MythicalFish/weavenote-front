@@ -4,42 +4,52 @@ import MaterialManager from 'containers/MaterialManager/Form';
 import Modal from 'components/Modal';
 import Button from 'components/Button';
 import ScrollArea from 'components/ScrollArea';
+import SearchInput from 'components/SearchInput';
 import Toolbar from './AddMaterialToolbar';
 import { VIEW } from '../constants';
 
 export default class AddMaterial extends React.PureComponent {
+  state = { view: VIEW.list, materialID: null };
+  changeView = (view) => {
+    this.setState({ view, materialID: null });
+  };
+  editMaterial = (material) => {
+    this.setState({ materialID: material.get('id'), view: VIEW.edit });
+  };
   render() {
     const {
-      selectMaterial,
+      filterMaterials,
       createComponents,
       selectedMaterials,
       createMaterial,
       materialListHeight,
-      editMaterial,
-      materialID,
-      view,
       abilities,
     } = this.props;
+    const { changeView, editMaterial } = this;
+    const { view, materialID } = this.state;
+    const lProps = { ...this.props, editMaterial, changeView, view };
     return (
       <Modal id="materials" width="100%" maxWidth="1000px">
+        <div className="flex items-center justify-center pt4">
+          <div className="flex-none">
+            <SearchInput onChange={filterMaterials} />
+          </div>
+        </div>
         {abilities.getIn(['Material', 'update']) ? (
           <div className="py3 px4">
-            <Toolbar {...this.props} />
+            <Toolbar {...lProps} />
           </div>
         ) : (
           <div className="pt3" />
         )}
         {view === VIEW.list && (
           <div>
-            <div className="vh-ymax50" style={{ height: materialListHeight() }}>
+            <div
+              className="vh-ymax40 bg-shadowY bt2"
+              style={{ height: materialListHeight() }}
+            >
               <ScrollArea className="px4">
-                <MaterialList
-                  selectable
-                  onSelect={selectMaterial}
-                  onEdit={editMaterial}
-                  selectedMaterials={selectedMaterials}
-                  inModal
-                />
+                <MaterialList {...lProps} selectable />
               </ScrollArea>
             </div>
             <Footer>
@@ -52,7 +62,7 @@ export default class AddMaterial extends React.PureComponent {
           </div>
         )}
         {[VIEW.create, VIEW.edit].includes(view) && (
-          <div className="vh-y50">
+          <div className="vh-y40 bg-shadowY bt2">
             <ScrollArea className="px4">
               <div className="pb4">
                 <MaterialManager id={materialID || 'new'} {...this.props} />
@@ -83,13 +93,10 @@ Footer.propTypes = {
 };
 
 AddMaterial.propTypes = {
-  selectMaterial: PropTypes.func,
+  filterMaterials: PropTypes.func,
   createMaterial: PropTypes.func,
   createComponents: PropTypes.func,
   selectedMaterials: PropTypes.object,
-  editMaterial: PropTypes.func,
-  materialID: PropTypes.number,
   materialListHeight: PropTypes.func,
-  view: PropTypes.string,
   abilities: PropTypes.object,
 };

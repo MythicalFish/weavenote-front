@@ -9,7 +9,7 @@ import List from './subcomponents/List';
 import MaterialCost from './subcomponents/MaterialCost';
 import AddMaterial from './subcomponents/AddMaterial';
 
-import { fetchMaterials } from '../MaterialList/actions';
+import { fetchMaterials, filterMaterials } from '../MaterialList/actions';
 import { selectMaterials } from '../MaterialList/selectors';
 import {
   fetchComponents,
@@ -23,27 +23,17 @@ import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
 class Components extends React.Component {
-  state = { view: VIEW.list, materialID: null };
   componentDidMount() {
     this.props.fetchComponents();
     this.props.fetchMaterials();
   }
-  setView = (view) => this.setState({ view });
   materialListHeight = () => this.props.materials.size * 50 + 100;
-  editMaterial = (material) => {
-    this.setState({ materialID: material.get('id'), view: VIEW.edit });
-  };
 
   render() {
-    const { materialID, view } = this.state;
-    const { setView, materialListHeight, editMaterial } = this;
+    const { materialListHeight } = this;
     const mProps = {
       ...this.props,
-      materialID,
-      view,
-      setView,
       materialListHeight,
-      editMaterial,
     };
     const abilities = this.props.abilities.get('Material').toJS();
     return (
@@ -82,6 +72,7 @@ export function mapDispatch(dispatch) {
       createComponents,
       fetchMaterials,
       selectMaterial,
+      filterMaterials,
       createMaterial,
     },
     dispatch

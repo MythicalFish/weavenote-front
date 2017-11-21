@@ -45,10 +45,15 @@ export class MaterialManager extends React.PureComponent {
 
   abilities = this.props.abilities.get('Material').toJS();
   readOnly = !this.abilities.update;
+  isNew = () => {
+    const { initialValues } = this.props;
+    if (!initialValues) return true;
+    return !this.props.initialValues.get('id');
+  };
   Field = fieldConstructor({
     readOnly: this.readOnly,
     onChange: () => {
-      if (!this.isNew) this.props.updateMaterial();
+      if (!this.isNew()) this.props.updateMaterial();
     },
   });
   render() {
@@ -65,7 +70,7 @@ export class MaterialManager extends React.PureComponent {
       switchType,
       abilities,
       readOnly,
-      isNew: !initialValues.get('id'),
+      isNew: this.isNew(),
       Field,
     };
     return <Form {...fProps} />;

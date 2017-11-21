@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
+import Icon from 'components/Icon';
 import { Field } from 'redux-form/immutable';
 import { debounce } from 'utils/misc';
 
@@ -26,10 +27,14 @@ class Input extends React.PureComponent {
     const p = { ...this.props };
 
     let field = null;
-    let touched = false;
-    let error = false;
     let fProps;
     let className = '';
+    let icon;
+
+    if (p.icon) {
+      icon = p.icon;
+      delete p.icon;
+    }
 
     if (p.fieldClass) {
       className = p.fieldClass;
@@ -63,11 +68,6 @@ class Input extends React.PureComponent {
       fProps.onFocus = null;
     }
 
-    if (p.meta) {
-      touched = p.meta.touched;
-      error = p.meta.error;
-    }
-
     const type = p.type || 'text';
 
     switch (type) {
@@ -94,7 +94,7 @@ class Input extends React.PureComponent {
     return (
       <div className={`input ${className}`}>
         {field}
-        {touched && error && <span className="error">{error}</span>}
+        {icon && <Icon name={icon.name} size={icon.size} />}
       </div>
     );
   }
