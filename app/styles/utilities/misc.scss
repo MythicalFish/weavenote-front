@@ -49,6 +49,13 @@
 .cut {
   overflow: hidden;
 }
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 @media #{$breakpoint-lg} {
   .lg-mln4 {
     margin-left: -$space-4;

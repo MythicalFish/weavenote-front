@@ -53,10 +53,17 @@ InnerLayout.propTypes = {
 
 const Layout = (props) => {
   const { Header, modalImage } = props;
+  const sidebarOffset = {
+    style: { marginLeft: '194px' },
+  };
   return (
     <div>
       <div id="app-container" className="flex flex-column">
-        {Header ? <Header /> : <DefaultHeader />}
+        {Header ? (
+          <Header {...sidebarOffset} />
+        ) : (
+          <DefaultHeader {...sidebarOffset} />
+        )}
         <div id="app-content" className="flex-auto flex">
           <Sidebar {...props} />
           <InnerLayout {...props} />

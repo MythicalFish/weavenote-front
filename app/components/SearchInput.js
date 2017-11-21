@@ -3,10 +3,12 @@ import Input from 'components/FormInput';
 
 function SearchInput(props) {
   const handleSearch = (e) => {
-    props.filterAction(e.target.value);
+    props.onChange(e.target.value);
   };
   return (
     <Input
+      small
+      fieldClass="inline-block"
       placeholder="Search"
       onChange={handleSearch}
       disableReduxForm
@@ -16,7 +18,7 @@ function SearchInput(props) {
 }
 
 SearchInput.propTypes = {
-  filterAction: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 export default SearchInput;

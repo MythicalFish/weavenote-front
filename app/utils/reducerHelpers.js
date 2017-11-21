@@ -26,3 +26,28 @@ const forReducer = (reducer, action) => {
   }
   return true;
 };
+
+export const filtered = (list, attributes, text = '') => {
+  // Returns array of keys of a filtered list
+  const f = [];
+  const t = text.toLowerCase();
+  list.forEach((item, key) => {
+    const values = attributes.map((attr) => {
+      if (Array.isArray(attr)) {
+        return item.getIn(attr);
+      }
+      return item.get(attr);
+    });
+    values.forEach((value) => {
+      // Return all keys if no text
+      if (t.length === 0) f.push(key);
+      // Skip if already found this item
+      if (f.includes(key)) return;
+      // Otherwise return key if matched
+      if (value && value.toLowerCase().includes(t)) {
+        f.push(key);
+      }
+    });
+  });
+  return f;
+};

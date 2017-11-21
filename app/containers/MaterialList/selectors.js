@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 
-const selectMaterials = () => (state) => state.get('MaterialList');
+export const selectDomain = () => (state) => state.get('MaterialList');
 
-export { selectMaterials };
-export default selectMaterials;
+export const selectMaterials = () =>
+  createSelector(selectDomain(), (s) =>
+    s.get('all').filter((p, key) => s.get('filtered').includes(key))
+  );

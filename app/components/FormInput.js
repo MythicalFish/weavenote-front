@@ -29,11 +29,16 @@ class Input extends React.PureComponent {
     let touched = false;
     let error = false;
     let fProps;
-    let className = p.fieldClass || '';
+    let className = '';
+
+    if (p.fieldClass) {
+      className = p.fieldClass;
+      delete p.fieldClass;
+    }
 
     if (p.small) {
       delete p.small;
-      className += 'input-sm';
+      className += ' input-sm';
     }
 
     if (p.input) {

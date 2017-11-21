@@ -24,7 +24,7 @@ export class ProjectList extends React.PureComponent {
   changeView = (view) => {
     this.setState({ view });
   };
-  Header = () => <Header {...this.props} />;
+  Header = (props) => <Header {...this.props} {...props} />;
   render() {
     const pProps = {
       ...this.props,

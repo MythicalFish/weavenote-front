@@ -1,14 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Layout from 'components/Layout';
 import List from './subcomponents/List';
+import Header from './subcomponents/Header';
+import { filterMaterials } from './actions';
 
-// Actions, selectors, etc. are in List because it
+// Most actions, selectors, etc. are in List.js because it
 // all needs to be able to work in a modal window.
 
-const MaterialList = (props) => (
-  <Layout {...props} type="narrow" scrollable>
-    <List {...props} showToolbar />
-  </Layout>
-);
+class MaterialList extends React.PureComponent {
+  Header = (props) => <Header {...this.props} {...props} />;
+  render() {
+    return (
+      <Layout {...this.props} type="narrow" scrollable Header={this.Header}>
+        <List {...this.props} inModal={false} />
+      </Layout>
+    );
+  }
+}
 
-export default MaterialList;
+function mapDispatch(dispatch) {
+  return bindActionCreators({ filterMaterials }, dispatch);
+}
+
+export default connect(null, mapDispatch)(MaterialList);

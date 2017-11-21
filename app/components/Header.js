@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import UserMenu from 'components/UserMenu';
 
-const Header = () => (
-  <header id="app-header" className="justify-end">
+const Header = (props) => (
+  <header id="app-header" className="justify-end" style={props.style}>
     <UserMenu />
   </header>
-);
+  );
+
+Header.propTypes = {
+  style: PropTypes.object,
+};
 
 export default Header;

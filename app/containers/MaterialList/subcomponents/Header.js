@@ -11,7 +11,7 @@ export default function Header(props) {
     >
       <div className="overlay flex items-center justify-center">
         <div className="flex-none">
-          <SearchInput onChange={props.filterProjects} />
+          <SearchInput onChange={props.filterMaterials} />
         </div>
       </div>
       <UserMenu />
@@ -20,6 +20,6 @@ export default function Header(props) {
 }
 
 Header.propTypes = {
-  filterProjects: PropTypes.func,
+  filterMaterials: PropTypes.func,
   style: PropTypes.object,
 };

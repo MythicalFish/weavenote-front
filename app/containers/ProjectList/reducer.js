@@ -1,25 +1,10 @@
 import { fromJS } from 'immutable';
+import { filtered } from 'utils/reducerHelpers';
 import * as types from './constants';
 
 const initialState = fromJS({ all: [], filtered: [] });
 
-const filtered = (list, text = '') => {
-  // Returns array of keys of a filtered list
-  const f = [];
-  const t = text.toLowerCase();
-  list.toJS().forEach((p, key) => {
-    const a = [p.name, p.ref_number, p.collection];
-    a.forEach((v) => {
-      if (t.length === 0) f.push(key);
-      if (v && v.toLowerCase().includes(t)) {
-        f.push(key);
-        return null;
-      }
-      return null;
-    });
-  });
-  return f;
-};
+const filterAttributes = ['name', 'ref_number', 'collection'];
 
 function projectsReducer(state = initialState, action) {
   const { type, response } = action;
@@ -32,10 +17,13 @@ function projectsReducer(state = initialState, action) {
     case types.DUPLICATE_PROJECT_SUCCESS:
       return state
         .set('all', fromJS(response))
-        .set('filtered', filtered(fromJS(response)));
+        .set('filtered', filtered(fromJS(response), filterAttributes));
 
     case types.FILTER_PROJECTS:
-      return state.set('filtered', filtered(state.get('all'), action.text));
+      return state.set(
+        'filtered',
+        filtered(state.get('all'), filterAttributes, action.text)
+      );
 
     default:
       return state;

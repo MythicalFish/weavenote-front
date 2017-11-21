@@ -42,3 +42,7 @@ export function duplicateMaterial(id) {
 export function duplicateMaterialSuccess(response) {
   return { type: types.DUPLICATE_MATERIAL_SUCCESS, response };
 }
+
+export function filterMaterials(text) {
+  return { type: types.FILTER_MATERIALS, text };
+}

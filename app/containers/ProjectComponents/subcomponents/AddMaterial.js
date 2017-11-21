@@ -38,6 +38,7 @@ export default class AddMaterial extends React.PureComponent {
                   onSelect={selectMaterial}
                   onEdit={editMaterial}
                   selectedMaterials={selectedMaterials}
+                  inModal
                 />
               </ScrollArea>
             </div>
