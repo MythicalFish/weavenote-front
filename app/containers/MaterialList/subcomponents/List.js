@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
-import { fetchMaterials, deleteMaterial, duplicateMaterial } from '../actions';
+import {
+  fileMaterial,
+  fetchMaterials,
+  deleteMaterial,
+  duplicateMaterial,
+} from '../actions';
 import { selectMaterials } from '../selectors';
 import ListItem from './ListItem';
 
@@ -56,7 +61,7 @@ const mapState = createStructuredSelector({
 
 function mapDispatch(dispatch) {
   return bindActionCreators(
-    { fetchMaterials, deleteMaterial, duplicateMaterial },
+    { fileMaterial, fetchMaterials, deleteMaterial, duplicateMaterial },
     dispatch
   );
 }

@@ -18,6 +18,7 @@ function materialsReducer(state = initialState, action) {
   switch (type) {
     case types.FETCH_MATERIALS_SUCCESS:
     case types.DELETE_MATERIAL_SUCCESS:
+    case types.FILE_MATERIAL_SUCCESS:
     case types.DUPLICATE_MATERIAL_SUCCESS:
       return state
         .set('all', fromJS(response))

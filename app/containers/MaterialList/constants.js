@@ -1,8 +1,7 @@
 export const FETCH_MATERIALS = '@@app/FETCH_MATERIALS';
-export const FILE_MATERIAL = '@@app/FILE_MATERIAL';
-
 export const FETCH_MATERIALS_SUCCESS = '@@app/FETCH_MATERIALS_SUCCESS';
-export const FETCH_MATERIALS_ERROR = '@@app/FETCH_MATERIALS_ERROR';
+
+export const FILE_MATERIAL = '@@app/FILE_MATERIAL';
 export const FILE_MATERIAL_SUCCESS = '@@app/FILE_MATERIAL_SUCCESS';
 
 export const DELETE_MATERIAL = '@@app/DELETE_MATERIAL';

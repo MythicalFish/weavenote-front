@@ -39,7 +39,8 @@ class ListItem extends React.PureComponent {
     duplicateMaterial(material.get('id'));
   };
   render() {
-    const { material, selectable } = this.props;
+    const { material, selectable, fileMaterial } = this.props;
+    const { id, archived } = material.toObject();
     const linked = {
       onClick: this.handleSelect,
       className: 'cursor-pointer',
@@ -68,8 +69,11 @@ class ListItem extends React.PureComponent {
         <td className="right-align">
           <Dropdown icon="more">
             <button onClick={this.handleEdit}>Edit</button>
-            <button onClick={this.handleDelete}>Delete</button>
             <button onClick={this.handleDuplicate}>Duplicate</button>
+            <button onClick={() => fileMaterial({ id, archived: !archived })}>
+              {archived ? 'Restore' : 'Archive'}
+            </button>
+            <button onClick={this.handleDelete}>Delete</button>
           </Dropdown>
         </td>
       </tr>
@@ -84,6 +88,7 @@ ListItem.propTypes = {
   selectMaterial: PropTypes.func,
   editMaterial: PropTypes.func,
   duplicateMaterial: PropTypes.func,
+  fileMaterial: PropTypes.func,
   selectedMaterials: PropTypes.object,
 };
 

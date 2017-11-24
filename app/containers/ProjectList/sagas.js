@@ -34,7 +34,7 @@ function* deleteProject({ id }) {
 
 function* fileProject(action) {
   const { id, archived } = action.payload;
-  const params = { project: { id, archived }, index_after_update: true };
+  const params = { project: { id, archived } };
   yield sagas.patch(`projects/${id}`, params, actions.fileProjectSuccess);
 }
 

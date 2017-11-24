@@ -3,26 +3,34 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
+
 export default [materialListWatcher];
 
 function* materialListWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_MATERIALS, fetchMaterials),
     yield takeLatest(types.DELETE_MATERIAL, deleteMaterial),
+    yield takeLatest(types.FILE_MATERIAL, fileMaterial),
     yield takeLatest(types.DUPLICATE_MATERIAL, duplicateMaterial),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
 
-export function* fetchMaterials() {
-  yield sagas.get('materials', null, actions.fetchMaterialsSuccess);
+function* fetchMaterials({ params }) {
+  yield sagas.get('materials', params, actions.fetchMaterialsSuccess);
 }
 
-export function* deleteMaterial({ id }) {
+function* deleteMaterial({ id }) {
   yield sagas.destroy(`materials/${id}`, null, actions.deleteMaterialSuccess);
 }
 
-export function* duplicateMaterial({ id }) {
+function* duplicateMaterial({ id }) {
   yield sagas.post(`materials/${id}`, null, actions.duplicateMaterialSuccess);
+}
+
+function* fileMaterial(action) {
+  const { id, archived } = action.payload;
+  const params = { material: { id, archived } };
+  yield sagas.patch(`materials/${id}`, params, actions.fileMaterialSuccess);
 }

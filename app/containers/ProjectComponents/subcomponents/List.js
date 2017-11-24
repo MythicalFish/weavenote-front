@@ -7,9 +7,9 @@ const List = (props) => {
     <table className="table-condensed smaller1">
       <colgroup>
         <col width="35%" />
-        <col width="35%" />
+        <col width="40%" />
         <col width="15%" />
-        <col width="15%" />
+        <col width="10%" />
       </colgroup>
       <thead>
         <tr>

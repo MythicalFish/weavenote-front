@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Dot from 'components/Dot';
 import Icon from 'components/Icon';
 import PriceSymbol from 'components/PriceSymbol';
-import Dots from 'images/dots.svg';
+import Dots from 'images/dots-vertical.svg';
 import TetherComponent from 'react-tether';
 import sizeMe from 'react-sizeme';
 import Focusable from 'utils/Focusable';
@@ -37,7 +37,7 @@ class Dropdown extends React.PureComponent {
           I = (
             <img
               src={Dots}
-              style={{ height: '5px', opacity: 0.6, maxWidth: '20px' }}
+              style={{ height: 'auto', opacity: 0.4, width: '5px' }}
             />
           );
         } else {

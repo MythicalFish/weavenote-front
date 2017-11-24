@@ -1,8 +1,9 @@
 import * as types from './constants';
 
-export function fetchMaterials() {
+export function fetchMaterials(params) {
   return {
     type: types.FETCH_MATERIALS,
+    params,
   };
 }
 
@@ -14,17 +15,11 @@ export function fetchMaterialsSuccess(response) {
 }
 
 export function fileMaterial(payload) {
-  return {
-    type: types.FILE_MATERIAL,
-    payload,
-  };
+  return { type: types.FILE_MATERIAL, payload };
 }
 
-export function fileMaterialSuccess(list) {
-  return {
-    type: types.FILE_MATERIAL_SUCCESS,
-    list,
-  };
+export function fileMaterialSuccess(response) {
+  return { type: types.FILE_MATERIAL_SUCCESS, response };
 }
 
 export function deleteMaterial(id) {
