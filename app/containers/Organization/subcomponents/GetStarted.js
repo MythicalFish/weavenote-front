@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
+import Logo from 'images/logo.png';
 
 const GetStarted = (props) => (
   <div className="center">
-    <img src={`${process.env.ASSET_HOST}/logo.png`} role="presentation" />
+    <img src={Logo} role="presentation" />
     <div className="bigger1 my3">
       It looks like you do not belong to a Weavenote organization yet.
     </div>

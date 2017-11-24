@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Dot from 'components/Dot';
 import Icon from 'components/Icon';
 import PriceSymbol from 'components/PriceSymbol';
+import Dots from 'images/dots.svg';
 import TetherComponent from 'react-tether';
 import sizeMe from 'react-sizeme';
 import Focusable from 'utils/Focusable';
@@ -35,7 +36,7 @@ class Dropdown extends React.PureComponent {
         if (icon === 'more') {
           I = (
             <img
-              src={`${process.env.ASSET_HOST}/dots.svg`}
+              src={Dots}
               style={{ height: '5px', opacity: 0.6, maxWidth: '20px' }}
             />
           );
@@ -141,11 +142,11 @@ class Dropdown extends React.PureComponent {
             {isFocused && this.items()}
           </TetherComponent>
         ) : (
-          <div className="untethered">
-            {this.label()}
-            {isFocused && this.items()}
-          </div>
-        )}
+            <div className="untethered">
+              {this.label()}
+              {isFocused && this.items()}
+            </div>
+          )}
       </div>
     );
   }

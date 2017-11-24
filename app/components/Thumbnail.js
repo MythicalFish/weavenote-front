@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { PLACEHOLDER } from 'containers/ProjectImages/constants';
+import Placeholder from 'images/placeholder-thumb.jpg';
 
 const Thumbnail = (props) => {
-  const url = props.url || PLACEHOLDER;
+  const url = props.url || Placeholder;
   const size = props.size || 'tiny';
   return (
     <div className={`thumbnail thumbnail-${size}`}>

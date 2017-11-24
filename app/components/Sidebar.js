@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import Logo from 'images/logo.png';
 
 const Button = (props) => {
   const { path, location, label } = props;
@@ -38,7 +39,7 @@ const Sidebar = (props) => {
   if (!role) return null;
   return (
     <aside id="sidebar" className="flex-none blurrable">
-      <img src={`${process.env.ASSET_HOST}/logo.png`} role="presentation" />
+      <img src={Logo} role="presentation" />
       <nav className="mt2">
         <Button {...props} path="/projects" label="Styles" />
         {exposeTo(role) && (
