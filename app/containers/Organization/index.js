@@ -42,7 +42,7 @@ export class Organization extends React.PureComponent {
 
   render() {
     return (
-      <Layout type="boxed" {...this.props}>
+      <Layout scrollable type="boxed" {...this.props}>
         {this.currentView()}
       </Layout>
     );

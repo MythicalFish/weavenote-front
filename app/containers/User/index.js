@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -9,7 +9,7 @@ import Form from './subcomponents/Form';
 class Profile extends React.PureComponent {
   render() {
     return (
-      <Layout type="boxed" {...this.props}>
+      <Layout scrollable type="boxed" {...this.props}>
         <Form {...this.props} />
       </Layout>
     );

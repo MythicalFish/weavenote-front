@@ -5,9 +5,8 @@ import AvatarList from 'components/AvatarList';
 import Icon from 'components/Icon';
 
 export default function Toolbar(props) {
-  const { changeView, currentView, openModal } = props;
+  const { changeView, currentView, openModal, project } = props;
   const abilities = props.abilities.get('Project').toJS();
-
   const Nav = ({ name }) => (
     <NavItem
       label={name}
@@ -60,6 +59,7 @@ export default function Toolbar(props) {
               showPlusButton={false}
               readOnly={!abilities.update}
               {...props}
+              collaborators={project.get('all_collaborators')}
             />
           </li>
         </ul>
@@ -70,6 +70,7 @@ export default function Toolbar(props) {
 }
 
 Toolbar.propTypes = {
+  project: PropTypes.object,
   changeView: PropTypes.func,
   currentView: PropTypes.string,
   openModal: PropTypes.func,
