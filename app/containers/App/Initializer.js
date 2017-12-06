@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { browserHistory } from 'react-router';
 import LoginForm from 'components/LoginForm';
+import Subscribe from 'components/Subscribe';
 import { fetchUser } from 'containers/User/actions';
 import { loggedIn } from 'utils/authUtils';
 import {
@@ -96,7 +97,7 @@ const Initializer = (Component) => {
 
       const newKey = this.newInviteKey();
       const storedKey = this.storedInviteKey();
-      const { user, invite } = this.props;
+      const { user, invite, organization } = this.props;
 
       if (!loggedIn()) {
         const loginProps = {
@@ -128,8 +129,12 @@ const Initializer = (Component) => {
         return null;
       }
 
-      if (!this.props.organization && location.pathname !== '/organization') {
+      if (!organization && location.pathname !== '/organization') {
         return null;
+      }
+
+      if (!organization.get('has_active_subscription')) {
+        return <Subscribe {...this.props} />;
       }
 
       const appProps = { ...this.props };

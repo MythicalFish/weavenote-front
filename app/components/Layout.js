@@ -27,7 +27,7 @@ const InnerLayout = (props) => {
         <ScrollContainer scrollable={scrollable}>
           <div className="p4">
             <div className="container-narrowest">
-              <div className="box b1 py4">{children}</div>
+              <div className="box b1 py4 bg-white">{children}</div>
             </div>
           </div>
         </ScrollContainer>
@@ -52,13 +52,15 @@ InnerLayout.propTypes = {
 };
 
 const Layout = (props) => {
-  const { Header, modalImage } = props;
+  const { Header, modalImage, background } = props;
   const sidebarOffset = {
     style: { marginLeft: '194px' },
   };
+  let containerClass = 'flex flex-column';
+  if (background) containerClass += ` bg-${background}`;
   return (
     <div>
-      <div id="app-container" className="flex flex-column">
+      <div id="app-container" className={containerClass}>
         {Header ? (
           <Header {...sidebarOffset} />
         ) : (

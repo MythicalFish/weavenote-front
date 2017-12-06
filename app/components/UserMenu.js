@@ -7,6 +7,7 @@ import Avatar from 'components/Avatar';
 import * as authUtils from 'utils/authUtils';
 import Icon from 'components/Icon';
 import { selectUser, selectOrganization } from 'containers/App/selectors';
+import { envVar } from 'utils/misc';
 
 const UserMenu = (props) => {
   if (!props.user) return null;
@@ -22,6 +23,11 @@ const UserMenu = (props) => {
       <Link to="/organization">
         <MenuItem icon="Users" label="Organization" />
       </Link>
+      {props.user.get('role') === 'Admin' && (
+        <a href={envVar('billing')}>
+          <MenuItem icon="CreditCard" label="Billing" />
+        </a>
+      )}
       <button onClick={authUtils.logout}>
         <MenuItem icon="LogOut" label="Logout" />
       </button>
@@ -29,25 +35,24 @@ const UserMenu = (props) => {
   );
 };
 
-const MenuItem = (p) =>
+const MenuItem = (p) => (
   <div className="flex items-center">
-    <div className="flex-auto">
-      {p.label}
-    </div>
+    <div className="flex-auto">{p.label}</div>
     <Icon name={p.icon} size={16} className="ml1 flex-none" />
-  </div>;
+  </div>
+);
 
-const UserMenuButton = ({ user, organization }) =>
+const UserMenuButton = ({ user, organization }) => (
   <div className="flex items-center">
     <div className="mr2 right-align smaller1">
       {user.get('name')}
-      {organization &&
-        <div className="dark5 upcase smaller1">
-          {organization.get('name')}
-        </div>}
+      {organization && (
+        <div className="dark5 upcase smaller1">{organization.get('name')}</div>
+      )}
     </div>
     <Avatar {...{ user }} small />
-  </div>;
+  </div>
+);
 
 UserMenuButton.propTypes = {
   user: PropTypes.object,

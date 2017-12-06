@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import Auth0Lock from 'auth0-lock';
 import { loggedIn } from 'utils/authUtils';
+import Layout from 'components/Layout';
+import Logo from 'images/logo.png';
 
 export default class LoginForm extends React.PureComponent {
   componentDidMount() {
@@ -50,10 +52,10 @@ export default class LoginForm extends React.PureComponent {
     });
   };
 
-  render = () =>
-    <div className="flex items-middle vh-ymin100 bg-gray-darker">
-      <div>
-        <div className="larger light8 center mb2">Weavenote</div>
+  render = () => (
+    <Layout type="boxed" background="gray-lightest">
+      <div className="center">
+        <img src={Logo} role="presentation" />
         <div id="login-form" />
         <style>{`
             .auth0-lock-header {
@@ -68,7 +70,8 @@ export default class LoginForm extends React.PureComponent {
             }
           `}</style>
       </div>
-    </div>;
+    </Layout>
+  );
 }
 
 LoginForm.propTypes = {
