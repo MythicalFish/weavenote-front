@@ -1,7 +1,12 @@
 import React, { PropTypes } from 'react';
+import sizeMe from 'react-sizeme';
 import ColumnValue from './ColumnValue';
 
 class ColumnValues extends React.PureComponent {
+  componentDidUpdate() {
+    const { setHeight, size: { height }, maxHeight } = this.props;
+    if (height > 0 && height !== maxHeight) setHeight(height + 42);
+  }
   render() {
     const { measurements, colWidths } = this.props;
     return (
@@ -23,8 +28,11 @@ class ColumnValues extends React.PureComponent {
 }
 
 ColumnValues.propTypes = {
+  maxHeight: PropTypes.number,
   colWidths: PropTypes.object,
   measurements: PropTypes.object,
+  size: PropTypes.object,
+  setHeight: PropTypes.func,
 };
 
-export default ColumnValues;
+export default sizeMe({ monitorHeight: true })(ColumnValues);

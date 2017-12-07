@@ -1,12 +1,7 @@
 import React, { PropTypes } from 'react';
-import sizeMe from 'react-sizeme';
 import Input from './Input';
 
 class ColumnValue extends React.PureComponent {
-  componentDidUpdate() {
-    const { setHeight, size: { height }, maxHeight } = this.props;
-    if (height > 0 && height !== maxHeight) setHeight(height);
-  }
   handleChange = (v) => (value) => {
     this.props.updateMeasurements({
       values: [Object.assign(v, { value })],
@@ -38,13 +33,10 @@ class ColumnValue extends React.PureComponent {
 }
 
 ColumnValue.propTypes = {
-  maxHeight: PropTypes.number,
-  size: PropTypes.object,
-  setHeight: PropTypes.func,
   measurements: PropTypes.object,
   group: PropTypes.object,
   fieldName: PropTypes.string,
   updateMeasurements: PropTypes.func,
 };
 
-export default sizeMe({ monitorHeight: true })(ColumnValue);
+export default ColumnValue;
