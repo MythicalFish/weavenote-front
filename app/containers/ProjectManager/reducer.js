@@ -25,8 +25,7 @@ function ProjectManagerReducer(state = initialState, action) {
       return state
         .set('project', fromJS(response.project))
         .set('userRole', response.user_role)
-        .set('abilities', fromJS(response.abilities))
-        .set('collaborators', fromJS(response.collaborators));
+        .set('abilities', fromJS(response.abilities));
 
     case types.FETCH_MATERIAL_COST_SUCCESS:
       return state.setIn(['project', 'material_cost'], fromJS(action.response));

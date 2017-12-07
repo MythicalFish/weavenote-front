@@ -14,7 +14,9 @@ export const selectMaterialCost = () =>
   );
 
 export const selectCollaborators = () =>
-  createSelector(selectDomain(), (s) => s.get('collaborators'));
+  createSelector(selectDomain(), (s) =>
+    s.getIn(['project', 'all_collaborators'])
+  );
 
 export const selectUserRole = () =>
   createSelector(selectDomain(), (s) => s.get('userRole'));
