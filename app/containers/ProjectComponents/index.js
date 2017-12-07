@@ -4,11 +4,10 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import Button from 'components/Button';
-import { VIEW } from './constants';
 import List from './subcomponents/List';
 import MaterialCost from './subcomponents/MaterialCost';
 import AddMaterial from './subcomponents/AddMaterial';
-
+import { VIEW } from './constants';
 import { fetchMaterials, filterMaterials } from '../MaterialList/actions';
 import { selectMaterials } from '../MaterialList/selectors';
 import {
@@ -23,17 +22,29 @@ import * as selectors from './selectors';
 import { selectMaterialCost } from '../ProjectManager/selectors';
 
 class Components extends React.Component {
+  state = { view: VIEW.list, materialID: null };
   componentDidMount() {
     this.props.fetchComponents();
     this.props.fetchMaterials();
   }
+  changeView = (view) => {
+    this.setState({ view, materialID: null });
+  };
+  editMaterial = (material) => {
+    this.setState({ materialID: material.get('id'), view: VIEW.edit });
+  };
   materialListHeight = () => this.props.materials.size * 50 + 100;
 
   render() {
-    const { materialListHeight } = this;
+    const { materialListHeight, changeView, editMaterial } = this;
+    const { view, materialID } = this.state;
     const mProps = {
       ...this.props,
       materialListHeight,
+      changeView,
+      editMaterial,
+      view,
+      materialID,
     };
     const abilities = this.props.abilities.get('Material').toJS();
     return (

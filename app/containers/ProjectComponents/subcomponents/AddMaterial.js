@@ -9,13 +9,6 @@ import Toolbar from './AddMaterialToolbar';
 import { VIEW } from '../constants';
 
 export default class AddMaterial extends React.PureComponent {
-  state = { view: VIEW.list, materialID: null };
-  changeView = (view) => {
-    this.setState({ view, materialID: null });
-  };
-  editMaterial = (material) => {
-    this.setState({ materialID: material.get('id'), view: VIEW.edit });
-  };
   render() {
     const {
       filterMaterials,
@@ -24,10 +17,9 @@ export default class AddMaterial extends React.PureComponent {
       createMaterial,
       materialListHeight,
       abilities,
+      view,
+      materialID,
     } = this.props;
-    const { changeView, editMaterial } = this;
-    const { view, materialID } = this.state;
-    const lProps = { ...this.props, editMaterial, changeView, view };
     return (
       <Modal id="materials" width="100%" maxWidth="1000px">
         <div className="flex items-center justify-center pt4">
@@ -37,7 +29,7 @@ export default class AddMaterial extends React.PureComponent {
         </div>
         {abilities.getIn(['Material', 'update']) ? (
           <div className="py3 px4">
-            <Toolbar {...lProps} />
+            <Toolbar {...this.props} />
           </div>
         ) : (
           <div className="pt3" />
@@ -49,7 +41,7 @@ export default class AddMaterial extends React.PureComponent {
               style={{ height: materialListHeight() }}
             >
               <ScrollArea className="px4">
-                <MaterialList {...lProps} selectable />
+                <MaterialList {...this.props} selectable />
               </ScrollArea>
             </div>
             <Footer>
@@ -99,4 +91,6 @@ AddMaterial.propTypes = {
   selectedMaterials: PropTypes.object,
   materialListHeight: PropTypes.func,
   abilities: PropTypes.object,
+  view: PropTypes.string,
+  materialID: PropTypes.number,
 };
