@@ -19,11 +19,11 @@ export function* ProjectAnnotationsWatcher() {
   yield watcher.map((task) => cancel(task));
 }
 
-function* fetchAnnotations() {
+function* fetchAnnotations({ archived }) {
   const projectID = yield select(selectProjectID());
   yield sagas.get(
     'annotations',
-    { project_id: projectID },
+    { project_id: projectID, archived },
     actions.fetchAnnotationsSuccess
   );
 }

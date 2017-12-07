@@ -26,10 +26,14 @@ class Input extends React.PureComponent {
     }
   };
   minSize = 3;
-  doUpdate = debounce(() => {
-    const { handleChange } = this.props;
-    if (handleChange) handleChange(this.state.value);
-  }, 1000);
+  doUpdate = debounce(
+    () => {
+      const { handleChange } = this.props;
+      if (handleChange) handleChange(this.state.value);
+    },
+    1000,
+    this
+  );
   render() {
     const { defaultValue, maxLength, placeholder, readOnly } = this.props;
     const fProps = {

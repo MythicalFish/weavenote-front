@@ -17,7 +17,10 @@ import {
   writeReply,
   cancelCommentAction,
 } from './actions';
-import { startAnnotation } from '../ProjectAnnotations/actions';
+import {
+  startAnnotation,
+  fetchAnnotations,
+} from '../ProjectAnnotations/actions';
 import { selectCurrentImage } from '../ProjectImages/selectors';
 import * as selectors from './selectors';
 import { VIEW } from './constants';
@@ -31,6 +34,8 @@ class Comments extends React.PureComponent {
     this.setState({ view });
     setTimeout(() => {
       this.fetchComments();
+      const archived = view === VIEW.archived;
+      this.props.fetchAnnotations(archived);
     }, 50);
   };
   fetchComments = () => {
@@ -78,6 +83,7 @@ class Comments extends React.PureComponent {
 
 Comments.propTypes = {
   fetchComments: PropTypes.func,
+  fetchAnnotations: PropTypes.func,
   data: PropTypes.object,
   abilities: PropTypes.object,
   commentable: PropTypes.object,
@@ -96,6 +102,7 @@ export function mapDispatch(dispatch) {
       focusComment,
       cancelCommentAction,
       startAnnotation,
+      fetchAnnotations,
     },
     dispatch
   );

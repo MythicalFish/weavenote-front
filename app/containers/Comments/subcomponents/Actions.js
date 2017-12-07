@@ -31,14 +31,17 @@ const Actions = (props) => {
   const deleteLabel = isReply ? 'Delete' : 'Archive';
   const actionable = { type: 'Comment', id };
   const handleDelete = () => {
-    confirm(
-      `Are you sure you want to ${deleteLabel} this ${label}?`
-    ).then(() => {
-      props.deleteComment({ id, commentable });
-    });
+    confirm(`Are you sure you want to ${deleteLabel} this ${label}?`).then(
+      () => {
+        props.deleteComment({ id, commentable });
+      }
+    );
   };
   const handleRestore = () => {
-    updateComment({ commentable, comment: comment.set('archived', false) });
+    updateComment({
+      commentable,
+      comment: comment.set('archived', false).toJS(),
+    });
     changeView(VIEW.active);
   };
   const handleAnnotate = () => {

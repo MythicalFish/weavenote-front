@@ -1,7 +1,7 @@
 import * as types from './constants';
 
-export function fetchAnnotations() {
-  return { type: types.FETCH_ANNOTATIONS };
+export function fetchAnnotations(archived) {
+  return { type: types.FETCH_ANNOTATIONS, archived: !!archived };
 }
 export function fetchAnnotationsSuccess(response) {
   return { type: types.FETCH_ANNOTATIONS_SUCCESS, response };
