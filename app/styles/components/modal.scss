@@ -22,9 +22,8 @@
     transition: all 0.5s;
     @extend .flex-none;
     z-index: 3;
-    max-height: 95%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    max-height: 95vh;
+    height: auto;
     box-shadow: rgba(0, 0, 0, 0.2) 0 0 200px;
     &.visible {
       opacity: 1;
@@ -32,6 +31,8 @@
     }
     .modal-content {
       height: 100%;
+      overflow-x: hidden;
+      overflow-y: hidden;
       background: $white;
       box-shadow: 0 0 30px rgba(49, 60, 84, 0.1);
       overflow: hidden;

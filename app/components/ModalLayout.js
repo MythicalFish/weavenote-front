@@ -1,17 +1,22 @@
 import React, { PropTypes } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import Icon from 'components/Icon';
+import sizeMe from 'react-sizeme';
 
 class Content extends React.PureComponent {
   static propTypes = {
     handleClose: PropTypes.func.isRequired,
     noClickOutside: PropTypes.bool,
+    size: PropTypes.object,
   };
-  state = { klass: '' };
+  state = { klass: '', height: 'auto' };
   componentDidMount() {
     setTimeout(() => {
       this.setState({ klass: 'visible' });
     }, 100);
+    setTimeout(() => {
+      this.setState({ height: this.props.size.height });
+    }, 1000);
   }
   handleClickOutside = () => {
     const { noClickOutside } = this.props;
@@ -28,16 +33,18 @@ class Content extends React.PureComponent {
   render() {
     const p = this.props;
     const style = {};
+    const cStyle = {};
     if (p.width) style.width = p.width;
-    if (p.height) style.height = p.height;
     if (p.minWidth) style.minWidth = p.minWidth;
     if (p.maxWidth) style.maxWidth = p.maxWidth;
     if (p.minHeight) style.minHeight = p.minHeight;
+    style.height = p.height || this.state.height;
+    if (p.nativeScroll) cStyle.overflowY = 'auto';
     let { klass } = this.state;
     if (p.cosy) klass += ' cosy';
     return (
       <div className={`modal-container ${klass}`} style={style}>
-        <div className="modal-content">
+        <div className="modal-content" style={cStyle}>
           {!p.hideCloseButton && (
             <Icon
               name="X"
@@ -54,7 +61,7 @@ class Content extends React.PureComponent {
   }
 }
 
-const ModalContent = onClickOutside(Content);
+const ModalContent = sizeMe({ monitorHeight: true })(onClickOutside(Content));
 
 class ModalLayout extends React.PureComponent {
   state = { klass: '' };

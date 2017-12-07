@@ -33,14 +33,12 @@ class Components extends React.Component {
   editMaterial = (material) => {
     this.setState({ materialID: material.get('id'), view: VIEW.edit });
   };
-  materialListHeight = () => this.props.materials.size * 50 + 100;
 
   render() {
-    const { materialListHeight, changeView, editMaterial } = this;
+    const { changeView, editMaterial } = this;
     const { view, materialID } = this.state;
     const mProps = {
       ...this.props,
-      materialListHeight,
       changeView,
       editMaterial,
       view,

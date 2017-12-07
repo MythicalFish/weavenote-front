@@ -91,7 +91,7 @@ class ProjectManager extends React.PureComponent {
             </div>
           </div>
         </div>
-        <Modal id="collaborators" width="700px" cosy>
+        <Modal id="collaborators" width="700px" nativeScroll cosy>
           <header className="modal-header">{`Collaborators for ${project.get(
             'name'
           )}`}</header>

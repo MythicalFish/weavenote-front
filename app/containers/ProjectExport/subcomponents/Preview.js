@@ -27,9 +27,9 @@ class Preview extends React.PureComponent {
     const { pageNumber, numPages } = this.state;
     const { url } = this.props;
     return (
-      <div>
-        <div className="modal-body">
-          <div className="b1" style={{ height: '60vh' }}>
+      <div className="flex-auto flex flex-column">
+        <div className="flex-auto modal-body relative">
+          <div className="b1 overlay">
             <ScrollArea>
               <Document file={url} onLoadSuccess={this.onDocumentLoad}>
                 <Page pageNumber={pageNumber} width={1100} />

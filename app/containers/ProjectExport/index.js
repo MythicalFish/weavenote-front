@@ -25,14 +25,16 @@ class ProjectExport extends React.PureComponent {
     const pProps = { ...this.props, resize };
     return (
       <Modal id="export" cosy width={this.state.width}>
-        <header className="modal-header">Export to PDF</header>
-        {isNewExport && <Options {...pProps} />}
-        {inProgress && (
-          <div className="modal-body">
-            <Spinner />
-          </div>
-        )}
-        {finished && <Preview {...pProps} />}
+        <div className="flex flex-column y-fill">
+          <header className="flex-none modal-header">Export to PDF</header>
+          {isNewExport && <Options {...pProps} />}
+          {inProgress && (
+            <div className="modal-body">
+              <Spinner />
+            </div>
+          )}
+          {finished && <Preview {...pProps} />}
+        </div>
       </Modal>
     );
   }

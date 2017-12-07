@@ -30,7 +30,7 @@ class ProjectMeasurements extends React.PureComponent {
         width="600px"
         handleClose={() => this.setState({ isModal: false })}
       >
-        <div className="p4">{children}</div>
+        <div className="p4 y-fill">{children}</div>
       </Modal>
     );
   };
