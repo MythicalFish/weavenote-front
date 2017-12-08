@@ -73,7 +73,7 @@ function* handleSetAnchor() {
   // if done annotating
   if (annotation.get('maxAnchors') === annotation.get('anchors').size) {
     // if is commentable
-    if (annotatable.get('type') === 'Comment') {
+    if (annotatable && annotatable.get('type') === 'Comment') {
       // if comment created
       if (annotatable.get('id')) {
         yield put(actions.createAnnotation());
