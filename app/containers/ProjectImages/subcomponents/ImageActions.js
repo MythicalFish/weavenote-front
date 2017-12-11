@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import Icon from 'components/Icon';
+import ImgAddDot from 'images/add-annotation.png';
+import ImgAddLine from 'images/add-line.png';
 
 const ImageActions = (props) => {
   const { currentView, focusThis, startAnnotation, readOnly } = props;
@@ -14,8 +16,9 @@ const ImageActions = (props) => {
               type: 'dot',
               annotatable: { type: 'Comment', id: null },
               maxAnchors: 1,
-            })}
-          name="Circle"
+            })
+          }
+          image={ImgAddDot}
           size={20}
           tooltip="Annotate"
         />
@@ -28,7 +31,8 @@ const ImageActions = (props) => {
               type: 'arrow',
               maxAnchors: 2,
               annotatable: { type: 'Comment', id: null },
-            })}
+            })
+          }
           name="ArrowDownRight"
           size={20}
           tooltip="Add arrow"
@@ -38,8 +42,9 @@ const ImageActions = (props) => {
         !readOnly && (
           <Icon
             onClick={() =>
-              startAnnotation({ imageID, type: 'line', maxAnchors: 2 })}
-            name="MoreHorizontal"
+              startAnnotation({ imageID, type: 'line', maxAnchors: 2 })
+            }
+            image={ImgAddLine}
             size={20}
             tooltip="Add line"
           />

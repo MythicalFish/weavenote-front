@@ -5,8 +5,18 @@ import * as FeatherIcons from 'react-feather';
 const Icon = (props) => {
   let I = FeatherIcons[props.name];
   if (!I) I = FeatherIcons.Circle;
-  const { color, size, tooltip, className, children, onClick, to } = props;
-  const FeatherIcon = () => <I className={color || ''} size={size || 30} />;
+  const {
+    color,
+    size,
+    tooltip,
+    className,
+    children,
+    onClick,
+    to,
+    image,
+  } = props;
+  let Graphic = () => <I className={color || ''} size={size || 30} />;
+  if (image) Graphic = () => <img src={image} role="presentation" />;
   const bProps = { className: 'icon' };
   if (className) bProps.className += ` ${className}`;
   if (tooltip) bProps.className += ' tooltipped';
@@ -28,7 +38,7 @@ const Icon = (props) => {
   };
   return (
     <Wrapper>
-      <FeatherIcon />
+      <Graphic />
       {children && children}
       {tooltip && <div className="tooltip">{tooltip}</div>}
     </Wrapper>
@@ -44,6 +54,7 @@ Icon.propTypes = {
   name: PropTypes.string,
   children: PropTypes.node,
   size: PropTypes.number,
+  image: PropTypes.string,
 };
 
 export default Icon;
