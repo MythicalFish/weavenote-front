@@ -3,7 +3,7 @@ import UserMenu from 'components/UserMenu';
 
 const Header = (props) => (
   <header id="app-header" className="justify-end" style={props.style}>
-    {props.user && <UserMenu />}
+    <UserMenu />
   </header>
 );
 

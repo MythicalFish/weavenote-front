@@ -80,6 +80,7 @@ const Layout = (props) => {
 Layout.propTypes = {
   Header: PropTypes.func,
   modalImage: PropTypes.object,
+  background: PropTypes.string,
 };
 
 export default Layout;
