@@ -1,35 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Circle } from 'react-konva';
-
-const themes = {
-  default: {
-    width: 22,
-    height: 22,
-    fill: '#CCC',
-    strokeWidth: 3,
-    stroke: '#FFF',
-  },
-  line: {
-    width: 8,
-    height: 8,
-    fill: '#42EA83',
-    strokeWidth: 0,
-  },
-  arrow: {
-    width: 8,
-    height: 8,
-    fill: '#42EA83',
-    strokeWidth: 0,
-  },
-};
-
-const activeColor = '#51b2fe';
+import { dotTheme } from './utils';
 
 const Anchor = (props) => {
   const { handleMouseOut, handleMouseOver, handleMouseUp, type } = props;
-  const theme = themes[type] ? type : 'default';
-  const style = { ...themes[theme] };
-  if (props.isActive) style.fill = activeColor;
+  const style = dotTheme(props);
   if (!props.isNew && type === 'arrow') style.opacity = 0;
   const onMouseOver = (e) => {
     if (handleMouseOver) handleMouseOver(e.evt);

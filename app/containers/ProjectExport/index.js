@@ -8,14 +8,14 @@ import Options from './subcomponents/Options';
 import Preview from './subcomponents/Preview';
 import * as selectors from './selectors';
 import { configure, doExport, resetExport } from './actions';
-import { DEFAULT_WIDTH } from './constants';
+import { DEFAULT_SIZE } from './constants';
 
 class ProjectExport extends React.PureComponent {
-  state = { width: DEFAULT_WIDTH };
+  state = { size: DEFAULT_SIZE };
   resize = (val) => {
-    let width = DEFAULT_WIDTH;
-    if (val) width = val;
-    this.setState({ width });
+    let size = DEFAULT_SIZE;
+    if (val) size = val;
+    this.setState({ size });
   };
   render() {
     const { state } = this.props;
@@ -23,8 +23,9 @@ class ProjectExport extends React.PureComponent {
     const isNewExport = !finished && !inProgress;
     const { resize } = this;
     const pProps = { ...this.props, resize };
+    const { height, width } = this.state.size;
     return (
-      <Modal id="export" cosy width={this.state.width}>
+      <Modal id="export" cosy width={width} height={height}>
         <div className="flex flex-column y-fill">
           <header className="flex-none modal-header">Export to PDF</header>
           {isNewExport && <Options {...pProps} />}

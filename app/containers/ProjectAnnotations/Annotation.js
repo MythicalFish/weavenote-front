@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import CanvasAnnotation from 'components/CanvasAnnotation';
+import CanvasAnnotation from 'components/Canvas/Annotation';
 import { getPosition } from 'utils/canvasPosition';
 import { idToIndex } from 'utils/reducerHelpers';
 

@@ -12,7 +12,7 @@ class Preview extends React.PureComponent {
   };
   state = { numPages: 1, pageNumber: 1 };
   componentWillMount() {
-    this.props.resize('95vw');
+    this.props.resize({ width: '95vw', height: '100%' });
   }
   onDocumentLoad = ({ numPages }) => {
     this.setState({ numPages });

@@ -1,18 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Line } from 'react-konva';
-
-const themes = {
-  default: {
-    stroke: '#42EA83',
-  },
-};
-
-const activeColor = '#51b2fe';
+import { lineTheme } from './utils';
 
 export default function CanvasLine(props) {
-  const theme = themes[props.type] ? props.type : 'default';
-  const style = { ...themes[theme] };
-  if (props.isActive) style.stroke = activeColor;
+  const theme = lineTheme(props);
   return (
     <Line
       x={0}
@@ -21,13 +12,11 @@ export default function CanvasLine(props) {
       strokeWidth={3}
       dash={[10, 5]}
       lineCap="round"
-      {...style}
+      {...theme}
     />
   );
 }
 
 CanvasLine.propTypes = {
-  isActive: PropTypes.bool,
   points: PropTypes.array,
-  type: PropTypes.string,
 };

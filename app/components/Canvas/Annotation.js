@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { toggleState } from 'utils/misc';
 import { Group } from 'react-konva';
 import { pixelPosition, anchorPoints } from 'utils/canvasPosition';
-import Anchor from './CanvasAnchor';
-import Line from './CanvasLine';
-import Arrow from './CanvasArrow';
-import Text from './CanvasText';
+import Anchor from './Anchor';
+import Line from './Line';
+import Arrow from './Arrow';
+import Text from './Text';
 
 const hiddenStyle = {
   opacity: 0,
@@ -84,7 +84,9 @@ class CanvasAnnotation extends React.PureComponent {
         />
       );
     });
-
+    if (label) {
+      objects.push(<Text key="txt" value={label} data={points} />);
+    }
     return (
       <Group {...this.groupProps()}>
         {objects}

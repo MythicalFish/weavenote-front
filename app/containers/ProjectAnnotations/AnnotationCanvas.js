@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Layer } from 'react-konva';
-import { withCanvas } from 'components/Canvas';
+import { withCanvas } from 'components/Canvas/Stage';
 import Annotation from './Annotation';
 
 const AnnotationCanvas = (props) => {
