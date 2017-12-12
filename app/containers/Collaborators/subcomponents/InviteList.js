@@ -39,7 +39,7 @@ class InvitesList extends React.PureComponent {
               </div>
               <div className="list-item-controls">
                 <button onClick={this.cancelInvite(invite)}>
-                  <i className="fa fa-close" />
+                  <i className="fa fa-times-circle" />
                 </button>
               </div>
             </ListItem>

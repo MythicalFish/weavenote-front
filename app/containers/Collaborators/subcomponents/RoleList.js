@@ -20,9 +20,12 @@ class RolesList extends React.PureComponent {
     );
     return roleTypes.get(key);
   };
-
+  isOwnRole = (role) => {
+    const { user } = this.props;
+    return user.get('id') === role.getIn(['user', 'id']);
+  };
   render() {
-    const { roles, user } = this.props;
+    const { roles } = this.props;
     return (
       <div className="y-max8 y-scroll b1 mt1">
         {roles &&
@@ -35,13 +38,15 @@ class RolesList extends React.PureComponent {
                   roleTypes={this.props.roleTypes}
                   handleChange={this.updateRole}
                   selectedRoleType={this.selectedRoleType}
-                  isOwnRole={user.get('id') === role.getIn(['user', 'id'])}
+                  isOwnRole={this.isOwnRole(role)}
                 />
               </div>
               <div className="list-item-controls">
-                <button onClick={this.removeRole(role)}>
-                  <i className="fa fa-close" />
-                </button>
+                {!this.isOwnRole(role) && (
+                  <button onClick={this.removeRole(role)}>
+                    <i className="fa fa-times-circle" />
+                  </button>
+                )}
               </div>
             </ListItem>
           ))}
