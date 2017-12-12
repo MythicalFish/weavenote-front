@@ -19,7 +19,7 @@ class Input extends React.PureComponent {
   handleKeyPress = (target, e) => {
     const { onEnterKey } = this.props;
     if (onEnterKey && target.charCode === 13 && !target.shiftKey) {
-      onEnterKey();
+      onEnterKey(e.target.value);
       e.preventDefault();
     }
   };
@@ -47,15 +47,18 @@ class Input extends React.PureComponent {
     }
 
     if (p.input) {
-      fProps = p.input;
+      fProps = { ...p.input };
       if (p.tail) fProps.tail = p.tail;
       if (p.required) fProps.required = p.required;
       if (p.placeholder) fProps.placeholder = p.placeholder;
       if (p.onFocus) fProps.onFocus = p.onFocus;
       if (p.onChanged) fProps.onChanged = p.onChanged;
     } else {
-      fProps = p;
+      fProps = { ...p };
     }
+
+    if (fProps.theme) delete fProps.theme;
+    if (fProps.focus) delete fProps.focus;
 
     if (p.focus) {
       fProps.ref = (input) => {

@@ -35,14 +35,14 @@ const ImageForm = (props) => {
             <DeleteButton
               image={initialValues}
               attributes={{
-                inlineIcon: 'trash-o',
+                fontIcon: 'trash-o',
                 label: 'Delete',
                 inline: true,
                 small: true,
               }}
             />
             <Button
-              inlineIcon="star-o"
+              fontIcon="far fastar"
               label="Set as primary"
               inline
               small

@@ -39,9 +39,7 @@ const AvatarList = (props) => {
     <button className="avatar-list" type="button" onClick={onClick}>
       {visibleAvatars}
       {hiddenCount > 0 && (
-        <div className="hidden-count flex items-center justify-center">
-          +{hiddenCount}
-        </div>
+        <div className="hidden-count flex-centered">+{hiddenCount}</div>
       )}
       {hiddenCount === 0 &&
         showPlusButton && (

@@ -4,27 +4,25 @@ import confirm from 'utils/confirm';
 
 const AnnotationActions = (props) => {
   if (!props.visible) return null;
-  const {
-    position,
-    deleteAnnotation,
-    imageID: image_id,
-    hideMenu,
-    focusedAnnotation,
-  } = props;
-  const id = focusedAnnotation.get('id');
+  const { position, hideMenu, focusedAnnotation: annotation } = props;
   const style = {
     left: position.x,
     top: position.y,
   };
   const handleDelete = () => {
     confirm('Are you sure you want to archive this annotation?').then(() => {
-      deleteAnnotation({ id, image_id });
+      props.deleteAnnotation(annotation);
       hideMenu();
     });
   };
+  const editLabel = () => {
+    props.editLabel(annotation);
+  };
   return (
     <div className="annotation-actions on-hover" style={style}>
-      <Icon name="Trash" size={15} onClick={handleDelete} />
+      <Icon fontIcon="fa fa-trash" onClick={handleDelete} />
+      <Icon fontIcon="fa fa-edit" onClick={editLabel} />
+      {annotation.get('type') === 'line' && null}
     </div>
   );
 };
@@ -33,9 +31,8 @@ AnnotationActions.propTypes = {
   visible: PropTypes.bool,
   position: PropTypes.object,
   focusedAnnotation: PropTypes.object,
-  deleteAnnotation: PropTypes.func,
   hideMenu: PropTypes.func,
-  imageID: PropTypes.number,
+  editLabel: PropTypes.func,
 };
 
 export default AnnotationActions;

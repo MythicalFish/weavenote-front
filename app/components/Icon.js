@@ -3,8 +3,6 @@ import { Link } from 'react-router';
 import * as FeatherIcons from 'react-feather';
 
 const Icon = (props) => {
-  let I = FeatherIcons[props.name];
-  if (!I) I = FeatherIcons.Circle;
   const {
     color,
     size,
@@ -14,9 +12,19 @@ const Icon = (props) => {
     onClick,
     to,
     image,
+    name,
+    fontIcon,
   } = props;
-  let Graphic = () => <I className={color || ''} size={size || 30} />;
-  if (image) Graphic = () => <img src={image} role="presentation" />;
+  let Graphic;
+  if (image) {
+    Graphic = () => <img src={image} role="presentation" />;
+  } else if (fontIcon) {
+    Graphic = () => <i className={fontIcon} />;
+  } else {
+    let I = FeatherIcons[name];
+    if (!I) I = FeatherIcons.Circle;
+    Graphic = () => <I className={color || ''} size={size || 30} />;
+  }
   const bProps = { className: 'icon' };
   if (className) bProps.className += ` ${className}`;
   if (tooltip) bProps.className += ' tooltipped';
@@ -55,6 +63,7 @@ Icon.propTypes = {
   children: PropTypes.node,
   size: PropTypes.number,
   image: PropTypes.string,
+  fontIcon: PropTypes.string,
 };
 
 export default Icon;

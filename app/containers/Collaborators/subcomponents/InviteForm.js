@@ -30,7 +30,7 @@ const InviteForm = (props) => {
         <div>
           <Button
             type="submit"
-            inlineIcon="envelope-o"
+            fontIcon="far fa-envelope"
             label="Send invite"
             disabled={submitting}
             small

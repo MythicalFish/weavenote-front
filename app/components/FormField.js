@@ -12,7 +12,7 @@ const FormField = (props) => {
   klass += ` field-theme-${theme}`;
   return (
     <div className={klass}>
-      <label>{label}</label>
+      {label && <label>{label}</label>}
       <Input {...props} onFocus={props.focusThis} />
     </div>
   );

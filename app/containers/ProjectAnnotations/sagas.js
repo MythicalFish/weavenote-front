@@ -1,7 +1,7 @@
 import { take, cancel, takeLatest, select, put } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
-import { selectNewAnnotation } from './selectors';
+import { newAnnotation } from './selectors';
 import * as types from './constants';
 import * as actions from './actions';
 import { fetchComments, writeComment } from '../Comments/actions';
@@ -29,12 +29,12 @@ function* fetchAnnotations({ archived }) {
 }
 
 function* createAnnotation() {
-  const data = yield select(selectNewAnnotation());
+  const data = yield select(newAnnotation());
   const a = data.toJS();
   const annotation = {
     image_id: a.imageID,
     annotation_type: a.type,
-    anchors_attributes: a.anchors,
+    anchors: a.anchors,
   };
   if (a.annotatable) {
     annotation.annotatable_id = a.annotatable.id;
@@ -47,17 +47,16 @@ function* createAnnotation() {
   );
 }
 
-function* updateAnnotation({ payload }) {
-  const { id, image_id, anchors: anchors_attributes } = payload;
+function* updateAnnotation({ payload: annotation }) {
   yield sagas.patch(
-    `annotations/${id}`,
-    { annotation: { anchors_attributes, image_id } },
+    `annotations/${annotation.get('id')}`,
+    { annotation },
     actions.updateAnnotationSuccess
   );
 }
 
-function* deleteAnnotation({ payload }) {
-  const { id, image_id } = payload;
+function* deleteAnnotation({ payload: annotation }) {
+  const { id, image_id } = annotation.toObject();
   yield sagas.destroy(
     `annotations/${id}`,
     { annotation: { image_id } },
@@ -68,7 +67,7 @@ function* deleteAnnotation({ payload }) {
 }
 
 function* handleSetAnchor() {
-  const annotation = yield select(selectNewAnnotation());
+  const annotation = yield select(newAnnotation());
   const annotatable = annotation.get('annotatable');
   // if done annotating
   if (annotation.get('maxAnchors') === annotation.get('anchors').size) {

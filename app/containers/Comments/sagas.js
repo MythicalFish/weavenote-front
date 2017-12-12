@@ -2,7 +2,7 @@ import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import * as sagas from 'utils/genericSagas';
-import { selectNewAnnotation } from 'containers/ProjectAnnotations/selectors';
+import { newAnnotation } from 'containers/ProjectAnnotations/selectors';
 import { selectCurrentImage } from 'containers/ProjectImages/selectors';
 import {
   fetchAnnotations,
@@ -68,7 +68,7 @@ function* deleteComment({ payload }) {
 const commentURL = (payload) => `comments/${payload.comment.id}`;
 
 function* associateAnnotation(annotatable) {
-  const annotation = yield select(selectNewAnnotation());
+  const annotation = yield select(newAnnotation());
   const image = yield select(selectCurrentImage());
   const imageID = image.get('id');
   if (annotation.getIn(['annotatable', 'type']) === 'Comment') {

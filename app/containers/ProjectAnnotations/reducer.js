@@ -8,6 +8,7 @@ const initialState = fromJS({
   existing: [],
   focused: {},
   isAnnotating: false,
+  isEditingLabel: false,
   new: {
     maxAnchors: 1,
     annotatable: null,
@@ -62,14 +63,15 @@ function AnnotationsReducer(state = initialState, action) {
       }
       return setAnchor(anchors.size);
 
-    case types.CREATE_ANNOTATION_SUCCESS:
-      return resetState(fromJS(response));
-
     case types.UPDATE_ANNOTATION_SUCCESS:
       return state.set('existing', fromJS(response));
 
+    case types.CREATE_ANNOTATION_SUCCESS:
     case types.DELETE_ANNOTATION_SUCCESS:
       return resetState(fromJS(response));
+
+    case types.EDIT_LABEL:
+      return state.set('isEditingLabel', true);
 
     default:
       return state;

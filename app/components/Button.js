@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Icon from 'components/Icon';
-import InlineIcon from 'components/InlineIcon';
 
 export default function Button(props) {
   return (
     <ButtonWrapper {...props}>
-      {props.inlineIcon && <InlineIcon name={props.inlineIcon} />}
+      {props.fontIcon && <i className={props.fontIcon} />}
       {props.icon && <Icon name={props.icon} size={18} />}
       {props.label || null}
     </ButtonWrapper>
@@ -48,7 +47,7 @@ const ButtonWrapper = (props) => {
 
 Button.propTypes = {
   icon: PropTypes.string,
-  inlineIcon: PropTypes.string,
+  fontIcon: PropTypes.string,
   label: PropTypes.string,
 };
 

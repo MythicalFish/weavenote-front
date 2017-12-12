@@ -1,6 +1,6 @@
 .field {
   position: relative;
-  &:not(:only-child) {
+  &:not(:only-of-type) {
     padding-bottom: $space-3;
   }
   &.field-theme-default {

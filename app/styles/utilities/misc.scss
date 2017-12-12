@@ -56,6 +56,11 @@
   bottom: 0;
   right: 0;
 }
+.flex-centered {
+  @extend .flex;
+  @extend .items-center;
+  @extend .justify-center;
+}
 @media #{$breakpoint-lg} {
   .lg-mln4 {
     margin-left: -$space-4;

@@ -6,11 +6,7 @@ import { getPosition } from 'utils/canvasPosition';
 import Canvas from './AnnotationCanvas';
 import AnnotationUI from './AnnotationUI';
 import { selectUser } from '../App/selectors';
-import {
-  selectExisting,
-  selectNewAnnotation,
-  selectFocusedAnnotation,
-} from './selectors';
+import * as select from './selectors';
 import { writeComment } from '../Comments/actions';
 import {
   buildAnnotation,
@@ -20,6 +16,7 @@ import {
   deleteAnnotation,
   cancelAnnotation,
   focusAnnotation,
+  editLabel,
 } from './actions';
 
 const ProjectAnnotations = (props) => {
@@ -48,15 +45,17 @@ export function mapDispatch(dispatch) {
       cancelAnnotation,
       focusAnnotation,
       writeComment,
+      editLabel,
     },
     dispatch
   );
 }
 
 const mapState = createStructuredSelector({
-  annotations: selectExisting(),
-  newAnnotation: selectNewAnnotation(),
-  focusedAnnotation: selectFocusedAnnotation(),
+  annotations: select.existing(),
+  newAnnotation: select.newAnnotation(),
+  focusedAnnotation: select.focusedAnnotation(),
+  isEditingLabel: select.isEditingLabel(),
   user: selectUser(),
 });
 

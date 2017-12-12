@@ -27,7 +27,7 @@ const ModalImage = ({ image }) => (
             <DeleteButton
               image={image}
               attributes={{
-                inlineIcon: 'trash-o',
+                fontIcon: 'trash-o',
                 secondary: true,
                 label: 'Delete',
                 small: true,

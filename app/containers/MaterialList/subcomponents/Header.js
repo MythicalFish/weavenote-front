@@ -9,7 +9,7 @@ export default function Header(props) {
       className="justify-end relative"
       style={props.style}
     >
-      <div className="overlay flex items-center justify-center">
+      <div className="overlay flex-centered">
         <div className="flex-none">
           <SearchInput onChange={props.filterMaterials} />
         </div>

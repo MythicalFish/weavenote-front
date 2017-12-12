@@ -5,16 +5,19 @@ import { idToIndex } from 'utils/reducerHelpers';
 export const selectDomain = () => (state) =>
   state.getIn(['Project', 'Annotations']);
 
-export const selectExisting = () =>
+export const existing = () =>
   createSelector(selectDomain(), (s) => s.get('existing'));
 
-export const selectNewAnnotation = () =>
+export const newAnnotation = () =>
   createSelector(selectDomain(), (s) => s.get('new'));
 
-export const selectIsAnnotating = () =>
+export const isAnnotating = () =>
   createSelector(selectDomain(), (s) => s.get('isAnnotating'));
 
-export const selectFocusedAnnotation = () =>
+export const isEditingLabel = () =>
+  createSelector(selectDomain(), (s) => s.get('isEditingLabel'));
+
+export const focusedAnnotation = () =>
   createSelector(selectDomain(), (s) => {
     const a = s.getIn([
       'existing',

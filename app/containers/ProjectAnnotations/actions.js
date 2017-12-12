@@ -50,3 +50,7 @@ export function buildAnnotation(payload) {
 export function setAnchor(payload) {
   return { type: types.SET_ANCHOR, payload };
 }
+
+export function editLabel(payload) {
+  return { type: types.EDIT_LABEL, payload };
+}

@@ -26,7 +26,7 @@ export default function FormImage({ initialValues: material, readOnly }) {
           {...iProps}
           label={uploadLabel}
           btnClass="btn-secondary btn-sm"
-          inlineIcon="file-image-o"
+          fontIcon="far fa-file-image"
         />
       )}
     </div>

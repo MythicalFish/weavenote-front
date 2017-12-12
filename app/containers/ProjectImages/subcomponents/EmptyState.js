@@ -12,7 +12,7 @@ const EmptyState = (props) => {
     <div className="row">
       <div className="col-xs-8 col-xs-offset-2">
         <div
-          className="border-dashed x-fill flex items-center justify-center"
+          className="border-dashed x-fill flex-centered"
           style={{ height: '60vh' }}
         >
           <div className="center">

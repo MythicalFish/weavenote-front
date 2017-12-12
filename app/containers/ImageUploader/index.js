@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import ReactS3Uploader from 'react-s3-uploader';
 import PlusButton from 'components/PlusButton';
-import InlineIcon from 'components/InlineIcon';
 import Spinner from 'components/Spinner';
 import { notifyWarning } from 'containers/Notification';
 import * as API from 'utils/API';
@@ -46,14 +45,14 @@ class ImageUploader extends React.PureComponent {
         scrubFilename={(filename) => filename.replace(/[^\w\d_\-\.]+/gi, '')}
       />
     );
-    const { label, Icon, inlineIcon, isUploading, btnClass } = this.props;
+    const { label, Icon, fontIcon, isUploading, btnClass } = this.props;
     if (isUploading === this.props.imageable) {
       return <Spinner />;
     }
     if (label) {
       return (
         <label className={`btn ${btnClass && btnClass}`}>
-          {inlineIcon && <InlineIcon name={inlineIcon} />}
+          {fontIcon && <i className={fontIcon} />}
           {label}
           {uploader}
         </label>
@@ -77,7 +76,7 @@ ImageUploader.propTypes = {
   createImage: PropTypes.func,
   label: PropTypes.string,
   btnClass: PropTypes.string,
-  inlineIcon: PropTypes.string,
+  fontIcon: PropTypes.string,
   onUploadFinish: PropTypes.func,
   notifyWarning: PropTypes.func,
   isUploading: PropTypes.object,

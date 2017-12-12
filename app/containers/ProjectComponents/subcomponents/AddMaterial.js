@@ -23,7 +23,7 @@ export default class AddMaterial extends React.PureComponent {
       <Modal id="materials" width="100%" height="100%" maxWidth="1000px">
         <div className="flex flex-column y-fill">
           <div className="flex-none">
-            <div className="flex items-center justify-center pt4">
+            <div className="flex-centered pt4">
               <div className="flex-none">
                 <SearchInput onChange={filterMaterials} />
               </div>

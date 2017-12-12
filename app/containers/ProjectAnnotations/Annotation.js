@@ -53,19 +53,19 @@ const Annotation = (props) => {
       hideMenu();
     },
     handleAnchorDragEnd: ({ anchor, event }) => {
-      const anchorID = anchor.get('id');
-      const anchorIndex = idToIndex(anchorID, anchors);
       const newPos = getPosition(event, canvasSize);
-      const a = annotation
-        .setIn(['anchors', anchorIndex], { id: anchorID, ...newPos })
-        .toJS();
       if (isNew) {
         setAnchor(newPos);
-      } else {
-        updateAnnotation(a);
-
-        showMenu({ x: event.offsetX, y: event.offsetY });
+        return;
       }
+      const anchorID = anchor.get('id');
+      const anchorIndex = idToIndex(anchorID, anchors);
+      const a = annotation.setIn(['anchors', anchorIndex], {
+        id: anchorID,
+        ...newPos,
+      });
+      updateAnnotation(a);
+      showMenu({ x: event.offsetX, y: event.offsetY });
     },
   };
 

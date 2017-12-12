@@ -48,7 +48,7 @@ const Form = (props) => {
               {...iProps}
               label="Upload image"
               btnClass="btn-secondary btn-sm"
-              inlineIcon="file-image-o"
+              fontIcon="far fa-file-image"
             />
           )}
         {!props.disableAutosave && (

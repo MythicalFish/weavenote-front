@@ -5,7 +5,7 @@ import ImageForm from 'containers/ImageForm';
 const Form = (props) => {
   const { unfocusThis, doNothing } = props;
   return (
-    <div className="image-form flex items-center justify-center">
+    <div className="overlay image-form flex-centered">
       <Icon
         name="X"
         className="image-form-close"
