@@ -1,27 +1,17 @@
-import { toPath } from 'svg-points';
-import { colors, lineThemes, dotThemes } from './constants';
+import { styles } from './constants';
 
-export const lineTheme = (props) => {
-  const { type } = props;
-  let theme = lineThemes.default;
-  if (type && lineThemes[type]) theme = lineThemes[type];
-  if (props.isActive) theme = lineThemes.active;
-  return theme;
+const buildStyle = (props) => {
+  const { type, isActive, shape } = props;
+  let style = { ...styles[shape].default };
+  if (type && styles[shape][type]) style = styles[shape][type];
+  if (isActive) {
+    style = Object.assign(style, styles[shape].active);
+  }
+  return style;
 };
 
-export const dotTheme = (props) => {
-  const { type } = props;
-  let theme = dotThemes.default;
-  if (type && dotThemes[type]) theme = dotThemes[type];
-  if (props.isActive) theme.fill = colors.blue;
-  return theme;
-};
+export const lineStyle = (props) => buildStyle({ shape: 'line', ...props });
 
-export const pointsToPath = (points) =>
-  toPath({
-    type: 'line',
-    x1: points[0],
-    y1: points[1],
-    x2: points[2],
-    y2: points[3],
-  });
+export const dotStyle = (props) => buildStyle({ shape: 'dot', ...props });
+
+export const textStyle = (props) => buildStyle({ shape: 'text', ...props });

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Circle } from 'react-konva';
-import { dotTheme } from './utils';
+import { dotStyle } from './utils';
 
 const Anchor = (props) => {
   const { handleMouseOut, handleMouseOver, handleMouseUp, type } = props;
-  const style = dotTheme(props);
+  const style = dotStyle(props);
   if (!props.isNew && type === 'arrow') style.opacity = 0;
   const onMouseOver = (e) => {
     if (handleMouseOver) handleMouseOver(e.evt);

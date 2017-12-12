@@ -7839,10 +7839,6 @@ supports-color@^4.2.1:
   dependencies:
     has-flag "^2.0.0"
 
-svg-points@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/svg-points/-/svg-points-6.0.0.tgz#a7a7ac04e4fcbfc04a1b4e08db3784c1b8ddc04f"
-
 svgo@^0.7.0:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-0.7.1.tgz#287320fed972cb097e72c2bb1685f96fe08f8034"

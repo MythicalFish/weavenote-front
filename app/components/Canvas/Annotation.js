@@ -5,7 +5,7 @@ import { pixelPosition, anchorPoints } from 'utils/canvasPosition';
 import Anchor from './Anchor';
 import Line from './Line';
 import Arrow from './Arrow';
-import Text from './Text';
+import Label from './Label';
 
 const hiddenStyle = {
   opacity: 0,
@@ -54,7 +54,7 @@ class CanvasAnnotation extends React.PureComponent {
   };
   render() {
     const { anchors, identifier, type, isNew, label } = this.props;
-    const { lineAnchors: points } = this.points();
+    const { lineAnchors: points, midpoint } = this.points();
     const isActive = this.props.isActive || this.state.isHovering;
     const objects = [];
     if (anchors.size > 1) {
@@ -85,7 +85,13 @@ class CanvasAnnotation extends React.PureComponent {
       );
     });
     if (label) {
-      objects.push(<Text key="txt" value={label} points={points} />);
+      objects.push(
+        <Label
+          key="txt"
+          value={label}
+          position={this.getPosition(anchors.get(0))}
+        />
+      );
     }
     return (
       <Group {...this.groupProps()}>

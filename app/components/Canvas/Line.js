@@ -1,15 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Line } from 'react-konva';
-import { lineTheme } from './utils';
+import { lineStyle } from './utils';
 
 export default function CanvasLine(props) {
-  const theme = lineTheme(props);
+  const theme = lineStyle(props);
   return (
     <Line
       x={0}
       y={0}
       points={props.points}
-      strokeWidth={3}
       dash={[10, 5]}
       lineCap="round"
       {...theme}
