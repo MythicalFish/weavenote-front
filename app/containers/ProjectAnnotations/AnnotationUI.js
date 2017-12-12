@@ -31,7 +31,9 @@ const AnnotationUI = (Component) => {
       if (e.keyCode === 27) this.cancelActions();
     };
     cancelActions = () => {
-      if (this.props.isAnnotating) this.props.cancelAnnotation();
+      if (this.props.isAnnotating || this.props.isEditingLabel) {
+        this.props.cancelAnnotation();
+      }
       if (this.props.focusedAnnotation.get('id')) {
         this.props.focusAnnotation(fromJS({}));
       }
@@ -60,6 +62,7 @@ const AnnotationUI = (Component) => {
                     name="label"
                     label="Annotation label"
                     disableReduxForm
+                    defaultValue={this.props.focusedAnnotation.get('label')}
                     focus
                   />
                   <input type="submit" className="conceal" />

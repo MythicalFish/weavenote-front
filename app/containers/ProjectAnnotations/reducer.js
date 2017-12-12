@@ -64,7 +64,9 @@ function AnnotationsReducer(state = initialState, action) {
       return setAnchor(anchors.size);
 
     case types.UPDATE_ANNOTATION_SUCCESS:
-      return state.set('existing', fromJS(response));
+      return state
+        .set('existing', fromJS(response))
+        .set('isEditingLabel', false);
 
     case types.CREATE_ANNOTATION_SUCCESS:
     case types.DELETE_ANNOTATION_SUCCESS:

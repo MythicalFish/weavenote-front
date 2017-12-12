@@ -18,7 +18,7 @@ const Annotation = (props) => {
     hideMenu,
     canvasRef,
   } = props;
-  const { id, type, anchors } = annotation.toObject();
+  const { id, type, anchors, label } = annotation.toObject();
   const isNew = !id;
   const isOwnAnnotation = user.get('id') === annotation.get('user_id');
   const isFocused = focusedAnnotation.get('id') === id;
@@ -32,6 +32,7 @@ const Annotation = (props) => {
   }
 
   const aProps = {
+    label,
     isDraggable,
     isVisible,
     type,

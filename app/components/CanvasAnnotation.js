@@ -53,7 +53,7 @@ class CanvasAnnotation extends React.PureComponent {
     return anchorPoints(anchors, canvasSize);
   };
   render() {
-    const { anchors, identifier, type, isNew } = this.props;
+    const { anchors, identifier, type, isNew, label } = this.props;
     const { lineAnchors: points } = this.points();
     const isActive = this.props.isActive || this.state.isHovering;
     const objects = [];
@@ -106,6 +106,7 @@ CanvasAnnotation.propTypes = {
   isActive: PropTypes.bool,
   isDraggable: PropTypes.bool,
   type: PropTypes.string,
+  label: PropTypes.string,
   identifier: PropTypes.string,
   canvasSize: PropTypes.object,
   canvasRef: PropTypes.object,
