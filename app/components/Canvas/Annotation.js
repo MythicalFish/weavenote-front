@@ -85,7 +85,7 @@ class CanvasAnnotation extends React.PureComponent {
       );
     });
     if (label) {
-      objects.push(<Text key="txt" value={label} data={points} />);
+      objects.push(<Text key="txt" value={label} points={points} />);
     }
     return (
       <Group {...this.groupProps()}>

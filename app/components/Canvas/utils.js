@@ -1,3 +1,4 @@
+import { toPath } from 'svg-points';
 import { colors, lineThemes, dotThemes } from './constants';
 
 export const lineTheme = (props) => {
@@ -15,3 +16,12 @@ export const dotTheme = (props) => {
   if (props.isActive) theme.fill = colors.blue;
   return theme;
 };
+
+export const pointsToPath = (points) =>
+  toPath({
+    type: 'line',
+    x1: points[0],
+    y1: points[1],
+    x2: points[2],
+    y2: points[3],
+  });
