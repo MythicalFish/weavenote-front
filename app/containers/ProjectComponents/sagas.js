@@ -1,7 +1,6 @@
 import { put, take, cancel, takeLatest, select } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { fromJS } from 'immutable';
-import { getFormValues, isDirty } from 'redux-form/immutable';
 import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
@@ -9,6 +8,7 @@ import * as selectors from './selectors';
 import { fetchMaterialCost } from '../ProjectManager/actions';
 import { selectProjectID } from '../ProjectManager/selectors';
 import { CREATE_MATERIAL_SUCCESS } from '../MaterialManager/constants';
+import { SWITCH_CURRENCY } from '../App/constants';
 import { closeModal } from '../App/actions';
 
 const componentsURL = (payload, addition = null) => {
@@ -27,6 +27,7 @@ export function* ProjectComponentsWatcher() {
     yield takeLatest(types.CREATE_COMPONENTS_SUCCESS, afterCreate),
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
     yield takeLatest(CREATE_MATERIAL_SUCCESS, addMaterial),
+    yield takeLatest(SWITCH_CURRENCY, fetchCost),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -76,4 +77,9 @@ function* addMaterial({ response }) {
 
 function* afterCreate() {
   yield put(closeModal());
+}
+
+function* fetchCost() {
+  const projectID = yield select(selectProjectID());
+  yield put(fetchMaterialCost(projectID));
 }

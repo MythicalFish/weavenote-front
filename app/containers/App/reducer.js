@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import UserReducer from 'containers/User/reducer';
-import * as appActionTypes from './constants';
+import * as types from './constants';
 
 const initialState = fromJS({
   globalData: null,
@@ -9,29 +9,33 @@ const initialState = fromJS({
   modalID: null,
   modalImage: null,
   focus: null,
+  preferred_currency: 1,
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
     // Global data
 
-    case appActionTypes.FETCH_GLOBAL_DATA_SUCCESS:
+    case types.FETCH_GLOBAL_DATA_SUCCESS:
       return state.set('globalData', fromJS(action.response).toObject());
 
     // Invite
 
-    case appActionTypes.FETCH_INVITE_SUCCESS:
+    case types.FETCH_INVITE_SUCCESS:
       return state.set('invite', action.invite);
+
+    case types.SWITCH_CURRENCY:
+      return state.set('preferred_currency', action.currency.get('id'));
 
     // Misc
 
-    case appActionTypes.OPEN_MODAL:
+    case types.OPEN_MODAL:
       return state.set('modalID', action.id);
 
-    case appActionTypes.CLOSE_MODAL:
+    case types.CLOSE_MODAL:
       return state.set('modalID', null);
 
-    case appActionTypes.OPEN_IMAGE:
+    case types.OPEN_IMAGE:
       return state.set('modalID', 'image').set('modalImage', action.image);
 
     default:

@@ -7,6 +7,7 @@ import { ProjectMeasurementsWatcher } from '../ProjectMeasurements/sagas';
 import { ProjectComponentsWatcher } from '../ProjectComponents/sagas';
 import { ProjectAnnotationsWatcher } from '../ProjectAnnotations/sagas';
 import { ProjectExportWatcher } from '../ProjectExport/sagas';
+import { selectPreferredCurrency } from '../App/selectors';
 import * as types from './constants';
 import * as actions from './actions';
 
@@ -33,10 +34,12 @@ function* fetchProject(action) {
   yield sagas.get(`projects/${action.id}`, null, actions.fetchProjectSuccess);
 }
 
-function* fetchMaterialCost(action) {
+function* fetchMaterialCost({ id }) {
+  const currency = yield select(selectPreferredCurrency());
+  const params = { currency: currency.get('id') };
   yield sagas.get(
-    `projects/${action.id}/material_cost`,
-    null,
+    `projects/${id}/material_cost`,
+    params,
     actions.fetchMaterialCostSuccess
   );
 }

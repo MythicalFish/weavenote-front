@@ -41,6 +41,12 @@ export function switchOrganizationSuccess(data) {
   return { type: types.SWITCH_ORGANIZATION_SUCCESS, data };
 }
 
+// Currency switching
+
+export function switchCurrency(currency) {
+  return { type: types.SWITCH_CURRENCY, currency };
+}
+
 // Other
 
 export function openModal(id) {

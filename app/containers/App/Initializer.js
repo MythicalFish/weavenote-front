@@ -15,6 +15,7 @@ import {
   openModal,
   closeModal,
   switchOrganization,
+  switchCurrency,
 } from './actions';
 import * as selectors from './selectors';
 
@@ -175,6 +176,7 @@ const Initializer = (Component) => {
         openModal,
         closeModal,
         switchOrganization,
+        switchCurrency,
       },
       dispatch
     );
@@ -189,6 +191,7 @@ const Initializer = (Component) => {
     globalData: selectors.selectGlobalData(),
     modalID: selectors.selectModalID(),
     modalImage: selectors.selectModalImage(),
+    preferredCurrency: selectors.selectPreferredCurrency(),
   });
   return connect(mapState, mapDispatch)(Init);
 };

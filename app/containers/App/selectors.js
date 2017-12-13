@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { idToIndex } from 'utils/reducerHelpers';
 
 export const selectDomain = () => (state) => state.get('global');
 export const selectMisc = () =>
@@ -39,6 +40,15 @@ export const selectModalImage = () =>
 
 export const selectGlobalData = () =>
   createSelector(selectMisc(), (s) => s.get('globalData'));
+
+export const selectPreferredCurrency = () =>
+  createSelector(selectMisc(), (s) => {
+    const g = s.get('globalData');
+    if (!g) return null;
+    const id = s.get('preferred_currency');
+    const index = idToIndex(id, g.currencies);
+    return g.currencies.get(index);
+  });
 
 // Route
 
