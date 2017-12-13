@@ -180,6 +180,7 @@ const Initializer = (Component) => {
   const mapState = createStructuredSelector({
     user: selectors.selectUser(),
     abilities: selectors.selectAbilities(),
+    role: selectors.selectRole(),
     organization: selectors.selectOrganization(),
     invite: selectors.selectInvite(),
     globalData: selectors.selectGlobalData(),

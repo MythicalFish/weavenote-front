@@ -3,12 +3,7 @@ import { reduxForm } from 'redux-form/immutable';
 import Field from 'components/FormField';
 
 const ProjectForm = (props) => {
-  const {
-    onSubmit,
-    handleSubmit,
-    submitting,
-    projectAbilities: abilities,
-  } = props;
+  const { onSubmit, handleSubmit, submitting, abilities } = props;
   const f = {
     onChange: onSubmit,
     readOnly: !abilities.getIn(['Project', 'update']),
@@ -27,7 +22,7 @@ const ProjectForm = (props) => {
 };
 
 ProjectForm.propTypes = {
-  projectAbilities: PropTypes.object,
+  abilities: PropTypes.object,
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,

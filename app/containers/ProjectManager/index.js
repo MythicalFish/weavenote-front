@@ -41,7 +41,7 @@ class ProjectManager extends React.PureComponent {
   };
   render() {
     const { project } = this.props;
-    if (!project) return null;
+    if (!project.get('id')) return null;
     const id = project.get('id');
     let View;
     const viewProps = { ...this.props };
@@ -126,8 +126,8 @@ export function mapDispatch(dispatch) {
 const mapState = createStructuredSelector({
   project: selectors.selectProject(),
   collaborators: selectors.selectCollaborators(),
-  projectAbilities: selectors.selectAbilities(),
-  userRole: selectors.selectUserRole(),
+  abilities: selectors.selectAbilities(),
+  role: selectors.selectRole(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectManager);

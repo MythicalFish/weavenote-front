@@ -5,7 +5,7 @@ import Dot from 'components/Dot';
 import Field from 'components/FormField';
 
 const Form = (props) => {
-  const { handleSubmit, onSubmit, submitting, userRole } = props;
+  const { handleSubmit, onSubmit, submitting, role } = props;
   const item = props.item.toJS();
   const material = item.material;
   const materialCost = <Price value={item.material_cost} />;
@@ -28,7 +28,7 @@ const Form = (props) => {
         focus
         onChange={onSubmit}
       />
-      {userRole !== 'Guest' && (
+      {role.get('name') !== 'Guest' && (
         <Field type="display" label="Cost" value={materialCost} />
       )}
       <button type="submit" disabled={submitting} className="conceal" />
@@ -41,7 +41,7 @@ Form.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func,
   submitting: PropTypes.bool,
-  userRole: PropTypes.string,
+  role: PropTypes.object,
 };
 
 export default reduxForm({

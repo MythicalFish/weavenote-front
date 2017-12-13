@@ -40,7 +40,8 @@ const ListItem = (props) => {
             disableReduxForm
             small
             onChange={(e) =>
-              updateComponent(component.set('quantity', e.target.value))}
+              updateComponent(component.set('quantity', e.target.value))
+            }
           />
         ) : (
           <span>{component.get('quantity')}</span>

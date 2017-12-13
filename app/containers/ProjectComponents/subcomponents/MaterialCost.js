@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import Price from 'components/Price';
 
-const MaterialCost = ({ materialCost, userRole }) => {
-  if (userRole === 'Guest') return null;
+const MaterialCost = ({ materialCost, role }) => {
+  if (role.get('name') === 'Guest') return null;
   return (
     <div className="p2 flex justify-between bt1">
       <div>Total</div>
@@ -15,7 +15,7 @@ const MaterialCost = ({ materialCost, userRole }) => {
 
 MaterialCost.propTypes = {
   materialCost: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  userRole: PropTypes.string,
+  role: PropTypes.object,
 };
 
 export default MaterialCost;

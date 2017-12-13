@@ -3,10 +3,10 @@ import * as types from './constants';
 import * as orgTypes from 'containers/Organization/constants';
 
 const initialState = fromJS({
-  organization: null,
-  role: null,
-  organizations: null,
+  role_type: null,
   abilities: null,
+  organization: null,
+  organizations: null,
 });
 
 function UserReducer(state = initialState, action) {

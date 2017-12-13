@@ -28,7 +28,7 @@ export default class AddMaterial extends React.PureComponent {
                 <SearchInput onChange={filterMaterials} />
               </div>
             </div>
-            {abilities.getIn(['Material', 'update']) ? (
+            {abilities.update ? (
               <div className="py3 px4">
                 <Toolbar {...this.props} />
               </div>

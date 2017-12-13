@@ -5,8 +5,8 @@ import AvatarList from 'components/AvatarList';
 import Icon from 'components/Icon';
 
 export default function Toolbar(props) {
-  const { changeView, currentView, openModal, project } = props;
-  const abilities = props.abilities.get('Project').toJS();
+  const { changeView, currentView, openModal, project, role } = props;
+  const readOnly = role.get('name') !== 'Admin';
   const Nav = ({ name }) => (
     <NavItem
       label={name}
@@ -44,7 +44,7 @@ export default function Toolbar(props) {
                   handleClick={() => openModal('export')}
                 />
               </div>
-              {abilities.update && (
+              {!readOnly && (
                 <NavItem
                   className="btn btn-sm btn-secondary"
                   label="Invite"
@@ -57,7 +57,7 @@ export default function Toolbar(props) {
             <AvatarList
               onClick={() => openModal('collaborators')}
               showPlusButton={false}
-              readOnly={!abilities.update}
+              readOnly={readOnly}
               {...props}
               collaborators={project.get('all_collaborators')}
             />
@@ -74,5 +74,5 @@ Toolbar.propTypes = {
   changeView: PropTypes.func,
   currentView: PropTypes.string,
   openModal: PropTypes.func,
-  abilities: PropTypes.object,
+  role: PropTypes.object,
 };

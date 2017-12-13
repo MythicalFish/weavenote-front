@@ -21,6 +21,9 @@ export const selectOrganizations = () =>
 export const selectAbilities = () =>
   createSelector(selectUser(), (s) => s.get('abilities'));
 
+export const selectRole = () =>
+  createSelector(selectUser(), (s) => s.getIn(['user', 'role_type']));
+
 // Invite
 
 export const selectInvite = () =>

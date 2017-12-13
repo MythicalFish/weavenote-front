@@ -37,14 +37,15 @@ class Components extends React.Component {
   render() {
     const { changeView, editMaterial } = this;
     const { view, materialID } = this.state;
+    const abilities = this.props.abilities.get('Component').toJS();
     const mProps = {
       ...this.props,
       changeView,
       editMaterial,
       view,
       materialID,
+      abilities,
     };
-    const abilities = this.props.abilities.get('Material').toJS();
     return (
       <div>
         {abilities.create && (
@@ -68,7 +69,6 @@ Components.propTypes = {
   fetchComponents: PropTypes.func,
   openModal: PropTypes.func,
   fetchMaterials: PropTypes.func,
-  materials: PropTypes.object,
   abilities: PropTypes.object,
 };
 

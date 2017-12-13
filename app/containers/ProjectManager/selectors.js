@@ -1,25 +1,21 @@
 import { createSelector } from 'reselect';
 
-export const selectDomain = () => (state) => state.getIn(['Project', 'Manager']);
+export const selectDomain = () => (state) => state.get('Project');
 
 export const selectProject = () =>
-  createSelector(selectDomain(), (s) => s.get('project'));
+  createSelector(selectDomain(), (s) => s.get('Manager'));
 
 export const selectProjectID = () =>
   createSelector(selectProject(), (s) => s.get('id'));
 
 export const selectMaterialCost = () =>
-  createSelector(selectDomain(), (substate) =>
-    substate.getIn(['project', 'material_cost'])
-  );
+  createSelector(selectProject(), (s) => s.get('material_cost'));
 
 export const selectCollaborators = () =>
-  createSelector(selectDomain(), (s) =>
-    s.getIn(['project', 'all_collaborators'])
-  );
+  createSelector(selectProject(), (s) => s.get('all_collaborators'));
 
-export const selectUserRole = () =>
-  createSelector(selectDomain(), (s) => s.get('userRole'));
+export const selectRole = () =>
+  createSelector(selectDomain(), (s) => s.getIn(['user', 'role_type']));
 
 export const selectAbilities = () =>
-  createSelector(selectDomain(), (s) => s.get('abilities'));
+  createSelector(selectDomain(), (s) => s.getIn(['user', 'abilities']));
