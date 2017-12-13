@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import Auth0Lock from 'auth0-lock';
 import { loggedIn } from 'utils/authUtils';
 import Layout from 'components/Layout';
@@ -40,12 +41,16 @@ export default class LoginForm extends React.PureComponent {
       localStorage.setItem('id_token', r.idToken);
       localStorage.setItem('access_token', r.accessToken);
       this.props.fetchUser();
+      const redirPath = localStorage.getItem('redirect');
+      localStorage.removeItem('redirect');
+      browserHistory.push(redirPath);
     });
     lock.on('authorization_error', (e) => {
       console.error('Auth error', e);
     });
     lock.on('hash_parsed', (hash) => {
       if (!hash && !loggedIn()) {
+        localStorage.setItem('redirect', window.location.pathname);
         // <!-- Don't render lock while it's still parsing the tokens given in the URL
         lock.show();
       }
