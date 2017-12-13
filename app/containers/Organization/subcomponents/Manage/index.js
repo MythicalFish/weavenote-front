@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Collaborators from 'containers/Collaborators';
+import Switcher from 'components/OrgSwitch';
 import OrgInfo from './OrgInfo';
-import Switcher from './Switcher';
-import { updateOrganization, switchOrganization } from '../../actions';
+import { updateOrganization } from '../../actions';
 
 class Manage extends React.PureComponent {
   render() {
-    const { organization, abilities } = this.props;
+    const { organization, abilities, startCreate } = this.props;
     return (
       <div>
         <div className="bg-white p2">
@@ -17,7 +17,15 @@ class Manage extends React.PureComponent {
               <h3 className="mb0">Organization settings</h3>
             </div>
             <div className="col-xs-12 col-sm-6 right-align">
-              <Switcher {...this.props} />
+              <Switcher
+                {...this.props}
+                tail={() => (
+                  <button type="button" onClick={startCreate}>
+                    <i className="fa fa-plus mr2" />
+                    Create new organization
+                  </button>
+                )}
+              />
             </div>
           </div>
         </div>
@@ -50,6 +58,7 @@ class Manage extends React.PureComponent {
 Manage.propTypes = {
   organization: PropTypes.object,
   handleUpdate: PropTypes.func,
+  startCreate: PropTypes.func,
   abilities: PropTypes.object,
 };
 
@@ -57,9 +66,6 @@ export function mapDispatch(dispatch) {
   return {
     handleUpdate: (data) => {
       dispatch(updateOrganization(data));
-    },
-    switchOrganization: (id) => {
-      dispatch(switchOrganization(id));
     },
   };
 }

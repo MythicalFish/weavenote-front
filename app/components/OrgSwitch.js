@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Dropdown from 'components/Dropdown';
-import Button from 'components/Button';
 
 class Switcher extends React.PureComponent {
   switchOrganization = (o) => {
@@ -17,24 +16,15 @@ class Switcher extends React.PureComponent {
     return orgs;
   };
   render() {
-    const { organization, startCreate } = this.props;
-    return (
-      <Dropdown
-        value={organization}
-        data={this.otherOrganizations()}
-        onChange={this.switchOrganization}
-        align="right"
-        tail={() => (
-          <Button
-            small
-            inline
-            label="Create new organization"
-            icon="Plus"
-            onClick={startCreate}
-          />
-        )}
-      />
-    );
+    const { organization, tail } = this.props;
+    const dProps = {
+      value: organization,
+      data: this.otherOrganizations(),
+      onChange: this.switchOrganization,
+      align: 'right',
+    };
+    if (tail) dProps.tail = tail;
+    return <Dropdown {...dProps} />;
   }
 }
 
@@ -42,7 +32,7 @@ Switcher.propTypes = {
   organization: PropTypes.object,
   organizations: PropTypes.object,
   switchOrganization: PropTypes.func,
-  startCreate: PropTypes.func,
+  tail: PropTypes.func,
 };
 
 export default Switcher;

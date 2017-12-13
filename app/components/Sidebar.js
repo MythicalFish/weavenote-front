@@ -35,7 +35,7 @@ const exposeTo = (role) => !['None', 'Guest'].includes(role);
 const Sidebar = (props) => {
   if (!props.location) return null;
   if (isProjectPage(props.location.pathname)) return null;
-  const role = props.user.get('role');
+  const role = props.user.getIn(['role_type', 'name']);
   if (!role) return null;
   return (
     <aside id="sidebar" className="flex-none blurrable">

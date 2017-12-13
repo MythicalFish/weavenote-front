@@ -4,17 +4,19 @@ import { browserHistory } from 'react-router';
 import * as sagas from 'utils/genericSagas';
 import { UserWatcher } from 'containers/User/sagas';
 import { fetchUser } from 'containers/User/actions';
-import * as actionType from './constants';
+import * as types from './constants';
 import * as actions from './actions';
+import { selectOrganization } from './selectors';
 export default [appWatcher, UserWatcher];
 
 export function* appWatcher() {
   const watcher = [
-    yield takeLatest(actionType.FETCH_GLOBAL_DATA, fetchGlobalData),
-    yield takeLatest(actionType.FETCH_INVITE, fetchInvite),
-    yield takeLatest(actionType.HANDLE_INVITE, handleInvite),
-    yield takeLatest(actionType.HANDLE_INVITE_SUCCESS, handleInviteSuccess),
-    yield takeLatest(actionType.SET_INVITE_KEY, setInviteKey),
+    yield takeLatest(types.FETCH_GLOBAL_DATA, fetchGlobalData),
+    yield takeLatest(types.FETCH_INVITE, fetchInvite),
+    yield takeLatest(types.HANDLE_INVITE, handleInvite),
+    yield takeLatest(types.HANDLE_INVITE_SUCCESS, handleInviteSuccess),
+    yield takeLatest(types.SET_INVITE_KEY, setInviteKey),
+    yield takeLatest(types.SWITCH_ORGANIZATION, switchOrganization),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -40,4 +42,12 @@ function* handleInviteSuccess() {
 
 function* fetchInvite({ key }) {
   yield sagas.get(`invites/${key}`, null, actions.fetchInviteSuccess);
+}
+
+function* switchOrganization({ id }) {
+  yield sagas.get(
+    'switch_organization',
+    { id },
+    actions.switchOrganizationSuccess
+  );
 }

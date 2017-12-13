@@ -1,11 +1,5 @@
 import * as types from './constants';
 
-export function switchOrganization(id) {
-  return { type: types.SWITCH_ORGANIZATION, id };
-}
-export function switchOrganizationSuccess(data) {
-  return { type: types.SWITCH_ORGANIZATION_SUCCESS, data };
-}
 export function updateOrganization() {
   return { type: types.UPDATE_ORGANIZATION };
 }

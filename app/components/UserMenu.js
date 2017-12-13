@@ -23,7 +23,7 @@ const UserMenu = (props) => {
       <Link to="/organization">
         <MenuItem icon="Users" label="Organization" />
       </Link>
-      {props.user.get('role') === 'Admin' && (
+      {props.user.getIn(['role_type', 'name']) === 'Admin' && (
         <a href={envVar('billing')}>
           <MenuItem icon="CreditCard" label="Billing" />
         </a>

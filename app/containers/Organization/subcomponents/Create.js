@@ -7,17 +7,23 @@ const Create = (props) => {
   const { handleSubmit, submitting } = props;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Your Weavenote Organization</h1>
+    <form onSubmit={handleSubmit} className="center">
+      <h2 className="h3 mb3">New organization</h2>
       <div className="data-rows">
-        <Field name="name" type="text" label="Name your organization" focus />
-        <footer className="p2 center">
+        <Field
+          name="name"
+          type="text"
+          label="Give it a name"
+          focus
+          theme="alt1"
+        />
+        <footer className="p2">
           <Button
             type="submit"
             disabled={submitting}
             label="Create"
             icon="Plus"
-            lg
+            large
           />
         </footer>
       </div>

@@ -32,6 +32,15 @@ export function handleInviteSuccess() {
   return { type: types.HANDLE_INVITE_SUCCESS };
 }
 
+// Org switching
+
+export function switchOrganization(id) {
+  return { type: types.SWITCH_ORGANIZATION, id };
+}
+export function switchOrganizationSuccess(data) {
+  return { type: types.SWITCH_ORGANIZATION_SUCCESS, data };
+}
+
 // Other
 
 export function openModal(id) {

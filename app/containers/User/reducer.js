@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 import * as types from './constants';
-import * as orgTypes from 'containers/Organization/constants';
+import * as orgTypes from '../Organization/constants';
+import * as appTypes from '../App/constants';
 
 const initialState = fromJS({
   role_type: null,
@@ -22,7 +23,7 @@ function UserReducer(state = initialState, action) {
 
     // Org
 
-    case orgTypes.SWITCH_ORGANIZATION_SUCCESS:
+    case appTypes.SWITCH_ORGANIZATION_SUCCESS:
       return fromJS(action.data);
 
     case orgTypes.CREATE_ORGANIZATION_SUCCESS:

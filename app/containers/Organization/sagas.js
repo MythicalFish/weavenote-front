@@ -7,6 +7,7 @@ import * as sagas from 'utils/genericSagas';
 import * as types from './constants';
 import * as actions from './actions';
 import { selectOrganization } from '../App/selectors';
+import * as appTypes from '../App/constants';
 
 export default [orgWatcher];
 
@@ -15,18 +16,13 @@ function* orgWatcher() {
     yield takeLatest(types.CREATE_ORGANIZATION, createOrganization),
     yield takeLatest(types.CREATE_ORGANIZATION_SUCCESS, orgSuccess),
     yield takeLatest(types.UPDATE_ORGANIZATION, updateOrganization),
-    yield takeLatest(types.SWITCH_ORGANIZATION, switchOrganization),
+    yield takeLatest(appTypes.SWITCH_ORGANIZATION_SUCCESS, switchOrganization),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
 }
 
-function* switchOrganization({ id }) {
-  yield sagas.get(
-    'switch_organization',
-    { id },
-    actions.switchOrganizationSuccess
-  );
+function* switchOrganization() {
   const o = yield select(selectOrganization());
   yield put(initialize('OrganizationForm', o, { form: 'OrganizationForm' }));
 }

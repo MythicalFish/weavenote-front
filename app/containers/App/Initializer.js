@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { browserHistory } from 'react-router';
 import LoginForm from 'components/LoginForm';
-import Subscribe from 'components/Subscribe';
+import Subscribe from 'components/OrgSubscribe';
 import { fetchUser } from 'containers/User/actions';
 import { loggedIn } from 'utils/authUtils';
 import {
@@ -14,6 +14,7 @@ import {
   fetchGlobalData,
   openModal,
   closeModal,
+  switchOrganization,
 } from './actions';
 import * as selectors from './selectors';
 
@@ -173,6 +174,7 @@ const Initializer = (Component) => {
         setInviteKey,
         openModal,
         closeModal,
+        switchOrganization,
       },
       dispatch
     );
@@ -182,6 +184,7 @@ const Initializer = (Component) => {
     abilities: selectors.selectAbilities(),
     role: selectors.selectRole(),
     organization: selectors.selectOrganization(),
+    organizations: selectors.selectOrganizations(),
     invite: selectors.selectInvite(),
     globalData: selectors.selectGlobalData(),
     modalID: selectors.selectModalID(),

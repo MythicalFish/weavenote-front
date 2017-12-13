@@ -46,6 +46,10 @@ button,
     font-size: 1.2em;
     padding: 14px 24px;
     border-width: 3px;
+    .fa,
+    .far {
+      margin-right: 12px;
+    }
   }
   &.btn-inline {
     border: none;
