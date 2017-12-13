@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: $dark3;
+  background: rgba(221, 221, 221, 0.6);
   overflow: hidden;
   transition: all 0.5s;
   @extend .flex;
@@ -24,7 +24,7 @@
     z-index: 3;
     max-height: 95vh;
     height: auto;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 0 200px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 200px;
     &.visible {
       opacity: 1;
       transform: translateY(0px);
@@ -37,7 +37,7 @@
       box-shadow: 0 0 30px rgba(49, 60, 84, 0.1);
       overflow: hidden;
       border: 1px solid $white;
-      @include borderRadius();
+      @include borderRadius(8px);
       position: relative;
       > img {
         @include borderRadius();
@@ -62,8 +62,8 @@
       }
       .modal-close {
         position: absolute;
-        top: $space-2;
-        right: $space-2;
+        top: $space-3;
+        right: $space-3;
         z-index: 2;
         opacity: 0.4;
       }

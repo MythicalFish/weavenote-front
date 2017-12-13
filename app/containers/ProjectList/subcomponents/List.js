@@ -10,10 +10,10 @@ export default function List(props) {
           <tr>
             <th />
             <th>Name</th>
-            <th>Style number</th>
-            <th>Collection</th>
-            <th>Notifications</th>
-            <th>Team</th>
+            <th>Reference number</th>
+            <th>Season/Collection</th>
+            <th>Color</th>
+            <th>Members</th>
             <th />
           </tr>
         </thead>
@@ -30,5 +30,4 @@ export default function List(props) {
 
 List.propTypes = {
   projects: PropTypes.object,
-  filterProjects: PropTypes.func,
 };

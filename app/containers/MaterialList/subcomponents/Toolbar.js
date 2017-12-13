@@ -18,7 +18,12 @@ export default function Toolbar(props) {
     <header className="toolbar toolbar-compact container-narrow px2 mb4">
       <div className="row">
         <div className="col-xs-2">
-          <Button to="/materials/new" label="New Material" icon="Plus" />
+          <Button
+            to="/materials/new"
+            label="Create new Material"
+            small
+            fontIcon="fa fa-plus"
+          />
         </div>
         <div className="col-xs-8 flex justify-center">
           <nav>

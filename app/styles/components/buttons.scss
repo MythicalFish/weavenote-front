@@ -30,7 +30,7 @@ button,
 .btn:focus {
   padding: $space-2 $space-3;
   @include transition('all .2s');
-  @include borderRadius();
+  @include borderRadius(4px);
   border: 1px solid $poiple;
   box-shadow: none;
   background: $poiple;
@@ -40,7 +40,8 @@ button,
   line-height: 1;
   &.btn-sm {
     font-size: 0.9em;
-    padding: 6px 12px;
+    padding: 8px 16px;
+    font-weight: normal;
   }
   &.btn-lg {
     font-size: 1.2em;
@@ -54,7 +55,8 @@ button,
   &.btn-inline {
     border: none;
     background: none;
-    color: $malibu;
+    color: inherit;
+    font-weight: normal;
     padding: 0;
     line-height: inherit;
   }
@@ -70,7 +72,7 @@ button,
   i.fa,
   i.far {
     font-size: 0.9em;
-    margin-right: 6px;
+    margin-right: 8px;
   }
   .icon {
     height: 1px;

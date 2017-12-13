@@ -44,7 +44,6 @@ class Components extends React.Component {
       editMaterial,
       view,
       materialID,
-      abilities,
     };
     return (
       <div>

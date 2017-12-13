@@ -28,7 +28,8 @@ export default function Toolbar(props) {
             <Button
               onClick={() => createProject()}
               label="New Style"
-              icon="Plus"
+              fontIcon="fa fa-plus"
+              small
             />
           )}
         </div>

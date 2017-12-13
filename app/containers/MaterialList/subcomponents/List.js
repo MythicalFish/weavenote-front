@@ -25,10 +25,10 @@ class List extends React.PureComponent {
             <tr>
               {selectable && <th />}
               <th>Type</th>
-              <th>Ref.</th>
+              <th>Reference</th>
               <th>Name</th>
               <th>Colour</th>
-              <th>Supplier</th>
+              {!selectable && <th>Supplier</th>}
               <th>Price</th>
               <th />
             </tr>

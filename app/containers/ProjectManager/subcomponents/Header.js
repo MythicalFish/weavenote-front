@@ -3,6 +3,7 @@ import NavItem from 'components/NavItem';
 import UserMenu from 'components/UserMenu';
 import AvatarList from 'components/AvatarList';
 import Icon from 'components/Icon';
+import Button from 'components/Button';
 
 export default function Toolbar(props) {
   const { changeView, currentView, openModal, project, role } = props;
@@ -18,9 +19,16 @@ export default function Toolbar(props) {
   return (
     <header
       id="app-header"
-      className="justify-between toolbar toolbar-flex bb1"
+      className="justify-between toolbar toolbar-flex bb1 dark5"
     >
-      <Icon to="/projects" color="gray" name="ArrowLeft" size={26} />
+      <div className="px3">
+        <Button
+          to="/projects"
+          label="Style overview"
+          fontIcon="fa fa-arrow-left"
+          inline
+        />
+      </div>
       <nav>
         <ul>
           <li>
