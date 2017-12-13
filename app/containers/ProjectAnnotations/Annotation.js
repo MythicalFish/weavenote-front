@@ -22,7 +22,7 @@ const Annotation = (props) => {
   const isNew = !id;
   const isOwnAnnotation = user.get('id') === annotation.get('user_id');
   const isFocused = focusedAnnotation.get('id') === id;
-  const isDraggable = (isFocused && isOwnAnnotation) || isNew;
+  const isDraggable = isOwnAnnotation || isNew;
   let isVisible = true;
   if (view === 'Measurements') {
     if (type === 'dot') isVisible = false;

@@ -3,7 +3,7 @@ import { styles } from './constants';
 const buildStyle = (props) => {
   const { type, isActive, shape } = props;
   let style = { ...styles[shape].default };
-  if (type && styles[shape][type]) style = styles[shape][type];
+  if (type && styles[shape][type]) style = { ...styles[shape][type] };
   if (isActive) {
     style = Object.assign(style, styles[shape].active);
   }

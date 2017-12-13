@@ -21,8 +21,9 @@ const AnnotationActions = (props) => {
   return (
     <div className="annotation-actions on-hover" style={style}>
       <Icon fontIcon="fa fa-trash" onClick={handleDelete} tooltip="Delete" />
-      <Icon fontIcon="fa fa-tag" onClick={editLabel} tooltip="Edit label" />
-      {annotation.get('type') === 'line' && null}
+      {annotation.get('type') === 'line' && (
+        <Icon fontIcon="fa fa-tag" onClick={editLabel} tooltip="Edit label" />
+      )}
     </div>
   );
 };

@@ -47,5 +47,8 @@ export const styles = {
       fontSize: 16,
       padding: 5,
     },
+    active: {
+      fill: colors.blue,
+    },
   },
 };

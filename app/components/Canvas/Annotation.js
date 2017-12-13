@@ -89,7 +89,8 @@ class CanvasAnnotation extends React.PureComponent {
         <Label
           key="txt"
           value={label}
-          position={this.getPosition(anchors.get(0))}
+          position={midpoint}
+          isActive={isActive}
         />
       );
     }
