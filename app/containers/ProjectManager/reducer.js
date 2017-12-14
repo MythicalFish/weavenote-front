@@ -26,7 +26,7 @@ function ProjectManagerReducer(state = initialState, action) {
       );
 
     case types.FETCH_MATERIAL_COST_SUCCESS:
-      return state.set('material_cost', fromJS(response));
+      return state.set('material_cost', fromJS(response.cost));
 
     default:
       return state;
