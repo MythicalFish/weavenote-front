@@ -135,7 +135,7 @@ const Initializer = (Component) => {
         return null;
       }
 
-      if (!organization.get('has_active_subscription')) {
+      if (organization && !organization.get('has_active_subscription')) {
         return <Subscribe {...this.props} />;
       }
 
