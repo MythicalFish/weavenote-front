@@ -8,7 +8,6 @@ import * as selectors from './selectors';
 import { fetchMaterialCost } from '../ProjectManager/actions';
 import { selectProjectID } from '../ProjectManager/selectors';
 import { CREATE_MATERIAL_SUCCESS } from '../MaterialManager/constants';
-import { SWITCH_CURRENCY } from '../App/constants';
 import { closeModal } from '../App/actions';
 
 const componentsURL = (payload, addition = null) => {
@@ -27,7 +26,6 @@ export function* ProjectComponentsWatcher() {
     yield takeLatest(types.CREATE_COMPONENTS_SUCCESS, afterCreate),
     yield takeLatest(types.DELETE_COMPONENT, deleteComponent),
     yield takeLatest(CREATE_MATERIAL_SUCCESS, addMaterial),
-    yield takeLatest(SWITCH_CURRENCY, fetchCost),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -48,7 +46,21 @@ function* updateComponent({ component }) {
     { component },
     actions.updateComponentSuccess
   );
-  yield put(fetchMaterialCost(component.get('project_id')));
+  yield put(fetchMaterialCost());
+}
+
+function* deleteComponent({ payload }) {
+  yield sagas.destroy(
+    componentURL(payload),
+    null,
+    actions.deleteComponentSuccess
+  );
+  yield put(fetchMaterialCost());
+}
+
+function* addMaterial({ response }) {
+  yield put(actions.selectMaterial(fromJS(response)));
+  yield put(actions.createComponents());
 }
 
 function* createComponents() {
@@ -61,25 +73,6 @@ function* createComponents() {
   );
 }
 
-function* deleteComponent({ payload }) {
-  yield sagas.destroy(
-    componentURL(payload),
-    null,
-    actions.deleteComponentSuccess
-  );
-  yield put(fetchMaterialCost(payload.project_id));
-}
-
-function* addMaterial({ response }) {
-  yield put(actions.selectMaterial(fromJS(response)));
-  yield put(actions.createComponents());
-}
-
 function* afterCreate() {
   yield put(closeModal());
-}
-
-function* fetchCost() {
-  const projectID = yield select(selectProjectID());
-  yield put(fetchMaterialCost(projectID));
 }

@@ -60,10 +60,12 @@ class Input extends React.PureComponent {
     if (fProps.theme) delete fProps.theme;
     if (fProps.focus) delete fProps.focus;
 
-    if (p.focus) {
+    if (p.focus || p.handleRef) {
       fProps.ref = (input) => {
         this.nameInput = input;
+        if (p.handleRef) p.handleRef(input);
       };
+      if (p.handleRef) delete fProps.handleRef;
     }
 
     if (p.readOnly) {
@@ -112,7 +114,7 @@ const fieldConstructor = (props) => {
         () => {
           props.onChange(e);
         },
-        500,
+        1000,
         this
       )();
     };

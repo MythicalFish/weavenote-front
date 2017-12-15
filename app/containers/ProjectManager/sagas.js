@@ -10,6 +10,9 @@ import { ProjectExportWatcher } from '../ProjectExport/sagas';
 import { selectPreferredCurrency } from '../App/selectors';
 import * as types from './constants';
 import * as actions from './actions';
+import { UPDATE_MATERIAL_SUCCESS } from '../MaterialManager/constants';
+import { SWITCH_CURRENCY } from '../App/constants';
+import { selectProjectID } from './selectors';
 
 export default [
   ProjectManagerWatcher,
@@ -25,6 +28,8 @@ function* ProjectManagerWatcher() {
     yield takeLatest(types.FETCH_PROJECT, fetchProject),
     yield takeLatest(types.UPDATE_PROJECT, updateProject),
     yield takeLatest(types.FETCH_MATERIAL_COST, fetchMaterialCost),
+    yield takeLatest(UPDATE_MATERIAL_SUCCESS, fetchMaterialCost),
+    yield takeLatest(SWITCH_CURRENCY, fetchMaterialCost),
   ];
   yield take(LOCATION_CHANGE);
   yield watcher.map((task) => cancel(task));
@@ -34,11 +39,12 @@ function* fetchProject(action) {
   yield sagas.get(`projects/${action.id}`, null, actions.fetchProjectSuccess);
 }
 
-function* fetchMaterialCost({ id }) {
+function* fetchMaterialCost() {
+  const projectID = yield select(selectProjectID());
   const currency = yield select(selectPreferredCurrency());
   const params = { currency: currency.get('id') };
   yield sagas.get(
-    `projects/${id}/material_cost`,
+    `projects/${projectID}/material_cost`,
     params,
     actions.fetchMaterialCostSuccess
   );
