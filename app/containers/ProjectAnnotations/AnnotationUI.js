@@ -55,11 +55,7 @@ class AnnotationUI extends React.PureComponent {
         {isAnnotating && (
           <div className="above lh1 smaller2 dark3 py2">Hit ESC to cancel</div>
         )}
-        {isEditingLabel && (
-          <div className="overlay flex-centered bg-dark7 z3">
-            <Form {...this.props} />
-          </div>
-        )}
+        {isEditingLabel && <Form {...this.props} />}
         <Actions {...this.state} {...this.props} hideMenu={this.hideMenu} />
         <Canvas {...cProps} {...this.props} />
       </div>
