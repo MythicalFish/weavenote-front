@@ -50,6 +50,7 @@ export function* destroy(url, params, callback) {
 }
 
 function* handleError({ error }) {
+  if (!error) return;
   const { message } = error;
   if (error.type === 'warning') {
     yield put(notifyWarning(message));
@@ -77,8 +78,6 @@ function* handleResponse(callback, response) {
       payload = response;
     }
     yield put(callback(payload));
-  } else {
-    yield put(notifyWarning('No response was given by the API'));
   }
 }
 

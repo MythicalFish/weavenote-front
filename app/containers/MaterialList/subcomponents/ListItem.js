@@ -68,12 +68,14 @@ class ListItem extends React.PureComponent {
         </td>
         <td className="right-align">
           <Dropdown icon="more">
-            <button onClick={this.handleEdit}>Edit</button>
-            <button onClick={this.handleDuplicate}>Duplicate</button>
+            {!archived && <button onClick={this.handleEdit}>Edit</button>}
+            {!archived && (
+              <button onClick={this.handleDuplicate}>Duplicate</button>
+            )}
             <button onClick={() => fileMaterial({ id, archived: !archived })}>
               {archived ? 'Restore' : 'Archive'}
             </button>
-            <button onClick={this.handleDelete}>Delete</button>
+            {archived && <button onClick={this.handleDelete}>Delete</button>}
           </Dropdown>
         </td>
       </tr>

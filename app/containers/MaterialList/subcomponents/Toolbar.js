@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import NavItem from 'components/NavItem';
 import Button from 'components/Button';
+import { VIEW } from '../constants';
 
 export default function Toolbar(props) {
   const { fetch, changeView, currentView } = props;
@@ -29,10 +30,10 @@ export default function Toolbar(props) {
           <nav>
             <ul>
               <li>
-                <Nav name="Materials" />
+                <Nav name={VIEW.list} />
               </li>
               <li>
-                <Nav name="Archive" params={{ archived: true }} />
+                <Nav name={VIEW.archive} params={{ archived: true }} />
               </li>
             </ul>
           </nav>

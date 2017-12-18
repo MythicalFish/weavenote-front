@@ -31,6 +31,9 @@ function* duplicateMaterial({ id }) {
 
 function* fileMaterial(action) {
   const { id, archived } = action.payload;
-  const params = { material: { id, archived } };
-  yield sagas.patch(`materials/${id}`, params, actions.fileMaterialSuccess);
+  yield sagas.patch(
+    `materials/${id}/categorize`,
+    { archived },
+    actions.fileMaterialSuccess
+  );
 }

@@ -6,6 +6,7 @@ import List from './subcomponents/List';
 import Header from './subcomponents/Header';
 import { fetchMaterials, filterMaterials } from './actions';
 import Toolbar from './subcomponents/Toolbar';
+import { VIEW } from './constants';
 
 // Most actions, selectors, etc. are in List.js because it
 // all needs to be able to work in a modal window.
@@ -14,7 +15,7 @@ class MaterialList extends React.PureComponent {
   static propTypes = {
     fetchMaterials: PropTypes.func,
   };
-  state = { view: 'Materials' };
+  state = { view: VIEW.list };
   Header = (props) => <Header {...this.props} {...props} />;
   changeView = (view) => {
     this.setState({ view });
