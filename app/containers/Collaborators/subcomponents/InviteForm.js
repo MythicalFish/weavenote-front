@@ -26,7 +26,6 @@ const InviteForm = (props) => {
             <label className="ml1">Invite as guest?</label>
           </div>
         )}
-        <InviteInfo type={type} />
         <div>
           <Button
             type="submit"
@@ -37,6 +36,7 @@ const InviteForm = (props) => {
           />
         </div>
       </footer>
+      <InviteInfo type={type} />
     </form>
   );
 };

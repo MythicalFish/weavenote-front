@@ -6,6 +6,7 @@ import Dots from 'images/dots-vertical.svg';
 import TetherComponent from 'react-tether';
 import sizeMe from 'react-sizeme';
 import Focusable from 'utils/Focusable';
+import { elementPosition } from 'utils/misc';
 
 class Dropdown extends React.PureComponent {
   toggleState = (item) => () => {
@@ -76,6 +77,7 @@ class Dropdown extends React.PureComponent {
   };
 
   items = () => {
+    let klass = 'dropdown-options';
     const {
       value,
       data,
@@ -85,9 +87,13 @@ class Dropdown extends React.PureComponent {
       focusClass,
       matchWidth,
       size,
+      tether,
     } = this.props;
+    const useTether = tether !== false;
+    if (useTether && this.isNearBottom()) klass += ' near-bottom';
+    if (focusClass) klass += ` ${focusClass}`;
     const iProps = {
-      className: `dropdown-options ${focusClass}`,
+      className: klass,
       style: {
         textAlign: align || 'left',
         width: matchWidth ? size.width : 'auto',
@@ -118,35 +124,50 @@ class Dropdown extends React.PureComponent {
       </div>
     );
   };
-
-  tetherOptions = {
-    attachment: 'top right',
-    targetAttachment: 'bottom right',
-    constraints: [
-      {
-        to: 'scrollParent',
-      },
-    ],
+  isNearBottom = () => {
+    if (!this.ref) return false;
+    const rect = this.ref.getBoundingClientRect();
+    const pos = rect.top + rect.height + 180;
+    return pos >= window.innerHeight;
   };
-
+  tetherOptions = () => {
+    const opts = {
+      attachment: 'top right',
+      targetAttachment: 'bottom right',
+      constraints: [
+        {
+          to: 'scrollParent',
+        },
+      ],
+    };
+    if (this.isNearBottom()) {
+      opts.attachment = 'bottom right';
+      opts.targetAttachment = 'top right';
+    }
+    return opts;
+  };
+  handleRef = (ref) => {
+    this.ref = ref;
+  };
   render() {
     const { className, readOnly, isFocused, onFocus, tether } = this.props;
-    let inputClass = className || '';
-    if (readOnly) inputClass += ' noselect';
-    const useTether = tether === false ? false : true;
+    let klass = 'dropdown';
+    if (className) klass += ` ${className}`;
+    if (readOnly) klass += ' noselect';
+    const useTether = tether !== false;
     return (
-      <div className={`dropdown ${inputClass}`} onClick={onFocus}>
+      <div className={klass} onClick={onFocus} ref={this.handleRef}>
         {useTether ? (
-          <TetherComponent {...this.tetherOptions}>
+          <TetherComponent {...this.tetherOptions()}>
             {this.label()}
             {isFocused && this.items()}
           </TetherComponent>
         ) : (
-            <div className="untethered">
-              {this.label()}
-              {isFocused && this.items()}
-            </div>
-          )}
+          <div className="untethered">
+            {this.label()}
+            {isFocused && this.items()}
+          </div>
+        )}
       </div>
     );
   }
@@ -170,6 +191,8 @@ Dropdown.propTypes = {
   unfocusThis: PropTypes.func,
   label: PropTypes.any,
   focusClass: PropTypes.string,
+  matchWidth: PropTypes.bool,
+  size: PropTypes.object,
 };
 
 export default sizeMe()(Focusable(Dropdown));

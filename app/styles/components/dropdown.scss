@@ -31,10 +31,10 @@
   -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
-  transform: translateY(-20px);
-  -webkit-transform: translateY(-20px);
-  transform-origin: top;
-  -webkit-transform-origin: top;
+  transform: scale(0.7) translateY(-20px);
+  -webkit-transform: scale(0.7) translateY(-20px);
+  transform-origin: top right;
+  -webkit-transform-origin: top right;
   @include borderRadius();
   list-style: none;
   margin: 0;
@@ -50,8 +50,12 @@
   opacity: 0;
   &.focused {
     opacity: 1;
-    transform: translateY(0);
-    -webkit-transform: translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform: scale(1) translateY(0);
+  }
+  &.near-bottom {
+    transform-origin: bottom right;
+    -webkit-transform-origin: bottom right;
   }
   > button,
   > a {
