@@ -33,7 +33,10 @@ class Components extends React.Component {
   editMaterial = (material) => {
     this.setState({ materialID: material.get('id'), view: VIEW.edit });
   };
-
+  listMaterials = () => {
+    this.props.openModal('materials');
+    this.changeView(VIEW.list);
+  };
   render() {
     const { changeView, editMaterial } = this;
     const { view, materialID } = this.state;
@@ -48,11 +51,7 @@ class Components extends React.Component {
     return (
       <div>
         {abilities.create && (
-          <Button
-            onClick={() => this.props.openModal('materials')}
-            label="Add material"
-            small
-          />
+          <Button onClick={this.listMaterials} label="Add material" small />
         )}
         <div className="mt3">
           <List {...{ ...mProps, abilities }} />
