@@ -14,6 +14,8 @@ const AvatarList = (props) => {
     readOnly,
     showSelf,
   } = props;
+  let klass = 'avatar-list';
+  if (readOnly) klass += ' readonly';
   const onClick = readOnly ? null : props.onClick;
   const maxWidth = size.width - avatarWidth;
   let usedWidth = 0;
@@ -36,7 +38,7 @@ const AvatarList = (props) => {
     }
   });
   return (
-    <button className="avatar-list" type="button" onClick={onClick}>
+    <button className={klass} type="button" onClick={onClick}>
       {visibleAvatars}
       {hiddenCount > 0 && (
         <div className="hidden-count flex-centered">+{hiddenCount}</div>

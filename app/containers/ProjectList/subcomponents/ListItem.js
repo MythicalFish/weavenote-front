@@ -35,6 +35,7 @@ export default function ListItem(props) {
       <td>
         <AvatarList
           collaborators={project.get('all_collaborators')}
+          readOnly
           {...props}
         />
       </td>

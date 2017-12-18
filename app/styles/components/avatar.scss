@@ -36,4 +36,10 @@ $avatarSize: 27px;
     @include borderRadius(999px);
     font-size: 0.6rem;
   }
+  &.readonly {
+    cursor: default;
+    * {
+      cursor: default;
+    }
+  }
 }

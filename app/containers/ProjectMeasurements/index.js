@@ -34,23 +34,16 @@ class ProjectMeasurements extends React.PureComponent {
       </Modal>
     );
   };
+  showInModal = () => this.setState({ isModal: true });
   render() {
-    const { Wrapper } = this;
+    const { Wrapper, showInModal } = this;
     const { measurements: m, abilities } = this.props;
     const { isModal } = this.state;
+    const readOnly = !abilities.getIn(['Measurement', 'update']);
     if (!m) return null;
     return (
       <Wrapper>
-        <Form
-          {...{
-            ...this.props,
-            lastUpdated: m.timestamp,
-            enableReinitialize: true,
-            showInModal: () => this.setState({ isModal: true }),
-            readOnly: !abilities.getIn(['Measurement', 'update']),
-            isModal,
-          }}
-        />
+        <Form {...{ ...this.props, isModal, readOnly, showInModal }} />
       </Wrapper>
     );
   }
