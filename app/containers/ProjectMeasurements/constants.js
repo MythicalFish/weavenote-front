@@ -20,8 +20,3 @@ export const DELETE_MEASUREMENT_GROUP_SUCCESS =
   '@@app/DELETE_MEASUREMENT_GROUP_SUCCESS';
 
 export const REORDER_MEASUREMENTS = '@@app/REORDER_MEASUREMENTS';
-
-// For displaying column handles & delete buttons when overflow is hidden.
-export const COLUMNS_OFFSET = {
-  style: { marginTop: '-45px', paddingTop: '45px' },
-};

@@ -5,7 +5,6 @@ import PlusButton from 'components/PlusButton';
 import RowLabels from './RowLabels';
 import ColumnLabels from './ColumnLabels';
 import ColumnValues from './ColumnValues';
-import { COLUMNS_OFFSET } from '../constants';
 
 class Form extends React.PureComponent {
   state = { scrollTop: 0, scrollLeft: 0, maxHeight: 0, colWidths: {} };
@@ -19,17 +18,19 @@ class Form extends React.PureComponent {
   };
   doScroll = ({ scrollTop, scrollLeft }) =>
     this.setState({ scrollTop, scrollLeft });
-  heightStyle = () => {
+  containerStyle = () => {
     const { maxHeight } = this.state;
-    if (maxHeight === 0) return {};
-    return { maxHeight };
+    const style = { marginLeft: '-45px' };
+    if (maxHeight > 0) style.maxHeight = maxHeight;
+    return style;
   };
-  offsetY = () => ({
+  scrollOffsetY = () => ({
     style: {
       transform: `translateY(-${this.state.scrollTop}px)`,
+      paddingLeft: '45px',
     },
   });
-  offsetX = () => ({
+  scrollOffsetX = () => ({
     style: {
       transform: `translateX(-${this.state.scrollLeft}px)`,
       paddingTop: '45px',
@@ -49,16 +50,16 @@ class Form extends React.PureComponent {
     };
     return (
       <div id="measurements" className="y-fill flex flex-column">
-        <div className="flex flex-auto" style={this.heightStyle()}>
+        <div className="flex flex-auto" style={this.containerStyle()}>
           <div className="flex-none">
             <div className="flex flex-column y-fill">
-              <div className="flex-none">
+              <div className="flex-none" style={{ paddingLeft: '45px' }}>
                 <div className="column-header px1">
                   <label className="opa5">Description</label>
                 </div>
               </div>
               <div className="flex-auto cut">
-                <div {...this.offsetY()}>
+                <div {...this.scrollOffsetY()}>
                   <RowLabels {...cProps} />
                 </div>
               </div>
@@ -70,14 +71,13 @@ class Form extends React.PureComponent {
                 <div
                   style={{
                     position: 'absolute',
-                    top: '-45px',
                     left: 0,
                     bottom: 0,
                     right: 0,
                     overflow: 'hidden',
                   }}
                 >
-                  <div {...this.offsetX()}>
+                  <div {...this.scrollOffsetX()}>
                     <ColumnLabels {...cProps} />
                   </div>
                 </div>

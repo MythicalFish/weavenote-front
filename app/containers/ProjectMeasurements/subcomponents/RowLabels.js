@@ -25,7 +25,7 @@ const SortableList = SortableContainer((props) => {
 });
 
 const RowLabels = (props) => (
-  <div className="column cut">
+  <div className="column">
     <SortableList
       {...props}
       lockToContainerEdges
