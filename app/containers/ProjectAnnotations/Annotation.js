@@ -41,10 +41,11 @@ const Annotation = (props) => {
     anchors,
     isNew,
     isActive: isFocused || isNew,
+    isOwnAnnotation,
     onMouseUp: ({ position }) => {
       if (isNew || isAnnotating) return;
-      focusAnnotation(annotation);
       if (isOwnAnnotation) {
+        focusAnnotation(annotation);
         showMenu(position);
       } else {
         hideMenu();

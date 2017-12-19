@@ -43,6 +43,14 @@
     }
   }
   &.field-theme-alt1 {
+    .input {
+      input,
+      textarea,
+      .dropdown > button {
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+      }
+    }
     &.focused {
       .input {
         input,

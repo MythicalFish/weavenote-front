@@ -40,13 +40,14 @@ class Components extends React.Component {
   render() {
     const { changeView, editMaterial } = this;
     const { view, materialID } = this.state;
-    const abilities = this.props.abilities.get('Component').toJS();
+    const abilities = this.props.abilities.toJS();
     const mProps = {
       ...this.props,
       changeView,
       editMaterial,
       view,
       materialID,
+      abilities: abilities.Component,
     };
     return (
       <div>
@@ -54,10 +55,10 @@ class Components extends React.Component {
           <Button onClick={this.listMaterials} label="Add material" small />
         )}
         <div className="mt3">
-          <List {...{ ...mProps, abilities }} />
+          <List {...mProps} />
         </div>
         <MaterialCost {...mProps} />
-        <AddMaterial {...mProps} />
+        <AddMaterial {...{ ...mProps, abilities: abilities.Material }} />
       </div>
     );
   }

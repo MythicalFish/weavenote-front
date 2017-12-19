@@ -17,11 +17,13 @@ class CanvasAnnotation extends React.PureComponent {
   state = { isHovering: false };
   getPosition = (anchor) => pixelPosition(anchor.toJS(), this.props.canvasSize);
   handleMouseOver = ({ evt }) => {
+    if (!this.props.isOwnAnnotation) return null;
     toggleState(this, 'isHovering');
     const { onMouseOver } = this.props;
     if (onMouseOver) onMouseOver(evt);
   };
   handleMouseOut = ({ evt }) => {
+    if (!this.props.isOwnAnnotation) return null;
     toggleState(this, 'isHovering');
     const { onMouseOut } = this.props;
     if (onMouseOut) onMouseOut(evt);

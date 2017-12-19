@@ -22,6 +22,9 @@
     @include borderRadius(3px);
     height: 45px;
   }
+  input[readonly] {
+    cursor: default;
+  }
   .icon {
     position: absolute;
     top: 50%;

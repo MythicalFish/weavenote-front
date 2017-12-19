@@ -27,9 +27,11 @@ const Form = (props) => {
           <div className="box">
             <Supplier {...props} />
           </div>
-          <div className="box">
-            <Cost {...props} />
-          </div>
+          {!readOnly && (
+            <div className="box">
+              <Cost {...props} />
+            </div>
+          )}
         </div>
       </div>
       {!readOnly &&

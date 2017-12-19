@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Collaborators from 'containers/Collaborators';
 import Switcher from 'components/OrgSwitch';
+import Button from 'components/Button';
 import OrgInfo from './OrgInfo';
 import { updateOrganization } from '../../actions';
 
@@ -11,26 +12,35 @@ class Manage extends React.PureComponent {
     const { organization, abilities, startCreate } = this.props;
     return (
       <div>
-        <div className="bg-white p2">
-          <div className="row">
-            <div className="col-xs-12 col-sm-6">
-              <h3 className="mb0">Organization settings</h3>
-            </div>
-            <div className="col-xs-12 col-sm-6 right-align">
-              <Switcher
-                {...this.props}
-                tail={() => (
-                  <button type="button" onClick={startCreate}>
-                    <i className="fa fa-plus mr2" />
-                    Create new organization
-                  </button>
-                )}
-              />
-            </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-6">
+            <h3 className="mb0">Organization settings</h3>
+          </div>
+          <div className="col-xs-12 col-sm-6 right-align">
+            <Switcher
+              {...this.props}
+              tail={() => (
+                <button type="button" onClick={startCreate}>
+                  <i className="fa fa-plus mr2" />
+                  Create new organization
+                </button>
+              )}
+            />
           </div>
         </div>
-
-        {abilities.getIn(['Organization', 'update']) && (
+        {!abilities.update && (
+          <div>
+            <p className="pt3 pb2">
+              You're unable to update this Organization's settings.
+            </p>
+            <Button
+              to="/projects"
+              label="Return to Styles Overview"
+              fontIcon="fa fa-arrow-left"
+            />
+          </div>
+        )}
+        {abilities.update && (
           <div>
             <div className="bg-white p2 mt2">
               <h4>General</h4>

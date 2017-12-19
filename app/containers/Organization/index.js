@@ -21,11 +21,13 @@ export class Organization extends React.PureComponent {
 
   currentView = () => {
     const { organization } = this.props;
+    const abilities = this.props.abilities.get('Organization').toJS();
+    const oProps = { ...this.props, abilities };
     const { view } = this.state;
     if (view === 'create') {
       return <Create onSubmit={this.create} />;
     } else if (organization) {
-      return <Manage {...this.props} startCreate={this.startCreate} />;
+      return <Manage {...oProps} startCreate={this.startCreate} />;
     } else if (view === 'start') {
       return <GetStarted onClick={this.startCreate} />;
     } else {
@@ -43,6 +45,7 @@ export class Organization extends React.PureComponent {
 }
 
 Organization.propTypes = {
+  abilities: PropTypes.object,
   organization: PropTypes.object,
   createOrganization: PropTypes.func,
 };

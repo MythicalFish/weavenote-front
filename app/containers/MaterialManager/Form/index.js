@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import fieldConstructor from './field';
-import { selectMaterial } from '../selectors';
+import { selectMaterial, selectAbilities } from '../selectors';
 import { fetchMaterial, updateMaterial, createMaterial } from '../actions';
 import Form from './Form';
 
@@ -42,9 +42,12 @@ export class MaterialManager extends React.PureComponent {
     if (!Array.isArray(t)) t = [t];
     return t.includes(this.state.type);
   };
-
-  abilities = this.props.abilities.get('Material').toJS();
-  readOnly = !this.abilities.update;
+  abilities = () => {
+    const { abilities, passedAbilities } = this.props;
+    if (passedAbilities) return passedAbilities;
+    return abilities;
+  };
+  readOnly = !this.abilities().update;
   isNew = () => {
     const { initialValues } = this.props;
     if (!initialValues) return true;
@@ -60,7 +63,7 @@ export class MaterialManager extends React.PureComponent {
     const { initialValues, globalData } = this.props;
     if (!globalData || !initialValues) return null;
     const { onSubmit, typeIs, switchType, Field } = this;
-    const { abilities, readOnly } = this;
+    const { readOnly } = this;
     const { type } = this.state;
     const fProps = {
       ...this.props,
@@ -68,8 +71,8 @@ export class MaterialManager extends React.PureComponent {
       typeIs,
       type,
       switchType,
-      abilities,
       readOnly,
+      abilities: this.abilities(),
       isNew: this.isNew(),
       Field,
     };
@@ -79,6 +82,7 @@ export class MaterialManager extends React.PureComponent {
 
 const mapState = createStructuredSelector({
   initialValues: selectMaterial(),
+  abilities: selectAbilities(),
 });
 
 const mapDispatch = (dispatch) =>

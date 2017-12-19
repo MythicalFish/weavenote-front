@@ -24,7 +24,7 @@ export default function AddMaterial(props) {
         <div className="flex-none">
           <div className="flex-centered pt4">
             <div className="flex-none">
-              <SearchInput onChange={filterMaterials} />
+              {view === VIEW.list && <SearchInput onChange={filterMaterials} />}
             </div>
           </div>
           {abilities.update ? (
@@ -32,8 +32,8 @@ export default function AddMaterial(props) {
               <Toolbar {...props} />
             </div>
           ) : (
-              <div className="pt3" />
-            )}
+            <div className="pt3" />
+          )}
         </div>
         <div className="flex-auto flex flex-column bt2 relative">
           <div className="overlay">
@@ -45,7 +45,11 @@ export default function AddMaterial(props) {
             {[VIEW.create, VIEW.edit].includes(view) && (
               <ScrollArea className="px4">
                 <div className="pb4">
-                  <MaterialManager id={materialID || 'new'} {...props} />
+                  <MaterialManager
+                    id={materialID || 'new'}
+                    {...props}
+                    passedAbilities={abilities}
+                  />
                 </div>
               </ScrollArea>
             )}
