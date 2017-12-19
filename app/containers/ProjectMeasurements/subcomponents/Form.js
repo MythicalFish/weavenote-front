@@ -54,7 +54,7 @@ class Form extends React.PureComponent {
           <div className="flex-none">
             <div className="flex flex-column y-fill">
               <div className="flex-none" style={{ paddingLeft: '45px' }}>
-                <div className="column-header px1">
+                <div className="column-header px1" style={{ height: '41px' }}>
                   <label className="opa5">Description</label>
                 </div>
               </div>
@@ -82,7 +82,7 @@ class Form extends React.PureComponent {
                   </div>
                 </div>
               </div>
-              <ScrollArea className="flex-auto" onScrollFrame={this.doScroll}>
+              <ScrollArea custom autoHide={false} onScrollFrame={this.doScroll}>
                 <ColumnValues {...cProps} />
               </ScrollArea>
             </div>

@@ -10,18 +10,22 @@ class ColumnValues extends React.PureComponent {
   render() {
     const { measurements, colWidths } = this.props;
     return (
-      <div className="flex y-fill">
-        {measurements.groups.map((group, colKey) => (
-          <ColumnValue
-            {...{
-              colKey,
-              colWidth: colWidths[colKey],
-              key: `groups[${group.id}].name`,
-              group,
-              ...this.props,
-            }}
-          />
-        ))}
+      <div>
+        <div className="flex y-fill">
+          {measurements.groups.map((group, colKey) => (
+            <ColumnValue
+              {...{
+                colKey,
+                colWidth: colWidths[colKey],
+                key: `groups[${group.id}].name`,
+                group,
+                ...this.props,
+              }}
+            />
+          ))}
+          <div style={{ width: '10px', flex: 'none' }} />
+        </div>
+        <div style={{ height: '10px' }} />
       </div>
     );
   }
