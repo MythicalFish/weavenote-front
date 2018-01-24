@@ -116,6 +116,7 @@ CanvasAnnotation.propTypes = {
   isVisible: PropTypes.bool,
   isActive: PropTypes.bool,
   isDraggable: PropTypes.bool,
+  isOwnAnnotation: PropTypes.bool,
   type: PropTypes.string,
   label: PropTypes.string,
   identifier: PropTypes.string,

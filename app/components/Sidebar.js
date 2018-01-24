@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Logo from 'images/logo.png';
+import OrgSwitch from 'components/OrgSwitch';
 
 const Button = (props) => {
   const { path, location, label } = props;
@@ -38,14 +39,22 @@ const Sidebar = (props) => {
   const role = props.user.getIn(['role_type', 'name']);
   if (!role) return null;
   return (
-    <aside id="sidebar" className="flex-none blurrable">
-      <img src={Logo} role="presentation" />
-      <nav className="mt2">
-        <Button {...props} path="/projects" label="Styles" />
-        {exposeTo(role) && (
-          <Button {...props} path="/materials" label="Materials" />
-        )}
-      </nav>
+    <aside
+      id="sidebar"
+      className="flex-none blurrable flex flex-column justify-between"
+    >
+      <div>
+        <img src={Logo} role="presentation" />
+        <nav className="mt2">
+          <Button {...props} path="/projects" label="Styles" />
+          {exposeTo(role) && (
+            <Button {...props} path="/materials" label="Materials" />
+          )}
+        </nav>
+      </div>
+      <div>
+        <OrgSwitch {...props} />
+      </div>
     </aside>
   );
 };
