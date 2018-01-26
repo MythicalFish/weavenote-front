@@ -16,6 +16,14 @@ export function updateUserSuccess(response) {
   return { type: types.UPDATE_USER_SUCCESS, response };
 }
 
+export function changeEmail(email) {
+  return { type: types.CHANGE_EMAIL, email };
+}
+
+export function changeEmailSuccess(response) {
+  return { type: types.CHANGE_EMAIL_SUCCESS, response };
+}
+
 export function requestPassword() {
   return { type: types.REQUEST_PASSWORD };
 }

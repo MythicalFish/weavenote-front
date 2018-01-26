@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectUser } from 'containers/App/selectors';
 import Layout from 'components/Layout';
 import Form from './subcomponents/Form';
+import { updateUser, changeEmail } from './actions';
 
 class Profile extends React.PureComponent {
   render() {
@@ -19,7 +20,7 @@ class Profile extends React.PureComponent {
 Profile.propTypes = {};
 
 export function mapDispatch(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ updateUser, changeEmail }, dispatch);
 }
 
 const mapState = createStructuredSelector({

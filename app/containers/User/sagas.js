@@ -9,6 +9,7 @@ export function* UserWatcher() {
   const watcher = [
     yield takeLatest(types.FETCH_USER, fetchUser),
     yield takeLatest(types.UPDATE_USER, updateUser),
+    yield takeLatest(types.CHANGE_EMAIL, changeEmail),
     yield takeLatest(types.REQUEST_PASSWORD, requestPassword),
   ];
   yield take(LOCATION_CHANGE);
@@ -22,6 +23,10 @@ function* fetchUser() {
 function* updateUser() {
   const user = yield select(getFormValues('UserInfo'));
   yield sagas.patch('user', { user }, actions.updateUserSuccess);
+}
+
+function* changeEmail({ email }) {
+  yield sagas.get('verify_email_change', { email }, actions.changeEmailSuccess);
 }
 
 function* requestPassword() {
