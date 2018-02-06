@@ -32,7 +32,7 @@ const ListItem = (props) => {
   return (
     <tr>
       <Col onClick={handleClick}>{material.getIn(['type', 'name'])}</Col>
-      <Col onClick={handleClick}>{material.get('name')}</Col>
+      <Col onClick={handleClick}>{material.get('display_name')}</Col>
       <Col className="center">
         {abilities.update ? (
           <Input

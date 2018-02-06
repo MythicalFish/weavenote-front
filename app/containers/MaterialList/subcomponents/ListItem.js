@@ -57,7 +57,7 @@ class ListItem extends React.PureComponent {
         )}
         <td {...linked}>{material.getIn(['type', 'name'])}</td>
         <td {...linked}>{material.get('identifier')}</td>
-        <td {...linked}>{material.get('name')}</td>
+        <td {...linked}>{material.get('display_name')}</td>
         <td {...linked}>{material.get('color')}</td>
         {!selectable && <td {...linked}>{material.get('supplier_name')}</td>}
         <td {...linked}>
