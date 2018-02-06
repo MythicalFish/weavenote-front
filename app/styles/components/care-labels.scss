@@ -1,0 +1,8 @@
+.care-label {
+  @extend .flex;
+  @extend .items-center;
+  > img {
+    width: 25px;
+    margin-right: $space-2;
+  }
+}

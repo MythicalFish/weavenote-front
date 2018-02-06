@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { FieldArray } from 'redux-form/immutable';
 import Checkbox from 'components/Checkbox';
+import ScrollArea from 'components/ScrollArea';
+import images from 'images/care-labels';
 
 class CareLabels extends React.PureComponent {
   labelKey = (label) => {
@@ -27,17 +29,24 @@ class CareLabels extends React.PureComponent {
     return (
       <div className="field">
         <label>Care labels</label>
-        <div className="checklist">
-          {globalData.careLabels.map((label, index) => (
-            <div
-              key={index}
-              onClick={this.handleClick(label)}
-              className={klass}
-            >
-              <div>{label.get('name')}</div>
-              <Checkbox checked={this.isAdded(label)} readOnly={readOnly} />
+        <div className="b2 p2 rounded" style={{ height: '250px' }}>
+          <ScrollArea className="pr2">
+            <div className="checklist">
+              {globalData.careLabels.map((label, index) => (
+                <div
+                  key={index}
+                  onClick={this.handleClick(label)}
+                  className={klass}
+                >
+                  <div className="care-label">
+                    <img src={images[label.get('icon')]} />
+                    {label.get('name')}
+                  </div>
+                  <Checkbox checked={this.isAdded(label)} readOnly={readOnly} />
+                </div>
+              ))}
             </div>
-          ))}
+          </ScrollArea>
         </div>
       </div>
     );

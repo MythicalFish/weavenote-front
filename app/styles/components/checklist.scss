@@ -1,13 +1,9 @@
 .checklist {
-  @extend .b1;
-  @include borderRadius();
-  padding: $space-1;
   > div {
     padding: $space-1;
     display: flex;
     @extend .justify-between;
+    @extend .items-center;
     cursor: pointer;
-    &:not(:last-child) {
-    }
   }
 }
