@@ -1,0 +1,1 @@
+scotty --spa --source ./build --bucket app.weavenote.com --force 
