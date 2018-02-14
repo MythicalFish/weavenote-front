@@ -26,7 +26,7 @@ function* updateUser() {
 }
 
 function* changeEmail({ email }) {
-  yield sagas.get('verify_email_change', { email }, actions.changeEmailSuccess);
+  yield sagas.get('change_email', { email }, actions.changeEmailSuccess);
 }
 
 function* requestPassword() {
