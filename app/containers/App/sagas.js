@@ -50,4 +50,5 @@ function* switchOrganization({ id }) {
     { id },
     actions.switchOrganizationSuccess
   );
+  window.location.reload();
 }
