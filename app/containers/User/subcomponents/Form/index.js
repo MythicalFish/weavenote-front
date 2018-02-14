@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Button from 'components/Button';
 import UserInfo from './UserInfo';
+import ChangeEmail from './ChangeEmail';
 import { requestPassword } from '../../actions';
 
 class Form extends React.PureComponent {
@@ -13,16 +14,23 @@ class Form extends React.PureComponent {
       <div className="box">
         {user && (
           <div>
-            <h2>Profile settings</h2>
-            <div className="bg-white p2">
+            <h3>Profile settings</h3>
+            <div className="pt3 bb2 pb3">
+              <h4>General</h4>
               <UserInfo
                 initialValues={user}
-                onSubmit={this.props.handleUpdate}
+                onSubmit={this.props.updateUser}
+                {...this.props}
               />
             </div>
-            <div className="bg-white p2 mt2">
-              <h4>Password</h4>
+            <div className="pt3 bb2 pb3">
+              <h4>Change email address</h4>
+              <ChangeEmail {...this.props} />
+            </div>
+            <div className="pt4">
+              <h4>Change password</h4>
               <Button
+                secondary
                 onClick={dispatch(requestPassword())}
                 label="Reset your password"
               />
@@ -36,7 +44,7 @@ class Form extends React.PureComponent {
 
 Form.propTypes = {
   user: PropTypes.object,
-  handleUpdate: PropTypes.func,
+  updateUser: PropTypes.func,
   dispatch: PropTypes.func,
 };
 
