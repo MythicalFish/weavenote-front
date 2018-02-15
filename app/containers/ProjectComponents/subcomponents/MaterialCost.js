@@ -31,7 +31,7 @@ const MaterialCost = (props) => {
 };
 
 MaterialCost.propTypes = {
-  materialCost: PropTypes.string,
+  materialCost: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   preferredCurrency: PropTypes.object,
   globalData: PropTypes.object,
   switchCurrency: PropTypes.func,

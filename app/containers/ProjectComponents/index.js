@@ -47,15 +47,14 @@ class Components extends React.Component {
       editMaterial,
       view,
       materialID,
-      abilities: abilities.Component,
     };
     return (
       <div>
-        {abilities.create && (
+        {abilities.Component.create && (
           <Button onClick={this.listMaterials} label="Add material" small />
         )}
         <div className="mt3">
-          <List {...mProps} />
+          <List {...{ ...mProps, abilities: abilities.Component }} />
         </div>
         <MaterialCost {...mProps} />
         <AddMaterial {...{ ...mProps, abilities: abilities.Material }} />
