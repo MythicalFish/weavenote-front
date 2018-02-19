@@ -7,7 +7,6 @@ function SearchInput(props) {
   };
   return (
     <Input
-      medium
       fieldClass="inline-block"
       className="search-input"
       placeholder="Search"
