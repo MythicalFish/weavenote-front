@@ -47,8 +47,8 @@ export default function ListItem(props) {
               <button onClick={() => fileProject({ id, archived: !archived })}>
                 {archived ? 'Restore' : 'Archive'}
               </button>
-              <button onClick={handleDelete}>Delete</button>
               <button onClick={handleDuplicate}>Duplicate</button>
+              <button onClick={handleDelete}>Delete</button>
             </Dropdown>
           )}
         </div>

@@ -23,6 +23,14 @@
     }
   }
 }
+
+.dropdown--dots {
+  & > button {
+    width: 30px;
+    text-align: center;
+  }
+}
+
 .tether-element {
   z-index: 4;
 }
