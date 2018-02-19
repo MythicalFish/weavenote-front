@@ -1,10 +1,14 @@
 import React, { PropTypes } from 'react';
 import ListItem from './ListItem';
+import LoadingOverlay from '../../../components/LoadingOverlay';
 
 export default function List(props) {
   const { projects } = props;
   return (
-    <div className="container-narrow px2 pb4">
+    <div className="container-narrow px2 pb4 relative">
+      {
+        props.isLoading && <LoadingOverlay />
+      }
       <table className="project-list-table">
         <thead>
           <tr>
@@ -30,4 +34,5 @@ export default function List(props) {
 
 List.propTypes = {
   projects: PropTypes.object,
+  isLoading: PropTypes.bool,
 };
