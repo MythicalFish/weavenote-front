@@ -5,7 +5,7 @@ export default function List(props) {
   const { projects } = props;
   return (
     <div className="container-narrow px2 pb4">
-      <table>
+      <table className="project-list-table">
         <thead>
           <tr>
             <th />
