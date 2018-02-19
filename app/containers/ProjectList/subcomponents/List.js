@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 export default function List(props) {
   const { projects } = props;
   return (
-    <div className="container-narrow px2 py4">
+    <div className="container-narrow px2 pb4">
       <table>
         <thead>
           <tr>

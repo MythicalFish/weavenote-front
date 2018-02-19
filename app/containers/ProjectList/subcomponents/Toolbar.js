@@ -21,7 +21,7 @@ export default function Toolbar(props) {
     />
   );
   return (
-    <header className="toolbar toolbar-compact container-narrow px2">
+    <header className="toolbar toolbar-compact container-narrow px2 mt4 mb4">
       <div className="row">
         <div className="col-xs-2">
           {abilities.create && (

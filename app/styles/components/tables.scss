@@ -5,3 +5,7 @@ thead {
 tbody {
   border-bottom: 1px solid $gray-lighterer;
 }
+
+table td {
+  max-width: 300px;
+}
