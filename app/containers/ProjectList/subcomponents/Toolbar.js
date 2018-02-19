@@ -22,8 +22,8 @@ export default function Toolbar(props) {
   );
   return (
     <header className="toolbar toolbar-compact container-narrow px2 mt4 mb4">
-      <div className="row">
-        <div className="col-xs-2">
+      <div className="row flex items-center">
+        <div className="col-xs-3 flex justify-center">
           {abilities.create && (
             <Button
               onClick={() => createProject()}
@@ -33,7 +33,7 @@ export default function Toolbar(props) {
             />
           )}
         </div>
-        <div className="col-xs-8 flex justify-center">
+        <div className="col-xs-6 flex justify-center">
           <nav>
             <ul>
               <li>
@@ -45,7 +45,7 @@ export default function Toolbar(props) {
             </ul>
           </nav>
         </div>
-        <div className="col-xs-2" />
+        <div className="col-xs-3" />
       </div>
     </header>
   );
