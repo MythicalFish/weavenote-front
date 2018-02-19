@@ -151,7 +151,7 @@ class Dropdown extends React.PureComponent {
   };
   render() {
     const { className, readOnly, isFocused, onFocus, tether } = this.props;
-    let klass = 'dropdown dropdown--dots';
+    let klass = 'dropdown';
     if (className) klass += ` ${className}`;
     if (readOnly) klass += ' noselect';
     const useTether = tether !== false;
