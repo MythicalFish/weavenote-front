@@ -1,20 +1,19 @@
+$avatarSize: 33px;
+
 .avatar {
   height: 2.2rem;
   width: 2.2rem;
   position: relative;
+
   .avatar-img {
     line-height: 0;
     background: $gray-lighter;
     overflow: hidden;
     @include borderRadius(999px);
-  }
-  &-sm {
-    height: 27px;
-    width: 27px;
+    height: $avatarSize;
+    width: $avatarSize;
   }
 }
-
-$avatarSize: 33px;
 
 .avatar-list {
   @extend .flex;
@@ -22,21 +21,25 @@ $avatarSize: 33px;
   min-width: 90px;
   max-width: 150px;
   width: 100%;
+
   .avatar,
   .hidden-count {
     width: $avatarSize;
     height: $avatarSize;
     @extend .flex-none;
   }
+
   .avatar {
     margin-right: $space-1;
   }
+
   .hidden-count {
     @include borderRadius(100%);
     background-size: 100%;
     background-repeat: no-repeat;
     font-size: 0.9rem;
   }
+  
   &.readonly {
     cursor: default;
     * {
