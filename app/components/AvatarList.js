@@ -3,6 +3,8 @@ import Avatar from 'components/Avatar';
 import Icon from 'components/Icon';
 import sizeMe from 'react-sizeme';
 
+import dashImg from '../images/dash.svg';
+
 const avatarWidth = 33;
 
 const AvatarList = (props) => {
@@ -41,7 +43,7 @@ const AvatarList = (props) => {
     <button className={klass} type="button" onClick={onClick}>
       {visibleAvatars}
       {hiddenCount > 0 && (
-        <div className="hidden-count flex-centered">+{hiddenCount}</div>
+        <div className="hidden-count flex-centered" style={{ backgroundImage: `url(${dashImg})` }}>+{hiddenCount}</div>
       )}
       {hiddenCount === 0 &&
         showPlusButton && (

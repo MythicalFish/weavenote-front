@@ -14,7 +14,7 @@
   }
 }
 
-$avatarSize: 27px;
+$avatarSize: 33px;
 
 .avatar-list {
   @extend .flex;
@@ -32,9 +32,10 @@ $avatarSize: 27px;
     margin-right: $space-1;
   }
   .hidden-count {
-    border: 1px dashed $dark5;
-    @include borderRadius(999px);
-    font-size: 0.6rem;
+    @include borderRadius(100%);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-size: 0.9rem;
   }
   &.readonly {
     cursor: default;
