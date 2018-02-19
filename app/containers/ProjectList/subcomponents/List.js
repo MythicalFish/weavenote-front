@@ -10,9 +10,9 @@ export default function List(props) {
           <tr>
             <th />
             <th>Name</th>
-            <th>Reference number</th>
-            <th>Season/Collection</th>
+            <th>Style number</th>
             <th>Color</th>
+            <th>Season/Collection</th>
             <th>Members</th>
             <th />
           </tr>

@@ -30,8 +30,8 @@ export default function ListItem(props) {
       </td>
       <td {...linked}>{project.get('name')}</td>
       <td {...linked}>{project.get('ref_number')}</td>
-      <td {...linked}>{project.get('collection')}</td>
       <td {...linked}>{project.get('color_code')}</td>
+      <td {...linked}>{project.get('collection')}</td>
       <td>
         <AvatarList
           collaborators={project.get('all_collaborators')}
