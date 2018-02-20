@@ -28,7 +28,7 @@
   .icon {
     position: absolute;
     top: 50%;
-    right: $space-2;
+    right: $space-3;
     transform: translate(0, -50%);
     -webkit-transform: translate(0, -50%);
   }
@@ -45,6 +45,7 @@
       font-size: 0.9em;
     }
   }
+
   &.input-inline {
     input,
     textarea,

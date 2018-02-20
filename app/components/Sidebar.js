@@ -46,7 +46,7 @@ const Sidebar = (props) => {
       <div>
         <img src={Logo} role="presentation" />
         <nav className="mt2">
-          <Button {...props} path="/projects" label="Styles" />
+          <Button {...props} path="/projects" label="Projects" />
           {exposeTo(role) && (
             <Button {...props} path="/materials" label="Materials" />
           )}

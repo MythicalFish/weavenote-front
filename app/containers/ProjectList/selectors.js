@@ -3,6 +3,13 @@ import { createSelector } from 'reselect';
 export const selectDomain = () => (state) => state.get('ProjectList');
 
 export const selectProjects = () =>
-  createSelector(selectDomain(), (s) =>
-    s.get('all').filter((p, key) => s.get('filtered').includes(key))
+  createSelector(
+    selectDomain(),
+    (s) => s.get('all').filter((p, key) => s.get('filtered').includes(key))
+  );
+
+export const selectIsLoading = () =>
+  createSelector(
+    selectDomain(),
+    (s) => s.get('isLoading')
   );

@@ -1,20 +1,22 @@
 #sidebar {
   color: $dark6;
   padding: 0 $space-5 $space-4 $space-4;
+
   header {
     @extend .bigger3;
     font-weight: bold;
     margin-bottom: $space-2;
   }
+
   nav {
     a {
       color: inherit;
       display: block;
       padding: $space-2 0;
       @extend .bigger1;
+
       &.active {
         color: $poiple;
-        font-weight: bold;
       }
     }
   }

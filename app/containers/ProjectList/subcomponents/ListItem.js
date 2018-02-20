@@ -30,8 +30,8 @@ export default function ListItem(props) {
       </td>
       <td {...linked}>{project.get('name')}</td>
       <td {...linked}>{project.get('ref_number')}</td>
-      <td {...linked}>{project.get('collection')}</td>
       <td {...linked}>{project.get('color_code')}</td>
+      <td {...linked}>{project.get('collection')}</td>
       <td>
         <AvatarList
           collaborators={project.get('all_collaborators')}
@@ -42,13 +42,13 @@ export default function ListItem(props) {
       <td className="pl0 cell-fit">
         <div className="flex items-end">
           {abilities.update && (
-            <Dropdown icon="more">
+            <Dropdown icon="more" className="dropdown--dots">
               <Link to={url}>Manage</Link>
               <button onClick={() => fileProject({ id, archived: !archived })}>
                 {archived ? 'Restore' : 'Archive'}
               </button>
-              <button onClick={handleDelete}>Delete</button>
               <button onClick={handleDuplicate}>Duplicate</button>
+              <button onClick={handleDelete} className="highlight--danger">Delete</button>
             </Dropdown>
           )}
         </div>

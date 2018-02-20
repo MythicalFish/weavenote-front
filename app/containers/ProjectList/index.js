@@ -6,6 +6,7 @@ import Layout from 'components/Layout';
 import Header from './subcomponents/Header';
 import Toolbar from './subcomponents/Toolbar';
 import List from './subcomponents/List';
+
 import {
   filterProjects,
   fetchProjects,
@@ -14,17 +15,23 @@ import {
   deleteProject,
   duplicateProject,
 } from './actions';
-import { selectProjects } from './selectors';
+import { selectProjects, selectIsLoading } from './selectors';
 
 export class ProjectList extends React.PureComponent {
-  state = { view: 'Active Styles' };
+  state = {
+    view: 'Active Styles',
+  };
+
   componentDidMount() {
     this.props.fetchProjects();
   }
+
   changeView = (view) => {
     this.setState({ view });
   };
+
   Header = (props) => <Header {...this.props} {...props} />;
+
   render() {
     const pProps = {
       ...this.props,
@@ -33,6 +40,7 @@ export class ProjectList extends React.PureComponent {
       currentView: this.state.view,
       scrollable: true,
     };
+
     return (
       <Layout {...pProps} Header={this.Header}>
         <Toolbar {...pProps} />
@@ -63,6 +71,7 @@ export function mapDispatch(dispatch) {
 
 const mapState = createStructuredSelector({
   projects: selectProjects(),
+  isLoading: selectIsLoading(),
 });
 
 export default connect(mapState, mapDispatch)(ProjectList);

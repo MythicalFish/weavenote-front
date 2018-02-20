@@ -7,12 +7,12 @@ function SearchInput(props) {
   };
   return (
     <Input
-      small
       fieldClass="inline-block"
+      className="search-input"
       placeholder="Search"
       onChange={handleSearch}
       disableReduxForm
-      style={{ width: '400px' }}
+      style={{ width: '440px' }}
       icon={{ name: 'Search', size: 15 }}
     />
   );

@@ -27,6 +27,7 @@
 @import 'components/dot';
 @import 'components/list-item';
 @import 'components/notifications';
+@import 'components/search-input';
 @import 'components/comments';
 @import 'components/spinner';
 @import 'components/toolbar';
@@ -36,6 +37,8 @@
 @import 'components/accordion';
 @import 'components/columns';
 @import 'components/checklist';
+@import 'components/project-list-table';
+@import 'components/loading-overlay';
 
 @import 'modules/app-header';
 @import 'modules/annotations';
