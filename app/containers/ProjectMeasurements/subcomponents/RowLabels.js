@@ -8,13 +8,14 @@ const SortableList = SortableContainer((props) => {
   delete lProps.measurements;
   return (
     <div className="column-body relative">
-      {measurements.names.map((name, index) => (
+      {measurements.names.map((name, i) => (
         <RowLabel
           {...{
             name,
-            index,
-            colKey: `l${index}`,
-            colWidth: colWidths[`l${index}`],
+            index: i,
+            rowKey: i + 1,
+            colKey: 0,
+            colWidth: colWidths[0] ? colWidths[0].max : 0,
             ...lProps,
             key: `names[${name.id}].value`,
           }}

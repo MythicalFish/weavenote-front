@@ -11,13 +11,12 @@ class Input extends React.PureComponent {
   };
   setColWidth = () => {
     const { element, minSize } = this;
-    const { colKey, defaultValue, colWidth } = this.props;
+    const { colKey, defaultValue, colWidth, rowKey } = this.props;
     let length = defaultValue;
     if (element) length = element.value.length;
     length = minSize > length ? minSize : length;
-    length += 1;
     if (colWidth === length) return;
-    this.props.setColWidth(colKey, length);
+    this.props.setColWidth(colKey, rowKey, length);
     this.setInputWidth();
   };
   setInputWidth = () => {
@@ -63,6 +62,7 @@ Input.propTypes = {
   setColWidth: PropTypes.func,
   maxLength: PropTypes.number,
   colKey: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  rowKey: PropTypes.number,
   colWidth: PropTypes.number,
 };
 

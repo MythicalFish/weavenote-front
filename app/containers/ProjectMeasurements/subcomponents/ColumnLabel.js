@@ -24,6 +24,7 @@ class ColumnLabel extends React.PureComponent {
           />
         )}
         <Input
+          rowKey={0}
           maxLength={16}
           placeholder="x"
           defaultValue={group.name}

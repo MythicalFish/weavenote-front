@@ -12,11 +12,11 @@ class ColumnValues extends React.PureComponent {
     return (
       <div>
         <div className="flex y-fill">
-          {measurements.groups.map((group, colKey) => (
+          {measurements.groups.map((group, i) => (
             <ColumnValue
               {...{
-                colKey,
-                colWidth: colWidths[colKey],
+                colKey: i + 1,
+                colWidth: colWidths[i + 1] ? colWidths[i + 1].max : 0,
                 key: `groups[${group.id}].name`,
                 group,
                 ...this.props,
@@ -33,7 +33,7 @@ class ColumnValues extends React.PureComponent {
 
 ColumnValues.propTypes = {
   maxHeight: PropTypes.number,
-  colWidths: PropTypes.object,
+  colWidths: PropTypes.array,
   measurements: PropTypes.object,
   size: PropTypes.object,
   setHeight: PropTypes.func,

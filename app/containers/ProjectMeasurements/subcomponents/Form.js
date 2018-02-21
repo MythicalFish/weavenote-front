@@ -7,14 +7,17 @@ import ColumnLabels from './ColumnLabels';
 import ColumnValues from './ColumnValues';
 
 class Form extends React.PureComponent {
-  state = { scrollTop: 0, scrollLeft: 0, maxHeight: 0, colWidths: {} };
+  state = { scrollTop: 0, scrollLeft: 0, maxHeight: 0, colWidths: [] };
   setHeight = (maxHeight) => this.setState({ maxHeight });
-  setColWidth = (colKey, length) => {
+  setColWidth = (colKey, rowKey, length) => {
     const colWidths = { ...this.state.colWidths };
-    if (length > (colWidths[colKey] || 0)) {
-      colWidths[colKey] = length;
-      this.setState({ colWidths });
-    }
+    colWidths[colKey] = colWidths[colKey] || { widths: [], max: 0 };
+    if (colWidths[colKey].widths[rowKey] === length) return;
+    colWidths[colKey].widths[rowKey] = length;
+    console.log(colWidths[colKey].widths);
+    colWidths[colKey].max = Math.max(...colWidths[colKey].widths);
+    this.setState({ colWidths });
+    console.log(colWidths);
   };
   doScroll = ({ scrollTop, scrollLeft }) =>
     this.setState({ scrollTop, scrollLeft });

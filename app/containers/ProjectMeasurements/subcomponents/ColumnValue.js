@@ -23,6 +23,7 @@ class ColumnValue extends React.PureComponent {
                 placeholder="0"
                 defaultValue={value.value}
                 handleChange={this.handleChange(value)}
+                rowKey={i + 1}
                 {...this.props}
               />
             </div>

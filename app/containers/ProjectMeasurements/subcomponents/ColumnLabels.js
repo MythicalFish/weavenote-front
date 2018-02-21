@@ -7,7 +7,7 @@ const SortableColumnLabels = SortableContainer((props) => (
     {props.measurements.groups.map((group, colKey) => (
       <ColumnLabel
         {...{
-          colWidth: props.colWidths[colKey],
+          colWidth: props.colWidths[colKey] ? props.colWidth[colKey].max : 0,
           colKey,
           index: colKey,
           key: `groups[${group.id}].name`,
