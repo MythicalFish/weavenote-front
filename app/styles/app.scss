@@ -13,7 +13,6 @@
 @import 'components/care-labels';
 @import 'components/tables';
 @import 'components/box';
-@import 'components/blur';
 @import 'components/avatar';
 @import 'components/canvas';
 @import 'components/animations';
@@ -37,9 +36,8 @@
 @import 'components/accordion';
 @import 'components/columns';
 @import 'components/checklist';
-@import 'components/project-list-table';
-@import 'components/loading-overlay';
 
+@import 'modules/loading-overlay';
 @import 'modules/app-header';
 @import 'modules/annotations';
 @import 'modules/measurements';
