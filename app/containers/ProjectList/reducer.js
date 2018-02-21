@@ -11,6 +11,9 @@ function projectsReducer(state = initialState, action) {
 
   switch (type) {
     case types.FETCH_PROJECTS:
+    case types.DELETE_PROJECT:
+    case types.DUPLICATE_PROJECT:
+    case types.FILE_PROJECT:
       return state
         .set('isLoading', true);
 
