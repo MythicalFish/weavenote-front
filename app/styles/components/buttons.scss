@@ -87,12 +87,29 @@ button,
       color: inherit;
     }
   }
+
   &.btn-sm {
     .icon {
       width: 23px;
       top: 2px;
       svg {
         transform: scale(0.7);
+      }
+    }
+  }
+
+  &.btn-flex {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      width: auto;
+      height: auto;
+      position: static;
+      margin-right: 5px;
+
+      svg {
+        position: static;
       }
     }
   }
