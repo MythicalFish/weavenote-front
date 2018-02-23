@@ -8,7 +8,8 @@ class ColumnValue extends React.PureComponent {
     });
   };
   render() {
-    const { measurements, group, fieldName } = this.props;
+    const { measurements, group, fieldName, colWidth } = this.props;
+    console.log(colWidth);
     return (
       <div className="column center">
         {measurements.values
@@ -19,6 +20,7 @@ class ColumnValue extends React.PureComponent {
               key={`${fieldName}[${i}][${value.id}]`}
             >
               <Input
+                colWidth={colWidth}
                 maxLength={16}
                 placeholder="0"
                 defaultValue={value.value}

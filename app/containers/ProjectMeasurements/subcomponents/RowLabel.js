@@ -8,7 +8,13 @@ const Handle = (props) => <div className="handle-left" {...props} />;
 class RowLabel extends React.PureComponent {
   state = { active: false };
   render() {
-    const { name, updateMeasurements, deleteName, readOnly } = this.props;
+    const {
+      name,
+      updateMeasurements,
+      deleteName,
+      readOnly,
+      colWidth,
+    } = this.props;
     const handleChange = (value) => {
       updateMeasurements({ names: [Object.assign(name, { value })] });
     };
@@ -26,6 +32,7 @@ class RowLabel extends React.PureComponent {
         <div className="flex">
           <label className="identifier flex-none">{name.identifier}</label>
           <Input
+            colWidth={colWidth}
             handleChange={handleChange}
             defaultValue={name.value}
             maxLength={25}

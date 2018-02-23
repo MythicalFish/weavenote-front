@@ -12,7 +12,7 @@ class ColumnLabel extends React.PureComponent {
   };
   render() {
     //
-    const { group, deleteGroup, readOnly } = this.props;
+    const { group, deleteGroup, readOnly, colWidth } = this.props;
     return (
       <div className="column-header relative hoverable">
         {!readOnly && <div className="handle-above" />}
@@ -24,6 +24,7 @@ class ColumnLabel extends React.PureComponent {
           />
         )}
         <Input
+          colWidth={colWidth}
           maxLength={16}
           placeholder="x"
           defaultValue={group.name}

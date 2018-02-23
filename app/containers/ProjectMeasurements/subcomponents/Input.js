@@ -18,12 +18,6 @@ class Input extends React.PureComponent {
     length += 1;
     if (colWidth === length) return;
     this.props.setColWidth(colKey, length);
-    this.setInputWidth();
-  };
-  setInputWidth = () => {
-    if (this.props.colWidth > this.minSize) {
-      this.element.size = this.props.colWidth;
-    }
   };
   minSize = 3;
   doUpdate = debounce(
@@ -35,22 +29,29 @@ class Input extends React.PureComponent {
     this
   );
   render() {
-    const { defaultValue, maxLength, placeholder, readOnly } = this.props;
+    const {
+      defaultValue,
+      maxLength,
+      placeholder,
+      readOnly,
+      colWidth,
+    } = this.props;
     const fProps = {
+      type: 'text',
       placeholder,
       defaultValue,
       readOnly: !!readOnly,
       maxLength: maxLength || 12,
       ref: (f) => (this.element = f),
       onFocus: () => this.element.select(),
-      size: this.minSize,
+      size: colWidth || this.minSize,
       onChange: (event) => {
         this.setState({ value: event.target.value });
         this.setColWidth();
         this.doUpdate();
       },
     };
-    return <input {...fProps} type="text" size={this.minSize} />;
+    return <input {...fProps} />;
   }
 }
 

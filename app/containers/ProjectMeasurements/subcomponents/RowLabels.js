@@ -13,8 +13,8 @@ const SortableList = SortableContainer((props) => {
           {...{
             name,
             index,
-            colKey: `l${index}`,
-            colWidth: colWidths[`l${index}`],
+            colKey: 'y',
+            colWidth: colWidths.y,
             ...lProps,
             key: `names[${name.id}].value`,
           }}
