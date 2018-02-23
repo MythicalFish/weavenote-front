@@ -26,9 +26,10 @@ export default function Toolbar(props) {
         <div className="col-xs-3 flex justify-center">
           {abilities.create && (
             <Button
+              className="btn btn-flex"
               onClick={() => createProject()}
               label="New Style"
-              fontIcon="fa fa-plus"
+              icon="Plus"
               small
             />
           )}
