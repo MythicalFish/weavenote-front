@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { envVar } from 'utils/misc';
 import Logo from 'images/logo.png';
 import Layout from './Layout';
 import Switcher from './OrgSwitch';
+import { billingURL } from '../utils/misc';
 
 const Subscribe = (props) => {
   const { user, organization, organizations } = props;
@@ -14,7 +14,7 @@ const Subscribe = (props) => {
         This organization currently has no active subscription.
         {user.getIn(['role_type', 'name']) === 'Admin' ? (
           <div className="mt3">
-            <a className="btn btn-lg" href={envVar('billing')}>
+            <a className="btn btn-lg" href={billingURL()}>
               <i className="fa fa-plus" />
               Subscribe now
             </a>

@@ -26,8 +26,13 @@ export default class LoginForm extends React.PureComponent {
     allowedConnections: ['Username-Password-Authentication'],
   };
 
-  lock = (opts) =>
-    new Auth0Lock(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN, opts);
+  lock = (opts) => {
+    const clientID =
+      process.env.NODE_ENV === 'production'
+        ? process.env.AUTH0_CLIENT_ID_PROD
+        : process.env.AUTH0_CLIENT_ID_DEV;
+    return new Auth0Lock(clientID, process.env.AUTH0_DOMAIN, opts);
+  };
 
   initializeLock = () => {
     const opts = this.lockOptions;

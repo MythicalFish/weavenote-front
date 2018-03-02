@@ -1,9 +1,5 @@
 import 'whatwg-fetch';
 
-export const endpoint = () => process.env.NODE_ENV === 'production'
-    ? process.env.API_PROD
-    : process.env.API_DEV;
-
 export function request(method = 'GET', path, params) {
   let url;
   const req = requestBody();
@@ -16,16 +12,18 @@ export function request(method = 'GET', path, params) {
     req.body = JSON.stringify(params);
   }
 
-  return fetch(url, req).then((r) => r.json()).then((r) => {
-    if (r.error) {
-      if (r.error.backtrace) {
-        console.error(`%c ${r.error.backtrace}`, ConsoleErrorStyle);
+  return fetch(url, req)
+    .then((r) => r.json())
+    .then((r) => {
+      if (r.error) {
+        if (r.error.backtrace) {
+          console.error(`%c ${r.error.backtrace}`, ConsoleErrorStyle);
+        }
+        throw r;
+      } else {
+        return r;
       }
-      throw r;
-    } else {
-      return r;
-    }
-  });
+    });
 }
 
 export function get(path, params) {
@@ -46,10 +44,15 @@ export function destroy(path, params) {
 
 export const accessToken = () => `Bearer: ${localStorage.access_token}`;
 
+export const endpoint =
+  process.env.NODE_ENV === 'production'
+    ? process.env.API_URL_PROD
+    : process.env.API_URL_DEV;
+
 // Private
 
 const requestURL = (opts) => {
-  let url = `${endpoint()}/${opts.path}`;
+  let url = `${endpoint}/${opts.path}`;
   if (opts.params) {
     url = `${url}?${toQueryString(opts.params)}`;
   }

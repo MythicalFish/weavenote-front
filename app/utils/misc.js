@@ -13,27 +13,13 @@ export function debounce(fn, delay, context, ...args) {
   };
 }
 
-export function envVar(v) {
-  if (process.env.NODE_ENV === 'production') {
-    switch (v) {
-      case 'billing':
-        return `${process.env.BILLING_PROD}?access_token=${
-          localStorage.access_token
-        }`;
-      default:
-        return null;
-    }
-  } else {
-    switch (v) {
-      case 'billing':
-        return `${process.env.BILLING_DEV}?access_token=${
-          localStorage.access_token
-        }`;
-      default:
-        return null;
-    }
-  }
-}
+export const billingURL = () => {
+  const domain =
+    process.env.NODE_ENV === 'production'
+      ? process.env.BILLING_URL_PROD
+      : process.env.BILLING_URL_DEV;
+  return `${domain}?access_token=${localStorage.access_token}`;
+};
 
 export function elementPosition(e) {
   const box = e.getBoundingClientRect();

@@ -33,7 +33,7 @@ class ImageUploader extends React.PureComponent {
   render() {
     const uploader = (
       <ReactS3Uploader
-        server={API.endpoint()}
+        server={API.endpoint}
         signingUrl={'/s3_url'}
         signingUrlMethod="GET"
         signingUrlHeaders={{ Authorization: API.accessToken() }}

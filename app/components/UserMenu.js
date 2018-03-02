@@ -7,7 +7,7 @@ import Avatar from 'components/Avatar';
 import * as authUtils from 'utils/authUtils';
 import Icon from 'components/Icon';
 import { selectUser, selectOrganization } from 'containers/App/selectors';
-import { envVar } from 'utils/misc';
+import { billingURL } from '../utils/misc';
 
 const UserMenu = (props) => {
   if (!props.user) return null;
@@ -24,7 +24,7 @@ const UserMenu = (props) => {
         <MenuItem icon="Users" label="Organization" />
       </Link>
       {props.user.getIn(['role_type', 'name']) === 'Admin' && (
-        <a href={envVar('billing')}>
+        <a href={billingURL()}>
           <MenuItem icon="CreditCard" label="Billing" />
         </a>
       )}
