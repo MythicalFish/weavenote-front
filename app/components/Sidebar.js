@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Logo from 'images/logo.png';
+import Logo from 'images/logo-s.svg';
 import OrgSwitch from 'components/OrgSwitch';
 
 const Button = (props) => {
@@ -44,7 +44,7 @@ const Sidebar = (props) => {
       className="flex-none blurrable flex flex-column justify-between"
     >
       <div>
-        <img src={Logo} role="presentation" />
+        <img src={Logo} role="presentation" className="x4" />
         <nav className="mt2">
           <Button {...props} path="/projects" label="Projects" />
           {exposeTo(role) && (

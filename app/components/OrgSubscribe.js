@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Logo from 'images/logo.png';
+import Logo from 'images/logo-s.svg';
 import Layout from './Layout';
 import Switcher from './OrgSwitch';
 import { billingURL } from '../utils/misc';
@@ -9,7 +9,7 @@ const Subscribe = (props) => {
   return (
     <Layout type="boxed" background="gray-lightest">
       <div className="center">
-        <img src={Logo} role="presentation" />
+        <img src={Logo} role="presentation" className="x4" />
         <h1 className="h3 mt4 mb2">{organization.get('name')}</h1>
         This organization currently has no active subscription.
         {user.getIn(['role_type', 'name']) === 'Admin' ? (

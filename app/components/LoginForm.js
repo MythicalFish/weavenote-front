@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 import Auth0Lock from 'auth0-lock';
 import { loggedIn } from 'utils/authUtils';
 import Layout from 'components/Layout';
-import Logo from 'images/logo.png';
+import Logo from 'images/logo-s.svg';
 
 export default class LoginForm extends React.PureComponent {
   componentDidMount() {
@@ -65,7 +65,7 @@ export default class LoginForm extends React.PureComponent {
   render = () => (
     <Layout type="boxed" background="gray-lightest">
       <div className="center">
-        <img src={Logo} role="presentation" />
+        <img src={Logo} role="presentation" className="x4" />
         <div id="login-form" />
         <style>{`
             .auth0-lock-header {

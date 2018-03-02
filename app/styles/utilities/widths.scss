@@ -102,7 +102,7 @@ $sizes_vw: 25, 40, 50, 60, 75, 85, 100;
 
 // Other size utility classes
 
-$sizes_em: 5, 6, 7, 8, 9, 10, 12, 13, 20, 25;
+$sizes_em: 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 20, 25;
 
 @mixin width-setup($namespace) {
   @each $size in $sizes_em {

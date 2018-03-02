@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import Button from 'components/Button';
-import Logo from 'images/logo.png';
+import Logo from 'images/logo-s.svg';
 
 const GetStarted = (props) => (
   <div className="center">
-    <img src={Logo} role="presentation" />
+    <img src={Logo} role="presentation" className="x4" />
     <div className="bigger1 my3">
       It looks like you do not belong to a Weavenote organization yet.
     </div>
